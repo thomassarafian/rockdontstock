@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: rockdontstock_production
-  username: rockdontstock
+  username: thomassarafian
   password: <%= ENV['ROCKDONTSTOCK_DATABASE_PASSWORD'] %>
