@@ -1,0 +1,17 @@
+<h1>Les sneakers</h1>
+
+<%= link_to "Ajouter sa sneaker", new_sneaker_path %>
+
+<% @sneakers.each do |sneaker|	%>
+	<h2><%=	sneaker.name %></h2>
+	<p>Taille : <%=	sneaker.size %></p>
+	<p>Prix : <%=	sneaker.price %>€</p>
+	<p>Condition : <%= sneaker.condition %>/10</p>
+	<p>Numéro de série : <%= sneaker.serial_number %></p>
+	<p>Box : <%= sneaker.box %></p>
+	<p>Extras : <%= sneaker.extras %></p>
+	<%=	link_to "Voir la sneaker", sneaker_path(sneaker)%>
+	<%=	link_to "Supprimer", sneaker_path(sneaker), method: :delete %>
+<% end %>
+
+
