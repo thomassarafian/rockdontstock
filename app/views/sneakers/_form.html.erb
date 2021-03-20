@@ -1,0 +1,24 @@
+<%= form_for @sneaker do |f| %>
+	<%= f.label :name, "Modèle" %>
+	<%= f.text_field :name %>
+
+	<%= f.label :size, "Taille" %>
+	<%= f.text_field :size %>
+
+	<%= f.label :price, "Prix" %>
+	<%= f.text_field :price %>
+
+	<%= f.label :condition, "Condition" %>
+	<%= f.text_field :condition %>
+
+	<%= f.label :serial_number, "Numéro de série" %>
+	<%= f.text_field :serial_number %>
+
+	<%= f.label :box, "Box" %>
+	<%= f.text_field :box %>
+
+	<%= f.label :extras, "Extras" %>
+	<%= f.text_field :extras %>
+
+	<%= f.submit %>
+<% end %>

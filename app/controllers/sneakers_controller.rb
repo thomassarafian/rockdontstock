@@ -22,7 +22,7 @@ class SneakersController < ApplicationController
 	
 	def update
 		@sneaker.update(sneaker_params)
-		redirect_to sneakers_path
+		redirect_to sneaker_path(@sneaker)
 	end
 
 	def destroy
