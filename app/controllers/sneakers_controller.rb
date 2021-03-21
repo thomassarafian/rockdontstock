@@ -1,9 +1,6 @@
 class SneakersController < ApplicationController
 	before_action :set_sneaker, only: [:show, :edit, :update, :destroy]
 
-	def home
-	end
-
 	def index
 		@sneakers = Sneaker.all
 	end
