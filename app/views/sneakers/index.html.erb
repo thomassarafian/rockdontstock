@@ -1,8 +1,8 @@
 <h1>Les sneakers</h1>
 
-<%= link_to "Ajouter sa sneaker", new_sneaker_path %>
-
-
+<% if policy(Sneaker).create? %>
+	<%= link_to "Ajouter sa sneaker", new_sneaker_path %>
+<% end %>
 
 <% @sneakers.each do |sneaker|	%>
 	<h2><%=	sneaker.name %></h2>
@@ -15,5 +15,4 @@
 	<p>Extras : <%= sneaker.extras %></p>
 	<%=	link_to "Voir la sneaker", sneaker_path(sneaker)%>
 <% end %>
-
 

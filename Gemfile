@@ -37,6 +37,7 @@ gem 'font-awesome-sass', '~> 5.15.1'
 gem 'simple_form'
 
 gem 'devise'
+gem 'pundit'
 
 
 group :development, :test do

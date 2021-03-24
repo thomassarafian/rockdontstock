@@ -9,10 +9,14 @@
 <p>Box : <%= @sneaker.box %></p>
 <p>Extras : <%= @sneaker.extras %></p>
 
+<% if policy(@sneaker).edit? %>
+	<%= link_to "Modifier #{@sneaker.name}", edit_sneaker_path(@sneaker) %>
+<% end %>
 
-<%= link_to "Modifier #{@sneaker.name}", edit_sneaker_path(@sneaker) %>
+<% if policy(@sneaker).destroy? %>
+	<%=	link_to "Supprimer", sneaker_path(@sneaker), method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>		
+
 	
-<%=	link_to "Supprimer", sneaker_path(@sneaker), method: :delete, data: { confirm: "Are you sure?" } %>
-
 <%=	link_to "Retour à la liste", sneakers_path%>
 

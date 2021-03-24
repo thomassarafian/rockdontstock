@@ -1,9 +1,9 @@
 class SneakersController < ApplicationController
+	skip_before_action :authenticate_user!, only: [:index, :show]
 	before_action :set_sneaker, only: [:show, :edit, :update, :destroy]
-	# skip_before_action :authenticate_user!, only: [:index, :show]
 
 	def index
-		@sneakers = Sneaker.all
+		@sneakers = policy_scope(Sneaker)
 	end
 	
 	def show
@@ -11,16 +11,14 @@ class SneakersController < ApplicationController
 	
 	def new
 		@sneaker = Sneaker.new
+		authorize @sneaker
 	end
 	
 	def create
-		sneaker = Sneaker.create(sneaker_params)
-		sneaker.user = current_user
-
-		if sneaker.save
-			redirect_to sneakers_path
-		else
-			render:new
+		@sneaker = current_user.sneakers.new(sneaker_params)
+		authorize @sneaker
+		if @sneaker.save
+			redirect_to @sneaker, notice: 'Ta paire a bien été ajouté'
 		end
 	end
 
@@ -45,6 +43,6 @@ class SneakersController < ApplicationController
 
 	def set_sneaker
 		@sneaker = Sneaker.find(params[:id])
+		authorize @sneaker
 	end
-
 end
