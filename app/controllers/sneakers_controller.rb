@@ -18,7 +18,7 @@ class SneakersController < ApplicationController
 		@sneaker = current_user.sneakers.new(sneaker_params)
 		authorize @sneaker
 		if @sneaker.save
-			redirect_to @sneaker, notice: 'Ta paire a bien été ajouté'
+			redirect_to sneaker_path(@sneaker), notice: 'Ta paire a bien été ajouté'
 		end
 	end
 
