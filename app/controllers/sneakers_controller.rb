@@ -1,5 +1,6 @@
 class SneakersController < ApplicationController
 	before_action :set_sneaker, only: [:show, :edit, :update, :destroy]
+	# skip_before_action :authenticate_user!, only: [:index, :show]
 
 	def index
 		@sneakers = Sneaker.all
@@ -14,7 +15,13 @@ class SneakersController < ApplicationController
 	
 	def create
 		sneaker = Sneaker.create(sneaker_params)
-		redirect_to sneakers_path
+		sneaker.user = current_user
+
+		if sneaker.save
+			redirect_to sneakers_path
+		else
+			render:new
+		end
 	end
 
 	def edit
