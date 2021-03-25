@@ -51,7 +51,10 @@ end
 
 gem "better_errors" #gem for debuging
 gem "binding_of_caller" #gem for debuging
-gem 'spring'
+#gem 'spring'
+
+gem 'cloudinary', '~> 1.16.0' # for image upload
+
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
