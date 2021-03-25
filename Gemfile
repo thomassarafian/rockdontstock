@@ -36,9 +36,11 @@ gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.15.1'
 gem 'simple_form'
 
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
+gem 'omniauth-facebook'
+gem "omniauth-rails_csrf_protection"
 gem 'pundit'
-
+gem 'figaro' #hide sensible info from git
 
 gem "better_errors" #gem for debuging
 gem "binding_of_caller" #gem for debuging
