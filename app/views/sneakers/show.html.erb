@@ -1,7 +1,11 @@
 <h1><%= @sneaker.name %></h1>
 
 <% @sneaker.photos.each do |photo|	%>
-	<%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill%>
+	<% if photo.content_type.match(*"heic") %>
+		<%= cl_image_tag photo.key, :format => :png, height: 300, width: 300, crop: :fill%>
+	<% else %>
+		<%= cl_image_tag photo.key, height: 300, width: 300, crop: :fill%>
+	<% end %>
 <% end %>
 
 <p>Taille : <%= @sneaker.size %></p>
