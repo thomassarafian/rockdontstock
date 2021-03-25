@@ -1,7 +1,9 @@
 <h1><%= @sneaker.name %></h1>
 
+<% @sneaker.photos.each do |photo|	%>
+	<%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill%>
+<% end %>
 
-<p><%= @sneaker.name %></p>
 <p>Taille : <%= @sneaker.size %></p>
 <p>Prix : <%= @sneaker.price %>€</p>
 <p>Condition : <%= @sneaker.condition %>/10</p>

@@ -1,4 +1,5 @@
-<%= form_for @sneaker do |f| %>
+<%#= form_for @sneaker do |f| %>
+<%= simple_form_for(sneaker) do |f| %>
 	<%= f.label :name, "Modèle" %>
 	<%= f.text_field :name %>
 
@@ -20,5 +21,7 @@
 	<%= f.label :extras, "Extras" %>
 	<%= f.text_field :extras %>
 
+	<%= f.label :photos, "Photos" %>
+	<%= f.input :photos, as: :file, input_html: {multiple: true} %>
 	<%= f.submit %>
 <% end %>
