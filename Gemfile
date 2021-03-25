@@ -40,6 +40,14 @@ gem 'devise'
 gem 'pundit'
 
 
+gem "better_errors" #gem for debuging
+gem "binding_of_caller" #gem for debuging
+gem 'spring' #for reload automaticaly
+
+gem 'cloudinary', '~> 1.16.0' # for image upload
+
+
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
@@ -49,13 +57,6 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
-gem "better_errors" #gem for debuging
-gem "binding_of_caller" #gem for debuging
-#gem 'spring'
-
-gem 'cloudinary', '~> 1.16.0' # for image upload
-
-
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
@@ -64,7 +65,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  # gem 'spring'
 end
 
 group :test do
