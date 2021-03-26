@@ -38,8 +38,11 @@ gem 'simple_form'
 
 gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
-gem 'pundit'
+gem 'activerecord-session_store' #store session data
+
+gem 'pundit' #rights for users 
 gem 'figaro' #hide sensible info from git
 
 gem "better_errors" #gem for debuging
