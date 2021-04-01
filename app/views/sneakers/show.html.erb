@@ -1,3 +1,20 @@
+<% shoes_size = {
+	6.0=>39,
+	6.5=>39,
+	7.0=>40,
+	7.5=>40.5,
+	8.0=>41,
+	8.5=>42,
+	9.0=>42.5,
+	9.5=>43,
+	10.0=>44,
+	10.5=>44.5,
+	11.0=>45,
+	11.5=>46,
+	12.0=>46.5,
+	12.5=>47
+}%>
+
 <h1><%= @sneaker.name %></h1>
 
 <% @sneaker.photos.each do |photo|	%>
@@ -8,7 +25,9 @@
 	<% end %>
 <% end %>
 
-<p>Taille : <%= @sneaker.size %></p>
+<p>Taille : <%=	@sneaker.size %> US (<%= shoes_size[@sneaker.size] %> FR)</p>
+
+
 <p>Prix : <%= @sneaker.price %>€</p>
 <p>Condition : <%= @sneaker.condition %>/10</p>
 <p>Box : <%= @sneaker.box %></p>
