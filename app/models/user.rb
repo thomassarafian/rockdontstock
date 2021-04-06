@@ -7,9 +7,6 @@ class User < ApplicationRecord
     	:recoverable, :rememberable, :validatable
     devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
-
-
-
   def self.create_from_google_data(auth)
     user_params = auth.slice("provider", "uid")
     user_params.merge! auth.info.slice("email", "first_name", "last_name")
@@ -29,8 +26,6 @@ class User < ApplicationRecord
     end
     return user
   end
-
-
 
    def self.find_for_facebook_oauth(auth)
     user_params = auth.slice("provider", "uid")
