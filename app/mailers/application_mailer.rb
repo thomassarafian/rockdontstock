@@ -1,4 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'contact@rds.com'
+  default from: 'elliot@rockdontstock.com'
+  default to: 'elliot@rockdontstock.com'
+
   layout 'mailer'
 end

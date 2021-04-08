@@ -2,11 +2,18 @@ class User < ApplicationRecord
   has_many :sneakers
   validates :first_name, :last_name, presence: true
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :confirmable, :lockable, :timeoutable, :trackable
 	devise :database_authenticatable, :registerable,
     	:recoverable, :rememberable, :validatable
-    devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+  devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
+  after_create :send_notification
+
+  def send_notification
+    UserMailer.new_user(self).deliver
+  end
+
+    
   def self.create_from_google_data(auth)
     user_params = auth.slice("provider", "uid")
     user_params.merge! auth.info.slice("email", "first_name", "last_name")
@@ -44,7 +51,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]  # Fake password for validation
       user.save
     end
-
     return user
   end
+
 end

@@ -53,7 +53,6 @@ gem 'cloudinary', '~> 1.16.0' # for image upload
 gem 'MailchimpTransactional', '~> 1.0.6'
 
 
-
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
