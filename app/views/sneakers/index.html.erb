@@ -26,7 +26,8 @@
 	<h2><%=	sneaker.name %></h2>
 	<p>User ID : <%= sneaker.user_id %></p>
 	<p>Taille : <%=	sneaker.size %> FR</p> <%#= US (shoes_size[sneaker.size] FR)%>
-	<p>Prix : <%= sneaker.price %>€</p>
+	<p>Prix: <%= humanized_money_with_symbol(sneaker.price) %></p>
+	<!-- <p>Prix : <%= sneaker.price %>€</p> -->
 	<p>Condition : <%= sneaker.condition %>/10</p>
 	<p>Box : <%= sneaker.box %></p>
 	<p>Extras : <%= sneaker.extras %></p>

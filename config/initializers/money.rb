@@ -51,12 +51,12 @@ MoneyRails.configure do |config|
   #   priority:            1,
   #   iso_code:            "EU4",
   #   name:                "Euro with subunit of 4 digits",
-  #   symbol:              "€",
-  #   symbol_first:        true,
+    # symbol:              "€",
+    # symbol_first:        true,
   #   subunit:             "Subcent",
   #   subunit_to_unit:     10000,
   #   thousands_separator: ".",
-  #   decimal_mark:        ","
+    # decimal_mark:        ","
   # }
 
   # Specify a rounding mode
@@ -72,7 +72,8 @@ MoneyRails.configure do |config|
   #
   # set to BigDecimal::ROUND_HALF_EVEN by default
   #
-  config.rounding_mode = BigDecimal::ROUND_UP 
+  Money.rounding_mode = BigDecimal::ROUND_HALF_EVEN
+ 
 
   # Set default money format globally.
   # Default value is nil meaning "ignore this option".

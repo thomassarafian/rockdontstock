@@ -28,10 +28,15 @@
 <p>Taille : <%=	@sneaker.size %> FR</p> <%#= US (shoes_size[@sneaker.size] FR)%>
 
 
-<p>Prix : <%= @sneaker.price %>€</p>
+<p>Prix : <%= humanized_money_with_symbol(@sneaker.price) %></p>
 <p>Condition : <%= @sneaker.condition %>/10</p>
 <p>Box : <%= @sneaker.box %></p>
 <p>Extras : <%= @sneaker.extras %></p>
+
+<%= form_tag orders_path do %>
+  <%= hidden_field_tag 'sneaker_id', @sneaker.id %>
+  <%= submit_tag 'Acheter', class: 'btn btn-primary' %>
+<% end %>
 
 <% if policy(@sneaker).edit? %>
 	<%= link_to "Modifier #{@sneaker.name}", edit_sneaker_path(@sneaker) %>
@@ -43,4 +48,5 @@
 
 	
 <%=	link_to "Retour à la liste", sneakers_path%>
+
 
