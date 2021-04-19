@@ -51,10 +51,12 @@ gem 'spring' #for reload automaticaly
 
 gem 'cloudinary', '~> 1.16.0' # for image upload
 gem 'MailchimpTransactional', '~> 1.0.6'
-gem 'mailjet'
+gem 'mailjet' #va bientot remplacer mailchimp
 
 
 gem 'stripe'
+gem 'money-rails'
+
 
 group :development, :test do
   gem 'pry-byebug'

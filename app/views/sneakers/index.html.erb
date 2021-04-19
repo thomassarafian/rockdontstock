@@ -1,4 +1,4 @@
-<% shoes_size = {
+<%# shoes_size = {
 	6.0=>39,
 	6.5=>39,
 	7.0=>40,
@@ -14,6 +14,8 @@
 	12.0=>46.5,
 	12.5=>47
 }%>
+
+
 <h1>Les sneakers</h1>
 
 <% if policy(Sneaker).create? %>
@@ -23,7 +25,7 @@
 <% @sneakers.each do |sneaker|	%>
 	<h2><%=	sneaker.name %></h2>
 	<p>User ID : <%= sneaker.user_id %></p>
-	<p>Taille : <%=	sneaker.size %> US (<%= shoes_size[sneaker.size] %> FR)</p>
+	<p>Taille : <%=	sneaker.size %> FR</p> <%#= US (shoes_size[sneaker.size] FR)%>
 	<p>Prix : <%= sneaker.price %>€</p>
 	<p>Condition : <%= sneaker.condition %>/10</p>
 	<p>Box : <%= sneaker.box %></p>

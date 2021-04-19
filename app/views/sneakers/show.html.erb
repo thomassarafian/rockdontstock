@@ -1,4 +1,4 @@
-<% shoes_size = {
+<%# shoes_size = {
 	6.0=>39,
 	6.5=>39,
 	7.0=>40,
@@ -25,7 +25,7 @@
 	<% end %>
 <% end %>
 
-<p>Taille : <%=	@sneaker.size %> US (<%= shoes_size[@sneaker.size] %> FR)</p>
+<p>Taille : <%=	@sneaker.size %> FR</p> <%#= US (shoes_size[@sneaker.size] FR)%>
 
 
 <p>Prix : <%= @sneaker.price %>€</p>
