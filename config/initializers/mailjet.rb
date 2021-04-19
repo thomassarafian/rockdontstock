@@ -14,21 +14,21 @@ Mailjet.configure do |config|
   config.api_version = 'v3.1'
 end
 
-variable = Mailjet::Send.create(messages: [{
-  'From'=> {
-    'Email'=> 'elliot@rockdontstock.com',
-    'Name'=> 'Elliot'
-  },
-  'To'=> [
-    {
-      'Email'=> 'sauzonchloe@gmail.com',
-      'Name'=> 'Thomas'
-    }
-  ],
-  'Subject'=> "Bienvenue chez Rock Don't Stock",
-  'TextPart'=> 'My first Mailjet email',
-  'HTMLPart'=> '<h3>Dear passenger 1, welcome to <a href=\'https://www.mailjet.com/\'>Mailjet</a>!</h3><br />May the delivery force be with you!',
-  'CustomID' => 'AppGettingStartedTest'
-}]
-)
-p variable.attributes['Messages']
+# variable = Mailjet::Send.create(messages: [{
+#   'From'=> {
+#     'Email'=> 'elliot@rockdontstock.com',
+#     'Name'=> 'Elliot'
+#   },
+#   'To'=> [
+#     {
+#       'Email'=> 'sauzonchloe@gmail.com',
+#       'Name'=> 'Thomas'
+#     }
+#   ],
+#   'Subject'=> "Bienvenue chez Rock Don't Stock",
+#   'TextPart'=> 'My first Mailjet email',
+#   'HTMLPart'=> '<h3>Dear passenger 1, welcome to <a href=\'https://www.mailjet.com/\'>Mailjet</a>!</h3><br />May the delivery force be with you!',
+#   'CustomID' => 'AppGettingStartedTest'
+# }]
+# )
+# p variable.attributes['Messages']
