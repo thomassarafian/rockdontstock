@@ -1,8 +1,8 @@
 class User < ApplicationRecord
+  validates :first_name, :last_name, presence: true
   has_many :sneakers
   has_many :orders
-  validates :first_name, :last_name, presence: true
-  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable
 	devise :database_authenticatable, :registerable,

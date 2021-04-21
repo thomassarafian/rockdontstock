@@ -1,7 +1,8 @@
+Order.destroy_all
 Sneaker.destroy_all
   
-  Sneaker.create(name: "Jordan 12 Retro Low Easter (2021)", size: 44, price: 199.99, condition: 5, box: "OG Box", extras: "lacets", user_id: 3)
-  Sneaker.create(name: "Jordan 5 Retro White Stealth (2021)", size: 42, price: 125, condition: 8, box: "OG Box", extras: "lacets", user_id: 3)
+  Sneaker.create(name: "Jordan 12 Retro Low Easter (2021)", size: 44, price: 199.99, condition: 5, box: "OG Box", extras: "lacets", user_id: 4)
+  Sneaker.create(name: "Jordan 5 Retro White Stealth (2021)", size: 42, price: 125, condition: 8, box: "OG Box", extras: "lacets", user_id: 4)
  
   Sneaker.create(name: "adidas Yeezy 700 V3 Kyanite", size: 38, price: 149, condition: 10, box: "OG Box", extras: "lacets", user_id: 3)
 	Sneaker.create(name: "Nike Air Max 720 Slip OBJ Black", size: 44, price: 199, condition: 5, box: "OG Box", extras: "lacets", user_id: 3)

@@ -17,8 +17,30 @@ class SneakersController < ApplicationController
 	def create
 		@sneaker = current_user.sneakers.new(sneaker_params)
 		authorize @sneaker
+
+		Stripe.api_key = ENV["STRIPE_SECRET"]
+		stripe_account = Stripe::Account.create(
+			type: 'custom',
+			country: 'FR',
+			email: current_user.email,
+			capabilities: {
+		    card_payments: {requested: true},
+		    transfers: {requested: true},
+  		},
+  		business_type: 'individual',
+		)
+		@sneaker.user_id = stripe_account.id 
+		
+		account_link = Stripe::AccountLink.create({
+		  account: stripe_account.id,
+		  type: 'account_onboarding',
+		  refresh_url: sneakers_url,
+		  return_url: sneakers_url
+		})
+
 		if @sneaker.save
-			redirect_to sneaker_path(@sneaker), notice: 'Ta paire a bien été ajouté'
+			redirect_to account_link.url
+			# redirect_to sneaker_path(@sneaker), notice: 'Ta paire a bien été ajouté'
 		end
 	end
 
@@ -38,7 +60,7 @@ class SneakersController < ApplicationController
 	private
 
 	def sneaker_params
-		params.require(:sneaker).permit(:name, :size, :price_cents, :condition, :box, :extras, photos: [])
+		params.require(:sneaker).permit(:name, :size, :price, :condition, :box, :extras, photos: [])
 	end
 
 	def set_sneaker
