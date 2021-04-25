@@ -8,7 +8,7 @@ class User < ApplicationRecord
 	devise :database_authenticatable, :registerable,
     	:recoverable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
-
+  
   # after_create :send_notification # a configurer avec mailjet 
 
   def send_notification

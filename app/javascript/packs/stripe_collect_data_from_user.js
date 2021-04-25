@@ -1,6 +1,5 @@
-// Assumes you've already included Stripe.js!
-// const stripe = Stripe('pk_test_51IcAgiE0gVjPTo06PeZhlZRFCJ0VbO0SXNeUaXVoefGxjMQ2ADjPY3ymyjjgvD7HLKYZl1yzow6bOym3OMNQAqO000jrMQzNBC');
-const stripe = Stripe('pk_test_51IcAgiE0gVjPTo06PeZhlZRFCJ0VbO0SXNeUaXVoefGxjMQ2ADjPY3ymyjjgvD7HLKYZl1yzow6bOym3OMNQAqO000jrMQzNBC');
+const stripe = Stripe(process.env.STRIPE_PUBLIC_TEST); 
+
 const myForm = document.querySelector('.simple_form.new_user');
 myForm.addEventListener('submit', handleForm);
 
