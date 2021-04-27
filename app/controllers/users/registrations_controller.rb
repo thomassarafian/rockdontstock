@@ -30,7 +30,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
           transfers: {requested: true},
         }
       })
-      current_user.id = stripe_account.id 
+
+      @user.stripe_account_id = stripe_account.id 
+      
+      p "==============================="
+      p current_user.stripe_account_id
+      p "==============================="
+      p @user.stripe_account_id
+      p "==============================="
       
       account_link = Stripe::AccountLink.create({
         account: stripe_account.id,

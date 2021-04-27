@@ -29,10 +29,10 @@ async function handleForm(event) {
 
   const personResult = await stripe.createToken('person', {
     person: {
-      first_name: "Tomatol", //document.querySelector('.user_first_name').value,
-      last_name: "Sarafou", //document.querySelector('.user_last_name').value,
+      first_name: "Thomas", //document.querySelector('.user_first_name').value,
+      last_name: "Sarafian", //document.querySelector('.user_last_name').value,
       address: {
-        line1:  "33 rue Dugas Montbel",//document.querySelector('.inp-person-street-address1').value,
+        line1:  "30 rue Dugas Montbel",//document.querySelector('.inp-person-street-address1').value,
         city: "Lyon",//document.querySelector('.inp-person-city').value,
         postal_code: "69002",//document.querySelector('.inp-person-zip').value,
         // state: document.querySelector('.inp-person-state').value,
