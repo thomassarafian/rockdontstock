@@ -30,6 +30,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
           transfers: {requested: true},
         }
       })
+      @user.update(stripe_account_id: stripe_account.id)
 
       @user.stripe_account_id = stripe_account.id 
       
