@@ -7,8 +7,16 @@ async function handleForm(event) {
   event.preventDefault();
   const accountResult = await stripe.createToken('account', {
     business_type: 'individual',
-    company: {
-      name: "Thomas",//document.querySelector('.user_first_name').value,
+    individual: {
+      first_name: "Thomas",//document.querySelector('.user_first_name').value,
+      last_name: "Sarafian",
+      email: "thomassarafian@gmail.com",
+      phone: "+33606860076",
+      dob: {
+        day: 12,
+        month: 10,
+        year: 1997,
+      },
       address: {
         line1: "30 rue Dugas Montbel", //document.querySelector('.inp-company-street-address1').value,
         city: "Lyon",//document.querySelector('.inp-company-city').value,
@@ -21,16 +29,17 @@ async function handleForm(event) {
 
   const personResult = await stripe.createToken('person', {
     person: {
-      first_name: "Thomas", //document.querySelector('.user_first_name').value,
-      last_name: "Saraf", //document.querySelector('.user_last_name').value,
+      first_name: "Tomatol", //document.querySelector('.user_first_name').value,
+      last_name: "Sarafou", //document.querySelector('.user_last_name').value,
       address: {
-        line1:  "30 rue Dugas Montbel",//document.querySelector('.inp-person-street-address1').value,
+        line1:  "33 rue Dugas Montbel",//document.querySelector('.inp-person-street-address1').value,
         city: "Lyon",//document.querySelector('.inp-person-city').value,
         postal_code: "69002",//document.querySelector('.inp-person-zip').value,
         // state: document.querySelector('.inp-person-state').value,
       },
     },
   });
+  
   if (accountResult.token && personResult.token) {
     document.querySelector('#user_token_account').value = accountResult.token.id;
     document.querySelector('#user_token_person').value = personResult.token.id;

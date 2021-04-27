@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 	def create
 	  sneaker = Sneaker.find(params[:sneaker_id])
-	  order = Order.create!(sneaker: sneaker, sneaker_name: sneaker.name, amount_cents: sneaker.price_cents, state: 'En cours', user: current_user)
+	  order = Order.create!(sneaker: sneaker, sneaker_name: sneaker.name, price_cents: sneaker.price_cents, state: 'En cours', user: current_user)
 
 
 	  session = Stripe::Checkout::Session.create(

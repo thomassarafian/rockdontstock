@@ -13,19 +13,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super
     if @user.save
-      token = current_user.token_account
+      token_account = current_user.token_account
       Stripe.api_key = ENV["STRIPE_SECRET_TEST"]
+      
       stripe_account = Stripe::Account.create({
+        account_token: token_account,
         type: 'custom',
+        business_profile: {
+          mcc: 5691,
+          url: "rds.com",
+        },
         country: 'FR',
         email: current_user.email,
         capabilities: {
           card_payments: {requested: true},
           transfers: {requested: true},
-        },
-        account_token: token
+        }
       })
-      
       current_user.id = stripe_account.id 
       
       account_link = Stripe::AccountLink.create({
