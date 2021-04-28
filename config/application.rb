@@ -15,7 +15,7 @@ module Rockdontstock
     end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
-
+    config.filter_parameters += [:password, :stripe_account_id] #for FILTERED PARAMS
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
