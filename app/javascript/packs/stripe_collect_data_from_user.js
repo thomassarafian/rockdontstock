@@ -8,12 +8,12 @@ async function handleForm(event) {
   const accountResult = await stripe.createToken('account', {
     business_type: 'individual',
     individual: {
-      first_name: "Damien",//document.querySelector('.user_first_name').value,
-      last_name: "Nicolas",
-      email: "thomassarafian@gmail.com",
-      phone: "+33606079811",
+      first_name: document.querySelector('#user_first_name').value,
+      last_name: document.querySelector('#user_last_name').value,
+      email: document.querySelector('#user_email').value,
+      phone: "+33606060606",
       dob: {
-        day: 12,
+        day: document.querySelector('#user_date_of_birth_3i').value,
         month: 10,
         year: 1997,
       },
@@ -29,8 +29,8 @@ async function handleForm(event) {
 
   const personResult = await stripe.createToken('person', {
     person: {
-      first_name: "Damien", //document.querySelector('.user_first_name').value,
-      last_name: "Nicolas", //document.querySelector('.user_last_name').value,
+      first_name: document.querySelector('#user_first_name').value,
+      last_name: document.querySelector('#user_last_name').value,
       address: {
         line1:  "11 rue Hotel de Ville",//document.querySelector('.inp-person-street-address1').value,
         city: "Lyon",//document.querySelector('.inp-person-city').value,
