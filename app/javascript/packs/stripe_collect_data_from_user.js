@@ -14,14 +14,13 @@ async function handleForm(event) {
       phone: "+33606060606",
       dob: {
         day: document.querySelector('#user_date_of_birth_3i').value,
-        month: 10,
-        year: 1997,
+        month: document.querySelector('#user_date_of_birth_2i').value,
+        year: document.querySelector('#user_date_of_birth_1i').value,
       },
       address: {
-        line1: "11 rue Hotel de Ville", //document.querySelector('.inp-company-street-address1').value,
-        city: "Lyon",//document.querySelector('.inp-company-city').value,
-        postal_code: "69001",//document.querySelector('.inp-company-zip').value,
-        // state: document.querySelector('.inp-company-state').value,
+        line1: document.querySelector('#user_line1').value,
+        city: document.querySelector('#user_city').value,
+        postal_code: document.querySelector('#user_postal_code').value,
       },
     },
     tos_shown_and_accepted: true,
@@ -32,10 +31,9 @@ async function handleForm(event) {
       first_name: document.querySelector('#user_first_name').value,
       last_name: document.querySelector('#user_last_name').value,
       address: {
-        line1:  "11 rue Hotel de Ville",//document.querySelector('.inp-person-street-address1').value,
-        city: "Lyon",//document.querySelector('.inp-person-city').value,
-        postal_code: "69001",//document.querySelector('.inp-person-zip').value,
-        // state: document.querySelector('.inp-person-state').value,
+        line1: document.querySelector('#user_line1').value,
+        city: document.querySelector('#user_city').value,
+        postal_code: document.querySelector('#user_postal_code').value,
       },
     },
   });

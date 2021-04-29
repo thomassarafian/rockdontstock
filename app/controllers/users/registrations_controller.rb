@@ -21,7 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         type: 'custom',
         business_profile: {
           mcc: 5691,
-          url: "rds.com",
+          url: "rockdontstock.com",
         },
         country: 'FR',
         email: current_user.email,
