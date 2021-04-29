@@ -32,13 +32,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
       })
       @user.update(stripe_account_id: stripe_account.id)
 
-      @user.stripe_account_id = stripe_account.id 
+      # @user.stripe_account_id = stripe_account.id 
       
-      p "==============================="
-      p current_user.stripe_account_id
-      p "==============================="
-      p @user.stripe_account_id
-      p "==============================="
+      # p "==============================="
+      # p current_user.stripe_account_id
+      # p "==============================="
+      # p @user.stripe_account_id
+      # p "==============================="
       
       account_link = Stripe::AccountLink.create({
         account: stripe_account.id,

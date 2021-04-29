@@ -8,19 +8,19 @@ async function handleForm(event) {
   const accountResult = await stripe.createToken('account', {
     business_type: 'individual',
     individual: {
-      first_name: "Thomas",//document.querySelector('.user_first_name').value,
-      last_name: "Sarafian",
+      first_name: "Damien",//document.querySelector('.user_first_name').value,
+      last_name: "Nicolas",
       email: "thomassarafian@gmail.com",
-      phone: "+33606860076",
+      phone: "+33606079811",
       dob: {
         day: 12,
         month: 10,
         year: 1997,
       },
       address: {
-        line1: "30 rue Dugas Montbel", //document.querySelector('.inp-company-street-address1').value,
+        line1: "11 rue Hotel de Ville", //document.querySelector('.inp-company-street-address1').value,
         city: "Lyon",//document.querySelector('.inp-company-city').value,
-        postal_code: "69002",//document.querySelector('.inp-company-zip').value,
+        postal_code: "69001",//document.querySelector('.inp-company-zip').value,
         // state: document.querySelector('.inp-company-state').value,
       },
     },
@@ -29,12 +29,12 @@ async function handleForm(event) {
 
   const personResult = await stripe.createToken('person', {
     person: {
-      first_name: "Thomas", //document.querySelector('.user_first_name').value,
-      last_name: "Sarafian", //document.querySelector('.user_last_name').value,
+      first_name: "Damien", //document.querySelector('.user_first_name').value,
+      last_name: "Nicolas", //document.querySelector('.user_last_name').value,
       address: {
-        line1:  "30 rue Dugas Montbel",//document.querySelector('.inp-person-street-address1').value,
+        line1:  "11 rue Hotel de Ville",//document.querySelector('.inp-person-street-address1').value,
         city: "Lyon",//document.querySelector('.inp-person-city').value,
-        postal_code: "69002",//document.querySelector('.inp-person-zip').value,
+        postal_code: "69001",//document.querySelector('.inp-person-zip').value,
         // state: document.querySelector('.inp-person-state').value,
       },
     },
