@@ -57,15 +57,13 @@ class SneakersController < ApplicationController
 
 	def create_connect_account
 		stripe_create_token
-		p stripe_create_token
-	  token_account = stripe_create_token.id
-	  p "=================="
-	  p token_account
-	  p "=================="
+
+		current_user.update(token_account: stripe_create_token.id)
+
     Stripe.api_key = ENV["STRIPE_SECRET_TEST"]
     
     stripe_account = Stripe::Account.create({
-      account_token: token_account,
+      account_token: current_user.token_account,
       type: 'custom',
       business_profile: {
         mcc: 5691,
