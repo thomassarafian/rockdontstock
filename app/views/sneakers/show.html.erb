@@ -39,14 +39,15 @@
 <% end %>
 
 <% if policy(@sneaker).edit? %>
-	<%= link_to "Modifier #{@sneaker.name}", edit_sneaker_path(@sneaker) %>
+	<p><%= link_to "Modifier #{@sneaker.name}", edit_sneaker_path(@sneaker) %></p>
+	<p><%=	link_to "MODIFIE TON PROFIL", edit_user_registration_path(current_user) %></p>
 <% end %>
 
 <% if policy(@sneaker).destroy? %>
-	<%=	link_to "Supprimer", sneaker_path(@sneaker), method: :delete, data: { confirm: "Are you sure?" } %>
+	<p><%=	link_to "Supprimer", sneaker_path(@sneaker), method: :delete, data: { confirm: "Are you sure?" } %></p>
 <% end %>		
 
-	
+
 <%=	link_to "Retour à la liste", sneakers_path%>
 
 

@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 		devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :token_account, :token_person, :stripe_account_id, :'date_of_birth(3i)', :'date_of_birth(2i)', :'date_of_birth(1i)', :line1, :city, :postal_code])
 
 		# For additional in app/views/devise/registrations/edit.html.erb
-		devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name])
+		devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :token_account, :token_person, :stripe_account_id, :'date_of_birth(3i)', :'date_of_birth(2i)', :'date_of_birth(1i)', :line1, :city, :postal_code])
 	end
 
 	private

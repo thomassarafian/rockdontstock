@@ -12,41 +12,46 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    if @user.save
-      token_account = current_user.token_account
-      Stripe.api_key = ENV["STRIPE_SECRET_TEST"]
+    # if @user.save
+        # Stripe::Customer.create({
+        #   email: current_user.email,
+        #   name: current_user.first_name + " " + current_user.last_name,
+        #   description: 'Test customer new',
+        # })
+      # token_account = current_user.token_account
+      # Stripe.api_key = ENV["STRIPE_SECRET_TEST"]
       
-      stripe_account = Stripe::Account.create({
-        account_token: token_account,
-        type: 'custom',
-        business_profile: {
-          mcc: 5691,
-          url: "rockdontstock.com",
-        },
-        country: 'FR',
-        email: current_user.email,
-        capabilities: {
-          card_payments: {requested: true},
-          transfers: {requested: true},
-        }
-      })
-      @user.update(stripe_account_id: stripe_account.id)
+      # stripe_account = Stripe::Account.create({
+      #   account_token: token_account,
+      #   type: 'custom',
+      #   business_profile: {
+      #     mcc: 5691,
+      #     url: "rockdontstock.com",
+      #   },
+      #   country: 'FR',
+      #   email: current_user.email,
+      #   capabilities: {
+      #     card_payments: {requested: true},
+      #     transfers: {requested: true},
+      #   }
+      # })
+      # @user.update(stripe_account_id: stripe_account.id)
 
-      # @user.stripe_account_id = stripe_account.id 
+      # # # @user.stripe_account_id = stripe_account.id 
       
-      # p "==============================="
-      # p current_user.stripe_account_id
-      # p "==============================="
-      # p @user.stripe_account_id
-      # p "==============================="
+      # # # p "==============================="
+      # # # p current_user.stripe_account_id
+      # # # p "==============================="
+      # # # p @user.stripe_account_id
+      # # # p "==============================="
       
-      account_link = Stripe::AccountLink.create({
-        account: stripe_account.id,
-        type: 'account_onboarding',
-        refresh_url: sneakers_url,
-        return_url: sneakers_url
-      })
-    end
+      # account_link = Stripe::AccountLink.create({
+      #   account: stripe_account.id,
+      #   type: 'account_onboarding',
+      #   refresh_url: sneakers_url,
+      #   return_url: sneakers_url
+      # })
+    # end
   end
 
   # GET /resource/edit
