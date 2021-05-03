@@ -1,4 +1,4 @@
-<%# shoes_size = {
+<%#shoes_size = {
 	6.0=>39,
 	6.5=>39,
 	7.0=>40,
@@ -44,7 +44,7 @@
 <% end %>
 
 <% if policy(@sneaker).destroy? %>
-	<p><%=	link_to "Supprimer", sneaker_path(@sneaker), method: :delete, data: { confirm: "Are you sure?" } %></p>
+	</p><%=	link_to "Supprimer", sneaker_path(@sneaker), method: :delete, data: { confirm: "Are you sure?" } %></p>
 <% end %>		
 
 
