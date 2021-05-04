@@ -7,9 +7,6 @@
         <%= f.error_notification %>
 
         <div class="form-inputs">
-          <%#= f.input :token_account, :as => :hidden, :input_html => { :value => "some value" } %>
-          <%#= f.input :token_person, :as => :hidden, :input_html => { :value => "some value" } %>
-
           <%= f.input :first_name, label: 'Prénom' %>
           <%= f.input :last_name, label: 'Nom de famille' %>
           <%= f.input :email,
@@ -35,5 +32,3 @@
     </div>
   </div>
 </div>
-
-<%#= javascript_pack_tag 'stripe_collect_data_from_user' %>

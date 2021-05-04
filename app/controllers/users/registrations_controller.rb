@@ -10,8 +10,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    super
+  # def create
+    # super
     # if @user.save
         # Stripe::Customer.create({
         #   email: current_user.email,
@@ -52,7 +52,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       #   return_url: sneakers_url
       # })
     # end
-  end
+  # end
 
   # GET /resource/edit
   # def edit
