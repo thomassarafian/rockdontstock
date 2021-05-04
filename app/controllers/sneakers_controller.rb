@@ -19,7 +19,7 @@ class SneakersController < ApplicationController
 		authorize @sneaker
 		if @sneaker.save
 			@sneaker.update(state: 1) # ici on devrai laisser à 0, puis si on valide la paire cote admin, alors on la passera a 1 
-			if current_user.date_of_birth.present? && current_user.line1.present? && current_user.city.present? && current_user.postal_code.present? #rajouter numero de telephone
+			if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? #rajouter numero de telephone
 				redirect_to sneakers_path, notice: "Ta paire a bien été envoyé !"
 				if current_user.token_account.nil?
 					create_connect_account

@@ -18,7 +18,7 @@
 
 <p><%=	link_to "MODIFIE TON PROFIL", edit_user_registration_path(current_user) %></p>
 
-<%
+<%#
 identity_front = Stripe::File.create({
   purpose: 'identity_document',
   file: File.new(current_user.ids[0].current_path),
@@ -50,7 +50,5 @@ Stripe::Account.update_person(
 	{
 		person_token: person_token
 	})
-
-
 %>
 
