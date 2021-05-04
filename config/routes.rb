@@ -6,7 +6,11 @@ Rails.application.routes.draw do
 		registrations: 'users/registrations'
 	}
 	resources :sneakers
-	resources :users
+
+	resources :users, only: [:show] do
+		resources :transfers, only: :new
+	end
+
 	resources :orders, only: [:show, :create] do
 	  resources :payments, only: :new
 	end
