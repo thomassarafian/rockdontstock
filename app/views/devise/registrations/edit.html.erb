@@ -33,7 +33,8 @@
                 input_html: { autocomplete: "current-password" } %>
     
     <% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? #rajouter numero de telephone %>
-      <%= f.file_field :ids, multiple: true, label: "📷 Recto ET Verso de la carte d'identité" %>
+      <%= f.file_field :ids, multiple: true, label: "📷 Recto & Verso de la carte d'identité" %>
+      <%= f.file_field :ids, label: "📷 Justificatif de domicile" %>
     <% end %>
   
   </div>

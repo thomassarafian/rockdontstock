@@ -19,6 +19,14 @@
 <p><%=	link_to "MODIFIE TON PROFIL", edit_user_registration_path(current_user) %></p>
 
 <%#
+identity_address = Stripe::File.create({
+  purpose: 'identity_document',
+  file: File.new(current_user.ids[2].current_path),
+  }, {
+  stripe_account: 'acct_1InK1r2QFklsr9vG',
+})
+
+
 identity_front = Stripe::File.create({
   purpose: 'identity_document',
   file: File.new(current_user.ids[0].current_path),
@@ -40,6 +48,9 @@ person_token = Stripe::Token.create({
 				front: identity_front.id,
       			back: identity_verso.id,
 		},
+		additional_document: {
+			front: identity_address.id
+		}
 	},
   },
 })
