@@ -3,7 +3,17 @@ class OrdersController < ApplicationController
   	@order = current_user.orders.find(params[:id])
   	authorize @order
   	current_stripe_session = retrieve_stripe_session
-		capture_payment(current_stripe_session)
+		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
+			capture_payment(current_stripe_session)
+		#end
+
+		#if le vendeur n'a pas envoyé sa paire avant les 7 jours # Je crois que ca cancel tout seul si on a pas validé dans les 7 jours
+		#	cancel_payment(current_stripe_session)
+		#end
+
+		#if on s'apercoit que le vendeur nous a envoyé une fausse paire
+			# refund_payment(current_stripe_session)
+		#end		
 	end
 
 	def create
@@ -55,5 +65,17 @@ class OrdersController < ApplicationController
 		Stripe::PaymentIntent.capture(
 		  current_stripe_session.payment_intent
 		)		
+	end
+
+	def cancel_payment(current_stripe_session)
+		Stripe::PaymentIntent.cancel(
+  		current_stripe_session.payment_intent
+		)
+	end
+
+	def refund_payment(current_stripe_session)
+		Stripe::Refund.create({
+			payment_intent: current_stripe_session.payment_intent,
+		})
 	end
 end

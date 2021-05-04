@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   validates :first_name, :last_name, presence: true
   has_many :sneakers
   has_many :orders
@@ -9,6 +10,8 @@ class User < ApplicationRecord
     	:recoverable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   
+  mount_uploaders :ids, IdUploader
+
   # after_create :send_notification # a configurer avec mailjet 
 
   def send_notification

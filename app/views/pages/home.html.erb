@@ -17,3 +17,40 @@
 <%=	link_to "Voir la liste", sneakers_path %>
 
 <p><%=	link_to "MODIFIE TON PROFIL", edit_user_registration_path(current_user) %></p>
+
+<%
+identity_front = Stripe::File.create({
+  purpose: 'identity_document',
+  file: File.new(current_user.ids[0].current_path),
+  }, {
+  stripe_account: 'acct_1InK1r2QFklsr9vG',
+})
+
+identity_verso = Stripe::File.create({
+  purpose: 'identity_document',
+  file: File.new(current_user.ids[1].current_path),
+  }, {
+  stripe_account: 'acct_1InK1r2QFklsr9vG',
+})
+
+person_token = Stripe::Token.create({
+  person: {
+	verification: {
+		document: {
+				front: identity_front.id,
+      			back: identity_verso.id,
+		},
+	},
+  },
+})
+
+Stripe::Account.update_person(
+	'acct_1InK1r2QFklsr9vG',
+	'person_4InK1r00pgBlEfDf',
+	{
+		person_token: person_token
+	})
+
+
+%>
+

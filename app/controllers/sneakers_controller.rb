@@ -105,7 +105,4 @@ class SneakersController < ApplicationController
 	  },
 	})
 	end
-
-
-
 end

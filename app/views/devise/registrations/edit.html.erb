@@ -31,6 +31,8 @@
                 hint: "we need your current password to confirm your changes",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
+
+  <%= f.file_field :ids, multiple: true, label: "Recto de la carte d'identité" %>
   </div>
 
   <div class="form-actions">
