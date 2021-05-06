@@ -1,8 +1,6 @@
 <div class="container">
   <div class="row py-4">
-    <!-- <div class="col-md-3"><%#= cl_image_tag @order.sneaker.photos[0], :format => :png, height: 300, width: 300, crop: :fill%></div> -->
-        
-<%#= image_tag @order.sneaker.photos, width: '100%' %>
+    <div class="col-md-3"><%= image_tag @order.sneaker.photos[0].url, width: '100%'%></div> 
     <div class="col">
       <h1>Checkout summary</h1>
       <p>Purchase of <strong><%= @order.sneaker.name %></strong> for <strong><%= humanized_money_with_symbol @order.price %></strong></p>

@@ -35,6 +35,7 @@ class OrdersController < ApplicationController
 	    	price_data: {
 	    		product_data: {
 	      		name: sneaker.name,
+	    			images: [sneaker.photos[0].url]
 	    		},
 	    		unit_amount: order.price_cents,
 	      	currency: "EUR",
