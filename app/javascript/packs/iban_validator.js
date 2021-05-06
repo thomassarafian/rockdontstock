@@ -12,8 +12,6 @@ function validateIbanChecksum(iban) {
                         //replace upper-case characters by numbers 10 to 35
                         return (ch.charCodeAt(0)-55); 
                     });
-  //The resulting number would be to long for javascript to handle without loosing precision.
-  //So the trick is to chop the string up in smaller parts.
   const mod97 = numbericed.match(/\d{1,7}/g)
                           .reduce(function(total, curr){ return Number(total + curr)%97},'');
 
@@ -21,10 +19,34 @@ function validateIbanChecksum(iban) {
 };
 
 const button = document.querySelector('.btn');
+const errorElement = document.getElementById("iban-error");
+
+const ibanForm = document.getElementById('user_iban');
+
 button.addEventListener('click', (event) => {
+  let message = [];
   user_iban = document.getElementById('user_iban').value;
-  if (smellsLikeIban(user_iban) == true && validateIbanChecksum(user_iban) == true)
-    window.alert("YES");
-  else
-    window.alert("NO");
+  if (smellsLikeIban(user_iban) == false || validateIbanChecksum(user_iban) == false)
+    message.push("L'IBAN n'est pas valide");
+  else if (smellsLikeIban(user_iban) == true && validateIbanChecksum(user_iban) == true)
+    message.push("L'IBAN est valide !");
+  if (message == "L'IBAN n'est pas valide")
+  {
+    event.preventDefault();
+    errorElement.innerText = message.join(', ');
+    errorElement.style.color = "red";
+    ibanForm.style.border = "solid 0.1em";
+    ibanForm.style.borderColor = "red";
+    ibanForm.style.boxShadow = "inset 0px 0px 40px 40px #ffb2b2";
+
+  }
+  else if (message == "L'IBAN est valide !")
+  {
+    errorElement.innerText = message.join(', ');
+    errorElement.style.color = "green";
+    ibanForm.style.border = "solid 0.1em";
+    ibanForm.style.borderColor = "green";
+    ibanForm.style.boxShadow = "inset 0px 0px 40px 40px #ffffff";
+  }
 });
+

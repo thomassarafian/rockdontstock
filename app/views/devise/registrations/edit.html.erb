@@ -12,7 +12,7 @@
     <% end %>
     
     <%= f.input :date_of_birth, as: :date,
-                start_year: Time.now.year - 100,
+                start_year: Time.now.year - 50,
                 end_year: Time.now.year - 18,
                 order: %i(day month year), label: 'Date de naissance' %>
 
@@ -38,6 +38,7 @@
         <%= f.file_field :ids, multiple: true %> <br> <br>
         <%= f.label "Envoyer un nouveau justificatif de domicile" %> <br>
         <%= f.file_field :ids %>  <br><br>
+        <div id="iban-error"></div>
         <%= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
 
       <% else %>
