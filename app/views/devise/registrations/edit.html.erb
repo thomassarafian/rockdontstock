@@ -34,25 +34,33 @@
     
     <% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? #rajouter numero de telephone %>
       <% if current_user.ids? %>
-        <%= f.file_field :ids, multiple: true, label: "Envoyer un nouveau recto & un nouveau Verso de la carte d'identité" %>
-        <%= f.file_field :ids, label: "Envoyer un nouveau justificatif de domicile" %>  
-      <% else %>
-        <%= f.file_field :ids, multiple: true, label: "📷 Recto & Verso de la carte d'identité" %>
-        <%= f.file_field :ids, label: "📷 Justificatif de domicile" %>
-      <% end %>
+        <%= f.label "Envoyer un nouveau recto & un nouveau Verso de la carte d'identité" %> <br>
+        <%= f.file_field :ids, multiple: true %> <br> <br>
+        <%= f.label "Envoyer un nouveau justificatif de domicile" %> <br>
+        <%= f.file_field :ids %>  <br><br>
+        <%= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
 
-        <!-- Demander le RIBs -->
+      <% else %>
+        <%= f.label "Envoyer un recto & un nouveau Verso de la carte d'identité" %> <br>
+        <%= f.file_field :ids, multiple: true %>
+        <%= f.label "Envoyer un justificatif de domicile" %> <br>
+        <%= f.file_field :ids  %>
+      <% end %>
     <% end %>
   
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+    <%= f.button :submit, "Enregistrer les modifications" %>
   </div>
 <% end %>
+
 
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
+
+
+<%= javascript_pack_tag "iban_validator" %>

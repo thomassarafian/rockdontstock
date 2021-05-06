@@ -48,10 +48,6 @@ class SneakersController < ApplicationController
 				order.destroy
 			end
 		end
-
-		# if current_user.orders.last.sneaker.id == @sneaker.id
-		# 	current_user.orders.destroy_all
-		# end
 		@sneaker.destroy
 		redirect_to sneakers_path
 	end

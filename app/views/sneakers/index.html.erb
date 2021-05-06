@@ -23,7 +23,7 @@
 <% end %>
 
 <% @sneakers.each do |sneaker|	%>
-	<%# if sneaker.state == 1 %>
+	<% if sneaker.state == 1 %>
 		<h2><%=	sneaker.name %></h2>
 		<p>User ID : <%= sneaker.user_id %></p>
 		<p>Taille : <%=	sneaker.size %> FR</p> <%#= US (shoes_size[sneaker.size] FR)%>
@@ -32,5 +32,5 @@
 		<p>Box : <%= sneaker.box %></p>
 		<p>Extras : <%= sneaker.extras %></p>
 		<%=	link_to "Voir la sneaker", sneaker_path(sneaker)%>
-	<%# end %>
+	<% end %>
 <% end %>
