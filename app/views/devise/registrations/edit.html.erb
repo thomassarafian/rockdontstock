@@ -33,8 +33,15 @@
                 input_html: { autocomplete: "current-password" } %>
     
     <% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? #rajouter numero de telephone %>
-      <%= f.file_field :ids, multiple: true, label: "📷 Recto & Verso de la carte d'identité" %>
-      <%= f.file_field :ids, label: "📷 Justificatif de domicile" %>
+      <% if current_user.ids? %>
+        <%= f.file_field :ids, multiple: true, label: "Envoyer un nouveau recto & un nouveau Verso de la carte d'identité" %>
+        <%= f.file_field :ids, label: "Envoyer un nouveau justificatif de domicile" %>  
+      <% else %>
+        <%= f.file_field :ids, multiple: true, label: "📷 Recto & Verso de la carte d'identité" %>
+        <%= f.file_field :ids, label: "📷 Justificatif de domicile" %>
+      <% end %>
+
+        <!-- Demander le RIB -->
     <% end %>
   
   </div>

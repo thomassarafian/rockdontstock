@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
 	    }],
     	payment_intent_data: {
     		capture_method: 'manual', 
-		    application_fee_amount: order.price_cents - 500, #l'argent qui va au vendeur #la plateforme reçoit une commission pour le service
+		    application_fee_amount: order.price_cents / 10, #l'argent qui va au vendeur #la plateforme reçoit une commission pour le service
 		    transfer_data: {
 		      destination: "acct_1InK1r2QFklsr9vG", #sneaker.user.stripe_account_id,
 		    },

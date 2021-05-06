@@ -8,10 +8,12 @@ Rails.application.routes.draw do
 	resources :sneakers
 
 	resources :users, only: [:show] do
-		resources :transfers, only: :new
+  	resources :transfers, only: [:index, :new]
 	end
 
 	resources :orders, only: [:show, :create] do
 	  resources :payments, only: :new
 	end
+
+	mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

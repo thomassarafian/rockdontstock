@@ -55,6 +55,7 @@ gem 'mailjet' #va bientot remplacer mailchimp
 
 
 gem 'stripe'
+gem 'stripe_event'
 gem 'money-rails' #managing money display easily
 
 gem 'carrierwave', '~> 2.0' #stock file uploaded
