@@ -22,14 +22,27 @@ class OrdersController < ApplicationController
 	  sneaker = Sneaker.find(params[:sneaker_id])
 	  order = Order.create!(sneaker: sneaker, sneaker_name: sneaker.name, price_cents: sneaker.price_cents, state: 'En cours', user: current_user)
 	  authorize order
+		#IF !customer_id?
+			#create_stripe_customer
+		#end
 		create_stripe_session(order, sneaker)
 	end
 
 	private
 
+
+	def create_stripe_customer
+		Stripe::Customer.create({
+			name: current_user.first_name + " " + current_user.last_name,
+			email: current_user.email,
+		  description: 'The customer is created dynamically',
+		})
+	end
+
+
 	def create_stripe_session(order, sneaker)
 		stripe_session = Stripe::Checkout::Session.create({
-	  	customer: "cus_JPmgmod0EE3LXW",
+	  	customer: "cus_JPmgmod0EE3LXW", #current_user.customer_id
 	    payment_method_types: ['card'],
 	    line_items: [{
 	    	price_data: {

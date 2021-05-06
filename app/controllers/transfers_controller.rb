@@ -6,7 +6,9 @@ class TransfersController < ApplicationController
 			stripe_account: 'acct_1InK1r2QFklsr9vG'
 		})
 
-		# raise
+
+		# POUR CREER UNE LIEN AVEC SA BANQUE AFIN DE FAIRE DES VIREMENTS 
+
 		# @bank_account = Stripe::Account.create_external_account(
 		# 	'acct_1InK1r2QFklsr9vG',
 		# 	{
@@ -21,7 +23,9 @@ class TransfersController < ApplicationController
 		# 	},
 		# )
 
-		# raise
+
+		# FAIRE LES VIREMENTS A PROPREMENT PARLÉ
+
 		# payout = Stripe::Payout.create({
 		#   amount: 100,
 		#   currency: 'eur',
