@@ -4,7 +4,9 @@ class OrdersController < ApplicationController
   	authorize @order
   	current_stripe_session = retrieve_stripe_session
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
+		if @order.state != "paid" 
 			capture_payment(current_stripe_session)
+		end
 		#end
 
 		#if le vendeur n'a pas envoyé sa paire avant les 7 jours # Je crois que ca cancel tout seul si on a pas validé dans les 7 jours
