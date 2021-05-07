@@ -10,6 +10,11 @@
 <h2>Mes ventes</h2> 
 <br>
 <h2>Mes informations</h2>
+<p>Email : <%= current_user.email %></p>
+<p>Adresse : <%= current_user.line1 %></p>
+<p>Ville : <%= current_user.city %></p>
+<p>Code postal : <%= current_user.postal_code %></p>
+
 <br>
 <% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? #rajouter numero de telephone %>
 	<%= link_to "Mes virements", user_transfers_path(@user) %>

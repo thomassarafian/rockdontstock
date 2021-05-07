@@ -15,7 +15,7 @@
   </head>
 
   <body>
-    <% if current_user.sneakers.present? %>
+    <% if current_user.sneakers.present? && (!current_user.date_of_birth? || !current_user.line1? || !current_user.city? || !current_user.postal_code?) #rajouter numero de telephone%>
       <div class="missing_infos">
         <p>Pour que votre paire soit mise en ligne, remplissez votre <strong>date de naissace</strong>, votre <strong>adresse</strong>  et votre <strong>numéro de téléphone</strong> sur <%= link_to "mon profil", edit_user_registration_path%> </p>
       </div>
