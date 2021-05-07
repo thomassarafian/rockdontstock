@@ -11,11 +11,15 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
-    <!-- <script src="https://js.stripe.com/v3/"></script> -->
     <script src="https://js.stripe.com/v3/" async></script>
   </head>
 
   <body>
+    <% if current_user.sneakers.present? %>
+      <div class="missing_infos">
+        <p>Pour que votre paire soit mise en ligne, remplissez votre <strong>date de naissace</strong>, votre <strong>adresse</strong>  et votre <strong>numéro de téléphone</strong> sur <%= link_to "mon profil", edit_user_registration_path%> </p>
+      </div>
+    <% end %>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <!-- <p class="notice"><%= notice %></p> -->

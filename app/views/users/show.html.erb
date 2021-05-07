@@ -1,5 +1,16 @@
 <h1>Mon profil</h1>
 
+<% avatar_url = current_user.picture_url || "default_avatar.png" %>
+<%= image_tag avatar_url, class: "avatar dropdown-toggle" %>
+
 <p><%= full_name %></p>
 
-<%= link_to "Mes virements", user_transfers_path(@user) %>
+<h2>Mes achats</h2> 
+<br>
+<h2>Mes ventes</h2> 
+<br>
+<h2>Mes informations</h2>
+<br>
+<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? #rajouter numero de telephone %>
+	<%= link_to "Mes virements", user_transfers_path(@user) %>
+<% end %>
