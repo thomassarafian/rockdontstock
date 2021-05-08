@@ -19,7 +19,7 @@ class SneakersController < ApplicationController
 		authorize @sneaker
 		if @sneaker.save
 			@sneaker.update(state: 1) # ici on devrai laisser à 0, puis si on valide la paire cote admin, alors on la passera a 1 
-			if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? #rajouter numero de telephone
+			if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone?
 				redirect_to sneaker_path(@sneaker), notice: "Ta paire a bien été envoyé !"
 				if current_user.token_account.nil?
 					create_connect_account
@@ -68,7 +68,6 @@ class SneakersController < ApplicationController
 
 		current_user.update(token_account: stripe_create_token.id)
 
-    Stripe.api_key = ENV["STRIPE_SECRET_TEST"] # A garder ou pas ?
     
     stripe_account = Stripe::Account.create({
       account_token: current_user.token_account,
@@ -84,6 +83,8 @@ class SneakersController < ApplicationController
         transfers: {requested: true},
       }
     })
+    current_user.update(stripe_account_id: stripe_account.id)
+    current_user.update(person_id: stripe_account['individual'].id)
 	end
 
 	def stripe_create_token

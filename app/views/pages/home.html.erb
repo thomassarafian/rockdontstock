@@ -18,7 +18,111 @@
 <br><br>
 <%= link_to "Modifier mon profil", edit_user_registration_path %>
 
+<% 
+if current_user
+  if !current_user.token_account? && current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? 
+    create_connect_account
+    p "LE USER A REMPLI TOUTE SES INFOS DONC ON LUI CRÉÉ UN COMPTE CONNECT"
+  end 
+  if current_user.ids[0] && current_user.ids[1] && current_user.ids[2]
+    send_identity_document
+  end 
+end
 
+
+def create_connect_account
+  stripe_create_token
+
+  current_user.update(token_account: stripe_create_token.id)
+  
+  stripe_account = Stripe::Account.create({
+    account_token: current_user.token_account,
+    type: 'custom',
+    business_profile: {
+      mcc: 5691,
+      url: "rockdontstock.com",
+    },
+    country: 'FR',
+    email: current_user.email,
+    capabilities: {
+      card_payments: {requested: true},
+      transfers: {requested: true},
+    }
+  })
+  current_user.update(stripe_account_id: stripe_account.id)
+  current_user.update(person_id: stripe_account['individual'].id)
+end
+
+def stripe_create_token
+  Stripe::Token.create({
+  account: {
+    business_type: "individual",
+    individual: {
+      email: current_user.email,
+      first_name: current_user.first_name,
+      last_name: current_user.last_name,
+      phone: "+33606060606",
+      address: {
+        line1: current_user.line1,
+        city: current_user.city,
+        postal_code: current_user.postal_code,
+      },
+      dob: {
+        day: current_user.date_of_birth.day,
+        month: current_user.date_of_birth.month,
+        year: current_user.date_of_birth.year,
+      }
+
+    },
+    tos_shown_and_accepted: true,
+  },
+})
+end
+
+def send_identity_document
+  identity_front = Stripe::File.create({
+    purpose: 'identity_document',
+    file: File.new(current_user.ids[0].current_path),
+    }, {
+    stripe_account: current_user.stripe_account_id,
+  })
+
+  identity_verso = Stripe::File.create({
+    purpose: 'identity_document',
+    file: File.new(current_user.ids[1].current_path),
+    }, {
+    stripe_account: current_user.stripe_account_id,
+  })
+
+  identity_address = Stripe::File.create({
+    purpose: 'identity_document',
+    file: File.new(current_user.ids[2].current_path),
+    }, {
+    stripe_account: current_user.stripe_account_id,
+  })
+
+  person_token = Stripe::Token.create({
+    person: {
+    verification: {
+      document: {
+          front: identity_front.id,
+              back: identity_verso.id,
+      },
+      additional_document: {
+        front: identity_address.id
+      }
+    },
+    },
+  })
+
+  Stripe::Account.update_person(
+    current_user.stripe_account_id,
+    current_user.person_id,
+    {
+      person_token: person_token
+    })    
+end
+%>
 <%#
 identity_address = Stripe::File.create({
   purpose: 'identity_document',

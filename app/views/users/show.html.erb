@@ -16,6 +16,6 @@
 <p>Code postal : <%= current_user.postal_code %></p>
 
 <br>
-<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? #rajouter numero de telephone %>
+<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? %>
 	<%= link_to "Mes virements", user_transfers_path(@user) %>
 <% end %>

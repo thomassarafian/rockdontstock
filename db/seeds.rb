@@ -1,8 +1,8 @@
 Order.destroy_all
 Sneaker.destroy_all
  
-Sneaker.create(name: "Jordan 12 Retro Low Easter (2021)", size: 44, price: 200, condition: 5, box: "OG Box", extras: "lacets", state: 1, user_id: 53)
-Sneaker.create(name: "Jordan 5 Retro White Stealth (2021)", size: 42, price: 125, condition: 8, box: "OG Box", extras: "lacets", state: 1, user_id: 53)
+# Sneaker.create(name: "Jordan 12 Retro Low Easter (2021)", size: 44, price: 200, condition: 5, box: "OG Box", extras: "lacets", state: 1, user_id: 1)
+# Sneaker.create(name: "Jordan 5 Retro White Stealth (2021)", size: 42, price: 125, condition: 8, box: "OG Box", extras: "lacets", state: 1, user_id: 1)
 	# photos: ["https://images.stockx.com/images/Air-Jordan-6-Retro-Electric-Green.jpg?fit=clip&bg=FFFFFF&w=700&h=500&auto=compress&q=90&dpr=2&trim=color&updated_at=1615313284&fm=jpg&ixlib=react-9.0.3"])
  
  #  Sneaker.create(name: "adidas Yeezy 700 V3 Kyanite", size: 38, price: 149, condition: 10, box: "OG Box", extras: "lacets", user_id: 2)

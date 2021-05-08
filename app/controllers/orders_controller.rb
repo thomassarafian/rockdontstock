@@ -4,9 +4,7 @@ class OrdersController < ApplicationController
   	authorize @order
   	current_stripe_session = retrieve_stripe_session
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
-		if @order.state != "paid" 
 			capture_payment(current_stripe_session)
-		end
 		#end
 
 		#if le vendeur n'a pas envoyé sa paire avant les 7 jours # Je crois que ca cancel tout seul si on a pas validé dans les 7 jours
@@ -22,9 +20,9 @@ class OrdersController < ApplicationController
 	  sneaker = Sneaker.find(params[:sneaker_id])
 	  order = Order.create!(sneaker: sneaker, sneaker_name: sneaker.name, price_cents: sneaker.price_cents, state: 'En cours', user: current_user)
 	  authorize order
-		#IF !customer_id?
-			#create_stripe_customer
-		#end
+		if !current_user.customer_id?
+			create_stripe_customer
+		end
 		create_stripe_session(order, sneaker)
 	end
 
@@ -32,17 +30,18 @@ class OrdersController < ApplicationController
 
 
 	def create_stripe_customer
-		Stripe::Customer.create({
+		customer = Stripe::Customer.create({
 			name: current_user.first_name + " " + current_user.last_name,
 			email: current_user.email,
 		  description: 'The customer is created dynamically',
 		})
+		current_user.update(customer_id: customer.id)
 	end
 
 
 	def create_stripe_session(order, sneaker)
 		stripe_session = Stripe::Checkout::Session.create({
-	  	customer: "cus_JPmgmod0EE3LXW", #current_user.customer_id
+	  	customer: current_user.customer_id,
 	    payment_method_types: ['card'],
 	    line_items: [{
 	    	price_data: {
@@ -59,7 +58,7 @@ class OrdersController < ApplicationController
     		capture_method: 'manual', 
 		    application_fee_amount: order.price_cents / 10, #l'argent qui va au vendeur #la plateforme reçoit une commission pour le service
 		    transfer_data: {
-		      destination: "acct_1InK1r2QFklsr9vG", #sneaker.user.stripe_account_id,
+		      destination: sneaker.user.stripe_account_id,
 		    },
 		  },
 	    mode: 'payment',

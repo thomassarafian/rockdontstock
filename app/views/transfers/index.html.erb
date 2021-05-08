@@ -9,18 +9,20 @@
 
 		<h2>En attente :</h2>
 		<% if  @balance.pending[0].amount > 0 %>
-			<p>Mon solde est de <%= @balance.pending[0].amount %> euros. Je pourrai retirer cet argent entre 3-5 jours ouvrés. </p>
+			<p>Mon solde est de <%= @balance.pending[0].amount / 100 %> euros. Je pourrai retirer cet argent dans 7 jours ouvrés. </p>
 		<% elsif  @balance.pending[0].amount == 0 %>
 			<p>Mon solde est de 0 euro, je ne peux rien retirer</p>
 		<% end %>
 
 		<h2>Disponible :</h2>
 		<% if  @balance.available[0].amount > 0 %>
-			<p>Mon solde est de <%= @balance.available[0].amount %> euros</p>
+			<p>Mon solde est de <%= @balance.available[0].amount / 100 %> euros</p>
 			<button>Retirer l'intégraliter</button>
 		<% elsif  @balance.available[0].amount == 0 %>
 			<p>Mon solde est de 0 euro, je ne peux rien retirer</p>
 		<% end %>
+
+		<%=	link_to "Voir la liste des Sneakers", sneakers_path %>
     </div>
   </div>
 </div>

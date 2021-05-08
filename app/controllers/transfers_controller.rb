@@ -1,27 +1,27 @@
 class TransfersController < ApplicationController
 	def index
 		skip_policy_scope
-		@account = Stripe::Account.retrieve('acct_1InK1r2QFklsr9vG')
+		@account = Stripe::Account.retrieve(current_user.stripe_account_id)
 		@balance = Stripe::Balance.retrieve({
-			stripe_account: 'acct_1InK1r2QFklsr9vG'
+			stripe_account: current_user.stripe_account_id
 		})
 
-
 		# POUR CREER UNE LIEN AVEC SA BANQUE AFIN DE FAIRE DES VIREMENTS 
-
-		# @bank_account = Stripe::Account.create_external_account(
-		# 	'acct_1InK1r2QFklsr9vG',
-		# 	{
-		#   	external_account: {
-		#   		object: 'bank_account',
-		#   		country: 'FR',
-		#   		currency: 'eur',
-		#   		account_holder_name: 'Nouveau tout propre',
-		#   		account_holder_type: 'individual',
-		#   		account_number: 'FR1420041010050500013M02606'
-		#   	},
-		# 	},
-		# )
+		if current_user.iban?
+			@bank_account = Stripe::Account.create_external_account(
+				current_user.stripe_account_id,
+				{
+			  	external_account: {
+			  		object: 'bank_account',
+			  		country: 'FR',
+			  		currency: 'eur',
+			  		account_holder_name: current_user.first_name + " " +  current_user.last_name,
+			  		account_holder_type: 'individual',
+			  		account_number: current_user.iban,
+			  	},
+				},
+			)
+		end
 
 
 		# FAIRE LES VIREMENTS A PROPREMENT PARLÉ

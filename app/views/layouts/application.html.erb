@@ -1,3 +1,14 @@
+<%  
+if current_user
+  if current_user.stripe_account_id? && current_user.sneakers.present? && (current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone?)    
+    @account = Stripe::Account.retrieve(current_user.stripe_account_id)
+    @balance = Stripe::Balance.retrieve({
+      stripe_account: current_user.stripe_account_id
+    })
+  end 
+end
+%>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,10 +26,18 @@
   </head>
 
   <body>
-    <% if current_user.sneakers.present? && (!current_user.date_of_birth? || !current_user.line1? || !current_user.city? || !current_user.postal_code?) #rajouter numero de telephone%>
-      <div class="missing_infos">
-        <p>Pour que votre paire soit mise en ligne, remplissez votre <strong>date de naissace</strong>, votre <strong>adresse</strong>  et votre <strong>numéro de téléphone</strong> sur <%= link_to "mon profil", edit_user_registration_path%> </p>
-      </div>
+    <% if current_user %>
+      <% if current_user.sneakers.present? && (!current_user.date_of_birth? || !current_user.line1? || !current_user.city? || !current_user.postal_code? || !current_user.phone?) %>
+        <div class="missing_infos">
+          <p>Pour que votre paire soit mise en ligne, remplissez votre <strong>date de naissace</strong>, votre <strong>adresse</strong>  et votre <strong>numéro de téléphone</strong> sur <%= link_to "mon profil", edit_user_registration_path%> </p>
+        </div>
+      <% end %>
+      <%# raise %>
+      <% if (!current_user.ids[0].present? || !current_user.ids[1].present? || !current_user.ids[2].present?) && (current_user.stripe_account_id? && current_user.sneakers.present? && (@balance.pending[0].amount > 0 || @balance.available[0].amount > 0))%>
+        <div class="missing_infos">
+          <p>Pour recevoir votre remplissez votre solde, vous devez upload votre <strong>carte d'identité</strong> et un <strong>justificatif de domicile</strong> sur <%= link_to "mon profil", edit_user_registration_path%> </p>
+        </div>
+      <% end %>
     <% end %>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
@@ -27,3 +46,4 @@
     <%= yield %>
   </body>
 </html>
+

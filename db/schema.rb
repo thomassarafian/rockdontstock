@@ -97,10 +97,13 @@ ActiveRecord::Schema.define(version: 2021_05_06_162351) do
     t.string "token_account"
     t.string "token_person"
     t.string "stripe_account_id"
+    t.string "person_id"
+    t.string "customer_id"
     t.date "date_of_birth"
     t.string "line1"
     t.string "city"
     t.string "postal_code"
+    t.string "phone"
     t.json "ids"
     t.string "iban"
     t.index ["email"], name: "index_users_on_email", unique: true
