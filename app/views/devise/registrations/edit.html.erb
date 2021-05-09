@@ -36,25 +36,6 @@
                         hint: "Entrez votre mot de passe actuel pour confirmer les modifications",
                         required: true,
                         input_html: { autocomplete: "current-password" } %>
-            
-            <%# if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? %>
-              <%# if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
-                <%= f.label "Envoyer un nouveau recto & un nouveau Verso de la carte d'identité" %> <br>
-                <%= f.file_field :ids, multiple: true %> <br> <br>
-                <%= f.label "Envoyer un nouveau justificatif de domicile" %> <br>
-                <%= f.file_field :ids %>  <br><br>
-                <div id="iban-error"></div>
-                <%= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
-
-              <%# else %>
-
-                <%#= f.label "Envoyer un recto & un Verso de la carte d'identité" %> <br>
-                <%#= f.file_field :ids, multiple: true %><br><br>
-                <%#= f.label "Envoyer un justificatif de domicile" %> <br>
-                <%#= f.file_field :ids  %><br>
-              <%# end %>
-            <%# end %>
-          
           </div>
 
           <div class="form-actions">
@@ -71,5 +52,3 @@
     </div>
   </div>
 </div>
-
-<%= javascript_pack_tag "iban_validator" %>

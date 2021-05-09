@@ -20,10 +20,10 @@ class ApplicationController < ActionController::Base
 
 	def configure_permitted_parameters
 		# For additional fields in app/views/devise/registrations/new.html.erb
-		devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :token_account, :token_person, :stripe_account_id, :person_id, :customer_id, :'date_of_birth(3i)', :'date_of_birth(2i)', :'date_of_birth(1i)', :line1, :city, :postal_code, :phone, :iban, {ids: []}])
+		devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :token_account, :token_person, :stripe_account_id, :person_id, :customer_id, :'date_of_birth(3i)', :'date_of_birth(2i)', :'date_of_birth(1i)', :line1, :city, :postal_code, :phone, :iban])
 
 		# For additional in app/views/devise/registrations/edit.html.erb
-		devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :token_account, :token_person, :stripe_account_id, :person_id, :customer_id, :'date_of_birth(3i)', :'date_of_birth(2i)', :'date_of_birth(1i)', :line1, :city, :postal_code, :phone, :iban, {ids: []}])
+		devise_parameter_sanitizer.permit(:account_update, keys: [:images, :first_name, :last_name, :token_account, :token_person, :stripe_account_id, :person_id, :customer_id, :'date_of_birth(3i)', :'date_of_birth(2i)', :'date_of_birth(1i)', :line1, :city, :postal_code, :phone, :iban])
 	end
 
 	private

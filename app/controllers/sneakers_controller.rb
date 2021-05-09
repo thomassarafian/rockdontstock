@@ -42,6 +42,7 @@ class SneakersController < ApplicationController
 
 	def destroy
 		# il faut destroy toutes les orders qui dependent de @sneaker 
+		
 		orders = Order.all
 		orders.each do |order|
 			if order.sneaker.id == @sneaker.id

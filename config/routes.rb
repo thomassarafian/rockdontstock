@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 	}
 	resources :sneakers
 
-	resources :users, only: [:show] do
+	resources :users, only: [:show, :update, :edit] do
   	resources :transfers, only: [:index, :new]
 	end
 

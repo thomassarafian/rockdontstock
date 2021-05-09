@@ -1,5 +1,7 @@
 class Sneaker < ApplicationRecord
 	has_many_attached :photos
+	# accepts_nested_attributes_for :photos
+
 	belongs_to :user
 
 	validates :size, :price, :condition, presence: true

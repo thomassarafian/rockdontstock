@@ -17,32 +17,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/edit
   # def edit
   #   super
-  #       p "AVAAAANT"
-  #       p "AVAAAANT"
-  #       p "AVAAAANT"
-  #       p "AVAAAANT"
-  #       p "AVAAAANT"
-  #       p "AVAAAANT"
-  #       p "AVAAAANT"
-  #     if !current_user.token_account? && current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? 
-  #       create_connect_account
-  #       p "LE USER A REMPLI TOUTE SES INFOS DONC ON LUI CRÉÉ UN COMPTE CONNECT"
-  #     end 
-  #     if current_user.ids[0] && current_user.ids[1] && current_user.ids[2]
-  #       send_identity_document
-  #     end
   # end
 
   # PUT /resource
   # def update
     # super
-    # if !current_user.token_account? && current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? 
-    #   create_connect_account
-    #   p "LE USER A REMPLI TOUTE SES INFOS DONC ON LUI CRÉÉ UN COMPTE CONNECT"
-    # end 
-    # if current_user.ids[0] && current_user.ids[1] && current_user.ids[2]
-    #   send_identity_document
-    # end
   # end
 
   # DELETE /resource
@@ -90,7 +69,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_resource(resource, params)
     resource.update_without_password(params)
   end
-
-
 
 end
