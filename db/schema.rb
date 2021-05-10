@@ -104,7 +104,6 @@ ActiveRecord::Schema.define(version: 2021_05_06_162351) do
     t.string "city"
     t.string "postal_code"
     t.string "phone"
-    t.json "ids"
     t.string "iban"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

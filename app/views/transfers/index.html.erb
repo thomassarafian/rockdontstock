@@ -3,7 +3,7 @@
     <div class="col-12 col-sm-9 ">
 		<h1>Tous mes virements</h1>
 
-		<% if !current_user.iban? && @balance.available[0].amount > 0  && current_user.ids %>
+		<% if !current_user.iban? && @balance.available[0].amount > 0 %>
 			<p><%= link_to "Remplir l'iban ", edit_user_registration_path %></p>
 		<% end %>
 

@@ -1,53 +1,59 @@
-<h1>Mon profil</h1>
+<div class="container">
+  <div class="row row-cols-4 mt-5 justify-content-center">
+    <div class="col-12 col-sm-9">
+		<h1>Mon profil</h1>
 
-<% avatar_url = current_user.picture_url || "default_avatar.png" %>
-<%= image_tag avatar_url, class: "avatar dropdown-toggle" %>
+		<% avatar_url = current_user.picture_url || "default_avatar.png" %>
+		<%= image_tag avatar_url, class: "avatar dropdown-toggle" %>
 
-<p><%= full_name %></p>
+		<p><%= full_name %></p>
 
-<h2>Mes achats</h2> 
-<br>
-<h2>Mes ventes</h2> 
-<br>
-<h2>Mes informations</h2>
-<p>Email : <%= current_user.email %></p>
-<p>Adresse : <%= current_user.line1 %></p>
-<p>Ville : <%= current_user.city %></p>
-<p>Code postal : <%= current_user.postal_code %></p>
+		<h2>Mes achats</h2> 
+		<br>
+		<h2>Mes ventes</h2> 
+		<br>
+		<h2>Mes informations</h2>
+		<p>Email : <%= current_user.email %></p>
+		<p>Adresse : <%= current_user.line1 %></p>
+		<p>Ville : <%= current_user.city %></p>
+		<p>Code postal : <%= current_user.postal_code %></p>
 
-<br>
-<h2>Mes virements vers mon comptes bancaires</h2>
-<%= simple_form_for(@user) do |f| %>
-	<div id="iban-error"></div>
-	<%= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
-	<%= f.button :submit %>
-<% end %>
-
-<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? && current_user.date_of_birth? && current_user.sneakers.present? %>
-	<%= link_to "Mes virements", user_transfers_path(@user) %>
-<% end %>
-
-
-<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? %>
-	<h2>Mes documents</h2>
-	<% if current_user.images[0].present? &&  current_user.images[1].present? &&  current_user.images[2].present? %>
+		<br>
+		<h2>Mes virements vers mon comptes bancaires</h2>
 		<%= simple_form_for(@user) do |f| %>
-			<p>Attention ! Si vous voulez transmettre à nouveaux vos documents, cela supprimera les anciens. Vous devez donc nous renvoyer vos 3 documents ci-dessous : </p>
-			<%= f.input :images, as: :file,  input_html: {multiple: true}, label: "Envoyer une nouvelle fois le recto de ma carte d'identité" %>
-			<%= f.input :images, as: :file,  input_html: {multiple: true}, label: "Envoyer une nouvelle fois le recto de ma carte d'identité" %>
-			<%= f.input :images, as: :file,  input_html: {multiple: true}, label: "Envoyer un nouveau justificatif de domicile" %>
-		    <%= f.button :submit %>
-		<% end %>
-	<% else %>
-		<%= simple_form_for(@user) do |f| %>
-		  	<p>Attention ! Vous devez nous envoyer les 3 documents ci-dessous au même moment : </p>
-		  	<%= f.input :images, as: :file,  input_html: {multiple: true}, label: "Envoyer le recto de ma carte d'identité" %>
-			<%= f.input :images, as: :file,  input_html: {multiple: true}, label: "Envoyer le verso de ma carte d'identité" %>
-			<%= f.input :images, as: :file,  input_html: {multiple: true}, label: "Envoyer un justificatif de domicile" %>
+			<div id="iban-error"></div>
+			<%= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
 			<%= f.button :submit %>
-	    <% end %>
-	<% end %>
-<% end %>
+		<% end %>
+
+		<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? && current_user.date_of_birth? && current_user.sneakers.present? %>
+			<%= link_to "Mes virements", user_transfers_path(@user) %>
+		<% end %>
+
+
+		<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? %>
+			<h2>Mes documents</h2>
+			<% if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
+				<%= simple_form_for(@user) do |f| %>
+					<p>Attention ! Si vous voulez transmettre à nouveaux vos documents, cela supprimera les anciens. Vous devez donc nous renvoyer vos 3 documents ci-dessous : </p>
+					<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer une nouvelle fois le recto de ma carte d'identité" %>
+					<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer une nouvelle fois le recto de ma carte d'identité" %>
+					<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer un nouveau justificatif de domicile" %>
+				    <%= f.button :submit %>
+				<% end %>
+			<% else %>
+				<%= simple_form_for(@user) do |f| %>
+				  	<p>Attention ! Vous devez nous envoyer les 3 documents ci-dessous au même moment : </p>
+				  	<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le recto de ma carte d'identité" %>
+					<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le verso de ma carte d'identité" %>
+					<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer un justificatif de domicile" %>
+					<%= f.button :submit %>
+			    <% end %>
+			<% end %>
+		<% end %>
+    </div>
+  </div>
+</div>
 
 	
 <%= javascript_pack_tag "iban_validator" %>
