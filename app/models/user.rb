@@ -78,14 +78,6 @@ class User < ApplicationRecord
       })
     end
 
-
-
-
-
-
-
-
-
     def send_notification
       UserMailer.new_user(self).deliver
     end
