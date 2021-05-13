@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'users/show'
 	root to: "pages#home"
 	devise_for :users, controllers: { 
 		omniauth_callbacks: 'users/omniauth_callbacks',
@@ -7,9 +6,10 @@ Rails.application.routes.draw do
 	}
 	resources :sneakers
 
-	resources :users, only: [:show, :update, :edit] do
-  	resources :transfers, only: [:index, :new]
-	end
+
+	resources :users, only: [:show, :update], path: 'me' do
+  	resources :transfers, only: [:index, :create]
+  end
 
 	resources :orders, only: [:show, :create] do
 	  resources :payments, only: :new

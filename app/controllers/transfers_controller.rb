@@ -22,11 +22,8 @@ class TransfersController < ApplicationController
 				},
 			)
 		end
-
-
 		# FAIRE LES VIREMENTS A PROPREMENT PARLÉ
-
-		# payout = Stripe::Payout.create({
+		# p payout = Stripe::Payout.create({
 		#   amount: 100,
 		#   currency: 'eur',
 		#   destination: 'ba_1Inmn42QFklsr9vGI323QckG',#@account.external_accounts.data[0].id
@@ -35,17 +32,32 @@ class TransfersController < ApplicationController
 		# 	}, {
 		# 		stripe_account: 'acct_1InK1r2QFklsr9vG',
 		# 	})
-		# payout = Stripe::Payout.create({
-		#   amount: 1000,
-		#   currency: 'eur',
-		#   method: 'instant',
-		# }, {
-		#   stripe_account: 'acct_1InK1r2QFklsr9vG',
-		# })
+		
+
 	end
+
+	def create
+    @user = User.find(params[:user_id])
+    @transfer = Transfer.new(transfer_params)
+    @user.transfer = @transfer
+    if @transfer.save
+      redirect_to users_path(@user)
+    else
+      render 'users/show'
+    end
+  end
+
+  private
+
+  def transfer_params
+    params.require(:transfer).permit(:iban)
+  end
+
+		
+
 
 	# def new
 	# end
 
-	private
+
 end

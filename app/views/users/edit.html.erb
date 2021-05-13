@@ -1,1 +1,43 @@
-edit.html.erb
+<!-- <div class="container">
+  <div class="row row-cols-4 mt-5 justify-content-center">
+    <div class="col-12 col-sm-9">
+		<h1>Mon profil</h1>
+
+		<% avatar_url = current_user.picture_url || "default_avatar.png" %>
+		<%= image_tag avatar_url, class: "avatar dropdown-toggle" %>
+
+		<h2>Modifier mes informations</h2>
+
+		<%= simple_form_for(@user) do |f| %>
+		  <%= f.input :first_name  %>
+		  <%= f.input :last_name  %>
+		  <%= f.input :email  %>
+		  <%= f.input :last_name  %>
+      <%= f.input :date_of_birth, as: :date,
+            start_year: Time.now.year - 50,
+            end_year: Time.now.year - 18,
+            order: %i(day month year), label: 'Date de naissance' %>
+
+			<%= f.input :line1, label: 'Adresse' %>
+			<%= f.input :city, label: 'Ville' %>
+			<%= f.input :postal_code, label: 'Code Postal' %>
+
+			<%= f.input :phone, label: 'Numéro de téléphone' %>
+			<%= f.input :password, label: 'Nouveau mot de passe',
+			            hint: "Ne pas remplir si vous ne voulez pas modifier votre mot de passe",
+			            required: false,
+			            input_html: { autocomplete: "new-password" } %>
+			<%= f.input :password_confirmation, label: 'Confirmation du nouveau mot de passe',
+			            required: false,
+            input_html: { autocomplete: "new-password" } %>
+		  <%= f.button :submit %>
+		<% end %>
+
+		<%= link_to "Retour à mon profil", user_path(@user) %>
+
+
+    </div>
+  </div>
+</div>
+
+	 -->

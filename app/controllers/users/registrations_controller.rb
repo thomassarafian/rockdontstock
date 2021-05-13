@@ -21,14 +21,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   # def update
-    # super
+  #   super
   # end
 
   # DELETE /resource
   def destroy
     sneakers = Sneaker.all.where(user_id: current_user.id)
     sneakers.each do |sneaker|
-        sneaker.destroy
+      sneaker.destroy
     end
     super
   end
@@ -69,5 +69,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_resource(resource, params)
     resource.update_without_password(params)
   end
+
+  def after_update_path_for(resource)
+    flash[:notice] = "Votre compte a bien été mise à jour !"
+    user_path(@user)
+  end
+
 
 end

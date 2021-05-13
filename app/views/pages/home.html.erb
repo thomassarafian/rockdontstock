@@ -18,6 +18,18 @@
 <br><br>
 <%= link_to "Modifier mon profil", edit_user_registration_path %>
 
+<%#
+p payout = Stripe::Payout.create({
+      amount: 100,
+      currency: 'eur',
+      destination: 'ba_1Inmn42QFklsr9vGI323QckG',#@account.external_accounts.data[0].id
+      method: "standard",
+      }, {
+        stripe_account: 'acct_1InK1r2QFklsr9vG',
+      }) 
+%>
+
+
 <%# 
 if current_user
   if !current_user.token_account? && current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? 

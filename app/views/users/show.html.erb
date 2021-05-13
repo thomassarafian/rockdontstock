@@ -6,24 +6,45 @@
 		<% avatar_url = current_user.picture_url || "default_avatar.png" %>
 		<%= image_tag avatar_url, class: "avatar dropdown-toggle" %>
 
+		<h2>Mes informations</h2>
 		<p><%= full_name %></p>
+		<p>Email : <%= current_user.email %></p>
+		<% if current_user.line1? %>		
+			<p>Adresse : <%= current_user.line1 %></p>
+		<% end %>
+		<% if current_user.city? %>		
+			<p>Ville : <%= current_user.city %></p>
+		<% end %>
+		<% if current_user.postal_code? %>		
+			<p>Code postal : <%= current_user.postal_code %></p>
+		<% end %>
+		<% if current_user.date_of_birth? %>		
+			<p>Date de naissance : <%= current_user.date_of_birth.strftime("%d/%m/%Y") %></p>
+		<% end %>
+		<% if current_user.phone? %>		
+			<p>Numéro de téléphone : <%= current_user.phone %></p>
+		<% end %>
+
+
+		
+		<%= link_to "Modifier mes informations", edit_user_registration_path(@user) %>
+
+
 
 		<h2>Mes achats</h2> 
 		<br>
 		<h2>Mes ventes</h2> 
-		<br>
-		<h2>Mes informations</h2>
-		<p>Email : <%= current_user.email %></p>
-		<p>Adresse : <%= current_user.line1 %></p>
-		<p>Ville : <%= current_user.city %></p>
-		<p>Code postal : <%= current_user.postal_code %></p>
+
+		
 
 		<br>
-		<h2>Mes virements vers mon comptes bancaires</h2>
-		<%= simple_form_for(@user) do |f| %>
-			<div id="iban-error"></div>
-			<%= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
-			<%= f.button :submit %>
+		<% if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
+			<h2>Mes virements vers mon comptes bancaires</h2>
+			<%= simple_form_for(@user) do |f| %>
+				<div id="iban-error"></div>
+				<%= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
+				<%= f.button :submit %>
+			<% end %>
 		<% end %>
 
 		<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? && current_user.date_of_birth? && current_user.sneakers.present? %>

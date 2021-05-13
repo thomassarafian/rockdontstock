@@ -1,6 +1,5 @@
 class Sneaker < ApplicationRecord
 	has_many_attached :photos
-	# accepts_nested_attributes_for :photos
 
 	belongs_to :user
 
@@ -13,4 +12,7 @@ class Sneaker < ApplicationRecord
 	def send_notification
     UserMailer.new_sneaker(self, user).deliver
   end
+
+
+
 end
