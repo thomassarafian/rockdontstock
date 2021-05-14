@@ -40,7 +40,9 @@ class OrdersController < ApplicationController
 
 
 	def create_stripe_session(order, sneaker)
-		stripe_session = Stripe::Checkout::Session.create({
+		Stripe.api_key = ENV['STRIPE_SECRET_TEST']
+
+		p stripe_session = Stripe::Checkout::Session.create({
 	  	customer: current_user.customer_id,
 	    payment_method_types: ['card'],
 	    line_items: [{
@@ -65,30 +67,34 @@ class OrdersController < ApplicationController
 	    success_url: order_url(order),
 	    cancel_url: sneaker_url(sneaker)
 	  })
-
 	  order.update(checkout_session_id: stripe_session.id)
 	  redirect_to new_order_payment_path(order)
 	end
 
 	def retrieve_stripe_session
+		Stripe.api_key = ENV['STRIPE_SECRET_TEST']
 		stripe_session = Stripe::Checkout::Session.retrieve(
 		  @order.checkout_session_id
 		)
 	end
 
 	def capture_payment(current_stripe_session)
+				Stripe.api_key = ENV['STRIPE_SECRET_TEST']
 		Stripe::PaymentIntent.capture(
 		  current_stripe_session.payment_intent
 		)		
 	end
 
 	def cancel_payment(current_stripe_session)
+				Stripe.api_key = ENV['STRIPE_SECRET_TEST']
 		Stripe::PaymentIntent.cancel(
   		current_stripe_session.payment_intent
 		)
 	end
 
 	def refund_payment(current_stripe_session)
+				Stripe.api_key = ENV['STRIPE_SECRET_TEST']
+
 		Stripe::Refund.create({
 			payment_intent: current_stripe_session.payment_intent,
 		})

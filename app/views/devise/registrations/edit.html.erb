@@ -6,6 +6,7 @@
           <%= f.error_notification %>
 
           <div class="form-inputs">
+            <h3>Mes informations</h3>
             <%= f.input :first_name, label: 'Prénom', autofocus: true  %>
             <%= f.input :last_name, label: 'Nom de famille' %>
             <%= f.input :email, required: true %>
@@ -35,6 +36,27 @@
                         hint: "Entrez votre mot de passe actuel pour confirmer les modifications",
                         required: true,
                         input_html: { autocomplete: "current-password" } %>
+            <% if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
+              <h3>Mon IBAN</h3>
+              <div id="iban-error">
+                <%= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
+              </div>
+            <% end %>
+
+            <% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? %>
+              <h3>Mes documents</h3>
+              <% if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
+                <p>Attention ! Si vous voulez transmettre à nouveaux vos documents, cela supprimera les anciens. Vous devez donc nous renvoyer vos 3 documents ci-dessous : </p>
+                <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer une nouvelle fois le recto de ma carte d'identité" %> 
+                <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer une nouvelle fois le recto de ma carte d'identité" %>
+                <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer un nouveau justificatif de domicile" %>
+              <% else %>
+                <p>Attention ! Vous devez nous envoyer les 3 documents ci-dessous au même moment : </p>
+                <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le recto de ma carte d'identité" %>
+                <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le verso de ma carte d'identité" %>
+                <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer un justificatif de domicile" %>
+              <% end %>
+            <% end %>
           </div>
 
           <div class="form-actions">

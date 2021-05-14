@@ -6,7 +6,7 @@
 		<% avatar_url = current_user.picture_url || "default_avatar.png" %>
 		<%= image_tag avatar_url, class: "avatar dropdown-toggle" %>
 
-		<h2>Mes informations</h2>
+		<h3>Mes informations</h3>
 		<p><%= full_name %></p>
 		<p>Email : <%= current_user.email %></p>
 		<% if current_user.line1? %>		
@@ -31,21 +31,22 @@
 
 
 
-		<h2>Mes achats</h2> 
+		<h3>Mes achats</h3> 
 		<br>
-		<h2>Mes ventes</h2> 
+		<h3>Mes ventes</h3> 
 
-		
-
+	
 		<br>
 		<% if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
-			<h2>Mes virements vers mon comptes bancaires</h2>
-			<%= simple_form_for(@user) do |f| %>
-				<div id="iban-error"></div>
-				<%= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
-				<%= f.button :submit %>
-			<% end %>
+			<%= link_to "Ajouter mon IBAN", edit_user_registration_path(@user, anchor: "iban-error") %>			
+			<!-- <h3>Mes virements vers mon comptes bancaires</h3> -->
+			<!-- <%#= simple_form_for(@user) do |f| %> -->
+				<!-- <div id="iban-error"></div> -->
+				<%#= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
+				<%#= f.button :submit %>
+			<%# end %>
 		<% end %>
+		<br>
 
 		<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? && current_user.date_of_birth? && current_user.sneakers.present? %>
 			<%= link_to "Mes virements", user_transfers_path(@user) %>
@@ -53,7 +54,7 @@
 
 
 		<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? %>
-			<h2>Mes documents</h2>
+			<h3>Mes documents</h3>
 			<% if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
 				<%= simple_form_for(@user) do |f| %>
 					<p>Attention ! Si vous voulez transmettre à nouveaux vos documents, cela supprimera les anciens. Vous devez donc nous renvoyer vos 3 documents ci-dessous : </p>

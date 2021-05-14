@@ -11,11 +11,110 @@ class User < ApplicationRecord
   
   has_many_attached :ids
   
+  validate :correct_ids_type?
+
   # after_create :send_notification # a configurer avec mailjet 
   
   after_update :create_connect_account, if: :attributes_are_filled?
 
+  # after_update :send_ids, if: :ids_are_filled?
+  
+
+  #le but c'est de creer les documents
   private
+    def correct_ids_type?
+      user = self
+      if user.ids[0].present? && user.ids[1].present? && user.ids[2].present?
+        unless user.ids[0].content_type.in?(%w(image/jpg image/png image/pdf))
+          errors.add(:ids, "Les fichiers doivent etre du type JPG, PNG ou PDF")
+        end
+      end
+    end
+
+    def ids_are_filled?
+    # LISTE DES CAS
+    # si le gars rempli ses infos pour la 1ere fois
+    # si le gars avait deja send mais qu'il veut re-send
+    # si le gars veut update des infos mais pas modifier ça
+    # si le gars a deja rempli ses infos mais qu'il veut juste modifier son prénom alors il passera dedans et il resendera
+
+      user = self
+      if user.ids[0].present? && user.ids[1].present? && user.ids[2].present? 
+        p "User IDs OK "
+        p "User IDs OK "
+        p "User IDs OK "
+        p "User IDs OK "
+        p "User IDs OK "
+        p "User IDs OK "
+
+        return true
+      else
+        return false
+      end
+    end
+    
+    def send_ids
+      user = self
+      identity_front = retrieve_front_id(user)
+      identity_verso = retrieve_verso_id(user)
+      proof_of_address = retrieve_proof_of_address(user)
+      person_token = create_person_token(identity_front, identity_verso, proof_of_address)
+      update_person(user, person_token)
+    end
+
+    def retrieve_front_id(user)
+      return Stripe::File.create({
+        purpose: 'identity_document',
+        file: File.new(user.ids[0].url),
+        }, {
+        stripe_account: user.stripe_account_id,
+      })
+    end
+
+    def retrieve_verso_id(user)
+      return Stripe::File.create({
+        purpose: 'identity_document',
+        file: File.new(user.ids[1].url),
+        }, {
+        stripe_account: user.stripe_account_id,
+      })
+    end
+
+    def retrieve_proof_of_address(user)
+      return Stripe::File.create({
+        purpose: 'identity_document',
+        file: File.new(user.ids[2].url),
+        }, {
+        stripe_account: user.stripe_account_id,
+      })
+    end
+
+    def create_person_token(identity_front, identity_verso, proof_of_address)
+      return Stripe::Token.create({
+        person: {
+          verification: {
+            document: {
+              front: identity_front.id,
+              back: identity_verso.id,
+            },
+            additional_document: {
+              front: proof_of_address.id
+            }
+          },
+        },
+      })
+    end
+
+    def update_person(user, person_token)
+      Stripe::Account.update_person(
+        user.stripe_account_id,
+        user.person_id,
+        {
+          person_token: person_token
+        })    
+    end
+
+
     def attributes_are_filled?
       user = self
       if user.token_account.nil?

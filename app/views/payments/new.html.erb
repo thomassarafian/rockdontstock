@@ -5,18 +5,25 @@
       <h1>Checkout summary</h1>
       <p>Purchase of <strong><%= @order.sneaker.name %></strong> for <strong><%= humanized_money_with_symbol @order.price %></strong></p>
 
+      <p><%= @order.sneaker.user.stripe_account_id %></p>
+      <p><%= @order.checkout_session_id %></p>
       <button id="pay" class="btn btn-primary">Pay</button>
+      
+
+
       <script>
         const paymentButton = document.getElementById('pay');
         paymentButton.addEventListener('click', () => {
           var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>', {
-            stripeAccount: '<%= current_user.stripe_account_id %>',
+            stripeAccount: '<%= @order.sneaker.user.stripe_account_id %>',
           });
           stripe.redirectToCheckout({
             sessionId: '<%= @order.checkout_session_id %>'
           });
         });
       </script>
+    
+
     </div>
   </div>
 </div>
