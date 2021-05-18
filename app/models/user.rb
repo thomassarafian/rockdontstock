@@ -1,3 +1,5 @@
+require 'net/http'
+
 class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   has_many :sneakers
@@ -40,6 +42,12 @@ class User < ApplicationRecord
 
       user = self
       if user.ids[0].present? && user.ids[1].present? && user.ids[2].present? 
+
+        # uri = URI.parse(user.ids[1].url)
+        # unless (response = Net::HTTP.get_response(uri)) != 200
+          # uri = URI.parse(user.ids[1].url)
+          # p response.code
+        # end
         p "User IDs OK "
         p "User IDs OK "
         p "User IDs OK "

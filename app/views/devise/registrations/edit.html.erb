@@ -2,7 +2,7 @@
   <div class="row row-cols-4 mt-5 justify-content-center">
     <div class="col-12 col-sm-9">
         <h2>Modifier son profil</h2>
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'fileinfo' }) do |f| %>
           <%= f.error_notification %>
 
           <div class="form-inputs">
@@ -47,14 +47,15 @@
               <h3>Mes documents</h3>
               <% if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
                 <p>Attention ! Si vous voulez transmettre à nouveaux vos documents, cela supprimera les anciens. Vous devez donc nous renvoyer vos 3 documents ci-dessous : </p>
+
                 <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer une nouvelle fois le recto de ma carte d'identité" %> 
                 <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer une nouvelle fois le recto de ma carte d'identité" %>
                 <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer un nouveau justificatif de domicile" %>
               <% else %>
                 <p>Attention ! Vous devez nous envoyer les 3 documents ci-dessous au même moment : </p>
-                <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le recto de ma carte d'identité" %>
-                <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le verso de ma carte d'identité" %>
-                <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer un justificatif de domicile" %>
+                <%= f.input :ids, as: :file,  input_html: {multiple: true, id: 'file-box'}, label: "Envoyer le recto de ma carte d'identité" %>
+                <%= f.input :ids, as: :file,  input_html: {multiple: true, id: 'file-box'}, label: "Envoyer le verso de ma carte d'identité" %>
+                <%= f.input :ids, as: :file,  input_html: {multiple: true, id: 'file-box'}, label: "Envoyer un justificatif de domicile" %>
               <% end %>
             <% end %>
           </div>
@@ -62,6 +63,11 @@
           <div class="form-actions">
             <%= f.button :submit, "Enregistrer les modifications" %>
           </div>
+        
+
+            <!-- <div id='label-results'>...</div> -->
+            <!-- <pre id="upload-results"></pre> -->
+
         <% end %>
 
 
@@ -73,3 +79,34 @@
     </div>
   </div>
 </div>
+
+<!-- <script type="text/javascript">
+  var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>');
+
+  document.querySelector('#fileinfo').addEventListener('submit', function(event){
+    event.preventDefault();
+    
+    var data = new FormData();
+    data.append('file', document.querySelector('#file-box').files[0]);
+    data.append('purpose', 'identity_document');
+    
+    var oReq = new XMLHttpRequest();
+    oReq.open("POST", 'https://uploads.stripe.com/v1/files', true);
+
+    oReq.setRequestHeader('Authorization', 'Bearer ' + stripe._apiKey);
+
+    oReq.onload = function(oEvent) {
+      if (oReq.status == 200) {
+        document.querySelector('#label-results').textContent = 'Success!';
+      } else {
+        document.querySelector('#label-results').textContent = 'Failure: ' + oReq.status;
+      }
+      document.querySelector('#upload-results').textContent = oReq.response;
+    }
+    oReq.send(data);
+  });
+
+
+</script>
+
+ -->

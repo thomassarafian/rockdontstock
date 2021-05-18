@@ -15,7 +15,7 @@
         const paymentButton = document.getElementById('pay');
         paymentButton.addEventListener('click', () => {
           var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>', {
-            stripeAccount: '<%= @order.sneaker.user.stripe_account_id %>',
+            // stripeAccount: '<%= @order.sneaker.user.stripe_account_id %>',
           });
           stripe.redirectToCheckout({
             sessionId: '<%= @order.checkout_session_id %>'
