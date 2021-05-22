@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 	end
 
   def user_params
-  	params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :token_account, :token_person, :stripe_account_id, :person_id, :customer_id, :'date_of_birth(3i)', :'date_of_birth(2i)', :'date_of_birth(1i)', :line1, :city, :postal_code, :phone, :iban, ids: [])
+  	params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :token_account, :token_person, :stripe_account_id, :person_id, :customer_id, :'date_of_birth(3i)', :'date_of_birth(2i)', :'date_of_birth(1i)', :line1, :city, :postal_code, :phone, :iban, :picker_data, ids: [])
   end
 
 end

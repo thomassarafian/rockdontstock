@@ -28,14 +28,20 @@
       <br><br><br>
       <button type="button" class="btn btn-primary">Choisir le transporteur</button>
 
-      <%= simple_form_for(current_user, remote: true) do |f| %>
-        <%= f.input :picker_data, as: :hidden,:input_html => { :value => "some value" } %>
+      
+      <%= simple_form_for(current_user) do |f| %>
+        <%= f.input :picker_data, :input_html => { :value => "none"} %>
       <% end %>
 
 
       <% if current_user.picker_data? %>
-        <% raise %>
-        <%= p current_user.picker_data  %>
+
+        <% 
+          require 'json'
+          current_user.update_column(:picker_data, JSON.parse(current_user.picker_data)) 
+        %> 
+        <%= p current_user.picker_data %>
+        <%#= p current_user.JSON.parse(picker_data)  %>
       <% end %>
 
 
@@ -66,9 +72,7 @@
 
 
 
-
-
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
 
-    
 <%= javascript_pack_tag "point_picker" %>
+

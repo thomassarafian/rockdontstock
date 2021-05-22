@@ -50,11 +50,13 @@ function openServicePointPicker(country, language, postalCode, carriers, service
 
     console.log(result.id); 
 
-    
     document.querySelector('#user_picker_data').value = JSON.stringify(servicePointObject, null, 2);
-    // document.querySelector('#user_picker_name').value
 
-
+    if (document.querySelector('#user_picker_data').value != "none")
+    {
+      console.log("coiucou");
+      document.forms["edit_user_3"].submit();
+    }
 
     resultElem.innerHTML = JSON.stringify(servicePointObject, null, 2);
     postResultElem.style.display = 'block'
