@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_06_162351) do
+ActiveRecord::Schema.define(version: 2021_05_22_170529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2021_05_06_162351) do
     t.string "postal_code"
     t.string "phone"
     t.string "iban"
+    t.string "picker_data"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["stripe_account_id"], name: "index_users_on_stripe_account_id", unique: true

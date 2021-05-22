@@ -2,12 +2,50 @@
   <div class="row py-4">
     <div class="col-md-3"><%= image_tag @order.sneaker.photos[0].url, width: '100%'%></div> 
     <div class="col">
-      <h1>Checkout summary</h1>
-      <p>Purchase of <strong><%= @order.sneaker.name %></strong> for <strong><%= humanized_money_with_symbol @order.price %></strong></p>
+      <h1>Récapitulatif de la commande</h1>
+      <p>Achat de <strong><%= @order.sneaker.name %></strong> pour <strong><%= humanized_money_with_symbol @order.price %></strong></p>
 
-      <p><%= @order.sneaker.user.stripe_account_id %></p>
-      <p><%= @order.checkout_session_id %></p>
+
+      <% if current_user.line1? && current_user.postal_code? && current_user.city? %>
+        <p>Mon adresse actuel : </p>
+        <p><%= current_user.line1 %>, <%= current_user.city %> <%= current_user.postal_code %></p>
+      <% else %>
+        <%= simple_form_for(current_user, remote: true) do |f| %>
+          <%= f.input :line1, label: 'Adresse' %>
+          <%= f.input :city, label: 'Ville' %>
+          <%= f.input :postal_code, label: 'Code Postal' %>
+          <%= f.submit %>
+        <% end %>
+      <% end %>
+
+      <button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>
+      <div id="result"></div>
+      <div id="postResult">
+        <div class="result__to-post-number">
+        </div>
+      </div>
+        
+      <br><br><br>
+      <button type="button" class="btn btn-primary">Choisir le transporteur</button>
+
+      <%= simple_form_for(current_user, remote: true) do |f| %>
+        <%= f.input :picker_data, as: :hidden,:input_html => { :value => "some value" } %>
+      <% end %>
+
+
+      <% if current_user.picker_data? %>
+        <% raise %>
+        <%= p current_user.picker_data  %>
+      <% end %>
+
+
+
+
+      <% if  %>
+        
+      <br><br><br>
       <button id="pay" class="btn btn-primary">Pay</button>
+      <% end %>
       
 
 
@@ -15,15 +53,22 @@
         const paymentButton = document.getElementById('pay');
         paymentButton.addEventListener('click', () => {
           var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>', {
-            // stripeAccount: '<%= @order.sneaker.user.stripe_account_id %>',
           });
           stripe.redirectToCheckout({
             sessionId: '<%= @order.checkout_session_id %>'
           });
         });
       </script>
-    
 
     </div>
   </div>
 </div>
+
+
+
+
+
+<script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
+
+    
+<%= javascript_pack_tag "point_picker" %>

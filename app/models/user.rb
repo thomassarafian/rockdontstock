@@ -1,5 +1,3 @@
-require 'net/http'
-
 class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   has_many :sneakers
@@ -19,7 +17,7 @@ class User < ApplicationRecord
   
   after_update :create_connect_account, if: :attributes_are_filled?
 
-  # after_update :send_ids, if: :ids_are_filled?
+  # after_update :send_ids #, if: :ids_are_filled?
   
 
   #le but c'est de creer les documents
@@ -41,24 +39,11 @@ class User < ApplicationRecord
     # si le gars a deja rempli ses infos mais qu'il veut juste modifier son prénom alors il passera dedans et il resendera
 
       user = self
-      if user.ids[0].present? && user.ids[1].present? && user.ids[2].present? 
-
-        # uri = URI.parse(user.ids[1].url)
-        # unless (response = Net::HTTP.get_response(uri)) != 200
-          # uri = URI.parse(user.ids[1].url)
-          # p response.code
-        # end
-        p "User IDs OK "
-        p "User IDs OK "
-        p "User IDs OK "
-        p "User IDs OK "
-        p "User IDs OK "
-        p "User IDs OK "
-
-        return true
-      else
-        return false
-      end
+      # if user.ids[0].present? && user.ids[1].present? && user.ids[2].present? 
+        # return true
+      # else
+        # return false
+      # end
     end
     
     def send_ids
@@ -73,7 +58,7 @@ class User < ApplicationRecord
     def retrieve_front_id(user)
       return Stripe::File.create({
         purpose: 'identity_document',
-        file: File.new(user.ids[0].url),
+        file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
         }, {
         stripe_account: user.stripe_account_id,
       })
@@ -82,7 +67,7 @@ class User < ApplicationRecord
     def retrieve_verso_id(user)
       return Stripe::File.create({
         purpose: 'identity_document',
-        file: File.new(user.ids[1].url),
+        file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
         }, {
         stripe_account: user.stripe_account_id,
       })
@@ -91,7 +76,7 @@ class User < ApplicationRecord
     def retrieve_proof_of_address(user)
       return Stripe::File.create({
         purpose: 'identity_document',
-        file: File.new(user.ids[2].url),
+        file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
         }, {
         stripe_account: user.stripe_account_id,
       })
