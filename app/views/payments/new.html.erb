@@ -12,8 +12,8 @@
         </div>
       <% else %>
         <div class="adress_form">
-          <%= simple_form_for(current_user) do |f| %>
-            <%= f.input :line1, label: 'Modifier mon adresse' %>
+          <%= simple_form_for(current_user, remote: true) do |f| %>
+            <%= f.input :line1, label: 'Mon adresse' %>
             <%= f.input :city, label: 'Ville' %>
             <%= f.input :postal_code, label: 'Code Postal' %>
             <%= f.submit %>
@@ -38,18 +38,18 @@
       <br>  
       
       <% if current_user.picker_data? %>
-      <button id="pay" class="btn btn-primary">Payer</button>
+        <button id="pay" class="btn btn-primary">Payer</button>
       <% end %>
       
 
-      <script type="text/javascript">
+      <!-- <script type="text/javascript">
         document.querySelector(".edit_user").addEventListener('submit', function () {
           adress_form = document.querySelector(".adress_form");
           adress_form.style.display="none";
           display_adress = document.querySelector(".display_adress");
           display_adress.style.display="block";
         });
-      </script>
+      </script> -->
       
     </div>
   </div>
@@ -57,17 +57,21 @@
 
 <script>
   const paymentButton = document.getElementById('pay');
-  paymentButton.addEventListener('click', () => {
-    var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>', {
+  if (paymentButton != undefined)
+  {
+    paymentButton.addEventListener('click', () => {
+      var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>', {
+      });
+      stripe.redirectToCheckout({
+        sessionId: '<%= @order.checkout_session_id %>'
+      });
     });
-    stripe.redirectToCheckout({
-      sessionId: '<%= @order.checkout_session_id %>'
-    });
-  });
+  }
 </script>
 
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
 
 <%= javascript_pack_tag "point_picker" %>
+<%= javascript_pack_tag "adress_form" %>
 
 
