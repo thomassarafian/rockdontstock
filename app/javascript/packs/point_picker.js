@@ -1,7 +1,6 @@
 var resultElem = document.getElementById('result'),
     postResultElem = document.getElementById('postResult'),
-    postalCodeField = document.getElementById('postalCode');
-
+    postalCodeField = document.getElementById('user_postal_code')
 
 
 select_point_picker.addEventListener('click', function () {
@@ -27,13 +26,13 @@ function openServicePointPicker(country, language, postalCode, carriers, service
   var config = {
     apiKey: process.env.SENDCLOUD_API_KEY,
     country: "fr",
-    postalCode: postalCode,
+    // postalCode: postalCodeField.value,
     language: "fr-fr",
     carriers: "mondial_relay"
     // servicePointId: servicePointId,
     // postNumber: postNumber
-
   };
+
   sendcloud.servicePoints.open(
   /* first arg: config object */
   config,
@@ -46,22 +45,20 @@ function openServicePointPicker(country, language, postalCode, carriers, service
   function (servicePointObject, postNumber) {
     var result = JSON.stringify(servicePointObject, null, 2);
     result = JSON.parse(result);
-    console.log(result.name); 
-
-    console.log(result.id); 
-
+    
     document.querySelector('#user_picker_data').value = JSON.stringify(servicePointObject, null, 2);
-
     if (document.querySelector('#user_picker_data').value != "none")
     {
-      console.log("coiucou");
-      document.forms["edit_user_3"].submit();
+      document.forms[0].submit();
     }
-
-    resultElem.innerHTML = JSON.stringify(servicePointObject, null, 2);
-    postResultElem.style.display = 'block'
-    postResultElem.querySelector('.result__to-post-number').innerText = postNumber
-    resultElem.style.display = 'block'
+    
+    // const data_picker = `<p>${result.name} - ${result.house_number} ${result.street}, ${result.postal_code} ${result.city}</p>`;
+    // resultElem.innerHTML = data_picker;
+    // resultElem.style.display = 'block';
+    // if (document.querySelector("#result").textContent != "") {
+    //   console.log("textContend is filled");
+    //   document.querySelector("#current_user_result").style.display="none";
+    // }
   },
   /**
    * third arg: failure callback function
@@ -73,5 +70,3 @@ function openServicePointPicker(country, language, postalCode, carriers, service
     });
   });
 }
-
-

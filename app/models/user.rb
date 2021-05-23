@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
+  validates :email, uniqueness: true
+  validates :email, format: { with:  /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
   has_many :sneakers
-  has_many :orders
+  has_many :orders, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable

@@ -7,41 +7,49 @@
 
 
       <% if current_user.line1? && current_user.postal_code? && current_user.city? %>
-        <p>Mon adresse actuel : </p>
-        <p><%= current_user.line1 %>, <%= current_user.city %> <%= current_user.postal_code %></p>
+        <div class="display_adress">
+          <p>Mon adresse actuel : <%= current_user.line1 %>, <%= current_user.city %> <%= current_user.postal_code %></p>
+        </div>
       <% else %>
-        <%= simple_form_for(current_user, remote: true) do |f| %>
-          <%= f.input :line1, label: 'Adresse' %>
-          <%= f.input :city, label: 'Ville' %>
-          <%= f.input :postal_code, label: 'Code Postal' %>
-          <%= f.submit %>
-        <% end %>
+        <div class="adress_form">
+          <%= simple_form_for(current_user) do |f| %>
+            <%= f.input :line1, label: 'Modifier mon adresse' %>
+            <%= f.input :city, label: 'Ville' %>
+            <%= f.input :postal_code, label: 'Code Postal' %>
+            <%= f.submit %>
+          <% end %>
+        </div>
       <% end %>
 
+
       <button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>
+      
       <div id="result"></div>
-      <div id="postResult">
-        <div class="result__to-post-number">
-        </div>
+      
+      <div id="current_user_result">
+        <% if current_user.picker_data.class == Hash %>
+          <p>
+            <%= current_user.picker_data['name'] %> - <%= current_user.picker_data['house_number'] %> <%= current_user.picker_data['street'] %>, <%= current_user.picker_data['postal_code'] %> <%= current_user.picker_data['city'] %>
+          </p>
+        <% end %>
       </div>
         
       <br><br><br>
       <button type="button" class="btn btn-primary">Choisir le transporteur</button>
 
-      
+  
       <%= simple_form_for(current_user) do |f| %>
-        <%= f.input :picker_data, :input_html => { :value => "none"} %>
+        <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
       <% end %>
 
+      
+      
 
-      <% if current_user.picker_data? %>
-
+      <% if current_user.picker_data? && current_user.picker_data.class != Hash %>
         <% 
           require 'json'
-          current_user.update_column(:picker_data, JSON.parse(current_user.picker_data)) 
-        %> 
-        <%= p current_user.picker_data %>
-        <%#= p current_user.JSON.parse(picker_data)  %>
+          current_user.update(picker_data: JSON.parse(current_user.picker_data))
+        %>
       <% end %>
 
 
@@ -54,7 +62,22 @@
       <% end %>
       
 
+      <script type="text/javascript">
 
+
+        // const data_picker = `<p>${result.name} - ${result.house_number} ${result.street}, ${result.postal_code} ${result.city}</p>`;
+        // document.querySelector('#current_user_result').innerHTML = data_picker;
+        // document.querySelector('#current_user_result').style.display = 'block';
+
+
+
+        document.querySelector(".edit_user").addEventListener('submit', function () {
+          adress_form = document.querySelector(".adress_form");
+          adress_form.style.display="none";
+          display_adress = document.querySelector(".display_adress");
+          display_adress.style.display="block";
+        });
+      </script>
       <script>
         const paymentButton = document.getElementById('pay');
         paymentButton.addEventListener('click', () => {
@@ -71,8 +94,8 @@
 </div>
 
 
-
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
 
 <%= javascript_pack_tag "point_picker" %>
+
 
