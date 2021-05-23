@@ -4,8 +4,9 @@ var resultElem = document.getElementById('result'),
 
 
 select_point_picker.addEventListener('click', function () {
-  openServicePointPicker("fr", "fr-fr");
+  res = openServicePointPicker("fr", "fr-fr");
 });
+
 
 function openServicePointPicker(country, language, postalCode, carriers, servicePointId, postNumber) {
   /**
@@ -45,20 +46,18 @@ function openServicePointPicker(country, language, postalCode, carriers, service
   function (servicePointObject, postNumber) {
     var result = JSON.stringify(servicePointObject, null, 2);
     result = JSON.parse(result);
-    
+
     document.querySelector('#user_picker_data').value = JSON.stringify(servicePointObject, null, 2);
     if (document.querySelector('#user_picker_data').value != "none")
     {
       document.forms[0].submit();
     }
-    
-    // const data_picker = `<p>${result.name} - ${result.house_number} ${result.street}, ${result.postal_code} ${result.city}</p>`;
-    // resultElem.innerHTML = data_picker;
-    // resultElem.style.display = 'block';
-    // if (document.querySelector("#result").textContent != "") {
-    //   console.log("textContend is filled");
-    //   document.querySelector("#current_user_result").style.display="none";
-    // }
+    const data_picker = `<p>Votre point relais : ${result.name} - ${result.house_number} ${result.street}, ${result.postal_code} ${result.city}</p>`;
+    resultElem.innerHTML = data_picker;
+    resultElem.style.display = 'block';
+    if (document.querySelector("#result").textContent != "") {
+      document.querySelector("#current_user_result").style.display = "none";
+    }
   },
   /**
    * third arg: failure callback function
@@ -70,3 +69,5 @@ function openServicePointPicker(country, language, postalCode, carriers, service
     });
   });
 }
+
+

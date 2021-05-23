@@ -1,3 +1,5 @@
+require 'json'
+
 class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :email, uniqueness: true
@@ -21,9 +23,26 @@ class User < ApplicationRecord
 
   # after_update :send_ids #, if: :ids_are_filled?
   
+  after_update :convert_picker_data_to_json, if: :picker_data_is_filled?
 
   #le but c'est de creer les documents
   private
+
+    def convert_picker_data_to_json
+      user = self
+      user.update_column(:picker_data, JSON.parse(user.picker_data))      
+    end
+
+    def picker_data_is_filled?
+      user = self
+       if user.picker_data? && user.picker_data.class != Hash 
+        return true
+      else
+        return false
+       end 
+    end
+
+
     def correct_ids_type?
       user = self
       if user.ids[0].present? && user.ids[1].present? && user.ids[2].present?

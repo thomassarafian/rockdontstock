@@ -21,56 +21,28 @@
         </div>
       <% end %>
 
-
       <button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>
-      
-      <div id="result"></div>
-      
-      <div id="current_user_result">
-        <% if current_user.picker_data.class == Hash %>
-          <p>
-            <%= current_user.picker_data['name'] %> - <%= current_user.picker_data['house_number'] %> <%= current_user.picker_data['street'] %>, <%= current_user.picker_data['postal_code'] %> <%= current_user.picker_data['city'] %>
-          </p>
-        <% end %>
-      </div>
-        
-      <br><br><br>
-      <button type="button" class="btn btn-primary">Choisir le transporteur</button>
-
-  
       <%= simple_form_for(current_user) do |f| %>
         <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
       <% end %>
 
+      <div id="result"></div>
       
+      <div id="current_user_result">
+        <% if current_user.picker_data.class == Hash %>
+          <p>Votre point relais : 
+            <%= current_user.picker_data['name'] %> - <%= current_user.picker_data['house_number'] %> <%= current_user.picker_data['street'] %>, <%= current_user.picker_data['postal_code'] %> <%= current_user.picker_data['city'] %>
+          </p>
+        <% end %>
+      </div>
+      <br>  
       
-
-      <% if current_user.picker_data? && current_user.picker_data.class != Hash %>
-        <% 
-          require 'json'
-          current_user.update(picker_data: JSON.parse(current_user.picker_data))
-        %>
-      <% end %>
-
-
-
-
-      <% if  %>
-        
-      <br><br><br>
-      <button id="pay" class="btn btn-primary">Pay</button>
+      <% if current_user.picker_data? %>
+      <button id="pay" class="btn btn-primary">Payer</button>
       <% end %>
       
 
       <script type="text/javascript">
-
-
-        // const data_picker = `<p>${result.name} - ${result.house_number} ${result.street}, ${result.postal_code} ${result.city}</p>`;
-        // document.querySelector('#current_user_result').innerHTML = data_picker;
-        // document.querySelector('#current_user_result').style.display = 'block';
-
-
-
         document.querySelector(".edit_user").addEventListener('submit', function () {
           adress_form = document.querySelector(".adress_form");
           adress_form.style.display="none";
@@ -78,21 +50,21 @@
           display_adress.style.display="block";
         });
       </script>
-      <script>
-        const paymentButton = document.getElementById('pay');
-        paymentButton.addEventListener('click', () => {
-          var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>', {
-          });
-          stripe.redirectToCheckout({
-            sessionId: '<%= @order.checkout_session_id %>'
-          });
-        });
-      </script>
-
+      
     </div>
   </div>
 </div>
 
+<script>
+  const paymentButton = document.getElementById('pay');
+  paymentButton.addEventListener('click', () => {
+    var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>', {
+    });
+    stripe.redirectToCheckout({
+      sessionId: '<%= @order.checkout_session_id %>'
+    });
+  });
+</script>
 
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
 
