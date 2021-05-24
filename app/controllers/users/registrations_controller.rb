@@ -25,13 +25,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  def destroy
-    sneakers = Sneaker.all.where(user_id: current_user.id)
-    sneakers.each do |sneaker|
-      sneaker.destroy
-    end
-    super
-  end
+  # def destroy
+  #   sneakers = Sneaker.all.where(user_id: current_user.id)
+  #   sneakers.each do |sneaker|
+  #     sneaker.destroy
+  #   end
+  #   super
+  # end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

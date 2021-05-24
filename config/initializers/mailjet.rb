@@ -11,29 +11,29 @@ end
 # This call sends a message to the given recipient with vars and custom vars.
 
 
-prenom = "spoxzzz"
-email = "thomassarafian@gmail.com"
+# prenom = "spoxzzz"
+# email = "thomassarafian@gmail.com"
 
-variable = Mailjet::Send.create(messages: [{
-  'From'=> {
-    'Email'=> "elliot@rockdontstock.com",
-    'Name'=> "Elliot de Rock Don't Stock"
-  },
-  'To'=> [
-    {
-      'Email'=> email,
-      'Name'=> prenom
-    }
-  ],
-  'TemplateID'=> 2815845,
-  'TemplateLanguage'=> true,
-  'Subject'=> "Bienvenue chez Rock Don't Stock",
-  'Variables'=> {
-    "prénom" => "Sneaker addict",
-    "age" => "20"
-  }
-}])
-p variable.attributes['Messages']
+# variable = Mailjet::Send.create(messages: [{
+#   'From'=> {
+#     'Email'=> "elliot@rockdontstock.com",
+#     'Name'=> "Elliot de Rock Don't Stock"
+#   },
+#   'To'=> [
+#     {
+#       'Email'=> email,
+#       'Name'=> prenom
+#     }
+#   ],
+#   'TemplateID'=> 2815845,
+#   'TemplateLanguage'=> true,
+#   'Subject'=> "Bienvenue chez Rock Don't Stock",
+#   'Variables'=> {
+#     "prénom" => "Sneaker addict",
+#     "age" => "20"
+#   }
+# }])
+# p variable.attributes['Messages']
 
 # variable = Mailjet::Send.create(messages: [{
 #   'From'=> {

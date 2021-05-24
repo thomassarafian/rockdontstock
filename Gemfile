@@ -50,9 +50,9 @@ gem "binding_of_caller" #gem for debuging
 gem 'spring' #for reload automaticaly
 
 gem 'cloudinary', '~> 1.16.0' # for image upload
-gem 'MailchimpTransactional', '~> 1.0.6'
+# gem 'MailchimpTransactional', '~> 1.0.6'
 gem 'mailjet' #va bientot remplacer mailchimp
-
+gem 'gibbon'
 
 gem 'stripe'
 gem 'stripe_event'

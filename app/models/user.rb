@@ -24,8 +24,13 @@ class User < ApplicationRecord
   # after_update :send_ids #, if: :ids_are_filled?
   
   after_update :convert_picker_data_to_json, if: :picker_data_is_filled?
+  after_create :subscribe_to_newsletter
 
   private
+
+  def subscribe_to_newsletter
+    SubscribeToNewsletterService.new(self).call
+  end
 
   def convert_picker_data_to_json
     user = self
