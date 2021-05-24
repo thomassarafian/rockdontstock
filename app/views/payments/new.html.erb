@@ -5,7 +5,6 @@
       <h1>Récapitulatif de la commande</h1>
       <p>Achat de <strong><%= @order.sneaker.name %></strong> pour <strong><%= humanized_money_with_symbol @order.price %></strong></p>
 
-
       <% if current_user.line1? && current_user.postal_code? && current_user.city? %>
         <div class="display_adress">
           <p>Mon adresse actuel : <%= current_user.line1 %>, <%= current_user.city %> <%= current_user.postal_code %></p>
@@ -27,7 +26,7 @@
       <% end %>
 
       <div id="result"></div>
-      
+
       <div id="current_user_result">
         <% if current_user.picker_data.class == Hash %>
           <p>Votre point relais : 
@@ -37,41 +36,23 @@
       </div>
       <br>  
       
-      <% if current_user.picker_data? %>
-        <button id="pay" class="btn btn-primary">Payer</button>
-      <% end %>
-      
+      <div class="pay_button">
+        <button id="pay_js" class="btn btn-primary" style="display:none;">Payer</button>
+        <% if current_user.picker_data? %>
+          <button id="pay_rails" class="btn btn-primary">Payer</button>
+        <% end %>
+      </div>
 
-      <!-- <script type="text/javascript">
-        document.querySelector(".edit_user").addEventListener('submit', function () {
-          adress_form = document.querySelector(".adress_form");
-          adress_form.style.display="none";
-          display_adress = document.querySelector(".display_adress");
-          display_adress.style.display="block";
-        });
-      </script> -->
-      
+            
     </div>
   </div>
 </div>
 
-<script>
-  const paymentButton = document.getElementById('pay');
-  if (paymentButton != undefined)
-  {
-    paymentButton.addEventListener('click', () => {
-      var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>', {
-      });
-      stripe.redirectToCheckout({
-        sessionId: '<%= @order.checkout_session_id %>'
-      });
-    });
-  }
-</script>
 
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
 
 <%= javascript_pack_tag "point_picker" %>
 <%= javascript_pack_tag "adress_form" %>
+<%= javascript_pack_tag "stripe_button_payment" %>
 
 

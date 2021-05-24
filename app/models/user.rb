@@ -29,7 +29,7 @@ class User < ApplicationRecord
 
   def convert_picker_data_to_json
     user = self
-    user.update_column(:picker_data, JSON.parse(user.picker_data))      
+    user.update_column(:picker_data, JSON.parse(user.picker_data))
   end
 
   def picker_data_is_filled?

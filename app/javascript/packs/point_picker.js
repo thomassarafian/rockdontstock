@@ -57,6 +57,8 @@ function openServicePointPicker(country, language, postalCode, carriers, service
     resultElem.style.display = 'block';
     if (document.querySelector("#result").textContent != "") {
       document.querySelector("#current_user_result").style.display = "none";
+      if (document.querySelector("#pay_rails") == undefined)
+      document.querySelector("#pay_js").style.display = "block";
     }
   },
   /**
