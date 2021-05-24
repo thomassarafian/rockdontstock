@@ -55,6 +55,38 @@ class SendcloudCreateLabel
     #      :headers => { 'Content-Type' => 'application/json' },
     #      basic_auth: auth)
     # puts JSON.pretty_generate(JSON.parse(create_parcel.body))
+
+
+
+    # puts JSON.pretty_generate(JSON.parse(create_parcel.body))
+
+    # get_sender_adress = HTTParty.get(
+    #                     'https://panel.sendcloud.sc/api/v2/user/addresses/sender',
+    #                     basic_auth:  auth)
+
+    # service_points = {
+    #   carrier: "Mondial Relay",
+    #   country: "FR",
+      
+    # }
+
+
+    # puts JSON.pretty_generate(JSON.parse(get_sender_adress.body))
+
+    # get_service_points = HTTParty.get(
+    #                 "https://servicepoints.sendcloud.sc/api/v2/service-points/",
+    #                 basic_auth: auth)
+
+    # puts JSON.pretty_generate(JSON.parse(get_carriers.body))
+
+    # get_parcels = HTTParty.get(
+    #       "https://panel.sendcloud.sc/api/v2/parcels",
+    #       basic_auth:  auth)
+
+    #puts JSON.pretty_generate(JSON.parse(get_parcels.body))
+
+
+
   end
 
   private
