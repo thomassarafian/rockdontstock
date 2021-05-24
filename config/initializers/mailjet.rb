@@ -3,42 +3,37 @@
 
 
 Mailjet.configure do |config|
-  config.api_key = '6ec1d422828843eba6c50abbf8611472'
-  config.secret_key = '603fd5ca5a8f0addbc7d6608d099fbac'
+  config.api_key = ENV['MAILJET_API_KEY']
+  config.secret_key = ENV['MAILJET_SECRET_KEY']
   config.default_from = 'elliot@rockdontstock.com'
-  # Mailjet API v3.1 is at the moment limited to Send API.
-  # We’ve not set the version to it directly since there is no other endpoint in that version.
-  # We recommend you create a dedicated instance of the wrapper set with it to send your emails.
-  # If you're only using the gem to send emails, then you can safely set it to this version.
-  # Otherwise, you can remove the dedicated line into config/initializers/mailjet.rb.
   config.api_version = 'v3.1'
 end
 # This call sends a message to the given recipient with vars and custom vars.
 
 
-# prenom = "spoxzzz"
-# email = "thomassarafian@gmail.com"
+prenom = "spoxzzz"
+email = "thomassarafian@gmail.com"
 
-# variable = Mailjet::Send.create(messages: [{
-#   'From'=> {
-#     'Email'=> "elliot@rockdontstock.com",
-#     'Name'=> "Elliot de Rock Don't Stock"
-#   },
-#   'To'=> [
-#     {
-#       'Email'=> email,
-#       'Name'=> prenom
-#     }
-#   ],
-#   'TemplateID'=> 2815845,
-#   'TemplateLanguage'=> true,
-#   'Subject'=> "Bienvenue chez Rock Don't Stock",
-#   'Variables'=> {
-#     "prénom" => "Sneaker addict",
-#     "age" => "20"
-#   }
-# }])
-# p variable.attributes['Messages']
+variable = Mailjet::Send.create(messages: [{
+  'From'=> {
+    'Email'=> "elliot@rockdontstock.com",
+    'Name'=> "Elliot de Rock Don't Stock"
+  },
+  'To'=> [
+    {
+      'Email'=> email,
+      'Name'=> prenom
+    }
+  ],
+  'TemplateID'=> 2815845,
+  'TemplateLanguage'=> true,
+  'Subject'=> "Bienvenue chez Rock Don't Stock",
+  'Variables'=> {
+    "prénom" => "Sneaker addict",
+    "age" => "20"
+  }
+}])
+p variable.attributes['Messages']
 
 # variable = Mailjet::Send.create(messages: [{
 #   'From'=> {
