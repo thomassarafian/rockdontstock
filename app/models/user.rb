@@ -15,7 +15,7 @@ class User < ApplicationRecord
   
   has_many_attached :ids
   
-  validate :correct_ids_type?
+  # validate :correct_ids_type?
 
   # after_create :send_notification # a configurer avec mailjet 
   
@@ -24,12 +24,30 @@ class User < ApplicationRecord
   # after_update :send_ids #, if: :ids_are_filled?
   
   after_update :convert_picker_data_to_json, if: :picker_data_is_filled?
+  
   after_create :subscribe_to_newsletter
 
+  after_update :send_label, if: :picker_data_is_converted?
+  
   private
 
   def subscribe_to_newsletter
     SubscribeToNewsletterService.new(self).call
+  end
+
+  def send_label
+    user = self
+    order = orders.where(user_id: user.id).last #pas sur de ca
+    SendcloudCreateLabel.new(user, order).create_label
+  end
+
+  def picker_data_is_converted?
+    user = self
+    if user.picker_data? && user.picker_data.class == Hash
+      return true
+    else
+      return false
+    end
   end
 
   def convert_picker_data_to_json

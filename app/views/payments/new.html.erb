@@ -5,11 +5,11 @@
       <h1>Récapitulatif de la commande</h1>
       <p>Achat de <strong><%= @order.sneaker.name %></strong> pour <strong><%= humanized_money_with_symbol @order.price %></strong></p>
 
-      <% if current_user.line1? && current_user.postal_code? && current_user.city? %>
-        <div class="display_adress">
+      <div class="display_adress">
+        <% if current_user.line1? && current_user.postal_code? && current_user.city? %>
           <p>Mon adresse actuel : <%= current_user.line1 %>, <%= current_user.city %> <%= current_user.postal_code %></p>
-        </div>
-      <% else %>
+        <% else %>
+      </div>
         <div class="adress_form">
           <%= simple_form_for(current_user, remote: true) do |f| %>
             <%= f.input :line1, label: 'Mon adresse' %>
@@ -19,6 +19,7 @@
           <% end %>
         </div>
       <% end %>
+
 
       <button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>
       <%= simple_form_for(current_user) do |f| %>

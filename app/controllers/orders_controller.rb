@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
 	def create_stripe_session(order, sneaker)
 		Stripe.api_key = ENV['STRIPE_SECRET_TEST']
 
-		p stripe_session = Stripe::Checkout::Session.create({
+		stripe_session = Stripe::Checkout::Session.create({
 	  	customer: current_user.customer_id,
 	    payment_method_types: ['card'],
 	    line_items: [{
