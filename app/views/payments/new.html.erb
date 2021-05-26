@@ -11,7 +11,7 @@
         <% else %>
       </div>
         <div class="adress_form">
-          <%= simple_form_for(current_user, remote: true) do |f| %>
+          <%= simple_form_for(current_user) do |f| %>
             <%= f.input :line1, label: 'Mon adresse' %>
             <%= f.input :city, label: 'Ville' %>
             <%= f.input :postal_code, label: 'Code Postal' %>
@@ -20,7 +20,7 @@
         </div>
       <% end %>
 
-
+      
       <button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>
       <%= simple_form_for(current_user) do |f| %>
         <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>

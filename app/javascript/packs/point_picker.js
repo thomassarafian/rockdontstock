@@ -33,7 +33,9 @@ function openServicePointPicker(country, language, postalCode, carriers, service
     // servicePointId: servicePointId,
     // postNumber: postNumber
   };
-
+  
+  console.log(process.env.SENDCLOUD_API_KEY);
+  console.log(process.env.SENDCLOUD_API_KEY);
   sendcloud.servicePoints.open(
   /* first arg: config object */
   config,
