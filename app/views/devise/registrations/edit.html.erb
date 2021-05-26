@@ -15,8 +15,8 @@
             <% end %>
             
             <%= f.input :date_of_birth, as: :date,
-                        start_year: Time.now.year - 50,
-                        end_year: Time.now.year - 18,
+                        start_year: Time.now.year - 30,
+                        end_year: Time.now.year - 10,
                         order: %i(day month year), label: 'Date de naissance' %>
 
             <%= f.input :line1, label: 'Adresse' %>

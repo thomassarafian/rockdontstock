@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   	authorize @order
   	current_stripe_session = retrieve_stripe_session
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
-			capture_payment(current_stripe_session)
+			# capture_payment(current_stripe_session)
 		#end
 
 		#if le vendeur n'a pas envoyé sa paire avant les 7 jours # Je crois que ca cancel tout seul si on a pas validé dans les 7 jours
@@ -56,13 +56,13 @@ class OrdersController < ApplicationController
 	    	},
 	    	quantity: 1,
 	    }],
-    	payment_intent_data: {
-    		capture_method: 'manual', 
-		    application_fee_amount: order.price_cents / 10, #l'argent qui va au vendeur #la plateforme reçoit une commission pour le service
-		    transfer_data: {
-		      destination: sneaker.user.stripe_account_id,
-		    },
-		  },
+    # 	payment_intent_data: {
+    # 		capture_method: 'manual', 
+		  #   application_fee_amount: order.price_cents / 10, #l'argent qui va au vendeur #la plateforme reçoit une commission pour le service
+		  #   transfer_data: {
+		  #     destination: sneaker.user.stripe_account_id,
+		  #   },
+		  # },
 	    mode: 'payment',
 	    success_url: order_url(order),
 	    cancel_url: sneaker_url(sneaker)

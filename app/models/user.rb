@@ -25,7 +25,7 @@ class User < ApplicationRecord
   
   after_update :convert_picker_data_to_json, if: :picker_data_is_filled?
   
-  after_create :subscribe_to_newsletter
+  # after_create :subscribe_to_newsletter
 
   after_update :send_label, if: :picker_data_is_converted?
   
