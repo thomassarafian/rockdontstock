@@ -5,22 +5,21 @@
       <h1>Récapitulatif de la commande</h1>
       <p>Achat de <strong><%= @order.sneaker.name %></strong> pour <strong><%= humanized_money_with_symbol @order.price %></strong></p>
 
-      <div class="display_adress">
-        <% if current_user.line1? && current_user.postal_code? && current_user.city? %>
-          <p>Mon adresse actuel : <%= current_user.line1 %>, <%= current_user.city %> <%= current_user.postal_code %></p>
-        <% else %>
-      </div>
+      <!-- <div class="display_adress"> -->
+        <%# if current_user.line1? && current_user.postal_code? && current_user.city? %>
+          <!-- <p>Mon adresse actuel : <%= current_user.line1 %>, <%= current_user.city %> <%= current_user.postal_code %></p> -->
+        <%# else %>
+      <!-- </div> -->
         <div class="adress_form">
-          <%= simple_form_for(current_user) do |f| %>
+          <%= simple_form_for(current_user, remote: true, format: :js, html: { id: "addddd"}) do |f| %>
             <%= f.input :line1, label: 'Mon adresse' %>
             <%= f.input :city, label: 'Ville' %>
             <%= f.input :postal_code, label: 'Code Postal' %>
             <%= f.submit %>
           <% end %>
         </div>
-      <% end %>
 
-      
+
       <button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>
       <%= simple_form_for(current_user) do |f| %>
         <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
@@ -67,7 +66,7 @@
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
 
 <%= javascript_pack_tag "point_picker" %>
-<%= javascript_pack_tag "adress_form" %>
+<%#= javascript_pack_tag "adress_form" %>
 
 
 
