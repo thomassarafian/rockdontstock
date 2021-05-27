@@ -11,7 +11,7 @@
         <%# else %>
       <!-- </div> -->
         <div class="adress_form">
-          <%= simple_form_for(current_user, remote: true, format: :js, html: { id: "addddd"}) do |f| %>
+          <%= simple_form_for(current_user, remote: true, format: :js, html: { id: "adress_form"}) do |f| %>
             <%= f.input :line1, label: 'Mon adresse' %>
             <%= f.input :city, label: 'Ville' %>
             <%= f.input :postal_code, label: 'Code Postal' %>
