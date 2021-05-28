@@ -51,7 +51,7 @@ class OrdersController < ApplicationController
 	      		name: sneaker.name,
 	    			images: [sneaker.photos[0].url],
 	    		},
-	    		unit_amount: order.price_cents,
+	    		unit_amount: order.price_cents + order.shipping_cost_cents + order.insurance_cents,
 	      	currency: "EUR",
 	    	},
 	    	quantity: 1,
