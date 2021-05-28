@@ -12,23 +12,23 @@ class User < ApplicationRecord
 	devise :database_authenticatable, :registerable,
     	:recoverable, :rememberable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
-  
+
   has_many_attached :ids
-  
+
   # validate :correct_ids_type?
 
   # after_create :send_notification # a configurer avec mailjet 
-  
+
   after_update :create_connect_account, if: :attributes_are_filled?
 
   # after_update :send_ids #, if: :ids_are_filled?
-  
+
   after_update :convert_picker_data_to_json, if: :picker_data_is_filled?
-  
+
   # after_create :subscribe_to_newsletter
 
-  after_update :send_label, if: :picker_data_is_converted?
-  
+  # after_update :send_label, if: :picker_data_is_converted?
+
   private
 
   def subscribe_to_newsletter
@@ -36,6 +36,10 @@ class User < ApplicationRecord
   end
 
   def send_label
+    p " I AM SENDING LABEL"
+    p " I AM SENDING LABEL"
+    p " I AM SENDING LABEL"
+    p " I AM SENDING LABEL"
     user = self
     order = orders.where(user_id: user.id).last #pas sur de ca
     SendcloudCreateLabel.new(user, order).create_label
@@ -43,7 +47,7 @@ class User < ApplicationRecord
 
   def picker_data_is_converted?
     user = self
-    if user.picker_data? && user.picker_data.class == Hash
+    if user.picker_data? && user.picker_data.class == Hash && (user.line1? && user.postal_code? && user.city?)
       return true
     else
       return false
@@ -53,6 +57,15 @@ class User < ApplicationRecord
   def convert_picker_data_to_json
     user = self
     user.update_column(:picker_data, JSON.parse(user.picker_data))
+
+    p " JE PASSERAI TJRS ICI BRO"
+    p " JE PASSERAI TJRS ICI BRO"
+    p " JE PASSERAI TJRS ICI BRO"
+    p " JE PASSERAI TJRS ICI BRO"
+    p " JE PASSERAI TJRS ICI BRO"
+    p " JE PASSERAI TJRS ICI BRO"
+    p " JE PASSERAI TJRS ICI BRO"
+    send_label
   end
 
   def picker_data_is_filled?

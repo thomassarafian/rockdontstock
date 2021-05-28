@@ -21,7 +21,7 @@
       <% end %>
 
       
-      <button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>
+      <button type="button" class="btn btn-primary" id="select_point_picker"><%= current_user.picker_data? ? "Modifier son point relais" : "Choix du point relais"%></button>
       <%= simple_form_for(current_user) do |f| %>
         <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
       <% end %>
@@ -30,13 +30,23 @@
 
       <div id="current_user_result">
         <% if current_user.picker_data.class == Hash %>
-          <p>Votre point relais : 
+          <p>
+            Votre point relais : 
             <%= current_user.picker_data['name'] %> - <%= current_user.picker_data['house_number'] %> <%= current_user.picker_data['street'] %>, <%= current_user.picker_data['postal_code'] %> <%= current_user.picker_data['city'] %>
+           <p>
+            <strong>Résumé de la commande</strong><br>
+            Commande : <%= @order.price %> €<br>
+            Frais de port : <%= @order.shipping_cost %> €<br>
+            Assurance : <%= @order.insurance %>  €<br>
+            -----------------------<br>
+            <% total =  (@order.price + @order.shipping_cost + @order.insurance) %>
+            <strong>Total : <%= total %> € </strong>
+          </p>
           </p>
         <% end %>
       </div>
       <br>  
-      
+
       <div class="pay_button">
         <button id="pay_js" class="btn btn-primary" style="display:none;">Payer</button>
         <% if current_user.picker_data? %>
