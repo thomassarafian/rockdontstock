@@ -27,7 +27,7 @@ function openServicePointPicker(country, language, postalCode, carriers, service
   var config = {
     apiKey: process.env.SENDCLOUD_API_KEY,
     country: "fr",
-    postalCode: postalCodeField.value,
+    // postalCode: postalCodeField.value,
     language: "fr-fr",
     carriers: "mondial_relay"
     // servicePointId: servicePointId,
