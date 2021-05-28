@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2021_05_28_134236) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "shipping_cost_cents", default: 0, null: false
     t.integer "insurance_cents", default: 0, null: false
+    t.integer "service_cents", default: 0, null: false
     t.index ["sneaker_id"], name: "index_orders_on_sneaker_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

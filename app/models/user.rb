@@ -35,15 +35,15 @@ class User < ApplicationRecord
     SubscribeToNewsletterService.new(self).call
   end
 
-  def send_label
-    p " I AM SENDING LABEL"
-    p " I AM SENDING LABEL"
-    p " I AM SENDING LABEL"
-    p " I AM SENDING LABEL"
-    user = self
-    order = orders.where(user_id: user.id).last #pas sur de ca
-    SendcloudCreateLabel.new(user, order).create_label
-  end
+  # def send_label
+  #   p " I AM SENDING LABEL"
+  #   p " I AM SENDING LABEL"
+  #   p " I AM SENDING LABEL"
+  #   p " I AM SENDING LABEL"
+  #   user = self
+  #   order = orders.where(user_id: user.id).last #pas sur de ca
+  #   SendcloudCreateLabel.new(user, order).create_label
+  # end
 
   def picker_data_is_converted?
     user = self
@@ -65,7 +65,7 @@ class User < ApplicationRecord
     p " JE PASSERAI TJRS ICI BRO"
     p " JE PASSERAI TJRS ICI BRO"
     p " JE PASSERAI TJRS ICI BRO"
-    send_label
+    # send_label
   end
 
   def picker_data_is_filled?

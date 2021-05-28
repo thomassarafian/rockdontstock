@@ -21,6 +21,7 @@ class Order < ApplicationRecord
 			self.insurance_cents = 800
   	end
   	self.shipping_cost_cents = 490
+    SendcloudCreateLabel.new(user, self).create_label
   end
 
 end

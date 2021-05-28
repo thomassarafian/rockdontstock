@@ -33,6 +33,8 @@ class SendcloudCreateLabel
         shipment: {
          id: 8, #@user.picker_data['id'],
         },
+        # insured_value: @order.sneaker.price_cents,
+        total_insured_value: @order.sneaker.price_cents,
         parcel_items: [],
         from_name: @order.sneaker.user.first_name + " " + @order.sneaker.user.last_name,
         from_address_1: @order.sneaker.user.line1,
@@ -49,12 +51,12 @@ class SendcloudCreateLabel
       }
     }
     p " IT S DOOOOOOOOOONE"
-    # create_parcel = HTTParty.post(
-    #      "https://panel.sendcloud.sc/api/v2/parcels",
-    #      body: first_parcel_data.to_json,
-    #      :headers => { 'Content-Type' => 'application/json' },
-    #      basic_auth: auth)
-    # puts JSON.pretty_generate(JSON.parse(create_parcel.body))
+    create_parcel = HTTParty.post(
+         "https://panel.sendcloud.sc/api/v2/parcels",
+         body: first_parcel_data.to_json,
+         :headers => { 'Content-Type' => 'application/json' },
+         basic_auth: auth)
+    puts JSON.pretty_generate(JSON.parse(create_parcel.body))
 
 
 
