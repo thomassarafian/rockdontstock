@@ -17,7 +17,7 @@
 
       <button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>
       <%= simple_form_for(current_user) do |f| %>
-        <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
+          <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
       <% end %>
 
       <div id="result"></div>
@@ -36,9 +36,7 @@
         <% if current_user.picker_data? %>
           <button id="pay_rails" class="btn btn-primary">Payer</button>
         <% end %>
-      </div>
-
-            
+      </div>            
     </div>
   </div>
 </div>

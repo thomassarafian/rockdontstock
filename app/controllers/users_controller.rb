@@ -10,9 +10,10 @@ class UsersController < ApplicationController
 	end
 	
 	def update
-		if @user.update(user_params)
-			render 'update'
+		@user.update(user_params)
+		if @user.save!
 			# redirect_to user_path(@user) # je ne connais pas les conséquences de ça, j'ai commenté pour pouvoir modifier avec remote : true dans payment#new l'adresse
+			#render 'update'
 		end
 
 	end
