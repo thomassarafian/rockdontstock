@@ -38,8 +38,9 @@
             Commande : <%= @order.price %> €<br>
             Frais de port : <%= @order.shipping_cost %> € (Livraison en 3 jours ouvrés)<br>
             Assurance : <%= @order.insurance %>  €<br>
+            Service : <%= @order.service_cents %> €<br>
             -----------------------<br>
-            <% total =  (@order.price + @order.shipping_cost + @order.insurance) %>
+            <% total =  (@order.price + @order.shipping_cost + @order.insurance + @order.service) %>
             <strong>Total : <%= total %> € </strong>
           </p>
           </p>
