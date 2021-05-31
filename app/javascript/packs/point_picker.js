@@ -3,13 +3,6 @@ var resultElem = document.getElementById('result'),
     postalCodeField = document.getElementById('user_postal_code'),
     select_point_picker = document.getElementById('select_point_picker')
 
-if (select_point_picker != undefined)
-{
-  select_point_picker.addEventListener('click', function () {
-    openServicePointPicker("fr", "fr-fr");
-  });
-}
-
 
 function openServicePointPicker(country, language, postalCode, carriers, servicePointId, postNumber) {
   /**
@@ -53,7 +46,7 @@ function openServicePointPicker(country, language, postalCode, carriers, service
     document.querySelector('#user_picker_data').value = JSON.stringify(servicePointObject, null, 2);
     if (document.querySelector('#user_picker_data').value != "none")
     {
-      document.forms[0].submit();
+      document.forms[1].submit();
     }
     const data_picker = `<p>Votre point relais : ${result.name} - ${result.house_number} ${result.street}, ${result.postal_code} ${result.city}</p>`;
     resultElem.innerHTML = data_picker;
@@ -75,4 +68,5 @@ function openServicePointPicker(country, language, postalCode, carriers, service
   });
 }
 
+export { openServicePointPicker };
 
