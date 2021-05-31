@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update]
+	
 
   def show
 		@user = User.find(params[:id])
@@ -11,11 +12,23 @@ class UsersController < ApplicationController
 	
 	def update
 		@user.update(user_params)
-		if @user.save!
+		# @user.save!
+    if @user.save
+	    respond_to do |format|
+	      format.html
+	      format.json { render json: { user: @user } }
+	    end
+      # render json: { success: true }
+    else
+      render json: { success: false, errors: user.errors.messages }, status: :unprocessable_entity 
+    end
+  end
+
+
 			# redirect_to user_path(@user) # je ne connais pas les conséquences de ça, j'ai commenté pour pouvoir modifier avec remote : true dans payment#new l'adresse
 			#render 'update'
-		end
-	end
+		# end
+	# end
 
 	
   private

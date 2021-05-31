@@ -1,11 +1,14 @@
 var resultElem = document.getElementById('result'),
     postResultElem = document.getElementById('postResult'),
-    postalCodeField = document.getElementById('user_postal_code')
+    postalCodeField = document.getElementById('user_postal_code'),
+    select_point_picker = document.getElementById('select_point_picker')
 
-
-select_point_picker.addEventListener('click', function () {
-  res = openServicePointPicker("fr", "fr-fr");
-});
+if (select_point_picker != undefined)
+{
+  select_point_picker.addEventListener('click', function () {
+    openServicePointPicker("fr", "fr-fr");
+  });
+}
 
 
 function openServicePointPicker(country, language, postalCode, carriers, servicePointId, postNumber) {

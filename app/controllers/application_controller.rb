@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 	after_action :verify_authorized, except: :index, unless: :skip_pundit?
 	after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
+	protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 	# Uncomment when you *really understand* Pundit!
 	# rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 	# def user_not_authorized

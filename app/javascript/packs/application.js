@@ -19,3 +19,5 @@ Turbolinks.start()
 ActiveStorage.start()
 
 require('dotenv').config()
+
+import "controllers"
