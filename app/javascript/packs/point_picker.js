@@ -4,6 +4,10 @@ var resultElem = document.getElementById('result'),
     select_point_picker = document.getElementById('select_point_picker')
 
 
+// select_point_picker.addEventListener('click', function () {
+//   openServicePointPicker("fr", "fr-fr");
+// });
+
 function openServicePointPicker(country, language, postalCode, carriers, servicePointId, postNumber) {
   /**
    * @typedef ConfigurationHash

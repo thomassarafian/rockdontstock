@@ -4,7 +4,7 @@ import { openServicePointPicker } from "../packs/point_picker";
 
 
 export default class extends Controller {
-	static targets = ["form", "line1", "city", "postal_code", "picker_button"]
+	static targets = ["form", "line1", "city", "postal_code", "picker_button", "display_address"]
 
   refresh() {
   	let id = event.target.form.dataset.id;
@@ -27,12 +27,13 @@ export default class extends Controller {
 	    });
 
   	if (this.line1 != "" && this.city != "" && this.postal_code != "") {
-    	this.formTarget.innerText = `Mon adresse actuelle : ${this.line1} ${this.city} ${this.postal_code}`;
+    	this.display_addressTarget.innerText = `Mon adresse actuelle : ${this.line1} ${this.city} ${this.postal_code}`;
     	this.picker_buttonTarget.innerHTML = `<button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>`;
 	  	this.picker_buttonTarget.addEventListener('click', function () {
 				openServicePointPicker("fr", "fr-fr");
 	  	});
-	  	
+
+
     }
   }
  
