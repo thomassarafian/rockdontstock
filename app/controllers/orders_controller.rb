@@ -6,6 +6,8 @@ class OrdersController < ApplicationController
 
 		# SendcloudCreateLabel.new(current_user, @order).create_label
 
+
+
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
 			# capture_payment(current_stripe_session)
 		#end

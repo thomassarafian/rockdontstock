@@ -5,18 +5,17 @@
 
       <h1>Récapitulatif de la commande</h1>
       <p>Achat de <strong><%= @order.sneaker.name %></strong> pour <strong><%= humanized_money_with_symbol @order.price %></strong></p> 
-
       
-        <div class="adress_form" data-controller="address">
-          <%= simple_form_for(current_user, remote: true,data: {target: "address.form", id: current_user.id }) do |f| %>
-            <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
-            <%= f.input :city, label: 'Ville', input_html: { data: { target: 'address.city'} },required: true %>
-            <%= f.input :postal_code, label: 'Code Postal', input_html: { data: { target: 'address.postal_code'} }, required: true %>
-            <%= f.button :submit, "Enregistrer les informations", data: { action: "click->address#refresh" } %>
-          <% end %>
-          <div data-target="address.display_address"></div>
-          <div data-target="address.picker_button"></div>
-        </div>
+      <div class="adress_form" data-controller="address">
+        <%= simple_form_for(current_user, remote: true,data: {target: "address.form", id: current_user.id }) do |f| %>
+          <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
+          <%= f.input :city, label: 'Ville', input_html: { data: { target: 'address.city'} },required: true %>
+          <%= f.input :postal_code, label: 'Code Postal', input_html: { data: { target: 'address.postal_code'} }, required: true %>
+          <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" } %>
+        <% end %>
+        <div data-target="address.display_address"></div>
+        <div data-target="address.picker_button"></div>
+      </div>
 
 
       <%# if current_user.picker_data? &&   current_user.picker_data.class == Hash%>

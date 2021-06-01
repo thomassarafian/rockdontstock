@@ -12,9 +12,8 @@ class Order < ApplicationRecord
 
 
   def percent_of(a, n)
-    a.to_f / n.to_f * 100.0
+    a.to_f * (n.to_f / 100.0)
   end
-
 
   def shipping_price
     case self.sneaker.price_cents / 100
@@ -31,15 +30,8 @@ class Order < ApplicationRecord
   	end
   	self.shipping_cost_cents = 490
 
-    p self.sneaker.price_cents
-    p self.sneaker.price_cents
-    p self.sneaker.price_cents
+    self.service_cents = ((percent_of((self.sneaker.price_cents / 100), 12)) / 2)
 
-    self.service_cents = (percent_of(12, self.sneaker.price_cents / 100))
-    
-    # raise
-    
-    # SendcloudCreateLabel.new(user, self).create_label
   end
 
 end

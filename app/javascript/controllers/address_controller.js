@@ -32,8 +32,9 @@ export default class extends Controller {
 	  	this.picker_buttonTarget.addEventListener('click', function () {
 				openServicePointPicker("fr", "fr-fr");
 	  	});
-
-
+	  	if (this.line1 != "" && this.city != "" && this.postal_code != "") {
+	  		
+	  	}
     }
   }
  
