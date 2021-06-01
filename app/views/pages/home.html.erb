@@ -1,5 +1,18 @@
 <h1>Home page</h1>
 
+
+<% 
+require 'csv'
+
+filepath = 'beers.csv'
+
+CSV.foreach(filepath) do |row|
+  # Here, row is an array of columns
+  puts "#{row[0]} | #{row[1]} | #{row[2]}"
+end 
+
+%>
+
 <% if user_signed_in? %>
 	<p>Hello <%=current_user.email %></p>
 <% end %>
@@ -22,7 +35,7 @@
 
 <%#= 
 transfer = Stripe::Transfer.create({
-  amount: 1000,
+  amount: 1000 , # sneaker.price - 490 (livraison) - (12 % du prix de la paire / 2) (service)
   currency: "eur",
   destination: "acct_1Iuvaq2RPNtnbUTH",
 }) %>

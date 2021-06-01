@@ -30,7 +30,7 @@ class Order < ApplicationRecord
   	end
   	self.shipping_cost_cents = 490
 
-    self.service_cents = ((percent_of((self.sneaker.price_cents / 100), 12)) / 2)
+    self.service = (percent_of((self.sneaker.price_cents / 100), 12))
 
   end
 

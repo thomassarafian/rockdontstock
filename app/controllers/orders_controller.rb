@@ -1,11 +1,18 @@
 class OrdersController < ApplicationController
 	def show
+		# On créé la commande 
+		# On envoie l'email au vendeur
+		# On passe la commande dans un autre state
+		# On passe la sneaker dans un autre state
+		# On retire la sneaker côté public
+		# Nous on va recevoir l'argent sur Stripe par exemple 220 euros. L'order elle appartient a une sneaker en particulier et la sneaker au vendeur
+		# @order.sneaker.user -> 
+
   	@order = current_user.orders.find(params[:id])
   	authorize @order
   	current_stripe_session = retrieve_stripe_session
 
-		# SendcloudCreateLabel.new(current_user, @order).create_label
-
+		SendcloudCreateLabel.new(current_user, @order).create_label
 
 
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
@@ -37,8 +44,7 @@ class OrdersController < ApplicationController
 	def create_stripe_customer
 		customer = Stripe::Customer.create({
 			name: current_user.first_name + " " + current_user.last_name,
-			email: current_user.email,
-		  description: 'The customer is created dynamically',
+			email: current_user.email
 		})
 		current_user.update(customer_id: customer.id)
 	end

@@ -24,8 +24,6 @@
 		<% if current_user.phone? %>		
 			<p>Numéro de téléphone : <%= current_user.phone %></p>
 		<% end %>
-
-
 		
 		<%= link_to "Modifier mes informations", edit_user_registration_path(@user) %>
 
@@ -37,15 +35,51 @@
 
 	
 		<br>
-		<% if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
-			<%= link_to "Ajouter mon IBAN", edit_user_registration_path(@user, anchor: "iban-error") %>			
+
+
+		<!-- Si l'utilisateur il a une senaker qui est en state 1 (donc validé côté admin) -->
+			<!-- Il est majeur -->
+				<!-- Il remplit ses informations -->
+			<!-- Il est mineur -->
+				<!-- Il remplit les informations d'un adulte + ID adulte -->
+
+		<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? && current_user.date_of_birth? && current_user.sneakers.present? %>
+			<% if current_user.sneakers[0].state == 1 %>
+				<% if age(current_user.date_of_birth) < 18  %>
+					<h3>Tu es mineur</h3>
+					<p>En France, our recevoir de l'argent sur ton compte bancaire, tu dois renseigner ces informations concernant une personne majeur : </p>
+					<%= simple_form_for(current_user, remote: true, data: {target: "address.form", id: current_user.id }) do |f| %>
+		        
+		        <%= f.input :first_name, label: 'Prénom', input_html: { data: {target: 'address.line1'} }, required: true  %>
+
+		        <%= f.input :last_name, label: 'Nom de famille', input_html: { data: { target: 'address.city'} },required: true %>
+
+		        <%= f.input :line1, label: 'Adresse', input_html: { data: { target: 'address.postal_code'} }, required: true %>
+		        <%= f.input :city, label: 'Ville', input_html: { data: { target: 'address.postal_code'} }, required: true %>
+		        <%= f.input :postal_code, label: 'Code postal', input_html: { data: { target: 'address.postal_code'} }, required: true %>
+		        
+		        <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le recto de ma carte d'identité" %>
+						
+						<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le verso de ma carte d'identité" %>
+						
+						<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer un justificatif de domicile" %>
+		        
+		        <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" } %>  
+		      <% end %>
+				
+				<% end %>
+			<% end %>
+		<% end %>
+
+		<%# if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
+			<%#= link_to "Ajouter mon IBAN", edit_user_registration_path(@user, anchor: "iban-error") %>			
 			<!-- <h3>Mes virements vers mon comptes bancaires</h3> -->
 			<!-- <%#= simple_form_for(@user) do |f| %> -->
 				<!-- <div id="iban-error"></div> -->
 				<%#= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
 				<%#= f.button :submit %>
 			<%# end %>
-		<% end %>
+		<%# end %>
 		<br>
 
 		<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? && current_user.date_of_birth? && current_user.sneakers.present? %>
@@ -78,4 +112,4 @@
 </div>
 
 	
-<%= javascript_pack_tag "iban_validator" %>
+<%#= javascript_pack_tag "iban_validator" %>
