@@ -1,23 +1,44 @@
 <h1>Home page</h1>
 
-
-<% 
-require 'csv'
-
-filepath = 'beers.csv'
-
-CSV.foreach(filepath) do |row|
-  # Here, row is an array of columns
-  puts "#{row[0]} | #{row[1]} | #{row[2]}"
-end 
-
-%>
-
 <% if user_signed_in? %>
 	<p>Hello <%=current_user.email %></p>
 <% end %>
 
-<div class="card" style="width: 18rem;">
+
+<div class="cards">
+  <% SneakerDb.all.each do |sneaker| %>
+      <div class="card-category" style="background-image: url(<%= sneaker.img_url %>)"></div>
+      <div><strong><%= sneaker.name %></strong></div>
+      <!-- <div><%= sneaker.price_cents %></div> -->
+  <% end %>
+</div>  
+
+<!-- <div class="cards">
+  <div class="card-category" style="background-image: url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+    Breakfast
+  </div>
+
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/lunch.jpg)">
+    Lunch
+  </div>
+
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/dinner.jpg)">
+    Dinner
+  </div>
+  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/lunch.jpg)">
+    Lunch
+  </div>
+</div>
+ -->
+
+
+
+
+
+
+
+
+<!-- <div class="card" style="width: 18rem;">
   <img src="https://picsum.photos/400/300" class="card-img-top">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
@@ -25,7 +46,7 @@ end
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div>
-
+ -->
 
 <%=	link_to "Voir la liste des Sneakers", sneakers_path %>
 <br><br>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_28_134236) do
+ActiveRecord::Schema.define(version: 2021_06_01_212451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,19 @@ ActiveRecord::Schema.define(version: 2021_05_28_134236) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
+  create_table "sneaker_dbs", force: :cascade do |t|
+    t.string "name"
+    t.string "style"
+    t.string "coloris"
+    t.integer "price_cents", default: 0, null: false
+    t.date "release_date"
+    t.string "category"
+    t.text "subcategory", default: [], array: true
+    t.string "img_url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sneakers", force: :cascade do |t|

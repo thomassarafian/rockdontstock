@@ -1,0 +1,2 @@
+class SneakerDb < ApplicationRecord
+end
