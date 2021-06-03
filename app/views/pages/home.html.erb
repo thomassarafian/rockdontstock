@@ -7,8 +7,14 @@
 
 <div class="cards">
   <% SneakerDb.all.each do |sneaker| %>
-      <div class="card-category" style="background-image: url(<%= sneaker.img_url %>)"></div>
-      <div><strong><%= sneaker.name %></strong></div>
+      <div class="card">
+       <div class="card_img">
+        <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
+        </div>
+        <div class="title"><strong><%= sneaker.name %></strong></div>
+        <div class="price">À partir de <%= sneaker.price_cents %>€</div>
+      </div>
+      <!-- <div><strong><%= sneaker.name %></strong></div> -->
       <!-- <div><%= sneaker.price_cents %></div> -->
   <% end %>
 </div>  

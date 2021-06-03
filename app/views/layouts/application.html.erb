@@ -27,7 +27,7 @@ end
     <script src="https://js.stripe.com/v3/" async></script>
   </head>
 
-  <body>
+ <body>
     <%# if current_user %>
       <%# if current_user.sneakers.present? && (!current_user.date_of_birth? || !current_user.line1? || !current_user.city? || !current_user.postal_code? || !current_user.phone?) %>
         <!-- <div class="missing_infos">

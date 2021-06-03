@@ -8,9 +8,6 @@ csv_text = File.read(Rails.root.join('lib', 'seeds', 'air_jordan.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
 
-
-
-
 count = 0
 csv.each do |row|
   next if row['sneaker-title'] == "null" || row['sneaker-title'] == ""
