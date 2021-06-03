@@ -4,70 +4,44 @@ Order.destroy_all
 Sneaker.destroy_all
 SneakerDb.destroy_all
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'air_jordan','1_to_5.csv'))
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'air_jordan.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
 
-air_jordan_sub = [*'1'..'32', "Packs", "Spizike", "Legacy 312", "Jordan OFF-WHITE", "Future", "Women", "Kids", "Golf", "Other"]
+
 
 
 count = 0
-
 csv.each do |row|
-  next if row['category'] == row['sneaker-title'] || row['category'] == "Home" || row['category'] == "sneakers" || row['category'] == "Air Jordan" || row['category'] == "High" || row['category'] == "Low"
-  next if row['category'] == "null" || row['sneaker-title'] == "null"
+  next if row['sneaker-title'] == "null" || row['sneaker-title'] == ""
   s = SneakerDb.new
   s.name = row['sneaker-title']
   s.style = row['style']
+  s.style = row['style']
   s.coloris = row['coloris']
-  s.price_cents = row['price-retail']
+  
+  if row['price-retail'] == "null" || row['price-retail'] == "--" 
+  	puts row
+  	s.price_cents = '0'
+  else
+		s.price_cents = row['price-retail']  		
+	end
+
   s.release_date = row['release-date']
   s.category = "Air Jordan"
-  
-  air_jordan_sub.each do |sub|
-  	while row['category'] == sub
-  		s.subcategory << sub
-  		row['category'] += 1
-  		i += 1
-  		p "2 - " + row['category']
-			# if row['category'] == sub
-		 #  	next if s.subcategory << sub
-	  # 	end
-	  end
+  if row['img-fixed-src'] == nil
+  	s.img_url = row['img-slide-src']
+  elsif row['img-slide-src'] == nil
+  	s.img_url = row['img-fixed-src']
   end
+  
 
-  # while row['category'] == sub
-  	# s.subcategory << sub
-  	# row++
-  # end
-
-  # if row['img-fixed-src'] == nil
-  # 	s.img_url = row['img-slide-src']
-  # elsif row['img-slide-src'] == nil
-  # 	s.img_url = row['img-fixed-src']
-  # end
-  # if s.save
-  # 	count += 1
-  # 	# puts count
-  # end
-
- 
-
-  #16 de trop 
-
-  # si category == Air Jordan || category == sneaker-title ||  category == Home ||  category == sneakers
-  	# next 
-	
+  if s.save
+  	count += 1
+		puts count
+	end
 end
 
-	# name
-	# style
-	# coloris
-	# price
-	# date
-	# category[0] => Air Jordan
-	# subcategory[0] => 1  
-	# subcategory[1] => 
 
 
 
