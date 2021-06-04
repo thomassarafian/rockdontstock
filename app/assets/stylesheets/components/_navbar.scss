@@ -2,12 +2,23 @@
   justify-content: space-between;
   background: white;
   height: 50px;
+  color: white;
 }
+
 .dropdown-toggle::after {
-    content: none;
+  content: none;
+}
+.dropdown-menu.show {
+  background-color: black;
+}
+.dropdown-item:hover {
+  color: white;
+  background-color: transparent !important;
 }
 
-
+.dropdown-item {
+  color: white;
+}
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
