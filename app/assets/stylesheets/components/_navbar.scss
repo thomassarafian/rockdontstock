@@ -1,9 +1,12 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
-  // height: 60px;
-  // margin: 20px 20px;
+  height: 50px;
 }
+.dropdown-toggle::after {
+    content: none;
+}
+
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
@@ -13,10 +16,37 @@
   width: 40px;
 }
 
-
-.navbar-brand {
-	
-	// height: 30px;
-
-	// margin: 0px 10px;	
+@media (min-width: 100px) and (max-width: 575px) {
+  .navbar {
+    position: relative;
+  }
+  .navbar-brand {
+      position: absolute;
+      left: 50%;
+      margin-left: -50px !important;
+      display: block;
+  }
 }
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+ 
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+ 
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  // .magnify_glass_icon {
+  //   display: none;
+  // }
+}
+

@@ -1,42 +1,137 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <%= image_tag "navbar/toggler_icon.svg" %>
+  </div>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" href="#">VENDS</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Mon compte</a>
+  </div>
+
+
+  <%#= image_tag "navbar/toggler_icon.svg", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border:none"> -->
+    <!-- <li class="nav-item dropdown"> -->
+      <!-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> -->
+      <%#= image_tag "navbar/toggler_icon.svg", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+        <%#= link_to "Action", "#", class: "dropdown-item" %>
+        <%#= link_to "Another action", "#", class: "dropdown-item" %>
+      <!-- </div>
+    </li>
+  </button> -->
+  
+
+    <%#= image_tag "navbar/toggler_icon.svg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+    <!-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> -->
+      <%#= link_to "Action", "#", class: "dropdown-item" %>
+      <%#= link_to "Another action", "#", class: "dropdown-item" %>
+    <!-- </div> -->
+  <!-- </li> -->
+
   <%= link_to "/", class: "navbar-brand" do %>
     <%= image_tag("logo.svg", style: 'width: 80%; height: 60px;object-fit: cover;') %>
   <% end %>
+  <a href=""><%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %></a>
+</div>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border:none">
-    <%= image_tag("navbar/toggler_icon.svg", style: 'width: 100%;') %>
-  </button>
 
-    
+<!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav mr-auto"> -->
+    <!-- <li class="nav-item dropdown">
+      <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+      <%= link_to "Panier", "#", class: "nav-link" %>
+      <%= link_to "VENDS", "#", class: "nav-link" %>
+      <%= link_to "Mon compte", "#", class: "nav-link" %>
+    </li> -->
+    <!-- <li class="nav-item dropdown">
+      <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <%= link_to "Action", "#", class: "dropdown-item" %>
+        <%= link_to "Another action", "#", class: "dropdown-item" %>
+      </div>
+    </li>
+  </ul>
+</div>
+</div>
+ -->
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+
+
+
+
+
+
+
+
+<!-- <div class="navbar navbar-expand-sm navbar-light navbar-lewagon"> -->
+  <%#= link_to "/", class: "navbar-brand" do %>
+    <%#= image_tag("logo.svg", style: 'width: 80%; height: 60px;object-fit: cover;') %>
+  <%# end %>
+
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border:none"> -->
+    <%#= image_tag("logo.svg", style: 'width: 80%; height: 60px;object-fit: cover;') %>
+  <!-- </button> -->
+
+  <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <% if user_signed_in? %>
-        <li class="nav-item active">
-          <%= link_to "Home", root_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Mon profil", user_path(current_user), class: "nav-link" %>
-        </li>
-        <li class="nav-item dropdown">
-          <% avatar_url = current_user.picture_url || "default_avatar.png" %>
-          <%= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", 
+      <li class="nav-item dropdown">
+        <%= image_tag "navbar/toggler_icon.svg", class: "dropdown-toggle", id: "navbar-wagon-menu", 
           "data-toggle" => "dropdown" %>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Action", "#", class: "dropdown-item" %>
-            <%= link_to "Another action", "#", class: "dropdown-item" %>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-          </div>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%#= image_tag("navbar/toggler_icon.svg", style: 'width: 100%;') %>
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-        </li>
-      <% end %>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <%= link_to "Action", "#", class: "dropdown-item" %>
+          <%= link_to "Another action", "#", class: "dropdown-item" %>
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+        </div>
+      </li>
     </ul>
   </div>
-</div>
+ -->
+
+  <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+    <!-- <ul class="navbar-nav mr-auto"> -->
+      <%# if user_signed_in? %>
+        <!-- <li class="nav-item active">
+          <%#= link_to "Home", root_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%#= link_to "Mon profil", user_path(current_user), class: "nav-link" %>
+        </li>
+        <li class="nav-item dropdown">
+          <%# avatar_url = current_user.picture_url || "default_avatar.png" %>
+          <%#= image_tag avatar_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", 
+          "data-toggle" => "dropdown" %>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%#= link_to "Action", "#", class: "dropdown-item" %>
+            <%#= link_to "Another action", "#", class: "dropdown-item" %>
+            <%#= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </li> -->
+      <%# else %>
+        
+        <!-- <li class="nav-item dropdown"> -->
+          <%#= image_tag "navbar/toggler_icon.svg", id: "navbar-wagon-menu", 
+          "data-toggle" => "dropdown" %>
+          <!-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> -->
+            <%#= link_to "Action", "#", class: "dropdown-item" %>
+            <%#= link_to "Another action", "#", class: "dropdown-item" %>
+            <%#= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          <!-- </div> -->
+        <!-- </li> -->
+        <!-- <li class="nav-item"> -->
+          <%#= image_tag("navbar/toggler_icon.svg", style: 'width: 100%;') %>
+          <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
+        <!-- </li> -->
+      <%# end %>
+    <!-- </ul> -->
+  <!-- </div> -->
+<!-- </div> -->
+
+
+
+
+
+
 
  <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
