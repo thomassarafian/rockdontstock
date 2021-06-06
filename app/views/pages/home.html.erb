@@ -1,19 +1,16 @@
 <div class="banner">
   <div class="container">
-    <h1 class="font-weight-bold">Faites pour <a style="color:white;">être</a> portées,<br>rien d'autre.</h1>
+    <h1 class="font-weight-bold">Faites pour <a class="white">être</a> portées,<br>rien d'autre.</h1>
     <div class="scrolling">
-      <p>Voir les annonces</p>
+     <a style=" color: black;" href="#scroll"><p>Voir les annonces</p></a>
       <%= image_tag("banner/arrow") %>
     </div>
   </div>
 </div>
 
 
-
-
-
-<div class="container">
-  <h2>Best sellers</h2>
+<div id="scroll" class="container">
+  <h2 style="font-style: italic;">Best sellers</h2>
   <div class="cards">
     <% SneakerDb.all.limit(10).each do |sneaker| %>
         <div class="card">
@@ -25,13 +22,15 @@
         </div>
     <% end %>
   </div>  
+ <p><%= link_to "Tout voir", sneakers_path %></p>
 </div>
 
 
 
-<%=	link_to "Voir la liste des Sneakers", sneakers_path %>
-<br><br>
-<%= link_to "Modifier mon profil", edit_user_registration_path %>
+
+<%#=	link_to "Voir la liste des Sneakers", sneakers_path %>
+
+<%#= link_to "Modifier mon profil", edit_user_registration_path %>
 
 
 

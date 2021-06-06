@@ -1,6 +1,10 @@
 .scrolling {
   text-align: center;
 }
+.font-weight-bold>a {
+  text-decoration: none;
+  color: black;
+}
 
 // .scrolling>p {
 //   margin: 0px 0 ;
@@ -15,6 +19,7 @@
 	height: 100vh;
   text-align: left;
   padding-top: 40vh;
+  margin-bottom: 50px;
 }
 
 h1 {
@@ -38,7 +43,7 @@ h1 {
   }
   .scrolling {
     padding-top: 320px;
-  } 
+  }
 }
 
 // Medium devices (tablets, 768px and up)
@@ -62,7 +67,9 @@ h1 {
   .scrolling {
     padding-top: 250px;
   }
-  
+  .font-weight-bold>a { 
+    color:white;
+  }
 }
 
 // Extra large devices (large desktops, 1200px and up)
