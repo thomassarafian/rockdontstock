@@ -1,0 +1,50 @@
+
+// .first-text {
+// 	margin-top: 32px;
+// }
+
+
+
+@media (min-width: 100px) and (max-width: 575px) {
+  .first-text {
+    margin-top: 10px;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .first-text {
+    margin-top: 10px;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .first-text {
+    margin-top: 32px;
+  }
+  .contact-title {
+    margin-top: 32px;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .first-text {
+	 margin-top: 32px;
+	}
+  .contact-title {
+    margin-top: 0px;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+	.first-text {
+		margin-top: 32px;
+	}
+  .contact-title {
+    margin-top: 0px;
+  }
+}
+
