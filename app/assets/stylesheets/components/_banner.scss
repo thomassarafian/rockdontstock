@@ -16,10 +16,7 @@
   text-align: left;
   padding-top: 40vh;
 }
-.container {
-  // align-items: center;
-    // margin-left: 100px;
-}
+
 h1 {
   font-size: 70px;
 }
@@ -30,7 +27,6 @@ h1 {
   }
   h1 {
     font-size: 30px;
-    // display: none;
   }
 
 }
@@ -48,7 +44,6 @@ h1 {
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
   h1 {
-  //   display: none;
       font-size: 50px;
   }
   .scrolling {
@@ -59,7 +54,6 @@ h1 {
 // Large devices (desktops, 902px and up)
 @media (min-width: 902px) {
   h1 {
-    // display: block;
     font-size: 60px;
   }
   .banner {
@@ -68,9 +62,7 @@ h1 {
   .scrolling {
     padding-top: 250px;
   }
-  // .container {
-  //   margin-left: 100px;
-  // }
+  
 }
 
 // Extra large devices (large desktops, 1200px and up)
