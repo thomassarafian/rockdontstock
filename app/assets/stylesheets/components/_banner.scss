@@ -8,7 +8,6 @@
 }
 
 
-
 .font-weight-bold>a {
   text-decoration: none;
   color: black;
@@ -19,7 +18,7 @@
 // }
 
 .banner {
-  border: solid;
+  // border: solid;
   background-image: url("banner/home_page_banner_phone.svg"); 
   background-position: center;	
   background-size: cover;
@@ -28,6 +27,7 @@
   text-align: left;
   padding-top: 40vh;
   margin-bottom: 50px;
+  box-shadow: 0 0 15px -2px rgba(0,0,0,0.2);
 }
 
 h1 {

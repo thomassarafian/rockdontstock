@@ -26,13 +26,23 @@
   <div class="all_sneakers">
     <%= link_to "Tout voir", sneakers_path %>
   </div>
-
 </div>
 
 
+<div class="container">
+  <div class="article">
+    <h2>Legit Check Tech</h2>
+    <p id="article-text">
+      Le système “Legit Check Tech” d’Entrupy pour les sneakers comprend une application et une boîte en bois sur laquelle sont installés différents iPods connectés à cette même appli et qui photographient plusieurs points caractéristiques de la chaussure. Avant de placer une<span id="dots">...</span> 
+      <span id="more">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</span>
+      <a href="javascript:void(0)" id="read_more_link">Lire la suite</a>
+    </p>
 
+  </div>
+</div>
 
-<%#=	link_to "Voir la liste des Sneakers", sneakers_path %>
+<%= javascript_pack_tag "read_more" %>
+
 
 <%#= link_to "Modifier mon profil", edit_user_registration_path %>
 
