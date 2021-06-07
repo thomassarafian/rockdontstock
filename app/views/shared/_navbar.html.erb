@@ -16,8 +16,9 @@
     <a class="dropdown-item" href="#">Nous contacter</a>
     <% if user_signed_in? %>
         <%= link_to "Mon profil", user_path(current_user), class: "dropdown-item" %>
+        <%= link_to "Déconnexion", destroy_user_session_path, :method => :delete, class: "dropdown-item" %>
     <% else %>
-      <a class="dropdown-item" href="#">Me connecter</a>
+      <%= link_to("Me connecter", user_session_path, class: "dropdown-item") %>
     <% end %>
   </div>
   
@@ -31,7 +32,7 @@
       <a href=""><%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %></a>
     </div>
     
-    <button type="button" class="btn btn-dark">Vends</button>
+    <button type="button" id="sell_button" class="btn btn-dark">Vends</button>
 
 
     <div class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -42,8 +43,9 @@
       <a class="dropdown-item" href="#">Nous contacter</a>
       <% if user_signed_in? %>
         <%= link_to "Mon profil", user_path(current_user), class: "dropdown-item" %>
+        <%= link_to "Déconnexion", destroy_user_session_path , :method => :delete, class: "dropdown-item" %>
       <% else %>
-        <a class="dropdown-item" href="#">Me connecter</a>
+      <%= link_to("Me connecter", user_session_path, class: "dropdown-item") %>
       <% end %>
     </div>
   </div>
