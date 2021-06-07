@@ -1,0 +1,20 @@
+.insta-posts {
+	display:flex;
+	flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.insta-posts>h2 {
+	margin-bottom: 30px;
+}
+
+
+.insta-posts>h2:after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  padding-top: 20px; 
+  border-bottom: 1px solid black;
+
+}
