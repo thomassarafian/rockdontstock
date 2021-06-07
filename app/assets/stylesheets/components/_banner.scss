@@ -1,6 +1,14 @@
 .scrolling {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: center;
+  height: 320px;
 }
+
+
+
 .font-weight-bold>a {
   text-decoration: none;
   color: black;
@@ -26,47 +34,69 @@ h1 {
   font-size: 70px;
 }
 
-@media (min-width: 100px) and (max-width: 575px) {
-  .banner {
-    background-image: url("banner/home_page_banner_phone.svg"); 
-  }
-  h1 {
-    font-size: 30px;
-  }
+// @media (min-width: 100px) and (max-width: 575px) {
+//   .scrolling {
+//     height: 75px, !important;
+//   }
 
-}
+//   .banner {
+//     background-image: url("banner/home_page_banner_phone.svg"); 
+//   }
+//   h1 {
+//     // display: block;
+//     // font-size: 30px;
+//   }
+//   .banner {
+//     height: 70vh;
+//   }
+  
+// }
 
 // Small devices (landscape phones, 500px and up)
 @media (min-width: 500px) {
+  .banner {
+    background-image: url("banner/home_page_banner_phone.svg"); 
+  }
+
   h1 {
-    font-size: 30px;
+    display: none;
+    // font-size: 30px;
+  }
+  .banner {
+    height: 70vh;
   }
   .scrolling {
-    padding-top: 320px;
+    height: 235px;
   }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
   h1 {
-      font-size: 50px;
+    display: none;
+  }
+  .banner {
+    height: 100vh;
   }
   .scrolling {
-    padding-top: 280px;
-  } 
+    height: 475px;
+  }
+  
 }
 
 // Large devices (desktops, 902px and up)
 @media (min-width: 902px) {
   h1 {
+     display: block;
     font-size: 60px;
   }
   .banner {
     background-image: url("banner/logo.svg"); 
   }
   .scrolling {
-    padding-top: 250px;
+   height: 322px;
   }
+
   .font-weight-bold>a { 
     color:white;
   }

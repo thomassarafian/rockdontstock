@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="font-weight-bold">Faites pour <a class="white">être</a> portées,<br>rien d'autre.</h1>
     <div class="scrolling">
-     <a style=" color: black;" href="#scroll"><p>Voir les annonces</p></a>
+      <a style=" color: black;" href="#scroll"><p>Voir les annonces</p></a>
       <%= image_tag("banner/arrow") %>
     </div>
   </div>
@@ -22,7 +22,11 @@
         </div>
     <% end %>
   </div>  
- <p><%= link_to "Tout voir", sneakers_path %></p>
+
+  <div class="all_sneakers">
+    <%= link_to "Tout voir", sneakers_path %>
+  </div>
+
 </div>
 
 

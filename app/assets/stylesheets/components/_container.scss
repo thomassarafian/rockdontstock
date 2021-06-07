@@ -1,6 +1,12 @@
 .container {
-	width : 1000px;
+	width : 1440px;
 	margin: 0 auto auto;
+}
+
+.all_sneakers { 
+  position: absolute;
+  right: 20px;
+  left: auto;
 }
 
 @media (max-width: 900px) {
