@@ -1,5 +1,5 @@
 <div class="container">
-    <h2 class="title-login text-center">Se connecter</h2>
+  <h2 class="title-login text-center">Se connecter</h2>
   <div class="row justify-content-center align-items-center">
     <div class="input-signin col-md-5">
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -25,11 +25,12 @@
       <%= render "devise/shared/links" %>
     </div>
   </div>
-    <div class="signup_button">
-      <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-        <%= link_to "Créer un compte", new_registration_path(resource_name) %><br />
-      <% end %>
-    </div>
+  
+  <div class="signup_button">
+    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <%= link_to "Créer un compte", new_registration_path(resource_name) %><br />
+    <% end %>
+  </div>
 
 
 </div>

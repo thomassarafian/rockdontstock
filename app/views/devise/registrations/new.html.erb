@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="row row-cols-4 mt-5 justify-content-center">
-    <div class="col-12 col-sm-9 col-md-5">
-      <h2>Inscription</h2>
+  <h2 class="title-signup text-center">Inscription</h2>
+  <div class="row justify-content-center align-items-center">
+    <div class="input-signup col-md-5">
 
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= f.error_notification %>
@@ -14,21 +14,31 @@
                       autofocus: true,
                       input_html: { autocomplete: "email" }%>
 
-          <%= f.input :password,
+          <%= f.input :password, label: "Mot de passe",
                       required: true,
                       hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                       input_html: { autocomplete: "new-password" } %>
-          <%= f.input :password_confirmation,
+          <%= f.input :password_confirmation, label: "Confirmation du mot de passe",
                       required: true,
                       input_html: { autocomplete: "new-password" } %>
         </div>
 
-        <div class="form-actions">
-          <%= f.button :submit, "Sign up" %>
-        </div>
+        <!-- <div class="form-actions"> -->
+          <%= f.button :submit, "S'inscrire", class: "text-center btn btn-dark" %>
+        <!-- </div> -->
       <% end %>
-
+    </div>
+    
+    <div class="col-md-5 omniauth text-left">
       <%= render "devise/shared/links" %>
     </div>
+  
   </div>
+
+  <div class="signin-btn">
+    <%- if controller_name != 'sessions' %>
+      <%= link_to "Se connecter", new_session_path(resource_name) %>
+    <% end %>
+  </div>
+
 </div>
