@@ -7,12 +7,14 @@ class OrdersController < ApplicationController
 		# On retire la sneaker côté public
 		# Nous on va recevoir l'argent sur Stripe par exemple 220 euros. L'order elle appartient a une sneaker en particulier et la sneaker au vendeur
 		# @order.sneaker.user -> 
+    
+    #order = 1 donc ca veut dire que if current_user.order == 1 alors current_user.order.sneaker
 
   	@order = current_user.orders.find(params[:id])
   	authorize @order
   	current_stripe_session = retrieve_stripe_session
 
-		SendcloudCreateLabel.new(current_user, @order).create_label
+		# SendcloudCreateLabel.new(current_user, @order).create_label
 
 
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis

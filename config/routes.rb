@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'items/index'
 	root to: "pages#home"
 	devise_for :users, controllers: { 
 		omniauth_callbacks: 'users/omniauth_callbacks',
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
 	resources :sneakers
 
 	resources :users, only: [:show, :update], path: 'me' do
-    # ressources :items
+    resources :items, only: [:index]
   	resources :transfers, only: [:index, :create]
   end
 

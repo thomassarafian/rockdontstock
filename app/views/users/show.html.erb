@@ -52,18 +52,12 @@
 				</div>
 			<% end %>
 
-			<%#= link_to root_path do %>
-				<!-- <div class="my-sales">
-					<h5>Mes ventes</h5> 
-					<% if current_user.sneakers[0] %>
-						<% if current_user.sneakers[0].state == 1 %>
-						 <%#= link_to(current_user.sneakers[0].name, sneaker_path(current_user.sneakers[0])) %>
-						 <%#= link_to(current_user.sneakers[1].name, sneaker_path(current_user.sneakers[1])) %>
-						<% end %>
-					<% end %>
+			<%= link_to root_path do %>
+				<div class="my-sales">
+					<h5>Mes documents d'identité</h5> 
 					<%= image_tag "profil/my_sales", class: "my-sales-icon" %>
-				</div> -->
-			<%# end %>
+				</div>
+			<% end %>
 			
 			<%= link_to user_transfers_path(@user) do %>
 				<div class="money-infos">
