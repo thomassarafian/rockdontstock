@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 	resources :sneakers
 
 	resources :users, only: [:show, :update], path: 'me' do
+    # ressources :items
   	resources :transfers, only: [:index, :create]
   end
 

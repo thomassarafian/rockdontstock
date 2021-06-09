@@ -1,6 +1,5 @@
 <div class="container">
 	<div class="profil-page">
-
 		<div class="header">
 			<div class="header-img">
 				<% avatar_url = "default_avatar.png" #current_user.picture_url || %>
@@ -12,47 +11,67 @@
 				<p>2 achats</p>
 			</div>
 		</div>
-
 			<div class="basic-infos">
 				<div class="modify-infos">
-					<%= link_to "Modifier", edit_user_registration_path(@user), class: "btn btn-secondary" %>
+					<%= link_to "Modifier", edit_user_registration_path(@user), class: "modify-infos-btn btn btn-outline-dark btn-sm" %>
 				</div>
 				<h5>Mes informations</h5>
+				<p>Nom : <%= full_name %></p>
 				<p>Email : <%= current_user.email %></p>
-				<% if current_user.line1? %>		
+				<% if current_user.line1? %>
 					<p>Adresse : <%= current_user.line1 %></p>
+				<% else %>
+					<p>Adresse : </p>
 				<% end %>
 				<% if current_user.city? %>		
 					<p>Ville : <%= current_user.city %></p>
+				<% else %>
+					<p>Ville : </p>
 				<% end %>
 				<% if current_user.postal_code? %>		
 					<p>Code postal : <%= current_user.postal_code %></p>
+				<% else %>
+					<p>Code postal : </p>
 				<% end %>
 				<% if current_user.date_of_birth? %>		
 					<p>Date de naissance : <%= current_user.date_of_birth.strftime("%d/%m/%Y") %></p>
+				<% else %>
+					<p>Date de naissance : </p>
 				<% end %>
 				<% if current_user.phone? %>		
 					<p>Numéro de téléphone : <%= current_user.phone %></p>
+				<% else %>
+					<p>Numéro de téléphone : <p>
 				<% end %>
 			</div>
-			
-			<div class="my-purchases">
-				<h5>Mes achats</h5> 
-				<%= image_tag "profil/my_purchases", class: "" %>
-			</div>
 
-			<a href="">
-				<div class="my-sales">
+			<%= link_to root_path do %>
+				<div class="my-items">
+					<h5>Mes achats & mes ventes</h5> 
+					<%= image_tag "profil/my_purchases", class: "" %>
+				</div>
+			<% end %>
+
+			<%#= link_to root_path do %>
+				<!-- <div class="my-sales">
 					<h5>Mes ventes</h5> 
+					<% if current_user.sneakers[0] %>
+						<% if current_user.sneakers[0].state == 1 %>
+						 <%#= link_to(current_user.sneakers[0].name, sneaker_path(current_user.sneakers[0])) %>
+						 <%#= link_to(current_user.sneakers[1].name, sneaker_path(current_user.sneakers[1])) %>
+						<% end %>
+					<% end %>
+					<%= image_tag "profil/my_sales", class: "my-sales-icon" %>
+				</div> -->
+			<%# end %>
+			
+			<%= link_to user_transfers_path(@user) do %>
+				<div class="money-infos">
+					<h5>RIB</h5> 
 					<%= image_tag "profil/my_sales", class: "" %>
 				</div>
-			</a>
+			<% end %>
 
-			<div class="money-infos">
-				<h5>RIB</h5> 
-				<%= image_tag "profil/my_sales", class: "" %>
-			</div>
-	
 	</div>	
 
 
@@ -66,7 +85,8 @@
 				<!-- Il remplit ses informations -->
 			<!-- Il est mineur -->
 				<!-- Il remplit les informations d'un adulte + ID adulte -->
-	<div class="adult-infos">
+	
+	<!-- <div class="adult-infos">
 		<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? && current_user.date_of_birth? && current_user.sneakers.present? %>
 			<% if current_user.sneakers[0].state == 1 %>
 				<% if age(current_user.date_of_birth) < 18  %>
@@ -87,7 +107,7 @@
 			<% end %>
 		<% end %>
 	</div>
-
+ -->
 		<%# if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
 			<%#= link_to "Ajouter mon IBAN", edit_user_registration_path(@user, anchor: "iban-error") %>			
 			<!-- <h3>Mes virements vers mon comptes bancaires</h3> -->
@@ -97,7 +117,7 @@
 				<%#= f.button :submit %>
 			<%# end %>
 		<%# end %>
-		<br>
+<!-- 		<br>
 		<div class="my-transfers">
 			<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? && current_user.date_of_birth? && current_user.sneakers.present? %>
 				<%= link_to "Mes virements", user_transfers_path(@user) %>
@@ -125,7 +145,7 @@
 			    <% end %>
 			<% end %>
 		<% end %>
-    
+ -->    
     
 
 	

@@ -3,7 +3,7 @@ require "date"
 module UsersHelper
 
 	def full_name
-		@user.first_name + " " + @user.last_name
+		@user.first_name.capitalize + " " + @user.last_name.capitalize
 	end
 
 	def age(dob)
