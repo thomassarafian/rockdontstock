@@ -34,33 +34,13 @@ h1 {
   font-size: 70px;
 }
 
-// @media (min-width: 100px) and (max-width: 575px) {
-//   .scrolling {
-//     height: 75px, !important;
-//   }
-
-//   .banner {
-//     background-image: url("banner/home_page_banner_phone.svg"); 
-//   }
-//   h1 {
-//     // display: block;
-//     // font-size: 30px;
-//   }
-//   .banner {
-//     height: 70vh;
-//   }
-  
-// }
-
-// Small devices (landscape phones, 500px and up)
-@media (min-width: 500px) {
-  .banner {
+@media (min-width: 320px) {
+    .banner {
     background-image: url("banner/home_page_banner_phone.svg"); 
   }
 
   h1 {
     display: none;
-    // font-size: 30px;
   }
   .banner {
     height: 70vh;
@@ -68,6 +48,23 @@ h1 {
   .scrolling {
     height: 220px;
   }
+}
+
+// Small devices (landscape phones, 500px and up)
+@media (min-width: 500px) {
+  // .banner {
+  //   background-image: url("banner/home_page_banner_phone.svg"); 
+  // }
+
+  // h1 {
+  //   display: none;
+  // }
+  // .banner {
+  //   height: 70vh;
+  // }
+  // .scrolling {
+  //   height: 220px;
+  // }
 }
 
 // Medium devices (tablets, 768px and up)

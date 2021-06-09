@@ -11,15 +11,23 @@
 	padding: 8px 0;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 320px) {
 	.input-signup {
 		border-bottom: 1px solid #dee2e6;
-		margin: 20px 0;
-		height: 520px;
+		border-right: none;	
 	}
-	.omniauth-btn {
-		text-align:center;
-	}
+  .input-signup {
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 20px;
+    height: 520px;
+  }
+  .omniauth-btn {
+    text-align:center;
+  }
+}
+
+
+@media (min-width: 500px) {
 }
 
 // Medium devices (tablets, 768px and up)
