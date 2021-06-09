@@ -1,2 +1,21 @@
-<h1>Items#index</h1>
-<p>Find me in app/views/items/index.html.erb</p>
+<h1>Les ventes et achats</h1>
+<h2>Mes ventes</h2>
+ <% if current_user.sneakers[0] %>
+  <% current_user.sneakers.each do |sneaker| %>
+    <p><%= sneaker.name %></p>
+    <p><%= sneaker.price %>€</p>
+    <p><%= sneaker.size %></p>
+    <p><%= sneaker.created_at %></p>
+  <% end %>
+<% end %>
+
+
+<h2>Mes achats</h2>
+<% if current_user.orders %>
+  <% current_user.orders.each do |order| %>
+    <p><%= order.sneaker_name %></p>
+    <p><%= order.price %>€</p>
+
+    <p><%= order.created_at %></p>
+  <% end %>
+<% end %>
