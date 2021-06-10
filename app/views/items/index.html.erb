@@ -12,7 +12,7 @@
   <div class="tab-pane fade show active" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
     <% if current_user.orders %>
       <% current_user.orders.each do |order| %>
-        <div class="purchases border-bottom">
+        <div class="purchases">
             <%= image_tag(order.sneaker.photos[0], class: "purchases-sneaker-img") %>
           <div class="purchases-sneaker">
            <div class="purchases-sneaker-name"><h5><%= order.sneaker_name %></h5></div>
@@ -24,7 +24,10 @@
             <p>Achetée le <%= order.created_at.strftime("%d/%m/%Y à %H:%M") %></p>
             <p><span class="font-weight-bold">ETAT</span> : Paire envoyée par RDS</p>
             <p><span class="font-weight-bold">RESULTAT : LEGIT</span></p>
-          </div> 
+          </div>
+          <button type="button" class="purchases-problem-btn btn btn-outline-dark btn-sm">
+            Signaler un problème
+          </button>
         </div>
       <% end %>
     <% end %>
