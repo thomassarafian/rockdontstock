@@ -10,8 +10,10 @@
 
 <div class="tab-content">
   <div class="purchases-pan tab-pane fade show active" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
+    <% if !current_user.orders || current_user.orders.where(state: "Payé").count == 0 %>
+      <h2>Aucun achats en cours</h2>
+    <% end %>
     <% if current_user.orders %>
-
       <% current_user.orders.where(state: "Payé").each do |order| %>
         <div class="purchases">
             <%= image_tag(order.sneaker.photos[0], class: "purchases-sneaker-img") %>
@@ -22,6 +24,7 @@
             <p><span class="font-weight-bold"><%= order.price %>€</span></p>
           </div>
           <div class="purchases-infos">
+            <p><span class="font-weight-bold">State</span><%= order.state %></p>
             <p>Achetée le <%= order.created_at.strftime("%d/%m/%Y à %H:%M") %></p>
             <p><span class="font-weight-bold">ETAT</span> : Paire envoyée par RDS</p>
             <p><span class="font-weight-bold">RESULTAT : LEGIT</span></p>
@@ -36,6 +39,9 @@
   </div>
 
   <div class="sales-pan tab-pane fade" id="sales" role="tabpanel" aria-labelledby="sales-tab">
+    <% if !current_user.sneakers[0] %>
+      <h2>Aucun ventes en cours</h2>
+    <% end %>
     <% if current_user.sneakers[0] %>
       <% current_user.sneakers.each do |sneaker| %>
       <div class="sales">
@@ -48,7 +54,19 @@
         </div>
         <div class="sales-infos">
           <p>Mis en ligne le <%= sneaker.created_at.strftime("%d/%m/%Y à %H:%M") %></p>
-          <p><span class="font-weight-bold">ETAT</span> : En attente de reception par RDS</p>
+          <% if sneaker.state == 0 %>
+            <p><span class="font-weight-bold">ETAT : </span>Vérification des photos</p>
+          <% elsif sneaker.state == -1  %>
+            <p><span class="font-weight-bold">ETAT : </span>Photo non conforme</p>
+          <% elsif sneaker.state == 1  %>
+            <p><span class="font-weight-bold">ETAT : </span>Mise en ligne</p>
+          <% elsif sneaker.state == 2  %>
+            <p><span class="font-weight-bold">ETAT : </span>Paire vendue !</p>
+          <% elsif sneaker.state == 3  %>
+            <p><span class="font-weight-bold">ETAT : </span>En attente de reception par RDS</p>
+          <% elsif sneaker.state == 4  %>
+            <p><span class="font-weight-bold">ETAT : </span>En cours d'envoi vers le client</p>
+          <% end %>
           <p><span class="font-weight-bold">RESULTAT : En attente</span></p>
         </div>
         <button type="button" class="sales-problem-btn btn btn-outline-dark btn-sm">

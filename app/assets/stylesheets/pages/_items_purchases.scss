@@ -1,12 +1,19 @@
+.purchases-pan.tab-pane.fade.show.active>h2 {
+  color: #494949;
+  margin-top: 50px;
+  justify-self:center;
+  text-align: center;
+}
+
 .navbar-items {
   margin-top : 30px;
 }
 
-.sales-sneaker-img {
+.purchases-sneaker-img {
   width: 100px;
 }
 
-.sales {
+.purchases {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
@@ -15,36 +22,36 @@
   border-bottom: 1px solid #545454;
 }
 
-.sales-sneaker {
+.purchases-sneaker {
   align-self: center;
   grid-column-start: 2;
   grid-column-end: 3;
 }
 
-.sales-sneaker>p {
+.purchases-sneaker>p {
   margin: 0;
   font-size: 13px;
 }
 
-.sales-sneaker-name {
+.purchases-sneaker-name {
   padding-bottom: 10px;
 }
 
-.sales-sneaker-name>h5 {
+.purchases-sneaker-name>h5 {
   font-size: 16px;
 }
 
-.sales-infos>p {
+.purchases-infos>p {
   margin: 0;
   font-size: 12px;
 }
 
-.sales-infos {
+.purchases-infos {
   grid-column-start: 1;
   grid-column-end: 3;
 }
 
-.sales-problem-btn {
+.purchases-problem-btn {
   padding: 2px 2px;
   border-radius: 10px;
   font-size: 10px;
@@ -63,30 +70,30 @@
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-  .sales {
+  .purchases {
     grid-gap: 20px;
     align-self:center;
     padding-top: 20px;
   }  
-  .sales-sneaker-img {
+  .purchases-sneaker-img {
     justify-self:right;
     align-self:center;
   }
-  .sales-sneaker-name>h5 {
+  .purchases-sneaker-name>h5 {
     font-size: 20px;
   }
-  .sales-sneaker>p {
+  .purchases-sneaker>p {
     font-size: 17px;
   }
-  .sales-infos>p {
+  .purchases-infos>p {
     font-size: 15px;
   }
-  .sales-infos {
+  .purchases-infos {
     justify-self:center;
     margin-bottom: 20px;
     justify-content: center;
   }
-  .sales-problem-btn {
+  .purchases-problem-btn {
     margin-left: 270px;
     margin-right: 270px;
     grid-column: 1 / 3;
@@ -96,18 +103,18 @@
 
 // Large devices (desktops, 902px and up)
 @media (min-width: 1024px) {
-  .sales:nth-child(odd) {
+  .purchases:nth-child(odd) {
     border-right: 1px solid #545454;;
   }
-  .sales { 
+  .purchases { 
     border-bottom: none;
   }
-  .sales-pan.tab-pane.fade.show.active {
+  .purchases-pan.tab-pane.fade.show.active {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, 1fr);
     grid-gap: 20px;
   }
-  .sales-problem-btn {
+  .purchases-problem-btn {
     padding: 0px 50px;
     justify-self: center;
     margin: 0px;
@@ -116,7 +123,7 @@
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
-  .sales-pan.tab-pane.fade.show.active {
+  .purchases-pan.tab-pane.fade.show.active {
     display: grid;
     grid-template-columns: repeat(auto-fit, 500px);
     justify-content:center;
@@ -125,7 +132,7 @@
 }
 
 @media (min-width: 2560px) {
-  .sales {
+  .purchases {
     border-right: 1px solid #545454;;
   }
 }
