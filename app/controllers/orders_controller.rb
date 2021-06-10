@@ -9,9 +9,9 @@ class OrdersController < ApplicationController
 		# @order.sneaker.user -> 
     
     #order = 1 donc ca veut dire que if current_user.order == 1 alors current_user.order.sneaker
-
   	@order = current_user.orders.find(params[:id])
   	authorize @order
+    @order.update(state: "Payé")
   	current_stripe_session = retrieve_stripe_session
 
 		# SendcloudCreateLabel.new(current_user, @order).create_label

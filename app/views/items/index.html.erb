@@ -11,7 +11,8 @@
 <div class="tab-content">
   <div class="purchases-pan tab-pane fade show active" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
     <% if current_user.orders %>
-      <% current_user.orders.each do |order| %>
+
+      <% current_user.orders.where(state: "Payé").each do |order| %>
         <div class="purchases">
             <%= image_tag(order.sneaker.photos[0], class: "purchases-sneaker-img") %>
           <div class="purchases-sneaker">
