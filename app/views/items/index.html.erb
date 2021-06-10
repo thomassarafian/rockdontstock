@@ -9,7 +9,7 @@
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane fade show active" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
+  <div class="purchases-pan tab-pane fade show active" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
     <% if current_user.orders %>
       <% current_user.orders.each do |order| %>
         <div class="purchases">
@@ -34,13 +34,26 @@
 
   </div>
 
-  <div class="tab-pane fade" id="sales" role="tabpanel" aria-labelledby="sales-tab">
+  <div class="sales-pan tab-pane fade" id="sales" role="tabpanel" aria-labelledby="sales-tab">
     <% if current_user.sneakers[0] %>
       <% current_user.sneakers.each do |sneaker| %>
-        <h5><%= sneaker.name %></h5>
-        <p><%= sneaker.price %>€</p>
-        <p><%= sneaker.size %></p>
-        <p><%= sneaker.created_at %></p>
+      <div class="sales">
+        <%= image_tag(sneaker.photos[0], class: "sales-sneaker-img") %>
+        <div class="sales-sneaker">
+          <div class="sales-sneaker-name"><h5><%= sneaker.name %></h5></div>
+          <p>Size : <span class="font-weight-bold"><%= sneaker.size %>US</span></p>
+          <p>Cond : <span class="font-weight-bold"><%= sneaker.condition %>/10</span></p>
+          <p><span class="font-weight-bold"><%= sneaker.price %>€</span></p>
+        </div>
+        <div class="sales-infos">
+          <p>Mis en ligne le <%= sneaker.created_at.strftime("%d/%m/%Y à %H:%M") %></p>
+          <p><span class="font-weight-bold">ETAT</span> : En attente de reception par RDS</p>
+          <p><span class="font-weight-bold">RESULTAT : En attente</span></p>
+        </div>
+        <button type="button" class="sales-problem-btn btn btn-outline-dark btn-sm">
+            Signaler un problème
+          </button>
+        </div>
       <% end %>
     <% end %>
   </div>

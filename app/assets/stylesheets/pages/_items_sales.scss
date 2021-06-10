@@ -99,12 +99,10 @@
   .purchases:nth-child(odd) {
     border-right: 1px solid #545454;;
   }
-
   .purchases { 
     border-bottom: none;
-    // border-right: 1px solid #545454;;
   }
-  .tab-pane.fade.show.active {
+  .purchases-pan.tab-pane.fade.show.active {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
@@ -118,7 +116,7 @@
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
-  .tab-pane.fade.show.active {
+  .purchases-pan.tab-pane.fade.show.active {
     display: grid;
     grid-template-columns: repeat(auto-fit, 500px);
     justify-content:center;
