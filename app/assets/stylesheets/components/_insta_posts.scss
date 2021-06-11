@@ -4,16 +4,61 @@
   justify-content: space-evenly;
   align-items: center;
 }
-.insta-posts>h2 {
+
+.insta-posts img {
+  max-width: 100%;
+}
+
+.insta-posts-title {
+  text-align: center;
+}
+
+.insta-posts-title>h2 {
 	margin-bottom: 30px;
 }
 
-.insta-posts>h2:after {
+.insta-posts-title>h2:after {
   content: "";
   display: block;
   margin: 0 auto;
   width: 50%;
   padding-top: 20px; 
   border-bottom: 1px solid black;
+}
+
+@media (min-width: 320px) {
+  .insta-posts {
+    display:none;
+  }
+}
+
+// Small devices (landscape phones, 500px and up)
+@media (min-width: 500px) {
+
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .carousel.slide {
+    display:none;
+  }
+  
+  .insta-posts {
+    display:block;
+  }
+}
+
+// Large devices (desktops, 902px and up)
+@media (min-width: 1024px) {
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+
+}
+
+@media (min-width: 2560px) {
 
 }

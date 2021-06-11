@@ -42,40 +42,61 @@
 
 
 <div class="container">
+  <div class="insta-posts-title">
+    <h2>#rockdontstock</h2>
+  </div>
   <div class="insta-posts">
-  <h2>#rockdontstock</h2>
-  <div class="card-deck">
-    <div class="card">
-      <%= image_tag("insta/post1.jpeg", class: "card-img-top")  %> 
-      <p class="card-title">@spoxz</p>
-    </div>
-    <div class="card">
-      <%= image_tag("insta/post2.jpeg", class: "card-img-top")  %> 
-      <p class="card-title">@spoxz</p>
-    </div>
-    <div class="card">
-      <%= image_tag("insta/post3.jpeg", class: "card-img-top")  %> 
-      <p class="card-title">@spoxz</p>
-    </div>
-    <div class="card">
-      <%= image_tag("insta/post4.jpeg", class: "card-img-top")  %> 
-      <p class="card-title">@spoxz</p>
-    </div>
-    <div class="card">
-      <%= image_tag("insta/post5.jpeg", class: "card-img-top")  %> 
-      <p class="card-title">@spoxz</p>
-    </div>
-    <div class="card">
-      <%= image_tag("insta/post6.jpeg", class: "card-img-top")  %> 
-      <p class="card-title">@spoxz</p>
-    </div>
-    <div class="card">
-      <%= image_tag("insta/post7.jpeg", class: "card-img-top")  %> 
-      <p class="card-title">@spoxz</p>
-    </div>
+    <div class="card-deck">
+      <div class="card">
+        <%= image_tag("insta/post5.jpeg", class: "card-img-top")  %> 
+        <p class="card-title">@nina.swoosh</p>
+      </div>
+      <div class="card">
+        <%= image_tag("insta/post4.jpeg", class: "card-img-top")  %> 
+        <p class="card-title">@joyssi.b</p>
+      </div>
+      <div class="card">
+        <%= image_tag("insta/post3.jpeg", class: "card-img-top")  %> 
+        <p class="card-title">@spoxz</p>
+      </div>
+      <div class="card">
+        <%= image_tag("insta/post2.jpeg", class: "card-img-top")  %> 
+        <p class="card-title">@spoxz</p>
+      </div>
+      <div class="card">
+        <%= image_tag("insta/post1.jpeg", class: "card-img-top")  %> 
+        <p class="card-title">@spoxz</p>
+      </div>
+    </div>  
   </div>
 
-  
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <%= image_tag("insta/post5.jpeg", class: "d-block w-100")  %> 
+      </div>
+      <div class="carousel-item">
+        <%= image_tag("insta/post4.jpeg", class: "d-block w-100")  %> 
+      </div>
+      <div class="carousel-item">
+        <%= image_tag("insta/post3.jpeg", class: "d-block w-100")  %> 
+      </div>
+      <div class="carousel-item">
+        <%= image_tag("insta/post2.jpeg", class: "d-block w-100")  %> 
+      </div>
+      <div class="carousel-item">
+        <%= image_tag("insta/post1.jpeg", class: "d-block w-100")  %> 
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Précédent</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Suivant</span>
+    </a>
   </div>
 </div>
 
