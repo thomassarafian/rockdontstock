@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  get 'items/index'
+  # get 'items/index'
 	root to: "pages#home"
-	devise_for :users, controllers: { 
+  get "/contact", to: "pages#contact"
+
+
+	
+  devise_for :users, controllers: { 
 		omniauth_callbacks: 'users/omniauth_callbacks',
 		registrations: 'users/registrations'
 	}
