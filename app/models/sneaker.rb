@@ -1,6 +1,6 @@
 class Sneaker < ApplicationRecord
 	has_many_attached :photos
-
+  has_many :orders, dependent: :destroy
 	belongs_to :user
 
 	validates :size, :price, :condition, presence: true

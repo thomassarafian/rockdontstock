@@ -26,8 +26,8 @@
           <div class="purchases-infos">
             <p><span class="font-weight-bold">State</span><%= order.state %></p>
             <p>Achetée le <%= order.created_at.strftime("%d/%m/%Y à %H:%M") %></p>
-            <p><span class="font-weight-bold">ETAT</span> : Paire envoyée par RDS</p>
-            <p><span class="font-weight-bold">RESULTAT : LEGIT</span></p>
+            <p><span class="font-weight-bold">ÉTAT</span> : Paire envoyée par RDS</p>
+            <!-- <p><span class="font-weight-bold">RESULTAT : LEGIT</span></p> -->
           </div>
           <button type="button" class="purchases-problem-btn btn btn-outline-dark btn-sm">
             Signaler un problème
@@ -55,19 +55,19 @@
         <div class="sales-infos">
           <p>Mis en ligne le <%= sneaker.created_at.strftime("%d/%m/%Y à %H:%M") %></p>
           <% if sneaker.state == 0 %>
-            <p><span class="font-weight-bold">ETAT : </span>Vérification des photos</p>
+            <p><span class="font-weight-bold">ÉTAT : </span>Vérification des photos</p>
           <% elsif sneaker.state == -1  %>
-            <p><span class="font-weight-bold">ETAT : </span>Photo non conforme</p>
+            <p><span class="font-weight-bold">ÉTAT : </span>Photos non conforme</p>
           <% elsif sneaker.state == 1  %>
-            <p><span class="font-weight-bold">ETAT : </span>Mise en ligne</p>
+            <p><span class="font-weight-bold">ÉTAT : </span>Mise en ligne</p>
           <% elsif sneaker.state == 2  %>
-            <p><span class="font-weight-bold">ETAT : </span>Paire vendue !</p>
+            <p><span class="font-weight-bold">ÉTAT : </span>Paire vendue !</p>
           <% elsif sneaker.state == 3  %>
-            <p><span class="font-weight-bold">ETAT : </span>En attente de reception par RDS</p>
+            <p><span class="font-weight-bold">ÉTAT : </span>En attente de reception par RDS</p>
           <% elsif sneaker.state == 4  %>
-            <p><span class="font-weight-bold">ETAT : </span>En cours d'envoi vers le client</p>
+            <p><span class="font-weight-bold">ÉTAT : </span>En cours d'envoi vers le client</p>
           <% end %>
-          <p><span class="font-weight-bold">RESULTAT : En attente</span></p>
+          <!-- <p><span class="font-weight-bold">RESULTAT : En attente</span></p> -->
         </div>
         <button type="button" class="sales-problem-btn btn btn-outline-dark btn-sm">
             Signaler un problème
