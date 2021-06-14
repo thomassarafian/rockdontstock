@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :email, uniqueness: true
   validates :email, format: { with:  /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
-  has_many :sneakers
+  has_many :sneakers, dependent: :destroy
   has_many :orders, dependent: :destroy
 
   # Include default devise modules. Others available are:
@@ -28,7 +28,8 @@ class User < ApplicationRecord
   # after_create :subscribe_to_newsletter
 
   # after_update :send_label, if: :picker_data_is_converted?
-
+  
+  
   private
 
   def subscribe_to_newsletter

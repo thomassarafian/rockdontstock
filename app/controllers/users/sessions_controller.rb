@@ -9,9 +9,12 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    @sneaker_session = Sneaker.where(id: session[:sneaker_session_id])
+    @sneaker_session[0].update(user_id: current_user.id)
+    @sneaker_session[0].save
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy

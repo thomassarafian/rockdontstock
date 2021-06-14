@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
   # get 'items/index'
 	root to: "pages#home"
+  resources :pages, only: [:index, :new, :create]
   get "/contact", to: "pages#contact"
 
 
 	
   devise_for :users, controllers: { 
 		omniauth_callbacks: 'users/omniauth_callbacks',
-		registrations: 'users/registrations'
+		registrations: 'users/registrations',
+    sessions: 'users/sessions',
 	}
 	resources :sneakers
 
