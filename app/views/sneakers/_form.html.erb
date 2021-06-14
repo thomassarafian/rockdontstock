@@ -1,31 +1,23 @@
 <%= simple_form_for(sneaker) do |f| %>
 	<%= f.label :name, "Modèle" %>
-	<%= f.text_field :name %>
+	<%= f.text_field :name, required: true %>
 
 	<%= f.label :size, "Taille US" %>
-	<%= f.text_field :size %>
+	<%= f.text_field :size, required: true %>
 
 	<%= f.label :price, "Prix" %>
-	<%= f.text_field :price %>
+	<%= f.text_field :price, required: true %>
 
 	<%#= f.label :condition, "Condition" %>
-	<%= f.input :condition, collection: 1..10 %>
+	<%= f.input :condition, collection: 1..10, required: true %>
 
 	<%#= f.label :box, "Box" %>
-	<%= f.input :box, collection: ["Og Box", "Boite de remplacement", "Pas de boite"] %>
+	<%= f.input :box, collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true %>
 
 	<%= f.label :extras, "Extras" %>
-	<%= f.text_field :extras %>
+	<%= f.text_field :extras, required: true %>
 
-	<%#= f.label :photos, "Photos" %>
-	<%#= f.input :photos, as: :file, 
-  input_html: {multiple: true, class: 'hidden', id: 'photo-input'},
-  label_html: { class: 'upload-photo'}, 
-  label: '📷 Mettre les photos' %>
-	
-
-
-  <%= f.input :photos, as: :file,
+  <%= f.input :photos, required: true, as: :file,
   input_html: {multiple: true, class: "hidden", id: 'photo-input'},
   label_html: { class: 'upload-photo' },
   label: '📷 Upload a photo' %>

@@ -1,5 +1,4 @@
 const previewImageOnFileSelect = () => {
-  console.log("ALLLLLLELWEEW");
   // we select the photo input
   const input = document.getElementById('photo-input');
   if (input) {
@@ -12,7 +11,6 @@ const previewImageOnFileSelect = () => {
 }
 
 const displayPreview = (input) => {
-    console.log("ALLLLLLELW");
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (event) => {
