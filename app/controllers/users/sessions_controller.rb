@@ -10,9 +10,11 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    @sneaker_session = Sneaker.where(id: session[:sneaker_session_id])
-    @sneaker_session[0].update(user_id: current_user.id)
-    @sneaker_session[0].save
+    if session[:sneaker_session_id]
+      @sneaker_session = Sneaker.where(id: session[:sneaker_session_id])
+      @sneaker_session[0].update(user_id: current_user.id)
+      @sneaker_session[0].save
+    end
     super
   end
 

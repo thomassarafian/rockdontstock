@@ -29,7 +29,7 @@ class User < ApplicationRecord
 
   # after_update :send_label, if: :picker_data_is_converted?
   
-  
+
   private
 
   def subscribe_to_newsletter

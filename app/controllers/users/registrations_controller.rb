@@ -5,29 +5,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    puts " AAAAAAAAAAA"
-    puts " AAAAAAAAAAA"
-    puts " AAAAAAAAAAA"
-    puts " AAAAAAAAAAA"
-    puts " AAAAAAAAAAA"
-    puts " AAAAAAAAAAA"
-    raise
-    @user.save!
-    @sneaker_session = Sneaker.where(id: session[:sneaker_session_id])
-    @sneaker_session[0].update(user_id: current_user.id)
-    @sneaker_session[0].save
-    super
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource
   def create
-  puts " bbbbbbbbbbbbbb"
-    puts " bbbbbbbbbbbbbb"
-    puts " bbbbbbbbbbbbbb"
-    puts " bbbbbbbbbbbbbb"
-    puts " bbbbbbbbbbbbbb"
-    puts " bbbbbbbbbbbbbb"
+    if session[:sneaker_session_id]
+      @sneaker_session = Sneaker.where(id: session[:sneaker_session_id])
+      @sneaker_session[0].update(user_id: current_user.id)
+      @sneaker_session[0].save
+    end
     super
   end
 
