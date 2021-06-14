@@ -103,13 +103,11 @@
 
 // Large devices (desktops, 902px and up)
 @media (min-width: 1024px) {
-  
-  .purchases:nth-child(odd) {
-    border-right: 1px solid #545454;;
-  }
   .purchases { 
-    border-bottom: none;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #545454;
   }
+  
   .purchases-pan.tab-pane.fade.show.active {
     display: grid;
     grid-template-columns: repeat(auto-fit, 1fr);
@@ -124,11 +122,22 @@
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
+  .purchases { 
+    // padding-bottom: 50px;
+    border-bottom: none;
+  }
+
   .purchases-pan.tab-pane.fade.show.active {
     display: grid;
     grid-template-columns: repeat(auto-fit, 500px);
     justify-content:center;
     grid-gap: 20px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .purchases:nth-child(odd) {
+    border-right: 1px solid #545454;;
   }
 }
 

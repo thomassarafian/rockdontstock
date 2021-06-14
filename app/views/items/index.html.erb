@@ -14,7 +14,7 @@
       <h2>Aucun achats en cours</h2>
     <% end %>
     <% if current_user.orders %>
-      <% current_user.orders.where(state: "Payé").each do |order| %>
+      <% current_user.orders.where(state: "Payé").sort_by {|obj| obj.created_at }.reverse.each do |order| %>
         <div class="purchases">
             <%= image_tag(order.sneaker.photos[0], class: "purchases-sneaker-img") %>
           <div class="purchases-sneaker">
@@ -24,9 +24,9 @@
             <p><span class="font-weight-bold"><%= order.price %>€</span></p>
           </div>
           <div class="purchases-infos">
-            <p><span class="font-weight-bold">State</span><%= order.state %></p>
+            <p><span class="font-weight-bold">State : </span><%= order.state %></p>
             <p>Achetée le <%= order.created_at.strftime("%d/%m/%Y à %H:%M") %></p>
-            <p><span class="font-weight-bold">ÉTAT</span> : Paire envoyée par RDS</p>
+            <p><span class="font-weight-bold">ÉTAT</span> : En cours d'envoi par le vendeur de colisino</p>
             <!-- <p><span class="font-weight-bold">RESULTAT : LEGIT</span></p> -->
           </div>
           <button type="button" class="purchases-problem-btn btn btn-outline-dark btn-sm">
@@ -43,7 +43,8 @@
       <h2>Aucun ventes en cours</h2>
     <% end %>
     <% if current_user.sneakers[0] %>
-      <% current_user.sneakers.each do |sneaker| %>
+      <% current_user.sneakers.sort_by {|obj| obj.created_at }.reverse.each do |sneaker| %>
+
       <div class="sales">
         <%= image_tag(sneaker.photos[0], class: "sales-sneaker-img") %>
         <div class="sales-sneaker">

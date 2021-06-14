@@ -103,12 +103,14 @@
 
 // Large devices (desktops, 902px and up)
 @media (min-width: 1024px) {
+  // .sales:nth-child(odd) {
+  //   border-bottom: 1px solid #545454;;
+  // }
 
-  .sales:nth-child(odd) {
-    border-right: 1px solid #545454;;
-  }
   .sales { 
-    border-bottom: none;
+    padding-bottom: 50px;
+    border-bottom: 1px solid #545454;
+    // border-bottom: none;
   }
   .sales-pan.tab-pane.fade.show.active {
     display: grid;
@@ -125,6 +127,10 @@
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
+  .sales { 
+    // padding-bottom: 50px;
+    border-bottom: none;
+  }
   .sales-pan.tab-pane.fade.show.active {
     display: grid;
     grid-template-columns: repeat(auto-fit, 500px);
@@ -132,6 +138,13 @@
     grid-gap: 20px;
   }
 }
+
+@media (min-width: 1440px) {
+  .sales:nth-child(odd) {
+    border-right: 1px solid #545454;;
+  }
+}
+
 
 @media (min-width: 2560px) {
   .sales {
