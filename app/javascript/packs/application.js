@@ -21,3 +21,8 @@ ActiveStorage.start()
 require('dotenv').config()
 
 import "controllers"
+
+import previewImageOnFileSelect from "components/photo_preview.js"
+
+
+
