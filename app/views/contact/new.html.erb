@@ -1,0 +1,35 @@
+<div class="contact-form-page">
+  <div class="container">
+    <div class="phone-infos">
+      <h2 class="phone-title">Téléphone</h2>
+      <p>Relation presse : <%= phone_to +33607643309, "+33607643309" %></p>
+      <p>Recrutement : <%= phone_to +33777659336, "+33777659336" %></p>
+      <p>Service client : <%= phone_to +33609236587, "+33609236587" %></p>
+    </div>
+
+      <div class="contact-form">
+        <h2 class="contact-form-title">Formulaire de contact</h2>
+        <div class="contact-form-inputs">
+          <%= simple_form_for(@contact, :url => contact_index_path) do |f| %>
+            <div class="row">
+              <div class="col-md">
+                <%= f.input :name,  placeholder: 'Prénom Nom' %>
+              </div>
+              <div class="col-md">
+                <%= f.input :email, placeholder: "Email" %>
+              </div>
+            </div>
+            <%= f.input :object, placeholder: "Objet du mail" %>
+            <%= f.input :message, as: :text, placeholder: "Message" %>
+            <%= f.button :submit, "Envoyer le message" %>
+          <% end %> 
+        </div>
+      </div>
+      <div class="address-infos">
+        <h2 class="address-title">Adresse</h2>
+        <p>Rock don’t Stock,</p>
+        <p>17 Faubourg Saint-Honoré, 75010,</p>
+        <p>Paris, France</p>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+body>.contact-form-page {
+  height: 150vh;
+  background-color: black;
+}
+
+footer {
+  display: none;
+}
+
+.phone-title {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.phone-infos {
+  font-weight: 100;
+  padding-top: 100px;
+  padding-bottom: 50px;
+  text-align:center;
+  color: #B4B4B4;
+}
+
+.phone-infos>p>a {
+  color: #B4B4B4;
+}
+
+.contact-form-title {
+  font-size: 20px;
+  color: #B4B4B4;
+  text-align:center;
+}
+
+.address-title {
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+
+.address-infos {
+  margin-top:20px;
+  color: #B4B4B4;
+  text-align:center;
+}
+
+.address-infos>p {
+  line-height: 10px;
+}

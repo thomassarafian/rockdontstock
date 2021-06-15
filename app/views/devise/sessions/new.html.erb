@@ -1,6 +1,8 @@
 <%= link_to image_tag("arrow_back.svg", class: "arrow-back"), :back %>
+
 <div class="container">
   <h2 class="title-login text-center">Se connecter</h2>
+  <h1 class="text-center"><%= link_to("contact", new_contact_path ) %></h1>
   <div class="row justify-content-center align-items-center">
     <div class="input-signin col-md-5">
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>

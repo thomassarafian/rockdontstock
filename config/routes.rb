@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  # get 'items/index'
+
 	root to: "pages#home"
-  resources :pages, only: [:index, :new, :create]
-  get "/contact", to: "pages#contact"
+  resources :pages, only: [:index]
+
+  resources :contact, only: [ :create, :new]
+
 
 
 	

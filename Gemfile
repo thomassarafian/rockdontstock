@@ -61,6 +61,9 @@ gem 'money-rails' #managing money display easily
 gem "httparty"
 
 
+gem 'mail_form' #page contact
+
+
 
 group :development, :test do
   gem 'pry-byebug'

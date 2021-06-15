@@ -162,6 +162,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+    mail_form (1.9.0)
+      actionmailer (>= 5.2)
+      activemodel (>= 5.2)
     mailjet (1.6.0)
       activesupport (>= 3.1.0)
       rack (>= 1.4.0)
@@ -364,6 +367,7 @@ DEPENDENCIES
   httparty
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mail_form
   mailjet
   money-rails
   omniauth-facebook
