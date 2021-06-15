@@ -13,6 +13,13 @@
                       required: true,
                       autofocus: true,
                       input_html: { autocomplete: "email" }%>
+          
+          <%= f.input :date_of_birth, as: :date,
+            required: true,
+            hint: "Tu dois être majeur si tu veux vendre tes paires",
+            start_year: Time.now.year - 50,
+            end_year: Time.now.year - 18,
+            order: %i(day month year), label: 'Date de naissance' %>
 
           <%= f.input :password, label: "Mot de passe",
                       required: true,

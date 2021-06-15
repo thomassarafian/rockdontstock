@@ -19,7 +19,7 @@
   .input-signup {
     border-bottom: 1px solid #dee2e6;
     margin-bottom: 20px;
-    height: 520px;
+    height: 650px;
   }
   .omniauth-btn {
     text-align:center;
@@ -27,8 +27,14 @@
 }
 
 
-@media (min-width: 500px) {
-}
+// @media (min-width: 425px) {
+//   .input-signup {
+//     border-right: none;
+//     border-bottom: 1px solid #dee2e6;
+//   }
+// }
+
+
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
@@ -36,6 +42,9 @@
 		border-right: 1px solid #dee2e6;
 		border-bottom: none;	
 	}
+  .signin-btn {
+    // padding-top:70px;
+  }
 }
 
 // Large devices (desktops, 902px and up)
