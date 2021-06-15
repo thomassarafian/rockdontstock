@@ -1,19 +1,19 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon" id="navbar-light">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon navbar-dark">
   <%= link_to "/", class: "navbar-brand" do %>
-    <%= image_tag("logo.svg", style: 'width: 80%; height: 60px;object-fit: cover;', class: 'icon') %>
+    <%= image_tag("navbar/white/white_rds_logo", style: 'width: 80%; height: 60px;object-fit: cover;', class: 'icon') %>
   <% end %>
   
   <div class="dropdown-toggle phone" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon_phone' %>  
+    <%= image_tag "navbar/white/white_toggler_icon.svg", class: 'toggler_icon_phone' %>  
   </div>
   
   <%= link_to "/", class: "navbar-brand-phone" do %>
-    <%= image_tag("logo.svg", style: 'width: 80%; height: 60px;object-fit: cover;', class: 'icon_phone') %>
+    <%= image_tag("navbar/white/white_rds_logo", style: 'width: 80%; height: 60px;object-fit: cover;', class: 'icon_phone') %>
   <% end %>
 
   <div class="dropdown-menu phone" aria-labelledby="navbarDropdown">
     <a class="dropdown-item" href="/sneakers">VENDS</a>
-    <a class="dropdown-item" href="/contact/new">Nous contacter</a>
+    <a class="dropdown-item" href="#">Nous contacter</a>
     <% if user_signed_in? %>
         <%= link_to "Mon profil", user_path(current_user), class: "dropdown-item" %>
         <%= link_to "Déconnexion", destroy_user_session_path, :method => :delete, class: "dropdown-item" %>
@@ -23,24 +23,24 @@
   </div>
   
   <div class="glass_icon_phone">
-    <a href=""><%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone") %></a>
+    <a href=""><%= image_tag("navbar/white/white_magnifying_glass_icon.svg", class: "magnify_glass_icon_phone") %></a>
   </div>
   
 
   <div class="icons">
     <div class="glass_icon">
-      <a href=""><%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %></a>
+      <a href=""><%= image_tag("navbar/white/white_magnifying_glass_icon.svg", class: "magnify_glass_icon") %></a>
     </div>
     
-    <%= link_to('<button type="button" id="sell_button" class="btn btn-dark">Vends</button>'.html_safe, sneakers_path ) %>
+    <%= link_to('<button type="button" id="sell_button" class="btn btn-light">Vends</button>'.html_safe, sneakers_path ) %>
 
 
     <div class="dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon' %>
+      <%= image_tag "navbar/white/white_toggler_icon.svg", class: 'toggler_icon' %>
     </div>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="right: 0; left: auto;">
       <a class="dropdown-item" href="/sneakers">VENDS</a>
-      <a class="dropdown-item" href="/contact/new">Nous contacter</a>
+      <a class="dropdown-item" href="#">Nous contacter</a>
       <% if user_signed_in? %>
         <%= link_to "Mon profil", user_path(current_user), class: "dropdown-item" %>
         <%= link_to "Déconnexion", destroy_user_session_path , :method => :delete, class: "dropdown-item" %>
