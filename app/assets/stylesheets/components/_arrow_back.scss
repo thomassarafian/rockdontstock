@@ -1,0 +1,40 @@
+
+.arrow-back {
+  margin: 0px 20px;
+  margin-top: 10px;
+  width: 15px;
+}
+
+@media (min-width: 320px) {
+
+}
+
+// Small devices (landscape phones, 500px and up)
+@media (min-width: 500px) {
+
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .arrow-back {
+    display:none;
+  }
+}
+
+// Large devices (desktops, 902px and up)
+@media (min-width: 1024px) {
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+
+}
+
+@media (min-width: 1440px) {
+
+}
+
+@media (min-width: 2560px) {
+
+}
