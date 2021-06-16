@@ -22,6 +22,9 @@
             start_year: Time.now.year - 50,
             end_year: Time.now.year - 18,
             order: %i(day month year), label: 'Date de naissance' %>
+          
+          <div id="iban-error"></div>
+            <%= f.input :iban, label: "RIB", hint: "OPTIONNEL. Cela permettra de vérifier ton compte et t'envoyer de l'argent",  placeholder: 'FR1420041010050500013M02606' %>
 
           <%= f.input :password, label: "Mot de passe",
                       required: true,
@@ -33,7 +36,7 @@
         </div>
 
         <!-- <div class="form-actions"> -->
-          <%= f.button :submit, "S'inscrire", class: "text-center btn btn-dark" %>
+          <%= f.button :submit, "S'inscrire", class: "text-center btn btn-dark", id: "btn-submit" %>
         <!-- </div> -->
       <% end %>
     </div>
@@ -51,3 +54,6 @@
   </div>
 
 </div>
+
+
+<%= javascript_pack_tag "iban_validator" %>

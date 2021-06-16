@@ -60,7 +60,7 @@ class ContactController < ApplicationController
     
     redirect_to root_path, notice: "Ton email a bien été envoyé !"
 
-      # render html: @contact.errors
+    # render html: @contact.errors
 
   end
 

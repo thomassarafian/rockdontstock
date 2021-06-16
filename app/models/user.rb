@@ -4,6 +4,8 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :email, uniqueness: true
   validates :email, format: { with:  /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
+  validates :iban, uniqueness: true
+
   has_many :sneakers, dependent: :destroy
   has_many :orders, dependent: :destroy
 
