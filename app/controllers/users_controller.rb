@@ -19,8 +19,8 @@ class UsersController < ApplicationController
 	      format.json { render json: { user: @user } }
 	    end
       # render json: { success: true }
-    else
-      render json: { success: false, errors: user.errors.messages }, status: :unprocessable_entity 
+    # else
+      # render json: { success: false, errors: @user.errors.messages }, status: :unprocessable_entity 
     end
   end
 

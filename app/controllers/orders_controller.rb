@@ -13,8 +13,8 @@ class OrdersController < ApplicationController
   	authorize @order
     @order.update(state: "Payé")
   	current_stripe_session = retrieve_stripe_session
-
-		# SendcloudCreateLabel.new(current_user, @order).create_label
+    
+		SendcloudCreateLabel.new(current_user, @order).create_label
 
 
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis

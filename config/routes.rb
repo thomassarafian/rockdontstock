@@ -2,11 +2,10 @@ Rails.application.routes.draw do
 
 	root to: "pages#home"
   resources :pages, only: [:index]
+  get 'about' => 'pages#about'
 
-  resources :contact, only: [ :create, :new]
-
-
-
+  
+  resources :contact, only: [:create, :new]
 	
   devise_for :users, controllers: { 
 		omniauth_callbacks: 'users/omniauth_callbacks',

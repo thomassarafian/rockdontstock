@@ -39,6 +39,7 @@ class ContactController < ApplicationController
     #     "message" => @contact.message
     #   }
     # }])
+    
     #   variable = Mailjet::Send.create(messages: [{
     #   'From'=> {
     #       'Email'=> 'sarafianthomas@gmail.com',
