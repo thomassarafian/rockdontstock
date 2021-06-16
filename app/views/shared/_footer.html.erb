@@ -31,13 +31,13 @@
 
           <ul class="list-unstyled mb-0">
             <li>
-              <a href="#!" class="text-white ">Acheter</a>
+              <a href="/sneakers" class="text-white ">Acheter</a>
             </li>
             <li>
-              <a href="#!" class="text-white">Vendre</a>
+              <a href="/sneakers/new" class="text-white">Vendre</a>
             </li>
             <li>
-              <a href="#!" class="text-white">Mon compte</a>
+              <%= link_to 'Mon compte', user_path(current_user), class:"text-white" %>
             </li>
           </ul>
         </div>
@@ -47,10 +47,10 @@
         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
           <ul class="list-unstyled mb-0">
             <li class="first-text">
-              <a href="#!" class="text-white">Qui sommes-nous ?</a>
+              <a href="/about" class="text-white">Qui sommes-nous ?</a>
             </li>
             <li>
-              <a href="#!" class="text-white">Comment acheter ?</a>
+              <a href="/about" class="text-white">Comment acheter ?</a>
             </li>
             <li>
               <a href="#!" class="text-white">Questions courantes</a>

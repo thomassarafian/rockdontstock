@@ -36,7 +36,7 @@ footer>.about-us {
   object-fit: cover;
 }
 
-.first-text, .second-text, .third-text {
+.about-first-text, .about-second-text, .about-third-text {
   grid-column-start : 2/3;
   display: flex;
   justify-content: center;
@@ -48,7 +48,7 @@ footer>.about-us {
   padding: 1px 10px;
 }
 
-.first-text>p, .second-text>p, .third-text>p {
+.about-first-text>p, .about-second-text>p, .about-third-text>p {
     font-size: 13px; 
     color: #a0a0a0;
   }
@@ -64,7 +64,7 @@ footer>.about-us {
   .about-us>.banner>h2 {
     font-size: 13px;
   }
-  .first-text>h3, .second-text>h3, .third-text>h3 {
+  .about-first-text>h3, .about-second-text>h3, .about-third-text>h3 {
     font-weight: bold;
     font-size: 17px; 
     margin-bottom: 20px;
@@ -84,26 +84,26 @@ footer>.about-us {
   .about-us>.banner>h2 {
     font-size: 20px;
   }
-  .first-text>h3, .second-text>h3, .third-text>h3 {
+  .about-first-text>h3, .about-second-text>h3, .about-third-text>h3 {
     font-size: 20px; 
   }
-  .first-text>p, .second-text>p, .third-text>p {
+  .about-first-text>p, .about-second-text>p, .about-third-text>p {
     font-size: 15px; 
   }
-  .first-text, .second-text, .third-text {
+  .about-first-text, .about-second-text, .about-third-text {
     padding-left: 80px;
   }
 }
 
 // Large devices (desktops, 902px and up)
 @media (min-width: 1024px) {
-  .first-text>h3, .second-text>h3, .third-text>h3 {
+  .about-first-text>h3, .about-second-text>h3, .about-third-text>h3 {
     font-size: 25px; 
   }
-  .first-text>p, .second-text>p, .third-text>p {
+  .about-first-text>p, .about-second-text>p, .about-third-text>p {
     font-size: 17px; 
   }
-  .first-text, .second-text, .third-text {
+  .about-first-text, .about-second-text, .about-third-text {
     padding-left: 100px;
   }
 }
@@ -116,13 +116,13 @@ footer>.about-us {
   .about-us>.banner>h2 {
     font-size: 30px;
   }
-  .first-text>h3, .second-text>h3, .third-text>h3 {
+  .about-first-text>h3, .about-second-text>h3, .about-third-text>h3 {
     font-size: 30px; 
   }
-  .first-text>p, .second-text>p, .third-text>p {
+  .about-first-text>p, .about-second-text>p, .about-third-text>p {
     font-size: 22px; 
   }
-  .first-text, .second-text, .third-text {
+  .about-first-text, .about-second-text, .about-third-text {
     padding-left: 150px;
   } 
 }
