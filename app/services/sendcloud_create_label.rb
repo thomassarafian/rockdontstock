@@ -67,28 +67,28 @@ class SendcloudCreateLabel
     base_64 = Base64.encode64(label_file.read)
 
 
-    variable = Mailjet::Send.create(messages: [{
-        'From'=> {
-            'Email'=> 'sarafianthomas@gmail.com',
-            'Name'=> 'Mailjet Pilot'
-        },
-        'To'=> [
-            {
-                'Email'=> 'thomassarafian@gmail.com',
-                'Name'=> 'passenger 1'
-            }
-        ],
-        'Subject'=> 'Your email coded plan!',
-        'TextPart'=> 'Dear passenger 1, welcome to Mailjet! May the delivery force be with you!',
-        'HTMLPart'=> '<h3>Dear passenger 1, welcome to <a href=\'https://www.mailjet.com/\'>Mailjet</a>!</h3><br />May the delivery force be with you!',
-        'Attachments'=> [
-            {
-                'ContentType'=> 'text/plain',
-                'Filename'=> 'app/assets/images/my_file.pdf',
-                'Base64Content'=> base_64
-            }
-        ]
-    }])
+    # variable = Mailjet::Send.create(messages: [{
+    #     'From'=> {
+    #         'Email'=> 'sarafianthomas@gmail.com',
+    #         'Name'=> 'Mailjet Pilot'
+    #     },
+    #     'To'=> [
+    #         {
+    #             'Email'=> 'thomassarafian@gmail.com',
+    #             'Name'=> 'passenger 1'
+    #         }
+    #     ],
+    #     'Subject'=> 'Your email coded plan!',
+    #     'TextPart'=> 'Dear passenger 1, welcome to Mailjet! May the delivery force be with you!',
+    #     'HTMLPart'=> '<h3>Dear passenger 1, welcome to <a href=\'https://www.mailjet.com/\'>Mailjet</a>!</h3><br />May the delivery force be with you!',
+    #     'Attachments'=> [
+    #         {
+    #             'ContentType'=> 'text/plain',
+    #             'Filename'=> 'app/assets/images/my_file.pdf',
+    #             'Base64Content'=> base_64
+    #         }
+    #     ]
+    # }])
 
 
     # https://panel.sendcloud.sc/api/v2/labels/normal_printer/113233996?start_from=0
