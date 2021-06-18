@@ -8,21 +8,12 @@ class SendcloudCreateLabel
     @order = order
   end
 
-  def get_pdf_label(label_id)
-    auth = {
-      username: ENV["SENDCLOUD_API_KEY"],
-      password: ENV["SENDCLOUD_SECRET_KEY"]
-    }
-    pdf_link = HTTParty.get("https://panel.sendcloud.sc/api/v2/labels/#{label_id}", basic_auth: auth)
-    p pdf_link
-  end
-
   def create_label
-    # raise
     auth = {
       username: ENV["SENDCLOUD_API_KEY"],
       password: ENV["SENDCLOUD_SECRET_KEY"]
     }
+
     first_parcel_data = {
       parcel: {
         name: "Nils Bonnavaud",
@@ -39,10 +30,10 @@ class SendcloudCreateLabel
         data: [],
         country: "FR",
         shipment: {
-         id: 1680, #@user.picker_data['id'],
-         name: "Mondial Relay Point Relais L 1-2kg",
+         id: 8,#1680, #@user.picker_data['id'],
+         name: "Unstamped Letter", #"Mondial Relay Point Relais L 1-2kg",
         },
-        to_service_point: @user.picker_data['id'],
+        # to_service_point: @user.picker_data['id'],
         parcel_items: [],
         from_name: @order.sneaker.user.first_name + " " + @order.sneaker.user.last_name,
         from_address_1: @order.sneaker.user.line1,
@@ -58,7 +49,6 @@ class SendcloudCreateLabel
         quantity: 1,
       }
     }
-    p " IT S DOOOOOOOOOONE"
     create_parcel = HTTParty.post(
          "https://panel.sendcloud.sc/api/v2/parcels",
          body: first_parcel_data.to_json,
@@ -66,15 +56,52 @@ class SendcloudCreateLabel
          basic_auth: auth)
     puts JSON.pretty_generate(JSON.parse(create_parcel.body))
     
-    # ship_methods = HTTParty.get("https://panel.sendcloud.sc/api/v2/shipping_methods", basic_auth: auth)
+
     puts "=============================="
-    # puts ship_methods
-    # puts "=============================="
+    
+    File.open("app/assets/images/my_file.pdf", "wb") do |f| 
+      f.write HTTParty.get(create_parcel.parsed_response['parcel']['label']['label_printer'], basic_auth: auth).body
+    end
+
+    label_file = open("app/assets/images/my_file.pdf")
+    base_64 = Base64.encode64(label_file.read)
+
+
+    variable = Mailjet::Send.create(messages: [{
+        'From'=> {
+            'Email'=> 'sarafianthomas@gmail.com',
+            'Name'=> 'Mailjet Pilot'
+        },
+        'To'=> [
+            {
+                'Email'=> 'thomassarafian@gmail.com',
+                'Name'=> 'passenger 1'
+            }
+        ],
+        'Subject'=> 'Your email coded plan!',
+        'TextPart'=> 'Dear passenger 1, welcome to Mailjet! May the delivery force be with you!',
+        'HTMLPart'=> '<h3>Dear passenger 1, welcome to <a href=\'https://www.mailjet.com/\'>Mailjet</a>!</h3><br />May the delivery force be with you!',
+        'Attachments'=> [
+            {
+                'ContentType'=> 'text/plain',
+                'Filename'=> 'app/assets/images/my_file.pdf',
+                'Base64Content'=> base_64
+            }
+        ]
+    }])
+
+
+    # https://panel.sendcloud.sc/api/v2/labels/normal_printer/113233996?start_from=0
+    # https://panel.sendcloud.sc/api/v2/labels/label_printer/113233996
+
+    # create_parcel.parsed_response['parcel']['label']['normal_printer'][0-3]
+    # create_parcel.parsed_response['parcel']['label']['label_printer']
+
+    get_pdf = HTTParty.get(create_parcel.parsed_response['parcel']['label']['label_printer'], basic_auth: auth)
 
     # pdf_label = get_pdf_label(create_parcel.parsed_response['parcel']['id'])
     
     # puts "==========================="
-    # pdf = HTTParty.get("https://panel.sendcloud.sc/api/v2/parcels/#{create_parcel.parsed_response['parcel']['id']}/documents/pdf", basic_auth: auth)
     # puts pdf
 
     # # raise

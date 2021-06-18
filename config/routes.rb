@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :pages, only: [:index]
   get 'about' => 'pages#about'
 
-  
+  # resources :search, only: [:index]
+
   resources :contact, only: [:create, :new]
 	
   devise_for :users, controllers: { 

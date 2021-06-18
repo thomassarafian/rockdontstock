@@ -37,7 +37,7 @@
               <a href="/sneakers/new" class="text-white">Vendre</a>
             </li>
             <li>
-              <%= link_to 'Mon compte', user_path(current_user), class:"text-white" %>
+              <%= link_to 'Mon compte', user_signed_in?? user_path(current_user) : new_user_registration_path, class:"text-white" %>
             </li>
           </ul>
         </div>

@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 
 
+require("packs/autocomplete/jquery.easy-autocomplete.js")
 
 
 import "bootstrap";
@@ -20,9 +21,12 @@ ActiveStorage.start()
 
 require('dotenv').config()
 
+
 import "controllers"
 
 import previewImageOnFileSelect from "components/photo_preview.js"
+
+import autocompleteSearch from "components/autocomplete.js"
 
 
 
