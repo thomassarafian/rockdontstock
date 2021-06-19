@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 	root to: "pages#home"
   resources :pages, only: [:index]
   get 'about' => 'pages#about'
-
   # resources :search, only: [:index]
 
   resources :contact, only: [:create, :new]
@@ -13,7 +12,9 @@ Rails.application.routes.draw do
 		registrations: 'users/registrations',
     sessions: 'users/sessions',
 	}
-	resources :sneakers
+	
+  resources :sneakers
+  resources :sneaker_dbs, only: [:index, :show]
 
 	resources :users, only: [:show, :update], path: 'me' do
     resources :items, only: [:index]

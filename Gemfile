@@ -64,11 +64,6 @@ gem "httparty"
 gem 'mail_form' #page contact
 
 
-
-gem 'grover' #pour les pdf label
-
-
-
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
