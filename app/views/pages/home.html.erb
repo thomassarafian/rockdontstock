@@ -34,7 +34,7 @@
   <div class="cards">
     <% SneakerDb.all.limit(10).each do |sneaker| %>
         <div class="card">
-          <%= link_to sneaker_db_path(sneaker)  do %>
+          <%= link_to sneaker_db_path(sneaker), :style=>'color:#000000;' do %>
             <div class="card_img">
               <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
             </div>

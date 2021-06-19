@@ -1,0 +1,141 @@
+.sneaker-db-name>h1 {
+  margin-top: 30px;
+  text-align:center;
+  font-size: 20px;
+}
+.sneaker-db-img {
+  margin-bottom: 10px;
+  text-align:center;
+}
+
+.sneaker-db-img-url {
+  width: 250px;
+}
+
+.sneaker-db-infos {
+  line-height: 10px;
+  text-align: center;
+  font-size: 15px;
+}
+
+@media (min-width: 0px) {
+  .sneaker-db-article {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sneaker-db-name>h1 {
+    text-align: left;
+    font-size: 30px;
+  }
+  .sneaker-db-img {
+    text-align:left;
+  }
+  .sneaker-db-img-url {
+    width: 500px;
+    border-bottom: 1px solid;
+  }
+  .sneaker-db-infos {
+    display: flex;
+    margin-top: -150px;
+  }
+  .sneaker-db-infos>p {
+    line-height: 30px;
+    font-weight: bold;
+    margin-right: 20px;
+  }
+  .sneaker-db-content1::after {
+    content: "\a";
+    white-space: pre;
+  }
+  .sneaker-db-content1 {
+    font-weight: normal;
+  }
+  .sneaker-db-content2 {
+    font-weight: bold;
+  }
+  .sneaker-db {
+    display: flex;
+    justify-content: space-between;
+  }
+  .sneaker-db-legit {
+    margin-top: -40px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    padding: 20px 20px;
+    right: 0px;
+    width: 280px;
+    height: 280px;
+    text-align:center;
+  }
+  .sneaker-db-delivery {
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    padding: 20px 20px;
+    right: 0px;
+    width: 280px;
+    height: 260px;
+    text-align:center;
+  }
+
+  .sneaker-db-article {
+    display: flex;
+    flex-direction: column;
+  }
+  .sneaker-db-legit>p, .sneaker-db-delivery>p {
+    margin-top: 20px;
+    font-size: 11px;
+    color: #898989;
+  }
+  .sneaker-db-legit-icon, .sneaker-db-delivery-icon {
+    margin-bottom: 20px;
+  }
+  .sneaker-offers {
+    margin-top: 200px;
+  }
+  .container-sneaker-db {
+    margin: 0 50px;
+  }
+}
+
+
+@media (min-width: 1440px) {
+  .sneaker-db-name>h1 {
+    font-size: 40px;
+  }
+  .sneaker-db-img-url {
+    width: 600px;
+  }
+  .sneaker-db-infos {
+    margin-top: -100px;
+  }
+  .sneaker-db-legit {
+    width: 280px;
+    height: 310px;
+  }
+  .sneaker-db-delivery {
+    width: 280px;
+    height: 280px;
+  }
+
+  .sneaker-db-legit>p, .sneaker-db-delivery>p {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #898989;
+  }
+  .sneaker-db-legit-icon, .sneaker-db-delivery-icon {
+    margin-bottom: 20px;
+  }
+  .sneaker-offers {
+    margin-top: 200px;
+  }
+  .container-sneaker-db {
+    margin: 0 50px;
+  }
+}
+
+@media (min-width: 2560px) {
+
+}

@@ -1,2 +1,61 @@
-<h1>SneakerDbs#show</h1>
-<p>Find me in app/views/sneaker_dbs/show.html.erb</p>
+<div class="container-sneaker-db">
+  <div class="sneaker-db-name">
+    <h1> <%= @sneaker_db.name %></h1>
+  </div>
+  <div class="sneaker-db">
+    <div class="sneaker-db-img">
+      <%= image_tag(@sneaker_db.img_url, class: "sneaker-db-img-url") %>
+    </div>
+    <div class="sneaker-db-article">
+      <div class="sneaker-db-legit">
+        <%= image_tag("sneaker_db_show/microscope.svg", class: "sneaker-db-legit-icon") %>
+        <h5>100% LEGIT</h5>
+        <p>Toutes les paires achetés passent directement par nos bureau afin d’êtres soumis à une authentification poussée. Grâce à des fiches produits et une inspection pointilleuse, Rock don’t Stock à pour vocation de luter contre la contrefaçon en proposant une plateforme safe rien que pour toi !</p>
+      </div>
+      <div class="sneaker-db-delivery">
+        <%= image_tag("sneaker_db_show/delivery_truck.svg", class: "sneaker-db-delivery-icon") %>
+        <h5>A PARTIR DE 5 € </h5>
+        <p>Economise sur les frais de livraison, en optant pour la livraison via Mondial Relay ! Dans le contexte logistique actuel, la fiabilité des transporteurs nous pousse à travailler en collaboration avec  des acteurs honnêtes et sécurisés.</p>
+      </div>
+    </div>
+  </div>
+  <div class="sneaker-db-infos">
+    <p class="sneaker-db-release">
+      <span class="sneaker-db-content1">Date de sortie : </span>
+      <span class="sneaker-db-content2"><%= @sneaker_db.release_date.strftime("%d/%m/%Y") %></span>
+    </p>
+    <p class="sneaker-db-retail-price">
+      <span class="sneaker-db-content1">Prix retail : </span>
+      <span class="sneaker-db-content2"><%= @sneaker_db.price_cents %>€</span>
+    </p>
+    <p class="sneaker-db-average-price">
+      <span class="sneaker-db-content1">Prix moyen : </span>
+      <span class="sneaker-db-content2"><%= 10 %>€</span>
+    </p>
+    <p class="sneaker-db-color">
+      <span class="sneaker-db-content1">Code couleur : </span>
+      <span class="sneaker-db-content2"><%= @sneaker_db.style %></span>
+    </p>
+    <p class="sneaker-db-nb-offers">
+      <span class="sneaker-db-content1">Nombre d'annonces : </span>
+      <span class="sneaker-db-content2"><%= 2 %></span>
+    </p>
+  </div>
+</div>
+<div class="container">
+  <div class="sneaker-offers">
+    <div class="cards">
+    <% SneakerDb.all.limit(10).each do |sneaker| %>
+        <div class="card">
+          <%= link_to sneaker_db_path(sneaker), :style=>'color:#000000;' do %>
+            <div class="card_img">
+              <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
+            </div>
+            <div class="title"><strong><%= sneaker.name %></strong></div>
+            <div class="price">À partir de <%= sneaker.price_cents %>€</div>
+          <% end %>
+        </div>
+    <% end %>
+  </div>  
+  </div>
+</div>
