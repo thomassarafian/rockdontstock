@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Search</h1>
+  <div data-controller="refresh-list">
+  <%= form_with url: searchs_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
+    <%= f.text_field :query,
+                     class: "form-control",
+                     placeholder: 'Type a movie title',
+                     value: params[:query],
+                     data: {
+                      refresh_list_target: 'searchInput',
+                      action: "keyup->refresh-list#update",
+                     } %>
+  <% end %>
+  <%= render 'list', sneaker_dbs: @sneaker_dbs %>
+  </div>
+</div>

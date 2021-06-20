@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
+  get 'searchs/index'
 	root to: "pages#home"
   resources :pages, only: [:index]
   get 'about' => 'pages#about'
-  # resources :search, only: [:index]
+  resources :searchs, only: [:index]
 
   resources :contact, only: [:create, :new]
 	
