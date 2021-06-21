@@ -12,6 +12,7 @@ class SneakersController < ApplicationController
 	end
 	
 	def new
+    session[:sneaker_db_id] = params['sneaker_db_id']
 		@sneaker = Sneaker.new
 		authorize @sneaker
 	end
@@ -28,8 +29,9 @@ class SneakersController < ApplicationController
       session[:sneaker_session_id] = @sneaker.id
       redirect_to new_user_session_path, notice: "Tu dois être connecté pour que nous puissions vérifier ta paire"
     elsif user_signed_in?
-      @sneaker = current_user.sneakers.new(sneaker_params)
-  		authorize @sneaker
+      @sneaker = current_user.sneakers.new(sneaker_db_id: session[:sneaker_db_id])
+      @sneaker.update(sneaker_params)
+   		authorize @sneaker
   		if @sneaker.save
   			@sneaker.update(state: 1) # ici on devrai laisser à 0, puis si on valide la paire cote admin, alors on la passera a 1 
         if user_signed_in? && current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone?
@@ -59,7 +61,7 @@ class SneakersController < ApplicationController
 	private
 
 	def sneaker_params
-		params.require(:sneaker).permit(:name, :size, :price, :condition, :box, :extras, :state, photos: [])
+		params.require(:sneaker).permit(:sneaker_db_id, :name, :size, :price, :condition, :box, :extras, :state, photos: [])
 	end
 
 	def set_sneaker

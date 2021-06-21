@@ -53,6 +53,9 @@
 
 
 @media (min-width: 320px) {
+  .carousel.slide {
+    margin-bottom: 50px;
+  }
   .insta-posts {
     display:none;
   }
@@ -70,6 +73,7 @@
     display:none;
   }
   .insta-posts {
+    margin-bottom: 50px;
     display:block;
   }
   .insta-posts.card-deck.card {

@@ -1,9 +1,16 @@
-
 .bg-dark.text-center.text-white {
   margin-top: 50px;
 }
 
-@media (min-width: 100px) and (max-width: 575px) {
+@media (min-width: 100px) {
+  footer a{
+    font-size: 13px;
+    color: #cecece;
+  }
+  footer h5 {
+    font-size: 17px;
+  }
+
   .first-text {
     margin-top: 10px;
   }
