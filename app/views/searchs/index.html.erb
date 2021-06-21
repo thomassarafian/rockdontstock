@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Search</h1>
+  <h1>Recherche ton modèle</h1>
   <div data-controller="refresh-list">
   <%= form_with url: searchs_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
     <%= f.text_field :query,

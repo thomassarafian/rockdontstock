@@ -5,7 +5,38 @@
   <div class="sneaker-db">
     <div class="sneaker-db-img">
       <%= image_tag(@sneaker_db.img_url, class: "sneaker-db-img-url") %>
+      <div class="sneaker-db-infos">
+        <% unless @sneaker_db.release_date.nil? %>
+          <p class="sneaker-db-release">
+            <span class="sneaker-db-content1">Date de sortie : </span>
+            <span class="sneaker-db-content2"><%= @sneaker_db.release_date.strftime("%d/%m/%Y") %></span>
+          </p>
+        <% end %>
+        <% unless @sneaker_db.price_cents.nil? %>
+          <p class="sneaker-db-retail-price">
+            <span class="sneaker-db-content1">Prix retail : </span>
+            <span class="sneaker-db-content2"><%= @sneaker_db.price_cents %>€</span>
+          </p>
+        <% end %>
+        <% if %>
+          <p class="sneaker-db-average-price">
+            <span class="sneaker-db-content1">Prix moyen : </span>
+            <span class="sneaker-db-content2"><%= 10 %>€</span>
+          </p>
+        <% end %>
+        <% unless @sneaker_db.style.nil? %>
+          <p class="sneaker-db-color">
+            <span class="sneaker-db-content1">Code couleur : </span>
+            <span class="sneaker-db-content2"><%= @sneaker_db.style %></span>
+          </p>
+        <% end %>
+          <p class="sneaker-db-nb-offers">
+            <span class="sneaker-db-content1">Nombre d'annonces : </span>
+            <span class="sneaker-db-content2"><%= 2 %></span>
+          </p>
+      </div>
     </div>
+  
     <div class="sneaker-db-article">
       <div class="sneaker-db-legit">
         <%= image_tag("sneaker_db_show/microscope.svg", class: "sneaker-db-legit-icon") %>
@@ -18,38 +49,11 @@
         <p>Economise sur les frais de livraison, en optant pour la livraison via Mondial Relay ! Dans le contexte logistique actuel, la fiabilité des transporteurs nous pousse à travailler en collaboration avec  des acteurs honnêtes et sécurisés.</p>
       </div>
     </div>
-  </div>
-  <div class="sneaker-db-infos">
-    <% unless @sneaker_db.release_date.nil? %>
-    <p class="sneaker-db-release">
-      <span class="sneaker-db-content1">Date de sortie : </span>
-      <span class="sneaker-db-content2"><%= @sneaker_db.release_date.strftime("%d/%m/%Y") %></span>
-    </p>
-    <% end %>
-    <% unless @sneaker_db.price_cents.nil? %>
-    <p class="sneaker-db-retail-price">
-      <span class="sneaker-db-content1">Prix retail : </span>
-      <span class="sneaker-db-content2"><%= @sneaker_db.price_cents %>€</span>
-    </p>
-    <% end %>
-    <% if %>
-    <p class="sneaker-db-average-price">
-      <span class="sneaker-db-content1">Prix moyen : </span>
-      <span class="sneaker-db-content2"><%= 10 %>€</span>
-    </p>
-    <% end %>
-    <% unless @sneaker_db.style.nil? %>
-    <p class="sneaker-db-color">
-      <span class="sneaker-db-content1">Code couleur : </span>
-      <span class="sneaker-db-content2"><%= @sneaker_db.style %></span>
-    </p>
-    <% end %>
+  </div>  
+</div>
 
-    <p class="sneaker-db-nb-offers">
-      <span class="sneaker-db-content1">Nombre d'annonces : </span>
-      <span class="sneaker-db-content2"><%= 2 %></span>
-    </p>
-  </div>
+<div class="container">
+  <button type="button" class="btn btn-dark">Ajoute ta paire</button>
 </div>
 
 <!-- <div class="container">
