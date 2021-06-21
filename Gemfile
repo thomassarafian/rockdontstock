@@ -63,6 +63,9 @@ gem "httparty"
 
 gem 'mail_form' #page contact
 
+gem 'pg_search', '~> 2.3.0' #search
+
+
 
 group :development, :test do
   gem 'pry-byebug'

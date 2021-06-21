@@ -3,8 +3,7 @@ class SearchsController < ApplicationController
     @sneaker_dbs = policy_scope(SneakerDb).order(release_date: :desc)
 
     if params[:query].present?
-      # puts "->>>>>>>>>" + @sneaker_dbs.to_s
-      @sneaker_dbs = @sneaker_dbs.where('name ILIKE ?', "%#{params[:query]}%")
+      @sneaker_dbs = @sneaker_dbs.search_by_name_and_category(params[:query])
     end
 
     respond_to do |format|
