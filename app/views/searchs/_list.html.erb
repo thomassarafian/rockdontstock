@@ -1,14 +1,14 @@
 <div data-refresh-list-target="list">
   <div id="scroll" class="container">
-    <div class="cards">
+    <div class="sneaker-cards">
       <% sneaker_dbs.all.limit(10).each do |sneaker| %>
-          <div class="card">
+          <div class="sneaker-card">
             <%= link_to sneaker_db_path(sneaker), :style=>'color:#000000;' do %>
-              <div class="card_img">
+              <div class="sneaker-card_img">
                 <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
               </div>
-              <div class="title"><strong><%= sneaker.name %></strong></div>
-              <div class="price">À partir de <%= sneaker.price_cents %>€</div>
+              <div class="sneaker-title"><strong><%= sneaker.name %></strong></div>
+              <div class="sneaker-price">À partir de <%= sneaker.price_cents %>€</div>
             <% end %>
           </div>
       <% end %>

@@ -4,7 +4,7 @@
   <%= form_with url: searchs_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
     <%= f.text_field :query,
                      class: "form-control",
-                     placeholder: 'Type a movie title',
+                     placeholder: 'Recherche ta paire',
                      value: params[:query],
                      data: {
                       refresh_list_target: 'searchInput',
