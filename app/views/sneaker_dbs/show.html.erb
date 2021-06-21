@@ -20,25 +20,25 @@
     </div>
   </div>
   <div class="sneaker-db-infos">
-    <% if %>
+    <% unless @sneaker_db.release_date.nil? %>
     <p class="sneaker-db-release">
       <span class="sneaker-db-content1">Date de sortie : </span>
       <span class="sneaker-db-content2"><%= @sneaker_db.release_date.strftime("%d/%m/%Y") %></span>
     </p>
     <% end %>
-    <% if %>
+    <% unless @sneaker_db.price_cents.nil? %>
     <p class="sneaker-db-retail-price">
       <span class="sneaker-db-content1">Prix retail : </span>
       <span class="sneaker-db-content2"><%= @sneaker_db.price_cents %>€</span>
     </p>
     <% end %>
-    <% if  %>
+    <% if %>
     <p class="sneaker-db-average-price">
       <span class="sneaker-db-content1">Prix moyen : </span>
       <span class="sneaker-db-content2"><%= 10 %>€</span>
     </p>
     <% end %>
-    <% if  %>
+    <% unless @sneaker_db.style.nil? %>
     <p class="sneaker-db-color">
       <span class="sneaker-db-content1">Code couleur : </span>
       <span class="sneaker-db-content2"><%= @sneaker_db.style %></span>
