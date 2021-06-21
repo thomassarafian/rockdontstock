@@ -37,10 +37,20 @@
 
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {
+  .sneaker-card .sneaker-price {
+    font-size: 12px;
+  }
+
+  .sneaker-card .sneaker-title {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
   .sneaker-cards {
     grid-template-columns: 1fr 1fr;
     grid-gap: 50px;
   }
+
 }
 
 // Small devices (landscape phones, 576px and up)
