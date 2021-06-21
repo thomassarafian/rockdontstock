@@ -14,3 +14,35 @@ body {
 	height: 25px;
 	background-color: #f8d7d9;
 }
+
+.btn-ghost {
+
+  color: #4A4A4A;
+  border: 1px solid #4A4A4A;
+  padding: 0px 2px;
+  margin-top: 15px;
+  border-radius: 50px;
+  font-weight: lighter;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.btn-ghost:hover {
+  opacity: 1;
+}
+
+
+.btn-flat {
+  margin-top: 15px;
+  color: white;
+  padding: 0px 2px;
+  border-radius: 4px;
+  background: #FFCD05;
+  transition: background 0.3s ease;
+}
+
+.btn-flat:hover {
+  background: #e6c233;
+  color: white;
+}
+

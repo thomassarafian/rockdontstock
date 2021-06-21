@@ -17,7 +17,12 @@
 .sneaker-card {
   display: flex;
   text-align: center;
+  flex-direction: column;
+  justify-content: space-between;
+
 }
+
+
 
 .sneaker-card_img {
   background-size: cover;
