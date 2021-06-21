@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_185202) do
+ActiveRecord::Schema.define(version: 2021_06_21_103924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,8 @@ ActiveRecord::Schema.define(version: 2021_06_09_185202) do
     t.bigint "user_id"
     t.integer "price_cents", default: 0, null: false
     t.integer "state"
+    t.bigint "sneaker_db_id", null: false
+    t.index ["sneaker_db_id"], name: "index_sneakers_on_sneaker_db_id"
     t.index ["user_id"], name: "index_sneakers_on_user_id"
   end
 
@@ -142,5 +144,6 @@ ActiveRecord::Schema.define(version: 2021_06_09_185202) do
   add_foreign_key "items", "users"
   add_foreign_key "orders", "sneakers"
   add_foreign_key "orders", "users"
+  add_foreign_key "sneakers", "sneaker_dbs"
   add_foreign_key "sneakers", "users"
 end

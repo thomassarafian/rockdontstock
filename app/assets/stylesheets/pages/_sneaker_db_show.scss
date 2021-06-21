@@ -43,7 +43,7 @@
   .sneaker-db-infos>p {
     line-height: 30px;
     font-weight: bold;
-    margin-right: 20px;
+    margin-right: 30px;
   }
   .sneaker-db-content1::after {
     content: "\a";
@@ -110,8 +110,8 @@
   .sneaker-db-img-url {
     width: 600px;
   }
-  .sneaker-db-infos {
-    // margin-top: -100px;
+  .sneaker-db-infos>p {
+    margin-right: 50px;
   }
   .sneaker-db-legit {
     width: 280px;
