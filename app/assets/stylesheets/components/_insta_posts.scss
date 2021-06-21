@@ -1,5 +1,4 @@
-.card-insta-post-username>a
-{
+.card-insta-post-username>a {
   color: black;
 }
 
@@ -11,14 +10,20 @@
 }
 
 
-.insta-posts.card-deck.card {
+.insta-posts>.card-deck>.card {
   align-items: center;
+  border: none;
+  display: flex;
+  align-content: space-around;
+  justify-content: space-between;
 }
 
 
 
 .insta-posts img {
-  max-width: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 200px;
 }
 
 .insta-posts-title {
