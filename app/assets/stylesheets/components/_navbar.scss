@@ -69,7 +69,6 @@
     margin-left: -50px !important;
     display: block;
   }
-
 }
 
 // Medium devices (tablets, 768px and up)
@@ -77,9 +76,10 @@
   .navbar-brand-phone {
     display:none;
   }
-  .dropdown-toggle.phone {
+  .toggler_icon_phone {
    display:none; 
   }
+  
   .glass_icon_phone
   {
     display:none;
