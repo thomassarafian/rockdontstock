@@ -219,6 +219,7 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
+    pagy (3.14.0)
     pg (1.2.3)
     pg_search (2.3.5)
       activerecord (>= 5.2)
@@ -376,6 +377,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
+  pagy (~> 3.5)
   pg (~> 1.1)
   pg_search (~> 2.3.0)
   pry-byebug

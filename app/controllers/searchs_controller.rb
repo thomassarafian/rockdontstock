@@ -1,6 +1,6 @@
 class SearchsController < ApplicationController
   def index
-    @sneaker_dbs = policy_scope(SneakerDb).order(release_date: :desc)
+    @pagy, @sneaker_dbs = pagy(policy_scope(SneakerDb).order(release_date: :desc))
 
     if params[:query].present?
       @sneaker_dbs = @sneaker_dbs.search_by_name_and_category(params[:query])

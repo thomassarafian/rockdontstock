@@ -13,4 +13,18 @@
   <% end %>
   <%= render 'list', sneaker_dbs: @sneaker_dbs %>
   </div>
+  <div class="pagy-nav" style="margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    font-size: 10px;">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
 </div>
+
+
+<style type="text/css">
+  .page-link {
+    padding: 0.5rem 0.5rem;
+  }
+
+</style>
