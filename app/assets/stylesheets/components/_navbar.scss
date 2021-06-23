@@ -1,3 +1,12 @@
+// .glass_icon_phone {
+//   margin-top: 100px;
+// }
+
+.glass-search-form {
+  display:none;
+}
+
+
 .dropdown-toggle::after {
   content: none;
 }
@@ -29,7 +38,24 @@
 }
 
 
+
 @media (min-width: 100px) and (max-width: 575px) {
+  .glass-search-form {
+    width: 100vh;
+    height: 100vh;
+    z-index: 1000;
+    overflow:auto;
+  } 
+
+  .popup-search {
+    background-color: white;
+    width: 100%;
+    margin: 0;
+  }
+  // .home-glass-search-form {
+  //   background-image: url("navbar/magnifying_glass_icon.svg");
+
+  // }
   .glass_icon_phone {
     transform: rotate(279deg);
   }

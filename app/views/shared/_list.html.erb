@@ -1,7 +1,7 @@
 <div data-refresh-list-target="list">
-  <div id="scroll" class="container">
+  <div id="scroll" class="popup-search" >
     <div class="sneaker-cards">
-      <% sneaker_dbs.all.limit(10).each do |sneaker| %>
+      <% sneaker_dbs.all.limit(30).each do |sneaker| %>
           <div class="sneaker-card">
             <%= link_to sneaker_db_path(sneaker), :style=>'color:#000000;' do %>
               <div class="sneaker-card_img">
@@ -10,9 +10,19 @@
             <% end %>
               <div class="sneaker-title"><strong><%= sneaker.name %></strong></div>
               <div class="sneaker-price">À partir de <%= sneaker.price_cents %>€</div>
-              <%#= link_to "Vend ce modèle", "#", class: "btn btn-flat" %>
           </div>
       <% end %>
     </div>  
   </div>
 </div>
+
+
+<style type="text/css">
+  .sneaker-title {
+    color: black;
+  }
+  .sneaker-price {
+    color: black;
+  }
+
+</style>

@@ -4,10 +4,17 @@ export default class extends Controller {
   static targets = [ "form", "list", "searchInput" ]
 
   update() {
+    // console.log("coucou");
+    // fetch('/searchs', { headers: { accept: "text/plain" } })
+    //  .then(response => response.text())
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
     const url = `${this.formTarget.action}?query=${this.searchInputTarget.value}`
     fetch(url, { headers: { 'Accept': 'text/plain' } })
       .then(response => response.text())
       .then((data) => {
+        // console.log(data)
         this.listTarget.outerHTML = data;
       })
     }

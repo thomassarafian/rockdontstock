@@ -39,9 +39,40 @@
   </ul>
 
   <div class="overlay"></div>
+
+  <!-- <div data-controller="hello" class="glass_icon_phone"> -->
+    <!-- <form action="" autocomplete="on"> -->
+      <!-- <input id="search" name="search" type="text" placeholder="Cherche ton modèle"> -->
+      <!-- <input id="search_submit" value="Rechercher" type="submit"> -->
+      <!-- <div data-target="hello.output"> -->
+      <!-- </div>  -->
+    <!-- </form> -->
   <div class="glass_icon_phone">
-    <a href="/searchs"><%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone") %></a>
+    <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone") %>
   </div>
+
+    <div data-controller="refresh-list" class="glass-search-form ">
+        <%= form_with url: root_path, method: :get, html: { class: '', data: { refresh_list_target: 'form' } } do |f| %>
+          <%= f.text_field :query,
+                         class: "form-control",
+                         id: "home-glass-search-form", 
+                         placeholder: 'Recherche ta paire',
+                         value: params[:query],
+                         data: {
+                          refresh_list_target: 'searchInput',
+                          action: "keyup->refresh-list#update",
+                         } %>
+        <% end %>
+        <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
+    </div>
+
+
+
+
+    <!-- <button class="btn-search"><%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone") %></button> -->
+    <!-- <input type="text" class="input-search" placeholder="Recherche ton modèle"> -->
+    
+  <!-- </div> -->
   
   <div class="icons">
     <div class="glass_icon">
@@ -54,15 +85,30 @@
 
 
 <script type="text/javascript">
-   $(document).ready(function() {
-  $('.navbarSideButton').on('click', function() {
-    $('#navbarSide').addClass('reveal');
-    $('.overlay').show();
+
+  $(document).ready(function() {
+    $('.navbarSideButton').on('click', function() {
+      $('#navbarSide').addClass('reveal');
+      $('.overlay').show();
+    });
+
+    $('.overlay, .navbar-side-item>a, .navbar-side-white-toggler').on('click', function(){
+      $('#navbarSide').removeClass('reveal');
+      $('.overlay').hide();
+    });
+
+    $('.glass_icon_phone').on('click', function() {
+      $('.toggler_icon_phone').hide();
+      $('.glass-search-form').show();
+      // $('.icon_phone').hide();
+    });
+    // $('.container, .banner').on('click', function() {
+      // $('.icon_phone').show("slow");
+      // $('.toggler_icon_phone').show("slow");
+    // });
+
   });
 
-  $('.overlay, .navbar-side-item>a, .navbar-side-white-toggler').on('click', function(){
-    $('#navbarSide').removeClass('reveal');
-    $('.overlay').hide();
-  });
-});
+
+
 </script>
