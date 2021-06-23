@@ -1,7 +1,7 @@
 <div data-refresh-list-target="list">
   <div id="scroll" class="popup-search" >
     <div class="sneaker-cards">
-      <% sneaker_dbs.all.limit(30).each do |sneaker| %>
+      <% sneaker_dbs.all.limit(5).each do |sneaker| %>
           <div class="sneaker-card">
             <%= link_to sneaker_db_path(sneaker), :style=>'color:#000000;' do %>
               <div class="sneaker-card_img">
@@ -13,11 +13,19 @@
           </div>
       <% end %>
     </div>  
+    <div class="sneaker-cards-btn">
+      <%= link_to(params[:query].nil? ? searchs_path : searchs_path + "?query=" + params[:query]) do %>
+        <div class="btn btn-dark">Tout voir</div>
+      <% end %>
+    </div>
   </div>
 </div>
 
 
 <style type="text/css">
+  .sneaker-cards-btn {
+    text-align: center;
+  }
   .sneaker-title {
     color: black;
   }

@@ -62,12 +62,20 @@
                           refresh_list_target: 'searchInput',
                           action: "keyup->refresh-list#update",
                          } %>
+          <%#= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone_input") %>
         <% end %>
         <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
     </div>
 
 
-
+    <!-- <style type="text/css">
+      .magnify_glass_icon_phone_input {
+        position: absolute;
+        left: 270px;
+        bottom: -50px;
+        /*top: 5px;*/
+      }
+    </style> -->
 
     <!-- <button class="btn-search"><%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone") %></button> -->
     <!-- <input type="text" class="input-search" placeholder="Recherche ton modèle"> -->
@@ -100,6 +108,8 @@
     $('.glass_icon_phone').on('click', function() {
       $('.toggler_icon_phone').hide();
       $('.glass-search-form').show();
+      $('.magnify_glass_icon_phone').hide();
+      $('.navbar').css('padding', 0);
       // $('.icon_phone').hide();
     });
     // $('.container, .banner').on('click', function() {
