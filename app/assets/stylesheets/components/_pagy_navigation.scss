@@ -1,0 +1,46 @@
+.pagy-nav {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.page-link {
+  padding: 0.5rem 0.5rem;
+}
+
+@media (min-width: 320px) {
+  
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+ 
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .pagy-nav {
+    font-size: 13px;
+  }
+  .page-link {
+    padding: 0.5rem 1rem;
+  } 
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .pagy-nav {
+    margin-top: 60px;
+    font-size: 15px;
+  }
+  .page-link {
+    padding: 0.5rem 1.2rem;
+  }
+}
+
