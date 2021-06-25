@@ -16,30 +16,30 @@
 					<%= link_to "Modifier", edit_user_registration_path(@user), class: "modify-infos-btn btn btn-outline-dark btn-sm" %>
 				</div>
 				<h5>Mes informations</h5>
-				<p>Nom : <%= full_name %></p>
-				<p>Email : <%= current_user.email %></p>
+				<p><strong>Nom : </strong><%= full_name %></p>
+				<p><strong>Email : </strong><%= current_user.email %></p>
 				<% if current_user.line1? %>
-					<p>Adresse : <%= current_user.line1 %></p>
+					<p><strong>Adresse : </strong><%= current_user.line1 %></p>
 				<% else %>
 					<p>Adresse : </p>
 				<% end %>
 				<% if current_user.city? %>		
-					<p>Ville : <%= current_user.city %></p>
+					<p><strong>Ville : </strong><%= current_user.city %></p>
 				<% else %>
 					<p>Ville : </p>
 				<% end %>
 				<% if current_user.postal_code? %>		
-					<p>Code postal : <%= current_user.postal_code %></p>
+					<p><strong>Code postal : </strong><%= current_user.postal_code %></p>
 				<% else %>
 					<p>Code postal : </p>
 				<% end %>
 				<% if current_user.date_of_birth? %>		
-					<p>Date de naissance : <%= current_user.date_of_birth.strftime("%d/%m/%Y") %></p>
+					<p><strong>Date de naissance : </strong><%= current_user.date_of_birth.strftime("%d/%m/%Y") %></p>
 				<% else %>
 					<p>Date de naissance : </p>
 				<% end %>
 				<% if current_user.phone? %>		
-					<p>Numéro de téléphone : <%= current_user.phone %></p>
+					<p><strong>Numéro de téléphone : </strong><%= current_user.phone %></p>
 				<% else %>
 					<p>Numéro de téléphone : <p>
 				<% end %>
@@ -47,14 +47,14 @@
 
 			<%= link_to user_items_path(current_user) do %>
 				<div class="my-items">
-					<h5>Mes achats & mes ventes</h5> 
+					<h5>Mes achats / ventes</h5> 
 					<%= image_tag "profil/my_purchases", class: "" %>
 				</div>
 			<% end %>
 
 			<%= link_to root_path do %>
 				<div class="my-sales">
-					<h5>Mes documents d'identité</h5> 
+					<h5>Mes documents</h5> 
 					<%= image_tag "profil/my_sales", class: "my-sales-icon" %>
 				</div>
 			<% end %>

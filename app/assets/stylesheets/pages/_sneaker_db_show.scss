@@ -59,7 +59,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
   }
   .sneaker-db-legit {
     margin-top: -40px;
@@ -67,8 +67,8 @@
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     padding: 20px 20px;
     right: 0px;
-    width: 280px;
-    height: 280px;
+    width: 260px;
+    height: 290px;
     text-align:center;
   }
   .sneaker-db-delivery {
@@ -77,7 +77,7 @@
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     padding: 20px 20px;
     right: 0px;
-    width: 280px;
+    width: 260px;
     height: 260px;
     text-align:center;
   }
@@ -98,7 +98,7 @@
     margin-top: 200px;
   }
   .container-sneaker-db {
-    margin: 0 50px;
+    margin: 0 30px;
   }
 }
 

@@ -37,7 +37,17 @@
   width: 40px;
 }
 
+.sneaker-cards-btn {
+  padding: 10px 0;
+  background-color: black;
+  width: 100%;
+  font-weight: bold;
+  font-size: 16px;
+}
 
+.sneaker-cards-btn>a {
+  color: white;
+}
 
 @media (min-width: 100px) and (max-width: 575px) {
   .glass-search-form {
@@ -53,10 +63,10 @@
     width: 100%;
     margin: 0;
   }
-  // .home-glass-search-form {
-  //   background-image: url("navbar/magnifying_glass_icon.svg");
+  #home-glass-search-form {
+    // position:fixed;
 
-  // }
+  }
   .glass_icon_phone {
     transform: rotate(279deg);
   }

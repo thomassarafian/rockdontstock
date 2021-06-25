@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   include Pundit
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	before_action :authenticate_user!
+  before_action :set_search_navbar
+
 
 	# Pundit: white-list approach.
 	after_action :verify_authorized, except: :index, unless: :skip_pundit?
@@ -17,6 +19,20 @@ class ApplicationController < ActionController::Base
 	# end
 
 	protected
+
+  def set_search_navbar
+    @pagy, @sneaker_dbs = pagy(SneakerDb.order(release_date: :desc))
+
+    if params[:query].present?
+      @sneaker_dbs = @sneaker_dbs.search_by_name_and_category(params[:query])
+    end
+
+    respond_to do |format|
+      format.html 
+      format.text { render partial: 'shared/list.html', locals: { sneaker_dbs: @sneaker_dbs }, pagination: view_context.pagy_nav(@pagy) }
+    end
+    
+  end
 
 	def configure_permitted_parameters
 		# For additional fields in app/views/devise/registrations/new.html.erb

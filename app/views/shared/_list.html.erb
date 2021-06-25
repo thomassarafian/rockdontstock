@@ -1,23 +1,54 @@
-<div data-refresh-list-target="list">
-  <div id="scroll" class="popup-search" >
-    <div class="sneaker-cards">
-      <% sneaker_dbs.all.limit(5).each do |sneaker| %>
-          <div class="sneaker-card">
-            <%= link_to sneaker_db_path(sneaker), :style=>'color:#000000;' do %>
-              <div class="sneaker-card_img">
-                <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
+<div class="list-sneakers-cards" data-refresh-list-target="list">
+  <!-- <div data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll"> -->
+  <!-- <div data-controller="infinite-scroll" > -->
+    <div data-target="infinite-scroll.entries">
+      <div class="popup-search" id="records_table">
+        <div class="sneaker-cards">
+          <% sneaker_dbs.all.limit(10).each do |sneaker| %>
+              <div class="sneaker-card" id="sneaker-card-search">
+                <%= link_to sneaker_db_path(sneaker), :style=>'color:#000000; align-items: center;' do %>
+                  <div class="sneaker-card_img">
+                    <%= image_tag(sneaker.img_url, style: 'object-fit: scale-down;width: 130px;justify-content: center;height: 130px;') %>
+                  </div>
+                <% end %>
+                  <div class="sneaker-title"><strong><%= sneaker.name %></strong></div>
+                  <div class="sneaker-price">À partir de <%= sneaker.price_cents %>€</div>
               </div>
-            <% end %>
-              <div class="sneaker-title"><strong><%= sneaker.name %></strong></div>
-              <div class="sneaker-price">À partir de <%= sneaker.price_cents %>€</div>
-          </div>
-      <% end %>
-    </div>  
-    <div class="sneaker-cards-btn">
-      <%= link_to(params[:query].nil? ? searchs_path : searchs_path + "?query=" + params[:query]) do %>
-        <div class="btn btn-dark">Tout voir</div>
-      <% end %>
+          <% end %>
+        </div>  
+      </div>
+    <!-- </div> -->
+
+    <!-- http://localhost:3000/?page=2 -->
+    <%#= form_with url: sneaker_dbs_path, method: :get, 'data-action': "infinite-scroll#displayMessage" do |f| %>
+      <%#= f.hidden_field 31980, 'data-infinite-scroll-target': "cursor" %>
+      <%#= f.submit "Load more" %>
+    <%# end %>
+    
+    <div class="sneaker-cards-button" data-action="click->infinite-scroll#displayMessage" style="color: black;">
+      OK OK OK 
     </div>
+    
+    <% if @pagy.page < @pagy.last %>
+      <div class="btn btn-primary"
+          data-controller="infinite-scroll"
+          data-infinite-scroll-next-url="<%= root_path(page: @pagy.page + 1) %>">
+          more
+      </div>
+    <% end %>
+
+
+    <!-- <div data-target="infinite-scroll.pagination">
+      <div class="pagy-nav" style="background-color:white;">
+        <%== pagy_bootstrap_nav(@pagy) %>
+      </div>
+    </div>
+  </div> -->
+        
+  <div class="sneaker-cards-btn">
+    <%= link_to(params[:query].nil? ? searchs_path : searchs_path + "?query=" + params[:query]) do %>
+      Tout voir
+    <% end %>
   </div>
 </div>
 
