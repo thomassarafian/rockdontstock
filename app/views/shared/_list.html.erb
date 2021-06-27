@@ -1,7 +1,7 @@
 <div class="list-sneakers-cards" data-refresh-list-target="list">
   <!-- <div data-controller="infinite-scroll" data-action="scroll@window->infinite-scroll#scroll"> -->
   <!-- <div data-controller="infinite-scroll" > -->
-    <div data-target="infinite-scroll.entries">
+    <!-- <div data-target="infinite-scroll.entries"> -->
       <div class="popup-search" id="records_table">
         <div class="sneaker-cards">
           <% sneaker_dbs.all.limit(10).each do |sneaker| %>
@@ -16,42 +16,24 @@
               </div>
           <% end %>
         </div>  
-      </div>
-    <!-- </div> -->
 
-    <!-- http://localhost:3000/?page=2 -->
-    <%#= form_with url: sneaker_dbs_path, method: :get, 'data-action': "infinite-scroll#displayMessage" do |f| %>
-      <%#= f.hidden_field 31980, 'data-infinite-scroll-target': "cursor" %>
-      <%#= f.submit "Load more" %>
-    <%# end %>
-    
-    <div class="sneaker-cards-button" data-action="click->infinite-scroll#displayMessage" style="color: black;">
-      OK OK OK 
-    </div>
+      </div>
+
     
     <% if @pagy.page < @pagy.last %>
-      <div class="btn btn-primary"
+      <div
           data-controller="infinite-scroll"
           data-infinite-scroll-next-url="<%= root_path(page: @pagy.page + 1) %>">
-          more
+          <div class="sneaker-cards-btn">
+        <%= link_to(params[:query].nil? ? searchs_path : searchs_path + "?query=" + params[:query]) do %>
+          Tout voir
+        <% end %>
+      </div>
       </div>
     <% end %>
 
-
-    <!-- <div data-target="infinite-scroll.pagination">
-      <div class="pagy-nav" style="background-color:white;">
-        <%== pagy_bootstrap_nav(@pagy) %>
-      </div>
-    </div>
-  </div> -->
-        
-  <div class="sneaker-cards-btn">
-    <%= link_to(params[:query].nil? ? searchs_path : searchs_path + "?query=" + params[:query]) do %>
-      Tout voir
-    <% end %>
-  </div>
 </div>
-
+    
 
 <style type="text/css">
   .sneaker-cards-btn {

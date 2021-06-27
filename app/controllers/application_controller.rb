@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     @pagy, @sneaker_dbs = pagy(SneakerDb.order(release_date: :desc))
 
     if params[:query].present?
-      @sneaker_dbs = @sneaker_dbs.search_by_name_and_category(params[:query])
+      @sneaker_dbs = @sneaker_dbs.search_by_name_category_and_price_cents(params[:query])
     end
 
     respond_to do |format|

@@ -1,9 +1,10 @@
 class SearchsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index]
   def index
     @pagy, @sneaker_dbs = pagy(policy_scope(SneakerDb).order(release_date: :desc))
 
     if params[:query].present?
-      @sneaker_dbs = @sneaker_dbs.search_by_name_and_category(params[:query])
+      @sneaker_dbs = @sneaker_dbs.search_by_name_category_and_price_cents(params[:query])
     end
 
     respond_to do |format|

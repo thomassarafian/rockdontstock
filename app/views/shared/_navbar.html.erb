@@ -64,10 +64,20 @@
                          } %>
           <%#= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone_input") %>
         <% end %>
+        <div class="search-filter">
+          Filtres
+        </div>
         <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
     </div>
 
-
+    <style type="text/css">
+      .search-filter {
+        padding: 0;
+        color: black;
+        text-align: center;
+        background-color: yellow;
+      }      
+    </style>
     <!-- <style type="text/css">
       .magnify_glass_icon_phone_input {
         position: absolute;
