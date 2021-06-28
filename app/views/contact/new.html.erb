@@ -4,9 +4,9 @@
   <div class="container">
     <div class="phone-infos">
       <h2 class="phone-title">Téléphone</h2>
-      <p>Relation presse : <%= phone_to +33607643309, "+33607643309" %></p>
-      <p>Recrutement : <%= phone_to +33777659336, "+33777659336" %></p>
-      <p>Service client : <%= phone_to +33609236587, "+33609236587" %></p>
+      <p>Relation presse : <%= phone_to +33607643309, "+33 6 07 64 33 09" %></p>
+      <p>Recrutement : <%= phone_to +33777659336, "+33 7 77 65 93 36" %></p>
+      <p>Service client : <%= phone_to +33609236587, "+33 6 09 23 65 87" %></p>
     </div>
 
       <div class="contact-form">
@@ -42,11 +42,10 @@
   footer {
     display: none;
   }
-  .navbar-dark {
+  #navbar-light {
     background-color: black;
   }
-  #navbar-light {
-    display:none;
+  .icon, .icon_phone, .magnify_glass_icon_phone, .magnify_glass_icon, #sell_button,  .toggler_icon, .toggler_icon_phone {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(347deg) brightness(106%) contrast(101%);
   }
-
 </style>
