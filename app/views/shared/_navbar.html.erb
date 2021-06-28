@@ -67,20 +67,18 @@
       <!-- <div class="search-filter">
         Filtres
       </div> -->
-        <div class="laptop-search-list">
-          <%= render 'shared/laptop_search_navbar', sneaker_dbs: @sneaker_dbs %>
-        </div>
 
-      <div class="mobile-search-list">
+      <!-- <div class="laptop-search-list"> -->
         <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
-      </div>
+      <!-- </div> -->
+
+      <!-- <div class="mobile-search-list"> -->
+        <%#= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
+      <!-- </div> -->
   </div>
 
   
     <style type="text/css">
-      /*.laptop-search-list {
-        position: absolute;
-      }*/
       .search-filter {
         padding: 0;
         color: black;
@@ -130,19 +128,15 @@
 
     $('.glass_icon_phone').on('click', function() {
       $('.toggler_icon_phone').hide();
-      $('.glass-search-form').show();
-      $('.icon').hide();
+      $('.glass-search-form').show();      
       $('.magnify_glass_icon_phone').hide();
-      $('.mobile-search-list').show();
       $('.navbar').css('padding', 0);
       $('.navbar').css('position', 'fixed');
     });
 
     $('.glass_icon').on('click', function() {
       $('.glass_icon').hide();
-      $('.mobile-search-list').hide()
       $('.glass-search-form').show();
-      $('.laptop-search-list').show();
     });
 
   });

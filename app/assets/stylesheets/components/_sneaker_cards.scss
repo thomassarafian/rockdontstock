@@ -8,7 +8,6 @@
   margin-top: 10px;
 }
 
-
 .sneaker-card>a {
   display: flex;
   flex-direction: column;
@@ -56,13 +55,29 @@
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
   .sneaker-cards {
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 50px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 40px;
+  }
+  .sneaker-card .sneaker-price {
+    font-size: 10px;
+  }
+
+  .sneaker-card .sneaker-title {
+    font-size: 11px;
+    line-height: 13px;
   }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+  .sneaker-card .sneaker-price {
+    font-size: 11px;
+  }
+
+  .sneaker-card .sneaker-title {
+    font-size: 12px;
+    line-height: 13px;
+  }
   .sneaker-cards {
     grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 50px;

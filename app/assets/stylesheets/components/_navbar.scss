@@ -1,11 +1,6 @@
-// .glass_icon_phone {
-//   margin-top: 100px;
-// }
-
-.glass-search-form, .laptop-glass-search-form,  .laptop-search-list, .mobile-search-list {
+.glass-search-form {
   display:none;
 }
-
 
 .dropdown-toggle::after {
   content: none;
@@ -45,9 +40,6 @@
   font-size: 16px;
 }
 
-.sneaker-cards-btn>a {
-  color: white;
-}
 
 @media (min-width: 100px) {
   .glass-search-form {
@@ -85,27 +77,32 @@
 }
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {
- .icons {
-    display:none;
-  }
-  .navbar-brand
-  {
-    display:none; 
-  }
-  .navbar {
-    position: relative;
-  }
-  .navbar-brand-phone {
-    position: absolute;
-    left: 50%;
-    margin-left: -50px !important;
-    display: block;
-  }
-}
+// @media (min-width: 576px) {
+//    .glass-search-form {
+//     width: 100vh;
+//     height: 100vh;
+//     z-index: 1000;
+//     overflow:auto;
+//     margin-top: 47px;
+//   } 
+
+//   .popup-search {
+//     background-color: white;
+//     width: 100%;
+//     margin: 0;
+//   } 
+// }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+  .list-sneakers-cards {
+    height: 768px;
+    left: 0px;
+    right: 0px;
+    background-color: white;  
+    position: absolute;
+  }
+ 
   .glass-search-form {
     width: 400px;
     height: auto;
@@ -145,11 +142,16 @@
 }
 
 // Large devices (desktops, 992px and up)
-@media (min-width: 992px) {
-  
+@media (min-width: 1024px) {
+  .glass-search-form {
+    width: 600px;
+  } 
 }
 
 // Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
+  .glass-search-form {
+    width: 1000px;
+  } 
 }
 
