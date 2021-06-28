@@ -48,17 +48,19 @@
 
   <div data-controller="refresh-list" class="glass-search-form">
     <%= form_with url: root_path, method: :get, html: { class: '', data: { refresh_list_target: 'form' } } do |f| %>
-      <%= f.text_field  :query,
-                          class: "form-control",
-                          id: "home-glass-search-form", 
-                          placeholder: 'Recherche ta paire',
-                          value: params[:query],
-                          data: {
-                            refresh_list_target: 'searchInput',
-                            action: "keyup->refresh-list#update",
-                          } %>
-        <%#= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone_input") %>
-      <% end %>
+      <div class="input-glass-search-form">
+        <%= f.text_field  :query,
+                            class: "",
+                            id: "home-glass-search-form", 
+                            placeholder: 'Recherche ta paire',
+                            value: params[:query],
+                            data: {
+                              refresh_list_target: 'searchInput',
+                              action: "keyup->refresh-list#update",
+                            } %>
+          <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone_input") %>
+        <% end %>
+      </div>        
       <!-- <div class="search-filter">
         Filtres
       </div>
