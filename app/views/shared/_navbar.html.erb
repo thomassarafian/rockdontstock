@@ -59,10 +59,10 @@
                           } %>
         <%#= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone_input") %>
       <% end %>
-      <div class="search-filter">
+      <!-- <div class="search-filter">
         Filtres
       </div>
-
+ -->
     <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
   </div>
 
@@ -111,9 +111,5 @@
       $('.glass_icon').hide();
       $('.glass-search-form').show();
     });
-
   });
-
-
-
 </script>
