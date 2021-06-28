@@ -22,16 +22,13 @@ class ApplicationController < ActionController::Base
 
   def set_search_navbar
     @pagy, @sneaker_dbs = pagy(SneakerDb.order(release_date: :desc))
-
     if params[:query].present?
       @sneaker_dbs = @sneaker_dbs.search_by_name_category_and_price_cents(params[:query])
     end
-
     respond_to do |format|
       format.html 
       format.text { render partial: 'shared/list.html', locals: { sneaker_dbs: @sneaker_dbs }, pagination: view_context.pagy_nav(@pagy) }
     end
-    
   end
 
 	def configure_permitted_parameters

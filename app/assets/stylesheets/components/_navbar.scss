@@ -2,7 +2,7 @@
 //   margin-top: 100px;
 // }
 
-.glass-search-form {
+.glass-search-form, .laptop-glass-search-form,  .laptop-search-list, .mobile-search-list {
   display:none;
 }
 
@@ -49,23 +49,19 @@
   color: white;
 }
 
-@media (min-width: 100px) and (max-width: 575px) {
+@media (min-width: 100px) {
   .glass-search-form {
     width: 100vh;
     height: 100vh;
     z-index: 1000;
     overflow:auto;
-    margin-top: 60px;
+    margin-top: 47px;
   } 
 
   .popup-search {
     background-color: white;
     width: 100%;
     margin: 0;
-  }
-  #home-glass-search-form {
-    // position:fixed;
-
   }
   .glass_icon_phone {
     transform: rotate(279deg);
@@ -110,6 +106,12 @@
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+  .glass-search-form {
+    width: 400px;
+    height: auto;
+    margin-top: 0px;
+  } 
+
   .navbar-brand-phone {
     display:none;
   }

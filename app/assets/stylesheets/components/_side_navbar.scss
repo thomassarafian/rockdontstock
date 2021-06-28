@@ -95,14 +95,14 @@
 
 @media (min-width: 768px) {
   .navbar-side {
+    right: 0;
+    left: auto;
+    width: 300px;
     -webkit-transform: translateX(100%);
     -ms-transform: translateX(100%);
     transform: translateX(100%);
     -webkit-transition: 400ms ease;
     transition: 400ms ease;
-    right: 0;
-    left: auto;
-    width: 300px;
   }
 
   .reveal {
