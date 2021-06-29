@@ -47,6 +47,9 @@ body>.contact-form-page {
 
 
 @media (min-width: 320px) {
+  .phone-infos>p {
+    font-size: 14px;
+  }
   .contact-form-btn {
     display: flex;
     justify-content: center;
@@ -62,11 +65,22 @@ body>.contact-form-page {
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-  
+  .phone-infos>h2 {
+    font-size: 22px;
+  }
+  .phone-infos>p {
+    font-size: 16px;
+  }
 }
 
 // Large devices (desktops, 902px and up)
 @media (min-width: 992px) {
+  .phone-infos>h2 {
+    font-size: 24px;
+  }
+  .phone-infos>p {
+    font-size: 18px;
+  }
   .contact-form {
     margin: 0 200px;
   }
@@ -74,11 +88,21 @@ body>.contact-form-page {
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
-  
+  .phone-infos>h2 {
+    font-size: 26px;
+  }
+  .phone-infos>p {
+    font-size: 20px;
+  }
 }
 
 @media (min-width: 1440px) {
-
+.phone-infos>h2 {
+    font-size: 28px;
+  }
+  .phone-infos>p {
+    font-size: 20px;
+  }
 }
 
 
