@@ -42,7 +42,6 @@
 
 
 @media (min-width: 100px) {
-  
   #home-glass-search-form {
     width: 100%;
     border: none;
@@ -111,28 +110,25 @@
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-
   #home-glass-search-form {
     width: 100%;
     background-color: #F2F2F2;
-    // border-radius: 11px;
-    // border: none;
   }
   .input-glass-search-form {
-    // padding:0 5px 0px 10px;
     background-color: #F2F2F2;
-    // border-radius: 11px;
     border: none;
-    // display: flex;
-    // justify-content: space-between;
   }
   
   .magnify_glass_icon_phone_input {
     width: 20px;
   }
-  
+  .list-sneakers-cards:first-of-type  {
+    margin-top: 10px;
+    padding-top: 50px;
+  }
+
   .list-sneakers-cards {
-    height: 768px;
+    height: 100vh;
     left: 0px;
     right: 0px;
     background-color: white;  
@@ -158,7 +154,7 @@
   }  
   .navbar-brand
   {
-    display:flex; 
+    display:flex;
   }
   .icons {
     display: flex;

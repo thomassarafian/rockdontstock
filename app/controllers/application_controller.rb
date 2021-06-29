@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
       @sneaker_dbs = @sneaker_dbs.search_by_name_category_and_price_cents(params[:query])
     end
     respond_to do |format|
-      format.html 
+      format.html
       format.text { render partial: 'shared/list.html', locals: { sneaker_dbs: @sneaker_dbs }, pagination: view_context.pagy_nav(@pagy) }
     end
   end
