@@ -38,7 +38,7 @@ class SneakersController < ApplicationController
   				redirect_to sneaker_path(@sneaker), notice: "Ta paire a bien été envoyé !"
   			else
   				# Redirection vers son compte pour pouvoir y apporter les modifications + pop up pour indiquer que sa chaussure a bien ete submit
-  				redirect_to edit_user_registration_path(current_user), notice: "Ta paire a bien été envoyé ! Complète ton adresse, ta date de naissance et ton numéro de téléphone pour que des acheteurs puissent te l'acheter"
+  				redirect_to edit_user_registration_path, notice: "Ta paire a bien été envoyé ! Complète ton adresse, ta date de naissance et ton numéro de téléphone pour que des acheteurs puissent te l'acheter"
   				#on créé pas automatiquement un compte connect ici car en realité si cote admin on valide la paire + le compte on créra un compte connect
   			end
   		end
