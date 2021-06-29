@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2021_06_21_103924) do
     t.bigint "user_id"
     t.integer "price_cents", default: 0, null: false
     t.integer "state"
-    t.bigint "sneaker_db_id", null: false
+    t.bigint "sneaker_db_id"
     t.index ["sneaker_db_id"], name: "index_sneakers_on_sneaker_db_id"
     t.index ["user_id"], name: "index_sneakers_on_user_id"
   end

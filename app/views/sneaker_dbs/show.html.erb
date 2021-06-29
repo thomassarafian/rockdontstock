@@ -67,7 +67,7 @@
         <div class="card">
           <%= link_to sneaker_path(sneaker), :style=>'color:#000000;' do %>
             <div class="card_img">
-              <%= image_tag(sneaker.photos[0], style: 'width: 100px; justify-content:center;') %>
+              <%#= image_tag(sneaker.photos[0], style: 'width: 100px; justify-content:center;') %>
             </div>
             <div class="title"><strong><%= sneaker.name %></strong></div>
             <div class="price">À partir de <%= sneaker.price_cents %>€</div>
