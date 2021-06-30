@@ -9,9 +9,11 @@
 .dropdown-toggle::after {
   content: none;
 }
+
 .dropdown-menu.show {
   background-color: black;
 }
+
 .dropdown-item:hover {
   color: white;
   background-color: transparent !important;
@@ -55,10 +57,6 @@
 .home-glass-search-form {
   display: flex;
   width: 250px;
-  // align-items: center;
-  // border: 1px solid black;
-  // border-radius: 11px;
-  // padding: 0 10px;
 }
 
 .hide-search-form {
@@ -136,7 +134,7 @@
   }
 }
 
-// Small devices (landscape phones, 576px and up)
+
 // @media (min-width: 576px) {
 //    .glass-search-form {
 //     width: 100vh;
@@ -153,7 +151,7 @@
 //   } 
 // }
 
-// Medium devices (tablets, 768px and up)
+
 @media (min-width: 768px) {
   .phone-hide-search-arrow {
     display: none;
@@ -228,7 +226,7 @@
   }
 }
 
-// Large devices (desktops, 992px and up)
+
 @media (min-width: 1024px) {
   .home-glass-search-form {
     width: 570px;
@@ -238,7 +236,7 @@
   } 
 }
 
-// Extra large devices (large desktops, 1200px and up)
+
 @media (min-width: 1440px) {
   .home-glass-search-form {
     width: 950px;
