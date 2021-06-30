@@ -47,20 +47,33 @@
 .testgrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  padding: 0 10px;
+  background-color: white;
+  padding-top: 10px; 
 }
 
 .home-glass-search-form {
   display: flex;
   width: 250px;
-  align-items: center;
+  // align-items: center;
+  // border: 1px solid black;
+  // border-radius: 11px;
+  // padding: 0 10px;
+}
+
+.hide-search-form {
+  align-self: center;
 }
 
 .phone-hide-search-arrow {
-  width:10px;
+  width:15px;
 }
 
 
 @media (min-width: 100px) {
+  .home-glass-search-form {
+    width: 270px;
+  }
   .phone-hide-search-arrow {
     display: block;
   }
@@ -69,12 +82,10 @@
     border: none;
   }
 
-  .input-glass-search-form {
+  .home-glass-search-form {
     padding:0 5px 0px 10px;
     border-radius: 11px;
     border: 1px solid black;
-    // display: flex;
-    // justify-content: space-between;
   }
 
   .magnify_glass_icon_phone_input {
@@ -113,6 +124,17 @@
     display: block;
   }
 }
+@media (min-width: 375px) {
+  .home-glass-search-form {
+    width: 320px;
+  }
+}
+
+@media (min-width: 425px) {
+  .home-glass-search-form {
+    width: 370px;
+  }
+}
 
 // Small devices (landscape phones, 576px and up)
 // @media (min-width: 576px) {
@@ -137,13 +159,17 @@
     display: none;
   }
   .hide-search-arrow {
+    width: 15px;
     display: block;
+  }
+  .testgrid {
+    padding: 0;
   }
   #home-glass-search-form {
     width: 100%;
     background-color: #F2F2F2;
   }
-  .input-glass-search-form {
+  .home-glass-search-form {
     background-color: #F2F2F2;
     border: none;
   }
@@ -204,6 +230,9 @@
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 1024px) {
+  .home-glass-search-form {
+    width: 570px;
+  }
   .glass-search-form {
     width: 600px;
   } 
@@ -211,6 +240,9 @@
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1440px) {
+  .home-glass-search-form {
+    width: 950px;
+  }
   .glass-search-form {
     width: 1000px;
   } 
