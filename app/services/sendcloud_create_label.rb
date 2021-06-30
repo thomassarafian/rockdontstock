@@ -6,14 +6,13 @@ class SendcloudCreateLabel
   def initialize(user, order)
     @user = user
     @order = order
-  end
-
-  def create_label
-    auth = {
+    @auth = {
       username: ENV["SENDCLOUD_API_KEY"],
       password: ENV["SENDCLOUD_SECRET_KEY"]
     }
+  end
 
+  def create_label
     first_parcel_data = {
       parcel: {
         name: "Nils Bonnavaud",
@@ -53,14 +52,14 @@ class SendcloudCreateLabel
          "https://panel.sendcloud.sc/api/v2/parcels",
          body: first_parcel_data.to_json,
          :headers => { 'Content-Type' => 'application/json' },
-         basic_auth: auth)
+         basic_auth: @auth)
     puts JSON.pretty_generate(JSON.parse(create_parcel.body))
     
 
     puts "=============================="
     
     File.open("app/assets/images/my_file.pdf", "wb") do |f| 
-      f.write HTTParty.get(create_parcel.parsed_response['parcel']['label']['label_printer'], basic_auth: auth).body
+      f.write HTTParty.get(create_parcel.parsed_response['parcel']['label']['label_printer'], basic_auth: @auth).body
     end
 
     label_file = open("app/assets/images/my_file.pdf")

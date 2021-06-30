@@ -1,3 +1,7 @@
+.phone-hide-search-arrow, .hide-search-arrow {
+  display: none;
+}
+
 .glass-search-form {
   display:none;
 }
@@ -40,18 +44,37 @@
   font-size: 16px;
 }
 
+.testgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.home-glass-search-form {
+  display: flex;
+  width: 250px;
+  align-items: center;
+}
+
+.phone-hide-search-arrow {
+  width:10px;
+}
+
 
 @media (min-width: 100px) {
+  .phone-hide-search-arrow {
+    display: block;
+  }
   #home-glass-search-form {
     width: 100%;
     border: none;
   }
+
   .input-glass-search-form {
     padding:0 5px 0px 10px;
     border-radius: 11px;
     border: 1px solid black;
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
   }
 
   .magnify_glass_icon_phone_input {
@@ -110,6 +133,12 @@
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+  .phone-hide-search-arrow {
+    display: none;
+  }
+  .hide-search-arrow {
+    display: block;
+  }
   #home-glass-search-form {
     width: 100%;
     background-color: #F2F2F2;

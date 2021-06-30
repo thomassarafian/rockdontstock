@@ -47,8 +47,12 @@
   </div>
 
   <div data-controller="refresh-list" class="glass-search-form">
-    <%= form_with url: root_path, method: :get, html: { class: '', data: { refresh_list_target: 'form' } } do |f| %>
-      <div class="input-glass-search-form">
+    <%= form_with url: root_path, method: :get, html: { class: 'testgrid', data: { refresh_list_target: 'form' } } do |f| %>
+      <div class="hide-search-form">
+        <%= image_tag("arrow_back.svg", class: "phone-hide-search-arrow") %>
+        <%= image_tag("arrow_back.svg", class: "hide-search-arrow") %>
+      </div>
+      <div class="home-glass-search-form">
         <%= f.text_field  :query,
                             class: "",
                             id: "home-glass-search-form", 
@@ -108,9 +112,24 @@
       $('.navbar').css('position', 'fixed');
     });
 
+    // $('.glass-search-form').show();
     $('.glass_icon').on('click', function() {
       $('.glass_icon').hide();
       $('.glass-search-form').show();
     });
+
+    $('.hide-search-arrow').on('click', function () {
+      $('.glass-search-form').hide();
+      $('.navbar').css('padding', '10px');
+      $('.navbar').css('position', 'relative');
+      $('toggler_icon, .glass_icon, #sell_button').show();
+    })
+
+    $('.phone-hide-search-arrow').on('click', function () {
+      $('.glass-search-form').hide();
+      $('.navbar').css('padding', '10px');
+      $('.navbar').css('position', 'relative');
+      $('img.toggler_icon_phone, .magnify_glass_icon_phone').show();
+    })
   });
 </script>
