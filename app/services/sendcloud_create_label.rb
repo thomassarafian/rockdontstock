@@ -45,46 +45,46 @@ class SendcloudCreateLabel
         quantity: 1,
       }
     }
-    # create_parcel = HTTParty.post(
-    #      "https://panel.sendcloud.sc/api/v2/parcels",
-    #      body: first_parcel_data.to_json,
-    #      :headers => { 'Content-Type' => 'application/json' },
-    #      basic_auth: @auth)
-    # puts JSON.pretty_generate(JSON.parse(create_parcel.body))
+    create_parcel = HTTParty.post(
+         "https://panel.sendcloud.sc/api/v2/parcels",
+         body: first_parcel_data.to_json,
+         :headers => { 'Content-Type' => 'application/json' },
+         basic_auth: @auth)
+    puts JSON.pretty_generate(JSON.parse(create_parcel.body))
     
 
-    # puts "=============================="
+    puts "=============================="
     
-    # File.open("app/assets/images/my_file.pdf", "wb") do |f| 
-    #   f.write HTTParty.get(create_parcel.parsed_response['parcel']['label']['label_printer'], basic_auth: @auth).body
-    # end
+    File.open("app/assets/images/my_file.pdf", "wb") do |f| 
+      f.write HTTParty.get(create_parcel.parsed_response['parcel']['label']['label_printer'], basic_auth: @auth).body
+    end
 
-    # label_file = open("app/assets/images/my_file.pdf")
-    # base_64 = Base64.encode64(label_file.read)
+    label_file = open("app/assets/images/my_file.pdf")
+    base_64 = Base64.encode64(label_file.read)
 
 
-    # variable = Mailjet::Send.create(messages: [{
-    #     'From'=> {
-    #         'Email'=> 'sarafianthomas@gmail.com',
-    #         'Name'=> 'Mailjet Pilot'
-    #     },
-    #     'To'=> [
-    #         {
-    #             'Email'=> 'thomassarafian@gmail.com',
-    #             'Name'=> 'passenger 1'
-    #         }
-    #     ],
-    #     'Subject'=> 'Your email coded plan!',
-    #     'TextPart'=> 'Dear passenger 1, welcome to Mailjet! May the delivery force be with you!',
-    #     'HTMLPart'=> '<h3>Dear passenger 1, welcome to <a href=\'https://www.mailjet.com/\'>Mailjet</a>!</h3><br />May the delivery force be with you!',
-    #     'Attachments'=> [
-    #         {
-    #             'ContentType'=> 'text/plain',
-    #             'Filename'=> 'app/assets/images/my_file.pdf',
-    #             'Base64Content'=> base_64
-    #         }
-    #     ]
-    # }])
+    variable = Mailjet::Send.create(messages: [{
+        'From'=> {
+            'Email'=> 'sarafianthomas@gmail.com',
+            'Name'=> 'Mailjet Pilot'
+        },
+        'To'=> [
+            {
+                'Email'=> 'thomassarafian@gmail.com',
+                'Name'=> 'passenger 1'
+            }
+        ],
+        'Subject'=> 'Your email coded plan!',
+        'TextPart'=> 'Dear passenger 1, welcome to Mailjet! May the delivery force be with you!',
+        'HTMLPart'=> '<h3>Dear passenger 1, welcome to <a href=\'https://www.mailjet.com/\'>Mailjet</a>!</h3><br />May the delivery force be with you!',
+        'Attachments'=> [
+            {
+                'ContentType'=> 'text/plain',
+                'Filename'=> 'app/assets/images/my_file.pdf',
+                'Base64Content'=> base_64
+            }
+        ]
+    }])
 
 
     # https://panel.sendcloud.sc/api/v2/labels/normal_printer/113233996?start_from=0
