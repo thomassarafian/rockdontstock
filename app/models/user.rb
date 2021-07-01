@@ -18,12 +18,11 @@ class User < ApplicationRecord
 
   has_many_attached :ids
 
+  after_update :create_connect_account
+
   # validate :correct_ids_type?
 
   # after_create :send_notification # a configurer avec mailjet 
-
-
-  after_update :create_connect_account
 
 
   # after_update :send_ids #, if: :ids_are_filled?

@@ -34,9 +34,11 @@ class OrdersController < ApplicationController
 	  sneaker = Sneaker.find(params[:sneaker_id])
 	  order = Order.create!(sneaker: sneaker, sneaker_name: sneaker.name, price_cents: sneaker.price_cents, state: 'En cours', user: current_user)
 	  authorize order
-		if !current_user.customer_id?
-			create_stripe_customer
-		end
+    Stripe::StripeCreateCustomer.new(current_user)
+    # raise
+		# if !current_user.customer_id?
+		# 	create_stripe_customer
+		# end
 		create_stripe_session(order, sneaker)
 	end
 
