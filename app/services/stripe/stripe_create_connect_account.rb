@@ -1,33 +1,26 @@
 module Stripe
   class StripeCreateConnectAccount
-    def initialize
-      
-
+    def initialize(user)
+      if attributes_are_filled?(user)
+        create_connect_account(user)
+      end
     end
-    def test_service
-      puts "ooook"
-      puts "ooook"
-      puts "ooook"
-      puts "ooook"
-      puts "ooook"
-      puts "ooook"
-      puts "ooook"
-      puts "ooook"
-      puts "ooook"
-      puts "ooook"        
-    end
-
-    def call(user)
-      raise
-      stripe_create_token
-    end
-
+    
     private
 
-    def create_connect_account
-      # user = self
-      create_token = stripe_create_token
+    def attributes_are_filled?(user)
+      if user.token_account.nil?
+        if user.email? && user.first_name? && user.last_name? && user.phone? && user.line1? && user.city? && user.postal_code? && user.date_of_birth.day.present? && user.date_of_birth.month.present? && user.date_of_birth.year.present?
+          return true
+        else
+          return false
+        end
+      end
+        return false
+    end
 
+    def create_connect_account(user)
+      create_token = stripe_create_token(user)
       user.update_column(:token_account, create_token.id)
 
       stripe_account = Stripe::Account.create({
@@ -48,8 +41,7 @@ module Stripe
       user.update_column(:person_id, stripe_account['individual'].id)
     end
 
-    def stripe_create_token
-      user = self
+    def stripe_create_token(user)
       return Stripe::Token.create({
         account: {
           business_type: "individual",
