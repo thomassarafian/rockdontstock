@@ -1,10 +1,8 @@
-
 <div class=" fixed-top navbar navbar-expand-sm navbar-light navbar-lewagon" id="navbar-light">
   <%= link_to "/", class: "navbar-brand" do %>
     <%= image_tag("logo.svg", style: 'width: 80%; height: 60px;object-fit: cover;', class: 'icon') %>
   <% end %>
   
-
   <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon_phone navbarSideButton', type: "button" %>  
   
   <%= link_to "/", class: "navbar-brand-phone" do %>
@@ -47,7 +45,7 @@
   </div>
 
   <div data-controller="refresh-list" class="glass-search-form">
-    <%= form_with url: root_path, method: :get, html: { class: 'testgrid', data: { refresh_list_target: 'form' } } do |f| %>
+    <%= form_with url: root_path, method: :get, html: { class: 'glass-search-form-input', data: { refresh_list_target: 'form' } } do |f| %>
       <div class="hide-search-form">
         <%= image_tag("arrow_back.svg", class: "phone-hide-search-arrow") %>
         <%= image_tag("arrow_back.svg", class: "hide-search-arrow") %>

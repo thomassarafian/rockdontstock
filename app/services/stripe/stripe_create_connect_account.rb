@@ -1,8 +1,22 @@
-# module Stripe
+module Stripe
   class StripeCreateConnectAccount
     def initialize
-      puts "ooook"
+      
+
     end
+    def test_service
+      puts "ooook"
+      puts "ooook"
+      puts "ooook"
+      puts "ooook"
+      puts "ooook"
+      puts "ooook"
+      puts "ooook"
+      puts "ooook"
+      puts "ooook"
+      puts "ooook"        
+    end
+
     def call(user)
       raise
       stripe_create_token
@@ -60,4 +74,4 @@
       })
     end
   end
-# end
+end
