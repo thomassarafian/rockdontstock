@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'searchs/index'
 	root to: "pages#home"
   resources :pages, only: [:index]

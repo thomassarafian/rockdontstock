@@ -35,28 +35,12 @@ class OrdersController < ApplicationController
 	  order = Order.create!(sneaker: sneaker, sneaker_name: sneaker.name, price_cents: sneaker.price_cents, state: 'En cours', user: current_user)
 	  authorize order
     Stripe::StripeCreateCustomer.new(current_user)
-    # raise
-		# if !current_user.customer_id?
-		# 	create_stripe_customer
-		# end
 		create_stripe_session(order, sneaker)
 	end
 
 	private
 
-
-	def create_stripe_customer
-		customer = Stripe::Customer.create({
-			name: current_user.first_name + " " + current_user.last_name,
-			email: current_user.email
-		})
-		current_user.update(customer_id: customer.id)
-	end
-
-
 	def create_stripe_session(order, sneaker)
-		Stripe.api_key = ENV['STRIPE_SECRET_TEST']
-
 		stripe_session = Stripe::Checkout::Session.create({
 	  	customer: current_user.customer_id,
 	    payment_method_types: ['card'],
