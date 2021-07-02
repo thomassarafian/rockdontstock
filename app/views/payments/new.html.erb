@@ -2,12 +2,13 @@
   <div class="row py-4">
     <div class="col-md-3"><%= image_tag @order.sneaker.photos[0].url, width: '100%'%></div> 
     <div class="col">
-
       <h1>Récapitulatif de la commande</h1>
-      <p>Achat de <strong><%= @order.sneaker.name %></strong> pour <strong><%= humanized_money_with_symbol @order.price %></strong></p> 
+      <p>
+        Achat de <strong><%= @order.sneaker.name %></strong> pour <strong><%= humanized_money_with_symbol @order.price %></strong>
+      </p> 
       
       <div class="adress_form" data-controller="address">
-        <%= simple_form_for(current_user, remote: true,data: {target: "address.form", id: current_user.id }) do |f| %>
+        <%= simple_form_for(current_user, remote: true, data: {target: "address.form", id: current_user.id }) do |f| %>
           <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
           <%= f.input :city, label: 'Ville', input_html: { data: { target: 'address.city'} },required: true %>
           <%= f.input :postal_code, label: 'Code Postal', input_html: { data: { target: 'address.postal_code'} }, required: true %>
@@ -30,7 +31,7 @@
 
       <%# end %>
       
-      <%= simple_form_for(current_user) do |f| %>
+      <%= simple_form_for(current_user, remote: true) do |f| %>
         <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
       <% end %>
 
@@ -41,6 +42,7 @@
           <p>
             Votre point relais : 
             <%= current_user.picker_data['name'] %> - <%= current_user.picker_data['house_number'] %> <%= current_user.picker_data['street'] %>, <%= current_user.picker_data['postal_code'] %> <%= current_user.picker_data['city'] %>
+          </p>
            <p>
             <strong>Résumé de la commande</strong><br>
             Commande : <%= @order.price %> €<br>
@@ -49,7 +51,6 @@
             -----------------------<br>
             <% total =  (@order.price + @order.shipping_cost + (@order.service / 2)) %>
             <strong>Total : <%= total %> € </strong>
-          </p>
           </p>
         <% end %>
       </div>
@@ -69,7 +70,7 @@
 
 
 <script type="text/javascript">
-  const paymentButton = document.getElementById('pay_rails');
+  const paymentButton = document.querySelector('.pay_button');
   if (paymentButton != undefined)
   {
     paymentButton.addEventListener('click', () => {

@@ -50,7 +50,7 @@ function openServicePointPicker(country, language, postalCode, carriers, service
     document.querySelector('#user_picker_data').value = JSON.stringify(servicePointObject, null, 2);
     if (document.querySelector('#user_picker_data').value != "none")
     {
-      document.forms[1].submit();
+      document.forms[2].submit();
     }
     const data_picker = `<p>Votre point relais : ${result.name} - ${result.house_number} ${result.street}, ${result.postal_code} ${result.city}</p>`;
     resultElem.innerHTML = data_picker;

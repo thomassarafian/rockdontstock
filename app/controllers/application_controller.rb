@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
     end
     respond_to do |format|
       format.html
+      format.json 
       format.text { render partial: 'shared/list.html', locals: { sneaker_dbs: @sneaker_dbs }, pagination: view_context.pagy_nav(@pagy) }
     end
   end
