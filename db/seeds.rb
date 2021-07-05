@@ -4,7 +4,7 @@ Order.destroy_all
 Sneaker.destroy_all
 SneakerDb.destroy_all
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'air_jordan_new.csv'))
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'air_jordan.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
 
