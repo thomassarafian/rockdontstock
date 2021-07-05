@@ -31,9 +31,13 @@ csv.each do |row|
   s.category = "Air Jordan"
 
   if row['img-fixed-src'] == nil
-  	s.img_url = row['img-slide-src']
+    s.img_url = row['img-slide-src']
   elsif row['img-slide-src'] == nil
-  	s.img_url = row['img-fixed-src']
+    if row['img-fixed-src'].start_with? "https://stockx-assets.imgix.net"
+      s.img_url = '/assets/default_avatar-79d97d5ae872c6df638f6670cc7ec8ce5425071b6f483e5be3cc9df1555dbc68.png'
+    else
+      s.img_url = row['img-fixed-src']
+    end
   end
   
 
