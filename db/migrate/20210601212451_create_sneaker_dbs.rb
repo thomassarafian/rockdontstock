@@ -7,7 +7,7 @@ class CreateSneakerDbs < ActiveRecord::Migration[6.1]
       t.monetize :price, currency: { present: false }
       t.date :release_date
       t.string :category
-      t.text :subcategory, array: true, default: []
+      t.string :subcategory
       t.string :img_url
 
       t.timestamps

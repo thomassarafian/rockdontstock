@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2021_06_21_103924) do
     t.integer "price_cents", default: 0, null: false
     t.date "release_date"
     t.string "category"
-    t.text "subcategory", default: [], array: true
+    t.string "subcategory"
     t.string "img_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

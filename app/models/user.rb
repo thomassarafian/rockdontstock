@@ -24,7 +24,6 @@ class User < ApplicationRecord
 
   # after_create :send_notification # a configurer avec mailjet 
 
-
   # after_update :send_ids #, if: :ids_are_filled?
 
   after_update :convert_picker_data_to_json, if: :picker_data_is_filled?

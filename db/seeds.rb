@@ -4,21 +4,24 @@ Order.destroy_all
 Sneaker.destroy_all
 SneakerDb.destroy_all
 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'air_jordan.csv'))
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'air_jordan_new.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
 
 count = 0
 csv.each do |row|
+  
   next if row['sneaker-title'] == "null" || row['sneaker-title'] == ""
+  next if row['sneaker-title'].include? "page"
+
   s = SneakerDb.new
+  
   s.name = row['sneaker-title']
-  s.style = row['style']
+  s.subcategory = row['subcategory']
   s.style = row['style']
   s.coloris = row['coloris']
   
   if row['price-retail'] == "null" || row['price-retail'] == "--" 
-  	puts row
   	s.price_cents = '0'
   else
 		s.price_cents = row['price-retail']  		
@@ -26,6 +29,7 @@ csv.each do |row|
 
   s.release_date = row['release-date']
   s.category = "Air Jordan"
+
   if row['img-fixed-src'] == nil
   	s.img_url = row['img-slide-src']
   elsif row['img-slide-src'] == nil
@@ -37,8 +41,10 @@ csv.each do |row|
   	count += 1
 		puts count
 	end
-end
 
+
+
+end
 
 
 
