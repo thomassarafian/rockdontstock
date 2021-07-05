@@ -1,9 +1,9 @@
 module Stripe
   class StripeCreateConnectAccount
     def initialize(user)
-      if attributes_are_filled?(user)
+      # if attributes_are_filled?(user)
         create_connect_account(user)
-      end
+      # end
     end
     
     private

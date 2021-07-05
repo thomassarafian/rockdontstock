@@ -169,6 +169,7 @@ class User < ApplicationRecord
   # end
 
   def create_connect_account
+    raise
     Stripe::StripeCreateConnectAccount.new(self)  
   end
 

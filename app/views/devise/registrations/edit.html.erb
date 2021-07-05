@@ -18,6 +18,10 @@
                         start_year: Time.now.year - 30,
                         end_year: Time.now.year - 10,
                         order: %i(day month year), label: 'Date de naissance' %>
+            
+            <%# if age(:date) < 13 %>
+              <%#=  flash[:notice] = "Stop!!" %>
+            <%# end %>
 
             <%= f.input :line1, label: 'Adresse' %>
             <%= f.input :city, label: 'Ville' %>
@@ -79,6 +83,33 @@
     </div>
   </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+<script>
+(function() {
+  var placesAutocomplete = places({
+    appId: '<%= ENV['ALGOLIA_APP_ID'] %>' ,
+    apiKey: '<%= ENV['ALGOLIA_API_KEY'] %>',
+    container: document.querySelector('#user_line1'),
+    language: 'fr', 
+    countries: ['fr'],
+    type: 'address'
+  });
+
+  placesAutocomplete.on('change', function(e) {
+    console.log(e.suggestion);
+    console.log(`Ville: ${e.suggestion.city}`);
+    console.log(`Code postal : ${e.suggestion.postcode}`);
+    console.log(`Adresse line1 : ${e.suggestion.name}`);
+  });
+
+})();
+
+</script>
+
+
+<%#= javascript_pack_tag "init_autocomplete" %>
 
 <%#
 token = params[:token]
