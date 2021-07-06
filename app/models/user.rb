@@ -4,7 +4,10 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, uniqueness: true
   validates :email, format: { with:  /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
-  validate :dob_check
+  validates :date_of_birth, presence: true
+  validate :date_of_birth, if: :age_verif, on: [:create, :update]
+
+
   # validates :iban, uniqueness: true # créé un bug 
 
   has_many :sneakers, dependent: :destroy
@@ -35,13 +38,15 @@ class User < ApplicationRecord
 
   private
 
-  def dob_check
+  def age_verif
+    if self.date_of_birth.nil?
+      return false
+    end
     dob = self.date_of_birth
     now = Time.now.utc.to_date
     age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
-    if age < 13
-      errors.add(:date_of_birth, :blank, message: "cannot be nil")
-      # errors.add(:date_of_birth, :blank, message:"Tu dois avoir minimum 13 ans pour te créer un compte")
+    if age <= 13
+      errors.add(:date_of_birth, " : Tu dois avoir au moins 13 ans")
     end
   end
 
