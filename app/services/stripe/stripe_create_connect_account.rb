@@ -7,18 +7,6 @@ module Stripe
     end
     
     private
-
-    def attributes_are_filled?(user)
-      if user.token_account.nil?
-        if user.email? && user.first_name? && user.last_name? && user.phone? && user.line1? && user.city? && user.postal_code? && user.date_of_birth.day.present? && user.date_of_birth.month.present? && user.date_of_birth.year.present?
-          return true
-        else
-          return false
-        end
-      end
-        return false
-    end
-
     def create_connect_account(user)
       create_token = stripe_create_token(user)
       user.update_column(:token_account, create_token.id)

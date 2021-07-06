@@ -1,10 +1,10 @@
-require 'json'
-
 class User < ApplicationRecord
+  require 'json'
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, uniqueness: true
   validates :email, format: { with:  /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
+  validate :dob_check
   # validates :iban, uniqueness: true # créé un bug 
 
   has_many :sneakers, dependent: :destroy
@@ -34,6 +34,16 @@ class User < ApplicationRecord
   
 
   private
+
+  def dob_check
+    dob = self.date_of_birth
+    now = Time.now.utc.to_date
+    age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+    if age < 13
+      errors.add(:date_of_birth, :blank, message: "cannot be nil")
+      # errors.add(:date_of_birth, :blank, message:"Tu dois avoir minimum 13 ans pour te créer un compte")
+    end
+  end
 
   def subscribe_to_newsletter
     SubscribeToNewsletterService.new(self).call
@@ -168,9 +178,31 @@ class User < ApplicationRecord
   #     return false
   # end
 
+  def age(dob)
+    now = Time.now.utc.to_date
+    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+  end
+  
+  def attributes_are_filled?(user)
+    if user.email? && user.first_name? && user.last_name? && user.phone? && user.line1? && user.city? && user.postal_code? && user.date_of_birth.day.present? && user.date_of_birth.month.present? && user.date_of_birth.year.present?
+      if age(user.date_of_birth) < 13
+        # raise
+        flash.now[:alert]  = "NOT OLD ENOUGH"
+        return false
+      elsif !user.token_account.nil?
+        return false
+      else
+        return true
+      end
+    else 
+      return false
+    end
+  end
+
   def create_connect_account
-    raise
-    Stripe::StripeCreateConnectAccount.new(self)  
+    if attributes_are_filled?(self)
+      Stripe::StripeCreateConnectAccount.new(self)  
+    end
   end
 
   def send_notification
