@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :email, format: { with:  /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
   validates :date_of_birth, presence: true
-  validate :date_of_birth, if: :age_verif, on: [:create, :update]
+  validate :date_of_birth, if: :user_over_13, on: [:create, :update]
 
 
   # validates :iban, uniqueness: true # créé un bug 
@@ -38,12 +38,13 @@ class User < ApplicationRecord
 
   private
 
-  def age_verif
-    if self.date_of_birth.nil?
-      return false
-    end
+  def user_over_13
     dob = self.date_of_birth
     now = Time.now.utc.to_date
+    if dob.nil? || dob.year < 1950 || dob.year >= now.year
+      errors.add(:date_of_birth, " : Format invalide")
+      return false
+    end
     age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
     if age <= 13
       errors.add(:date_of_birth, " : Tu dois avoir au moins 13 ans")
