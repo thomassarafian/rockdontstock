@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  get 'searchs/index'
 	root to: "pages#home"
   resources :pages, only: [:index]
-  get 'about' => 'pages#about'
-  resources :searchs, only: [:index]
+  
+  resources :searchs, only: [:index] #devient la page sneakerdbs
 
-  resources :contact, only: [:create, :new]
+  resource :contact, only: [:create, :new]
 	
   devise_for :users, controllers: { 
 		omniauth_callbacks: 'users/omniauth_callbacks',
@@ -13,10 +12,13 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
 	}
 	
-  resources :sneakers
-  resources :sneaker_dbs, only: [:index, :show]
+  resources :sneakers, only: [:index, :show, :edit, :update]
 
-	resources :users, only: [:show, :update], path: 'me' do
+  resources :sneaker_dbs, only: [:index, :show] do
+    resources :sneakers, only: [:new, :create]
+  end
+
+	resource :user, only: [:show, :update], path: 'me' do
     resources :items, only: [:index]
   	resources :transfers, only: [:index, :create]
   end
@@ -25,5 +27,9 @@ Rails.application.routes.draw do
 	  resources :payments, only: [:new]
 	end
 
-	# mount StripeEvent::Engine, at: '/stripe-webhooks'
+  get 'about' => 'pages#about'
+  
+  # get 'searchs/index' #-> ne sert a rien
+	
+  # mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

@@ -12,12 +12,14 @@ class SneakersController < ApplicationController
 	end
 	
 	def new
-    session[:sneaker_db_id] = params['sneaker_db_id']
+    @sneaker_db = SneakerDb.find(params['sneaker_db_id'])
+    # session[:sneaker_db_id] = params['sneaker_db_id'] 
 		@sneaker = Sneaker.new
 		authorize @sneaker
 	end
 	
 	def create
+    @sneaker_db = SneakerDb.find(params['sneaker_db_id'])
     if current_user == nil
       reset_session
       @sneaker = Sneaker.new(user_id: 1, name: params['sneaker']['name'],

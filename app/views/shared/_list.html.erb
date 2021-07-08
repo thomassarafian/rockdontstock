@@ -21,7 +21,7 @@
         data-controller="infinite-scroll"
         data-infinite-scroll-next-url="<%= root_path(page: @pagy.page + 1) %>">
         <div class="sneaker-cards-btn">
-      <%= link_to(params[:query].nil? ? searchs_path : searchs_path + "?query=" + params[:query]) do %>
+      <%= link_to(params[:query].nil? ? sneaker_dbs_path : sneaker_dbs_path + "?query=" + params[:query]) do %>
         Tout voir
       <% end %>
     </div>

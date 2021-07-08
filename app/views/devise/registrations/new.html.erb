@@ -23,13 +23,6 @@
                 hint: "Tu dois être majeur si tu veux vendre tes paires",
                 label: 'Date de naissance'
             %>
-
-          <%#= f.input :date_of_birth, as: :date,
-            required: true,
-            hint: "Tu dois être majeur si tu veux vendre tes paires",
-            start_year: Time.now.year - 50,
-            end_year: Time.now.year - 18,
-            order: %i(day month year), label: 'Date de naissance' %>
           
           <div id="iban-error"></div>
             <%= f.input :iban, label: "RIB", hint: "OPTIONNEL. Cela permettra de vérifier ton compte et t'envoyer de l'argent",  placeholder: 'FR1420041010050500013M02606' %>

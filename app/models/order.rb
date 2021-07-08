@@ -1,10 +1,20 @@
 class Order < ApplicationRecord
+  STATES = [
+    "En cours",
+    "Payé",
+    "Validé",
+    "Refusé",
+    #Status -> Sendcloud Webhook
+  ]
+
   belongs_to :user
   belongs_to :sneaker
 
   monetize :price_cents
   monetize :shipping_cost_cents
   monetize :service_cents
+
+  # validates :state, inclusion: { in: STATES } # Pareil pour les sneakers -> permet d'etre sur que l'order est tjrs le statut 
 
 
   after_create :shipping_price

@@ -54,7 +54,7 @@
 
 <div class="container">
   <div class="d-flex justify-content-center">
-    <%= link_to(new_sneaker_path(:sneaker_db_id => @sneaker_db )) do %>
+    <%= link_to(new_sneaker_db_sneaker_path(@sneaker_db)) do %>
       <button type="button" class="btn btn-dark">Vend ce modèle</button>
     <% end %>
   </div>

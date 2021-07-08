@@ -13,12 +13,7 @@
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
             <% end %>
-            
-            <%#= f.input :date_of_birth, as: :date,
-                        start_year: Time.now.year - 30,
-                        end_year: Time.now.year - 10,
-                        order: %i(day month year), label: 'Date de naissance' %>
-            
+
             <%= f.input :date_of_birth, as: :date, input_html: { 
                   min: "#{Time.now.year - 80}-#{Time.now.month}-#{Time.now.day}", 
                   max: "#{Time.now.year - 14}-#{Time.now.month}-#{Time.now.day}",
@@ -26,11 +21,6 @@
                 html5: true,
                 label: 'Date de naissance'
             %>
-
-            <%# if age(:date) < 13 %>
-              <%#=  flash[:notice] = "Stop!!" %>
-            <%# end %>
-
             <%= f.input :line1, label: 'Adresse' %>
             <%= f.input :city, label: 'Ville' %>
             <%= f.input :postal_code, label: 'Code Postal' %>
