@@ -1,5 +1,4 @@
 class ContactController < ApplicationController
-
   skip_before_action :authenticate_user!, only: [:new, :create]
 
   def new
@@ -40,22 +39,6 @@ class ContactController < ApplicationController
     #   }
     # }])
     
-    #   variable = Mailjet::Send.create(messages: [{
-    #   'From'=> {
-    #       'Email'=> 'sarafianthomas@gmail.com',
-    #       'Name'=> "Contact"
-    #   },
-    #   'To'=> [
-    #       {
-    #           'Email'=> "thomassarafian@gmail.com",
-    #           'Name'=> 'Thomas'
-    #       }
-    #   ],
-    #   'Subject'=> "Email provenant de #{@contact.email}",
-    #   'HTMLPart'=> "
-    #   <h4>Nom : #{@contact.name} | Email : #{@contact.email}</h4>
-    #   <h5>Message : </h5><p>#{@contact.message}</p>"
-    # }])
     
     # p variable.attributes[:messages]
     

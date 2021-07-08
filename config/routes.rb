@@ -2,9 +2,9 @@ Rails.application.routes.draw do
 	root to: "pages#home"
   resources :pages, only: [:index]
   
-  resources :searchs, only: [:index] #devient la page sneakerdbs
+  resource :contact, only: [:create, :new], controller: 'contact'
+  # resolve('Contact') { [:contact] }
 
-  resource :contact, only: [:create, :new]
 	
   devise_for :users, controllers: { 
 		omniauth_callbacks: 'users/omniauth_callbacks',

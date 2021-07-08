@@ -20,10 +20,11 @@
       <a class="side-link" href="/sneakers">Vends</a>
     </li>
     <li class="navbar-side-item">
-      <a class="side-link" href="/searchs">Tout voir</a>
+     <%= link_to("Tout voir", sneaker_dbs_path, class: "side-link") %>
     </li>
     <li class="navbar-side-item">
-      <a class="side-link" href="/contact/new">Nous contacter</a>
+      <%= link_to("Nous contacter", new_contact_path, class: "side-link") %>
+      <!-- <a class="side-link" href="/contacts/new">Nous contacter</a> -->
     </li>
     <div class="navbar-sign">
       <% if user_signed_in? %>

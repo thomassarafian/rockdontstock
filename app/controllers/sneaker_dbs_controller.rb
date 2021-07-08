@@ -4,7 +4,7 @@ class SneakerDbsController < ApplicationController
     @pagy, @sneaker_dbs = pagy(policy_scope(SneakerDb).order(release_date: :desc))
 
     if params[:query].present?
-      @sneaker_dbs = @sneaker_dbs.search_by_name_category_and_price_cents(params[:query])
+      @sneaker_dbs = @sneaker_dbs.search_by_name_category_sub_and_price(params[:query])
     end
 
     respond_to do |format|
