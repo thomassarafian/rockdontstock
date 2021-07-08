@@ -29,7 +29,6 @@ Rails.application.routes.draw do
 
   get 'about' => 'pages#about'
   
-  # get 'searchs/index' #-> ne sert a rien
 	
   # mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

@@ -8,8 +8,8 @@ class SneakerDbsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # Follow regular flow of Rails
-      format.text { render partial: 'list_sneakers_db', locals: { sneaker_dbs: @sneaker_dbs } }
+      format.html
+      format.text { render partial: 'sneaker_dbs/list_sneakers_db.html.erb', locals: { sneaker_dbs: @sneaker_dbs } }
     end
   end
 

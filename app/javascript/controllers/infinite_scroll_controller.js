@@ -9,7 +9,7 @@ export default class extends Controller {
 
   connect() {
     useIntersection(this, {
-      rootMargin: "100px",
+      rootMargin: "150px",
     });
   }
   appear() {

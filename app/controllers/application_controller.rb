@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include Pundit
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	before_action :authenticate_user!
-  before_action :set_search_navbar
+  before_action :set_search_navbar, unless: :skip_set_search_navbar?
 
 
 	# Pundit: white-list approach.
@@ -19,6 +19,14 @@ class ApplicationController < ActionController::Base
 	# end
 
 	protected
+
+  def skip_set_search_navbar?
+    if params[:controller] == "sneaker_dbs" && params[:action] == "index"
+      return true
+    else
+      return false
+    end
+  end
 
   def set_search_navbar
     @pagy, @sneaker_dbs = pagy(SneakerDb.order(release_date: :desc))

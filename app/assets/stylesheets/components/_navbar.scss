@@ -1,10 +1,9 @@
 .phone-hide-search-arrow, .hide-search-arrow, .glass-search-form {
   display: none;
 }
-
-// .glass-search-form {
-//   display:none;
-// }
+#home-glass-search-form:focus {
+  outline: none;
+}
 
 .dropdown-toggle::after {
   content: none;
