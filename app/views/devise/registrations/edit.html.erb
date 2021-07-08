@@ -1,12 +1,11 @@
 <div class="container">
   <div class="row row-cols-4 mt-5 justify-content-center">
     <div class="col-12 col-sm-9">
-        <h2>Modifier son profil</h2>
+        <h1>Modifier son profil</h1>
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'fileinfo' }) do |f| %>
           <%= f.error_notification %>
 
           <div class="form-inputs">
-            <h3>Mes informations</h3>
             <%= f.input :first_name, label: 'Prénom', autofocus: true  %>
             <%= f.input :last_name, label: 'Nom de famille' %>
             <%= f.input :email, required: true %>
@@ -38,6 +37,7 @@
                         hint: "Entrez votre mot de passe actuel pour confirmer les modifications",
                         required: true,
                         input_html: { autocomplete: "current-password" } %>
+            <!-- <div>
             <% if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
               <h3>Mon IBAN</h3>
               <div id="iban-error">
@@ -60,6 +60,7 @@
                 <%= f.input :ids, as: :file,  input_html: {multiple: true, id: 'front_adress'}, label: "Envoyer un justificatif de domicile" %>
               <% end %>
             <% end %>
+            </div> -->
           </div>
 
           <div class="form-actions">

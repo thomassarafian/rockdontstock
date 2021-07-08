@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   resources :pages, only: [:index]
   
   resource :contact, only: [:create, :new], controller: 'contact'
-  # resolve('Contact') { [:contact] }
-
 	
   devise_for :users, controllers: { 
 		omniauth_callbacks: 'users/omniauth_callbacks',

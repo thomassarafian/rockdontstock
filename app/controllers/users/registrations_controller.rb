@@ -77,7 +77,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     flash[:notice] = "Votre compte a bien été mise à jour !"
-    user_path(@user)
+    user_path
   end
 
 
