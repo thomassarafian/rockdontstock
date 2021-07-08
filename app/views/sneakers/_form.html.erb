@@ -1,5 +1,5 @@
 <%= simple_form_for(sneaker.new_record? ? [sneaker_db, sneaker] : sneaker) do |f| %>
-	<%= f.label :size, "Taille US" %>
+  <%= f.label :size, "Taille US" %>
 	<%= f.text_field :size, required: true %>
 
 	<%= f.label :price, "Prix" %>

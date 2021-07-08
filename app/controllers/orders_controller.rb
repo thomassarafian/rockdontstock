@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
   	@order = current_user.orders.find(params[:id])
   	authorize @order
     @order.update(state: "Payé")
-  	current_stripe_session = retrieve_stripe_session
+  	# current_stripe_session = retrieve_stripe_session
     
 		SendcloudCreateLabel.new(current_user, @order).create_label
 
@@ -31,11 +31,12 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-	  sneaker = Sneaker.find(params[:sneaker_id])
-	  order = Order.create!(sneaker: sneaker, sneaker_name: sneaker.name, price_cents: sneaker.price_cents, state: 'En cours', user: current_user)
-	  authorize order
+	  @sneaker = Sneaker.find(params[:sneaker_id])
+    @sneaker_db = SneakerDb.find(@sneaker.sneaker_db_id)
+	  @order = Order.create!(sneaker: @sneaker, sneaker_name: @sneaker_db.name, price_cents: @sneaker.price_cents, state: 'En cours', user: current_user)
+	  authorize @order
     Stripe::StripeCreateCustomer.new(current_user)
-		create_stripe_session(order, sneaker)
+		create_stripe_session(@order, @sneaker)
 	end
 
 	private
@@ -47,10 +48,10 @@ class OrdersController < ApplicationController
 	    line_items: [{
 	    	price_data: {
 	    		product_data: {
-	      		name: sneaker.name,
-	    			images: [sneaker.photos[0].url],
+	      		name: @sneaker_db.name,
+	    			images: [@sneaker.photos[0].url],
 	    		},
-	    		unit_amount: order.price_cents + order.shipping_cost_cents + (order.service_cents / 2),
+	    		unit_amount: @order.price_cents + @order.shipping_cost_cents + (@order.service_cents / 2),
 	      	currency: "EUR",
 	    	},
 	    	quantity: 1,
@@ -63,11 +64,11 @@ class OrdersController < ApplicationController
 		  #   },
 		  # },
 	    mode: 'payment',
-	    success_url: order_url(order),
-	    cancel_url: sneaker_url(sneaker)
+	    success_url: order_url(@order),
+	    cancel_url: sneaker_url(@sneaker)
 	  })
-	  order.update(checkout_session_id: stripe_session.id)
-	  redirect_to new_order_payment_path(order)
+	  @order.update(checkout_session_id: stripe_session.id)
+	  redirect_to new_order_payment_path(@order)
 	end
 
 	def retrieve_stripe_session

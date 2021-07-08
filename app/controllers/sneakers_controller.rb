@@ -13,6 +13,7 @@ class SneakersController < ApplicationController
 	
 	def new
     @sneaker_db = SneakerDb.find(params['sneaker_db_id'])
+    # raise
     # session[:sneaker_db_id] = params['sneaker_db_id'] 
 		@sneaker = Sneaker.new
 		authorize @sneaker
@@ -31,7 +32,7 @@ class SneakersController < ApplicationController
       session[:sneaker_session_id] = @sneaker.id
       redirect_to new_user_session_path, notice: "Tu dois être connecté pour que nous puissions vérifier ta paire"
     elsif user_signed_in?
-      @sneaker = current_user.sneakers.new(sneaker_db_id: session[:sneaker_db_id])
+      @sneaker = current_user.sneakers.new(sneaker_db_id: @sneaker_db.id)
       @sneaker.update(sneaker_params)
    		authorize @sneaker
   		if @sneaker.save
