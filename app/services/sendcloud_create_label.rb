@@ -38,7 +38,7 @@ class SendcloudCreateLabel
         from_city: @order.sneaker.user.city,
         from_postal_code: @order.sneaker.user.postal_code,
         from_country: "FR",
-        from_telephone: "0606860076", #@order.sneaker.user.phone? ? @order.sneaker.user.phone : "",
+        from_telephone: @order.sneaker.user.phone, #"0606860076", #@order.sneaker.user.phone? ? @order.sneaker.user.phone : "",
         from_email: @order.sneaker.user.email,
         total_order_value_currency: "EUR",
         total_order_value: @order.sneaker.price_cents / 100,

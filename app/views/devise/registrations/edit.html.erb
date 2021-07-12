@@ -21,15 +21,17 @@
                 label: 'Date de naissance'
             %>
             
-            <%#= f.label :line1, "Adresse" %>
-            <!-- <div data-controller="algolia-autocomplete-address"> -->
-              <%= f.input :line1, label: "Adresse" %>
-            <!-- </div> -->
+            <%= f.input :line1, label: "Adresse" %>
             <%= f.input :line1, as: :hidden %>
             <%= f.input :city, as: :hidden %>
             <%= f.input :postal_code, as: :hidden %>
 
-            <%= f.input :phone, label: 'Numéro de téléphone' %>
+              <%= f.input :phone, label: "Numéro de téléphone", input: false  %>
+            <div class="form-phone-num">
+              <p class="france-phone">+33</p>
+              <%= f.input :phone, label: false, as: :tel, required: true, placeholder: "6 06 06 06 06" %>
+            </div>
+
             <%= f.input :password, label: 'Nouveau mot de passe',
                         hint: "Ne pas remplir si vous ne voulez pas modifier votre mot de passe",
                         required: false,
@@ -88,6 +90,22 @@
   </div>
 </div>
 
+<style type="text/css">
+  #user_phone {
+    padding-right: 250px;
+  }
+  .tel.optional  {
+    margin-bottom: 0.3rem;
+  }
+
+  .form-phone-num {
+    display: flex;
+    align-items: center;
+  }
+  .france-phone {
+    margin-right: 10px;
+  }
+</style>
 
 <%= javascript_pack_tag "algolia_autocomplete_address" %>
 

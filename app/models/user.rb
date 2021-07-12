@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, uniqueness: true
   validates :email, format: { with:  /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
+  validates :phone,length: {minimum: 9, maximum: 10}, format: { with: /^[0-9]*$/, multiline: true  }
   validates :date_of_birth, presence: true
   validate :date_of_birth, if: :user_over_13, on: [:create, :update]
 
@@ -21,6 +22,7 @@ class User < ApplicationRecord
 
   has_many_attached :ids
 
+  after_update :format_phone_number
   after_update :create_connect_account
 
   # validate :correct_ids_type?
@@ -37,6 +39,10 @@ class User < ApplicationRecord
   
 
   private
+
+  def format_phone_number
+    self.phone = "+33#{self.phone}"
+  end
 
   def user_over_13
     dob = self.date_of_birth

@@ -2,6 +2,7 @@ module Stripe
   class StripeCreateConnectAccount
     def initialize(user)
       # if attributes_are_filled?(user)
+      # raise
         create_connect_account(user)
       # end
     end
@@ -37,7 +38,7 @@ module Stripe
             email: user.email,
             first_name: user.first_name,
             last_name: user.last_name,
-            phone: "+33606860076",
+            phone: user.phone,
             address: {
               line1: user.line1,
               city: user.city,
