@@ -5,10 +5,8 @@
 	<%= f.label :price, "Prix" %>
 	<%= f.text_field :price, required: true %>
 
-	<%#= f.label :condition, "Condition" %>
 	<%= f.input :condition, collection: 1..10, required: true %>
 
-	<%#= f.label :box, "Box" %>
 	<%= f.input :box, collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true %>
 
 	<%= f.label :extras, "Extras" %>
