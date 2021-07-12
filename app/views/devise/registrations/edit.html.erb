@@ -89,33 +89,7 @@
 </div>
 
 
-<script type="text/javascript">
-  let placesAutocomplete = places({
-      appId: '<%= ENV['ALGOLIA_APP_ID'] %>',
-      apiKey: '<%=  ENV['ALGOLIA_API_KEY'] %>',
-      container: document.querySelector('#user_line1'),
-      language: 'fr', 
-      countries: ['fr'],
-      type: 'address'
-    });
-
-    // let cityInput = document.querySelector("#user_city");
-    // let postalCodeInput = document.querySelector("#user_postal_code");
-    // let line1Input = document.querySelector("#user_line1");
-    
-    placesAutocomplete.on('change', function(e) {
-      $('input[type=hidden]#user_city').val(e.suggestion.city);
-      $('input[type=hidden]#user_postal_code').val(e.suggestion.postcode);
-      $('input[type=hidden]#user_line1').val(e.suggestion.name);
-      console.log(e.suggestion);
-      console.log(`Ville: ${e.suggestion.city}`);
-      console.log(`Code postal : ${e.suggestion.postcode}`);
-      console.log(`Adresse line1 : ${e.suggestion.name}`);
-    });
-
-</script>
-
-<%#= javascript_pack_tag "init_autocomplete" %>
+<%= javascript_pack_tag "algolia_autocomplete_address" %>
 
 <%#
 token = params[:token]
