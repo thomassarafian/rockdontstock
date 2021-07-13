@@ -22,7 +22,6 @@ class User < ApplicationRecord
 
   has_many_attached :ids
 
-  after_update :format_phone_number
   after_update :create_connect_account
 
   # validate :correct_ids_type?
@@ -39,10 +38,6 @@ class User < ApplicationRecord
   
 
   private
-
-  def format_phone_number
-    self.phone = "+33#{self.phone}"
-  end
 
   def user_over_13
     dob = self.date_of_birth
@@ -198,7 +193,6 @@ class User < ApplicationRecord
   def attributes_are_filled?(user)
     if user.email? && user.first_name? && user.last_name? && user.phone? && user.line1? && user.city? && user.postal_code? && user.date_of_birth.day.present? && user.date_of_birth.month.present? && user.date_of_birth.year.present?
       if age(user.date_of_birth) < 13
-        # raise
         flash.now[:alert]  = "NOT OLD ENOUGH"
         return false
       elsif !user.token_account.nil?

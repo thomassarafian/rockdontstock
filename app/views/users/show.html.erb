@@ -39,7 +39,7 @@
 					<p>Date de naissance : </p>
 				<% end %>
 				<% if current_user.phone? %>		
-					<p><strong>Numéro de téléphone : </strong><%= current_user.phone %></p>
+					<p><strong>Numéro de téléphone : </strong>+33 <%= format_phone_number(current_user.phone) %></p>
 				<% else %>
 					<p>Numéro de téléphone : <p>
 				<% end %>

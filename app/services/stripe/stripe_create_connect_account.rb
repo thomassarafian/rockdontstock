@@ -38,7 +38,7 @@ module Stripe
             email: user.email,
             first_name: user.first_name,
             last_name: user.last_name,
-            phone: user.phone,
+            phone: "+33#{user.phone}",
             address: {
               line1: user.line1,
               city: user.city,

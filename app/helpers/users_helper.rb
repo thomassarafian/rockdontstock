@@ -11,6 +11,12 @@ module UsersHelper
 	  now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
 	end
 
-
+  def format_phone_number(user_phone)
+    a = ""
+    user_phone.scan(/../) do |w|
+      a << "#{w} "
+    end
+    return a
+  end
 
 end
