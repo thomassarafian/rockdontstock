@@ -91,20 +91,17 @@
 </div>
 
 <style type="text/css">
-  #user_phone {
-    padding-right: 250px;
-  }
+
   .tel.optional  {
     margin-bottom: 0.3rem;
   }
-
   .form-phone-num {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: [first] 40px [line2] 100%;
+    margin-right: 40px;
+    align-items: baseline;
   }
-  .france-phone {
-    margin-right: 10px;
-  }
+  
 </style>
 
 <%= javascript_pack_tag "algolia_autocomplete_address" %>

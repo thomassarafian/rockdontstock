@@ -1,4 +1,4 @@
-<div class="list-sneakers-cards" data-refresh-list-target="list">
+<div class="list-sneakers-cards" data-refresh-list-target="list" data-filters-target="thelist">
   <div class="popup-search" id="records_table">
     <div class="sneaker-cards">
       <% sneaker_dbs.all.limit(10).each do |sneaker| %>
@@ -17,14 +17,12 @@
 
     
   <% if @pagy.page < @pagy.last %>
-    <div
-        data-controller="infinite-scroll"
-        data-infinite-scroll-next-url="<%= root_path(page: @pagy.page + 1) %>">
-        <div class="sneaker-cards-btn">
-      <%= link_to(params[:query].nil? ? sneaker_dbs_path : sneaker_dbs_path + "?query=" + params[:query]) do %>
-        Tout voir
-      <% end %>
-    </div>
+    <div data-controller = "infinite-scroll" data-infinite-scroll-next-url = "<%= root_path(page: @pagy.page + 1) %>">
+      <div class="sneaker-cards-btn">
+        <%= link_to(params[:query].nil? ? sneaker_dbs_path : sneaker_dbs_path + "?query=" + params[:query]) do %>
+          Tout voir
+        <% end %>
+      </div>
     </div>
   <% end %>
 

@@ -2,8 +2,6 @@ import Rails from '@rails/ujs';
 import { Controller } from "stimulus"
 import { useIntersection } from 'stimulus-use'
 
-
-
 export default class extends Controller {
   static targets = [ "entries", "pagination" ]
 
