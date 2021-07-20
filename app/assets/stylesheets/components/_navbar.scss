@@ -121,6 +121,23 @@
     display: block;
   }
 }
+
+@media (min-width: 320px) {
+  h5 {
+    color: black;
+  }
+  .dropdown-filter {
+    width: 100%;
+    margin:10px 0;
+  }
+  .search-filter {
+    padding: 0;
+    color: white;
+    text-align: center;
+    background-color: white;
+  }   
+}
+
 @media (min-width: 375px) {
   .home-glass-search-form {
     width: 320px;
@@ -152,6 +169,14 @@
 
 
 @media (min-width: 768px) {
+  .dropdown-filter {
+    margin-top: 15px;
+  }
+  .search-filter {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
   .phone-hide-search-arrow {
     display: none;
   }

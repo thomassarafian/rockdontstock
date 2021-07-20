@@ -58,14 +58,14 @@
       </div>
       <div class="home-glass-search-form">
         <%= f.text_field  :query,
-                            class: "",
-                            id: "home-glass-search-form", 
-                            placeholder: 'Recherche ta paire',
-                            value: params[:query],
-                            data: {
-                              refresh_list_target: 'searchInput',
-                              action: "keyup->refresh-list#update",
-                            } %>
+                          class: "",
+                          id: "home-glass-search-form", 
+                          placeholder: 'Recherche ta paire',
+                          value: params[:query],
+                          data: {
+                            refresh_list_target: 'searchInput',
+                            action: "keyup->refresh-list#update",
+                          } %>
           <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone_input") %>
         <% end %>
       </div>        
@@ -74,16 +74,15 @@
           <button class="dropdown-filter btn btn-secondary" type="button">Filtres</button>
             <div class="dropdown-filter-items">
               <h5 class="filter-label">MARQUES</h5>
-              <%= select_tag :category, 
-              options_for_select(brand),
-              include_blank: "Toute les marques",
-              class: "form-select",
-              data: { action: "filters#filter", target: "filters.filter" } %>
+              <%= select_tag :category, options_for_select(brand),
+                include_blank: "Toute les marques",
+                class: "form-select",
+                data: { action: "filters#filter", target: "filters.filter" } %>
 
               <h5 class="filter-label">PRIX</h5>
                 <%= select_tag :price,
                     options_for_select(
-                      [ ["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 300] ], params[:price]
+                      [ ["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301] ], params[:price]
                     ),
                 include_blank: "Tous les prix",
                 class: "form-select",
@@ -98,37 +97,12 @@
                 class: "form-select",
                 data: { action: "filters#filter", target: "filters.filter" } %>
             </div>
-
-       <!-- <div class="search-filter">
-        Filtres
-      </div> -->
-    <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
+        <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
       </div>
     </div>
   </div>
 
-  
-    <style type="text/css">
-      h5 {
-        color: black;
-      }
-      .dropdown-filter {
-        width: 100%;
-        margin-top: -20px;
-      }
-      .dropdown-filter{
-        margin:20px 0;
-        width: 100%;
-      }
-      .search-filter {
-        padding: 0;
-        color: white;
-        text-align: center;
-        background-color: white;
-      }      
-    </style>
-    
-  
+
   <div class="icons">
     <div class="glass_icon">
       <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %>

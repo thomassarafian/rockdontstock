@@ -44,35 +44,10 @@ class ApplicationController < ActionController::Base
       @sneaker_dbs = SneakerDb.order(:name)
     end
 
-
-    # if params[:query].present? && (params[:category].present? || params[:price].present? || params[:release_date].present?)
-      # @sneaker_dbs = @sneaker_dbs.search_by_name_category_sub_and_price(params[:query]).where(category: params[:category], price_cents: params[:price], release_date: params[:release_date])
-    # end
-    # if params[:query].present?
-    #   @sneaker_dbs = @sneaker_dbs.search_by_name_category_sub_and_price(params[:query])
-    # end
+    if params[:query].present?
+      @sneaker_dbs = @sneaker_dbs.search_by_name_category_sub_and_price(params[:query])
+    end
     
-    # if session[:filter_price].present? || params[:category].present? || params[:price].present? || params[:release_date].present?
-      # unless session[:filter_price].present?
-        # session[:filter_price] = params[:price]
-      # end
-      # @pagy, @sneaker_dbs = pagy(SneakerDb.where(category: " ", price_cents: 1..100).order(:name))
-      # @pagy, @sneaker_dbs = pagy(SneakerDb.where(price_cents: 1..).order(:name))
-      # if params[:price].present?
-      #   puts session[:filter_price]
-      #   puts params[:price]
-      #   puts get_price
-      #   puts get_price
-      #   puts get_price
-      #   puts get_price
-      #   @pagy, @sneaker_dbs = pagy(SneakerDb.where(price_cents: get_price).order(:name))
-      # end
-    # end
-    
-    # if params[:category].present?
-      # @sneaker_dbs = SneakerDb.where(category: params[:category], price_cents: params[:price], release_date: params[:release_date])
-      # raise
-    # end
     
     respond_to do |format|
       format.html

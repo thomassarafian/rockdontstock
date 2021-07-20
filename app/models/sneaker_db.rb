@@ -15,6 +15,8 @@ class SneakerDb < ApplicationRecord
       where(price_cents: 0..200)
     elsif price == "300"
       where(price_cents: 0..300)
+    elsif price == "301"
+      where(price_cents: 300..100000)
     end
   }
   scope :filter_by_category, -> (category) { where category: category }

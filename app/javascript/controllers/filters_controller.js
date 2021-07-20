@@ -8,7 +8,6 @@ export default class extends Controller {
     const url = `${window.location.pathname}?${this.params}`;
     Turbolinks.clearCache();
     this.after_filter(url)
-    // Turbolinks.visit(url);
   }
 
   after_filter(url) {
