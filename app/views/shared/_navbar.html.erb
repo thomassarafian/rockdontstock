@@ -71,7 +71,7 @@
       </div>        
       <div class="search-filter">
         <div class="filters" data-controller="filters">
-          <button class="dropdown-filter btn btn-secondary" type="button">Filtres</button>
+          <button class="dropdown-filter btn btn-dark" type="button">Filtres</button>
             <div class="dropdown-filter-items">
               <h5 class="filter-label">MARQUES</h5>
               <%= select_tag :category, options_for_select(brand),
@@ -96,6 +96,16 @@
                 include_blank: "Toute années",
                 class: "form-select",
                 data: { action: "filters#filter", target: "filters.filter" } %>
+              <h5 class="filter-label">TAILLES</h5>
+              <%= select_tag :size,
+                  options_for_select([
+                    ["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], ["5", 5],
+                    ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
+                    ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
+                    ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18] ], params[:size]),
+              include_blank: "Toute taille",
+              class: "form-select",
+              data: { action: "filters#filter", target: "filters.filter" } %>
             </div>
         <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
       </div>
@@ -112,6 +122,10 @@
   </div>
 </div>
   
+
+<style type="text/css">
+
+</style>
 
 <script type="text/javascript">
   $(document).ready(function() {

@@ -28,4 +28,8 @@ class SneakerDb < ApplicationRecord
     end
   }
   
+  scope :filter_by_size, -> (size) {
+    joins(:sneakers).where("sneakers.size = ?", size)
+ }
+
 end
