@@ -11,7 +11,7 @@
 <div id="scroll" class="container">
   <h2 style="font-style: italic;">Best sellers</h2>
   <div class="sneaker-cards">
-    <% SneakerDb.all.limit(10).each do |sneaker| %>
+    <% SneakerDb.all.limit(8).each do |sneaker| %>
         <div class="sneaker-card">
           <%= link_to sneaker_db_path(sneaker), :style=>'color:#000000;' do %>
             <div class="sneaker-card_img">
@@ -49,6 +49,14 @@
   </div>
   <div class="insta-posts">
     <div class="card-deck">
+      <div class="card">
+        <%= image_tag("insta/post7.jpeg", class: "card-img-top")  %> 
+        <p class="card-insta-post-username card-title">
+          <a href="https://www.instagram.com/sneakers_ink_/" target="_blank">@sneakers_ink_</a>
+          &nbsp;&
+          <a href="https://www.instagram.com/reputation_studios_/" target="_blank">@reputation_studios_</a>
+        </p>
+      </div>
       <div class="card">
         <%= image_tag("insta/post6.jpeg", class: "card-img-top")  %> 
         <p class="card-insta-post-username card-title">
@@ -96,6 +104,16 @@
     
     <div class="carousel-inner">
       <div class="carousel-item active">
+        <%= image_tag("insta/post7.jpeg", class: "d-block w-100")  %> 
+        <div class="insta-post-username carousel-caption ">
+          <p>
+            <a href="https://www.instagram.com/sneakers_ink_/" target="_blank">@sneakers_ink_</a>
+            &
+            <a href="https://www.instagram.com/reputation_studios_/" target="_blank">@reputation_studios_</a>
+          </p>
+        </div>
+      </div>
+      <div class="carousel-item">
         <%= image_tag("insta/post6.jpeg", class: "d-block w-100")  %> 
         <div class="insta-post-username carousel-caption ">
           <p><a href="https://www.instagram.com/keomx_/" target="_blank">@keomx_</a></p>
