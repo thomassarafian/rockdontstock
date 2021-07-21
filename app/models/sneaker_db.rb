@@ -20,13 +20,17 @@ class SneakerDb < ApplicationRecord
     end
   }
   scope :filter_by_category, -> (category) { where category: category }
-  scope :filter_by_release_date, -> (release_date) { 
-    if release_date == "2001"
-      where("extract(year from release_date) >= ? and extract(year from release_date) <= ?", "1900", "2001")
-    else
-      where('extract(year from release_date) = ?', release_date) 
-    end
+  scope :filter_by_condition, -> (condition) { 
+    joins(:sneakers).where("sneakers.condition = ?", condition) 
   }
+  
+  # scope :filter_by_release_date, -> (release_date) { 
+  #   if release_date == "2001"
+  #     where("extract(year from release_date) >= ? and extract(year from release_date) <= ?", "1900", "2001")
+  #   else
+  #     where('extract(year from release_date) = ?', release_date) 
+  #   end
+  # }
   
   scope :filter_by_size, -> (size) {
     joins(:sneakers).where("sneakers.size = ?", size)

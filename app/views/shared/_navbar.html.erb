@@ -88,12 +88,12 @@
                 class: "form-select",
                 data: { action: "filters#filter", target: "filters.filter" } %>
               
-              <h5 class="filter-label">DATE DE SORTIE</h5>
-                <%= select_tag :release_date,
+              <h5 class="filter-label">CONDITION</h5>
+                <%= select_tag :condition,
                     options_for_select(
-                      [ ["Avant 2001", 2001], ["2002", 2002], ["2003", 2003], ["2004", 2004] ], params[:release_date]
+                      [ ["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5], ["6", 6], ["7", 7], ["8", 8], ["9", 9], ["10", 10] ], params[:condition]
                     ),
-                include_blank: "Toute années",
+                include_blank: "Toute condition",
                 class: "form-select",
                 data: { action: "filters#filter", target: "filters.filter" } %>
                 

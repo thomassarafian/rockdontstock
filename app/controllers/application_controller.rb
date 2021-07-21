@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   
   def set_search_navbar
     @pagy, @sneaker_dbs = pagy(SneakerDb.order(:name))
-    if params[:category].present? || params[:price].present? || params[:release_date].present? || params[:size].present?
+    if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
       session[:filter_params] = params
       filtering_params(params).each do |key, value|
         @sneaker_dbs = @sneaker_dbs.public_send("filter_by_#{key}", value) if value.present?
@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
   end
 
   def filtering_params(params)
-    params.slice(:category, :price, :release_date, :size)
+    params.slice(:category, :price, :condition, :size)
   end
 
 
