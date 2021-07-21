@@ -1,4 +1,4 @@
- <% brand = ["Adidas", "Air+Jordan", "Nike", "Other+Brands", "Luxury+Brands", "Collections"]
+ <% brand = ["Adidas", "Air Jordan", "Nike", "Other Brands", "Luxury Brands", "Collections"]
     nike_categories = [ "Foamposite", "KD", "Kobe", "LeBron", "Air Force", "Air Max", "Basketball", "SB", "Other", "Sacai", "Presto", "Cortez", "Fear Of God", "OBJ", "Huarache", "Undercover", "Tailwind", "Stranger Things", "Daybreak", "React Element", "Cactus Plant Flea Market", "Comme Des Garcons", "Yeezy", "Zoomx"]
     adidas_categories = ["Ozweego", "Human Race", "Nite Jogger", "Ivy Park", "Raf Simons", "Yeezy", "Ultra Boost", "NMD", "Iniki", "Stan Smith", "EQT", "Basketball", "Running", "Skateboarding", "Soccer", "Other"]
     air_jordan_categories = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "Future", "Golf", "Legacy 312", "Off-White", "Packs", "Spizike", "Women", "Other"]       
@@ -68,51 +68,50 @@
                           } %>
           <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone_input") %>
         <% end %>
-      </div>        
-      <div class="search-filter">
-        <div class="filters" data-controller="filters">
-          <button class="dropdown-filter btn btn-dark" type="button">Filtres</button>
-            <div class="dropdown-filter-items">
-              <h5 class="filter-label">MARQUES</h5>
-              <%= select_tag :category, options_for_select(brand),
-                include_blank: "Toute les marques",
-                class: "form-select",
-                data: { action: "filters#filter", target: "filters.filter" } %>
+      </div>
+        <div class="search-filter">
+          <div class="filters" data-controller="filters">
+            <button class="dropdown-filter btn btn-dark" type="button">Filtres</button>
+            <div class="filter-and-sneakers">
+              <div class="dropdown-filter-items">
+                <button class="dropdown-filter-laptop btn btn-dark" type="button">Filtres</button>
+                <h5 class="filter-label">MARQUES</h5>
+                <%= select_tag :category, options_for_select(brand),
+                  include_blank: "Toute les marques",
+                  class: "form-select",
+                  data: { action: "filters#filter", target: "filters.filter" } %>
 
-              <h5 class="filter-label">PRIX</h5>
-                <%= select_tag :price,
-                    options_for_select(
-                      [ ["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301] ], params[:price]
-                    ),
-                include_blank: "Tous les prix",
-                class: "form-select",
-                data: { action: "filters#filter", target: "filters.filter" } %>
-              
-              <h5 class="filter-label">CONDITION</h5>
-                <%= select_tag :condition,
-                    options_for_select(
-                      [ ["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5], ["6", 6], ["7", 7], ["8", 8], ["9", 9], ["10", 10] ], params[:condition]
-                    ),
-                include_blank: "Toute condition",
-                class: "form-select",
-                data: { action: "filters#filter", target: "filters.filter" } %>
+                <h5 class="filter-label">PRIX</h5>
+                  <%= select_tag :price,
+                      options_for_select(
+                        [ ["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301] ], params[:price]
+                      ),
+                  include_blank: "Tous les prix",
+                  class: "form-select",
+                  data: { action: "filters#filter", target: "filters.filter" } %>
                 
+                <h5 class="filter-label">CONDITION</h5>
+                  <%= select_tag :condition,
+                      options_for_select(
+                        [ ["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5], ["6", 6], ["7", 7], ["8", 8], ["9", 9], ["10", 10] ], params[:condition]
+                      ),
+                  include_blank: "Toute condition",
+                  class: "form-select",
+                  data: { action: "filters#filter", target: "filters.filter" } %>
 
-
-
-
-              <h5 class="filter-label">TAILLES</h5>
-              <%= select_tag :size,
-                  options_for_select([
-                    ["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], ["5", 5],
-                    ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
-                    ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
-                    ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18] ], params[:size]),
-              include_blank: "Toute taille",
-              class: "form-select-size",
-              data: { action: "filters#filter", target: "filters.filter" } %>
+                <h5 class="filter-label">TAILLES</h5>
+                <%= select_tag :size,
+                    options_for_select([
+                      ["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], ["5", 5],
+                      ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
+                      ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
+                      ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18] ], params[:size]),
+                include_blank: "Toute taille",
+                class: "form-select-size",
+                data: { action: "filters#filter", target: "filters.filter" } %>
+              </div>
+              <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
             </div>
-        <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
       </div>
     </div>
   </div>
@@ -156,14 +155,19 @@
       // $('.glass-search-form').show();
     // $('.dropdown-filter-items').show();
     
-    $('.dropdown-filter').on('click', function() {
-      $('.dropdown-filter-items').slideToggle('fast');
-    });
-
     $('.glass_icon').on('click', function() {
       $('.glass_icon').hide();
       $('.glass-search-form').show();
     });
+    
+    if ($( window ).width() < 1024) {
+      $('.dropdown-filter').on('click', function() {
+        $('.dropdown-filter-items').slideToggle('fast');
+        $('.dropdown-filter-laptop').hide();
+      });
+    } else {
+      $('.dropdown-filter').hide();
+    }
 
     $('.hide-search-arrow').on('click', function () {
       $('.glass-search-form').hide();

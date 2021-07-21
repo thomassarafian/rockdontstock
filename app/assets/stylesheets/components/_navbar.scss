@@ -113,6 +113,7 @@
   }
   .navbar {
     position: relative;
+    align-items: center;
   }
   .navbar-brand-phone {
     position: absolute;
@@ -258,6 +259,33 @@
   .glass-search-form {
     width: 600px;
   } 
+
+  .dropdown-filter-items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 40px 0px 0 40px;
+    z-index: 1;
+  }
+  .filter-label {
+    padding: 10px 0;
+  }
+
+  button.dropdown-filter-laptop {
+    width: 100%;
+    text-align: left;
+  }
+  .filter-and-sneakers {
+    display: grid;
+    grid-template-columns: [first] 250px [line2] 1fr;
+    grid-gap: 20px;
+  }
+  .list-sneakers-cards {
+    position: relative;
+    width: 750px;
+    height: auto;
+  }
+
 }
 
 

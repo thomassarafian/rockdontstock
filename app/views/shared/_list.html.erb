@@ -1,7 +1,7 @@
 <div class="list-sneakers-cards" data-refresh-list-target="list" data-filters-target="thelist">
   <div class="popup-search" id="records_table">
     <div class="sneaker-cards">
-      <% sneaker_dbs.all.limit(10).each do |sneaker| %>
+      <% sneaker_dbs.all.limit(8).each do |sneaker| %>
           <div class="sneaker-card" id="sneaker-card-search">
             <%= link_to sneaker_db_path(sneaker), :style=>'color:#000000; align-items: center;' do %>
               <div class="sneaker-card_img">
