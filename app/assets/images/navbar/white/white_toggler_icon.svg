@@ -1,3 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="29.943" height="32.667" viewBox="0 0 29.943 32.667">
-  <path id="Path_38" data-name="Path 38" d="M3,4H32.943V7.843H3ZM6.327,32.823H29.616v3.843H6.327ZM3,23.216H32.943v3.843H3Zm3.327-9.608H29.616v3.843H6.327Z" transform="translate(-3 -4)" fill="#fff"/>
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="40.000000pt" height="40.000000pt" viewBox="0 0 512.000000 512.000000"
+ preserveAspectRatio="xMidYMid meet">
+
+<g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+fill="#ffffff" stroke="none">
+<path d="M980 3415 l0 -115 1580 0 1580 0 0 115 0 115 -1580 0 -1580 0 0 -115z"/>
+<path d="M980 2560 l0 -110 1580 0 1580 0 0 110 0 110 -1580 0 -1580 0 0 -110z"/>
+<path d="M980 1705 l0 -115 1580 0 1580 0 0 115 0 115 -1580 0 -1580 0 0 -115z"/>
+</g>
 </svg>
