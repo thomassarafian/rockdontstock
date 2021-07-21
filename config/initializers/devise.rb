@@ -11,8 +11,8 @@
 Devise.setup do |config|
   
   config.omniauth :facebook, ENV["FB_ID"], ENV["FB_SECRET"],
-    scope: 'email',
-    info_fields: 'email, first_name, last_name',
+    scope: 'email, user_birthday',
+    info_fields: 'email, first_name, last_name, birthday',
     image_size: 'square',  # 50x50, guaranteed ratio
     secure_image_url: true
   # The secret key used by Devise. Devise uses this key to generate
@@ -22,7 +22,7 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '6a2a063987e6ac7265424bb46f4ba404bd438ccbf1f2de2fc6c19dc233bc5f1334c38af4ba0f1d83a8fa319d84828c8f9390049d6eea5d52b3952b6025e78b57'
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"],
-    scope: 'userinfo.email, userinfo.profile',
+    scope: 'userinfo.email, userinfo.profile, user.birthday.read',
     image_size: 'square',  # 50x50, guaranteed ratio
     secure_image_url: true
 

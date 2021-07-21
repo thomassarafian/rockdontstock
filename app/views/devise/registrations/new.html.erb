@@ -7,11 +7,10 @@
         <%= f.error_notification %>
 
         <div class="form-inputs">
-          <%= f.input :first_name, label: 'Prénom' %>
+          <%= f.input :first_name, label: 'Prénom', autofocus: true %>
           <%= f.input :last_name, label: 'Nom de famille' %>
           <%= f.input :email,
                       required: true,
-                      autofocus: true,
                       input_html: { autocomplete: "email" }%>
           
           <%= f.input :date_of_birth, as: :date, input_html: { 
@@ -24,9 +23,6 @@
                 label: 'Date de naissance'
             %>
           
-          <div id="iban-error"></div>
-            <%= f.input :iban, label: "RIB", hint: "OPTIONNEL. Cela permettra de vérifier ton compte et t'envoyer de l'argent",  placeholder: 'FR1420041010050500013M02606' %>
-
           <%= f.input :password, label: "Mot de passe",
                       required: true,
                       hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
@@ -56,5 +52,3 @@
 
 </div>
 
-
-<%= javascript_pack_tag "iban_validator" %>

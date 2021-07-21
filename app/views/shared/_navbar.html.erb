@@ -96,6 +96,11 @@
                 include_blank: "Toute années",
                 class: "form-select",
                 data: { action: "filters#filter", target: "filters.filter" } %>
+                
+
+
+
+
               <h5 class="filter-label">TAILLES</h5>
               <%= select_tag :size,
                   options_for_select([
@@ -104,7 +109,7 @@
                     ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
                     ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18] ], params[:size]),
               include_blank: "Toute taille",
-              class: "form-select",
+              class: "form-select-size",
               data: { action: "filters#filter", target: "filters.filter" } %>
             </div>
         <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
@@ -148,8 +153,9 @@
       $('.dropdown-filter-items').hide();
     });
     
-
-
+      // $('.glass-search-form').show();
+    // $('.dropdown-filter-items').show();
+    
     $('.dropdown-filter').on('click', function() {
       $('.dropdown-filter-items').slideToggle('fast');
     });
