@@ -23,7 +23,7 @@
       <%= link_to "Mon compte", user_signed_in? ? user_path : user_session_path, class: "side-link" %>
     </li>
     <li class="navbar-side-item">
-      <a class="side-link" href="/sneakers">Vends</a>
+      <a class="side-link" href="/">Vendre</a>
     </li>
     <li class="navbar-side-item">
      <%= link_to("Tout voir", sneaker_dbs_path, class: "side-link") %>
@@ -116,19 +116,23 @@
     </div>
   </div>
 
-
   <div class="icons">
     <div class="glass_icon">
       <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %>
     </div>
-    <%= link_to('<button type="button" id="sell_button" class="btn btn-dark">Vends</button>'.html_safe, sneakers_path ) %>
+    <%= link_to('<button type="button" id="sell_button" class="btn btn-dark">Vensdre</button>'.html_safe, 
+    new_sneaker_db_sneaker_path(SneakerDb.first.id)) %>
     <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon navbarSideButton', type: "button" %>
   </div>
 </div>
   
 
 <style type="text/css">
-
+  @media (min-width: 992px)
+    .sneaker-cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 </style>
 
 <script type="text/javascript">

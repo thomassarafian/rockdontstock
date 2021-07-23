@@ -124,7 +124,7 @@
 }
 
 @media (min-width: 320px) {
-  h5 {
+  .dropdown-filter-items {
     color: black;
   }
   .dropdown-filter {
@@ -282,7 +282,7 @@
   }
   .list-sneakers-cards {
     position: relative;
-    width: 750px;
+    // width: 750px;
     height: auto;
   }
 

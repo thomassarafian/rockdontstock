@@ -40,8 +40,8 @@ class ApplicationController < ActionController::Base
       filtering_params(session[:filter_params]).each do |key, value|
         @sneaker_dbs = @sneaker_dbs.public_send("filter_by_#{key}", value) if value.present?
       end
-    else 
-      @sneaker_dbs = SneakerDb.order(:name)
+    elsif !params[:category].present? || !params[:price].present? || !params[:condition].present? || !params[:size].present?
+      reset_session
     end
 
     if params[:query].present?
