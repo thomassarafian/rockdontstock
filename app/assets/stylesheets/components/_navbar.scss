@@ -75,6 +75,7 @@
     display: block;
   }
   #home-glass-search-form {
+    background-color: #F2F2F2;
     width: 100%;
     border: none;
   }
@@ -82,7 +83,7 @@
   .home-glass-search-form {
     padding:0 5px 0px 10px;
     border-radius: 11px;
-    border: 1px solid black;
+    background-color: #F2F2F2;
   }
 
   .magnify_glass_icon_phone_input {
@@ -132,7 +133,7 @@
     margin:10px 0;
   }
   .search-filter {
-    padding: 0;
+    padding-top: 10px;
     color: white;
     text-align: center;
     background-color: white;
@@ -186,7 +187,7 @@
     display: block;
   }
   .glass-search-form-input {
-    padding: 0;
+    padding: 5px 10px 0;
   }
   #home-glass-search-form {
     width: 100%;

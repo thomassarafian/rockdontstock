@@ -75,13 +75,13 @@
             <div class="filter-and-sneakers">
               <div class="dropdown-filter-items">
                 <button class="dropdown-filter-laptop btn btn-dark" type="button">Filtres</button>
-                <h5 class="filter-label">MARQUES</h5>
+                <h5 class="filter-label">Marques</h5>
                 <%= select_tag :category, options_for_select(brand),
                   include_blank: "Toute les marques",
                   class: "form-select",
                   data: { action: "filters#filter", target: "filters.filter" } %>
 
-                <h5 class="filter-label">PRIX</h5>
+                <h5 class="filter-label">Prix</h5>
                   <%= select_tag :price,
                       options_for_select(
                         [ ["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301] ], params[:price]
@@ -90,7 +90,7 @@
                   class: "form-select",
                   data: { action: "filters#filter", target: "filters.filter" } %>
                 
-                <h5 class="filter-label">CONDITION</h5>
+                <h5 class="filter-label">Condition</h5>
                   <%= select_tag :condition,
                       options_for_select(
                         [ ["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5], ["6", 6], ["7", 7], ["8", 8], ["9", 9], ["10", 10] ], params[:condition]
@@ -99,7 +99,7 @@
                   class: "form-select",
                   data: { action: "filters#filter", target: "filters.filter" } %>
 
-                <h5 class="filter-label">TAILLES</h5>
+                <h5 class="filter-label">Tailles</h5>
                 <%= select_tag :size,
                     options_for_select([
                       ["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], ["5", 5],
@@ -120,8 +120,8 @@
     <div class="glass_icon">
       <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %>
     </div>
-    <%= link_to('<button type="button" id="sell_button" class="btn btn-dark">Vensdre</button>'.html_safe, 
-    new_sneaker_db_sneaker_path(SneakerDb.first.id)) %>
+    <%= link_to('<button type="button" id="sell_button" class="btn btn-dark">Vendre</button>'.html_safe, 
+    new_sneaker_path) %>
     <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon navbarSideButton', type: "button" %>
   </div>
 </div>

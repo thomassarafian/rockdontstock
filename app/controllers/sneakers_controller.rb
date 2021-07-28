@@ -12,7 +12,9 @@ class SneakersController < ApplicationController
 	end
 	
 	def new
-    @sneaker_db = SneakerDb.find(params['sneaker_db_id'])
+    if params['sneaker_db_id'].present?
+      @sneaker_db = SneakerDb.find(params['sneaker_db_id'])
+    end
     # raise
     # session[:sneaker_db_id] = params['sneaker_db_id'] 
 		@sneaker = Sneaker.new
@@ -20,7 +22,9 @@ class SneakersController < ApplicationController
 	end
 	
 	def create
-    @sneaker_db = SneakerDb.find(params['sneaker_db_id'])
+    if params['sneaker_db_id'].present?
+      @sneaker_db = SneakerDb.find(params['sneaker_db_id'])
+    end
     if current_user == nil
       reset_session
       @sneaker = Sneaker.new(user_id: 1, name: params['sneaker']['name'],

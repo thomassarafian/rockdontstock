@@ -13,12 +13,24 @@
 	<%= f.text_field :extras, required: true %>
 
   <%= f.input :photos, as: :file,
-  input_html: {multiple: true, class: "hidden", id: 'photo-input'},
+  input_html: {class: "hidden", id: 'photo-input0'},
+  label_html: { class: 'upload-photo' },
+  label: '📷 Upload a photo' %>
+
+  <%= f.input :photos, as: :file,
+  input_html: {class: "hidden", id: 'photo-input1'},
+  label_html: { class: 'upload-photo' },
+  label: '📷 Upload a photo' %>
+  
+  <%= f.input :photos, as: :file,
+  input_html: {class: "hidden", id: 'photo-input2'},
   label_html: { class: 'upload-photo' },
   label: '📷 Upload a photo' %>
 
 
-  <%= image_tag "", width: 300, class: "hidden", id: "photo-preview" %>
+  <%= image_tag "", width: 300, class: "hidden", id: "photo-preview0" %>
+  <%= image_tag "", width: 300, class: "hidden", id: "photo-preview1" %>
+  <%= image_tag "", width: 300, class: "hidden", id: "photo-preview2" %>
 
   <%= f.submit %>
 <% end %>
