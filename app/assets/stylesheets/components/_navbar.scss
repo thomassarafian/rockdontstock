@@ -1,3 +1,7 @@
+.dropdown-filter-laptop {
+  display: none;
+}
+
 .phone-hide-search-arrow, .hide-search-arrow, .glass-search-form {
   display: none;
 }
@@ -23,7 +27,7 @@
 }
 
 .navbar-lewagon {
-  justify-content: space-between;
+  // justify-content: space-between;
   background: white;
   height: 50px;
   color: white;
@@ -46,6 +50,7 @@
 }
 
 .glass-search-form-input {
+  margin-top: 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding: 0 10px;
@@ -66,8 +71,25 @@
   width:15px;
 }
 
+.profiler-results.profiler-left.profiler-top.profiler-no-controls {
+  display:none;
+}
 
 @media (min-width: 100px) {
+  .real-nav {
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    height: 40px;
+    background-color: white;
+    z-index: 11;
+    width: 100%;
+  }
+
+
   .home-glass-search-form {
     width: 270px;
   }
@@ -90,11 +112,11 @@
     width: 20px;
   }
   .glass-search-form {
-    width: 100vh;
+    position: fixed;
+    top: 0;
     height: 100vh;
     z-index: 1000;
     overflow:auto;
-    margin-top: 47px;
   } 
 
   .popup-search {
@@ -113,14 +135,14 @@
     display:none; 
   }
   .navbar {
-    position: relative;
+    position: sticky;
     align-items: center;
   }
   .navbar-brand-phone {
-    position: absolute;
-    left: 50%;
-    margin-left: -50px !important;
-    display: block;
+    // position: absolute;
+    // left: 50%;
+    // margin-left: -50px !important;
+    // display: block;
   }
 }
 
@@ -171,6 +193,17 @@
 
 
 @media (min-width: 768px) {
+  .real-nav {
+    display: none;
+  }
+  .nav-test {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: white;
+  }
+
+
   .dropdown-filter {
     margin-top: 15px;
   }
@@ -178,6 +211,7 @@
     position: absolute;
     left: 0;
     right: 0;
+    z-index: 1;
   }
   .phone-hide-search-arrow {
     display: none;
@@ -196,6 +230,7 @@
   .home-glass-search-form {
     background-color: #F2F2F2;
     border: none;
+    width: 670px;
   }
   
   .magnify_glass_icon_phone_input {
@@ -215,11 +250,14 @@
   }
  
   .glass-search-form {
-    width: 400px;
-    height: auto;
+    background-color: white;
+    width: 100%;
     margin-top: 0px;
+    padding: 0 20px;
   } 
-
+  .glass-search-form-input {
+    margin-top: 50px;
+  }
   .navbar-brand-phone {
     display:none;
   }
@@ -238,6 +276,9 @@
   .icons {
     display: flex;
     align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+
   }
   .glass_icon {
     margin: 0px 15px;
@@ -254,13 +295,13 @@
 
 
 @media (min-width: 1024px) {
-  .home-glass-search-form {
-    width: 570px;
+  .dropdown-filter-laptop {
+    display: block;
   }
-  .glass-search-form {
-    width: 600px;
-  } 
-
+  .home-glass-search-form {
+    width: 900px;
+  }
+  
   .dropdown-filter-items {
     display: flex;
     flex-direction: column;
@@ -283,19 +324,15 @@
   }
   .list-sneakers-cards {
     position: relative;
-    // width: 750px;
     height: auto;
   }
 
 }
 
-
 @media (min-width: 1440px) {
   .home-glass-search-form {
-    width: 950px;
+    width: 1300px;
   }
-  .glass-search-form {
-    width: 1000px;
-  } 
+  
 }
 

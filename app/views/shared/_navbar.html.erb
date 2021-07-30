@@ -4,16 +4,33 @@
     air_jordan_categories = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "Future", "Golf", "Legacy 312", "Off-White", "Packs", "Spizike", "Women", "Other"]       
 %>
 
-<div class=" fixed-top navbar navbar-expand-sm navbar-light navbar-lewagon" id="navbar-light">
-  <%= link_to "/", class: "navbar-brand" do %>
-    <%= image_tag("logo.svg", style: 'width: 80%; height: 60px;object-fit: cover;', class: 'icon') %>
-  <% end %>
+<div class="" id="navbar-light">
+  <div class="fixed-top nav-test">
+    <%= link_to "/", class: "navbar-brand" do %>
+      <%= image_tag("logo.svg", style: 'height: 80px;', class: 'icon') %>
+    <% end %>
+    <div class="icons">
+      <div class="glass_icon">
+        <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %>
+      </div>
+      <%= link_to('<button type="button" id="sell_button" class="btn btn-dark">Vendre</button>'.html_safe, 
+      new_sneaker_path) %>
+      <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon navbarSideButton', type: "button" %>
+    </div>
+  </div>
   
-  <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon_phone navbarSideButton', type: "button" %>  
-  
-  <%= link_to "/", class: "navbar-brand-phone" do %>
-    <%= image_tag("logo.svg", style: 'width: 80%; height: 60px;object-fit: cover;', class: 'icon_phone') %>
-  <% end %>
+  <div class="real-nav">
+    <%= image_tag "navbar/toggler_icon.svg", style: 'height: 40px;', class: 'toggler_icon_phone navbarSideButton', type: "button" %>  
+    
+    <%= link_to "/", class: "navbar-brand-phone" do %>
+      <%= image_tag("logo.svg", style: 'width: 60px;', class: 'icon_phone') %>
+    <% end %>
+
+    <div class="glass_icon_phone">
+      <%= image_tag("navbar/magnifying_glass_icon.svg", style: 'height: 20px;', class: "magnify_glass_icon_phone") %>
+    </div>
+  </div>
+
 
   <ul class="navbar-side" id="navbarSide">
     <div class="navbar-side-white-toggler">
@@ -46,9 +63,13 @@
 
   <div class="overlay"></div>
 
-  <div class="glass_icon_phone">
-    <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone") %>
+  <!-- <div class="real-nav">
+    <div class="glass_icon_phone">
+      <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone") %>
+    </div>
   </div>
+ -->
+
 
   <div data-controller="refresh-list" class="glass-search-form">
     <%= form_with url: root_path, method: :get, html: { class: 'glass-search-form-input', data: { refresh_list_target: 'form' } } do |f| %>
@@ -116,24 +137,11 @@
     </div>
   </div>
 
-  <div class="icons">
-    <div class="glass_icon">
-      <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %>
-    </div>
-    <%= link_to('<button type="button" id="sell_button" class="btn btn-dark">Vendre</button>'.html_safe, 
-    new_sneaker_path) %>
-    <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon navbarSideButton', type: "button" %>
-  </div>
+  
 </div>
   
 
-<style type="text/css">
-  @media (min-width: 992px)
-    .sneaker-cards {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-</style>
+
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -147,12 +155,20 @@
       $('.overlay').hide();
     });
 
+    let relPageCoords = null;
+
+    $("body").mousemove(function(event){
+      relPageCoords = event.pageY ;
+    });
+
+
+
     $('.glass_icon_phone').on('click', function() {
       $('.toggler_icon_phone').hide();
-      $('.glass-search-form').show();      
+      $('.glass-search-form').show();
+      // $('.glass-search-form').css('top', relPageCoords - 20);      
       $('.magnify_glass_icon_phone').hide();
-      $('.navbar').css('padding', 0);
-      $('.navbar').css('position', 'fixed');
+      $('.real-nav').css('justify-content', 'center');
       $('.dropdown-filter-items').hide();
     });
     
@@ -175,15 +191,12 @@
 
     $('.hide-search-arrow').on('click', function () {
       $('.glass-search-form').hide();
-      $('.navbar').css('padding', '10px');
-      $('.navbar').css('position', 'relative');
       $('toggler_icon, .glass_icon, #sell_button').show();
     })
 
     $('.phone-hide-search-arrow').on('click', function () {
       $('.glass-search-form').hide();
-      $('.navbar').css('padding', '10px');
-      $('.navbar').css('position', 'relative');
+      $('.real-nav').css('justify-content', 'space-between');
       $('img.toggler_icon_phone, .magnify_glass_icon_phone').show();
     })
   });
