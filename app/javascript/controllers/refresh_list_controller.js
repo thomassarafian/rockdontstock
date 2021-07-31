@@ -1,7 +1,21 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "form", "list", "searchInput", "newSneakerForm", "sneakers"]
+  static targets = [ "form", "list", "searchInput", "new_sneaker_form", "searchModel"]
+  
+  initialize() {
+    // this.hide_form()
+    // console.log(this.new_sneaker_formTarget)
+    // if (this.new_sneaker_formTarget) {
+      // this.new_sneaker_formTarget.classList.add('gaga');
+    // }
+
+    // console.log(this.newSneakerFormTarget)
+  }
+
+  // hide_form() {
+  //   this.new_sneaker_formTarget.classList.add('gaga');
+  // }
 
   update() {
     const url = `${this.formTarget.action}?query=${this.searchInputTarget.value}`
@@ -11,11 +25,17 @@ export default class extends Controller {
       this.listTarget.outerHTML = data;
     })
   }
-
+  
   greet() {
-    console.log(this.sneakersTarget)
-    this.listTarget.style.display = "none";
-    this.formTarget.style.display = "none";
-    this.newSneakerFormTarget.style.display = "block";
+    this.new_sneaker_formTarget.classList.remove('toggle-hide')
+    this.searchModelTarget.classList.add('toggle-hide')
+    
+
+    // this.newSneakerFormTarget.classList.add('gaga');
+    // console.log(this.data.get("sneaker"))
+    // this.searchModelTarget.style.display = "none"
+
+    // this.newSneakerFormTarget.style.display = "block";
   }
+  
 }

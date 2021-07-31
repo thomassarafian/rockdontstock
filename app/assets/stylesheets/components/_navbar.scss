@@ -26,17 +26,6 @@
   color: white;
 }
 
-.navbar-lewagon {
-  // justify-content: space-between;
-  background: white;
-  height: 50px;
-  color: white;
-}
-
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
@@ -134,16 +123,6 @@
   {
     display:none; 
   }
-  .navbar {
-    position: sticky;
-    align-items: center;
-  }
-  .navbar-brand-phone {
-    // position: absolute;
-    // left: 50%;
-    // margin-left: -50px !important;
-    // display: block;
-  }
 }
 
 @media (min-width: 320px) {
@@ -173,23 +152,6 @@
     width: 370px;
   }
 }
-
-
-// @media (min-width: 576px) {
-//    .glass-search-form {
-//     width: 100vh;
-//     height: 100vh;
-//     z-index: 1000;
-//     overflow:auto;
-//     margin-top: 47px;
-//   } 
-
-//   .popup-search {
-//     background-color: white;
-//     width: 100%;
-//     margin: 0;
-//   } 
-// }
 
 
 @media (min-width: 768px) {

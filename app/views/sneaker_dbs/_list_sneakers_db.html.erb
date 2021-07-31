@@ -1,13 +1,17 @@
-<!-- <div data-refresh-list-target="list">
+<div data-refresh-list-target="list">
   <div id="scroll" class="container">
     <div class="sneaker-cards">
       <% sneaker_dbs.all.limit(8).each do |sneaker| %>
-          <div class="sneaker-card">
-            <%= link_to sneaker_db_path(sneaker), :style=>'color:#000000;' do %>
-              <div class="sneaker-card_img">
+          <div class="sneaker-card" >
+            <%#= link_to new_sneaker_db_sneaker_path(sneaker), :style=>'color:#000000;' do %>
+              <div class="sneaker-card_img"
+                data-action="click->sneaker-id#get_sneaker_id click->refresh-list#greet" 
+                data-controller="sneaker-id"
+                data-sneaker-id-sneaker = "<%= sneaker.id %>"
+                >
                 <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
               </div>
-            <% end %>
+            <%# end %>
               <div class="sneaker-title"><strong><%= sneaker.name %></strong></div>
               <div class="sneaker-price">À partir de <%= sneaker.price_cents %>€</div>
           </div>
@@ -16,12 +20,12 @@
   </div>
 </div>
 
- -->
-<div data-refresh-list-target="list">
+
+<!-- <div data-refresh-list-target="list">
   <div id="scroll" class="container">
     <div class="sneaker-cards" data-action="click->refresh-list#greet">
       <% @sneaker_dbs.all.limit(8).each do |sneaker| %>
-          <div class="sneaker-card" data-refresh-list-target="<%= sneaker %>">
+          <div class="sneaker-card" data-refresh-list-target="sneakers">
             <button class="btn-sneaker-card-img"><div class="sneaker-card_img">
              <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
             </div></button>
@@ -32,7 +36,7 @@
     </div>  
   </div>
 </div>
-
+ -->
 <style type="text/css">
   .btn-sneaker-card-img {
     border: none;

@@ -2,71 +2,67 @@
 
 <div class="container search-sneaker-model">
   <h1>Recherche ton modèle</h1>
-  <div data-controller="refresh-list">
-    <%= form_with url: sneaker_dbs_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
-      <%= f.text_field :query,
-        class: "form-control",
-        placeholder: 'Recherche ta paire',
-        value: params[:query],
-        data: {
-          refresh_list_target: 'searchInput',
-          action: "keyup->refresh-list#update",
-        } %>
-    <% end %>
+  <%# unless params[:sneaker_db_id].present? %>
+    <div data-controller="refresh-list">
+      <div class="search-models"  data-refresh-list-target="searchModel">
+        <%= form_with url: sneaker_dbs_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
+          <%= f.text_field :query,
+            class: "form-control",
+            placeholder: 'Recherche ta paire',
+            value: params[:query],
+            data: {
+              refresh_list_target: 'searchInput',
+              action: "keyup->refresh-list#update",
+            } %>
+        <% end %>
 
-    <div data-refresh-list-target="list">
-      <!-- <div id="scroll" class="container">
-        <div class="sneaker-cards">
-          <% @sneaker_dbs.all.limit(8).each do |sneaker| %>
-              <div class="sneaker-card">
-                <button class="btn-sneaker-card-img"><div class="sneaker-card_img">
-                 <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
-                </div></button>
-                <div class="sneaker-title"><strong><%= sneaker.name %></strong></div>
-                <div class="sneaker-price">À partir de <%= sneaker.price_cents %>€</div>
-              </div>
-          <% end %>
-        </div>  
-      </div> -->
+      <div class="search-models">
+        <div data-refresh-list-target="list">
+          <!-- <div id="scroll" class="container">
+            <div class="sneaker-cards" >
+              <% @sneaker_dbs.all.limit(8).each do |sneaker| %>
+                  <div class="sneaker-card" data-refresh-list-target="sneakerBtn" data-action="click->refresh-list#displayBtn">
+                      <div class="sneaker-card_img">
+                     <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
+                    <button data-action="click->refresh-list#greet" id="gaga" type="button" class="choose-btn btn btn-primary" data-id="<%= sneaker.id %>">C'est ma paire</button>
+                    </div>
+                    <div class="sneaker-title"><strong><%= sneaker.name %></strong></div>
+                    <div class="sneaker-price">À partir de <%= sneaker.price_cents %>€</div>
+                  </div>
+              <% end %>
+            </div>  
+          </div> -->
+        </div>
+      </div>
+    <%# end %>
+      </div>
+    <div data-controller="sneaker-id" data-sneaker-id-target="sneakerModel">
+      
+    </div>
+    <div class="toggle-hide new-sneaker-form" data-refresh-list-target="new_sneaker_form">
+      <%= render "form", sneaker: @sneaker, sneaker_db: @sneaker_db %>      
     </div>
 
-    <div class="new-sneaker-form" data-refresh-list-target="newSneakerForm">
-      <%= render "form", sneaker: @sneaker, sneaker_db: @sneaker_db %>
-      <%= puts  "SNEAKER => #{@sneaker}" %>
-      <%= puts  "SNEAKER_DB => #{@sneaker_db}"  %>
-    </div>
-
-    <!-- <div class="new-sneaker-form" data-refresh-list-target="newSneakerForm">
-      <%= render "form", sneaker: @sneaker, sneaker_db: @sneaker_db %>
-    </div> -->
+    
   </div>
 </div>
 
-<script type="text/javascript">
 
-  console.log("text");
-  $(document).click(function(event) {
-    var text = $(event.target);
-    console.log(text[0].alt);
-});
-
-
-</script>
-
-<script type="text/javascript">
-  let newSneakerForm = document.querySelector('.new-sneaker-form');
-  let formControl = document.querySelector('.form-control');
-
-  let sneakerCards = document.querySelectorAll('.btn-sneaker-card-img');
-  let sneakerSneakerModel = document.querySelector('.search-sneaker-model')
-
-  newSneakerForm.style.display = "none";
-  
-</script>
 
 
 
 <style type="text/css">
+
+  .toggle-hide {
+    display:none;
+  }
+  
+
+  .choose-btn {
+    display:none;
+    position:absolute;
+
+  }
   .btn-sneaker-card-img {
     border: none;
     background-color: white;

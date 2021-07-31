@@ -63,13 +63,6 @@
 
   <div class="overlay"></div>
 
-  <!-- <div class="real-nav">
-    <div class="glass_icon_phone">
-      <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone") %>
-    </div>
-  </div>
- -->
-
 
   <div data-controller="refresh-list" class="glass-search-form">
     <%= form_with url: root_path, method: :get, html: { class: 'glass-search-form-input', data: { refresh_list_target: 'form' } } do |f| %>
@@ -155,18 +148,10 @@
       $('.overlay').hide();
     });
 
-    let relPageCoords = null;
-
-    $("body").mousemove(function(event){
-      relPageCoords = event.pageY ;
-    });
-
-
 
     $('.glass_icon_phone').on('click', function() {
       $('.toggler_icon_phone').hide();
       $('.glass-search-form').show();
-      // $('.glass-search-form').css('top', relPageCoords - 20);      
       $('.magnify_glass_icon_phone').hide();
       $('.real-nav').css('justify-content', 'center');
       $('.dropdown-filter-items').hide();

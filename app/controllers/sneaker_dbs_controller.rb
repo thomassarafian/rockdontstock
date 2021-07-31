@@ -16,5 +16,10 @@ class SneakerDbsController < ApplicationController
   def show
     @sneaker_db = SneakerDb.find(params[:id])
     authorize @sneaker_db
+    
+    respond_to do |format|
+      format.html
+      format.json {render json: @sneaker_db }
+    end
   end
 end
