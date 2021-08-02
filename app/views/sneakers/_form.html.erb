@@ -17,51 +17,59 @@
   </div>
   
   <div class="photos-input">
-    <%= f.input :photos, as: :file,
-    input_html: {class: "hidden", id: 'photo-input0'},
-    label_html: { class: 'upload-photo photo-input0' },
-    label: '📷 Ajoute une photo' %>
+
+    <%= f.file_field :photos, as: :file, :multiple => true,
+    class: "hidden", id: 'photo-input0',
+    class: 'upload-photo photo-input0',
+    label_html: '📷 Ajoute une photo' %>
     <%= image_tag "", width: 0, class: "hidden", id: "photo-preview0" %>
 
-    <%= f.input :photos, as: :file,
-    input_html: {class: "hidden", id: 'photo-input1'},
-    label_html: { class: 'upload-photo photo-input1' },
+
+    <%= f.file_field :photos, as: :file, :multiple => true,
+    class: "hidden", id: 'photo-input1',
+    class: 'upload-photo photo-input1',
     label: '📷 Ajoute une photo' %>
     <%= image_tag "", width: 0, class: "hidden", id: "photo-preview1" %>
     
-    <%= f.input :photos, as: :file,
-    input_html: {class: "hidden", id: 'photo-input2'},
-    label_html: { class: 'upload-photo photo-input2' },
+
+    <%= f.file_field :photos, as: :file, :multiple => true,
+    class: "hidden", id: 'photo-input2',
+    class: 'upload-photo photo-input2',
     label: '📷 Ajoute une photo' %>
     <%= image_tag "", width: 0, class: "hidden", id: "photo-preview2" %>
 
-    <%= f.input :photos, as: :file,
-    input_html: {class: "hidden", id: 'photo-input3'},
-    label_html: { class: 'upload-photo photo-input3' },
+
+    <%= f.file_field :photos, as: :file, :multiple => true,
+    class: "hidden", id: 'photo-input3',
+    class: 'upload-photo photo-input3',
     label: '📷 Ajoute une photo' %>
     <%= image_tag "", width: 0, class: "hidden", id: "photo-preview3" %>
 
-    <%= f.input :photos, as: :file,
-    input_html: {class: "hidden", id: 'photo-input4'},
-    label_html: { class: 'upload-photo photo-input4' },
+
+    <%= f.file_field :photos, as: :file, :multiple => true,
+    class: "hidden", id: 'photo-input4',
+    class: 'upload-photo photo-input4',
     label: '📷 Ajoute une photo' %>
     <%= image_tag "", width: 0, class: "hidden", id: "photo-preview4" %>
 
-    <%= f.input :photos, as: :file,
-    input_html: {class: "hidden", id: 'photo-input5'},
-    label_html: { class: 'upload-photo photo-input5' },
+
+    <%= f.file_field :photos, as: :file, :multiple => true,
+    class: "hidden", id: 'photo-input5',
+    class: 'upload-photo photo-input5',
     label: '📷 Ajoute une photo' %>
     <%= image_tag "", width: 0, class: "hidden", id: "photo-preview5" %>
 
-    <%= f.input :photos, as: :file,
-    input_html: {class: "hidden", id: 'photo-input6'},
-    label_html: { class: 'upload-photo photo-input6' },
+
+    <%= f.file_field :photos, as: :file, :multiple => true,
+    class: "hidden", id: 'photo-input6',
+    class: 'upload-photo photo-input6',
     label: '📷 Ajoute une photo' %>
     <%= image_tag "", width: 0, class: "hidden", id: "photo-preview6" %>
 
-    <%= f.input :photos, as: :file,
-    input_html: {class: "hidden", id: 'photo-input7'},
-    label_html: { class: 'upload-photo photo-input7' },
+
+    <%= f.file_field :photos, as: :file, :multiple => true,
+    class: "hidden", id: 'photo-input7',
+    class: 'upload-photo photo-input7',
     label: '📷 Ajoute une photo' %>
 
     <%= image_tag "", width: 0, class: "hidden", id: "photo-preview7" %>
@@ -109,9 +117,6 @@
   .photo-input7 {
     background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/219/original/585613_06.jpg.jpeg?1581711887);
   }
-  #photo-preview0 {
-
-  }
 
   .photos-input {
     display: flex;
@@ -120,8 +125,9 @@
     align-items: center;
     justify-content: center;
   }
-  .sneaker_photos {
-    padding: 0 20px;
+
+  .upload-photo {
+    margin: 20px 20px;
   }
 </style>
 
@@ -130,20 +136,47 @@
   let photoPreview0 = document.getElementById('photo-preview0');
   let photoPreview1 = document.getElementById('photo-preview1');
   let photoPreview2 = document.getElementById('photo-preview2');
-  
+  let photoPreview3 = document.getElementById('photo-preview3');
+  let photoPreview4 = document.getElementById('photo-preview4');
+  let photoPreview5 = document.getElementById('photo-preview5');
+  let photoPreview6 = document.getElementById('photo-preview6');
+  let photoPreview7 = document.getElementById('photo-preview7');
+
   photoPreview0.addEventListener('load', (event) => {
     let photoInput0 = document.querySelector('.photo-input0');
     photoInput0.style.backgroundImage = `url(${photoPreview0.src})`;
   })
-
   photoPreview1.addEventListener('load', (event) => {
     let photoInput1 = document.querySelector('.photo-input1');
     photoInput1.style.backgroundImage = `url(${photoPreview1.src})`;
   })
-
   photoPreview2.addEventListener('load', (event) => {
     let photoInput2 = document.querySelector('.photo-input2');
     photoInput2.style.backgroundImage = `url(${photoPreview2.src})`;
+  })
+  photoPreview3.addEventListener('load', (event) => {
+    let photoInput3 = document.querySelector('.photo-input3');
+    photoInput3.style.backgroundImage = `url(${photoPreview3.src})`;
+  })
+  photoPreview3.addEventListener('load', (event) => {
+    let photoInput3 = document.querySelector('.photo-input3');
+    photoInput3.style.backgroundImage = `url(${photoPreview3.src})`;
+  })
+  photoPreview4.addEventListener('load', (event) => {
+    let photoInput4 = document.querySelector('.photo-input4');
+    photoInput4.style.backgroundImage = `url(${photoPreview4.src})`;
+  })
+  photoPreview5.addEventListener('load', (event) => {
+    let photoInput5 = document.querySelector('.photo-input5');
+    photoInput5.style.backgroundImage = `url(${photoPreview5.src})`;
+  })
+  photoPreview6.addEventListener('load', (event) => {
+    let photoInput6 = document.querySelector('.photo-input6');
+    photoInput6.style.backgroundImage = `url(${photoPreview6.src})`;
+  })
+  photoPreview7.addEventListener('load', (event) => {
+    let photoInput7 = document.querySelector('.photo-input7');
+    photoInput7.style.backgroundImage = `url(${photoPreview7.src})`;
   })
 
   let infoInput =  document.querySelector('.info-input');

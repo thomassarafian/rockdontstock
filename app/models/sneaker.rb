@@ -1,5 +1,6 @@
 class Sneaker < ApplicationRecord
 	has_many_attached :photos, dependent: :destroy
+
   has_many :orders, dependent: :destroy
 	belongs_to :user
   belongs_to :sneaker_db
@@ -7,11 +8,9 @@ class Sneaker < ApplicationRecord
 	validates :size, presence: true
   validates :price, presence: true
   validates :condition, presence: true
-
-  validates :price, format: { with: /([\s\d]+)/, :multiline => true  }
-
-
-
+  validates :box, presence: true
+  validates :price, format: { with: /([\s\d]+)/ }
+  validate :photos, if: :photos_limit_min
   monetize :price_cents
 
 
@@ -22,6 +21,15 @@ class Sneaker < ApplicationRecord
 
 	def send_notification
     UserMailer.new_sneaker(self, user).deliver
+  end
+
+  private    
+  
+  def photos_limit_min
+    return if self.photos.empty?
+    flash[:notice] =  " You must to upload at least 7 images" if self.photos.length <= 7
+    # errors.add(:photos, " You must to upload at least 7 images") if self.photos.length <= 7
+    return false
   end
 
 end
