@@ -1,93 +1,173 @@
 <%= simple_form_for(sneaker.new_record? ? [sneaker_db, sneaker] : sneaker) do |f| %>
   <div class="info-input">
-    <%= f.label :size, "Taille US" %>
-  	<%= f.text_field :size, required: true %>
 
-  	<%= f.label :price, "Prix" %>
-  	<%= f.text_field :price, required: true %>
+  	<%= f.input :size, required: true, label: "Taille US", placeholder: "10,5" %>
 
-  	<%= f.input :condition, collection: 1..10, required: true %>
+  	<%= f.input :price, required: true, label: "Prix", placeholder: "199" %>
+
+  	<%= f.input :condition, collection: 1..10, required: true, hint: "Une note sur 10 de l'état de ta paire" %>
 
   	<%= f.input :box, collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true %>
 
-  	<%= f.label :extras, "Extras" %>
-  	<%= f.text_field :extras, required: true, oninput: "displayNextBtn()" %>
+  	<%= f.input :extras, required: true, label: "Extras", placeholder: "Lacets, stickers..."  %>
   </div>
-  <div class="display-next-btn">
+
+  <div class="next-btn">
     <button type="button" class="btn btn-dark">Next</button>
   </div>
+  
   <div class="photos-input">
     <%= f.input :photos, as: :file,
     input_html: {class: "hidden", id: 'photo-input0'},
-    label_html: { class: 'upload-photo' },
-    label: '📷 Upload a photo' %>
+    label_html: { class: 'upload-photo photo-input0' },
+    label: '📷 Ajoute une photo' %>
+    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview0" %>
 
     <%= f.input :photos, as: :file,
     input_html: {class: "hidden", id: 'photo-input1'},
-    label_html: { class: 'upload-photo' },
-    label: '📷 Upload a photo' %>
+    label_html: { class: 'upload-photo photo-input1' },
+    label: '📷 Ajoute une photo' %>
+    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview1" %>
     
     <%= f.input :photos, as: :file,
     input_html: {class: "hidden", id: 'photo-input2'},
-    label_html: { class: 'upload-photo' },
-    label: '📷 Upload a photo' %>
+    label_html: { class: 'upload-photo photo-input2' },
+    label: '📷 Ajoute une photo' %>
+    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview2" %>
 
+    <%= f.input :photos, as: :file,
+    input_html: {class: "hidden", id: 'photo-input3'},
+    label_html: { class: 'upload-photo photo-input3' },
+    label: '📷 Ajoute une photo' %>
+    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview3" %>
 
-    <%= image_tag "", width: 300, class: "hidden", id: "photo-preview0" %>
-    <%= image_tag "", width: 300, class: "hidden", id: "photo-preview1" %>
-    <%= image_tag "", width: 300, class: "hidden", id: "photo-preview2" %>
+    <%= f.input :photos, as: :file,
+    input_html: {class: "hidden", id: 'photo-input4'},
+    label_html: { class: 'upload-photo photo-input4' },
+    label: '📷 Ajoute une photo' %>
+    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview4" %>
 
-    <%= f.submit %>
+    <%= f.input :photos, as: :file,
+    input_html: {class: "hidden", id: 'photo-input5'},
+    label_html: { class: 'upload-photo photo-input5' },
+    label: '📷 Ajoute une photo' %>
+    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview5" %>
+
+    <%= f.input :photos, as: :file,
+    input_html: {class: "hidden", id: 'photo-input6'},
+    label_html: { class: 'upload-photo photo-input6' },
+    label: '📷 Ajoute une photo' %>
+    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview6" %>
+
+    <%= f.input :photos, as: :file,
+    input_html: {class: "hidden", id: 'photo-input7'},
+    label_html: { class: 'upload-photo photo-input7' },
+    label: '📷 Ajoute une photo' %>
+
+    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview7" %>
   </div>
+  <div class="submit-new-sneaker">
+    <%= f.button :submit, "Ajouter ma sneaker", class: "text-center btn btn-dark" %>
+  </div>
+
 <% end %>
 
+<style type="text/css">
+  .submit-new-sneaker {
+    text-align: center;
+  }
+  .upload-photo {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .photo-input0 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/236/original/585613_01.jpg.jpeg?1581711888);
+  }
+  .photo-input1 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/228/original/585613_03.jpg.jpeg?1581711888);
+  }
+  .photo-input2 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/219/original/585613_06.jpg.jpeg?1581711887);
+  }
+  .photo-input3 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/215/original/585613_08.jpg.jpeg?1581711887);
+  }
+  .photo-input4 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/221/original/585613_04.jpg.jpeg?1581711887);
+  }
+  .photo-input4 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/219/original/585613_06.jpg.jpeg?1581711887);
+  }
+  .photo-input5 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/219/original/585613_06.jpg.jpeg?1581711887);
+  }
+
+  .photo-input6 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/219/original/585613_06.jpg.jpeg?1581711887);
+  }
+  .photo-input7 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/219/original/585613_06.jpg.jpeg?1581711887);
+  }
+  #photo-preview0 {
+
+  }
+
+  .photos-input {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .sneaker_photos {
+    padding: 0 20px;
+  }
+</style>
+
+
 <script type="text/javascript">
+  let photoPreview0 = document.getElementById('photo-preview0');
+  let photoPreview1 = document.getElementById('photo-preview1');
+  let photoPreview2 = document.getElementById('photo-preview2');
+  
+  photoPreview0.addEventListener('load', (event) => {
+    let photoInput0 = document.querySelector('.photo-input0');
+    photoInput0.style.backgroundImage = `url(${photoPreview0.src})`;
+  })
+
+  photoPreview1.addEventListener('load', (event) => {
+    let photoInput1 = document.querySelector('.photo-input1');
+    photoInput1.style.backgroundImage = `url(${photoPreview1.src})`;
+  })
+
+  photoPreview2.addEventListener('load', (event) => {
+    let photoInput2 = document.querySelector('.photo-input2');
+    photoInput2.style.backgroundImage = `url(${photoPreview2.src})`;
+  })
+
   let infoInput =  document.querySelector('.info-input');
-  let photosInput = document.querySelector('.photos-input');
-  let displayNextBtn = document.querySelector('.photos-input'); //display-next-btn
-  photosInput.style.display = "none";
-  
-  function displayNextBtn() {
-
-    photosInput.style.display = "block";
-  }  
-
-
+  let photosInput = document.querySelector('.photos-input');  
+  let nextBtn = document.querySelector('.next-btn');
   let photoInput0 = document.getElementById('photo-input0');
-  photoInput0.style.display = "none";
-
   let sneakerExtras = document.getElementById('sneaker_extras')
-  
-  sneakerExtras.addEventListener('change', (event) => {
 
-    console.log("ok")
+  // photosInput.style.display = "none";
+  nextBtn.style.display = "none";
+  // photoInput0.style.display = "none";
+  // infoInput.style.display = "none";
+  
+  sneakerExtras.addEventListener('input', (event) => {
+    nextBtn.style.display = "block";
+    nextBtn.addEventListener('click', (event) => { 
+      photosInput.style.display = "block";
+      infoInput.style.display = "none";
+      nextBtn.style.display = "none";
+    })
+
   });
 
 
 </script>
-
-<script type="text/javascript">
-  // $(document).ready(function() {
-  //   if ($('#sneaker_extras').val) {
-  //     console.log("dd")
-  //   }
-  // });
-  $(document).ready(function(){
-    $('#sneaker_extras input[type="text"]').blur(function(){
-        if(!$(this).val()){
-          console.log("error")
-            // $(this).addClass("error");
-        } else{
-          console.log("good")
-            // $(this).removeClass("error");
-        }
-    });
-});
-</script>
-
-
-
-
-
 
 

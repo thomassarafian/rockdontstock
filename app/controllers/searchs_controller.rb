@@ -13,5 +13,5 @@ class SearchsController < ApplicationController
 #     end
 
 #   end
-end
+ end
 # 

@@ -32,9 +32,12 @@ class SneakersController < ApplicationController
         price: params['sneaker']['price'], photos: params['sneaker']['photos'],
         box: params['sneaker']['box'], extras: params['sneaker']['extras'],
         state: 1)
-      @sneaker.save!
-      session[:sneaker_session_id] = @sneaker.id
-      redirect_to new_user_session_path, notice: "Tu dois être connecté pour que nous puissions vérifier ta paire"
+        if !@sneaker.save
+          render :new          
+        else
+          session[:sneaker_session_id] = @sneaker.id
+          redirect_to new_user_session_path, notice: "Tu dois être connecté pour que nous puissions vérifier ta paire"
+        end
     elsif user_signed_in?
       @sneaker = current_user.sneakers.new(sneaker_db_id: @sneaker_db.id)
       @sneaker.update(sneaker_params)

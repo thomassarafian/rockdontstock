@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, uniqueness: true
   validates :email, format: { with:  /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
-  validates :phone,length: {minimum: 9, maximum: 10}, format: { with: /^[0-9]*$/, multiline: true  }
+  validates :phone, length: {minimum: 9, maximum: 10}, format: { with: /^[0-9]*$/, multiline: true  }
   validates :date_of_birth, presence: true
   validate :date_of_birth, if: :user_over_13, on: [:create, :update]
 

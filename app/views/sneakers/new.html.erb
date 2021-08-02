@@ -39,6 +39,7 @@
     
 
     <% if params[:sneaker_db_id].present? %>
+      <h1 class="search-sneaker-model-title">Remplir les informations</h1>
       <div class="new-sneaker-form" >
         <%= render "form", sneaker: @sneaker, sneaker_db: @sneaker_db %>      
       </div>
@@ -53,14 +54,13 @@
 
 <style type="text/css">
   .new-sneaker-form {
-    margin-top: 70px;
+    /*margin-top: 70px;*/
   }
   .search-sneaker-model-title {
+    text-align: center;
     margin-top:60px;
   }
-  .toggle-hide {
-    /*display:none;*/
-  }
+  
   
   .choose-btn {
     display:none;

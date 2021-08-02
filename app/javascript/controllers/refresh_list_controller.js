@@ -15,8 +15,8 @@ export default class extends Controller {
   
   greet() {
     // console.log(this.element)
-    this.new_sneaker_formTarget.classList.remove('toggle-hide')
-    this.searchModelTarget.classList.add('toggle-hide')
+    // this.new_sneaker_formTarget.classList.remove('toggle-hide')
+    // this.searchModelTarget.classList.add('toggle-hide')
     
     // console.log(this.data)
     // this.newSneakerFormTarget.classList.add('gaga');
