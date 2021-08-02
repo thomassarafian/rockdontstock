@@ -65,8 +65,9 @@ gem 'mail_form' #page contact
 
 gem 'pg_search', '~> 2.3.0' #search
 
-gem 'pagy', '~> 3.5'
+gem 'pagy', '~> 3.5' #pagination
 
+gem 'forest_liana'
 
 
 group :development, :test do

@@ -3,15 +3,15 @@
     <div class="sneaker-cards">
       <% sneaker_dbs.all.limit(8).each do |sneaker| %>
           <div class="sneaker-card" >
-            <%#= link_to new_sneaker_db_sneaker_path(sneaker), :style=>'color:#000000;' do %>
+            <%= link_to new_sneaker_db_sneaker_path(sneaker), :style=>'color:#000000;' do %>
               <div class="sneaker-card_img"
-                data-action="click->sneaker-id#get_sneaker_id click->refresh-list#greet" 
-                data-controller="sneaker-id"
-                data-sneaker-id-sneaker = "<%= sneaker.id %>"
+                data-action="click->refresh-list#greet" 
                 >
+                <!-- data-controller="sneaker-id"
+                data-sneaker-id-sneaker = "<%= sneaker.id %>" -->
                 <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
               </div>
-            <%# end %>
+            <% end %>
               <div class="sneaker-title"><strong><%= sneaker.name %></strong></div>
               <div class="sneaker-price">À partir de <%= sneaker.price_cents %>€</div>
           </div>

@@ -3,19 +3,6 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = [ "form", "list", "searchInput", "new_sneaker_form", "searchModel"]
   
-  initialize() {
-    // this.hide_form()
-    // console.log(this.new_sneaker_formTarget)
-    // if (this.new_sneaker_formTarget) {
-      // this.new_sneaker_formTarget.classList.add('gaga');
-    // }
-
-    // console.log(this.newSneakerFormTarget)
-  }
-
-  // hide_form() {
-  //   this.new_sneaker_formTarget.classList.add('gaga');
-  // }
 
   update() {
     const url = `${this.formTarget.action}?query=${this.searchInputTarget.value}`
@@ -27,15 +14,17 @@ export default class extends Controller {
   }
   
   greet() {
+    // console.log(this.element)
     this.new_sneaker_formTarget.classList.remove('toggle-hide')
     this.searchModelTarget.classList.add('toggle-hide')
     
-
+    // console.log(this.data)
     // this.newSneakerFormTarget.classList.add('gaga');
     // console.log(this.data.get("sneaker"))
     // this.searchModelTarget.style.display = "none"
 
     // this.newSneakerFormTarget.style.display = "block";
   }
-  
+
+
 }

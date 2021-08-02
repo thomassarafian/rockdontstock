@@ -1,4 +1,4 @@
-# class SearchsController < ApplicationController
+class SearchsController < ApplicationController
 #   skip_before_action :authenticate_user!, only: [:index]
 #   def index
 #     @pagy, @sneaker_dbs = pagy(policy_scope(SneakerDb).order(release_date: :desc))
@@ -13,4 +13,5 @@
 #     end
 
 #   end
-# end
+end
+# 

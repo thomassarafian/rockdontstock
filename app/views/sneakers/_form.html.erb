@@ -1,38 +1,93 @@
 <%= simple_form_for(sneaker.new_record? ? [sneaker_db, sneaker] : sneaker) do |f| %>
-  <%= f.label :size, "Taille US" %>
-	<%= f.text_field :size, required: true %>
+  <div class="info-input">
+    <%= f.label :size, "Taille US" %>
+  	<%= f.text_field :size, required: true %>
 
-	<%= f.label :price, "Prix" %>
-	<%= f.text_field :price, required: true %>
+  	<%= f.label :price, "Prix" %>
+  	<%= f.text_field :price, required: true %>
 
-	<%= f.input :condition, collection: 1..10, required: true %>
+  	<%= f.input :condition, collection: 1..10, required: true %>
 
-	<%= f.input :box, collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true %>
+  	<%= f.input :box, collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true %>
 
-	<%= f.label :extras, "Extras" %>
-	<%= f.text_field :extras, required: true %>
+  	<%= f.label :extras, "Extras" %>
+  	<%= f.text_field :extras, required: true, oninput: "displayNextBtn()" %>
+  </div>
+  <div class="display-next-btn">
+    <button type="button" class="btn btn-dark">Next</button>
+  </div>
+  <div class="photos-input">
+    <%= f.input :photos, as: :file,
+    input_html: {class: "hidden", id: 'photo-input0'},
+    label_html: { class: 'upload-photo' },
+    label: '📷 Upload a photo' %>
 
-  
-
-  <%= f.input :photos, as: :file,
-  input_html: {class: "hidden", id: 'photo-input0'},
-  label_html: { class: 'upload-photo' },
-  label: '📷 Upload a photo' %>
-
-  <%= f.input :photos, as: :file,
-  input_html: {class: "hidden", id: 'photo-input1'},
-  label_html: { class: 'upload-photo' },
-  label: '📷 Upload a photo' %>
-  
-  <%= f.input :photos, as: :file,
-  input_html: {class: "hidden", id: 'photo-input2'},
-  label_html: { class: 'upload-photo' },
-  label: '📷 Upload a photo' %>
+    <%= f.input :photos, as: :file,
+    input_html: {class: "hidden", id: 'photo-input1'},
+    label_html: { class: 'upload-photo' },
+    label: '📷 Upload a photo' %>
+    
+    <%= f.input :photos, as: :file,
+    input_html: {class: "hidden", id: 'photo-input2'},
+    label_html: { class: 'upload-photo' },
+    label: '📷 Upload a photo' %>
 
 
-  <%= image_tag "", width: 300, class: "hidden", id: "photo-preview0" %>
-  <%= image_tag "", width: 300, class: "hidden", id: "photo-preview1" %>
-  <%= image_tag "", width: 300, class: "hidden", id: "photo-preview2" %>
+    <%= image_tag "", width: 300, class: "hidden", id: "photo-preview0" %>
+    <%= image_tag "", width: 300, class: "hidden", id: "photo-preview1" %>
+    <%= image_tag "", width: 300, class: "hidden", id: "photo-preview2" %>
 
-  <%= f.submit %>
+    <%= f.submit %>
+  </div>
 <% end %>
+
+<script type="text/javascript">
+  let infoInput =  document.querySelector('.info-input');
+  let photosInput = document.querySelector('.photos-input');
+  let displayNextBtn = document.querySelector('.photos-input'); //display-next-btn
+  photosInput.style.display = "none";
+  
+  function displayNextBtn() {
+
+    photosInput.style.display = "block";
+  }  
+
+
+  let photoInput0 = document.getElementById('photo-input0');
+  photoInput0.style.display = "none";
+
+  let sneakerExtras = document.getElementById('sneaker_extras')
+  
+  sneakerExtras.addEventListener('change', (event) => {
+
+    console.log("ok")
+  });
+
+
+</script>
+
+<script type="text/javascript">
+  // $(document).ready(function() {
+  //   if ($('#sneaker_extras').val) {
+  //     console.log("dd")
+  //   }
+  // });
+  $(document).ready(function(){
+    $('#sneaker_extras input[type="text"]').blur(function(){
+        if(!$(this).val()){
+          console.log("error")
+            // $(this).addClass("error");
+        } else{
+          console.log("good")
+            // $(this).removeClass("error");
+        }
+    });
+});
+</script>
+
+
+
+
+
+
+

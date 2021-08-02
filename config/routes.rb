@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-	root to: "pages#home"
+  mount ForestLiana::Engine => '/forest'
+	
+  root to: "pages#home"
   resources :pages, only: [:index]
   
   resource :contact, only: [:create, :new], controller: 'contact'

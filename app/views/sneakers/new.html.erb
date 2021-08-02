@@ -1,10 +1,10 @@
 <!-- <h1>Ajouter sa paire </h1> -->
 
 <div class="container search-sneaker-model">
-  <h1>Recherche ton modèle</h1>
-  <%# unless params[:sneaker_db_id].present? %>
+  <% unless params[:sneaker_db_id].present? %>
     <div data-controller="refresh-list">
       <div class="search-models"  data-refresh-list-target="searchModel">
+        <h1 class="search-sneaker-model-title">Recherche ton modèle</h1>
         <%= form_with url: sneaker_dbs_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
           <%= f.text_field :query,
             class: "form-control",
@@ -16,7 +16,7 @@
             } %>
         <% end %>
 
-      <div class="search-models">
+      <div class="search-models" >
         <div data-refresh-list-target="list">
           <!-- <div id="scroll" class="container">
             <div class="sneaker-cards" >
@@ -34,15 +34,16 @@
           </div> -->
         </div>
       </div>
-    <%# end %>
       </div>
-    <div data-controller="sneaker-id" data-sneaker-id-target="sneakerModel">
-      
-    </div>
-    <div class="toggle-hide new-sneaker-form" data-refresh-list-target="new_sneaker_form">
-      <%= render "form", sneaker: @sneaker, sneaker_db: @sneaker_db %>      
-    </div>
+    <% end %>
+    
 
+    <% if params[:sneaker_db_id].present? %>
+      <div class="new-sneaker-form" >
+        <%= render "form", sneaker: @sneaker, sneaker_db: @sneaker_db %>      
+      </div>
+    <% end %>
+    
     
   </div>
 </div>
@@ -50,14 +51,17 @@
 
 
 
-
 <style type="text/css">
-
+  .new-sneaker-form {
+    margin-top: 70px;
+  }
+  .search-sneaker-model-title {
+    margin-top:60px;
+  }
   .toggle-hide {
-    display:none;
+    /*display:none;*/
   }
   
-
   .choose-btn {
     display:none;
     position:absolute;
