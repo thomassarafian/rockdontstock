@@ -40,7 +40,7 @@
   footer {
     display: none;
   }
-  .nav-test {
+  .nav-test, .real-nav {
     background-color: black;
   }
   .icon, .icon_phone, .magnify_glass_icon_phone, .magnify_glass_icon, #sell_button,  .toggler_icon, .toggler_icon_phone {
@@ -50,13 +50,13 @@
 
 
 <script type="text/javascript">
-  $('.glass_icon, .glass_icon_phone').on('click', function() {
-    $('.navbar, .contact-form-page').css('background-color', 'white');
+  $('.nav-test, .glass_icon, .glass_icon_phone').on('click', function() {
+    $('.real-nav, .nav-test, .contact-form-page').css('background-color', 'white');
     $('.icon, .icon_phone, .magnify_glass_icon_phone, .magnify_glass_icon, #sell_button, .toggler_icon, .toggler_icon_phone').css('filter', 'invert(0%) sepia(59%) saturate(0%) hue-rotate(116deg) brightness(97%) contrast(104%)');
   });
 
   $('.hide-search-arrow, .phone-hide-search-arrow').on('click', function() {
-    $('.navbar, .contact-form-page').css('background-color', 'black');
+    $('.nav-test, .real-nav, .contact-form-page').css('background-color', 'black');
     $('.icon, .icon_phone, .magnify_glass_icon_phone, .magnify_glass_icon, #sell_button, .toggler_icon, .toggler_icon_phone').css('filter', 'invert(100%) sepia(100%) saturate(0%) hue-rotate(347deg) brightness(106%) contrast(101%)');
   });
 </script>

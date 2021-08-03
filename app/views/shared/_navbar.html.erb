@@ -89,13 +89,13 @@
             <div class="filter-and-sneakers">
               <div class="dropdown-filter-items">
                 <button class="dropdown-filter-laptop btn btn-dark" type="button">Filtres</button>
-                <h5 class="filter-label">Marques</h5>
+                <!-- <h5 class="filter-label">Marques</h5> -->
                 <%= select_tag :category, options_for_select(brand),
                   include_blank: "Toute les marques",
                   class: "form-select",
                   data: { action: "filters#filter", target: "filters.filter" } %>
 
-                <h5 class="filter-label">Prix</h5>
+                <!-- <h5 class="filter-label">Prix</h5> -->
                   <%= select_tag :price,
                       options_for_select(
                         [ ["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301] ], params[:price]
@@ -104,7 +104,7 @@
                   class: "form-select",
                   data: { action: "filters#filter", target: "filters.filter" } %>
                 
-                <h5 class="filter-label">Condition</h5>
+                <!-- <h5 class="filter-label">Condition</h5> -->
                   <%= select_tag :condition,
                       options_for_select(
                         [ ["1", 1], ["2", 2], ["3", 3], ["4", 4], ["5", 5], ["6", 6], ["7", 7], ["8", 8], ["9", 9], ["10", 10] ], params[:condition]
@@ -113,7 +113,7 @@
                   class: "form-select",
                   data: { action: "filters#filter", target: "filters.filter" } %>
 
-                <h5 class="filter-label">Tailles</h5>
+                <!-- <h5 class="filter-label">Tailles</h5> -->
                 <%= select_tag :size,
                     options_for_select([
                       ["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], ["5", 5],
@@ -121,7 +121,7 @@
                       ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
                       ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18] ], params[:size]),
                 include_blank: "Toute taille",
-                class: "form-select-size",
+                class: "form-select",
                 data: { action: "filters#filter", target: "filters.filter" } %>
               </div>
               <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>

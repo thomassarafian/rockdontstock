@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Recherche ton modèle</h1>
+  <h1 class="sneaker-dbs-title">Recherche ton modèle</h1>
   <div data-controller="refresh-list">
     <%= form_with url: sneaker_dbs_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
       <%= f.text_field :query,
@@ -17,3 +17,11 @@
     <%== pagy_bootstrap_nav(@pagy) %>
   </div>
 </div>
+
+
+<style type="text/css">
+  .sneaker-dbs-title {
+    margin-top: 50px;
+    text-align:center;
+  }
+</style>

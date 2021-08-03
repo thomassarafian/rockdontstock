@@ -1,18 +1,29 @@
-<div class="container">
-  <div class="row py-4">
-    <div class="col-md-3"><%= image_tag @order.sneaker.photos[0].url, width: '100%'%></div> 
-    <div class="col">
-      <h1>Récapitulatif de la commande</h1>
+<div class="container sneaker-payment">
+  <div class="col py-4">
+    <h1 class="sneaker-payment-title">Récapitulatif de la commande</h1>
+    <div class="sneaker-payment-photos">
+      <div class="col-md-3"><%= image_tag @order.sneaker.photos[0].url, width: '100%'%></div> 
+      <div class="col-md-3"><%= image_tag @order.sneaker.photos[1].url, width: '100%'%></div> 
+      <div class="col-md-3"><%= image_tag @order.sneaker.photos[2].url, width: '100%'%></div> 
+    </div>
+    <div class="col sneaker-payment-infos">
       <p>
-        Achat de <strong><%= @order.sneaker.name %></strong> pour <strong><%= humanized_money_with_symbol @order.price %></strong>
-      </p> 
-      
+        Achat de <strong><%= @order.sneaker.sneaker_db.name %></strong> pour <strong><%= humanized_money_with_symbol @order.price %></strong>
+      </p>
+    </div>
+  
       <div class="adress_form" data-controller="address">
-        <%= simple_form_for(current_user, remote: true, data: {target: "address.form", id: current_user.id }) do |f| %>
+        <%= simple_form_for(current_user, html: {method: :PATCH }, remote: true, data: {target: "address.form", id: current_user.id }) do |f| %>
           <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
-          <%= f.input :city, label: 'Ville', input_html: { data: { target: 'address.city'} },required: true %>
-          <%= f.input :postal_code, label: 'Code Postal', input_html: { data: { target: 'address.postal_code'} }, required: true %>
-          <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" } %>
+          <%#= f.input :city, as: :hidden  %>
+          <%#= f.input :postal_code, as: :hidden  %>
+          
+          <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
+          <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
+          <button type="button" class="btn btn-dark">
+            <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;' %>
+          </button>
+        
         <% end %>
         <div data-target="address.display_address"></div>
         <div data-target="address.picker_button"></div>
@@ -68,6 +79,23 @@
   </div>
 </div>
 
+<style type="text/css">
+  .sneaker-payment-title {
+    text-align:center;
+  }
+  .sneaker-payment-infos {
+    padding: 20px 0;
+    text-align: center;
+  }
+  .sneaker-payment-photos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sneaker-payment {
+    margin: 50px auto 20px auto;
+  }
+</style>
 
 <script type="text/javascript">
   const paymentButton = document.querySelector('.pay_button');
@@ -86,6 +114,6 @@
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
 
 <%= javascript_pack_tag "point_picker" %>
-
+<%= javascript_pack_tag "algolia_autocomplete_address" %>
 
 

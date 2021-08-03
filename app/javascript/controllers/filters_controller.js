@@ -11,7 +11,7 @@ export default class extends Controller {
   }
 
   after_filter(url) {
-    console.log(url)
+    // console.log(url)
      Rails.ajax({
       type: "GET",
       url: url,

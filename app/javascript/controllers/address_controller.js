@@ -8,7 +8,7 @@ export default class extends Controller {
 
   refresh() {
   	let id = event.target.form.dataset.id;
-	  fetch(`/me/${id}/`, {
+	  fetch(`/users`, {
 	    method: "PATCH",
 	    headers: {
 	      "Accept": "application/json",
@@ -23,6 +23,7 @@ export default class extends Controller {
 	    })
 	  }).then(response => response.json())
 	    .then((data) => {
+        console.log(data);
 	    });
 
   	if (this.line1 != "" && this.city != "" && this.postal_code != "") {
