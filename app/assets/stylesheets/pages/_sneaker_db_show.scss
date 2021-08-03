@@ -19,8 +19,22 @@
 }
 
 @media (min-width: 0px) {
+  .sneaker-db-img-url {
+    margin-bottom: 20px;
+  }
   .sneaker-db-article {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .sneaker-db-legit, .sneaker-db-delivery {
+    text-align: center;
+    font-size: 12px;
+  }
+  .sneaker-db-legit-icon {
+    margin-bottom: 10px;
   }
 }
 
@@ -60,8 +74,8 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    // flex-wrap: wrap;
   }
+
   .sneaker-db-legit {
     margin-top: -40px;
     border-radius: 5px;
@@ -86,6 +100,7 @@
   .sneaker-db-article {
     display: flex;
     flex-direction: column;
+    margin: 0;
   }
   .sneaker-db-legit>p, .sneaker-db-delivery>p {
     margin-top: 20px;
