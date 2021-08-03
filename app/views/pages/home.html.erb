@@ -42,6 +42,23 @@
   </div>
 </div>
 
+<div class="container home-rds-selection">
+  <h2>La séléction Rock Don't Stock</h2>
+  <div class="sneaker-cards">
+    <% Sneaker.all.limit(8).each do |sneaker| %>
+        <div class="sneaker-card">
+          <%= link_to sneaker_path(sneaker), :style=>'color:#000000;' do %>
+            <div class="sneaker-card_img">
+              <%= cl_image_tag(sneaker.photos[0].key)  %>
+            </div>
+          <% end %>
+            <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
+            <div class="sneaker-price">À partir de <%= humanized_money_with_symbol sneaker.price %></div>
+        </div>
+    <% end %>
+  </div>  
+    <div class="all_sneakers"><%= link_to "Tout voir", sneaker_dbs_path %></div>
+</div>
 
 <div class="container">
   <div class="insta-posts-title">
@@ -100,7 +117,7 @@
     </div>  
   </div>
 
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <div id="carouselExampleIndicators" class="insta-post-carousel carousel slide" data-ride="carousel">
     
     <div class="carousel-inner">
       <div class="carousel-item active">

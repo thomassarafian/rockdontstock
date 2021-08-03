@@ -27,6 +27,7 @@
 }
 
 .insta-posts-title {
+  margin-top: 50px;
   text-align: center;
 }
 
@@ -53,11 +54,11 @@
 
 
 @media (min-width: 320px) {
-  .carousel.slide {
+  .insta-post-carousel {
     margin-bottom: 50px;
   }
   .insta-posts {
-    // display:none;
+    display:none;
   }
 }
 
@@ -69,11 +70,11 @@
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
-  .carousel.slide {
-    // display:none; #a remettre
+  .insta-post-carousel {
+    display:none; 
   }
   .insta-posts {
-    // margin-bottom: 50px;
+    margin-bottom: 50px;
     display:block;
   }
   .insta-posts.card-deck.card {

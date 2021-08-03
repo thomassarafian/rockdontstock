@@ -1,18 +1,18 @@
 <%#shoes_size = {
-	6.0=>39,
-	6.5=>39,
-	7.0=>40,
-	7.5=>40.5,
-	8.0=>41,
-	8.5=>42,
-	9.0=>42.5,
-	9.5=>43,
-	10.0=>44,
-	10.5=>44.5,
-	11.0=>45,
-	11.5=>46,
-	12.0=>46.5,
-	12.5=>47
+  6.0=>39,
+  6.5=>39,
+  7.0=>40,
+  7.5=>40.5,
+  8.0=>41,
+  8.5=>42,
+  9.0=>42.5,
+  9.5=>43,
+  10.0=>44,
+  10.5=>44.5,
+  11.0=>45,
+  11.5=>46,
+  12.0=>46.5,
+  12.5=>47
 }%>
 
 <h1 class="sneaker-show-title">Mon annonce</h1>
@@ -45,13 +45,13 @@
         <%= cl_image_tag(@sneaker.photos[4].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
       </div>
       <div class="carousel-item ">
-        <%= cl_image_tag(@sneaker.photos[5].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
+        <%#= cl_image_tag(@sneaker.photos[5].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
       </div>
       <div class="carousel-item ">
-        <%= cl_image_tag(@sneaker.photos[6].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
+        <%#= cl_image_tag(@sneaker.photos[6].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
       </div>
       <div class="carousel-item ">
-        <%= cl_image_tag(@sneaker.photos[7].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
+        <%#= cl_image_tag(@sneaker.photos[7].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -64,29 +64,31 @@
     </a>
   </div>
 
-  	<%# if photo.content_type.match(*"heic") %>
-  		<%#= cl_image_tag photo.key, :format => :png, height: 300, width: 300, crop: :fill%>
-  	<%# else %>
-  		<%#= cl_image_tag photo.key,  :transformation=>[
-  		  {y: 110, :width=>600, :height=>300, :crop=>"crop"}
-  		  ]  %>
-  	<%# end %>
+    <%# if photo.content_type.match(*"heic") %>
+      <%#= cl_image_tag photo.key, :format => :png, height: 300, width: 300, crop: :fill%>
+    <%# else %>
+      <%#= cl_image_tag photo.key,  :transformation=>[
+        {y: 110, :width=>600, :height=>300, :crop=>"crop"}
+        ]  %>
+    <%# end %>
   <%# end %>
   <div class="sneaker-show-infos">
     <h2 class="sneaker-show-infos-title"><%= @sneaker.sneaker_db.name %></h2>
-    <p><strong>Taille : </strong><%=	@sneaker.size %> FR</p> <%#= US (shoes_size[@sneaker.size] FR)%>
+    <p><strong>Taille : </strong><%=  @sneaker.size %> FR</p> <%#= US (shoes_size[@sneaker.size] FR)%>
     <p><strong>Prix : </strong><%= humanized_money_with_symbol(@sneaker.price) %></p>
     <p><strong>Condition : </strong><%= @sneaker.condition %>/10</p>
     <p><strong>Box : </strong><%= @sneaker.box %></p>
     <p><strong>Extras : </strong><%= @sneaker.extras %></p>
 
-    <%#= form_tag orders_path do %>
-      <%#= hidden_field_tag 'sneaker_id', @sneaker.id %>
-      <%#= submit_tag 'Acheter', class: 'btn btn-primary' %>
-    <%# end %>
+    <% if current_user != @sneaker.user %>
+      <%= form_tag orders_path do %>
+        <%= hidden_field_tag 'sneaker_id', @sneaker.id %>
+        <%= submit_tag 'Acheter', class: 'btn btn-primary' %>
+      <% end %>
+    <% end %>
 
     <% if policy(@sneaker).edit? %>
-    	<button type="button" class="btn btn-dark sneaker-show-btn">
+      <button type="button" class="btn btn-dark sneaker-show-btn">
         <%= link_to "Modifier la paire", edit_sneaker_path(@sneaker), style: 'color: white;' %>
       </button>
     <% end %>
@@ -95,7 +97,7 @@
       <button type="button" class="btn btn-danger sneaker-show-btn">
         <%= link_to "Supprimer", sneaker_path(@sneaker), method: :delete, data: { confirm: "Are you sure?" }, style: 'color: white;' %>
       </button>
-    <% end %>		
+    <% end %>   
 
   </div>
 </div>
@@ -143,21 +145,11 @@
       grid-template-columns: [first] 700px [line2] 1fr;
     }
   }
-  .carousel  {
-    /*margin: 400px;*/
-  }
-  .carousel-control-prev {
-
-  }
-  #carouselExampleIndicators {
-    /*margin-top:100px;*/
-  }
+  
   .sneaker-show-photos {
     object-fit: contain;
-    /*height: 300px;*/
+
   }
 
-  /*.carousel {
-    margin-top: 100px;
-  }*/
+
 </style>

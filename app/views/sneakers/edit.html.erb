@@ -1,3 +1,31 @@
-<h1>Modifier sa paire </h1>
+<h1 class="sneaker-edit-title">Modifier sa paire </h1>
 
-<%= render "form", sneaker: @sneaker %>
+<div class="sneaker-edit">
+  <%= simple_form_for(@sneaker) do |f| %>
+    <div class="info-input">
+      <%= f.input :size, required: true, label: "Taille US", placeholder: "10,5" %>
+
+      <%= f.input :price, required: true, label: "Prix", placeholder: "199" %>
+
+      <%= f.input :condition, collection: 1..10, required: true, hint: "Une note sur 10 de l'état de ta paire" %>
+
+      <%= f.input :box, collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true %>
+
+      <%= f.input :extras, required: true, label: "Extras", placeholder: "Lacets, stickers..."  %>
+    </div>
+    <div class="edit-sneaker">
+      <%= f.button :submit, "Modifier ma sneaker", class: "text-center btn btn-dark" %>
+    </div>
+  <% end %>
+</div>
+
+
+<style type="text/css">
+  .sneaker-edit-title {
+    margin-top: 100px;
+    text-align: center
+  }
+  .sneaker-edit {
+    margin: 0px 100px;
+  }
+</style>
