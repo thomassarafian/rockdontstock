@@ -4,11 +4,7 @@
       <% sneaker_dbs.all.limit(8).each do |sneaker| %>
           <div class="sneaker-card" >
             <%= link_to new_sneaker_db_sneaker_path(sneaker), :style=>'color:#000000;' do %>
-              <div class="sneaker-card_img"
-                data-action="click->refresh-list#greet" 
-                >
-                <!-- data-controller="sneaker-id"
-                data-sneaker-id-sneaker = "<%= sneaker.id %>" -->
+              <div class="sneaker-card_img">
                 <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
               </div>
             <% end %>

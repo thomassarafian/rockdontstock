@@ -1,6 +1,5 @@
 class SneakerDb < ApplicationRecord
   has_many :sneakers
-  has_many :subcategories
   include PgSearch::Model
   pg_search_scope :search_by_name_category_sub_and_price,
     against: [:name, :category, :subcategory, :price_cents],

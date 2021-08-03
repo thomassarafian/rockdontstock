@@ -223,7 +223,7 @@ class User < ApplicationRecord
     user_params[:token] = auth.credentials.token
     user_params[:token_expiry] = Time.at(auth.credentials.expires_at)
     
-    user_params[:date_of_birth] =  Date.strptime(auth.info.birthday,'%d/%m/%Y')
+    # user_params[:date_of_birth] =  Date.strptime(auth.info.birthday,'%d/%m/%Y')
     
     user_params = user_params.to_h
 

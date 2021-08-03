@@ -3,7 +3,7 @@
 <div class="container search-sneaker-model">
   <% unless params[:sneaker_db_id].present? %>
     <div data-controller="refresh-list">
-      <div class="search-models"  data-refresh-list-target="searchModel">
+      <div class="search-models">
         <h1 class="search-sneaker-model-title">Recherche ton modèle</h1>
         <%= form_with url: sneaker_dbs_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
           <%= f.text_field :query,

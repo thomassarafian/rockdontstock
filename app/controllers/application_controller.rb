@@ -41,14 +41,11 @@ class ApplicationController < ActionController::Base
         @sneaker_dbs = @sneaker_dbs.public_send("filter_by_#{key}", value) if value.present?
       end
     elsif !params[:category].present? || !params[:price].present? || !params[:condition].present? || !params[:size].present?
-      reset_session
+      session.delete(:filter_params)
     end
-
     if params[:query].present?
       @sneaker_dbs = @sneaker_dbs.search_by_name_category_sub_and_price(params[:query])
     end
-    
-    
     respond_to do |format|
       format.html
       format.json 

@@ -17,62 +17,71 @@
   </div>
   
   <div class="photos-input">
+    <div class='sneaker-photo-input'>
+      <%= f.label :photos, "photo 1"  %>
+      <%= f.file_field :photos, as: :file, :multiple => true,
+      class: "hidden", id: 'photo-input0',
+      class: 'upload-photo photo-input0',
+      label: '📷 Ajoute une photo' %>
+      <%= image_tag "", width: 0, class: "hidden", id: "photo-preview0" %>
+    </div>
 
-    <%= f.file_field :photos, as: :file, :multiple => true,
-    class: "hidden", id: 'photo-input0',
-    class: 'upload-photo photo-input0',
-    label_html: '📷 Ajoute une photo' %>
-    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview0" %>
-
-
-    <%= f.file_field :photos, as: :file, :multiple => true,
-    class: "hidden", id: 'photo-input1',
-    class: 'upload-photo photo-input1',
-    label: '📷 Ajoute une photo' %>
-    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview1" %>
-    
-
-    <%= f.file_field :photos, as: :file, :multiple => true,
-    class: "hidden", id: 'photo-input2',
-    class: 'upload-photo photo-input2',
-    label: '📷 Ajoute une photo' %>
-    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview2" %>
-
-
-    <%= f.file_field :photos, as: :file, :multiple => true,
-    class: "hidden", id: 'photo-input3',
-    class: 'upload-photo photo-input3',
-    label: '📷 Ajoute une photo' %>
-    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview3" %>
-
-
-    <%= f.file_field :photos, as: :file, :multiple => true,
-    class: "hidden", id: 'photo-input4',
-    class: 'upload-photo photo-input4',
-    label: '📷 Ajoute une photo' %>
-    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview4" %>
-
-
-    <%= f.file_field :photos, as: :file, :multiple => true,
-    class: "hidden", id: 'photo-input5',
-    class: 'upload-photo photo-input5',
-    label: '📷 Ajoute une photo' %>
-    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview5" %>
-
-
-    <%= f.file_field :photos, as: :file, :multiple => true,
-    class: "hidden", id: 'photo-input6',
-    class: 'upload-photo photo-input6',
-    label: '📷 Ajoute une photo' %>
-    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview6" %>
-
-
-    <%= f.file_field :photos, as: :file, :multiple => true,
-    class: "hidden", id: 'photo-input7',
-    class: 'upload-photo photo-input7',
-    label: '📷 Ajoute une photo' %>
-
-    <%= image_tag "", width: 0, class: "hidden", id: "photo-preview7" %>
+    <div class='sneaker-photo-input'>
+      <%= f.label :photos, "photo 2"  %>
+      <%= f.file_field :photos, as: :file, :multiple => true,
+      class: "hidden", id: 'photo-input1',
+      class: 'upload-photo photo-input1',
+      label: '📷 Ajoute une photo' %>
+      <%= image_tag "", width: 0, class: "hidden", id: "photo-preview1" %>
+    </div>
+    <div class='sneaker-photo-input'>
+      <%= f.label :photos, "photo 3"  %>
+      <%= f.file_field :photos, as: :file, :multiple => true,
+      class: "hidden", id: 'photo-input2',
+      class: 'upload-photo photo-input2',
+      label: '📷 Ajoute une photo' %>
+      <%= image_tag "", width: 0, class: "hidden", id: "photo-preview2" %>
+    </div>
+    <div class='sneaker-photo-input'>
+      <%= f.label :photos, "photo 4"  %>
+      <%= f.file_field :photos, as: :file, :multiple => true,
+      class: "hidden", id: 'photo-input3',
+      class: 'upload-photo photo-input3',
+      label: '📷 Ajoute une photo' %>
+      <%= image_tag "", width: 0, class: "hidden", id: "photo-preview3" %>
+    </div>
+    <div class='sneaker-photo-input'>
+      <%= f.label :photos, "photo 5"  %>
+      <%= f.file_field :photos, as: :file, :multiple => true,
+      class: "hidden", id: 'photo-input4',
+      class: 'upload-photo photo-input4',
+      label: '📷 Ajoute une photo' %>
+      <%= image_tag "", width: 0, class: "hidden", id: "photo-preview4" %>
+    </div>
+    <div class='sneaker-photo-input'>
+      <%= f.label :photos, "photo 6"  %>
+      <%= f.file_field :photos, as: :file, :multiple => true,
+      class: "hidden", id: 'photo-input5',
+      class: 'upload-photo photo-input5',
+      label: '📷 Ajoute une photo' %>
+      <%= image_tag "", width: 0, class: "hidden", id: "photo-preview5" %>
+    </div>
+    <div class='sneaker-photo-input'>
+      <%= f.label :photos, "photo 7"  %>
+      <%= f.file_field :photos, as: :file, :multiple => true,
+      class: "hidden", id: 'photo-input6',
+      class: 'upload-photo photo-input6',
+      label: '📷 Ajoute une photo' %>
+      <%= image_tag "", width: 0, class: "hidden", id: "photo-preview6" %>
+    </div>
+    <div class='sneaker-photo-input'>
+      <%= f.label :photos, "photo 8"  %>
+      <%= f.file_field :photos, as: :file, :multiple => true,
+      class: "hidden", id: 'photo-input7',
+      class: 'upload-photo photo-input7',
+      label: '📷 Ajoute une photo' %>
+      <%= image_tag "", width: 0, class: "hidden", id: "photo-preview7" %>
+    </div>
   </div>
   <div class="submit-new-sneaker">
     <%= f.button :submit, "Ajouter ma sneaker", class: "text-center btn btn-dark" %>
@@ -81,6 +90,11 @@
 <% end %>
 
 <style type="text/css">
+  .sneaker-photo-input {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
   .submit-new-sneaker {
     text-align: center;
   }
@@ -183,21 +197,26 @@
   let photosInput = document.querySelector('.photos-input');  
   let nextBtn = document.querySelector('.next-btn');
   let photoInput0 = document.getElementById('photo-input0');
-  let sneakerExtras = document.getElementById('sneaker_extras')
-
-  // photosInput.style.display = "none";
+  let sneakerExtras = document.getElementById('sneaker_extras');
+  let sneakerBox = document.getElementById('sneaker_box');
+  let submitSneaker = document.querySelector('.submit-new-sneaker');
+  
+  
+  photosInput.style.display = "none";
   nextBtn.style.display = "none";
-  // photoInput0.style.display = "none";
+  submitSneaker.style.display = "none"
   // infoInput.style.display = "none";
   
-  sneakerExtras.addEventListener('input', (event) => {
-    nextBtn.style.display = "block";
-    nextBtn.addEventListener('click', (event) => { 
-      photosInput.style.display = "block";
-      infoInput.style.display = "none";
-      nextBtn.style.display = "none";
-    })
-
+  sneakerBox.addEventListener('input', (event) => {
+    if (sneaker_size.value && sneaker_price.value && sneaker_condition.value && sneaker_box.value) { 
+      nextBtn.style.display = "block";
+      nextBtn.addEventListener('click', (event) => { 
+        photosInput.style.display = "flex";
+        submitSneaker.style.display = "block";
+        infoInput.style.display = "none";
+        nextBtn.style.display = "none";
+      })
+    } 
   });
 
 
