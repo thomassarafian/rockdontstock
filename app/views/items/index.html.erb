@@ -30,7 +30,7 @@
             <!-- <p><span class="font-weight-bold">RESULTAT : LEGIT</span></p> -->
           </div>
           <button type="button" class="purchases-problem-btn btn btn-outline-dark btn-sm">
-            Signaler un problème
+            Voir mon annonce
           </button>
         </div>
       <% end %>
@@ -71,7 +71,7 @@
           <!-- <p><span class="font-weight-bold">RESULTAT : En attente</span></p> -->
         </div>
         <button type="button" class="sales-problem-btn btn btn-outline-dark btn-sm">
-            Signaler un problème
+           <%= link_to("Voir mon annonce", sneaker_path(sneaker), class: 'see-my-sneaker') %>
           </button>
         </div>
       <% end %>
@@ -79,6 +79,8 @@
   </div>
   
 </div>
+
+
 
 <script>
   function myTab() {

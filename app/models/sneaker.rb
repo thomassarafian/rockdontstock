@@ -10,7 +10,7 @@ class Sneaker < ApplicationRecord
   validates :condition, presence: true
   validates :box, presence: true
   validates :price, format: { with: /([\s\d]+)/ }
-  validate :photos, if: :photos_limit_min
+  # validate :photos, if: :photos_limit_min
   monetize :price_cents
 
 
@@ -26,8 +26,8 @@ class Sneaker < ApplicationRecord
   private    
   
   def photos_limit_min
-    return if self.photos.empty?
-    flash[:notice] =  " You must to upload at least 7 images" if self.photos.length <= 7
+    # return false if self.photos.empty?
+    errors.add(:photos, " You must to upload at least 7 images") if self.photos.length <= 7 || self.photos.empty?
     # errors.add(:photos, " You must to upload at least 7 images") if self.photos.length <= 7
     return false
   end

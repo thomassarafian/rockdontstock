@@ -15,42 +15,149 @@
 	12.5=>47
 }%>
 
-<h1><%= @sneaker.name %></h1>
+<h1 class="sneaker-show-title">Mon annonce</h1>
+<div class="sneaker-show">
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <%= cl_image_tag(@sneaker.photos[0].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
+      </div>
+      <div class="carousel-item ">
+        <%= cl_image_tag(@sneaker.photos[1].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
+      </div>
+      <div class="carousel-item ">
+        <%= cl_image_tag(@sneaker.photos[2].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
+      </div>
+      <div class="carousel-item ">
+        <%= cl_image_tag(@sneaker.photos[3].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
+      </div>
+      <div class="carousel-item ">
+        <%= cl_image_tag(@sneaker.photos[4].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
+      </div>
+      <div class="carousel-item ">
+        <%= cl_image_tag(@sneaker.photos[5].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
+      </div>
+      <div class="carousel-item ">
+        <%= cl_image_tag(@sneaker.photos[6].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
+      </div>
+      <div class="carousel-item ">
+        <%= cl_image_tag(@sneaker.photos[7].key, class: 'd-block w-100 sneaker-show-photos', style: "height: 100%;") %>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 
-<% @sneaker.photos.each do |photo|	%>
-	<% if photo.content_type.match(*"heic") %>
-		<%= cl_image_tag photo.key, :format => :png, height: 300, width: 300, crop: :fill%>
-	<% else %>
-		<%= cl_image_tag photo.key,  :transformation=>[
-		  {y: 110, :width=>600, :height=>300, :crop=>"crop"}
-		  ]  %>
+  	<%# if photo.content_type.match(*"heic") %>
+  		<%#= cl_image_tag photo.key, :format => :png, height: 300, width: 300, crop: :fill%>
+  	<%# else %>
+  		<%#= cl_image_tag photo.key,  :transformation=>[
+  		  {y: 110, :width=>600, :height=>300, :crop=>"crop"}
+  		  ]  %>
+  	<%# end %>
+  <%# end %>
+  <div class="sneaker-show-infos">
+    <h2 class="sneaker-show-infos-title"><%= @sneaker.sneaker_db.name %></h2>
+    <p><strong>Taille : </strong><%=	@sneaker.size %> FR</p> <%#= US (shoes_size[@sneaker.size] FR)%>
+    <p><strong>Prix : </strong><%= humanized_money_with_symbol(@sneaker.price) %></p>
+    <p><strong>Condition : </strong><%= @sneaker.condition %>/10</p>
+    <p><strong>Box : </strong><%= @sneaker.box %></p>
+    <p><strong>Extras : </strong><%= @sneaker.extras %></p>
 
-	<% end %>
-<% end %>
+    <%#= form_tag orders_path do %>
+      <%#= hidden_field_tag 'sneaker_id', @sneaker.id %>
+      <%#= submit_tag 'Acheter', class: 'btn btn-primary' %>
+    <%# end %>
 
-<p>Taille : <%=	@sneaker.size %> FR</p> <%#= US (shoes_size[@sneaker.size] FR)%>
+    <% if policy(@sneaker).edit? %>
+    	<button type="button" class="btn btn-dark sneaker-show-btn">
+        <%= link_to "Modifier la paire", edit_sneaker_path(@sneaker), style: 'color: white;' %>
+      </button>
+    <% end %>
 
+    <% if policy(@sneaker).destroy? %>
+      <button type="button" class="btn btn-danger sneaker-show-btn">
+        <%= link_to "Supprimer", sneaker_path(@sneaker), method: :delete, data: { confirm: "Are you sure?" }, style: 'color: white;' %>
+      </button>
+    <% end %>		
 
-<p>Prix : <%= humanized_money_with_symbol(@sneaker.price) %></p>
-<p>Condition : <%= @sneaker.condition %>/10</p>
-<p>Box : <%= @sneaker.box %></p>
-<p>Extras : <%= @sneaker.extras %></p>
-
-<%= form_tag orders_path do %>
-  <%= hidden_field_tag 'sneaker_id', @sneaker.id %>
-  <%= submit_tag 'Acheter', class: 'btn btn-primary' %>
-<% end %>
-
-<% if policy(@sneaker).edit? %>
-	<p><%= link_to "Modifier #{@sneaker.name}", edit_sneaker_path(@sneaker) %></p>
-	<p><%=	link_to "MODIFIE TON PROFIL", edit_user_registration_path(current_user) %></p>
-<% end %>
-
-<% if policy(@sneaker).destroy? %>
-	</p><%=	link_to "Supprimer", sneaker_path(@sneaker), method: :delete, data: { confirm: "Are you sure?" } %></p>
-<% end %>		
+  </div>
+</div>
 
 
-<%=	link_to "Retour à la liste", sneakers_path%>
+<style type="text/css">
+  @media (min-width: 320px) {
+    .sneaker-show-title {
+      text-align: center;
+      margin-top: 60px;
+    }
+    .sneaker-show {
+      display: flex;
+      flex-direction: column;
+      margin: 50px;
+      text-align: center;
+    }  
+    .sneaker-show-infos-title {
+      font-size: 20px;
+    }
+    .sneaker-show-btn {
+      margin-top: 10px;
+    }
+  }
 
+  @media (min-width: 768px) {
+    .sneaker-show {
+      display: grid;
+      grid-template-columns: [first] 300px [line2] 1fr;
+      align-items: center;
+      grid-gap: 50px;
+      margin: 100px;
+      text-align: left;
+    }
+  }
 
+  @media (min-width: 1024px) {
+    .sneaker-show {
+      grid-template-columns: [first] 500px [line2] 1fr;
+      grid-gap: 60px;
+    }
+  }
+  @media (min-width: 1440px) {
+    .sneaker-show {
+      grid-template-columns: [first] 700px [line2] 1fr;
+    }
+  }
+  .carousel  {
+    /*margin: 400px;*/
+  }
+  .carousel-control-prev {
+
+  }
+  #carouselExampleIndicators {
+    /*margin-top:100px;*/
+  }
+  .sneaker-show-photos {
+    object-fit: contain;
+    /*height: 300px;*/
+  }
+
+  /*.carousel {
+    margin-top: 100px;
+  }*/
+</style>

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
 	}
 	
-  resources :sneakers, only: [:index, :new, :create, :show, :edit, :update]
+  resources :sneakers, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 
   resources :sneaker_dbs, only: [:index, :show] do
     resources :sneakers, only: [:new, :create]
