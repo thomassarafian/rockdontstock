@@ -5,7 +5,7 @@
     <div data-controller="refresh-list">
       <div class="search-models">
         <h1 class="search-sneaker-model-title">Recherche ton modèle</h1>
-        <%= form_with url: sneaker_dbs_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
+        <%= form_with url: sneaker_dbs_path, method: :get, html: { class: 'mb-5 search-sneaker-model-form', data: { refresh_list_target: 'form' } } do |f| %>
           <%= f.text_field :query,
             class: "form-control",
             placeholder: 'Recherche ta paire',
@@ -16,7 +16,7 @@
             } %>
         <% end %>
 
-      <div class="search-models" >
+      <!-- <div class="search-models" > -->
         <div data-refresh-list-target="list">
           <!-- <div id="scroll" class="container">
             <div class="sneaker-cards" >
@@ -33,7 +33,7 @@
             </div>  
           </div> -->
         </div>
-      </div>
+      <!-- </div> -->
       </div>
     <% end %>
     
@@ -53,15 +53,37 @@
 
 
 <style type="text/css">
+
+  @media (min-width: 768px) {
+    .search-sneaker-model-form {
+      width: 400px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .search-sneaker-model-form {
+      width: 500px;
+    }
+  }
+  
+
   .new-sneaker-form {
     /*margin-top: 70px;*/
   }
   .search-sneaker-model-title {
     text-align: center;
-    margin-top:60px;
+    margin-bottom:40px;
   }
   
-  
+  .search-sneaker-model {
+    margin-top: 60px;
+  }
+  .search-models {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .choose-btn {
     display:none;
     position:absolute;
@@ -73,3 +95,11 @@
   }
 
 </style>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.search-sneaker-model-form').on('input', function() {
+      $('.search-sneaker-model ').css('height', 'auto');
+    });
+  });
+
+</script>

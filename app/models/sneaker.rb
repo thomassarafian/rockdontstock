@@ -10,7 +10,7 @@ class Sneaker < ApplicationRecord
   validates :condition, presence: true
   validates :box, presence: true
   validates :price, format: { with: /([\s\d]+)/ }
-  # validate :photos, if: :photos_limit_min
+  validate :photos, if: :photos_limit_min
   monetize :price_cents
 
 

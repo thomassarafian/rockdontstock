@@ -16,9 +16,7 @@ export default class extends Controller {
   get nextUrl() {
     return this.data.get("nextUrl");
   }
-  scroll() {
 
-  }
   loadMore(url) {
     Rails.ajax({
       type: "GET",

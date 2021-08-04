@@ -1,15 +1,15 @@
 <%= simple_form_for(sneaker.new_record? ? [sneaker_db, sneaker] : sneaker) do |f| %>
   <div class="info-input">
+  	 <%= f.input :size, required: true, placeholder: "Taille US", label: false, input_html: { class: "info-input-sneaker" } %>
 
-  	<%= f.input :size, required: true, placeholder: "Taille US", label: false %>
+  	<%= f.input :condition, prompt: "Condition", collection: 1..10, required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
 
-  	<%= f.input :condition, placeholder: "Condition", collection: 1..10, required: true, hint: "Une note sur 10 de l'état de ta paire", label: false %>
+  	<%= f.input :box, prompt: "Box", collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
 
-  	<%= f.input :box, collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true %>
+  	<%= f.input :extras, required: true, placeholder: "Commentaires", label: false, input_html: { class: "info-input-sneaker" }  %>
 
-  	<%= f.input :extras, required: true, placeholder: "Commentaires"  %>
+  	<%= f.input :price, required: true, placeholder: "Prix", label: false, input_html: { class: "info-input-sneaker", value: nil }  %>
 
-  	<%= f.input :price, required: true, placeholder: "199" %>
   </div>
 
   <div class="next-btn">
@@ -90,6 +90,18 @@
 <% end %>
 
 <style type="text/css">
+  .next-btn {
+    text-align: center;
+  }
+  .info-input-sneaker {
+    width: 250px;
+    margin: 10px 0;
+  }
+  .info-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .sneaker-photo-input {
     display: flex;
     text-align: center;
@@ -147,52 +159,6 @@
 
 
 <script type="text/javascript">
-  let photoPreview0 = document.getElementById('photo-preview0');
-  let photoPreview1 = document.getElementById('photo-preview1');
-  let photoPreview2 = document.getElementById('photo-preview2');
-  let photoPreview3 = document.getElementById('photo-preview3');
-  let photoPreview4 = document.getElementById('photo-preview4');
-  let photoPreview5 = document.getElementById('photo-preview5');
-  let photoPreview6 = document.getElementById('photo-preview6');
-  let photoPreview7 = document.getElementById('photo-preview7');
-
-  photoPreview0.addEventListener('load', (event) => {
-    let photoInput0 = document.querySelector('.photo-input0');
-    photoInput0.style.backgroundImage = `url(${photoPreview0.src})`;
-  })
-  photoPreview1.addEventListener('load', (event) => {
-    let photoInput1 = document.querySelector('.photo-input1');
-    photoInput1.style.backgroundImage = `url(${photoPreview1.src})`;
-  })
-  photoPreview2.addEventListener('load', (event) => {
-    let photoInput2 = document.querySelector('.photo-input2');
-    photoInput2.style.backgroundImage = `url(${photoPreview2.src})`;
-  })
-  photoPreview3.addEventListener('load', (event) => {
-    let photoInput3 = document.querySelector('.photo-input3');
-    photoInput3.style.backgroundImage = `url(${photoPreview3.src})`;
-  })
-  photoPreview3.addEventListener('load', (event) => {
-    let photoInput3 = document.querySelector('.photo-input3');
-    photoInput3.style.backgroundImage = `url(${photoPreview3.src})`;
-  })
-  photoPreview4.addEventListener('load', (event) => {
-    let photoInput4 = document.querySelector('.photo-input4');
-    photoInput4.style.backgroundImage = `url(${photoPreview4.src})`;
-  })
-  photoPreview5.addEventListener('load', (event) => {
-    let photoInput5 = document.querySelector('.photo-input5');
-    photoInput5.style.backgroundImage = `url(${photoPreview5.src})`;
-  })
-  photoPreview6.addEventListener('load', (event) => {
-    let photoInput6 = document.querySelector('.photo-input6');
-    photoInput6.style.backgroundImage = `url(${photoPreview6.src})`;
-  })
-  photoPreview7.addEventListener('load', (event) => {
-    let photoInput7 = document.querySelector('.photo-input7');
-    photoInput7.style.backgroundImage = `url(${photoPreview7.src})`;
-  })
-
   let infoInput =  document.querySelector('.info-input');
   let photosInput = document.querySelector('.photos-input');  
   let nextBtn = document.querySelector('.next-btn');
@@ -201,13 +167,61 @@
   let sneakerBox = document.getElementById('sneaker_box');
   let submitSneaker = document.querySelector('.submit-new-sneaker');
   
+  nextBtn.addEventListener('click', (event) => {
+    let photoPreview0 = document.getElementById('photo-preview0');
+    let photoPreview1 = document.getElementById('photo-preview1');
+    let photoPreview2 = document.getElementById('photo-preview2');
+    let photoPreview3 = document.getElementById('photo-preview3');
+    let photoPreview4 = document.getElementById('photo-preview4');
+    let photoPreview5 = document.getElementById('photo-preview5');
+    let photoPreview6 = document.getElementById('photo-preview6');
+    let photoPreview7 = document.getElementById('photo-preview7');
+
+    photoPreview0.addEventListener('load', (event) => {
+      let photoInput0 = document.querySelector('.photo-input0');
+      photoInput0.style.backgroundImage = `url(${photoPreview0.src})`;
+    })
+    photoPreview1.addEventListener('load', (event) => {
+      let photoInput1 = document.querySelector('.photo-input1');
+      photoInput1.style.backgroundImage = `url(${photoPreview1.src})`;
+    })
+    photoPreview2.addEventListener('load', (event) => {
+      let photoInput2 = document.querySelector('.photo-input2');
+      photoInput2.style.backgroundImage = `url(${photoPreview2.src})`;
+    })
+    photoPreview3.addEventListener('load', (event) => {
+      let photoInput3 = document.querySelector('.photo-input3');
+      photoInput3.style.backgroundImage = `url(${photoPreview3.src})`;
+    })
+    photoPreview3.addEventListener('load', (event) => {
+      let photoInput3 = document.querySelector('.photo-input3');
+      photoInput3.style.backgroundImage = `url(${photoPreview3.src})`;
+    })
+    photoPreview4.addEventListener('load', (event) => {
+      let photoInput4 = document.querySelector('.photo-input4');
+      photoInput4.style.backgroundImage = `url(${photoPreview4.src})`;
+    })
+    photoPreview5.addEventListener('load', (event) => {
+      let photoInput5 = document.querySelector('.photo-input5');
+      photoInput5.style.backgroundImage = `url(${photoPreview5.src})`;
+    })
+    photoPreview6.addEventListener('load', (event) => {
+      let photoInput6 = document.querySelector('.photo-input6');
+      photoInput6.style.backgroundImage = `url(${photoPreview6.src})`;
+    })
+    photoPreview7.addEventListener('load', (event) => {
+      let photoInput7 = document.querySelector('.photo-input7');
+      photoInput7.style.backgroundImage = `url(${photoPreview7.src})`;
+    })
+  })
+  
   
   photosInput.style.display = "none";
   nextBtn.style.display = "none";
   submitSneaker.style.display = "none"
   // infoInput.style.display = "none";
   
-  sneakerBox.addEventListener('input', (event) => {
+  document.getElementById('sneaker_price').addEventListener('input', (event) => {
     if (sneaker_size.value && sneaker_price.value && sneaker_condition.value && sneaker_box.value) { 
       nextBtn.style.display = "block";
       nextBtn.addEventListener('click', (event) => { 
