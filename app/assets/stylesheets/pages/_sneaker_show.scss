@@ -1,0 +1,84 @@
+  .sneaker-show-prev-icon,
+  .sneaker-show-next-icon {
+    height: 80px;
+    width: 80px;
+    outline: black;
+    background-size: 100%, 100%;
+    background-image: none;
+  }
+
+  .sneaker-show-next-icon:after
+  {
+    content: '>';
+    font-size: 35px;
+    color: red;
+  }
+
+  .sneaker-show-prev-icon:after {
+    content: '<';
+    font-size: 35px;
+    color: red;
+  }
+  
+  .carousel-item {
+    text-align: center;
+  }
+  
+  @media (min-width: 320px) {
+    .sneaker-show-photos {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+    }
+    .sneaker-show-title {
+      text-align: center;
+      margin-top: 60px;
+    }
+    .sneaker-show {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }  
+    .sneaker-show-infos-title {
+      font-size: 20px;
+    }
+    .sneaker-show-btn {
+      margin-top: 10px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .sneaker-show-photos {
+      width: 250px;
+      height: 250px;
+    }
+    .sneaker-show {
+      display: grid;
+      grid-template-columns: [first] 300px [line2] 1fr;
+      align-items: center;
+      grid-gap: 50px;
+      margin: 70px;
+      text-align: left;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .sneaker-show-photos {
+      width: 350px;
+      height: 350px;
+    }
+    .sneaker-show {
+      grid-template-columns: [first] 500px [line2] 1fr;
+      grid-gap: 60px;
+    }
+  }
+  @media (min-width: 1440px) {
+    .sneaker-show-photos {
+      width: 450px;
+      height: 450px;
+    }
+    .sneaker-show {
+      grid-template-columns: [first] 700px [line2] 1fr;
+    }
+  }
+  
