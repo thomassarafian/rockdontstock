@@ -7,24 +7,24 @@ export default class extends Controller {
 	static targets = ["form", "line1", "city", "postal_code", "picker_button", "display_address"]
 
   refresh() {
-  	let id = event.target.form.dataset.id;
-	  fetch(`/users`, {
-	    method: "PATCH",
-	    headers: {
-	      "Accept": "application/json",
-	      "Content-Type": "application/json"
-	    },
-	    body: JSON.stringify({ 
-	    	user: { 
-	    		line1: this.line1,
-	    		city: this.city,
-	    		postal_code: this.postal_code,
-	    	}
-	    })
-	  }).then(response => response.json())
-	    .then((data) => {
-        console.log(data);
-	    });
+  	// let id = event.target.form.dataset.id;
+	  // fetchWithToken(`/users`, {
+	  //   method: "PATCH",
+	  //   headers: {
+	  //     "Accept": "application/json",
+	  //     "Content-Type": "application/json"
+	  //   },
+	  //   body: JSON.stringify({ 
+	  //   	user: { 
+	  //   		line1: this.line1,
+	  //   		city: this.city,
+	  //   		postal_code: this.postal_code,
+	  //   	}
+	  //   })
+	  // }).then(response => response.json())
+	  //   .then((data) => {
+   //      console.log(data);
+	  //   });
 
   	if (this.line1 != "" && this.city != "" && this.postal_code != "") {
     	this.display_addressTarget.innerText = `Mon adresse actuelle : ${this.line1} ${this.city} ${this.postal_code}`;

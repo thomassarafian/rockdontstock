@@ -15,9 +15,6 @@
       <div class="adress_form" data-controller="address">
         <%= simple_form_for(current_user, html: {method: :PATCH }, remote: true, data: {target: "address.form", id: current_user.id }) do |f| %>
           <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
-          <%#= f.input :city, as: :hidden  %>
-          <%#= f.input :postal_code, as: :hidden  %>
-          
           <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
           <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
           <button type="button" class="btn btn-dark">

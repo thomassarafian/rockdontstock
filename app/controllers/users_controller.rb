@@ -10,12 +10,13 @@ class UsersController < ApplicationController
 	def update
 		@user.update(user_params)
     @user.save!
-    if @user.save
-      respond_to do |format|
-        format.html
-        format.json { render json: { user: @user } }
-      end
-	   end
+    # if @user.save
+      # respond_to do |format|
+      #   format.html
+      #   format.js 
+      #   format.json { render json: { user: @user } }
+      # end
+	   # end
   end
 	
   private
