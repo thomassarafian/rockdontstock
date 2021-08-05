@@ -1,4 +1,4 @@
-<%= simple_form_for(sneaker.new_record? ? [sneaker_db, sneaker] : sneaker) do |f| %>
+<%= simple_form_for(sneaker.new_record? ? [sneaker_db, sneaker] : sneaker, id: 'newSneakerForm') do |f| %>
   <div class="info-input">
   	 <%= f.input :size, collection: [ ["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], 
         ["5", 5], ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
@@ -14,8 +14,11 @@
   	<%= f.input :extras, required: true, placeholder: "Commentaires", label: false,
     input_html: { class: "info-input-sneaker" }  %>
 
-  	<%= f.input :price, required: true, placeholder: "Prix", label: false,
-    input_html: { class: "info-input-sneaker", value: nil }  %>
+
+    	<%= f.input :price, required: true, placeholder: "Prix", label: false,
+      input_html: { class: "info-input-sneaker", value: nil} %>
+      <%= f.error :price, :id => "price-sneaker-error" %>
+
 
   </div>
 
@@ -228,6 +231,15 @@
   }
 </style>
 <style type="text/css">
+  .sneaker_price, #sneaker_price {
+    margin-bottom: 0;
+  }
+  
+  #price-sneaker-error {
+    width: 250px;
+    visibility: hidden;
+    color: #e74c3c;
+  }
   @media (min-width: 320px) {
     .summary-name>p, .summary-size>p, .summary-cond>p, .summary-extras>p, .summary-box>p {
       margin-bottom: 5px;
@@ -258,25 +270,41 @@
 </style>
 
 <script type="text/javascript">
-  // document.querySelector('.photos-input').style.display = "none";
-  // document.querySelector('.next-btn').style.display = "none";
-  // document.querySelector('.snd-next-btn').style.display = "none";
-  // document.querySelector('.submit-new-sneaker').style.display = "none"
-  // document.querySelector('.summary-new-sneaker').style.display = "none"
+  document.querySelector('.photos-input').style.display = "none";
+  document.querySelector('.next-btn').style.display = "none";
+  document.querySelector('.snd-next-btn').style.display = "none";
+  document.querySelector('.submit-new-sneaker').style.display = "none"
+  document.querySelector('.summary-new-sneaker').style.display = "none"
 
   document.getElementById('sneaker_price').addEventListener('input', (event) => {
+    function checkInputs() {
+      if (sneaker_price.value.match(/[^0-9,]/g)) {
+        setErrorFor(sneaker_price, "<small>Le prix ne doit contenir que des chiffres et/ou une virgule. Ex: 199,99 ou 199</small>");
+        return -1;
+      }
+    }
+    function setErrorFor(input, message) {
+      const priceSneakerError = document.querySelector('#price-sneaker-error');
+      priceSneakerError.style.visibility = "visible";
+      priceSneakerError.innerHTML = message;
+      document.querySelector('#sneaker_price').classList.add("is-invalid");
+    }
     let photosInput = document.querySelector('.photos-input');
     let infoInput =  document.querySelector('.info-input');
     let submitSneaker = document.querySelector('.submit-new-sneaker');
     let nextBtn = document.querySelector('.next-btn');
-
+    
+    
     if (sneaker_size.value && sneaker_price.value && sneaker_condition.value && sneaker_box.value) { 
       nextBtn.style.display = "block";
-      nextBtn.addEventListener('click', (event) => { 
-        photosInput.style.display = "flex";
-        // submitSneaker.style.display = "block";
-        infoInput.style.display = "none";
-        nextBtn.style.display = "none";
+      nextBtn.addEventListener('click', (event) => {
+        if (checkInputs() == -1) {}
+        else {
+          photosInput.style.display = "flex";
+          submitSneaker.style.display = "block";
+          infoInput.style.display = "none";
+          nextBtn.style.display = "none";
+        }
       })
     } 
   });
