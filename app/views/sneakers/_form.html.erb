@@ -241,7 +241,7 @@
   }
   @media (min-width: 768px) {
     .summary-new-sneaker {
-      display: grid !important;
+      display: grid;
       grid-template-columns: repeat(2, 1fr);
       justify-items: center;
       align-items: center;
@@ -308,11 +308,12 @@
           
           document.querySelector('.summary-price-seller').innerHTML = `<p class="summary-price-sneaker">Prix demandé : 
           <span id="summary-price-seller">${sneaker_price.value}€</span></p>`;
-          
+          let summaryPriceCheck = ((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2).toFixed(2);
           document.querySelector('.summary-price-check').innerHTML = `<p class="summary-price-sneaker">Frais d’authentification :
-          <span id="summary-price-check">${(sneaker_price.value*0.12)/2}€</span></p>`;
+          <span id="summary-price-check">${summaryPriceCheck}€</span></p>`;
+          let summaryPriceTotal = parseFloat(((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2) + 4.99 + parseFloat(sneaker_price.value.replace(/,/g, "."))).toFixed(2);
           document.querySelector('.summary-price-total').innerHTML = `<p class="summary-price-sneaker">Total : 
-          <span id="summary-price-total">${sneaker_price.value + ((sneaker_price.value*0.12)/2) + 4.99}€</span></p>`
+          <span id="summary-price-total">${summaryPriceTotal}€</span></p>`
           
           
         });
