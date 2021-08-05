@@ -1,14 +1,21 @@
 <%= simple_form_for(sneaker.new_record? ? [sneaker_db, sneaker] : sneaker) do |f| %>
   <div class="info-input">
-  	 <%= f.input :size, required: true, placeholder: "Taille US", label: false, input_html: { class: "info-input-sneaker" } %>
+  	 <%= f.input :size, collection: [ ["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], 
+        ["5", 5], ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
+        ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
+        ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18] ], required: true, prompt: "Taille US", 
+        label: false, input_html: { class: "info-input-sneaker" } %>
 
-  	<%= f.input :condition, prompt: "Condition", collection: 1..10, required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
+  	<%= f.input :condition, prompt: "Condition", collection: 1..10, required: true, label: false,
+    input_html: { class: "info-input-sneaker" }  %>
 
   	<%= f.input :box, prompt: "Box", collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
 
-  	<%= f.input :extras, required: true, placeholder: "Commentaires", label: false, input_html: { class: "info-input-sneaker" }  %>
+  	<%= f.input :extras, required: true, placeholder: "Commentaires", label: false,
+    input_html: { class: "info-input-sneaker" }  %>
 
-  	<%= f.input :price, required: true, placeholder: "Prix", label: false, input_html: { class: "info-input-sneaker", value: nil }  %>
+  	<%= f.input :price, required: true, placeholder: "Prix", label: false,
+    input_html: { class: "info-input-sneaker", value: nil }  %>
 
   </div>
 
@@ -139,7 +146,7 @@
         <div class="summary-price-seller"></div>
         <div class="summary-price-check"></div>
         <div class="summary-price-shipping">
-          <p class="summary-price-sneaker">Expédition : <span id="summary-price-shipping">4,99€</span></p>
+          <p class="summary-price-sneaker">Expédition : <span id="summary-price-shipping">4.99€</span></p>
         </div>
         <hr>
         <div class="summary-price-total">   
@@ -251,11 +258,11 @@
 </style>
 
 <script type="text/javascript">
-  document.querySelector('.photos-input').style.display = "none";
-  document.querySelector('.next-btn').style.display = "none";
-  document.querySelector('.snd-next-btn').style.display = "none";
-  document.querySelector('.submit-new-sneaker').style.display = "none"
-  document.querySelector('.summary-new-sneaker').style.display = "none"
+  // document.querySelector('.photos-input').style.display = "none";
+  // document.querySelector('.next-btn').style.display = "none";
+  // document.querySelector('.snd-next-btn').style.display = "none";
+  // document.querySelector('.submit-new-sneaker').style.display = "none"
+  // document.querySelector('.summary-new-sneaker').style.display = "none"
 
   document.getElementById('sneaker_price').addEventListener('input', (event) => {
     let photosInput = document.querySelector('.photos-input');
@@ -312,10 +319,9 @@
           document.querySelector('.summary-price-check').innerHTML = `<p class="summary-price-sneaker">Frais d’authentification :
           <span id="summary-price-check">${summaryPriceCheck}€</span></p>`;
           let summaryPriceTotal = parseFloat(((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2) + 4.99 + parseFloat(sneaker_price.value.replace(/,/g, "."))).toFixed(2);
-          document.querySelector('.summary-price-total').innerHTML = `<p class="summary-price-sneaker">Total : 
+          document.querySelector('.summary-price-total').innerHTML = `<p class="summary-price-sneaker">TOTAL : 
           <span id="summary-price-total">${summaryPriceTotal}€</span></p>`
-          
-          
+
         });
       }
     })

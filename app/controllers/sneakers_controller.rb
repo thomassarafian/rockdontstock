@@ -65,7 +65,7 @@ class SneakersController < ApplicationController
 
 	def destroy
 		@sneaker.destroy
-		redirect_to sneakers_path
+		redirect_to user_path
 	end
 
 	private
