@@ -1,16 +1,16 @@
-<div class="container">
+<div class="container session-new">
   <h2 class="title-login text-center">Se connecter</h2>
   <div class="row justify-content-center align-items-center">
-    <div class="input-signin col-md-5">
+    <div class="input-signin">
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= f.input :email,
                     required: false,
                     autofocus: true,
-                    input_html: { autocomplete: "email" } %>
+                    input_html: { autocomplete: "email" }, label: false, placeholder: 'Email' %>
         <%= f.input :password,
                     label: "Mot de passe",
                     required: false,
-                    input_html: { autocomplete: "current-password" } %>
+                    input_html: { autocomplete: "current-password" }, label: false, placeholder: 'Mot de passe' %>
         
         <div class="forgot-password">
           <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
@@ -31,7 +31,62 @@
       <%= link_to "Créer un compte", new_registration_path(resource_name) %><br />
     <% end %>
   </div>
-
-
 </div>
 
+<style type="text/css">
+  .forgot-password>a {
+    color: #606060;
+  }
+  @media (min-width: 320px) {
+    #user_email, #user_password {
+      height: 30px;
+      width: 200px;
+    }
+    #new_user {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #connect-btn {
+      padding: 5px 5px;
+      font-size: 13px;
+    }
+    .omniauth-btn {
+      font-size: 13px;
+    }
+    .input-signin {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 150px;
+      height: 230px;
+    }
+    .signup_button {
+      padding-top: 0px;
+    }
+    .title-login {
+      margin-top: 50px;
+      font-size: 25px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  @media (min-width: 768px) {
+    .input-signin {
+      justify-content: flex-end;
+    }
+  }
+  .omniauth-btn {
+    margin-bottom: 0;
+  }
+  
+  .session-new {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .signup_button {
+    margin-top: 50px;
+  }
+</style>

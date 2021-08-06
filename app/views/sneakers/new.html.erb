@@ -1,5 +1,3 @@
-<!-- <h1>Ajouter sa paire </h1> -->
-
 <div class="container search-sneaker-model">
   <% unless params[:sneaker_db_id].present? %>
     <div data-controller="refresh-list">
@@ -15,37 +13,17 @@
               action: "keyup->refresh-list#update",
             } %>
         <% end %>
-
-      <!-- <div class="search-models" > -->
         <div data-refresh-list-target="list">
-          <!-- <div id="scroll" class="container">
-            <div class="sneaker-cards" >
-              <% @sneaker_dbs.all.limit(8).each do |sneaker| %>
-                  <div class="sneaker-card" data-refresh-list-target="sneakerBtn" data-action="click->refresh-list#displayBtn">
-                      <div class="sneaker-card_img">
-                     <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
-                    <button data-action="click->refresh-list#greet" id="gaga" type="button" class="choose-btn btn btn-primary" data-id="<%= sneaker.id %>">C'est ma paire</button>
-                    </div>
-                    <div class="sneaker-title"><strong><%= sneaker.name %></strong></div>
-                    <div class="sneaker-price">À partir de <%= sneaker.price_cents %>€</div>
-                  </div>
-              <% end %>
-            </div>  
-          </div> -->
         </div>
-      <!-- </div> -->
       </div>
     <% end %>
     
-
     <% if params[:sneaker_db_id].present? %>
       <h1 class="search-sneaker-model-title">Remplir les informations</h1>
       <div class="new-sneaker-form" >
         <%= render "form", sneaker: @sneaker, sneaker_db: @sneaker_db %>      
       </div>
     <% end %>
-    
-    
   </div>
 </div>
 
@@ -56,6 +34,7 @@
   @media (min-width: 320px) {
     .search-sneaker-model-title {
       text-align: center;
+      font-size: 30px;
     }  
   }
   @media (min-width: 768px) {

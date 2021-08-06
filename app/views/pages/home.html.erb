@@ -51,7 +51,7 @@
           <%= cl_image_tag(sneaker.photos[0].key) %>
         </div>
         <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
-        <div class="sneaker-price">À partir de <%= humanized_money_with_symbol sneaker.price %></div>
+        <div class="sneaker-price"><%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
       </div>
       <div class="modal fade" id="exampleModal-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -117,7 +117,7 @@
               <% if current_user != sneaker.user %>
                 <%= form_tag orders_path do %>
                   <%= hidden_field_tag 'sneaker_id', sneaker.id %>
-                  <%= submit_tag 'Acheter', class: 'btn btn-primary' %>
+                  <%= submit_tag 'Acheter', class: 'btn btn-warning' %>
                 <% end %>
               <% else %>
                 <% if policy(sneaker).edit? %>
