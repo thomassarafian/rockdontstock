@@ -185,6 +185,8 @@
     text-align: center;
   }
   .upload-photo {
+    width: 200px;
+    height: 200px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -241,6 +243,9 @@
     color: #e74c3c;
   }
   @media (min-width: 320px) {
+    .search-sneaker-model-title {
+      font-size: 30px;
+    }
     .summary-name>p, .summary-size>p, .summary-cond>p, .summary-extras>p, .summary-box>p {
       margin-bottom: 5px;
     }
@@ -331,7 +336,12 @@
           let photosInput = document.querySelector('.photos-input');
           let summaryNewSneaker = document.querySelector('.summary-new-sneaker');
           photosInput.style.display = "none";
-          summaryNewSneaker.style.display = "block";
+          if (window.innerWidth >= 768) {
+            summaryNewSneaker.style.display = "grid";
+          }
+          else {
+            summaryNewSneaker.style.display = "block";
+          }
           sndNextBtn.style.display = "none";
           document.querySelector('.submit-new-sneaker').style.display = "block"
           document.querySelector('.search-sneaker-model-title').innerText = "Récapitulatif de la commande";
