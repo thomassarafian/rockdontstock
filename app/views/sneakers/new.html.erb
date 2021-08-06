@@ -65,25 +65,20 @@
     }
   }
   
-
-  .new-sneaker-form {
-    /*margin-top: 70px;*/
-  }
   .search-sneaker-model-title {
     text-align: center;
     margin-bottom:40px;
   }
   
-  .search-sneaker-model {
-    margin-top: 60px;
-  }
   .search-models {
-    height: auto;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+  
+
   .choose-btn {
     display:none;
     position:absolute;
@@ -97,10 +92,10 @@
 </style>
 
 <script type="text/javascript">
-  // $(document).ready(function() {
-  //   $('.search-sneaker-model-form').on('input', function() {
-  //     $('.search-sneaker-model ').css('height', 'auto');
-  //   });
-  // });
+  $(document).ready(function() {
+    $('.search-sneaker-model-form').on('input', function() {
+      $('.search-models').css('height', 'auto');
+    });
+  });
 
 </script>
