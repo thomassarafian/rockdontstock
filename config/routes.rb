@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  mount ForestLiana::Engine => '/forest'
-	
   root to: "pages#home"
   resources :pages, only: [:index]
   
@@ -29,6 +27,11 @@ Rails.application.routes.draw do
 
   get 'about' => 'pages#about'
   
-	
+  namespace :forest do
+    post '/actions/validate-announcement' => 'sneakers#validate_announcement'
+  end
+
+  mount ForestLiana::Engine => '/forest'	
+
   # mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

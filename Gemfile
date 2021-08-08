@@ -68,6 +68,8 @@ gem 'pg_search', '~> 2.3.0' #search
 gem 'pagy', '~> 3.5' #pagination
 
 gem 'forest_liana'
+gem 'rack-cors'
+
 
 
 group :development, :test do

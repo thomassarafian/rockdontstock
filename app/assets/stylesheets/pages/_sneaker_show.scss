@@ -27,7 +27,7 @@
   @media (min-width: 320px) {
     .sneaker-show-photos {
       width: 200px;
-      height: 200px;
+      height: 150px;
       object-fit: contain;
     }
     .sneaker-show-title {
@@ -50,7 +50,7 @@
   @media (min-width: 768px) {
     .sneaker-show-photos {
       width: 250px;
-      height: 250px;
+      height: 150px;
     }
     .sneaker-show {
       display: grid;
@@ -65,7 +65,7 @@
   @media (min-width: 1024px) {
     .sneaker-show-photos {
       width: 350px;
-      height: 350px;
+      height: 200px;
     }
     .sneaker-show {
       grid-template-columns: [first] 500px [line2] 1fr;
@@ -75,7 +75,7 @@
   @media (min-width: 1440px) {
     .sneaker-show-photos {
       width: 450px;
-      height: 450px;
+      height: 250px;
     }
     .sneaker-show {
       grid-template-columns: [first] 700px [line2] 1fr;

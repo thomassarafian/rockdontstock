@@ -130,11 +130,9 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-    </div>
-    <div class="summary-new-sneaker-resume"> 
       <div class="summary-new-sneaker-infos">
         <div class='summary-name'>
-         <p>Modèle : <%= @sneaker_db.name %></p>
+         <p>Modèle : <strong><%= @sneaker_db.name %></strong></p>
         </div>
         <div class='summary-size'>
         </div>
@@ -145,6 +143,8 @@
         <div class='summary-box'>
         </div>
       </div>
+    </div>
+    <div class="summary-new-sneaker-resume"> 
       <div class="summary-new-sneaker-price">
         <div class="summary-price-seller"></div>
         <div class="summary-price-check"></div>
@@ -154,10 +154,10 @@
         <hr>
         <div class="summary-price-total">   
         </div>
+        <div class="submit-new-sneaker">
+          <%= f.button :submit, "Finaliser la mise en vente", class: "text-center btn btn-dark" %>
+        </div>
       </div>
-    </div>
-    <div class="submit-new-sneaker">
-      <%= f.button :submit, "Finaliser la mise en vente", class: "text-center btn btn-dark" %>
     </div>
   </div>
 
@@ -233,6 +233,9 @@
   }
 </style>
 <style type="text/css">
+  .search-sneaker-model {
+    min-height: 100vh;
+  }
   .sneaker_price, #sneaker_price {
     margin-bottom: 0;
   }
@@ -250,6 +253,7 @@
       margin-bottom: 5px;
     }
     .summary-new-sneaker-infos {
+      font-size: 12px;
       margin-bottom: 30px;
     }
     .summary-price-sneaker {
@@ -264,11 +268,28 @@
 
   }
   @media (min-width: 768px) {
+    .summary-new-sneaker-resume {
+      font-size: 12px;
+      width: 250px
+    }
+    .submit-new-sneaker {
+      grid-column: 2 / 3;
+    }
     .summary-new-sneaker {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       justify-items: center;
       align-items: center;
+    }
+  }
+  @media (min-width: 1024px) {
+    .summary-new-sneaker-resume {
+      width: 400px
+    }
+  }
+  @media (min-width: 1440px) {
+    .summary-new-sneaker-resume {
+      width: 500px
     }
   }
 
@@ -357,8 +378,8 @@
           document.querySelector('.summary-price-check').innerHTML = `<p class="summary-price-sneaker">Frais d’authentification :
           <span id="summary-price-check">${summaryPriceCheck}€</span></p>`;
           let summaryPriceTotal = parseFloat(((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2) + 4.99 + parseFloat(sneaker_price.value.replace(/,/g, "."))).toFixed(2);
-          document.querySelector('.summary-price-total').innerHTML = `<p class="summary-price-sneaker">TOTAL : 
-          <span id="summary-price-total">${summaryPriceTotal}€</span></p>`
+          document.querySelector('.summary-price-total').innerHTML = `<strong><p class="summary-price-sneaker">TOTAL : 
+          <span id="summary-price-total">${summaryPriceTotal}€</span></p></strong>`
 
         });
       }

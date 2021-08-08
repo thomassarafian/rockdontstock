@@ -31,7 +31,7 @@ class SneakersController < ApplicationController
         size: params['sneaker']['size'], condition: params['sneaker']['condition'], 
         price: params['sneaker']['price'], photos: params['sneaker']['photos'],
         box: params['sneaker']['box'], extras: params['sneaker']['extras'],
-        state: 1, sneaker_db_id: @sneaker_db.id)
+        state: 0, sneaker_db_id: @sneaker_db.id)
         if !@sneaker.save
           render :new
         else
@@ -43,7 +43,7 @@ class SneakersController < ApplicationController
       @sneaker.update(sneaker_params)
    		authorize @sneaker
   		if @sneaker.save
-  			@sneaker.update(state: 1) # ici on devrai laisser à 0, puis si on valide la paire cote admin, alors on la passera a 1 
+  			@sneaker.update(state: 0) # ici on devrai laisser à 0, puis si on valide la paire cote admin, alors on la passera a 1 
         if user_signed_in? && current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone?
   				redirect_to sneaker_path(@sneaker), notice: "Ta paire a bien été envoyé !"
   			else

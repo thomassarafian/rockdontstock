@@ -1,6 +1,6 @@
 <div class="container session-new">
   <h2 class="title-login text-center">Se connecter</h2>
-  <div class="row justify-content-center align-items-center">
+  <div class="session-new-form row justify-content-center align-items-center">
     <div class="input-signin">
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= f.input :email,
@@ -74,12 +74,33 @@
   @media (min-width: 768px) {
     .input-signin {
       justify-content: flex-end;
+      width: 320px;
+      height: 230px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .input-signin {
+      width: 450px;
+    }
+    #user_email, #user_password {
+      width: 300px;
+    }
+  }
+  @media (min-width: 1440px) {
+    .input-signin {
+      width: 550px;
+    }
+    #user_email, #user_password {
+      width: 390px;
     }
   }
   .omniauth-btn {
     margin-bottom: 0;
   }
-  
+  .session-new-form {
+    display: flex;
+    flex-direction: column;
+  }
   .session-new {
     display: flex;
     height: 100vh;
