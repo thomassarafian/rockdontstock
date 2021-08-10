@@ -2,30 +2,136 @@
   <div class="col py-4">
     <h1 class="sneaker-payment-title">Récapitulatif de la commande</h1>
     <div class="sneaker-payment-photos">
-      <div class="col-md-3"><%= image_tag @order.sneaker.photos[0].url, width: '100%'%></div> 
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= image_tag(@order.sneaker.photos[0].url, class: 'sneaker-show-photos') %>
+          </div>
+          <!-- <div class="carousel-item ">
+            <%#= cl_image_tag(@sneaker.photos[1].key, class: 'sneaker-show-photos') %>
+          </div>
+          <div class="carousel-item ">
+            <%#= cl_image_tag(@sneaker.photos[2].key, class: 'sneaker-show-photos') %>
+          </div>
+          <div class="carousel-item ">
+            <%#= cl_image_tag(@sneaker.photos[3].key, class: 'sneaker-show-photos') %>
+          </div>
+          <div class="carousel-item ">
+            <%#= cl_image_tag(@sneaker.photos[4].key, class: 'sneaker-show-photos') %>
+          </div> -->
+          <!-- <div class="carousel-item ">
+            <%#= cl_image_tag(@sneaker.photos[5].key, class: 'sneaker-show-photos') %>
+          </div>
+          <div class="carousel-item ">
+            <%#= cl_image_tag(@sneaker.photos[6].key, class: 'sneaker-show-photos') %>
+          </div>
+          <div class="carousel-item ">
+            <%#= cl_image_tag(@sneaker.photos[7].key, class: 'sneaker-show-photos') %>
+          </div> -->
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon sneaker-show-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <!-- <div class="col-md-3"><%= image_tag @order.sneaker.photos[0].url, width: '100%'%></div> 
       <div class="col-md-3"><%#= image_tag @order.sneaker.photos[1].url, width: '100%'%></div> 
-      <div class="col-md-3"><%#= image_tag @order.sneaker.photos[2].url, width: '100%'%></div> 
-    </div>
-    <div class="col sneaker-payment-infos">
-      <p>
-        Achat de <strong><%= @order.sneaker.sneaker_db.name %></strong> pour <strong><%= humanized_money_with_symbol @order.price %></strong>
-      </p>
+      <div class="col-md-3"><%#= image_tag @order.sneaker.photos[2].url, width: '100%'%></div>  -->
+      <div class="col sneaker-payment-infos">
+        <p><strong><%= @order.sneaker.sneaker_db.name %></strong></p> 
+        <p>Taille : <%= @order.sneaker.size %> US</p>
+        <p>Condition : <%= @order.sneaker.condition %> / 10</p>
+        <p>Prix : <%= humanized_money_with_symbol @order.price %></p>
+      </div>
     </div>
   
-      <div class="adress_form" data-controller="address">
-        <%= simple_form_for(current_user, html: {method: :PATCH }, remote: true, data: {target: "address.form", id: current_user.id }) do |f| %>
-          <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
-          <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
-          <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
-          <button type="button" class="btn btn-dark">
-            <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;' %>
-          </button>
-        
-        <% end %>
-        <div data-target="address.display_address"></div>
-        <div data-target="address.picker_button"></div>
+    <div class="payment-input-info">
+      <div class="circles">
+       <p class="circle-step"><%= image_tag("payment/black_circle.svg", class: 'black-circle-logo') %><br>Livraison</p>
+       <p class="circle-step"><%= image_tag("payment/white_circle.svg", class: 'white-circle-logo') %><br>Récapitulatif</p>
+       <p class="circle-step"><%= image_tag("payment/white_circle.svg", class: 'white-circle-logo') %><br>Paiement</p>
       </div>
+      <h5>Choix du point relais</h5>
+      <hr>
+      <div class="payment-delivery">
+        <div>
+          <p class="delivery-brand mondial-relay"><span class="delivery-name-mondial-relay">Mondial Relay</span><span>6,30€</span></p>
+          <p class="delivery-brand colissimo"><span class="delivery-name-colissimo">Colissimo</span><span>6,30€</span></p>
+          <p class="delivery-brand chronopost"><span class="delivery-name-chronopost">Chronopost</span><span>13,45€</span></p>
+        </div>
+        <h5>Choix du point relais</h5>
+        <hr>
 
+        <div class="adress_form" data-controller="address">
+          <%= simple_form_for(current_user, html: {method: :PATCH }, remote: true, data: {target: "address.form", id: current_user.id }, id: 'adress-form') do |f| %>
+            <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
+            <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
+            <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
+            <button type="button" class="btn btn-dark">
+              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;' %>
+            </button>
+          <% end %>
+          <div data-target="address.display_address"></div>
+          <div data-target="address.picker_button"></div>
+        </div>
+        
+        <div class="point-picker"> 
+          <button type="button" class="btn btn-dark" id="select_point_picker">Choix du point relais</button>
+          <div class="point-picker-result"></div>
+        </div>
+      </div>
+    </div>
+
+    
+    <style type="text/css">
+      .adress_form, .point-picker {
+        display: none;
+      }
+      .toggle-hidden {
+        display: block;
+      }
+      .delivery-cliked {
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        padding: 0 5px;
+      }
+
+      .delivery-brand {
+        display: flex;
+        justify-content: space-between;
+      }
+      .circles {
+        display: flex;
+        justify-content: space-evenly;
+      }
+      .circle-step {
+        text-align: center;
+      }
+      .payment-input-info {
+        padding: 30px;
+        width: 700px;
+        height: 500px;
+        margin: 50px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      }
+    </style>
+
+    
 
       <%# if current_user.picker_data? &&   current_user.picker_data.class == Hash%>
         <!-- <button type="button" class="btn btn-primary" id="select_point_picker"> -->
@@ -39,7 +145,7 @@
 
       <%# end %>
       
-      <%= simple_form_for(current_user, remote: true) do |f| %>
+      <%= simple_form_for(current_user, remote: true, url: user_path) do |f| %>
         <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
       <% end %>
 
@@ -110,7 +216,7 @@
 
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
 
+<%#= javascript_tag "hello()" %>
 <%= javascript_pack_tag "point_picker" %>
-<%= javascript_pack_tag "algolia_autocomplete_address" %>
-
+<%#= javascript_pack_tag "algolia_autocomplete_address" %>
 
