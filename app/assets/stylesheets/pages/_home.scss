@@ -5,6 +5,17 @@ body {
   font-weight: 200;
 }
 
+.link-home-page a {
+  color: black;
+}
+.btn-dark {
+  background-color: black;
+}
+.link-home-page a:hover {
+  text-decoration: none; 
+  color: #FFCD05;
+}
+
 .missing_infos {
  	display: flex;
   justify-content: center;

@@ -4,7 +4,7 @@ import { openServicePointPicker } from "../packs/point_picker";
 
 
 export default class extends Controller {
-	static targets = ["form", "line1", "city", "postal_code", "picker_button", "display_address"]
+	static targets = ["form", "line1", "city", "postal_code", "picker_button", "display_address", "next_btn"]
 
   refresh() {
   	// let id = event.target.form.dataset.id;
@@ -27,14 +27,15 @@ export default class extends Controller {
 	  //   });
 
   	if (this.line1 != "" && this.city != "" && this.postal_code != "") {
-    	this.display_addressTarget.innerText = `Mon adresse actuelle : ${this.line1} ${this.city} ${this.postal_code}`;
-    	this.picker_buttonTarget.innerHTML = `<button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>`;
-	  	this.picker_buttonTarget.addEventListener('click', function () {
-				openServicePointPicker("fr", "fr-fr");
-	  	});
-	  	if (this.line1 != "" && this.city != "" && this.postal_code != "") {
-	  		
-	  	}
+    	this.display_addressTarget.innerHTML = `<br><p>Mon adresse actuelle : ${this.line1} ${this.city} ${this.postal_code}</p>`;
+      this.next_btnTarget.innerHTML = '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>';
+    	// this.picker_buttonTarget.innerHTML = `<button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>`;
+	  	// this.picker_buttonTarget.addEventListener('click', function () {
+				// openServicePointPicker("fr", "fr-fr");
+	  	// });
+	  	// if (this.line1 != "" && this.city != "" && this.postal_code != "") {
+	  		// 
+	  	// }
     }
   }
  

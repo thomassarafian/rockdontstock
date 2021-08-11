@@ -2,11 +2,18 @@ footer {
   margin-top: 50px;
 }
 
+footer a:hover { 
+  text-decoration: none; 
+  color: #FFCD05;
+}
+
+
 @media (min-width: 100px) {
   footer a{
     font-size: 13px;
     color: #cecece;
   }
+
   footer h5 {
     font-size: 17px;
   }

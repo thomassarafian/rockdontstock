@@ -23,7 +23,7 @@
   </div>
 
   <div class="next-btn">
-    <button type="button" class="btn btn-dark">Next</button>
+    <button type="button" class="btn btn-dark">Suivant</button>
   </div>
   
   <div class="photos-input">
@@ -94,7 +94,7 @@
     </div>
   </div>
   <div class="snd-next-btn">
-    <button type="button" class="btn btn-dark">Next</button>
+    <button type="button" class="btn btn-dark">Suivant</button>
   </div>
 
   <div class="summary-new-sneaker">
@@ -155,7 +155,7 @@
         <div class="summary-price-total">   
         </div>
         <div class="submit-new-sneaker">
-          <%= f.button :submit, "Finaliser la mise en vente", class: "text-center btn btn-dark" %>
+          <%= f.button :submit, "Finaliser la mise en vente", class: "finish-sneaker-new-btn text-center btn btn-dark" %>
         </div>
       </div>
     </div>
@@ -164,8 +164,19 @@
 <% end %>
 
 <style type="text/css">
+  .finish-sneaker-new-btn {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
   .next-btn, .snd-next-btn {
     text-align: center;
+  }
+  .snd-next-btn {
+    float: right;
+  }
+  .next-btn {
+    margin-top: 30px;
+    margin-left: 173px;
   }
   .info-input-sneaker {
     width: 250px;

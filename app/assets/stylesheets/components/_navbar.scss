@@ -139,6 +139,8 @@
     text-align-last: center;
     width: 150px;
     margin: 5px 0;
+    border: none;
+    border-bottom: 1px solid #eeeeee;
   }
   .dropdown-filter {
     width: 100%;
@@ -166,6 +168,9 @@
 
 
 @media (min-width: 768px) {
+  .magnify_glass_icon {
+    width: 20px;
+  }
   .real-nav {
     display: none;
   }
@@ -236,8 +241,7 @@
   .toggler_icon_phone {
    display:none; 
   }
-  .glass_icon_phone
-  {
+  .glass_icon_phone {
     display:none;
   }  
   .navbar-brand
@@ -256,12 +260,14 @@
     margin: 0px 15px;
   }
   #sell_button {
+    font-size: 14px;
     margin: 0 25px;
     padding: 0 20px;
     border-radius: 10px;
   }
   .toggler_icon {
     margin-right: 10px;
+    width: 35px;
   }
 }
 

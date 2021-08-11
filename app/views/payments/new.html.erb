@@ -1,6 +1,6 @@
 <div class="container sneaker-payment">
-  <div class="col py-4">
-    <h1 class="sneaker-payment-title">Récapitulatif de la commande</h1>
+  <h1 class="sneaker-payment-title">Récapitulatif de la commande</h1>
+  <div class="sneaker-payment-new">
     <div class="sneaker-payment-photos">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -48,14 +48,11 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-      <!-- <div class="col-md-3"><%= image_tag @order.sneaker.photos[0].url, width: '100%'%></div> 
-      <div class="col-md-3"><%#= image_tag @order.sneaker.photos[1].url, width: '100%'%></div> 
-      <div class="col-md-3"><%#= image_tag @order.sneaker.photos[2].url, width: '100%'%></div>  -->
       <div class="col sneaker-payment-infos">
         <p><strong><%= @order.sneaker.sneaker_db.name %></strong></p> 
         <p>Taille : <%= @order.sneaker.size %> US</p>
         <p>Condition : <%= @order.sneaker.condition %> / 10</p>
-        <p>Prix : <%= humanized_money_with_symbol @order.price %></p>
+        <p>Prix : <strong><%= humanized_money_with_symbol @order.price %></strong></p>
       </div>
     </div>
   
@@ -81,57 +78,22 @@
             <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
             <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
             <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
-            <button type="button" class="btn btn-dark">
+            <button type="button" class="address-btn btn btn-dark">
               <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;' %>
             </button>
           <% end %>
           <div data-target="address.display_address"></div>
-          <div data-target="address.picker_button"></div>
+          <div data-target="address.next_btn"></div>
         </div>
         
         <div class="point-picker"> 
-          <button type="button" class="btn btn-dark" id="select_point_picker">Choix du point relais</button>
+          <button type="button" class="point-picker-btn btn btn-dark" id="select_point_picker">Choix du point relais</button>
           <div class="point-picker-result"></div>
         </div>
       </div>
     </div>
 
-    
-    <style type="text/css">
-      .adress_form, .point-picker {
-        display: none;
-      }
-      .toggle-hidden {
-        display: block;
-      }
-      .delivery-cliked {
-        background-color: black;
-        color: white;
-        border-radius: 5px;
-        padding: 0 5px;
-      }
-
-      .delivery-brand {
-        display: flex;
-        justify-content: space-between;
-      }
-      .circles {
-        display: flex;
-        justify-content: space-evenly;
-      }
-      .circle-step {
-        text-align: center;
-      }
-      .payment-input-info {
-        padding: 30px;
-        width: 700px;
-        height: 500px;
-        margin: 50px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      }
-    </style>
-
-    
+  
 
       <%# if current_user.picker_data? &&   current_user.picker_data.class == Hash%>
         <!-- <button type="button" class="btn btn-primary" id="select_point_picker"> -->
@@ -149,9 +111,9 @@
         <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
       <% end %>
 
-      <div id="result"></div>
+      <!-- <div id="result"></div> -->
 
-      <div id="current_user_result">
+      <!-- <div id="current_user_result">
         <% if current_user.picker_data.class == Hash %>
           <p>
             Votre point relais : 
@@ -178,11 +140,43 @@
       </div>
 
             
-    </div>
+    </div> -->
   </div>
 </div>
 
 <style type="text/css">
+
+  .point-picker-btn, .address-btn, .recap-payment-btn {
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .adress_form, .point-picker {
+    display: none;
+  }
+  .toggle-hidden {
+    display: block;
+  }
+  .delivery-cliked {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 0 5px;
+  }
+
+  .delivery-brand {
+    display: flex;
+    justify-content: space-between;
+  }
+  .circles {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .circle-step {
+    text-align: center;
+  }
+  
   .sneaker-payment-title {
     text-align:center;
   }
@@ -192,6 +186,7 @@
   }
   .sneaker-payment-photos {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
@@ -216,7 +211,7 @@
 
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
 
-<%#= javascript_tag "hello()" %>
+
 <%= javascript_pack_tag "point_picker" %>
-<%#= javascript_pack_tag "algolia_autocomplete_address" %>
+<%= javascript_pack_tag "algolia_autocomplete_address" %>
 
