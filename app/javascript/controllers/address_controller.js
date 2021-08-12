@@ -28,7 +28,7 @@ export default class extends Controller {
 
   	if (this.line1 != "" && this.city != "" && this.postal_code != "") {
     	this.display_addressTarget.innerHTML = `<br><p>Mon adresse actuelle : ${this.line1} ${this.city} ${this.postal_code}</p>`;
-      this.next_btnTarget.innerHTML = '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>';
+      // this.next_btnTarget.innerHTML = '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>';
     	// this.picker_buttonTarget.innerHTML = `<button type="button" class="btn btn-primary" id="select_point_picker">Choix du point relais</button>`;
 	  	// this.picker_buttonTarget.addEventListener('click', function () {
 				// openServicePointPicker("fr", "fr-fr");

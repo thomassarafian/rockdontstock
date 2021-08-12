@@ -31,18 +31,15 @@
 
 
 <div class="container">
-  <div class="article">
+  <div class="newsletter-container">
     <h2>INSCRIS TOI</h2>
     <hr>
     <p>Reçois en avant-première nos futures réductions, Les jeux concours ainsi que les nombreux meet-ups et releases party !</p>
     <div class="subscribe-newsletter">
-     <%= simple_form_for :user, remote: true  do |f|%>
-      <%= f.input :first_name, placeholder: "Prénom" %>
-      <%= f.input :email, placeholder: "Email" %>
-      <%= f.button :submit, "S'inscrire", class: 'btn btn-light' %>
+     <%= simple_form_for :user, remote: true, html: { class: 'newsletter-form' } do |f|%>
+      <%= f.input :email, placeholder: "Email", input_html: { class: 'newsletter-email' }, label: false %>
+      <%= f.button :submit, "S'inscrire", class: 'btn btn-light newsletter-btn' %>
      <% end %>
-      <!-- <input id="email" placeholder="Email" type="email"></input>
-      <button type="button" class="newsletter-btn btn btn-light" id="subscribe-btn">S'inscrire</button> -->
     </div>
   </div>
 </div>

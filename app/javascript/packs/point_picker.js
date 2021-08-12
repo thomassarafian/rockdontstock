@@ -30,31 +30,41 @@ function checkToggleHidden(deliveryName) {
   } 
 }
 
-// document.querySelector('.mondial-relay').addEventListener('click', (event) => {
-//   event.stopImmediatePropagation();
-//   toggleDeliveryName('colissimo', 'chronopost');
-//   document.querySelector('.delivery-name-mondial-relay').classList.toggle('delivery-cliked');
-//   document.querySelector('.point-picker').classList.toggle('toggle-hidden');
-//   document.querySelector('#select_point_picker').addEventListener('click', (event) => {
-//     event.stopImmediatePropagation();
-//     openServicePointPicker("fr", "fr-fr");
-//   });
-// });
+// function mondialRelay() {
+  document.querySelector('.mondial-relay').addEventListener('click', (event) => {
+    event.stopImmediatePropagation();
+    toggleDeliveryName('colissimo', 'chronopost');
+    document.querySelector('.delivery-name-mondial-relay').classList.toggle('delivery-cliked');
+    document.querySelector('.adress_form').classList.toggle('toggle-hidden'); 
+    document.querySelector('.address-btn').addEventListener('click', (event) => {
+      event.stopImmediatePropagation();
+      document.querySelector('.point-picker').classList.toggle('toggle-hidden');
+      document.querySelector('#select_point_picker').addEventListener('click', (event) => {
+        event.stopImmediatePropagation();
+        openServicePointPicker("fr", "fr-fr");
+      });
+    })
 
-// document.querySelector('.colissimo').addEventListener('click', (event) => {
-//   event.stopImmediatePropagation();
-//   toggleDeliveryName('mondial-relay', 'chronopost');
-//   document.querySelector('.delivery-name-colissimo').classList.toggle('delivery-cliked');  
-//   checkToggleHidden('colissimo');
-// });
+  });
+// }
 
-// document.querySelector('.chronopost').addEventListener('click', (event) => {
-//   event.stopImmediatePropagation();
-//   toggleDeliveryName('mondial-relay', 'colissimo');
-//   document.querySelector('.delivery-name-chronopost').classList.toggle('delivery-cliked');
-//   checkToggleHidden('chronopost');
-// });
+// function colissimo() {
+  document.querySelector('.colissimo').addEventListener('click', (event) => {
+    event.stopImmediatePropagation();
+    toggleDeliveryName('mondial-relay', 'chronopost');
+    document.querySelector('.delivery-name-colissimo').classList.toggle('delivery-cliked');  
+    checkToggleHidden('colissimo');
+  });
+// }
 
+// function chronopost() {
+  document.querySelector('.chronopost').addEventListener('click', (event) => {
+    event.stopImmediatePropagation();
+    toggleDeliveryName('mondial-relay', 'colissimo');
+    document.querySelector('.delivery-name-chronopost').classList.toggle('delivery-cliked');
+    checkToggleHidden('chronopost');
+  });
+// }
 
 
 let pointPickerResult = document.querySelector('.point-picker-result');
@@ -117,8 +127,11 @@ function openServicePointPicker(country, language, postalCode, carriers, service
     }
     const data_picker = `<br><p>Votre point relais : ${result.name} - ${result.house_number} ${result.street}, ${result.postal_code} ${result.city}</p>`;
     pointPickerResult.innerHTML = data_picker;
-    let recapPaymentBtn = '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>';
-    pointPickerResult.insertAdjacentHTML('afterEnd', recapPaymentBtn)
+    if (document.querySelector('.recap-payment-btn') == undefined) {
+      let recapPaymentBtn = '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>';
+      pointPickerResult.insertAdjacentHTML('afterEnd', recapPaymentBtn)
+      
+    }
 
     // resultElem.style.display = 'block';
     // if (document.querySelector("#result").textContent != "") {
@@ -139,5 +152,5 @@ function openServicePointPicker(country, language, postalCode, carriers, service
 }
 
 
-// export { openServicePointPicker };
+
 

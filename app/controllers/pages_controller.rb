@@ -5,11 +5,16 @@ class PagesController < ApplicationController
   def about
   end
   def newsletter
-    newsletter_params
-    if params['user']['email'].present? && params['user']['first_name'].present?
+    # newsletter_params
+    if params['user']['email'].present?
       SubscribeToNewsletterService.new(params['user']).home_page_signup
     end
+      flash[:notice] = "bravo!"
+  
   end
+  
+  private
+  
   def newsletter_params
     params.permit(:user, :commit, :first_name, :email)
   end
