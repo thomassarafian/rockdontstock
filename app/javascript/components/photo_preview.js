@@ -131,6 +131,7 @@ const displayPreview7 = (input) => {
     document.getElementById('photo-preview7').classList.remove('hidden');
   }
 }
+
 previewImageOnFileSelect();
 
 export { previewImageOnFileSelect };

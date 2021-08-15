@@ -21,4 +21,19 @@ require('dotenv').config()
 
 import "controllers"
 
+
 import previewImageOnFileSelect from "components/photo_preview.js"
+
+// import openServicePointPicker from "components/point_picker.js"
+
+
+// document.addEventListener('turbolinks:load', () => {
+//   openServicePointPicker();
+// });
+
+
+
+
+
+
+

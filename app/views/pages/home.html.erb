@@ -32,7 +32,7 @@
 
 <div class="container">
   <div class="newsletter-container">
-    <h2>INSCRIS TOI</h2>
+    <h2>INSCRIS-TOI</h2>
     <hr>
     <p>Reçois en avant-première nos futures réductions, Les jeux concours ainsi que les nombreux meet-ups et releases party !</p>
     <div class="subscribe-newsletter">
@@ -117,9 +117,8 @@
             </div>
             <div class="modal-footer" style="justify-content: center;">
               <% if current_user != sneaker.user %>
-                <%= form_tag orders_path do %>
-                  <%= hidden_field_tag 'sneaker_id', sneaker.id %>
-                  <%= submit_tag 'Acheter', class: 'btn btn-warning' %>
+                <%= form_tag orders_path(sneaker_id: sneaker.id) do %>
+                  <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
                 <% end %>
               <% else %>
                 <% if policy(sneaker).edit? %>
@@ -128,7 +127,7 @@
                   </button>
                 <% end %>
                 <% if policy(sneaker).destroy? %>
-                  <button type="button" class="btn btn-danger sneaker-show-btn">
+                  <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;">
                     <%= link_to "Supprimer", sneaker_path(sneaker), method: :delete, data: { confirm: "Are you sure?" }, style: 'color: white;' %>
                   </button>
                 <% end %>   

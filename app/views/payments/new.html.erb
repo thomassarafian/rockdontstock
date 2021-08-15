@@ -56,102 +56,116 @@
       </div>
     </div>
   
+    
+
+
     <div class="payment-input-info">
       <div class="circles">
        <p class="circle-step"><%= image_tag("payment/black_circle.svg", class: 'black-circle-logo') %><br>Livraison</p>
        <p class="circle-step"><%= image_tag("payment/white_circle.svg", class: 'white-circle-logo') %><br>Récapitulatif</p>
        <p class="circle-step"><%= image_tag("payment/white_circle.svg", class: 'white-circle-logo') %><br>Paiement</p>
       </div>
-      <h5>Choix du point relais</h5>
-      <hr>
-      <div class="payment-delivery">
-        <div>
-          <p class="delivery-brand mondial-relay"><span class="delivery-name-mondial-relay">Mondial Relay</span><span>6,30€</span></p>
-          <p class="delivery-brand colissimo"><span class="delivery-name-colissimo">Colissimo</span><span>6,30€</span></p>
-          <p class="delivery-brand chronopost"><span class="delivery-name-chronopost">Chronopost</span><span>13,45€</span></p>
-        </div>
+      <div class="resume-payment-infos">
+        <p><strong>Livraison</strong></p>
+        <div class="resume-delivery-infos"></div>
+        <br>
+        <p class="resume-prices">Prix de l'article : <span class="payment-article-price"><%= @order.price %> €</span></p>
+        <p class="resume-prices">Livraison : <span class="payment-delivery-price"><%= @order.shipping_cost %> €</span></p>
+        <p class="resume-prices">Authentification : <span class="payment-service-price"><%= @order.service / 2 %> €</span></p>
+        <br>
+        <% total =  (@order.price + @order.shipping_cost + (@order.service / 2)) %>
+        <strong><p class="resume-prices">TOTAL <span class="payment-total-price"><%= total %> €</span></p></strong>
+        <button type="button" class="pay_button btn btn-dark">Paiement</button>
+      </div>
+      <div class="payment-new-delivery-step">
         <h5>Choix du point relais</h5>
         <hr>
+        <div class="payment-delivery">
+          <div>
+            <p class="delivery-brand mondial-relay"><span class="delivery-name-mondial-relay">Mondial Relay</span><span>6,30€</span></p>
+            <p class="delivery-brand colissimo"><span class="delivery-name-colissimo">Colissimo</span><span>6,30€</span></p>
+            <p class="delivery-brand chronopost"><span class="delivery-name-chronopost">Chronopost</span><span>13,45€</span></p>
+          </div>
+          <h5>Choix du point relais</h5>
+          <hr>
 
-        <div class="adress_form" data-controller="address">
-          <%= simple_form_for(current_user, html: {method: :PATCH }, remote: true, data: {target: "address.form", id: current_user.id }, id: 'adress-form') do |f| %>
-            <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
-            <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
-            <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
-            <button type="button" class="address-btn btn btn-dark">
-              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;' %>
-            </button>
-          <% end %>
-          <div data-target="address.display_address"></div>
-          <div data-target="address.next_btn"></div>
+          <div class="adress_form" data-controller="address">
+            <%= simple_form_for(current_user, html: {method: :PATCH }, remote: true, data: {target: "address.form", id: current_user.id }, id: 'adress-form') do |f| %>
+              <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
+              <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
+              <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
+              <button type="button" class="address-btn btn btn-dark">
+                <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;' %>
+              </button>
+            <% end %>
+            <div  class="payment-display-address" data-target="address.display_address"></div>
+            <div data-target="address.next_btn"></div>
+          </div>
+          
+          <div class="point-picker"> 
+            <button type="button" class="point-picker-btn btn btn-dark" id="select_point_picker">Choix du point relais</button>
+            <div class="point-picker-result"></div>
+          </div>
         </div>
-        
-        <div class="point-picker"> 
-          <button type="button" class="point-picker-btn btn btn-dark" id="select_point_picker">Choix du point relais</button>
-          <div class="point-picker-result"></div>
-        </div>
+        <button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>
       </div>
-    </div>
-
-
-      <%# if current_user.picker_data? &&   current_user.picker_data.class == Hash%>
-        <!-- <button type="button" class="btn btn-primary" id="select_point_picker"> -->
-          <!-- Modifier son point relais -->
-        <!-- </button> -->
-      <%# end %>
-      <%# if current_user.line1? && current_user.city? && current_user.postal_code? %>
-        <!-- <button type="button" class="btn btn-primary" id="select_point_picker"> -->
-          <%#= current_user.picker_data? ? "Modifier son point relais" : "Choixx du point relais" %>
-        <!-- </button> -->
-
-      <%# end %>
-      
+        
       <%= simple_form_for(current_user, remote: true, url: user_path) do |f| %>
         <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
       <% end %>
+      
+    </div>
 
-      <!-- <div id="result"></div> -->
 
-      <!-- <div id="current_user_result">
-        <% if current_user.picker_data.class == Hash %>
-          <p>
-            Votre point relais : 
-            <%= current_user.picker_data['name'] %> - <%= current_user.picker_data['house_number'] %> <%= current_user.picker_data['street'] %>, <%= current_user.picker_data['postal_code'] %> <%= current_user.picker_data['city'] %>
-          </p>
-           <p>
-            <strong>Résumé de la commande</strong><br>
-            Commande : <%= @order.price %> €<br>
-            Frais de port : <%= @order.shipping_cost %> € (Livraison en 3 jours ouvrés)<br>
-            Service : <%= @order.service / 2 %> €<br>
-            -----------------------<br>
-            <% total =  (@order.price + @order.shipping_cost + (@order.service / 2)) %>
-            <strong>Total : <%= total %> € </strong>
-          </p>
-        <% end %>
-      </div>
-      <br>  
 
-      <div class="pay_button">
+
+      <!-- <div class="pay_button">
         <button id="pay_js" class="btn btn-primary" style="display:none;">Payer</button>
         <% if current_user.picker_data? %>
           <button id="pay_rails" class="btn btn-primary">Payer</button>
         <% end %>
-      </div>
+      </div> -->
 
             
-    </div> -->
+    </div>
   </div>
 </div>
 
-<style type="text/css">
 
-  .point-picker-btn, .address-btn, .recap-payment-btn {
+<script type="text/javascript">
+  
+  const recapPaymentBtn = document.querySelector('.recap-payment-btn');
+  if (recapPaymentBtn) {
+    document.querySelector('.recap-payment-btn').addEventListener('click', (event) => {
+      document.querySelector('.black-circle-logo').src = "/assets/payment/white_circle.svg";
+      document.querySelectorAll(".white-circle-logo")[0].src = "/assets/payment/black_circle.svg";
+      document.querySelector('.payment-new-delivery-step').style.display = "none";
+      document.querySelector('.resume-payment-infos').style.display = "block";
+      
+
+      document.querySelector('.resume-delivery-infos').appendChild(document.querySelector('.payment-display-address').children[1]);
+      if (document.querySelector('.point-picker-result').children[1]) {
+        document.querySelector('.resume-delivery-infos').appendChild(document.querySelector('.point-picker-result').children[1]);
+      }
+    })
+  }
+
+
+
+</script>
+
+<style type="text/css">
+  .resume-prices {
+    display: flex;
+    justify-content: space-between;
+  }
+  .point-picker-btn, .address-btn, .recap-payment-btn, .pay_button {
     height: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .adress_form, .point-picker {
+  .adress_form, .point-picker, .recap-payment-btn, .resume-payment-infos {
     display: none;
   }
   .toggle-hidden {
@@ -210,8 +224,7 @@
 
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
 
-<%#= javascript_pack_tag "point_picker" %>
-<%= javascript_include_tag 'packs/point_picker' %>
+
 
 <%= javascript_pack_tag "algolia_autocomplete_address" %>
 
