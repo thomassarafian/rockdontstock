@@ -114,19 +114,7 @@
         <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
       <% end %>
       
-    </div>
-
-
-
-
-      <!-- <div class="pay_button">
-        <button id="pay_js" class="btn btn-primary" style="display:none;">Payer</button>
-        <% if current_user.picker_data? %>
-          <button id="pay_rails" class="btn btn-primary">Payer</button>
-        <% end %>
-      </div> -->
-
-            
+    </div>    
     </div>
   </div>
 </div>
@@ -141,8 +129,6 @@
       document.querySelectorAll(".white-circle-logo")[0].src = "/assets/payment/black_circle.svg";
       document.querySelector('.payment-new-delivery-step').style.display = "none";
       document.querySelector('.resume-payment-infos').style.display = "block";
-      
-
       document.querySelector('.resume-delivery-infos').appendChild(document.querySelector('.payment-display-address').children[1]);
       if (document.querySelector('.point-picker-result').children[1]) {
         document.querySelector('.resume-delivery-infos').appendChild(document.querySelector('.point-picker-result').children[1]);
