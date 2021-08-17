@@ -82,9 +82,12 @@
         <hr>
         <div class="payment-delivery">
           <div>
-            <p class="delivery-brand mondial-relay"><span class="delivery-name-mondial-relay">Mondial Relay</span><span>6,30€</span></p>
-            <p class="delivery-brand colissimo"><span class="delivery-name-colissimo">Colissimo</span><span>6,30€</span></p>
-            <p class="delivery-brand chronopost"><span class="delivery-name-chronopost">Chronopost</span><span>13,45€</span></p>
+            <p class="delivery-brand mondial-relay"><span class="delivery-name-mondial-relay">Mondial Relay</span>
+              <span><%= @mondial_relay_price %>€</span></p>
+            <p class="delivery-brand colissimo"><span class="delivery-name-colissimo">Colissimo</span>
+              <span><%= @colissimo_price %>€</span></p>
+            <p class="delivery-brand chronopost"><span class="delivery-name-chronopost">Chronopost</span>
+              <span><%= @chronopost_price %>€</span></p>
           </div>
           <h5>Choix du point relais</h5>
           <hr>

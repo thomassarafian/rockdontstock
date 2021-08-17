@@ -1,28 +1,44 @@
-<div class="container">
-  <div class="row row-cols-4 mt-5 justify-content-center">
-    <div class="col-12 col-sm-9 ">
-		<h1>Tous mes virements</h1>
+<div class="container tranfers-index">  
+  <div style="margin-top:100px;text-align: center;">
+    <form method="post" class="my-form" id="fileinfo" name="fileinfo" ajax="true">
+      <label>Recto de ma carte d'identité :</label>
+      <input type="hidden" name="file-front-hid" id="file-front-hid">
+      <input type="file" id="file-front" name="file" required />
+      <br>
+      <label>Verso de ma carte d'identité :</label>
+      <input type="hidden" name="file-back-hid" id="file-back-hid">
+      <input type="file" id="file-back" name="file" required />
+      <br>
+      <label>Justificatif de domicile :</label>
+      <input type="hidden" name="file-home-hid" id="file-home-hid">
+      <input type="file" id="file-home" name="file" required />
+      <br>
+      <input type="submit" value="Envoyer mes document" />
+    </form>
+  </div>
 
-		<% if !current_user.iban? && @balance.available[0].amount > 0 %>
-			<p><%= link_to "Remplir l'iban ", edit_user_registration_path %></p>
-		<% end %>
 
-		<h2>En attente :</h2>
-		<% if  @balance.pending[0].amount > 0 %>
-			<p>Mon solde est de <%= @balance.pending[0].amount / 100 %> euros. Je pourrai retirer cet argent dans 7 jours ouvrés. </p>
-		<% elsif  @balance.pending[0].amount == 0 %>
-			<p>Mon solde est de 0 euro, je ne peux rien retirer</p>
-		<% end %>
 
-		<h2>Disponible :</h2>
-		<% if  @balance.available[0].amount > 0 %>
-			<p>Mon solde est de <%= @balance.available[0].amount / 100 %> euros</p>
-			<button>Retirer l'intégraliter</button>
-		<% elsif  @balance.available[0].amount == 0 %>
-			<p>Mon solde est de 0 euro, je ne peux rien retirer</p>
-		<% end %>
+  <div class="">
+    <h1>Tous mes virements</h1>
 
-		<%=	link_to "Voir la liste des Sneakers", sneakers_path %>
-    </div>
+    <% if !current_user.iban? && @balance.available[0].amount > 0 %>
+      <p><%= link_to "Remplir l'iban ", edit_user_registration_path %></p>
+    <% end %>
+
+    <h2>En attente :</h2>
+    <% if  @balance.pending[0].amount > 0 %>
+      <p>Mon solde est de <%= @balance.pending[0].amount / 100 %> euros. Je pourrai retirer cet argent dans 7 jours ouvrés. </p>
+    <% elsif  @balance.pending[0].amount == 0 %>
+      <p>Mon solde est de 0 euro, je ne peux rien retirer</p>
+    <% end %>
+
+    <h2>Disponible :</h2>
+    <% if  @balance.available[0].amount > 0 %>
+      <p>Mon solde est de <%= @balance.available[0].amount / 100 %> euros</p>
+      <button>Retirer l'intégraliter</button>
+    <% elsif  @balance.available[0].amount == 0 %>
+      <p>Mon solde est de 0 euro, je ne peux rien retirer</p>
+    <% end %>
   </div>
 </div>

@@ -21,13 +21,13 @@ Rails.application.routes.draw do
   	resources :transfers, only: [:index, :create]
   end
 
-  post '/', to: 'pages#newsletter'
 
 	resources :orders, only: [:show, :create] do
 	  resources :payments, only: [:new]
 	end
 
   get 'about' => 'pages#about'
+  post '/', to: 'pages#newsletter'
   
   namespace :forest do
     post '/actions/validate-announcement' => 'sneakers#validate_announcement'
