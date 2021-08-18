@@ -14,14 +14,6 @@ class UsersController < ApplicationController
       if !@res 
         redirect_to user_transfers_path, alert: "Erreur de vérification de l'IBAN."
       end
-      #   raise
-      # else
-      #   raise
-      # end
-      # raise
-      # if @result == "Erreur de vérification de l'IBAN."
-      #   redirect_to user_transfers_path, alert: @result
-      # end
     end
 		@user.update(user_params)
     @user.save!

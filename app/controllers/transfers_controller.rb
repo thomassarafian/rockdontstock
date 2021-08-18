@@ -4,37 +4,23 @@ class TransfersController < ApplicationController
   def index
 		skip_policy_scope
     @user = current_user
-		@account = Stripe::Account.retrieve(current_user.stripe_account_id)
-		@balance = Stripe::Balance.retrieve({
-			stripe_account: current_user.stripe_account_id
-		})
+		
+    @account = Stripe::Account.retrieve(@user.stripe_account_id)
+
+		@balance = Stripe::Balance.retrieve({stripe_account: @user.stripe_account_id})
+
 
 		# POUR CREER UNE LIEN AVEC SA BANQUE AFIN DE FAIRE DES VIREMENTS 
-		# if current_user.iban?
-		# 	@bank_account = Stripe::Account.create_external_account(
-		# 		current_user.stripe_account_id,
-		# 		{
-		# 	  	external_account: {
-		# 	  		object: 'bank_account',
-		# 	  		country: 'FR',
-		# 	  		currency: 'eur',
-		# 	  		account_holder_name: current_user.first_name + " " +  current_user.last_name,
-		# 	  		account_holder_type: 'individual',
-		# 	  		account_number: current_user.iban,
-		# 	  	},
-		# 		},
-		# 	)
-		# end
-
+		
 		# FAIRE LES VIREMENTS A PROPREMENT PARLÉ
 		# p payout = Stripe::Payout.create({
 		#   amount: 100,
 		#   currency: 'eur',
-		#   destination: 'ba_1Inmn42QFklsr9vGI323QckG',#@account.external_accounts.data[0].id
+		#   destination: @account.external_accounts.data[0].id,#'ba_1Inmn42QFklsr9vGI323QckG',@account.external_accounts.data[0].id
 		#   source_type: 'bank_account',
 		#   method: "standard",
 		# 	}, {
-		# 		stripe_account: 'acct_1InK1r2QFklsr9vG',
+		# 		stripe_account: @user.stripe_account_id, #'acct_1InK1r2QFklsr9vG',
 		# 	})
 		
 
@@ -63,6 +49,19 @@ class TransfersController < ApplicationController
         {
           account_token: token
         });
+    elsif params['send-money-bank'] == '1'
+      @user = current_user
+      @account = Stripe::Account.retrieve(@user.stripe_account_id)
+      @balance = Stripe::Balance.retrieve({stripe_account: @user.stripe_account_id})
+      # raise
+      payout = Stripe::Payout.create({
+        amount: @balance.available[0].amount,
+        currency: 'eur',
+        destination: @account.external_accounts.data[0].id,
+        method: "standard",
+        },{
+          stripe_account: @user.stripe_account_id,
+      })
     else
       @user = User.find(params[:user_id])
       @transfer = Transfer.new(transfer_params)

@@ -23,16 +23,16 @@ import "controllers"
 
 
 import { previewImageOnFileSelect } from "components/photo_preview.js"
-
 import { pointPicker } from "components/point_picker.js"
-
 import { uploadIds } from "components/upload_ids.js"
+import { ibanValidator } from "components/iban_validator.js"
 
 
 document.addEventListener('turbolinks:load', () => {
   pointPicker();
   previewImageOnFileSelect();
   uploadIds();
+  ibanValidator();
 });
 
 
