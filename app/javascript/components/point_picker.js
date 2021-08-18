@@ -44,8 +44,8 @@ function pointPicker() {
         document.querySelector('#select_point_picker').addEventListener('click', (event) => {
           event.stopImmediatePropagation();
           openServicePointPicker("fr", "fr-fr");
-          let recapPaymentBtn = document.querySelector('.recap-payment-btn');
-          recapPaymentBtn.style.display = "flex";
+          // let recapPaymentBtn = document.querySelector('.recap-payment-btn');
+          document.querySelector('.recap-payment-btn').style.display = "flex";
         });
       })
 
@@ -64,8 +64,8 @@ function pointPicker() {
       document.querySelector('.address-btn').addEventListener('click', (event) => {
         event.stopImmediatePropagation();
         // if (document.querySelector('.recap-payment-btn') == undefined) {
-          let recapPaymentBtn = document.querySelector('.recap-payment-btn');
-          recapPaymentBtn.style.display = "flex";
+          // let recapPaymentBtn = document.querySelector('.recap-payment-btn');
+          document.querySelector('.recap-payment-btn').style.display = "flex";
           // let recapPaymentBtn = '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>';
           // document.querySelector('.payment-display-address').insertAdjacentHTML('afterEnd', recapPaymentBtn);
         // }
@@ -84,8 +84,8 @@ function pointPicker() {
       document.querySelector('.address-btn').addEventListener('click', (event) => {
         event.stopImmediatePropagation();
         // if (document.querySelector('.recap-payment-btn') == undefined) {
-          let recapPaymentBtn = document.querySelector('.recap-payment-btn');
-          recapPaymentBtn.style.display = "flex";
+          // let recapPaymentBtn = document.querySelector('.recap-payment-btn');
+          document.querySelector('.recap-payment-btn').style.display = "flex";
           // let recapPaymentBtn = '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>';
           // document.querySelector('.payment-display-address').insertAdjacentHTML('afterEnd', recapPaymentBtn);
         // }
@@ -144,8 +144,8 @@ function pointPicker() {
       const data_picker = `<br><p>Votre point relais : ${result.name} - ${result.house_number} ${result.street}, ${result.postal_code} ${result.city}</p>`;
       pointPickerResult.innerHTML = data_picker;
       if (document.querySelector('.recap-payment-btn') == undefined) {
-        let recapPaymentBtn = '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>';
-        pointPickerResult.insertAdjacentHTML('afterEnd', recapPaymentBtn)
+        // let recapPaymentBtn = '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>';
+        pointPickerResult.insertAdjacentHTML('afterEnd', '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>');
       }
 
       // resultElem.style.display = 'block';

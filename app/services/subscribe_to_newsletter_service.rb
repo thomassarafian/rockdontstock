@@ -1,7 +1,5 @@
 class SubscribeToNewsletterService
   include ActiveModel::Validations
-
-
   
   def initialize(user)
     @user = user

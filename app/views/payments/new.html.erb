@@ -69,9 +69,13 @@
         <p><strong>Livraison</strong></p>
         <div class="resume-delivery-infos"></div>
         <br>
-        <p class="resume-prices">Prix de l'article : <span class="payment-article-price"><%= @order.price %> €</span></p>
-        <p class="resume-prices">Livraison : <span class="payment-delivery-price"><%= @order.shipping_cost %> €</span></p>
-        <p class="resume-prices">Authentification : <span class="payment-service-price"><%= @order.service / 2 %> €</span></p>
+        <p class="resume-prices">Prix de l'article : <span class="payment-article-price"><%= @order.price %>€</span></p>
+        <p class="resume-prices">Livraison : <span class="payment-delivery-price">
+        <%# if  %>
+          <%= @order.shipping_cost %> €
+        <%# end %>
+        </span></p>
+        <p class="resume-prices">Authentification : <span class="payment-service-price"><%= @order.service / 2 %>€</span></p>
         <br>
         <% total =  (@order.price + @order.shipping_cost + (@order.service / 2)) %>
         <strong><p class="resume-prices">TOTAL <span class="payment-total-price"><%= total %> €</span></p></strong>
