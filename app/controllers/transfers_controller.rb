@@ -1,6 +1,6 @@
 class TransfersController < ApplicationController
     skip_after_action :verify_authorized, only: [:index, :create]
-	
+	 
   def index
 		skip_policy_scope
     @user = current_user
@@ -10,22 +10,22 @@ class TransfersController < ApplicationController
 		})
 
 		# POUR CREER UNE LIEN AVEC SA BANQUE AFIN DE FAIRE DES VIREMENTS 
-		if current_user.iban?
-			@bank_account = Stripe::Account.create_external_account(
-				current_user.stripe_account_id,
-				{
-			  	external_account: {
-			  		object: 'bank_account',
-			  		country: 'FR',
-			  		currency: 'eur',
-			  		account_holder_name: current_user.first_name + " " +  current_user.last_name,
-			  		account_holder_type: 'individual',
-			  		account_number: current_user.iban,
-			  	},
-				},
-			)
-		end
-    
+		# if current_user.iban?
+		# 	@bank_account = Stripe::Account.create_external_account(
+		# 		current_user.stripe_account_id,
+		# 		{
+		# 	  	external_account: {
+		# 	  		object: 'bank_account',
+		# 	  		country: 'FR',
+		# 	  		currency: 'eur',
+		# 	  		account_holder_name: current_user.first_name + " " +  current_user.last_name,
+		# 	  		account_holder_type: 'individual',
+		# 	  		account_number: current_user.iban,
+		# 	  	},
+		# 		},
+		# 	)
+		# end
+
 		# FAIRE LES VIREMENTS A PROPREMENT PARLÉ
 		# p payout = Stripe::Payout.create({
 		#   amount: 100,

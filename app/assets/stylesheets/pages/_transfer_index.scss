@@ -1,0 +1,59 @@
+.btn-save-iban, .btn-send-documents {
+  padding: 0 4px;
+}
+
+.form-validate-iban {
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  border-radius: 5px;
+  padding: 25px 10px;
+  margin: 30px 0;
+}
+
+@media (min-width: 320px) {
+  .tranfers-index h1 {
+    margin-top:60px;
+    font-size: 22px;
+  }
+  .tranfers-index h2 {
+    font-size: 17px;
+  }
+  .my-form {
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    padding: 15px;
+  }
+  .my-form label{
+    margin: 20px 0;
+  }
+  .btn-send-documents {
+    margin-top:30px;
+  }
+}
+
+
+@media (min-width: 768px) {
+  
+}
+
+
+@media (min-width: 1024px) {
+  
+}
+
+@media (min-width: 1440px) {
+  
+}
+
+
+.tranfers-index {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.send-id-documents {
+  margin: 50px 0;
+}

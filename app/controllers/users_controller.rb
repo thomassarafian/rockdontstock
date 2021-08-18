@@ -8,6 +8,21 @@ class UsersController < ApplicationController
 	end
 	
 	def update
+   # raise
+    if params['user']['iban'].present?
+      @res = Stripe::StripeSendIban.new(current_user,params['user']['iban']).call
+      if !@res 
+        redirect_to user_transfers_path, alert: "Erreur de vérification de l'IBAN."
+      end
+      #   raise
+      # else
+      #   raise
+      # end
+      # raise
+      # if @result == "Erreur de vérification de l'IBAN."
+      #   redirect_to user_transfers_path, alert: @result
+      # end
+    end
 		@user.update(user_params)
     @user.save!
     # if @user.save
