@@ -1,3 +1,10 @@
+.users-show {    
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .profil-page {
   margin-top: 100px;
   display: grid;
@@ -93,6 +100,16 @@
 
 // Large devices (desktops, 902px and up)
 @media (min-width: 902px) {
+  .document-verif {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .bought-sales-items {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+  }
   .profil-page {
     margin-top: 100px;
     display: grid;
@@ -101,8 +118,7 @@
     grid-template-areas:
     "header header"
     "basic purchases"
-    "basic sales"
-    "basic money";
+    "basic sales";
   }
 
   .header {
@@ -119,9 +135,6 @@
     grid-area: sales;
   }
 
-  .money-infos {
-    grid-area: money;
-  }
   .modify-infos-btn {
     padding: 5px;
   }
@@ -136,5 +149,6 @@
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1024px) {
+
 }
 

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container users-show">
 	<div class="profil-page">
 		<div class="header">
 			<div class="header-img">
@@ -44,20 +44,22 @@
 					<p>Numéro de téléphone : <p>
 				<% end %>
 			</div>
+      
+      <!-- <div class="section-profil"> -->
+  			<%= link_to user_items_path, class: 'bought-sales-items' do %>
+  				<div class="my-items">
+  					<h5>Mes achats / ventes</h5> 
+  					<%= image_tag "profil/my_purchases", class: "" %>
+  				</div>
+  			<% end %>
 
-			<%= link_to user_items_path do %>
-				<div class="my-items">
-					<h5>Mes achats / ventes</h5> 
-					<%= image_tag "profil/my_purchases", class: "" %>
-				</div>
-			<% end %>
-
-			<%= link_to root_path do %>
-				<div class="my-sales">
-					<h5>Mes documents / RIB</h5> 
-					<%= image_tag "profil/my_sales", class: "my-sales-icon" %>
-				</div>
-			<% end %>
+  			<%= link_to user_transfers_path, class: 'document-verif' do %>
+  				<div class="my-sales">
+  					<h5>Mes documents / RIB</h5> 
+  					<%= image_tag "profil/my_sales", class: "my-sales-icon" %>
+  				</div>
+  			<% end %>
+      <!-- </div> -->
 			
 		
 
