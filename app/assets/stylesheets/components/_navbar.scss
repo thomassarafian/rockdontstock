@@ -66,7 +66,6 @@
 }
 
 @media (min-width: 100px) {
-
   .real-nav {
     position: fixed;
     top: 0;
@@ -240,7 +239,7 @@
     display:none;
   }
   .toggler_icon_phone {
-   display:none; 
+    display:none; 
   }
   .glass_icon_phone {
     display:none;
@@ -258,7 +257,9 @@
 
   }
   .glass_icon {
-    border: 1px solid #a8a8a8;
+    height: 30px;
+    align-items: center;
+    background-color: #F2F2F2;
     border-radius: 5px;
     padding: 0px 5px;
     display: flex;

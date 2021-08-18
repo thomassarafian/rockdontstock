@@ -44,16 +44,21 @@ class TransfersController < ApplicationController
           tos_shown_and_accepted: true,
         },
       })
-      Stripe::Account.update(
-        current_user.stripe_account_id,
-        {
-          account_token: token
-        });
+      begin
+        Stripe::Account.update(
+          current_user.stripe_account_id,
+          {
+            account_token: token
+          });
+        redirect_to user_transfers_path, notice: "Tes documents viennent d'être envoyés"
+      rescue Exception => e
+        redirect_to user_transfers_path, notice: "Impossible d'envoyer tes documents"
+      end
     elsif params['send-money-bank'] == '1'
       @user = current_user
       @account = Stripe::Account.retrieve(@user.stripe_account_id)
       @balance = Stripe::Balance.retrieve({stripe_account: @user.stripe_account_id})
-      # raise
+
       payout = Stripe::Payout.create({
         amount: @balance.available[0].amount,
         currency: 'eur',
@@ -62,15 +67,7 @@ class TransfersController < ApplicationController
         },{
           stripe_account: @user.stripe_account_id,
       })
-    else
-      @user = User.find(params[:user_id])
-      @transfer = Transfer.new(transfer_params)
-      @user.transfer = @transfer
-      if @transfer.save
-        redirect_to users_path(@user)
-      else
-        render 'users/show'
-      end
+      redirect_to user_transfers_path, notice: "Le virement vient d'être effectué !"
     end
   end
 

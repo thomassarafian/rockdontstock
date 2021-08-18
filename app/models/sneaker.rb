@@ -1,4 +1,6 @@
 class Sneaker < ApplicationRecord
+  include PgSearch::Model
+
 	has_many_attached :photos, dependent: :destroy
 
   has_many :orders, dependent: :destroy
@@ -16,6 +18,42 @@ class Sneaker < ApplicationRecord
 
 	# after_create :send_notification  # a configurer avec mailjet 
 
+
+  pg_search_scope :search_by_name,
+    against: [:name],
+    using: {
+      tsearch: { prefix: true } 
+    }
+
+  scope :filter_by_price, -> (price) { 
+    if price == "100"
+      where(price_cents: 0..10000)
+    elsif price == "200"
+      where(price_cents: 0..20000)
+    elsif price == "300"
+      where(price_cents: 0..30000)
+    elsif price == "301"
+      where(price_cents: 300..10000000)
+    end
+  }
+
+  # scope :filter_by_category, -> (category) { where category: category }
+
+  scope :filter_by_condition, -> (condition) { 
+    where("sneakers.condition = ?", condition) 
+  }
+  
+  # scope :filter_by_release_date, -> (release_date) { 
+  #   if release_date == "2001"
+  #     where("extract(year from release_date) >= ? and extract(year from release_date) <= ?", "1900", "2001")
+  #   else
+  #     where('extract(year from release_date) = ?', release_date) 
+  #   end
+  # }
+  
+  scope :filter_by_size, -> (size) {
+    where("sneakers.size = ?", size)
+ }
 
 
 

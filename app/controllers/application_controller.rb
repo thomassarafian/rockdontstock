@@ -22,7 +22,6 @@ class ApplicationController < ActionController::Base
 
   def skip_set_search_navbar?
     if (params[:controller] == "sneaker_dbs" && params[:action] == "index") || params["_method"] == "patch"
-      puts " GO HERE ! ! ! ! !"
       return true
     else
       return false
@@ -31,32 +30,33 @@ class ApplicationController < ActionController::Base
 
   
   def set_search_navbar
-    @pagy, @sneaker_dbs = pagy(SneakerDb.order(:name))
-    if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
+    @pagy, @sneakers = pagy(Sneaker.order(:name))
+
+    if params[:price].present? || params[:condition].present? || params[:size].present?
       session[:filter_params] = params
       filtering_params(params).each do |key, value|
-        @sneaker_dbs = @sneaker_dbs.public_send("filter_by_#{key}", value) if value.present?
+        @sneakers = @sneakers.public_send("filter_by_#{key}", value) if value.present?
       end
     elsif params[:page].present? && params[:page] >= "2" && session[:filter_params].present?
       filtering_params(session[:filter_params]).each do |key, value|
-        @sneaker_dbs = @sneaker_dbs.public_send("filter_by_#{key}", value) if value.present?
+        @sneakers = @sneakers.public_send("filter_by_#{key}", value) if value.present?
       end
-    elsif !params[:category].present? || !params[:price].present? || !params[:condition].present? || !params[:size].present?
+    elsif !params[:price].present? || !params[:condition].present? || !params[:size].present?
       session.delete(:filter_params)
     end
     if params[:query].present?
-      @sneaker_dbs = @sneaker_dbs.search_by_name_category_sub_and_price(params[:query])
+      @sneakers = @sneakers.search_by_name(params[:query])
     end
-    
+
     respond_to do |format|
       format.html
       format.json 
-      format.text { render partial: 'shared/list.html.erb', locals: { sneaker_dbs: @sneaker_dbs, params: params}, pagination: view_context.pagy_nav(@pagy) }
+      format.text { render partial: 'shared/list.html.erb', locals: { sneakers: @sneakers, params: params}, pagination: view_context.pagy_nav(@pagy) }
     end
   end
 
   def filtering_params(params)
-    params.slice(:category, :price, :condition, :size)
+    params.slice(:price, :condition, :size)
   end
 
 
