@@ -5,12 +5,12 @@
     <!-- Section: Social media -->
     <section class="mb-4">
       <!-- Facebook -->
-      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/rockdntstock/" target='_blank' role="button"
         ><i class="fab fa-facebook-f"></i
       ></a>
 
       <!-- Instagram -->
-      <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/rockdntstock/" target='_blank' role="button"
         ><i class="fab fa-instagram"></i
       ></a>
 
@@ -56,7 +56,7 @@
               <a href="#!">Questions courantes</a>
             </li> -->
             <li>
-              <a href="#!">FAQ</a>
+              <a href="/">FAQ</a>
             </li>
           </ul>
         </div>
@@ -87,14 +87,11 @@
           <h5 class="contact-title font-weight-bold">Nous contacter </h5>
 
           <ul class="list-unstyled mb-0">
-            <!-- <li>
-              <a href="#!">+33606811836</a>
-            </li> -->
             <li>
-              <a href="#!">hello@rockdontstock.fr</a>
+              <%= mail_to("hello@rockdontstock.fr", "hello@rockdontstock.fr", target:"_blank") %>
             </li>
             <li>
-              Follow nous sur IG : <br><a href="#!">@rockdntstock</a>
+              Follow nous sur IG : <br><a href="https://www.instagram.com/rockdntstock/" target="_blank">@rockdntstock</a>
             </li>
           </ul>
         </div>

@@ -1,0 +1,14 @@
+@media (min-width: 768px) {
+  .modal-sneaker-all {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-sneaker-size-cond, .modal-sneaker-box-extras {
+    margin: 20px;
+  }
+}
+.modal-sneaker-infos {
+  text-align: center;
+}
