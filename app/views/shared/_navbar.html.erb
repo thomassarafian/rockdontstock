@@ -1,8 +1,4 @@
- <%# brand = ["Adidas", "Air Jordan", "Nike", "Other Brands", "Luxury Brands", "Collections"]
-    nike_categories = [ "Foamposite", "KD", "Kobe", "LeBron", "Air Force", "Air Max", "Basketball", "SB", "Other", "Sacai", "Presto", "Cortez", "Fear Of God", "OBJ", "Huarache", "Undercover", "Tailwind", "Stranger Things", "Daybreak", "React Element", "Cactus Plant Flea Market", "Comme Des Garcons", "Yeezy", "Zoomx"]
-    adidas_categories = ["Ozweego", "Human Race", "Nite Jogger", "Ivy Park", "Raf Simons", "Yeezy", "Ultra Boost", "NMD", "Iniki", "Stan Smith", "EQT", "Basketball", "Running", "Skateboarding", "Soccer", "Other"]
-    air_jordan_categories = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "Future", "Golf", "Legacy 312", "Off-White", "Packs", "Spizike", "Women", "Other"]       
-%>
+ <% brand = ["Adidas", "Air Jordan", "Nike", "Other Brands", "Luxury Brands", "Collections"]%>
 
 <div class="" id="navbar-light">
   <div class="fixed-top nav-test">
@@ -41,7 +37,7 @@
       <%= link_to "Mon compte", user_signed_in? ? user_path : user_session_path, class: "side-link" %>
     </li>
     <li class="navbar-side-item">
-      <a class="side-link" href="/">Vendre</a>
+      <a class="side-link" href="/sneakers/new">Vendre</a>
     </li>
     <li class="navbar-side-item">
      <%= link_to("Tout voir", sneaker_dbs_path, class: "side-link") %>
@@ -91,10 +87,11 @@
               <div class="dropdown-filter-items">
                 <button class="dropdown-filter-laptop btn btn-dark" type="button">Filtres</button>
 
-                <%#= select_tag :category, options_for_select(brand),
+                <%= select_tag :category, options_for_select(brand),
                   include_blank: "Toute les marques",
                   class: "form-select",
                   data: { action: "filters#filter", target: "filters.filter" } %>
+                  
                   <%= select_tag :price,
                       options_for_select(
                         [ ["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301] ], params[:price]
@@ -126,6 +123,91 @@
       </div>
     </div>
   </div>
+
+  
+  <% @sneakers.all.each do |sneaker| %>
+    <div class="modal fade" id="search-list-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="searchListLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" style="color: black;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="searchListLabel"><%= sneaker.sneaker_db.name %></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <%= cl_image_tag(sneaker.photos[0].key, class: 'sneaker-show-photos') %>
+                </div>
+                <!-- <div class="carousel-item ">
+                  <%#= cl_image_tag(sneaker.photos[1].key, class: 'sneaker-show-photos') %>
+                </div>
+                <div class="carousel-item ">
+                  <%#= cl_image_tag(sneaker.photos[2].key, class: 'sneaker-show-photos') %>
+                </div>
+                <div class="carousel-item ">
+                  <%#= cl_image_tag(sneaker.photos[3].key, class: 'sneaker-show-photos') %>
+                </div>
+                <div class="carousel-item ">
+                  <%#= cl_image_tag(sneaker.photos[4].key, class: 'sneaker-show-photos') %>
+                </div> -->
+                <!-- <div class="carousel-item ">
+                  <%#= cl_image_tag(sneaker.photos[5].key, class: 'sneaker-show-photos') %>
+                </div>
+                <div class="carousel-item ">
+                  <%#= cl_image_tag(sneaker.photos[6].key, class: 'sneaker-show-photos') %>
+                </div>
+                <div class="carousel-item ">
+                  <%#= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
+                </div> -->
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon sneaker-show-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+            <div class="modal-sneaker-infos">
+              <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification</p>
+              <div class='modal-sneaker-all'>
+                <div class="modal-sneaker-size-cond">
+                  <p>Taille : <strong><%=  sneaker.size %> FR</strong></p> <%#= US (shoes_size[@sneaker.size] FR)%>
+                  <p>Condition : <strong><%= sneaker.condition %>/10</strong></p>
+                </div>
+                <div class="modal-sneaker-box-extras">
+                  <p>Box : <strong><%= sneaker.box %></strong></p>
+                  <p>Extras : <strong><%= sneaker.extras %></strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer" style="justify-content: center;">
+            <% if current_user != sneaker.user %>
+              <%= form_tag orders_path(sneaker_id: sneaker.id) do %>
+                <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
+              <% end %>
+            <% else %>
+              <%# if policy(sneaker).edit? %>
+                <!-- <button type="button" class="btn btn-dark sneaker-show-btn"> -->
+                  <%#= link_to "Modifier la paire", edit_sneaker_path(sneaker), style: 'color: white;' %>
+                <!-- </button> -->
+              <%# end %>
+              <% if policy(sneaker).destroy? %>
+                <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;">
+                  <%= link_to "Supprimer", sneaker_path(sneaker), method: :delete, data: { confirm: "Tu es sûr ?" }, style: 'color: white;' %>
+                </button>
+              <% end %>   
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>   
 
   
 </div>
