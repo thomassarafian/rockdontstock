@@ -104,41 +104,41 @@ class User < ApplicationRecord
     # end
   end
   
-  def send_ids
-    user = self
-    identity_front = retrieve_front_id(user)
-    identity_verso = retrieve_verso_id(user)
-    proof_of_address = retrieve_proof_of_address(user)
-    person_token = create_person_token(identity_front, identity_verso, proof_of_address)
-    update_person(user, person_token)
-  end
+  # def send_ids
+  #   user = self
+  #   identity_front = retrieve_front_id(user)
+  #   identity_verso = retrieve_verso_id(user)
+  #   proof_of_address = retrieve_proof_of_address(user)
+  #   person_token = create_person_token(identity_front, identity_verso, proof_of_address)
+  #   update_person(user, person_token)
+  # end
 
-  def retrieve_front_id(user)
-    return Stripe::File.create({
-      purpose: 'identity_document',
-      file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
-      }, {
-      stripe_account: user.stripe_account_id,
-    })
-  end
+  # def retrieve_front_id(user)
+  #   return Stripe::File.create({
+  #     purpose: 'identity_document',
+  #     file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
+  #     }, {
+  #     stripe_account: user.stripe_account_id,
+  #   })
+  # end
 
-  def retrieve_verso_id(user)
-    return Stripe::File.create({
-      purpose: 'identity_document',
-      file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
-      }, {
-      stripe_account: user.stripe_account_id,
-    })
-  end
+  # def retrieve_verso_id(user)
+  #   return Stripe::File.create({
+  #     purpose: 'identity_document',
+  #     file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
+  #     }, {
+  #     stripe_account: user.stripe_account_id,
+  #   })
+  # end
 
-  def retrieve_proof_of_address(user)
-    return Stripe::File.create({
-      purpose: 'identity_document',
-      file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
-      }, {
-      stripe_account: user.stripe_account_id,
-    })
-  end
+  # def retrieve_proof_of_address(user)
+  #   return Stripe::File.create({
+  #     purpose: 'identity_document',
+  #     file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
+  #     }, {
+  #     stripe_account: user.stripe_account_id,
+  #   })
+  # end
 
   def create_person_token(identity_front, identity_verso, proof_of_address)
     return Stripe::Token.create({

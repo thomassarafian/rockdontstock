@@ -27,7 +27,7 @@ class SneakersController < ApplicationController
     end
     if current_user == nil
       reset_session
-      @sneaker = Sneaker.new(user_id: 1, name: params['sneaker']['name'],
+      @sneaker = Sneaker.new(user_id: 1,
         size: params['sneaker']['size'], condition: params['sneaker']['condition'], 
         price: params['sneaker']['price'], photos: params['sneaker']['photos'],
         box: params['sneaker']['box'], extras: params['sneaker']['extras'],

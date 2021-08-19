@@ -44,6 +44,8 @@ air_jordan_csv.each do |row|
     else
       s.img_url = row['img-fixed-src']
     end
+  else
+    s.img_url = row['img-fixed-src']
   end
   if s.save
   	count += 1
@@ -64,6 +66,8 @@ new_balance_csv.each do |row|
     else
       s.img_url = row['img-fixed-src']
     end
+  else
+    s.img_url = row['img-fixed-src']
   end
   if s.save
     count += 1
@@ -77,6 +81,7 @@ adidas_csv.each do |row|
   s = SneakerDb.new
   s.name = row['sneaker-title']
   s.category = "Adidas"
+  
   if row['img-fixed-src'] == nil
     s.img_url = row['img-slide-src']
   elsif row['img-slide-src'] == nil
@@ -85,6 +90,8 @@ adidas_csv.each do |row|
     else
       s.img_url = row['img-fixed-src']
     end
+  else
+    s.img_url = row['img-fixed-src']
   end
   if s.save
     count += 1
@@ -106,6 +113,8 @@ nike_csv.each do |row|
     else
       s.img_url = row['img-fixed-src']
     end
+  else
+    s.img_url = row['img-fixed-src']
   end
   if s.save
     count += 1

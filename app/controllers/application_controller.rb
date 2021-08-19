@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
     if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
       session[:filter_params] = params
       filtering_params(params).each do |key, value|
+        puts  key,value
         @sneakers = @sneakers.public_send("filter_by_#{key}", value) if value.present?
       end
     elsif params[:page].present? && params[:page] >= "2" && session[:filter_params].present?

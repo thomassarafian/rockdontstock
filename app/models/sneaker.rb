@@ -30,25 +30,18 @@ class Sneaker < ApplicationRecord
 
   scope :filter_by_price, -> (price) { 
     if price == "100"
-      where(price_cents: 0..10000)
+      Sneaker.where(price_cents: 0..10000)
     elsif price == "200"
-      where(price_cents: 0..20000)
+      Sneaker.where(price_cents: 0..20000)
     elsif price == "300"
-      where(price_cents: 0..30000)
+      Sneaker.where(price_cents: 0..30000)
     elsif price == "301"
-      where(price_cents: 300..10000000)
+     Sneaker.where(price_cents: 30000..10000000)
     end
   }
 
   scope :filter_by_category, -> (category) { 
-    puts category
-    puts category
-    puts category
-    puts category
-    Sneaker.joins(:sneaker_db).where(:sneaker_dbs => { :category => category })
-
-    # where("sneaker_db.category = ?", category)
-    # joins(:sneaker_db).where("sneaker_db.category = ?", category )
+    joins(:sneaker_db).where(:sneaker_dbs => { :category => category })
   }
 
   scope :filter_by_condition, -> (condition) { 

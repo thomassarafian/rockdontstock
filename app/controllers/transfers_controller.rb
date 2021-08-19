@@ -4,13 +4,8 @@ class TransfersController < ApplicationController
   def index
 		skip_policy_scope
     @user = current_user
-		
     @account = Stripe::Account.retrieve(@user.stripe_account_id)
-
 		@balance = Stripe::Balance.retrieve({stripe_account: @user.stripe_account_id})
-
-
-		# POUR CREER UNE LIEN AVEC SA BANQUE AFIN DE FAIRE DES VIREMENTS 
 		
 		# FAIRE LES VIREMENTS A PROPREMENT PARLÉ
 		# p payout = Stripe::Payout.create({

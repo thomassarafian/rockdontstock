@@ -9,7 +9,6 @@
               </div>
             <% end %>
               <div class="sneaker-title"><strong><%= sneaker.name %></strong></div>
-              <!-- <div class="sneaker-price">À partir de <%#= sneaker.price_cents %>€</div> -->
           </div>
       <% end %>
     </div>  
@@ -23,7 +22,7 @@
       <% @sneaker_dbs.all.limit(8).each do |sneaker| %>
           <div class="sneaker-card" data-refresh-list-target="sneakers">
             <button class="btn-sneaker-card-img"><div class="sneaker-card_img">
-             <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
+             <%#= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
             </div></button>
             <div class="sneaker-title"><strong><%= sneaker.name %></strong></div>
             <div class="sneaker-price">À partir de <%= sneaker.price_cents %>€</div>
