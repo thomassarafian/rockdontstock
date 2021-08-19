@@ -16,12 +16,12 @@
       </div>
       <%= link_to('<button type="button" id="sell_button" class="btn btn-dark">Vendre</button>'.html_safe, 
       new_sneaker_path) %>
-      <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon navbarSideButton', type: "button" %>
+      <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon navbarSideButton' %>
     </div>
   </div>
   
   <div class="real-nav">
-    <%= image_tag "navbar/toggler_icon.svg", style: 'height: 40px;border:0; border-image: none; background-color: white;', class: 'toggler_icon_phone navbarSideButton', type: "button" %>  
+    <%= image_tag "navbar/toggler_icon.svg", style: 'height: 40px;', class: 'toggler_icon_phone navbarSideButton' %>  
     
     <%= link_to "/", class: "navbar-brand-phone" do %>
       <%= image_tag("logo.svg", style: 'width: 60px;', class: 'icon_phone') %>

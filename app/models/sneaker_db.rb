@@ -1,11 +1,11 @@
 class SneakerDb < ApplicationRecord
   has_many :sneakers
- #  include PgSearch::Model
- #  pg_search_scope :search_by_name_category_sub_and_price,
- #    against: [:name, :category, :subcategory, :price_cents],
- #    using: {
- #      tsearch: { prefix: true } 
- #    }
+  include PgSearch::Model
+  pg_search_scope :search_by_name,
+    against: [:name],
+    using: {
+      tsearch: { prefix: true } 
+    }
 
  #  scope :filter_by_price, -> (price) { 
  #    if price == "100"
