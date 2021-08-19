@@ -21,6 +21,9 @@ class Sneaker < ApplicationRecord
 
   pg_search_scope :search_by_name,
     against: [:name],
+    associated_against: {
+      sneaker_db: [:name]
+    },
     using: {
       tsearch: { prefix: true } 
     }
