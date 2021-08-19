@@ -40,7 +40,16 @@ class Sneaker < ApplicationRecord
     end
   }
 
-  scope :filter_by_category, -> (category) { where category: category }
+  scope :filter_by_category, -> (category) { 
+    puts category
+    puts category
+    puts category
+    puts category
+    Sneaker.joins(:sneaker_db).where(:sneaker_dbs => { :category => category })
+
+    # where("sneaker_db.category = ?", category)
+    # joins(:sneaker_db).where("sneaker_db.category = ?", category )
+  }
 
   scope :filter_by_condition, -> (condition) { 
     where("sneakers.condition = ?", condition) 
