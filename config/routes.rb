@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :sneakers, only: [:new, :create]
   end
 
+
 	resource :user, only: [:show, :update], path: 'me' do
     resources :items, only: [:index]
   	resources :transfers, only: [:index, :create]
