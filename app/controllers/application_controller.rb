@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
-	include Pagy::Backend
+	if @user && (@user.email != "elliot@rockdontstock.com" || @user.email != "nils@rockdontstock.com" || @user.email != "thomassarafian@gmail.com")
+    redirect_to "/", flash: "Tu n'es pas admin"
+  else
+  include Pagy::Backend
   include Pundit
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	before_action :authenticate_user!
@@ -17,6 +20,7 @@ class ApplicationController < ActionController::Base
 	#   flash[:alert] = "You are not authorized to perform this action."
 	#   redirect_to(root_path)
 	# end
+  end
 
 	protected
 
