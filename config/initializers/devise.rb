@@ -24,7 +24,7 @@ Devise.setup do |config|
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"],
     scope: 'userinfo.email, userinfo.profile',
     image_size: 'square',  # 50x50, guaranteed ratio
-    secure_image_url: true
+    secure_image_url: true 
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -37,8 +37,8 @@ Devise.setup do |config|
   config.mailer_sender = "no-reply@rockdontstock.com"
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
-  config.mailer = 'MailForm::Base'
+  config.mailer = 'Devise::Mailer'
+  # config.mailer = 'MailForm::Base'
 
 
   # Configure the parent class responsible to send e-mails.

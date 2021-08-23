@@ -19,7 +19,9 @@
 <% end %>
 
 <%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Connexion via #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), method: :post, class:"omniauth-btn" %>
-  <% end %>
+  <%#- resource_class.omniauth_providers.each do |provider| %>
+    <%# puts resource_class%>
+    <%= link_to "Connexion via Facebook", omniauth_authorize_path(User, 'facebook'), method: :post, class:"omniauth-btn" %>
+    <%= link_to "Connexion via Google", omniauth_authorize_path(User, 'google_oauth2'), method: :post, class:"omniauth-btn" %>
+  <%# end %>
 <% end %>
