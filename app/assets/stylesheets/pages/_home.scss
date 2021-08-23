@@ -9,6 +9,76 @@ select {
   // font: Questrial !important;
 }
 
+.article-legit-check {
+  background-image: url('/assets/home/article_background_img.png');
+  background-size: cover;
+  height: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  color: white;
+  text-align: center;
+  padding: 20px 20px;
+}
+.article-legit-check hr {
+  background-color: white;
+  margin: 0 20rem;
+}
+.article-legit-check h2 {
+  font-size: 40px;
+  font-weight: bold;
+}
+.article-legit-check p {
+  margin-top:20px;
+}
+
+.article-legit-check a {
+  text-decoration: none; 
+  color: white;
+}
+
+.article-legit-check a:hover {
+  text-decoration: none; 
+  color: #FFCD05;
+}
+
+@media (min-width: 320px) {
+  .article-legit-check h2 {
+    font-size: 20px;
+  }
+  .article-legit-check hr {
+    margin: 0 10px;
+  }
+  .article-legit-check p, a{
+    font-size: 10px;
+  }
+}
+@media (min-width: 768px) {
+  .article-legit-check h2 {
+    font-size: 30px;
+  }
+  .article-legit-check hr {
+    margin: 0 50px;
+  }
+  .article-legit-check p, a{
+    font-size: 12px;
+  } 
+}
+
+@media (min-width: 1024px) {
+  .article-legit-check h2 {
+    font-size: 40px;
+  }
+  .article-legit-check hr {
+    margin: 0 100px;
+  }
+  .article-legit-check p, a{
+    font-size: 14px;
+  } 
+}
+
+
+
+
 .message-pub {
   margin-top:50px;
   padding: 0px 10px;

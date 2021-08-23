@@ -188,7 +188,6 @@
     position: absolute;
     left: 0;
     right: 0;
-    // z-index: 1;
   }
   .phone-hide-search-arrow {
     display: none;
@@ -254,8 +253,8 @@
     align-items: center;
     width: 100%;
     justify-content: flex-end;
-
   }
+
   .glass_icon {
     height: 30px;
     align-items: center;
@@ -264,8 +263,11 @@
     padding: 0px 5px;
     display: flex;
     justify-content: space-between;
-    width: 170px;
     margin: 0px 15px;
+    border-radius: 11px;
+    width: 200px;
+    color: #7b7b7b;
+    font-weight: 300;
   }
   #sell_button {
     font-size: 14px;

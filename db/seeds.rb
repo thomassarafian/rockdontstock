@@ -40,7 +40,7 @@ air_jordan_csv.each do |row|
     s.img_url = row['img-slide-src']
   elsif row['img-slide-src'] == nil
     if row['img-fixed-src'].start_with? "https://stockx-assets.imgix.net"
-      s.img_url = '/assets/default_avatar-79d97d5ae872c6df638f6670cc7ec8ce5425071b6f483e5be3cc9df1555dbc68.png'
+      s.img_url = '/assets/oeil-rds.png'
     else
       s.img_url = row['img-fixed-src']
     end
