@@ -40,7 +40,7 @@
       <a class="side-link" href="/sneakers/new">Vendre</a>
     </li>
     <li class="navbar-side-item">
-     <%= link_to("Tout voir", sneaker_dbs_path, class: "side-link") %>
+     <%= link_to("Tout voir", sneakers_path, class: "side-link") %>
     </li>
     <li class="navbar-side-item">
       <%= link_to("Nous contacter", new_contact_path, class: "side-link") %>
@@ -118,7 +118,7 @@
                 class: "form-select",
                 data: { action: "filters#filter", target: "filters.filter" } %>
               </div>
-              <%= render 'shared/list', sneaker_dbs: @sneaker_dbs %>
+              <%= render 'shared/list', sneakers: @sneakers %>
             </div>
       </div>
     </div>

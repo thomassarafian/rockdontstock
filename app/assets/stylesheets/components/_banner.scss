@@ -17,12 +17,8 @@
   background-image: url("banner/home_page_banner_phone.svg"); 
   background-position: center;	
   background-size: cover;
-  text-color: white;
-	height: 100vh;
-  text-align: left;
-  padding-top: 40vh;
+  // text-align: left;
   margin-bottom: 50px;
-  // box-shadow: 0 0 15px -2px rgba(0,0,0,0.2);
 }
 
 .home-title {
@@ -30,73 +26,69 @@
 }
 
 @media (min-width: 320px) {
-    .banner {
-    background-image: url("banner/home_page_banner_phone.svg"); 
+  .banner {
+    background-image: url("banner/home_page_banner_phone.jpg"); 
   }
 
-  .home-title {
-    display: none;
-  }
   .banner {
-    height: 70vh;
+    // height: 70vh;
   }
   .scrolling {
-    height: 220px;
+    height: 490px;
   }
 }
 
-// Small devices (landscape phones, 500px and up)
-@media (min-width: 500px) {
-  // .banner {
-  //   background-image: url("banner/home_page_banner_phone.svg"); 
-  // }
-
-  // .home-title {
-  //   display: none;
-  // }
-  // .banner {
-  //   height: 70vh;
-  // }
-  // .scrolling {
-  //   height: 220px;
-  // }
+@media (min-width: 375px) {
+  .scrolling {
+    height: 590px;
+  }
 }
 
-// Medium devices (tablets, 768px and up)
+@media (min-width: 425px) {
+  .scrolling {
+    height: 650px;
+  }
+}
+
+
 @media (min-width: 768px) {
   .home-title {
     display: none;
   }
-  .banner {
-    height: 100vh;
-  }
   .scrolling {
-    height: 440px;
+    height: 1160px;
   }
   
 }
 
-// Large devices (desktops, 902px and up)
+
 @media (min-width: 902px) {
   .home-title {
-     display: block;
+    display: block;
     font-size: 60px;
   }
   .banner {
-    background-image: url("navbar/white/white_rds_icon.svg") ; 
-    // background-image: url("banner/home_page_banner.svg") ; 
+    background-image: url("banner/banner.jpg");
   }
   .scrolling {
-   height: 280px;
-  }
-
+    height: 450px;
+  }  
   .font-weight-bold>a { 
     color:white;
   }
 }
 
-// Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {
-  
+@media (min-width: 1024px) {
+  .scrolling {
+    height: 530px;
+  }  
 }
+
+@media (min-width: 1440px) {
+  .scrolling {
+    height: 740px;
+  }  
+}
+
+
 

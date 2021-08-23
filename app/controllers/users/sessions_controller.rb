@@ -5,7 +5,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-    if params['user']['email'] == "elliot@rockdontstock.com" || params['user']['email'] == "nils@rockdontstock.com" || params['user']['email'] == "thomassarafian@gmail.com" 
+    if params['user']['email'] == "elliot@rockdontstock.com" || params['user']['email'] == "nils@rockdontstock.com" || params['user']['email'] == "thomassarafian@gmail.com"
       super
     else
       redirect_to root_path, alert: "Tu n'es pas admin"

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
 	if @user && (@user.email != "elliot@rockdontstock.com" || @user.email != "nils@rockdontstock.com" || @user.email != "thomassarafian@gmail.com")
     redirect_to "/", flash: "Tu n'es pas admin"
   else
@@ -35,7 +36,7 @@ class ApplicationController < ActionController::Base
   
   def set_search_navbar
     @pagy, @sneakers = pagy(Sneaker.order(:name))
-
+    
     if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
       session[:filter_params] = params
       filtering_params(params).each do |key, value|

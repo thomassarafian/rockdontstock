@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row row-cols-4 mt-5 justify-content-center">
-    <div class="col-12 col-sm-9">
-        <h1>Modifier son profil</h1>
+    <div class="col-12 col-sm-9 edit-user-form">
+        <h1 style="text-align: center">Modifier son profil</h1>
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'fileinfo' }) do |f| %>
           <%= f.error_notification %>
 
@@ -71,37 +71,53 @@
           </div>
 
           <div class="form-actions">
-            <%= f.button :submit, "Enregistrer les modifications" %>
+            <%= f.button :submit, "Enregistrer les modifications", class: 'btn btn-dark' %>
           </div>
         
 
-            <div id='label-results'>...</div>
-            <pre id="upload-results"></pre>
-
+           
         <% end %>
 
 
-        <h3>Cancel my account</h3>
+        <!-- <h3>Cancel my account</h3> -->
 
-        <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+        <!-- <p>Unhappy? <%#= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p> -->
 
-        <%= link_to "Back", :back %>
+        <%#= link_to "Back", :back %>
     </div>
   </div>
 </div>
 
 <style type="text/css">
-
+  .edit_user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .tel.optional  {
     margin-bottom: 0.3rem;
   }
   .form-phone-num {
     display: grid;
-    grid-template-columns: [first] 100px [line2] 100%;
+    grid-template-columns: [first] 40px [line2] 100%;
     margin-right: 40px;
     align-items: baseline;
   }
-  
+  /*.edit-user-form h1 {
+    margin-top:50px;
+  }*/
+  @media (min-width: 320px) {
+    .edit-user-form h1 {
+      margin-top:10px;
+      font-size: 20px;
+    }
+  }
+  @media (min-width: 768px) {
+    .edit-user-form h1 {
+      margin-top:20px;
+      font-size: 25px;
+    }
+  }
 </style>
 
 <%= javascript_pack_tag "algolia_autocomplete_address" %>

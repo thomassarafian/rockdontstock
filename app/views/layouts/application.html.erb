@@ -64,14 +64,16 @@ end
       </div>
     </div>
   <% end %>
+
    <% if current_user.present? && (current_user.email == "elliot@rockdontstock.com" || current_user.email == "nils@rockdontstock.com" || current_user.email == "thomassarafian@gmail.com")  %>
       <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
       <!-- <p class="notice"><%= notice %></p> -->
       <!-- <p class="alert"><%= alert %></p>    -->
       <%= yield %>
-      
       <%= render 'shared/footer' %>
+    <%# elsif current_user.present? %>
+      <%# reset_session  %>
   <% end %>
   </body>
 </html>

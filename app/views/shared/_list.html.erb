@@ -2,6 +2,7 @@
   <div class="popup-search" id="records_table">
     <div class="sneaker-cards">
       <% @sneakers.all.each do |sneaker| %>
+      <!-- <div class="sneaker-cards-no-result" style="color:black;"></div> -->
       <div class="sneaker-card">
         <div class="sneaker-card_img" data-toggle="modal" data-target="#search-list-<%= sneaker.id %>">
           <%= cl_image_tag(sneaker.photos[0].key) %>
@@ -26,6 +27,15 @@
 
 </div>
 
+<script type="text/javascript">
+  document.querySelector('.list-sneakers-cards').addEventListener('change', (event) => {
+    console.log('alllllew');
+    if (document.querySelector('.sneaker-cards').childElementCount == 0)
+    {
+      document.querySelector('.sneaker-cards-no-result').innerHTML = "No result";
+    }
+  })
+</script>
 
 
 <style type="text/css">
