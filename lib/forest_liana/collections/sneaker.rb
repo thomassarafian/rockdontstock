@@ -5,4 +5,6 @@ class Forest::Sneaker
   
   action "Validate announcement"
 
+  # action "Validate announcement"
+
 end

@@ -1,42 +1,25 @@
-<%#shoes_size = {
-  6.0=>39,
-  6.5=>39,
-  7.0=>40,
-  7.5=>40.5,
-  8.0=>41,
-  8.5=>42,
-  9.0=>42.5,
-  9.5=>43,
-  10.0=>44,
-  10.5=>44.5,
-  11.0=>45,
-  11.5=>46,
-  12.0=>46.5,
-  12.5=>47
-}%>
-
 <h1 class="sneaker-show-title">Mon annonce</h1>
 <div class="sneaker-show">
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <div id="carouselSneakerShow" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
-      <!-- <li data-target="#carouselExampleIndicators" data-slide-to="6"></li> -->
-      <!-- <li data-target="#carouselExampleIndicators" data-slide-to="7"></li> -->
+      <li data-target="#carouselSneakerShow" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselSneakerShow" data-slide-to="1"></li>
+      <li data-target="#carouselSneakerShow" data-slide-to="2"></li>
+      <li data-target="#carouselSneakerShow" data-slide-to="3"></li>
+      <li data-target="#carouselSneakerShow" data-slide-to="4"></li>
+      <li data-target="#carouselSneakerShow" data-slide-to="5"></li>
+      <!-- <li data-target="#carouselSneakerShow" data-slide-to="6"></li> -->
+      <!-- <li data-target="#carouselSneakerShow" data-slide-to="7"></li> -->
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
         <%= cl_image_tag(@sneaker.photos[0].key, class: 'sneaker-show-photos') %>
       </div>
       <div class="carousel-item ">
-        <%#= cl_image_tag(@sneaker.photos[1].key, class: 'sneaker-show-photos') %>
+        <%= cl_image_tag(@sneaker.photos[1].key, class: 'sneaker-show-photos') %>
       </div>
       <div class="carousel-item ">
-        <%#= cl_image_tag(@sneaker.photos[2].key, class: 'sneaker-show-photos') %>
+        <%= cl_image_tag(@sneaker.photos[2].key, class: 'sneaker-show-photos') %>
       </div>
       <div class="carousel-item ">
         <%#= cl_image_tag(@sneaker.photos[3].key, class: 'sneaker-show-photos') %>
@@ -44,21 +27,21 @@
       <div class="carousel-item ">
         <%#= cl_image_tag(@sneaker.photos[4].key, class: 'sneaker-show-photos') %>
       </div>
-      <!-- <div class="carousel-item ">
+      <div class="carousel-item ">
         <%#= cl_image_tag(@sneaker.photos[5].key, class: 'sneaker-show-photos') %>
       </div>
-      <div class="carousel-item ">
+      <!-- <div class="carousel-item "> -->
         <%#= cl_image_tag(@sneaker.photos[6].key, class: 'sneaker-show-photos') %>
-      </div>
-      <div class="carousel-item ">
+      <!-- </div> -->
+      <!-- <div class="carousel-item "> -->
         <%#= cl_image_tag(@sneaker.photos[7].key, class: 'sneaker-show-photos') %>
-      </div> -->
+      <!-- </div> -->
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <a class="carousel-control-prev" href="#carouselSneakerShow" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <a class="carousel-control-next" href="#carouselSneakerShow" role="button" data-slide="next">
       <span class="carousel-control-next-icon sneaker-show-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
     </a>

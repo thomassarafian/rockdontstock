@@ -1,12 +1,7 @@
-.scrolling {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-content: center;
-  height: 320px;
+.desktop-banner-img, .phone-banner-img {
+  height: 100%;
+  width: 100%;
 }
-
 
 .font-weight-bold>a {
   text-decoration: none;
@@ -14,10 +9,8 @@
 }
 
 .banner {
-  background-image: url("banner/home_page_banner_phone.svg"); 
   background-position: center;	
   background-size: cover;
-  // text-align: left;
   margin-bottom: 50px;
 }
 
@@ -26,69 +19,20 @@
 }
 
 @media (min-width: 320px) {
-  .banner {
-    background-image: url("banner/home_page_banner_phone.jpg"); 
+  .desktop-banner-img {
+    display: none;
   }
-
-  .banner {
-    // height: 70vh;
-  }
-  .scrolling {
-    height: 490px;
-  }
-}
-
-@media (min-width: 375px) {
-  .scrolling {
-    height: 590px;
-  }
-}
-
-@media (min-width: 425px) {
-  .scrolling {
-    height: 650px;
+  .phone-banner-img {
+    display: block;
   }
 }
 
 
 @media (min-width: 768px) {
-  .home-title {
-    display: none;
-  }
-  .scrolling {
-    height: 1160px;
-  }
-  
-}
-
-
-@media (min-width: 902px) {
-  .home-title {
+  .desktop-banner-img {
     display: block;
-    font-size: 60px;
   }
-  .banner {
-    background-image: url("banner/banner.jpg");
-  }
-  .scrolling {
-    height: 450px;
-  }  
-  .font-weight-bold>a { 
-    color:white;
-  }
-}
-
-@media (min-width: 1024px) {
-  .scrolling {
-    height: 530px;
+  .phone-banner-img {
+    display: none;
   }  
 }
-
-@media (min-width: 1440px) {
-  .scrolling {
-    height: 740px;
-  }  
-}
-
-
-

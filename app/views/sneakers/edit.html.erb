@@ -3,24 +3,97 @@
 <div class="sneaker-edit">
   <%= simple_form_for(@sneaker) do |f| %>
     <div class="info-input">
-      <%= f.input :size, required: true, label: "Taille US", placeholder: "10,5" %>
+      <%#= f.input :size, collection: [ ["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], 
+        ["5", 5], ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
+        ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
+        ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18] ], required: true, prompt: "Taille US", 
+        label: false, input_html: { class: "info-input-sneaker" } %>
+      <%#= f.input :condition, prompt: "Condition", collection: 1..10, required: true, label: false,
+        input_html: { class: "info-input-sneaker" }  %>
+      <%#= f.input :box, prompt: "Box", collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
+      <%#= f.input :extras, required: true, placeholder: "Commentaires", label: false,
+        input_html: { class: "info-input-sneaker" }  %>
+      <%#= f.input :price, required: true, placeholder: "Prix", label: false,
+        input_html: { class: "info-input-sneaker"} %>
+      <div class="photos-input">
+        <div class='sneaker-photo-input'>
+          <%= f.label :photos, "photo 1"  %>
+          <%= f.file_field :photos, as: :file, :multiple => true,
+          class: "hidden", id: 'photo-input0',
+          class: 'upload-photo edit-photo-input0',
+          label: '📷 Ajoute une photo' %>
+          <%= image_tag "", width: 0, class: "hidden", id: "photo-preview0" %>
+        </div>
 
-      <%= f.input :price, required: true, label: "Prix", placeholder: "199" %>
-
-      <%= f.input :condition, collection: 1..10, required: true, hint: "Une note sur 10 de l'état de ta paire" %>
-
-      <%= f.input :box, collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true %>
-
-      <%= f.input :extras, required: true, label: "Extras", placeholder: "Lacets, stickers..."  %>
+        <div class='sneaker-photo-input'>
+          <%= f.label :photos, "photo 2"  %>
+          <%= f.file_field :photos, as: :file, :multiple => true,
+          class: "hidden", id: 'photo-input1',
+          class: 'upload-photo edit-photo-input1',
+          label: '📷 Ajoute une photo' %>
+          <%= image_tag "", width: 0, class: "hidden", id: "photo-preview1" %>
+        </div>
+        <div class='sneaker-photo-input'>
+          <%= f.label :photos, "photo 3"  %>
+          <%= f.file_field :photos, as: :file, :multiple => true,
+          class: "hidden", id: 'photo-input2',
+          class: 'upload-photo edit-photo-input2',
+          label: '📷 Ajoute une photo' %>
+          <%= image_tag "", width: 0, class: "hidden", id: "photo-preview2" %>
+        </div>
+        <div class='sneaker-photo-input'>
+          <%= f.label :photos, "photo 4"  %>
+          <%= f.file_field :photos, as: :file, :multiple => true,
+          class: "hidden", id: 'photo-input3',
+          class: 'upload-photo edit-photo-input3',
+          label: '📷 Ajoute une photo' %>
+          <%= image_tag "", width: 0, class: "hidden", id: "photo-preview3" %>
+        </div>
+        <div class='sneaker-photo-input'>
+          <%= f.label :photos, "photo 5"  %>
+          <%= f.file_field :photos, as: :file, :multiple => true,
+          class: "hidden", id: 'photo-input4',
+          class: 'upload-photo edit-photo-input4',
+          label: '📷 Ajoute une photo' %>
+          <%= image_tag "", width: 0, class: "hidden", id: "photo-preview4" %>
+        </div>
+        <div class='sneaker-photo-input'>
+          <%= f.label :photos, "photo 6"  %>
+          <%= f.file_field :photos, as: :file, :multiple => true,
+          class: "hidden", id: 'photo-input5',
+          class: 'upload-photo edit-photo-input5',
+          label: '📷 Ajoute une photo' %>
+          <%= image_tag "", width: 0, class: "hidden", id: "photo-preview5" %>
+        </div>
+        <div class='sneaker-photo-input'>
+          <%= f.label :photos, "photo 7"  %>
+          <%= f.file_field :photos, as: :file, :multiple => true,
+          class: "hidden", id: 'photo-input6',
+          class: 'upload-photo edit-photo-input6',
+          label: '📷 Ajoute une photo' %>
+          <%= image_tag "", width: 0, class: "hidden", id: "photo-preview6" %>
+        </div>
+        <div class='sneaker-photo-input'>
+          <%= f.label :photos, "photo 8"  %>
+          <%= f.file_field :photos, as: :file, :multiple => true,
+          class: "hidden", id: 'photo-input7',
+          class: 'upload-photo edit-photo-input7',
+          label: '📷 Ajoute une photo' %>
+          <%= image_tag "", width: 0, class: "hidden", id: "photo-preview7" %>
+        </div>
+      </div>
     </div>
     <div class="edit-sneaker">
-      <%= f.button :submit, "Modifier ma sneaker", class: "text-center btn btn-dark" %>
+      <%= f.button :submit, "Modifier ma sneaker", class: "edit-sneaker-btn text-center btn btn-dark" %>
     </div>
   <% end %>
 </div>
 
 
 <style type="text/css">
+  .edit-sneaker-btn {
+    display: none;
+  }
   .sneaker-edit-title {
     margin-top: 100px;
     text-align: center
@@ -29,3 +102,73 @@
     margin: 0px 100px;
   }
 </style>
+
+<style type="text/css">
+  .info-input-sneaker {
+    width: 250px;
+    margin: 10px 0;
+  }
+  .info-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .sneaker-photo-input {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+  }
+  .submit-new-sneaker {
+    text-align: center;
+  }
+  .upload-photo {
+    width: 200px;
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  .edit-photo-input0 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/236/original/585613_01.jpg.jpeg?1581711888);
+  }
+  .edit-photo-input1 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/228/original/585613_03.jpg.jpeg?1581711888);
+  }
+  .edit-photo-input2 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/219/original/585613_06.jpg.jpeg?1581711887);
+  }
+  .edit-photo-input3 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/215/original/585613_08.jpg.jpeg?1581711887);
+  }
+  
+  .edit-photo-input4 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/219/original/585613_06.jpg.jpeg?1581711887);
+  }
+  .edit-photo-input5 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/219/original/585613_06.jpg.jpeg?1581711887);
+  }
+
+  .edit-photo-input6 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/219/original/585613_06.jpg.jpeg?1581711887);
+  }
+  .edit-photo-input7 {
+    background-image: url(https://image.goat.com/crop/750/attachments/product_template_additional_pictures/images/032/800/219/original/585613_06.jpg.jpeg?1581711887);
+  }
+
+  .photos-input {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .upload-photo {
+    margin: 20px 20px;
+  }
+</style>
+
+
+<script type="text/javascript">
+  
+</script>

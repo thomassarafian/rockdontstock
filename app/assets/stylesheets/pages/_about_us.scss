@@ -41,7 +41,7 @@ footer>.about-us {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding-left: 10px;
+  padding: 10px;
 }
 
 .block-contact-btn {
@@ -54,6 +54,9 @@ footer>.about-us {
   }
 
 @media (min-width: 320px) {
+  .about-first-text>p, .about-second-text>p, .about-third-text>p {
+    font-size: 10px; 
+  }
   .about-us>.banner {
     height: 70vh;
     padding: 0 40px;
@@ -67,7 +70,8 @@ footer>.about-us {
   .about-first-text>h3, .about-second-text>h3, .about-third-text>h3 {
     font-weight: bold;
     font-size: 17px; 
-    margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 10px;
   }
 }
 
@@ -86,12 +90,14 @@ footer>.about-us {
   }
   .about-first-text>h3, .about-second-text>h3, .about-third-text>h3 {
     font-size: 20px; 
+    margin-bottom: 20px;
   }
   .about-first-text>p, .about-second-text>p, .about-third-text>p {
     font-size: 15px; 
   }
   .about-first-text, .about-second-text, .about-third-text {
-    padding-left: 80px;
+    padding: 30px;
+    text-align: center;
   }
 }
 
@@ -99,12 +105,13 @@ footer>.about-us {
 @media (min-width: 1024px) {
   .about-first-text>h3, .about-second-text>h3, .about-third-text>h3 {
     font-size: 25px; 
+    margin-bottom: 30px;
   }
   .about-first-text>p, .about-second-text>p, .about-third-text>p {
     font-size: 17px; 
   }
   .about-first-text, .about-second-text, .about-third-text {
-    padding-left: 100px;
+    padding: 50px;
   }
 }
 
@@ -118,12 +125,13 @@ footer>.about-us {
   }
   .about-first-text>h3, .about-second-text>h3, .about-third-text>h3 {
     font-size: 30px; 
+    margin-bottom: 50px; 
   }
   .about-first-text>p, .about-second-text>p, .about-third-text>p {
     font-size: 22px; 
   }
   .about-first-text, .about-second-text, .about-third-text {
-    padding-left: 150px;
+    padding: 70px;
   } 
 }
 

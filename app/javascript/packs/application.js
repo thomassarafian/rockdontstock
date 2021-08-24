@@ -26,6 +26,7 @@ import { previewImageOnFileSelect } from "components/photo_preview.js"
 import { pointPicker } from "components/point_picker.js"
 import { uploadIds } from "components/upload_ids.js"
 import { ibanValidator } from "components/iban_validator.js"
+import { editSneakerPhotos } from "components/edit_sneaker_photos.js"
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -33,6 +34,7 @@ document.addEventListener('turbolinks:load', () => {
   previewImageOnFileSelect();
   uploadIds();
   ibanValidator();
+  editSneakerPhotos();
 });
 
 
