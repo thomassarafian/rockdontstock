@@ -13,18 +13,18 @@ class PagesController < ApplicationController
       # raise
       if @result == "Tu es dejà inscrit à notre newsletter"
         redirect_to root_path, alert:"Tu es dejà inscrit à notre newsletter"
-        # flash[:alert] = "Tu es dejà inscrit à notre newsletter"  
-        # render :home
       else
         redirect_to root_path, notice: "Félicitation ! Tu vas bientôt recevoir nos offres"
       end
     else 
       redirect_to root_path, alert: "Adresse email invalide"
-      # flash[:alert] = "Adresse email invalide"
-      # render :home
     end
   end
   
+  def faq
+    
+  end
+
   private
   
   def newsletter_params

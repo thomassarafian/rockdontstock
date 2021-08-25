@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 	end
 
   get 'about' => 'pages#about'
+  get 'faq' => 'pages#faq'
   post '/', to: 'pages#newsletter'
   
   namespace :forest do

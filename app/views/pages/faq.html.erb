@@ -1,0 +1,138 @@
+<div class="faq-banner">
+  <%= image_tag("pages/faq/banner.png", class: 'faq-banner-img') %>
+</div>
+
+<div class="container faq-all-articles">
+  <div class="faq-article">
+    <h2>Etat des paires</h2>
+    <p>Lors de la mise en vente de ta paire, nous allons te demander l’état de cette dernière. Rock Don’t Stock, c’est des paires DS et d’occasion, c’est pour cela que nous proposons une échelle que nous voulons le plus proche de la réalité sneakers.<br>
+    Fais très attention en sélectionnant l’état de ta paire, si nous recevons une paire trop éloignée de sa description, nous risquons de te la renvoyer.<br>
+    Cette échelle est la suivante :</p>
+    <ul>
+      <li>10/10 : Paire neuve, DS. La paire n’a jamais été portée.</li>
+      <li>9/10 : Paire en excellent état, portée moins d’une dizaine de fois, et n’ayant aucune marque ou trace. </li>
+      <li>8/10 : La paire est en bon état, a été portée, la semelle commence à être usée et la paire peut montrer quelques marques ou traces légères.</li>
+      <li>6/10 : L’aspect de la paire est correct dans l’ensemble, mais la paire a des sérieuses marques et traces, et/ou la semelle est bien usée.</li>
+      <li>5 et moins : Paire en fin de vie, nécessitant un nettoyage ou une rénovation. Attention, en fonction de la côte, certaines paires peuvent ne pas être validées par l’équipe de vérification</li>
+    </ul>
+  </div>
+  <div class="faq-article">
+    <h2>Comment acheter ?</h2>
+    <p>Pour acheter une paire, c’est très simple.<br>Il te suffit de taper dans la barre de recherche le nom de ta paire préférée. Une fois cela fait, tu tomberas sur la fiche de la paire, et les exemplaires disponibles seront proposés juste en dessous.<br>S’il n’y a pas d’articles en dessous, c’est que personne n’en vend actuellement, reviens d’ici quelques jours<br><br>
+    Tu peux également trouver des super paires sur la page d’accueil en consultant les dernières paires mises en vente.<br><br>
+    Une fois que tu as trouvé ta pépite, il ne te reste plus qu’à cliquer sur acheter, et à suivre les étapes jusqu’à la confirmation de la commande. On te demandera alors ton adresse, le moyen de livraison de ton choix, et ton moyen de paiement.<br>
+    Il ne te reste plus qu’à attendre ta paire ! Nous ferons au plus vite pour l’authentifier.
+    </p>
+  </div>
+  <div class="faq-article">
+    <h2>J’ai acheté une paire</h2>
+    <p style="text-decoration: underline;">Je n’ai pas de nouvelles de ma commande</p>
+    <p>Si tu n’as pas reçu de mail de confirmation, c’est sûrement que nos mails sont passés dans les spams de ta boîte mail. Pour cela, vérifie cette partie de ta boîte mail et marque Rock Don’t Stock comme « Courrier Légitime »<br>
+    Si tu n’as rien en Indésirable, c’est peut-être que tu as mal renseigné ton mail. N’hésite pas à nous contacter à 
+    <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %> si le problème persiste.</p>
+    <p style="text-decoration: underline;">Comment se passe la livraison et combien de temps dure-t-elle ?</p>
+    <p>Comme tu le sais, nous accordons chez Rock Don’t Stock une place majeure à l’authentification. Nous avons donc décidé de nous positionner entre le vendeur et l’acheteur pour sécuriser la transaction, que ce soit au niveau de l’authenticité de la paire ou de sa conformité (taille, état…).<br>
+    Le vendeur va donc nous envoyer la paire, puis nous te l’enverrons après avoir vérifié que tout était OK.<br>
+    Une fois la paire reçue, sache que nous faisons au plus vite pour réaliser nos Legit Check et réexpédier la paire. Sachant que le vendeur a 2 jours pour expédier sa paire une fois que tu l’as achetée, compte environ 10 jours pour la recevoir.</p>
+    <p style="text-decoration: underline;">Combien de temps le vendeur pour envoyer ma paire ?</p>
+    <p>A partir de l’achat, le vendeur a 2 jours pour envoyer ta paire.</p>
+    <p style="text-decoration: underline;">De combien sont les frais d’authentification ?</p>
+    <p>Il est très important pour nous d’être transparent et juste sur cet aspect pour nous. Nous prélevons donc 6% de frais pour l’acheteur et 6% pour le vendeur et cela quelque soit le montant de la paire.<br>
+    Ces frais prennent en compte le travail d’authentification, la mise en carton et les divers frais de service.</p>
+    <p style="text-decoration: underline;">Quels sont les moyens de livraison possibles ?</p>
+    <p>Etant nous-mêmes sneakerheads, nous nous sommes aperçus lors d’achat de paires que mettre un intermédiaire de confiance apportait toujours plus de sécurité. C’est pour cela que nous préconisons la livraison en points relais.<br>
+    De plus, cette méthode de livraison est meilleure écologiquement, ce point nous tenant particulièrement à cœur. </p>
+    <p style="text-decoration: underline;">Quels sont les frais de livraison ?</p>
+    <p>Les frais de livraison dépendent de la méthode choisie. Pour une paire :<br>
+    Mondial Relay :<br>
+    Colissimo :<br>
+    Chronopost :</p>
+    <p style="text-decoration: underline;">J’ai un problème avec l’article reçu</p>
+    <ul><li>L’article que j’ai reçu à l’air d’une contrefaçon.</li></ul>
+    <p>Avant tout, sache que nous apportons une très grande importance à la lutte contre la contrefaçon et essayons d’améliorer nos techniques d’authentification de jour en jour.<br>
+    <strong>Nous photographions tous nos articles</strong> avant de les envoyer à l’acheteur pour diminuer au maximum les risques de fraude. Les articles Fakes peuvent être parfois très bien copiés et avoir un doute est légitime. De plus, nous sommes humains et il se peut que nous ayons commis une erreur.<br><br>
+    Si tu as des doutes sur un produit donc, nous te rappelons que tu as 3 jours à compter de la réception du produit pour nous en avertir. Pour cela, explique-nous précisément tes doutes avec preuves à l’appui et photos à l’adresse 
+    <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %> en précisant ton numéro de commande. Nous y répondrons dans les plus brefs délais.<br>
+    Si effectivement l’article est contrefait, nous t’enverrons alors un bordereau préaffranchis pour renvoyer la paire, et tu seras bien évidemment remboursé.</p>
+    <ul><li>L’article reçu ne correspond pas à celui commandé.</li></ul>
+    <p>Avant tout, sache que nous apportons une très grande importance à chaque commande et son contenu. <strong>Nous photographions tous nos articles</strong> avant de les envoyer à l’acheteur pour diminuer au maximum les risques de fraude. Cependant, si tu constates que l’article que tu as reçu n’est identique à celui commandé (problème de modèle, de taille, d’état…), tu as 3 jours à compter de la réception du produit pour nous en avertir. Pour cela, explique-nous précisément en quoi l’article est différent à l’adresse
+    <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %> en précisant ton numéro de commande. Nous y répondrons dans les plus brefs délais.<br>
+    Si effectivement l’article n’est pas celui commandé, nous t’enverrons alors un bordereau préaffranchi pour renvoyer la paire, et tu seras bien évidemment remboursé.</p>
+    
+    <p style="text-decoration: underline;">L’article que j’ai acheté n’a pas passé l’étape d’authentification</p>
+    <p>Si l’article que tu as commandé n’a pas passé l’étape d’authentification, c’est que nous avons détecté un problème à la réception de l’article. L’article envoyé par le vendeur peut être contrefait ou peut ne pas correspondre avec celui que tu as acheté (pas le même état, pas la même condition). Tu seras donc automatiquement remboursé dans les plus brefs délais.</p>
+    
+    <p style="text-decoration: underline;">Je n’ai pas reçu l’article</p>
+    <p>Si tu n’as pas reçu l’article dans le délai annoncé, et que tu n’as pas de nouvelles de notre part, il s’agit probablement d’un problème avec le transporteur. Contacte nous à <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %>  en nous indiquant ton numéro de commande et toutes les informations nécessaires pour que nous fassions le nécessaire.</p>
+  </div>
+  <div class="faq-article">
+    <h2>Comment vendre ?</h2>
+    <p>Pour vendre une paire, c’est très simple.<br>
+    Il te suffit de cliquer sur l’icône en haut à droite, juste à côté de la barre de recherche.<br>
+    On va ensuite te demander te taper le nom de ton modèle dans la barre de recherche qui apparaîtra. Sois le plus précis lorsque tu tapes le nom du modèle, tu peux retrouver ce dernier sur l’étiquette de la boîte de ta paire.<br>
+    Si tu ne trouves vraiment pas le modèle, tu as la possibilité de toi-même taper le modèle en dessous de cette barre de recherche en cliquant sur « je ne trouve pas ma paire ».<br>
+    Tu vas devoir ensuite suivre les étapes et remplir les champs demandés (Condition, extras présents dans la boîte et bien sûr prix).
+    <br>
+    Une fois les étapes finalisées, ton annonce nous sera envoyée pour vérification, et 24h maximum après elle sera en ligne !</p>
+  </div>
+
+  <div class="faq-article">
+    <h2>J’ai vendu une paire</h2>
+    <p style="text-decoration: underline;">Je n’ai pas de nouvelles de ma vente</p>
+    <p>Si tu n’as pas reçu de mail de confirmation, c’est sûrement que nos mails sont <strong>passés dans les spams</strong> de ta boîte mail. Pour cela, vérifie cette partie de ta boîte mail et marque Rock Don’t Stock comme « Courrier Légitime »<br>
+    Si tu n’as rien en Indésirable, c’est peut-être que tu as mal renseigné ton mail. N’hésite pas à nous contacter à 
+    <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %> si le problème persiste.</p>
+
+    <p style="text-decoration: underline;">Il y a un problème lors de la mise en vente de ma paire</p>
+    <p>Comme tu le sais en tant que passionné de sneakers, lorsque l’on achète une paire, on adore la voir sous son meilleur angle.<br>
+    La raison pour laquelle ta paire n’a pas été mise en vente t’a du être envoyée par mail.<br><br>
+    Si ta paire n’a pas été mise en vente, cela peut venir de plusieurs choses :</p>
+    <ol>
+      <li><strong>Il manque peut-être des angles de prise de vue.</strong> Comme c’est expliqué lors de la vente de ton article, nous demandons aux vendeurs de photographier la paire sous dans angles bien spécifiques afin de permettre de la vendre le mieux possible en la montrant sous toutes ses coutures ! Si c’est le cas, tu as dû recevoir un mail avec un lien te permettant d’ajouter des photos. Si ce n’est pas le cas, n’hésite pas à nous contacter à l’adresse 
+      <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %> en nous expliquant bien le problème.</li>
+      <li style="color:red"><strong>Les photos déposées ne sont peut-être de qualité suffisante.</strong> Pour pouvoir vendre ta paire le mieux possible, il est nécessaire d’avoir des photos nettes sur lesquelles ont puisse bien voir les détails.<br>
+      Si c’est le cas, tu as dû recevoir un mail avec un lien te permettant d’ajouter des photos. Si ce n’est pas le cas, n’hésite pas à nous contacter à l’adresse <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %> en nous expliquant bien le problème.<br>
+      Pour avoir le meilleur rendu possible, photographie ta paire dans un endroit clair et lumineux !<br>
+      Tu peux retrouver tous nos conseils pour photographier une paire sur cette page.</li>
+      <li style="color:red"><strong>Ta paire est en dessous de nos critères en termes d’état.</strong> Comme tu le sais, Rock Don’t Stock met en avant la sneakers d’occasion et la rotation de ta collection.<br>
+      Cependant, il est important pour nous que la paire soit portable. Si tu veux faire un Soleswap sur ta paire ou une créa, tu peux te tourner vers des plateformes spécialisées. Pour plus d’informations, n’hésite pas à consulter notre guide sur les conditions des paires ici.</li>
+    </ol>
+    <p style="text-decoration: underline;">Je veux vendre ma paire mais elle n’est toujours pas en ligne</p>
+    <p>Une fois toutes les infos remplies, l’annonce nous sera envoyée pour validation. Cela peut mettre 24h maximum. Si ce délai est passé, c’est peut-être qu’il y a un problème avec ta paire, nous t’invitons donc à lire la partie juste au-dessus « il y a un problème avec ma paire ».<br>
+    Si tu penses qu’il n’y a pas de problème avec ta paire, tu peux toujours nous envoyer un mail à 
+    <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %>  en précisant bien le problème.</p>
+    <p style="text-decoration: underline;">Comment emballer ma paire ?</p>
+    <p>Nous attachons beaucoup d’importance à l’état des paires et apportons tout notre soin pour cela. Il est donc important de bien l’emballer pour nous la faire parvenir.<br>
+    Tu trouveras tous les conseils pour bien emballer ta paire sur cet article :</p>
+    <p style="text-decoration: underline;">Comment envoyer ma paire ?</p>
+    <p>Une fois ta paire vendue, tu as le choix entre différents transporteurs pour nous l’envoyer afin que nous l’authentifiions.<br>
+    Nous te rappelons qu’aux yeux de la loi, c’est toujours l’expéditeur qui est responsable du colis. Nous te conseillons donc de choisir un transporteur fiable comme Mondial Relay.</p>
+
+    <p style="text-decoration: underline;">De combien sont les frais d’authentification ?</p>
+    <p>Il est très important pour nous d’être transparent et juste sur cet aspect pour nous. Nous prélevons donc 6% de frais pour l’acheteur et 6% pour le vendeur et cela quel que soit le montant de la paire.<br>
+    Ces frais prennent en compte le travail d’authentification, la mise en carton et les divers frais de service. </p>
+
+    <p style="text-decoration: underline;">L’article que j’ai vendu n’a pas passé l’étape d’authentification</p>
+    <p>Si l’article que tu as commandé n’a pas passé l’étape d’authentification, c’est que nous avons détecté un problème à la réception de l’article. Tu as normalement dû recevoir un mail t’expliquant la raison. L’article que tu as envoyé peut :</p>
+    <ul>
+      <li>Ne pas correspondre avec l’annonce postée (pas le même état, pas la même condition). La paire te seras donc renvoyée à tes frais.</li>
+      <li>Être contrôlé comme contrefait. Rock Don’t Stock a pour but d’être une plateforme la plus sûre possible, nous sommes donc intransigeants avec les articles contrefaits. Nous avons des critères de contrôle très stricts et vérifions deux fois une paire pour ne pas laisser de place à l’erreur. Si nous avons un doute, tu recevras un mail où ne te demanderons des explications ou des photos. Si nous sommes sûrs de notre verdict, tu seras prélevé de 12% du prix de la paire (correspondant aux frais d’authentification du vendeur ET de l’acheteur) + 3% de pénalité, soit 15%.<br>
+      La paire peut t’être renvoyée si tu le souhaites, les frais d’envois étant à tes frais. Tout utilisateur proposant un article contrefait sur la plateforme en ligne risque de voir son compte définitivement clôturé par Rock Don‘t Stock.</li>
+    </ul>
+    <p style="text-decoration: underline;">Pourquoi j’ai reçu moins d’argent que prévu ?</p>
+    <p>Si tu n’as pas reçu la somme indiquée au début, c’est probablement car la paire que l’on a reçu n’était pas d’une propreté suffisante, cela a du t’être indiqué par mail.<br>
+    On s’est donc permis, comme indiqué dans les CGV, de la nettoyer, et cela explique le forfait de 5€ retenu sur la vente.<br>
+    Comme tu l’auras compris, Rock Don’t Stock c’est des paires d’occasion, on fait donc tout pour leur donner la meilleure impression possible.</p>
+  </div>
+</div>
+
+<style type="text/css">
+  .faq-all-articles {
+    margin-top:50px;
+  }
+  .faq-banner-img {
+    width: 100%;
+  }
+
+
+</style>
