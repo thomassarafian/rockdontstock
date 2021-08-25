@@ -10,13 +10,18 @@ class PagesController < ApplicationController
     # newsletter_params
     if params['user']['email'].present? && params['user']['email'].match(/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
       @result = SubscribeToNewsletterService.new(params['user']).home_page_signup
+      # raise
       if @result == "Tu es dejà inscrit à notre newsletter"
-        flash[:alert] = "Tu es dejà inscrit à notre newsletter"  
-        render :home
+        redirect_to root_path, alert:"Tu es dejà inscrit à notre newsletter"
+        # flash[:alert] = "Tu es dejà inscrit à notre newsletter"  
+        # render :home
+      else
+        redirect_to root_path, notice: "Félicitation ! Tu vas bientôt recevoir nos offres"
       end
     else 
-      flash[:alert] = "Adresse email invalide"
-      render :home
+      redirect_to root_path, alert: "Adresse email invalide"
+      # flash[:alert] = "Adresse email invalide"
+      # render :home
     end
   end
   

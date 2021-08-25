@@ -59,8 +59,12 @@ class SneakersController < ApplicationController
 	end
 	
 	def update
-		@sneaker.update(sneaker_params)
-		redirect_to sneaker_path(@sneaker)
+    if @sneaker.state == 0
+  		@sneaker.update(sneaker_params)
+  		redirect_to sneaker_path(@sneaker)
+    else
+      redirect_to root_path, notice: "Tu ne pas pas modifié une paire déjà en ligne"
+    end
 	end
 
 	def destroy

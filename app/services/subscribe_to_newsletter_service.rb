@@ -9,13 +9,15 @@ class SubscribeToNewsletterService
 
   def home_page_signup
     begin
+      # raise
       @gibbon.lists(@audience_id).members.create(
         body: {
           email_address: @user['email'],
-          status: "subscribed",
+          status: "subscribed"
         }
       )
     rescue Gibbon::MailChimpError => e
+      # puts e,e,e
       if e.title == "Member Exists"
         return "Tu es dejà inscrit à notre newsletter"
       else

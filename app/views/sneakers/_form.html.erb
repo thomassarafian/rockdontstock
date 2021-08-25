@@ -19,7 +19,9 @@
       input_html: { class: "info-input-sneaker", value: nil} %>
       <%= f.error :price, :id => "price-sneaker-error" %>
 
-
+      <div clas="total-price-for-seller">
+        <p></p>
+      </div>
   </div>
 
   <div class="next-btn">
@@ -164,6 +166,10 @@
 <% end %>
 
 <style type="text/css">
+  /*.info-input-sneaker:focus {
+    outline:none;
+    outline-width: 0;
+  }*/
   .finish-sneaker-new-btn {
     font-size: 13px;
     padding: 5px 10px;
@@ -333,6 +339,7 @@
     
     
     if (sneaker_size.value && sneaker_price.value && sneaker_condition.value && sneaker_box.value) { 
+      // document.querySelector('.total-price-for-seller').innerHTML = `<p>Box : ${sneaker_price.value}</p>`;
       nextBtn.style.display = "block";
       nextBtn.addEventListener('click', (event) => {
         if (checkInputs() == -1) {}
@@ -382,13 +389,14 @@
           document.querySelector('.summary-cond').innerHTML = `<p>Condition : ${sneaker_condition.value} / 10</p>`;
           document.querySelector('.summary-extras').innerHTML = `<p>Extras : ${sneaker_extras.value}</p>`;
           document.querySelector('.summary-box').innerHTML = `<p>Box : ${sneaker_box.value}</p>`;
-          
           document.querySelector('.summary-price-seller').innerHTML = `<p class="summary-price-sneaker">Prix demandé : 
           <span id="summary-price-seller">${sneaker_price.value}€</span></p>`;
           let summaryPriceCheck = ((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2).toFixed(2);
           document.querySelector('.summary-price-check').innerHTML = `<p class="summary-price-sneaker">Frais d’authentification :
           <span id="summary-price-check">${summaryPriceCheck}€</span></p>`;
-          let summaryPriceTotal = parseFloat(((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2) + 4.99 + parseFloat(sneaker_price.value.replace(/,/g, "."))).toFixed(2);
+          let summaryPriceTotal = parseFloat( 
+            // ((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2) + 
+            4.99 + parseFloat(sneaker_price.value.replace(/,/g, "."))).toFixed(2);
           document.querySelector('.summary-price-total').innerHTML = `<strong><p class="summary-price-sneaker">TOTAL : 
           <span id="summary-price-total">${summaryPriceTotal}€</span></p></strong>`
 
@@ -446,10 +454,13 @@
 
   // infoInput.style.display = "none";
   
-  
-
 
 
 </script>
 
 
+<style type="text/css">
+  #summary-price-check {
+    text-decoration: line-through;
+  }
+</style>

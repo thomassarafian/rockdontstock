@@ -1,3 +1,9 @@
+<%# charge = Stripe::Charge.create({
+  amount: 1000,
+  currency: 'eur',
+  source: 'acct_1JS1p42QOrqxO7EN',
+}) %>
+
 <div class='message-pub'>
  <%= link_to("Gagne des modèles exclusifs en mettant une paire en ligne + frais d’authentification offerts sur ta première vente !", new_sneaker_path) %>
 </div>
@@ -6,22 +12,6 @@
   <%= image_tag("banner/banner.jpg", class: 'desktop-banner-img') %>
   <%= image_tag("banner/home_page_banner_phone.jpg", class: 'phone-banner-img') %>
 </div>
-
-
-<div class="container">
-  <div class='article-legit-check'>
-    <div class='home-article-legit-content'>
-      <%= image_tag("home/microscope.png", class: 'home-article-legit-img') %>
-      <div class='home-article-legit-title'>
-        <h2>LEGIT CHECK</h2>
-        <hr>
-      </div>
-      <p>Toutes les sneakers vendues sur le sites sont inspectées minutieusement par nos experts en Legit Check avant de vous être envoyés afin de vous proposer une plateforme secure et vous permettre de cliquer l’esprit tranquille. Rockez, on s’occupe du reste !<br><br><a href="">En savoir plus sur l’authentification</a></p>
-      
-    </div>
-  </div>
-</div>
-
 
 <div class="container home-rds-selection">
   <h2>Les dernières paires en ligne</h2>
@@ -120,22 +110,20 @@
 </div>
 <div class="link-home-page all_sneakers"><%= link_to "Tout voir", sneakers_path %></div>
 
-
-
-
 <div class="container">
-  <div class="newsletter-container">
-    <h2>INSCRIS-TOI</h2>
-    <hr>
-    <p>Reçois en avant-première nos futures réductions, Les jeux concours ainsi que les nombreux meet-ups et releases party !</p>
-    <div class="subscribe-newsletter">
-     <%= simple_form_for :user, html: { class: 'newsletter-form' } do |f|%>
-      <%= f.input :email, placeholder: "Email", input_html: { class: 'newsletter-email' }, label: false %>
-      <%= f.button :submit, "S'inscrire", class: 'btn btn-light newsletter-btn' %>
-     <% end %>
+  <div class='article-legit-check'>
+    <div class='home-article-legit-content'>
+      <%= image_tag("home/microscope.png", class: 'home-article-legit-img') %>
+      <div class='home-article-legit-title'>
+        <h2>LEGIT CHECK</h2>
+        <hr>
+      </div>
+      <p>Toutes les sneakers vendues sur le sites sont inspectées minutieusement par nos experts en Legit Check avant de vous être envoyés afin de vous proposer une plateforme secure et vous permettre de cliquer l’esprit tranquille. Rockez, on s’occupe du reste !<br><br><a href="">En savoir plus sur l’authentification</a></p>
+      
     </div>
   </div>
 </div>
+
 
 <div class="container home-rds-selection">
   <h2>La séléction Rock Don't Stock</h2>
@@ -233,6 +221,21 @@
   </div>  
 </div>
 <div class="link-home-page all_sneakers"><%= link_to "Tout voir", sneaker_dbs_path %></div>
+
+<div class="container">
+  <div class="newsletter-container">
+    <h2>INSCRIS-TOI</h2>
+    <hr>
+    <p>Reçois en avant-première nos futures réductions, Les jeux concours ainsi que les nombreux meet-ups et releases party !</p>
+    <div class="subscribe-newsletter">
+     <%= simple_form_for :user, html: { class: 'newsletter-form' } do |f|%>
+      <%= f.input :email, placeholder: "Email", input_html: { class: 'newsletter-email' }, label: false %>
+      <%= f.button :submit, "S'inscrire", class: 'btn btn-light newsletter-btn' %>
+     <% end %>
+    </div>
+  </div>
+</div>
+
 
 
 <div class="container">
