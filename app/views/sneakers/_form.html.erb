@@ -157,7 +157,7 @@
         <div class="summary-price-total">   
         </div>
         <div class="submit-new-sneaker">
-          <%= f.button :submit, "Finaliser la mise en vente", class: "finish-sneaker-new-btn text-center btn btn-dark" %>
+          <button type="submit" name="commit" value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark" data-disable-with="<i class='fas fa-spinner fa-spin'></i>  Le chargement peut prendre plusieurs minutes...">Finaliser la mise en vente</button>
         </div>
       </div>
     </div>
@@ -396,7 +396,7 @@
           <span id="summary-price-check">${summaryPriceCheck}€</span></p>`;
           let summaryPriceTotal = parseFloat( 
             // ((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2) + 
-            4.99 + parseFloat(sneaker_price.value.replace(/,/g, "."))).toFixed(2);
+            parseFloat(sneaker_price.value.replace(/,/g, ".") ) - 4.99 ).toFixed(2);
           document.querySelector('.summary-price-total').innerHTML = `<strong><p class="summary-price-sneaker">TOTAL : 
           <span id="summary-price-total">${summaryPriceTotal}€</span></p></strong>`
 

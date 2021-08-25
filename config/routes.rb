@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   get 'about' => 'pages#about'
   get 'faq' => 'pages#faq'
   get 'comment-envoyer-une-paire' => 'pages#how_to_send_shoes'
+  get 'cgu' => 'pages#cgu'
+  get 'cgv' => 'pages#cgv'
   post '/', to: 'pages#newsletter'
   
   namespace :forest do
