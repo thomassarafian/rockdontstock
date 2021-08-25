@@ -34,13 +34,14 @@
   justify-items: center;
 }
 
-
+.sneaker-card_img>img {
+  object-fit: cover;
+}
 
 @media (min-width: 100px) and (max-width: 575px) {
   .sneaker-card_img>img {
     width: 100px;
     height: 100px;
-    object-fit: cover;
   }
   .sneaker-card .sneaker-price {
     font-size: 12px;
