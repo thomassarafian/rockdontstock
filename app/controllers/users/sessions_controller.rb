@@ -4,13 +4,9 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  def new
-    if params['user']['email'] == "elliot@rockdontstock.com" || params['user']['email'] == "nils@rockdontstock.com" || params['user']['email'] == "thomassarafian@gmail.com"
-      super
-    else
-      redirect_to root_path, alert: "Tu n'es pas admin"
-    end
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource/sign_in
   def create
