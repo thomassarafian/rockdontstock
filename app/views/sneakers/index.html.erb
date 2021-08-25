@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container sneaker-all-list">
   <h1 class="sneaker-dbs-title">Recherche ton modèle</h1>
   <div data-controller="refresh-list">
     <%= form_with url: sneakers_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
@@ -23,6 +23,13 @@
   .sneaker-dbs-title {
     margin-top: 50px;
     text-align:center;
+  }
+  .sneaker-all-list {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 </style>
 

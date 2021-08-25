@@ -191,17 +191,10 @@
               <%= form_tag orders_path(sneaker_id: sneaker.id) do %>
                 <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
               <% end %>
-            <% else %>
-              <%# if policy(sneaker).edit? %>
-                <!-- <button type="button" class="btn btn-dark sneaker-show-btn"> -->
-                  <%#= link_to "Modifier la paire", edit_sneaker_path(sneaker), style: 'color: white;' %>
-                <!-- </button> -->
-              <%# end %>
-              <% if policy(sneaker).destroy? %>
-                <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;">
-                  <%= link_to "Supprimer", sneaker_path(sneaker), method: :delete, data: { confirm: "Tu es sûr ?" }, style: 'color: white;' %>
-                </button>
-              <% end %>   
+            <% elsif policy(sneaker).edit? %>
+              <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
+                <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
+              </button>
             <% end %>
           </div>
         </div>
