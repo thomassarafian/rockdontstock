@@ -20,11 +20,8 @@ class PagesController < ApplicationController
       redirect_to root_path, alert: "Adresse email invalide"
     end
   end
-  
-  def faq
-    
-  end
 
+  
   private
   
   def newsletter_params

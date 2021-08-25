@@ -1,0 +1,117 @@
+<div class="container article-send-shoes">
+  <h1>Comment envoyer une paire ?</h1>
+  <p>Ça y est tu viens de vendre ta paire sur Rock Don’t Stock, bravo ! Tu as maintenant 2 jours pour l’envoyer. Il faut que nous recevions la paire telle que tu l’as envoyée, et nous allons t’aider pour cela. </p>
+  <ol>
+    <div class="article-send-shoes-step">
+      <li>Insère ton reçu dans la box.</li>
+      <%= image_tag("pages/how_to_send_shoes/1.jpeg", class: 'send-shoes-step-img') %>
+    </div>
+    <div class="article-send-shoes-step">
+      <li>Comme tu le sais, dans la sneakers, la boîte est très importante, elle fait presque partie de la paire ! N’envoie donc jamais la paire uniquement avec la boîte,  mais utilise un deuxième carton plus grand !</li>
+      <%= image_tag("pages/how_to_send_shoes/2.jpeg", class: 'send-shoes-step-img') %>
+    </div>
+    <p>Nous te rappelons que si nous recevons la paire et que nous constatons qu’un aspect est différent de ce qui était précisé, nous serons obligés de te la renvoyer.</p>
+    <%= image_tag("pages/how_to_send_shoes/draw.png", style: 'width: 100%;') %>
+    <p>Trouve donc un carton plus grand que la boîte de la paire (mais pas trop), et insère cette dernière à l’intérieur. </p>
+    <div class="article-send-shoes-step">
+      <li>Cale la boîte pour ne pas qu’elle bouge trop pendant le trajet. Utilise pour cela du papier bulle, du papier journal ou autre.</li>
+      <%= image_tag("pages/how_to_send_shoes/3.jpeg", class: 'send-shoes-step-img') %>
+    </div>
+    <li>Rock Don’t Stock, c’est la communauté sneakers et la communauté sneakers, c’est le partage. Si tu es artiste ou créateur dans un domaine qui touche à la street culture, n’hésite pas nous balancer 2/3 stickers à toi, on fera tourner ça dans les commandes ! </li>
+    <div class="article-send-shoes-step">
+      <li>C’est le moment de fermer le colis ! Pour cela, utilise du scotch assez large pour pouvoir tout recouvrir. </li>
+      <%= image_tag("pages/how_to_send_shoes/4.png", class: 'send-shoes-step-img') %>
+    </div>
+    <div class="article-send-shoes-step">
+      <li>Pour finir, place le bordereau envoyé par mail sur le carton et colle le avec des bouts de scotch (des 4 côtés c’est mieux, ça évite que celle-ci se détache pendant le transport).</li>
+      <%= image_tag("pages/how_to_send_shoes/5.png", class: 'send-shoes-step-img') %>
+    </div>
+      <li>Rends-toi chez le transporteur choisi pour expédier le colis.</li>
+    <div class="article-send-shoes-final-step">
+      <%= image_tag("pages/how_to_send_shoes/6.png", class: '') %>
+    </div>
+  </ol>
+</div>
+
+<style type="text/css">
+  .article-send-shoes {
+    margin-top: 70px;
+  }
+  .article-send-shoes h1 {
+    text-align: center;
+  }
+  .article-send-shoes-step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+  }
+  .article-send-shoes-step li {
+    margin-left: 200px
+  }
+  .send-shoes-step-img {
+    margin: 50px 0;
+    width: 100%;
+  }
+  .article-send-shoes-final-step {
+    text-align: center;
+  }
+  @media (min-width: 320px) {
+    .article-send-shoes h1{
+      font-size: 20px;
+    }
+    .article-send-shoes li,p{
+      font-size: 12px;
+    }
+    .article-send-shoes-step li {
+      margin-left: 0px
+    }
+    .article-send-shoes-step {
+      margin: 30px 0;
+
+    }
+  }
+  @media (min-width: 768px) {
+    .article-send-shoes h1{
+      font-size: 25px;
+    }
+    .article-send-shoes li,p{
+      font-size: 14px;
+    }
+    .send-shoes-step-img {
+      width: 250px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .article-send-shoes h1{
+      font-size: 30px;
+    }
+    .article-send-shoes li,p{
+      font-size: 16px;
+    }
+    .send-shoes-step-img {
+      width: 300px;
+    } 
+    .article-send-shoes-step li {
+      margin-left: 100px;
+    }
+  }
+  @media (min-width: 1440px) {
+    .article-send-shoes h1{
+      font-size: 40px;
+    }
+    .article-send-shoes li,p{
+      font-size: 20px;
+    }
+    .send-shoes-step-img {
+      width: 400px;
+    } 
+    .article-send-shoes-step li {
+      margin-left: 150px;
+    }
+  }
+</style>
+
+
+
+
