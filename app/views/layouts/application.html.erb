@@ -43,29 +43,29 @@ end
         </div> -->
       <%# end %>
     <%# end %>
-    <% if current_user.nil?  %>
-    <div class="container session-new">
+    <%# if current_user.nil?  %>
+    <!-- <div class="container session-new">
       <h2 class="title-login text-center">J-5</h2>
       <div class="session-new-form row justify-content-center align-items-center">
         <div class="input-signin">
-          <%= simple_form_for(User.new, as: :user, url: new_user_session_path) do |f| %>
-            <%= f.input :email,
+          <%#= simple_form_for(User.new, as: :user, url: new_user_session_path) do |f| %>
+            <%#= f.input :email,
                         required: false,
                         autofocus: true,
                         input_html: { autocomplete: "email" }, label: false, placeholder: 'Email' %>
-            <%= f.input :password,
+            <%#= f.input :password,
                         label: "Mot de passe",
                         required: false,
                         input_html: { autocomplete: "current-password" }, label: false, placeholder: 'Mot de passe' %>
             
-            <%= f.button :submit, "Connexion", id: 'connect-btn', class: 'text-center btn btn-dark' %>
-          <% end %>
+            <%#= f.button :submit, "Connexion", id: 'connect-btn', class: 'text-center btn btn-dark' %>
+          <%# end %>
         </div>  
       </div>
-    </div>
-  <% end %>
+    </div> -->
+  <%# end %>
 
-   <% if current_user.present? && (current_user.email == "elliot@rockdontstock.com" || current_user.email == "nils@rockdontstock.com" || current_user.email == "thomassarafian@gmail.com")  %>
+   <%# if current_user.present? && (current_user.email == "elliot@rockdontstock.com" || current_user.email == "nils@rockdontstock.com" || current_user.email == "thomassarafian@gmail.com")  %>
       <%= render 'shared/navbar' %>
       <%= render 'shared/flashes' %>
       <!-- <p class="notice"><%= notice %></p> -->
@@ -74,7 +74,7 @@ end
       <%= render 'shared/footer' %>
     <%# elsif current_user.present? %>
       <%# reset_session  %>
-  <% end %>
+  <%# end %>
   </body>
 </html>
 
