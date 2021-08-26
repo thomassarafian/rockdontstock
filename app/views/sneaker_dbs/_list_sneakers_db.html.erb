@@ -4,7 +4,7 @@
       <% sneaker_dbs.all.limit(16).each do |sneaker| %>
           <div class="sneaker-card" >
             <%= link_to new_sneaker_db_sneaker_path(sneaker), :style=>'color:#000000;' do %>
-              <div class="sneaker-card_img">
+              <div class="sneaker-db-card-img">
                 <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
               </div>
             <% end %>
@@ -35,12 +35,49 @@
 
 
 <style type="text/css">
-  .sneaker-cards {
-    /*height: 300px;*/
+  .sneaker-card > a {
+    align-items: center;
   }
+  .sneaker-db-card-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+  }
+  
   .btn-sneaker-card-img {
     border: none;
     background-color: white;
   }
+  @media (min-width: 100px) {
+  .sneaker-db-card-img>img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+  }
+}
+
+@media (min-width: 768px) {
+  .sneaker-db-card-img>img {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (min-width: 992px) {
+  .sneaker-db-card-img>img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sneaker-db-card-img>img {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+
 </style>
 

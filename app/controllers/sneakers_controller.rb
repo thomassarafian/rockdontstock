@@ -68,7 +68,8 @@ class SneakersController < ApplicationController
 	end
 
 	def destroy
-		@sneaker.destroy
+		@sneaker.photos.purge
+    @sneaker.destroy
 		redirect_to user_path
 	end
 
