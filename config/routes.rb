@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'authentification' => 'pages#authentification'
   get 'cgu' => 'pages#cgu'
   get 'cgv' => 'pages#cgv'
+  get 'politique-de-confidentialite' => 'pages#trust_policy'
   post '/', to: 'pages#newsletter'
   
   namespace :forest do

@@ -12,6 +12,8 @@ function editSneakerPhotos () {
     if (editPhotoPreview0 && editPhotoPreview1 && editPhotoPreview2 && editPhotoPreview3 && editPhotoPreview4 && editPhotoPreview5 && editPhotoPreview6 && editPhotoPreview7) {
       editPhotoPreview0.addEventListener('load', (event) => {
         let photoInput0 = document.querySelector('.edit-photo-input0');
+        console.log("here")
+        console.log(photoInput0)
         photoInput0.style.backgroundImage = `url(${editPhotoPreview0.src})`;
         editPhotoPreview++;
         if (editPhotoPreview == 1) {

@@ -35,7 +35,7 @@
       class: 'upload-photo photo-input0',
       label: '📷 Ajoute une photo' %>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview0" %>
-      <%= f.label :photos, "Côté 1"  %>
+      <%= f.label :photos, "Intérieur"  %>
     </div>
 
     <div class='sneaker-photo-input'>
@@ -44,7 +44,7 @@
       class: 'upload-photo photo-input1',
       label: '📷 Ajoute une photo' %>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview1" %>
-      <%= f.label :photos, "Côté 2"  %>
+      <%= f.label :photos, "Extérieur"  %>
     </div>
     <div class='sneaker-photo-input'>
       <%= f.file_field :photos, as: :file, :multiple => true,
@@ -84,7 +84,7 @@
       class: 'upload-photo photo-input6',
       label: '📷 Ajoute une photo' %>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview6" %>
-      <%= f.label :photos, "Étiquette"  %>
+      <%= f.label :photos, "Size tag"  %>
     </div>
     <div class='sneaker-photo-input'>
       <%= f.file_field :photos, as: :file, :multiple => true,
@@ -233,7 +233,6 @@
     background-image: url(/assets/sneaker_new/8.jpg);
   }
   
-
   .photos-input {
     display: flex;
     flex-wrap: wrap;
@@ -310,8 +309,8 @@
 </style>
 
 <script type="text/javascript">
-  document.querySelector('.photos-input').style.display = "none";
-  document.querySelector('.next-btn').style.display = "none";
+  // document.querySelector('.photos-input').style.display = "none";
+  // document.querySelector('.next-btn').style.display = "none";
   document.querySelector('.snd-next-btn').style.display = "none";
   document.querySelector('.submit-new-sneaker').style.display = "none"
   document.querySelector('.summary-new-sneaker').style.display = "none"
@@ -381,6 +380,7 @@
           sndNextBtn.style.display = "none";
           document.querySelector('.submit-new-sneaker').style.display = "block"
           document.querySelector('.search-sneaker-model-title').innerText = "Récapitulatif de la commande";
+          console.log(photoPreview0.src);
           document.querySelector('.carousel-sneaker-photo0').innerHTML = `<img src="${photoPreview0.src}" class="sneaker-show-photos">`;
           document.querySelector('.summary-size').innerHTML = `<p>Taille : ${sneaker_size.value}</p>`;
           document.querySelector('.summary-cond').innerHTML = `<p>Condition : ${sneaker_condition.value} / 10</p>`;

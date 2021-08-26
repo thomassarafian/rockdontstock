@@ -51,12 +51,15 @@ const previewImageOnFileSelect = () => {
 
 const displayPreview0 = (input) => {
   if (input.files && input.files[0]) {
+    // console.log(input.files[0])
     const reader = new FileReader();
+    // console.log(reader)
     reader.onload = (event) => {
       document.getElementById('photo-preview0').src = event.currentTarget.result;
     }
     reader.readAsDataURL(input.files[0])
-    document.getElementById('photo-preview0').classList.remove('hidden');
+    // console.log(reader)
+    // document.getElementById('photo-preview0').classList.remove('hidden');
   }
 }
 const displayPreview1 = (input) => {
