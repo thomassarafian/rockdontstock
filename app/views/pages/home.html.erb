@@ -1,4 +1,11 @@
 <%# raise %>
+<% session.delete(:sneaker_id_buy_btn) %>
+
+
+<!-- user_return_to -->
+
+
+
 <%# charge = Stripe::Charge.create({
   amount: 1000,
   currency: 'eur',
@@ -86,11 +93,11 @@
               </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">
-              <% if current_user != sneaker.user %>
-                <%= form_tag orders_path(sneaker_id: sneaker.id) do %>
-                  <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                <% end %>
-              <% elsif policy(sneaker).edit? %>
+              <%# if current_user != sneaker.user %>
+                <%#= form_tag orders_path(sneaker_id: sneaker.id) do %>
+                  <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                <%# end %>
+              <% if policy(sneaker).edit? %>
                 <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
                   <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
                 </button>
@@ -191,11 +198,11 @@
               </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">
-              <% if current_user != sneaker.user %>
-                <%= form_tag orders_path(sneaker_id: sneaker.id) do %>
-                  <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                <% end %>
-              <% elsif policy(sneaker).edit? %>
+              <%# if current_user != sneaker.user %>
+                <%#= form_tag orders_path(sneaker_id: sneaker.id) do %>
+                  <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                <%# end %>
+              <% if policy(sneaker).edit? %>
                 <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
                   <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
                 </button>

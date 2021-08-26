@@ -1,3 +1,7 @@
+.sneaker-card .sneaker-title {
+  margin-top:5px
+}
+
 .all_sneakers {
   margin-top: 30px;
   display: flex;
@@ -32,6 +36,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-items: center;
+  align-items: baseline;
 }
 
 .sneaker-card_img>img {
@@ -82,11 +87,11 @@
     height: 140px;
   }
   .sneaker-card .sneaker-price {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .sneaker-card .sneaker-title {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 13px;
   }
   .sneaker-cards {
@@ -94,7 +99,7 @@
     grid-gap: 50px;
   }
   .sneaker-card {
-    width: 200px;
+    width: 140px;
   }
 }
 
@@ -125,6 +130,6 @@
     grid-gap: 80px;
   }
   .sneaker-card {
-    width: 200px;
+    width: 160px;
   }
 }
