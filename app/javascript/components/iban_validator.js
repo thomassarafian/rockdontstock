@@ -19,12 +19,17 @@ function ibanValidator () {
     return (mod97 === 1);
   };
 
-  const button = document.querySelector('#btn-validate-iban');
+  let button = document.querySelector('#btn-validate-iban');
+  if (document.querySelector('.sign-up-user')) {
+    button = document.querySelector('.sign-up-user');
+  }
   const errorElement = document.getElementById("iban-error");
   const ibanForm = document.getElementById('user_iban');
-
+  console.log(button);
   if (button && errorElement && ibanForm) {
+    console.log('ok1111');
     button.addEventListener('click', (event) => {
+    console.log('ok');
       let message = [];
       user_iban = document.getElementById('user_iban').value;
       if (user_iban != "")
