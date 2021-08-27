@@ -44,10 +44,7 @@ Rails.application.routes.draw do
 
   # mount StripeEvent::Engine, at: '/stripe-webhooks'
 
-  require "sidekiq/web"
-  authenticate :user do
-    mount Sidekiq::Web => '/sidekiq'
-  end
+
 
 
 end

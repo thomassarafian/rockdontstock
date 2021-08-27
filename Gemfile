@@ -70,10 +70,6 @@ gem 'pagy', '~> 3.5' #pagination
 gem 'forest_liana' # admin
 gem 'rack-cors'    # admin
 
-gem 'sidekiq'                    # background-job
-gem 'sidekiq-failures', '~> 1.0' # background-job
-
-
 
 
 group :development, :test do
