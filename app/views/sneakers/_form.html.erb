@@ -28,18 +28,18 @@
     <button type="button" class="btn btn-dark">Suivant</button>
   </div>
   
+
   <div class="photos-input">
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file, :multiple => true,
+      <%= f.file_field :photos, as: :file, :multiple => true, onchange:"uploadPhotos()",
       class: "hidden", id: 'photo-input0',
       class: 'upload-photo photo-input0',
-      label: '📷 Ajoute une photo' %>
+      label: '📷 Ajoute une photo'%>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview0" %>
-      <%= f.label :photos, "Intérieur"  %>
+      <%= f.label :photos, "Intérieur" %>
     </div>
-
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file, :multiple => true,
+      <%= f.file_field :photos, as: :file, :multiple => true, onchange:"uploadPhotos()",
       class: "hidden", id: 'photo-input1',
       class: 'upload-photo photo-input1',
       label: '📷 Ajoute une photo' %>
@@ -47,7 +47,7 @@
       <%= f.label :photos, "Extérieur"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file, :multiple => true,
+      <%= f.file_field :photos, as: :file, :multiple => true, onchange:"uploadPhotos()",
       class: "hidden", id: 'photo-input2',
       class: 'upload-photo photo-input2',
       label: '📷 Ajoute une photo' %>
@@ -55,7 +55,7 @@
       <%= f.label :photos, "Derrière"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file, :multiple => true,
+      <%= f.file_field :photos, as: :file, :multiple => true, onchange:"uploadPhotos()",
       class: "hidden", id: 'photo-input3',
       class: 'upload-photo photo-input3',
       label: '📷 Ajoute une photo' %>
@@ -63,7 +63,7 @@
       <%= f.label :photos, "Dessus"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file, :multiple => true,
+      <%= f.file_field :photos, as: :file, :multiple => true, onchange:"uploadPhotos()",
       class: "hidden", id: 'photo-input4',
       class: 'upload-photo photo-input4',
       label: '📷 Ajoute une photo' %>
@@ -71,7 +71,7 @@
       <%= f.label :photos, "Dessous"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file, :multiple => true,
+      <%= f.file_field :photos, as: :file, :multiple => true, onchange:"uploadPhotos()",
       class: "hidden", id: 'photo-input5',
       class: 'upload-photo photo-input5',
       label: '📷 Ajoute une photo' %>
@@ -79,7 +79,7 @@
       <%= f.label :photos, "Boite"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file, :multiple => true,
+      <%= f.file_field :photos, as: :file, :multiple => true, onchange:"uploadPhotos()",
       class: "hidden", id: 'photo-input6',
       class: 'upload-photo photo-input6',
       label: '📷 Ajoute une photo' %>
@@ -87,47 +87,140 @@
       <%= f.label :photos, "Size tag"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file, :multiple => true,
+      <%= f.file_field :photos, as: :file, :multiple => true, onchange:"uploadPhotos()",
       class: "hidden", id: 'photo-input7',
       class: 'upload-photo photo-input7',
       label: '📷 Ajoute une photo' %>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview7" %>
-      <%= f.label :photos, "[OPTIONNEL] Défaults sur la paire"  %>
+      <%= f.label :photos, "Défaults sur la paire"  %>
     </div>
   </div>
   <div class="snd-next-btn">
     <button type="button" class="btn btn-dark">Suivant</button>
   </div>
 
+
+
+
+<script type="text/javascript">
+  let opti_photos = []
+  window.uploadPhotos = function(url){
+    var file = event.target.files[0];
+
+    // Ensure it's an image
+    if(file.type.match(/image.*/)) {
+        console.log('An image has been loaded');
+
+        // Load the image
+        var reader = new FileReader();
+        reader.onload = function (readerEvent) {
+            var image = new Image();
+            image.onload = function (imageEvent) {
+
+                // Resize the image
+                var canvas = document.createElement('canvas'),
+                    max_size = 544,// TODO : pull max size from a site config
+                    width = image.width,
+                    height = image.height;
+                if (width > height) {
+                    if (width > max_size) {
+                        height *= max_size / width;
+                        width = max_size;
+                    }
+                } else {
+                    if (height > max_size) {
+                        width *= max_size / height;
+                        height = max_size;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+                var dataUrl = canvas.toDataURL('image/jpeg');
+                var resizedImage = dataURLToBlob(dataUrl);
+                $.event.trigger({
+                    type: "totoEoh",
+                    blob: resizedImage,
+                    url: dataUrl
+                });
+            }
+            image.src = readerEvent.target.result;
+            // console.log(image.src)
+        }
+        reader.readAsDataURL(file);
+        // console.log(file)
+    }
+};
+
+var dataURLToBlob = function(dataURL) {
+    var BASE64_MARKER = ';base64,';
+    if (dataURL.indexOf(BASE64_MARKER) == -1) {
+        var parts = dataURL.split(',');
+        var contentType = parts[0].split(':')[1];
+        var raw = parts[1];
+
+        return new Blob([raw], {type: contentType});
+    }
+
+    var parts = dataURL.split(BASE64_MARKER);
+    var contentType = parts[0].split(':')[1];
+    var raw = window.atob(parts[1]);
+    var rawLength = raw.length;
+
+    var uInt8Array = new Uint8Array(rawLength);
+
+    for (var i = 0; i < rawLength; ++i) {
+        uInt8Array[i] = raw.charCodeAt(i);
+    }
+
+    return new Blob([uInt8Array], {type: contentType});
+}
+
+  $(document).on("totoEoh", function (event) {
+    console.log("Uploaded the photo and pushed to opti photos ");
+    if (event.blob && event.url) {
+        opti_photos.push(event.blob);
+    }
+  });
+
+  document.querySelector('.snd-next-btn').addEventListener('click', (e) => {
+    var data = new FormData($("form[id*='newSneakerForm']")[0]);
+    console.log("On crée data !")
+    data.append('sneaker[size]', document.getElementById('sneaker_size').value);
+    data.append('sneaker[condition]', document.getElementById('sneaker_condition').value);
+    data.append('sneaker[box]', document.getElementById('sneaker_box').value);
+    data.append('sneaker[extras]', document.getElementById('sneaker_extras').value);
+    data.append('sneaker[price]', document.getElementById('sneaker_price').value);
+    opti_photos.forEach(elem => {
+      data.append('sneaker[photos][]', elem);
+    });
+    fetch(document.getElementById('new_sneaker').action, {
+      method: "POST",
+      body: data,
+    })
+  });
+
+
+</script>
+
   <div class="summary-new-sneaker">
     <div class='summary-photo'>
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div id="carouselSummaryNewSneaker" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active carousel-sneaker-photo0">
-          </div>
-          <div class="carousel-item carousel-sneaker-photo1">
-          </div>
-          <div class="carousel-item carousel-sneaker-photo2">
-          </div>
-          <div class="carousel-item carousel-sneaker-photo3">
-          </div>
-          <div class="carousel-item carousel-sneaker-photo4">
-          </div>
-          <!-- <div class="carousel-item ">
-            <%#= cl_image_tag(sneaker.photos[5].key, class: 'sneaker-show-photos') %>
-          </div>
-          <div class="carousel-item ">
-            <%#= cl_image_tag(sneaker.photos[6].key, class: 'sneaker-show-photos') %>
-          </div>
-          <div class="carousel-item ">
-            <%#= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
-          </div> -->
+          <div class="carousel-item active carousel-sneaker-photo0"></div>
+          <div class="carousel-item carousel-sneaker-photo1"></div>
+          <div class="carousel-item carousel-sneaker-photo2"></div>
+          <div class="carousel-item carousel-sneaker-photo3"></div>
+          <div class="carousel-item carousel-sneaker-photo4"></div>
+          <div class="carousel-item  carousel-sneaker-photo5"></div>
+          <div class="carousel-item carousel-sneaker-photo6"></div>
+          <div class="carousel-item carousel-sneaker-photo7"></div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carouselSummaryNewSneaker" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#carouselSummaryNewSneaker" role="button" data-slide="next">
           <span class="carousel-control-next-icon sneaker-show-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
@@ -136,14 +229,10 @@
         <div class='summary-name'>
          <p>Modèle : <strong><%= @sneaker_db.name %></strong></p>
         </div>
-        <div class='summary-size'>
-        </div>
-        <div class='summary-cond'>
-        </div>
-        <div class='summary-extras'>
-        </div>
-        <div class='summary-box'>
-        </div>
+        <div class='summary-size'></div>
+        <div class='summary-cond'></div>
+        <div class='summary-extras'></div>
+        <div class='summary-box'></div>
       </div>
     </div>
     <div class="summary-new-sneaker-resume"> 
@@ -157,7 +246,8 @@
         <div class="summary-price-total">   
         </div>
         <div class="submit-new-sneaker">
-          <button type="submit" name="commit" value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark" data-disable-with="<i class='fas fa-spinner fa-spin'></i>  Le chargement peut prendre plusieurs minutes...">Finaliser la mise en vente</button>
+          <a id="final-sell"style="margin: 50px 0;"href="/">Finaliser la vente ! </a>
+          <!-- <button value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark" data-disable-with="<i class='fas fa-spinner fa-spin'></i>  Le chargement peut prendre plusieurs minutes...">Finaliser la mise en vente</button> -->
         </div>
       </div>
     </div>
@@ -334,7 +424,7 @@
     let nextBtn = document.querySelector('.next-btn');
     
     
-    if (sneaker_size.value && sneaker_price.value && sneaker_condition.value && sneaker_box.value) { 
+    if (sneaker_size.value && sneaker_price.value && sneaker_condition.value && sneaker_box.value) {
       // document.querySelector('.total-price-for-seller').innerHTML = `<p>Box : ${sneaker_price.value}</p>`;
       nextBtn.style.display = "block";
       nextBtn.addEventListener('click', (event) => {
@@ -359,46 +449,11 @@
     let photoPreview6 = document.getElementById('photo-preview6');
     let photoPreview7 = document.getElementById('photo-preview7');
     let photoPreview = 0;
-    
+
     photoPreview0.addEventListener('load', (event) => {
       let photoInput0 = document.querySelector('.photo-input0');
       photoInput0.style.backgroundImage = `url(${photoPreview0.src})`;
       photoPreview++;
-      if (photoPreview == 1) {
-        let sndNextBtn = document.querySelector('.snd-next-btn');
-        sndNextBtn.style.display = "block";
-        sndNextBtn.addEventListener('click', (event) => {
-          let photosInput = document.querySelector('.photos-input');
-          let summaryNewSneaker = document.querySelector('.summary-new-sneaker');
-          photosInput.style.display = "none";
-          if (window.innerWidth >= 768) {
-            summaryNewSneaker.style.display = "grid";
-          }
-          else {
-            summaryNewSneaker.style.display = "block";
-          }
-          sndNextBtn.style.display = "none";
-          document.querySelector('.submit-new-sneaker').style.display = "block"
-          document.querySelector('.search-sneaker-model-title').innerText = "Récapitulatif de la commande";
-          console.log(photoPreview0.src);
-          document.querySelector('.carousel-sneaker-photo0').innerHTML = `<img src="${photoPreview0.src}" class="sneaker-show-photos">`;
-          document.querySelector('.summary-size').innerHTML = `<p>Taille : ${sneaker_size.value}</p>`;
-          document.querySelector('.summary-cond').innerHTML = `<p>Condition : ${sneaker_condition.value} / 10</p>`;
-          document.querySelector('.summary-extras').innerHTML = `<p>Extras : ${sneaker_extras.value}</p>`;
-          document.querySelector('.summary-box').innerHTML = `<p>Box : ${sneaker_box.value}</p>`;
-          document.querySelector('.summary-price-seller').innerHTML = `<p class="summary-price-sneaker">Prix demandé : 
-          <span id="summary-price-seller">${sneaker_price.value}€</span></p>`;
-          let summaryPriceCheck = ((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2).toFixed(2);
-          document.querySelector('.summary-price-check').innerHTML = `<p class="summary-price-sneaker">Frais d’authentification :
-          <span id="summary-price-check">${summaryPriceCheck}€</span></p>`;
-          let summaryPriceTotal = parseFloat( 
-            // ((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2) + 
-            parseFloat(sneaker_price.value.replace(/,/g, ".") ) - 4.99 ).toFixed(2);
-          document.querySelector('.summary-price-total').innerHTML = `<strong><p class="summary-price-sneaker">TOTAL : 
-          <span id="summary-price-total">${summaryPriceTotal}€</span></p></strong>`
-
-        });
-      }
     })
     photoPreview1.addEventListener('load', (event) => {
       let photoInput1 = document.querySelector('.photo-input1');
@@ -408,11 +463,6 @@
     photoPreview2.addEventListener('load', (event) => {
       let photoInput2 = document.querySelector('.photo-input2');
       photoInput2.style.backgroundImage = `url(${photoPreview2.src})`;
-      photoPreview++;
-    })
-    photoPreview3.addEventListener('load', (event) => {
-      let photoInput3 = document.querySelector('.photo-input3');
-      photoInput3.style.backgroundImage = `url(${photoPreview3.src})`;
       photoPreview++;
     })
     photoPreview3.addEventListener('load', (event) => {
@@ -439,20 +489,47 @@
       let photoInput7 = document.querySelector('.photo-input7');
       photoInput7.style.backgroundImage = `url(${photoPreview7.src})`;
       photoPreview++;
-      // if (photoPreview == 9) {
-      //   sndNextBtn.style.display = "block";
-      //   sndNextBtn.addEventListener('click', (event) => {
-      //     photosInput.style.display = "none";
-      //     summaryNewSneaker.style.display = "block";
-      //   });
-      // }
+      if (photoPreview == 8) {
+        let sndNextBtn = document.querySelector('.snd-next-btn');
+        sndNextBtn.style.display = "block";
+        sndNextBtn.addEventListener('click', (event) => {
+          let photosInput = document.querySelector('.photos-input');
+          let summaryNewSneaker = document.querySelector('.summary-new-sneaker');
+          photosInput.style.display = "none";
+          if (window.innerWidth >= 768) {
+            summaryNewSneaker.style.display = "grid";
+          } else {
+            summaryNewSneaker.style.display = "block";
+          }
+          sndNextBtn.style.display = "none";
+          document.querySelector('.submit-new-sneaker').style.display = "block"
+          document.querySelector('.search-sneaker-model-title').innerText = "Récapitulatif de la commande";
+          document.querySelector('.carousel-sneaker-photo0').innerHTML = `<img src="${photoPreview0.src}" class="sneaker-show-photos">`;
+          document.querySelector('.carousel-sneaker-photo1').innerHTML = `<img src="${photoPreview1.src}" class="sneaker-show-photos">`;
+          document.querySelector('.carousel-sneaker-photo2').innerHTML = `<img src="${photoPreview2.src}" class="sneaker-show-photos">`;
+          document.querySelector('.carousel-sneaker-photo3').innerHTML = `<img src="${photoPreview3.src}" class="sneaker-show-photos">`;
+          document.querySelector('.carousel-sneaker-photo4').innerHTML = `<img src="${photoPreview4.src}" class="sneaker-show-photos">`;
+          document.querySelector('.carousel-sneaker-photo5').innerHTML = `<img src="${photoPreview5.src}" class="sneaker-show-photos">`;
+          document.querySelector('.carousel-sneaker-photo6').innerHTML = `<img src="${photoPreview6.src}" class="sneaker-show-photos">`;
+          document.querySelector('.carousel-sneaker-photo7').innerHTML = `<img src="${photoPreview7.src}" class="sneaker-show-photos">`;
+          document.querySelector('.summary-size').innerHTML = `<p>Taille : ${sneaker_size.value}</p>`;
+          document.querySelector('.summary-cond').innerHTML = `<p>Condition : ${sneaker_condition.value} / 10</p>`;
+          document.querySelector('.summary-extras').innerHTML = `<p>Extras : ${sneaker_extras.value}</p>`;
+          document.querySelector('.summary-box').innerHTML = `<p>Box : ${sneaker_box.value}</p>`;
+          document.querySelector('.summary-price-seller').innerHTML = `<p class="summary-price-sneaker">Prix demandé : 
+          <span id="summary-price-seller">${sneaker_price.value}€</span></p>`;
+          let summaryPriceCheck = ((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2).toFixed(2);
+          document.querySelector('.summary-price-check').innerHTML = `<p class="summary-price-sneaker">Frais d’authentification :
+          <span id="summary-price-check">${summaryPriceCheck}€</span></p>`;
+          let summaryPriceTotal = parseFloat( 
+            // ((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2) + 
+            parseFloat(sneaker_price.value.replace(/,/g, ".") ) - 4.99 ).toFixed(2);
+          document.querySelector('.summary-price-total').innerHTML = `<strong><p class="summary-price-sneaker">TOTAL : 
+          <span id="summary-price-total">${summaryPriceTotal}€</span></p></strong>`
+        });
+      }
     })
-  })
-
-  // infoInput.style.display = "none";
-  
-
-
+  })  
 </script>
 
 
@@ -461,3 +538,4 @@
     text-decoration: line-through;
   }
 </style>
+

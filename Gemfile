@@ -67,8 +67,12 @@ gem 'pg_search', '~> 2.3.0' #search
 
 gem 'pagy', '~> 3.5' #pagination
 
-gem 'forest_liana'
-gem 'rack-cors'
+gem 'forest_liana' # admin
+gem 'rack-cors'    # admin
+
+gem 'sidekiq'                    # background-job
+gem 'sidekiq-failures', '~> 1.0' # background-job
+
 
 
 

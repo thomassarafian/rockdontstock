@@ -24,6 +24,8 @@ module Rockdontstock
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    config.active_job.queue_adapter = :sidekiq
+
     config.i18n.default_locale = :fr
     null_regex = Regexp.new(/\Anull\z/)
     config.middleware.insert_before 0, Rack::Cors do

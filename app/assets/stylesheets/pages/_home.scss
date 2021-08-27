@@ -69,6 +69,9 @@ select {
   }
 }
 @media (min-width: 768px) {
+  .home-article-legit-content {
+    margin: 0 50px;
+  }
   .article-legit-check h2 {
     font-size: 30px;
   }
@@ -78,6 +81,9 @@ select {
 }
 
 @media (min-width: 1024px) {
+  .home-article-legit-content {
+    margin: 0 100px;
+  }
   .home-article-legit-content {
     grid-template-columns: 80px auto;
   }
