@@ -145,35 +145,29 @@
                 });
             }
             image.src = readerEvent.target.result;
-            // console.log(image.src)
         }
         reader.readAsDataURL(file);
-        // console.log(file)
     }
 };
 
 var dataURLToBlob = function(dataURL) {
-    var BASE64_MARKER = ';base64,';
-    if (dataURL.indexOf(BASE64_MARKER) == -1) {
-        var parts = dataURL.split(',');
-        var contentType = parts[0].split(':')[1];
-        var raw = parts[1];
+  var BASE64_MARKER = ';base64,';
+  if (dataURL.indexOf(BASE64_MARKER) == -1) {
+      var parts = dataURL.split(',');
+      var contentType = parts[0].split(':')[1];
+      var raw = parts[1];
+      return new Blob([raw], {type: contentType});
+  }
+  var parts = dataURL.split(BASE64_MARKER);
+  var contentType = parts[0].split(':')[1];
+  var raw = window.atob(parts[1]);
+  var rawLength = raw.length;
+  var uInt8Array = new Uint8Array(rawLength);
+  for (var i = 0; i < rawLength; ++i) {
+      uInt8Array[i] = raw.charCodeAt(i);
+  }
 
-        return new Blob([raw], {type: contentType});
-    }
-
-    var parts = dataURL.split(BASE64_MARKER);
-    var contentType = parts[0].split(':')[1];
-    var raw = window.atob(parts[1]);
-    var rawLength = raw.length;
-
-    var uInt8Array = new Uint8Array(rawLength);
-
-    for (var i = 0; i < rawLength; ++i) {
-        uInt8Array[i] = raw.charCodeAt(i);
-    }
-
-    return new Blob([uInt8Array], {type: contentType});
+  return new Blob([uInt8Array], {type: contentType});
 }
 
   $(document).on("totoEoh", function (event) {
@@ -246,8 +240,8 @@ var dataURLToBlob = function(dataURL) {
         <div class="summary-price-total">   
         </div>
         <div class="submit-new-sneaker">
-          <a id="final-sell"style="margin: 50px 0;"href="/">Finaliser la vente ! </a>
-          <!-- <button value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark" data-disable-with="<i class='fas fa-spinner fa-spin'></i>  Le chargement peut prendre plusieurs minutes...">Finaliser la mise en vente</button> -->
+          <!-- <a id="final-sell"style="margin: 50px 0;"href="/">Finaliser la vente ! </a> -->
+          <button name="button-new-sneaker" value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark" data-disable-with="<i class='fas fa-spinner fa-spin'></i> Chargement ...">Finaliser la mise en vente</button>
         </div>
       </div>
     </div>

@@ -77,11 +77,11 @@
           </div>
         </div>
         <div class="modal-footer" style="justify-content: center;">
-          <% if current_user != sneaker.user %>
-            <%= form_tag orders_path(sneaker_id: sneaker.id) do %>
-              <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-            <% end %>
-          <% else %>
+          <%# if current_user != sneaker.user %>
+            <%#= form_tag orders_path(sneaker_id: sneaker.id) do %>
+              <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
+            <%# end %>
+          <%# else %>
             <%# if policy(sneaker).edit? %>
               <!-- <button type="button" class="btn btn-dark sneaker-show-btn"> -->
                 <%#= link_to "Modifier la paire", edit_sneaker_path(sneaker), style: 'color: white;' %>
