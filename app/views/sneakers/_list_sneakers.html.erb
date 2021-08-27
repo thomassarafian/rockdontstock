@@ -6,7 +6,6 @@
             <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
               <%=  cl_image_tag(sneaker.photos[0].key, style: 'width: 100%; justify-content:center;') %>
             </div>
-
             <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
               <div class="sneaker-price"><%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
           </div>
@@ -92,7 +91,7 @@
                 <%= link_to "Supprimer", sneaker_path(sneaker), method: :delete, data: { confirm: "Are you sure?" }, style: 'color: white;' %>
               </button>
             <% end %>   
-          <% end %>
+          <%# end %>
         </div>
       </div>
     </div>

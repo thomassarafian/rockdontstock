@@ -11,7 +11,7 @@
                       action: "keyup->refresh-list#update",
                      } %>
     <% end %>
-    <%= render 'list_sneakers', sneakers: @sneakers %>
+    <%= render 'list_sneakers.html.erb', sneakers: @sneakers %>
   </div>
   <div class="pagy-nav">
     <%== pagy_bootstrap_nav(@pagy) %>
