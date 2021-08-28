@@ -4,9 +4,11 @@ class TransfersController < ApplicationController
   def index
 		skip_policy_scope
     @user = current_user
-    @account = Stripe::Account.retrieve(@user.stripe_account_id)
-		@balance = Stripe::Balance.retrieve({stripe_account: @user.stripe_account_id})
-		
+    if @user.stripe_account_id?
+      @account = Stripe::Account.retrieve(@user.stripe_account_id)
+  		@balance = Stripe::Balance.retrieve({stripe_account: @user.stripe_account_id})
+    end
+
 		# FAIRE LES VIREMENTS A PROPREMENT PARLÉ
 		# p payout = Stripe::Payout.create({
 		#   amount: 100,

@@ -1,5 +1,17 @@
 class User < ApplicationRecord
   require 'json'
+  
+  has_many :sneakers, dependent: :destroy
+  has_many :orders, dependent: :destroy
+
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable
+  devise :database_authenticatable, :registerable,
+      :recoverable, :rememberable, :validatable
+  devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
+
+  has_many_attached :ids
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, uniqueness: true
@@ -9,31 +21,16 @@ class User < ApplicationRecord
   validates :iban, presence: true
   validate :date_of_birth, if: :user_over_13, on: [:create, :update]
 
-
-  # validates :iban, uniqueness: true # créé un bug 
-
-  has_many :sneakers, dependent: :destroy
-  has_many :orders, dependent: :destroy
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable
-	devise :database_authenticatable, :registerable,
-    	:recoverable, :rememberable, :validatable
-  devise :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
-
-  has_many_attached :ids
-
   after_update :create_connect_account
 
   # validate :correct_ids_type?
-
-  # after_create :send_notification # a configurer avec mailjet 
 
   # after_update :send_ids #, if: :ids_are_filled?
 
   after_update :convert_picker_data_to_json, if: :picker_data_is_filled?
 
-  # after_create :subscribe_to_newsletter
+  after_create :subscribe_to_newsletter
+  after_create :send_welcome
 
   # after_update :send_label, if: :picker_data_is_converted?
   
@@ -212,8 +209,27 @@ class User < ApplicationRecord
     end
   end
 
-  def send_notification
-    UserMailer.new_user(self).deliver
+  def send_welcome
+    variable = Mailjet::Send.create(messages: [{
+      'From'=> {
+        'Email'=> "elliot@rockdontstock.com",
+        'Name'=> "Rock Don't Stock"
+      },
+      'To'=> [
+        {
+          'Email'=> self.email,
+          'Name'=> self.first_name
+        }
+      ],
+      'TemplateID'=> 2961026,
+      'TemplateLanguage'=> true,
+      'Subject'=> "Inscription validée ! ",
+      'Variables'=> {
+        "prenom" => self.first_name,
+        "compte_rockdontstock" => 'https://www.rockdontstock.com/me'
+      }
+    }])
+    # p variable.attributes['Messages']
   end
 
     
