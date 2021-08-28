@@ -25,11 +25,8 @@ function ibanValidator () {
   }
   const errorElement = document.getElementById("iban-error");
   const ibanForm = document.getElementById('user_iban');
-  console.log(button);
   if (button && errorElement && ibanForm) {
-    console.log('ok1111');
     button.addEventListener('click', (event) => {
-    console.log('ok');
       let message = [];
       user_iban = document.getElementById('user_iban').value;
       if (user_iban != "")
