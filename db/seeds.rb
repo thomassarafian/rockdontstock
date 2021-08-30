@@ -2,7 +2,7 @@ require 'csv'
 
 # Order.destroy_all
 # Sneaker.destroy_all
-SneakerDb.destroy_all
+# SneakerDb.destroy_all
 
 # air_jordan_csv_file = File.read(Rails.root.join('lib', 'seeds', 'air_jordan.csv'))
 # air_jordan_csv = CSV.parse(air_jordan_csv_file, :headers => true, :encoding => 'ISO-8859-1')
