@@ -18,11 +18,10 @@ class Sneaker < ApplicationRecord
 
 	# after_create :send_notification  # a configurer avec mailjet 
 
-
-  pg_search_scope :search_by_name,
+  pg_search_scope :search_by_name_and_brand,
     against: [:name],
     associated_against: {
-      sneaker_db: [:name]
+      sneaker_db: [:name, :category]
     },
     using: {
       tsearch: { prefix: true } 

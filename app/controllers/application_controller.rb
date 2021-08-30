@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   
   def set_search_navbar
     @pagy, @sneakers = pagy(Sneaker.order(:name))
-    
+
     if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
       session[:filter_params] = params
       filtering_params(params).each do |key, value|
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
       session.delete(:filter_params)
     end
     if params[:query].present?
-      @sneakers = @sneakers.search_by_name(params[:query])
+      @sneakers = @sneakers.search_by_name_and_brand(params[:query])
     end
 
     respond_to do |format|
