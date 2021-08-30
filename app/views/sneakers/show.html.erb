@@ -1,16 +1,6 @@
 <h1 class="sneaker-show-title">Mon annonce</h1>
 <div class="sneaker-show">
   <div id="carouselSneakerShow" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselSneakerShow" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselSneakerShow" data-slide-to="1"></li>
-      <li data-target="#carouselSneakerShow" data-slide-to="2"></li>
-      <li data-target="#carouselSneakerShow" data-slide-to="3"></li>
-      <li data-target="#carouselSneakerShow" data-slide-to="4"></li>
-      <li data-target="#carouselSneakerShow" data-slide-to="5"></li>
-      <li data-target="#carouselSneakerShow" data-slide-to="6"></li>
-      <li data-target="#carouselSneakerShow" data-slide-to="7"></li>
-    </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
         <%= cl_image_tag(@sneaker.photos[0].key, class: 'sneaker-show-photos') %>
@@ -30,12 +20,16 @@
       <div class="carousel-item ">
         <%= cl_image_tag(@sneaker.photos[5].key, class: 'sneaker-show-photos') %>
       </div>
-      <div class="carousel-item ">
-        <%= cl_image_tag(@sneaker.photos[6].key, class: 'sneaker-show-photos') %>
-      </div>
-      <div class="carousel-item ">
-        <%= cl_image_tag(@sneaker.photos[7].key, class: 'sneaker-show-photos') %>
-      </div>
+      <% unless @sneaker.photos[6].nil? %>
+        <div class="carousel-item ">
+          <%= cl_image_tag(@sneaker.photos[6].key, class: 'sneaker-show-photos') %>
+        </div>
+      <% end %>
+      <% unless @sneaker.photos[7].nil? %>
+        <div class="carousel-item ">
+          <%= cl_image_tag(@sneaker.photos[7].key, class: 'sneaker-show-photos') %>
+        </div>
+      <% end %>
     </div>
     <a class="carousel-control-prev" href="#carouselSneakerShow" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>

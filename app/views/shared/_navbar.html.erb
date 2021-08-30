@@ -125,7 +125,7 @@
   </div>
 
   
-  <% @sneakers.all.each do |sneaker| %>
+  <% @sneakers.where(state:0).all.each do |sneaker| %>
     <div class="modal fade" id="search-list-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="searchListLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content" style="color: black;">
@@ -156,12 +156,16 @@
                 <div class="carousel-item ">
                   <%= cl_image_tag(sneaker.photos[5].key, class: 'sneaker-show-photos') %>
                 </div>
-                <div class="carousel-item ">
-                  <%= cl_image_tag(sneaker.photos[6].key, class: 'sneaker-show-photos') %>
-                </div>
-                <div class="carousel-item ">
-                  <%= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
-                </div>
+                <% unless sneaker.photos[6].nil? %>
+                  <div class="carousel-item ">
+                    <%= cl_image_tag(sneaker.photos[6].key, class: 'sneaker-show-photos') %>
+                  </div>
+                <% end %>
+                <% unless sneaker.photos[7].nil? %>
+                  <div class="carousel-item ">
+                    <%= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
+                  </div>
+                <% end %>
               </div>
               <a class="carousel-control-prev" href="#carousel-navbar-<%= sneaker.id %>" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>

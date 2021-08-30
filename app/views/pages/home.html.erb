@@ -16,7 +16,7 @@
 <div class="container home-rds-selection">
   <h2>Les dernières paires en ligne</h2>
   <div class="sneaker-cards">
-    <% Sneaker.all.limit(8).each do |sneaker| %>
+    <% Sneaker.all.where(state:0).limit(8).each do |sneaker| %>
       <div class="sneaker-card">
         <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
           <%= cl_image_tag(sneaker.photos[0].key) %>
@@ -54,12 +54,16 @@
                   <div class="carousel-item ">
                     <%= cl_image_tag(sneaker.photos[5].key, class: 'sneaker-show-photos') %>
                   </div>
-                  <div class="carousel-item ">
-                    <%= cl_image_tag(sneaker.photos[6].key, class: 'sneaker-show-photos') %>
-                  </div>
-                  <div class="carousel-item ">
-                    <%= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
-                  </div>
+                  <% unless sneaker.photos[6].nil? %>
+                    <div class="carousel-item ">
+                      <%= cl_image_tag(sneaker.photos[6].key, class: 'sneaker-show-photos') %>
+                    </div>
+                  <% end %>
+                  <% unless sneaker.photos[7].nil? %>
+                    <div class="carousel-item ">
+                      <%= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
+                    </div>
+                  <% end %>
                 </div>
                 <a class="carousel-control-prev" href="#carousel-<%= sneaker.id %>-home" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
@@ -121,7 +125,7 @@
 <div class="container home-rds-selection">
   <h2>La séléction Rock Don't Stock</h2>
   <div class="sneaker-cards">
-    <% Sneaker.all.limit(8).each do |sneaker| %>
+    <% Sneaker.all.where(state:0).limit(8).each do |sneaker| %>
       <div class="sneaker-card">
         <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
           <%= cl_image_tag(sneaker.photos[0].key) %>
@@ -159,12 +163,16 @@
                   <div class="carousel-item ">
                     <%= cl_image_tag(sneaker.photos[5].key, class: 'sneaker-show-photos') %>
                   </div>
-                  <div class="carousel-item ">
-                    <%= cl_image_tag(sneaker.photos[6].key, class: 'sneaker-show-photos') %>
-                  </div>
-                  <div class="carousel-item ">
-                    <%= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
-                  </div>
+                  <% unless sneaker.photos[6].nil? %>
+                    <div class="carousel-item ">
+                      <%= cl_image_tag(sneaker.photos[6].key, class: 'sneaker-show-photos') %>
+                    </div>
+                  <% end %>
+                  <% unless sneaker.photos[7].nil? %>
+                    <div class="carousel-item ">
+                      <%= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
+                    </div>
+                  <% end %>
                 </div>
                 <a class="carousel-control-prev" href="#carousel-home-<%= sneaker.id %>" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
