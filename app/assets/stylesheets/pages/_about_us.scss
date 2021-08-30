@@ -54,6 +54,9 @@ footer>.about-us {
   }
 
 @media (min-width: 320px) {
+  .first-block {
+    margin-top: 90px;
+  }
   .about-first-text>p, .about-second-text>p, .about-third-text>p {
     font-size: 10px; 
   }

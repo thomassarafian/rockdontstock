@@ -17,6 +17,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @sneaker_session = Sneaker.where(id: session[:sneaker_session_id])
       @sneaker_session[0].update(user_id: @user.id)
       @sneaker_session[0].save
+      variable = Mailjet::Send.create(messages: [{
+        'From'=> {
+          'Email'=> "elliot@rockdontstock.com",
+          'Name'=> "Rock Don't Stock"
+        },
+        'To'=> [
+          {
+            'Email'=> @user.email,
+            'Name'=> @user.first_name,
+          }
+        ],
+        'TemplateID'=> 2961370,
+        'TemplateLanguage'=> true,
+        'Subject'=> "Ta paire est en cours de validation ⌛",
+        'Variables'=> {
+          "prenom" => @user.first_name,
+          "modele_paire" => @user.sneakers.last.sneaker_db.name,
+        }
+      }])
     end
   end
 

@@ -26,8 +26,8 @@ class ContactController < ApplicationController
         },
         'To'=> [
           {
-            'Email'=> 'thomassarafian@gmail.com',
-            'Name'=> 'Thomas'
+            'Email'=> 'hello@rockdontstock.com',
+            'Name'=> "Rock Don't Stock"
           }
         ],
         'TemplateID'=> 2963699,

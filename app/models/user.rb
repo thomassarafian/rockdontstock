@@ -102,41 +102,7 @@ class User < ApplicationRecord
     # end
   end
   
-  # def send_ids
-  #   user = self
-  #   identity_front = retrieve_front_id(user)
-  #   identity_verso = retrieve_verso_id(user)
-  #   proof_of_address = retrieve_proof_of_address(user)
-  #   person_token = create_person_token(identity_front, identity_verso, proof_of_address)
-  #   update_person(user, person_token)
-  # end
-
-  # def retrieve_front_id(user)
-  #   return Stripe::File.create({
-  #     purpose: 'identity_document',
-  #     file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
-  #     }, {
-  #     stripe_account: user.stripe_account_id,
-  #   })
-  # end
-
-  # def retrieve_verso_id(user)
-  #   return Stripe::File.create({
-  #     purpose: 'identity_document',
-  #     file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
-  #     }, {
-  #     stripe_account: user.stripe_account_id,
-  #   })
-  # end
-
-  # def retrieve_proof_of_address(user)
-  #   return Stripe::File.create({
-  #     purpose: 'identity_document',
-  #     file: File.new("/Users/thomassarafian/Desktop/default_avatar\ 3.png"),
-  #     }, {
-  #     stripe_account: user.stripe_account_id,
-  #   })
-  # end
+  
 
   def create_person_token(identity_front, identity_verso, proof_of_address)
     return Stripe::Token.create({
@@ -164,24 +130,6 @@ class User < ApplicationRecord
   end
 
 
-  # def attributes_are_filled?
-  #   user = self
-  #   puts " attributes_are_filled"
-  #   puts " attributes_are_filled"
-  #   puts " attributes_are_filled"
-  #   puts " attributes_are_filled"
-  #   puts " attributes_are_filled"
-  #   puts " attributes_are_filled"
-
-  #   if user.token_account.nil?
-  #     if user.email? && user.first_name? && user.last_name? && user.phone? && user.line1? && user.city? && user.postal_code? && user.date_of_birth.day.present? && user.date_of_birth.month.present? && user.date_of_birth.year.present?
-  #       return true
-  #     else
-  #       return false
-  #     end
-  #   end
-  #     return false
-  # end
 
   def age(dob)
     now = Time.now.utc.to_date
@@ -217,7 +165,7 @@ class User < ApplicationRecord
       },
       'To'=> [
         {
-          'Email'=> self.email,
+          'Email'=> "thomassarafian@gmail.com",
           'Name'=> self.first_name
         }
       ],
@@ -229,7 +177,6 @@ class User < ApplicationRecord
         "compte_rockdontstock" => 'https://www.rockdontstock.com/me'
       }
     }])
-    # p variable.attributes['Messages']
   end
 
     
