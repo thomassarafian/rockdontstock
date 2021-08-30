@@ -27,7 +27,8 @@ all_sneakers_csv.each do |row|
   next if row['sneaker-title'].include? "page" 
   next if row['sneaker-title'].include? "Page"
 
-  s = SneakerDb.new
+  s = SneakerDb.find_or_initialize_by(name: row['sneaker-title'])
+  # SneakerDb.new
   # s.subcategory = row['subcategory']
   # s.style = row['style']
   # s.coloris = row['coloris']
@@ -37,8 +38,8 @@ all_sneakers_csv.each do |row|
   #   s.price_cents = row['price-retail']     
   # end
   #  s.release_date = row['release-date']
-  
-  s.name = row['sneaker-title']
+    
+  # s.name = row['sneaker-title']
   s.category = row['brand']
 
   if row['img-fixed-src'] == nil
