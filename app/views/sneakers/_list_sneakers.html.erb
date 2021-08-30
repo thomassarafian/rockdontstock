@@ -1,7 +1,7 @@
 <div data-refresh-list-target="list">
   <div id="scroll" class="container">
     <div class="sneaker-cards">
-      <% sneakers.all.limit(8).each do |sneaker| %>
+      <% sneakers.where("state >= ?", 0).all.limit(8).each do |sneaker| %>
           <div class="sneaker-card" >
             <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
               <%=  cl_image_tag(sneaker.photos[0].key, style: 'width: 100%; justify-content:center;') %>
@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<% sneakers.all.limit(8).each do |sneaker| %>
+<% sneakers.where("state >= ?", 0).all.limit(8).each do |sneaker| %>
   <div class="modal fade" id="exampleModal-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

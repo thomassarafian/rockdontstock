@@ -8,6 +8,7 @@ body {
 select {
   // font: Questrial !important;
 }
+
 .page-item.active .page-link {
   background-color: #FFCD05;
   border-color: #FFCD05;
@@ -46,6 +47,10 @@ select {
 }
 
 @media (min-width: 320px) {
+  .home-rds-selection h2 {
+    font-size:20px;
+    margin-bottom: 30px;
+  }
   .home-article-legit-content {
     display: grid;
     grid-template-columns: 50px auto;
@@ -69,6 +74,9 @@ select {
   }
 }
 @media (min-width: 768px) {
+  .home-rds-selection h2 {
+    font-size:26px;
+  }
   .home-article-legit-content {
     margin: 0 50px;
   }
@@ -81,6 +89,9 @@ select {
 }
 
 @media (min-width: 1024px) {
+  .home-rds-selection h2 {
+    font-size:32px;
+  }
   .home-article-legit-content {
     margin: 0 100px;
   }

@@ -42,7 +42,7 @@ class ContactController < ApplicationController
     
     # p variable.attributes[:messages]
     
-    redirect_to root_path, notice: "Ton email a bien été envoyé !"
+    # redirect_to root_path, notice: "Ton email a bien été envoyé !"
 
     # render html: @contact.errors
 

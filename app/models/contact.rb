@@ -1,7 +1,10 @@
 class Contact < MailForm::Base
-  attribute :name, validate: true
-  attribute :email, validate: true
-  attribute :message, validate: true
-  attribute :object, validate: true
-  
+  attribute :name
+  attribute :email
+  attribute :message
+  attribute :object
+  validates :name, presence: true
+  validates :email, presence: true
+  validates :message, presence: true
+  validates :object, presence: true  
 end

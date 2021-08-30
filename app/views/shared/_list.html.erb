@@ -1,7 +1,7 @@
 <div class="list-sneakers-cards" data-refresh-list-target="list" data-filters-target="thelist">
   <div class="popup-search" id="records_table">
     <div class="sneaker-cards">
-      <% @sneakers.all.where(state:0).each do |sneaker| %>
+      <% @sneakers.where("state >= ?", 1).all.each do |sneaker| %>
       <!-- <div class="sneaker-cards-no-result" style="color:black;"></div> -->
       <div class="sneaker-card">
         <div class="sneaker-card_img" data-toggle="modal" data-target="#search-list-<%= sneaker.id %>">
