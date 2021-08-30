@@ -33,10 +33,7 @@ class SneakersController < ApplicationController
         box: params['sneaker']['box'], extras: params['sneaker']['extras'],
         state: 0, sneaker_db_id: @sneaker_db.id)
         @sneaker.save!
-        puts @sneaker.id 
-        puts session[:sneaker_session_id]
         session[:sneaker_session_id] = @sneaker.id
-
       elsif user_signed_in?
         @sneaker = current_user.sneakers.new(sneaker_db_id: @sneaker_db.id)
         @sneaker.update(sneaker_params)

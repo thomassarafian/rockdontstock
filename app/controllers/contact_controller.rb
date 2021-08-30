@@ -16,36 +16,32 @@ class ContactController < ApplicationController
     @contact.object = params[:contact][:object]
     @contact.message = params[:contact][:message]
     
-    # raise
-    # variable = Mailjet::Send.create(messages: [{
-    #   'From'=> {
-    #     'Email'=> "sarafianthomas@gmail.com",
-    #     'Name'=> @contact.name
-    #   },
-    #   'To'=> [
-    #     {
-    #       'Email'=> 'thomassarafian@gmail.com',
-    #       'Name'=> 'Thomas'
-    #     }
-    #   ],
-    #   'TemplateID'=> 2963699,
-    #   'TemplateLanguage'=> true,
-    #   'Subject'=> "Email provenant de #{@contact.email}",
-    #   'Variables'=> {
-    #     "email" => @contact.email,
-    #     "object" => @contact.object,
-    #     "name" => @contact.name,
-    #     "message" => @contact.message
-    #   }
-    # }])
-    
-    
-    # p variable.attributes[:messages]
-    
-    # redirect_to root_path, notice: "Ton email a bien été envoyé !"
-
-    # render html: @contact.errors
-
+    if @contact.name == "" || @contact.email == "" || @contact.object == "" || @contact.message == ""
+      redirect_to new_contact_path, alert: "Il faut remplir tous les champs"
+    else
+      variable = Mailjet::Send.create(messages: [{
+        'From'=> {
+          'Email'=> "sarafianthomas@gmail.com",
+          'Name'=> @contact.name
+        },
+        'To'=> [
+          {
+            'Email'=> 'thomassarafian@gmail.com',
+            'Name'=> 'Thomas'
+          }
+        ],
+        'TemplateID'=> 2963699,
+        'TemplateLanguage'=> true,
+        'Subject'=> "Email provenant de #{@contact.email}",
+        'Variables'=> {
+          "email" => @contact.email,
+          "object" => @contact.object,
+          "name" => @contact.name,
+          "message" => @contact.message
+        }
+      }])
+      redirect_to root_path, notice: "Ton email a bien été envoyé !"
+    end
   end
 
   private
