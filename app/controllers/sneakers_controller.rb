@@ -27,6 +27,7 @@ class SneakersController < ApplicationController
     end
     if !params['button-new-sneaker'].present?
       if current_user == nil
+        session.delete(:sneaker_session_id)
         @sneaker = Sneaker.new(user_id: 1,
         size: params['sneaker']['size'], condition: params['sneaker']['condition'], 
         price: params['sneaker']['price'], photos: params['sneaker']['photos'],
@@ -43,7 +44,6 @@ class SneakersController < ApplicationController
       end  
     else
       if current_user == nil  
-        # reset_session
         # @sneaker = Sneaker.new(user_id: 1,
         #   size: params['sneaker']['size'], condition: params['sneaker']['condition'], 
         #   price: params['sneaker']['price'], photos: params['sneaker']['photos'],

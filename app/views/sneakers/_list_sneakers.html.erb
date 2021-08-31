@@ -65,12 +65,12 @@
             <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification</p>
             <div class='modal-sneaker-all'>
               <div class="modal-sneaker-size-cond">
-                <p>Taille : <strong><%=  sneaker.size %> FR</strong></p> <%#= US (shoes_size[@sneaker.size] FR)%>
+                <p>Taille : <strong><%=  sneaker.size %> US</strong></p> <%#= US (shoes_size[@sneaker.size] FR)%>
                 <p>Condition : <strong><%= sneaker.condition %>/10</strong></p>
               </div>
               <div class="modal-sneaker-box-extras">
                 <p>Box : <strong><%= sneaker.box %></strong></p>
-                <p>Extras : <strong><%= sneaker.extras %></strong></p>
+                <p>Description : <strong><%= sneaker.extras %></strong></p>
               </div>
             </div>
           </div>

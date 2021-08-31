@@ -15,7 +15,7 @@ function optimizeUploadPhotos() {
 
                 // Resize the image
                 var canvas = document.createElement('canvas'),
-                    max_size = 544,// TODO : pull max size from a site config
+                    max_size = 720,// TODO : pull max size from a site config
                     width = image.width,
                     height = image.height;
                 if (width > height) {
