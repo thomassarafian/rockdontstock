@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   def newsletter
     # newsletter_params
     if params['user']['email'].present? && params['user']['email'].match(/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
-      @result = SubscribeToNewsletterService.new(params['user']).home_page_signup
+      @result = SubscribeToNewsletterService.new(params['user']).call(params['user'])
       # raise
       if @result == "Tu es dejà inscrit à notre newsletter"
         redirect_to root_path, alert:"Tu es dejà inscrit à notre newsletter"
