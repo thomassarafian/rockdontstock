@@ -76,3 +76,12 @@
   }
 
 </style>
+<script type="text/javascript">
+  $(document).on('turbolinks:load', () => {
+    $('form').on('keypress', e => {
+        if (e.keyCode == 13) {
+            return false;
+        }
+    });
+});
+</script>

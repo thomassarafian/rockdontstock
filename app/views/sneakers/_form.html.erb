@@ -143,7 +143,7 @@
         <div class="summary-price-total">   
         </div>
         <div class="submit-new-sneaker">
-          <button name="button-new-sneaker" value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark" data-disable-with="<i class='fas fa-spinner fa-spin'></i> Chargement ...">Finaliser la mise en vente</button>
+          <button disabled name="button-new-sneaker" value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark" data-disable-with="<i class='fas fa-spinner fa-spin'></i> Chargement ...">Finaliser la mise en vente</button>
         </div>
       </div>
     </div>
@@ -401,6 +401,7 @@
           }
           sndNextBtn.style.display = "none";
           document.querySelector('.submit-new-sneaker').style.display = "block"
+          document.querySelector('.submit-new-sneaker>button').disabled = false;
           document.querySelector('.search-sneaker-model-title').innerText = "Récapitulatif de la commande";
           document.querySelector('.carousel-sneaker-photo0').innerHTML = `<img src="${photoPreview0.src}" class="sneaker-show-photos">`;
           document.querySelector('.carousel-sneaker-photo1').innerHTML = `<img src="${photoPreview1.src}" class="sneaker-show-photos">`;
