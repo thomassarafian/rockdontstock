@@ -7,7 +7,8 @@
         label: false, input_html: { class: "info-input-sneaker" } %>
 
   	<%= f.input :condition, prompt: "Condition", collection: [ ["5/10 et moins", 5], ["6/10", 6],["8/10", 8],["9/10",9],['10/10', 10] ], required: true, label: false,
-    input_html: { class: "info-input-sneaker" }  %>
+      input_html: { class: "info-input-sneaker" },
+      hint: "#{link_to "Tout savoir sur les conditions", faq_path, style:"color:#707981;", target: :_blank}".html_safe %>
 
   	<%= f.input :box, prompt: "Box", collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
 
@@ -84,7 +85,7 @@
       class: 'hidden upload-photo photo-input6',
       label: '📷 Ajoute une photo' %>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview6" %>
-      <%= f.label :photos, "Boite"  %>
+      <%= f.label :photos, "Optionnel : Boite"  %>
     </div>
     <div class='sneaker-photo-input'>
       <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()",
@@ -142,6 +143,7 @@
         <hr>
         <div class="summary-price-total">   
         </div>
+        <div><%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981;", target: :_blank) %></div>
         <div class="submit-new-sneaker">
           <button disabled name="button-new-sneaker" value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark" data-disable-with="<i class='fas fa-spinner fa-spin'></i> Chargement ...">Finaliser la mise en vente</button>
         </div>

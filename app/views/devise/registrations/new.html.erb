@@ -16,9 +16,11 @@
           <%= f.input :date_of_birth, as: :date, input_html: { 
                   min: "#{Time.now.year - 80}-#{Time.now.month}-#{Time.now.day}", 
                   max: "#{Time.now.year - 14}-#{Time.now.month}-#{Time.now.day}",
+                  placeholder: "jj/mm/aaaa",
                 },
                 html5: true,
                 required: true,
+
                 hint: "Tu dois être majeur si tu veux vendre tes paires",
                 label: 'Date de naissance'
             %>
