@@ -25,7 +25,7 @@
                 label: 'Date de naissance'
             %>
           
-            <%= f.input :iban, label: "Remplir mon IBAN", placeholder: "FR1420041010050500013M02606" %>
+            <%= f.input :iban, label: "Remplir mon IBAN", placeholder: "FR1420041010050500013M02606", hint: "Pas d’inquiétude, nous avons seulement besoin de ton IBAN afin de vérifier ton profil et te transférer la somme de tes futures ventes." %>
             <div id="iban-error"></div>
 
           <%= f.input :password, label: "Mot de passe",
@@ -57,6 +57,11 @@
 
 </div>
 
+<style type="text/css">
+  abbr {
+    display: none;
+  }
+</style>
 
 <script type="text/javascript">
 document.addEventListener('turbolinks:load', () => {
