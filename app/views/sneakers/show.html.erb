@@ -43,7 +43,7 @@
     
   <div class="sneaker-show-infos">
     <h2 class="sneaker-show-infos-title"><%= @sneaker.sneaker_db.name %></h2>
-    <p><strong>Taille : </strong><%=  @sneaker.size %> FR</p> <%#= US (shoes_size[@sneaker.size] FR)%>
+    <p><strong>Taille : </strong><%=  @sneaker.size %> US</p> <%#= US (shoes_size[@sneaker.size] FR)%>
     <p><strong>Prix : </strong><%= humanized_money_with_symbol(@sneaker.price) %></p>
     <p><strong>Condition : </strong><%= @sneaker.condition %>/10</p>
     <p><strong>Box : </strong><%= @sneaker.box %></p>

@@ -5,11 +5,12 @@ class SubscribeToNewsletterService
     @user = user
     @gibbon = Gibbon::Request.new(api_key: ENV['MAILCHIMP_API_KEY'])
     @audience_id = ENV['MAILCHIMP_LIST_ID']
+    raise
   end
 
   def home_page_signup
     begin
-      @gibbon.lists(@audience_id).members.create(
+      @gibbon.lists("f457fd3813").members.create(
         body: {
           email_address: @user['email'],
           status: "subscribed"
@@ -25,7 +26,7 @@ class SubscribeToNewsletterService
   end
 
   def call
-    @gibbon.lists(@audience_id).members.create(
+    @gibbon.lists("f457fd3813").members.create(
       body: {
         email_address: @user.email,
         status: "subscribed",
