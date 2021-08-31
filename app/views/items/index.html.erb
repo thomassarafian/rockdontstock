@@ -58,6 +58,8 @@
           <% if sneaker.state == 0 %>
             <p><span class="font-weight-bold">ÉTAT : </span>Vérification des photos</p>
           <% elsif sneaker.state == -1  %>
+            <p><span class="font-weight-bold">ÉTAT : </span>Critères non conforme</p>
+          <% elsif sneaker.state == -2 %>
             <p><span class="font-weight-bold">ÉTAT : </span>Photos non conforme</p>
           <% elsif sneaker.state == 1  %>
             <p><span class="font-weight-bold">ÉTAT : </span>Mise en ligne</p>

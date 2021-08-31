@@ -31,10 +31,41 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     }])
     p variable.attributes['Messages']
     
-    
-
     render json: { 
       success: "L'annonce est en ligne et l'email a été envoyé au vendeur !"
+    }
+  end
+
+  def reject_announcement_bad_criteria
+    sneaker_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
+
+    @sneaker = Sneaker.find(sneaker_id)
+    @sneaker.update(state: -1)
+
+    variable = Mailjet::Send.create(messages: [{
+      'From'=> {
+        'Email'=> "elliot@rockdontstock.com",
+        'Name'=> "Rock Don't Stock"
+      },
+      'To'=> [
+        {
+          'Email'=> @sneaker.user.email,
+          'Name'=> @sneaker.user.first_name
+        }
+      ],
+      'TemplateID'=> 2961587,
+      'TemplateLanguage'=> true,
+      'Subject'=> "Erreur lors de la mise en ligne de ta paire 🧐",
+      'Variables'=> {
+        "prenom" => @sneaker.user.first_name,
+        "modele_paire" => @sneaker.sneaker_db.name,
+        "lien_faq" => "https://www.rockdontstock.com/faq"
+      }
+    }])
+    p variable.attributes['Messages']
+
+    render json: { 
+      success: "L'annonce est refusé pour mauvais critères et l'email a été envoyé au vendeur !"
     }
   end
 end

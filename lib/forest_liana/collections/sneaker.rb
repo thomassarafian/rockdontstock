@@ -5,6 +5,6 @@ class Forest::Sneaker
   
   action "Validate announcement"
 
-  # action "Reject announcement bad criteria"
+  action "Reject announcement bad criteria"
 
 end

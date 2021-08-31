@@ -1039,6 +1039,19 @@
         "load": false,
         "change": []
       }
+    }, {
+      "name": "Reject announcement bad criteria",
+      "type": "bulk",
+      "base_url": null,
+      "endpoint": "forest/actions/reject-announcement-bad-criteria",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
     }]
   }, {
     "name": "SneakerDb",

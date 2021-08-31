@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   
   namespace :forest do
     post '/actions/validate-announcement' => 'sneakers#validate_announcement'
+    post '/actions/reject-announcement-bad-criteria' => 'sneakers#reject_announcement_bad_criteria'
   end
 
   mount ForestLiana::Engine => '/forest'	
