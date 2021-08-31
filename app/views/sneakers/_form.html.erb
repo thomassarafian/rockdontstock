@@ -355,31 +355,37 @@
     photoPreview0.addEventListener('load', (event) => {
       let photoInput0 = document.querySelector('.photo-input0');
       photoInput0.style.backgroundImage = `url(${photoPreview0.src})`;
+      photoInput0.disabled = true;
       photoPreview++;
     })
     photoPreview1.addEventListener('load', (event) => {
       let photoInput1 = document.querySelector('.photo-input1');
       photoInput1.style.backgroundImage = `url(${photoPreview1.src})`;
+      photoInput1.disabled = true;
       photoPreview++;
     })
     photoPreview2.addEventListener('load', (event) => {
       let photoInput2 = document.querySelector('.photo-input2');
       photoInput2.style.backgroundImage = `url(${photoPreview2.src})`;
+      photoInput2.disabled = true;
       photoPreview++;
     })
     photoPreview3.addEventListener('load', (event) => {
       let photoInput3 = document.querySelector('.photo-input3');
       photoInput3.style.backgroundImage = `url(${photoPreview3.src})`;
+      photoInput3.disabled = true;
       photoPreview++;
     })
     photoPreview4.addEventListener('load', (event) => {
       let photoInput4 = document.querySelector('.photo-input4');
       photoInput4.style.backgroundImage = `url(${photoPreview4.src})`;
+      photoInput4.disabled = true;
       photoPreview++;
     })
     photoPreview5.addEventListener('load', (event) => {
       let photoInput5 = document.querySelector('.photo-input5');
       photoInput5.style.backgroundImage = `url(${photoPreview5.src})`;
+      photoInput5.disabled = true;
       photoPreview++;
       if (photoPreview == 6) {
         let sndNextBtn = document.querySelector('.snd-next-btn');
@@ -441,11 +447,13 @@
     photoPreview6.addEventListener('load', (event) => {
       let photoInput6 = document.querySelector('.photo-input6');
       photoInput6.style.backgroundImage = `url(${photoPreview6.src})`;
+      photoInput6.disabled = true;
       photoPreview++;
     })
     photoPreview7.addEventListener('load', (event) => {
       let photoInput7 = document.querySelector('.photo-input7');
       photoInput7.style.backgroundImage = `url(${photoPreview7.src})`;
+      photoInput7.disabled = true;
       photoPreview++;
     })
   })  
