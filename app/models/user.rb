@@ -165,13 +165,13 @@ class User < ApplicationRecord
       },
       'To'=> [
         {
-          'Email'=> "thomassarafian@gmail.com",
+          'Email'=> self.email,
           'Name'=> self.first_name
         }
       ],
       'TemplateID'=> 2961026,
       'TemplateLanguage'=> true,
-      'Subject'=> "Inscription validée ! ",
+      'Subject'=> "Inscription validée !",
       'Variables'=> {
         "prenom" => self.first_name,
         "compte_rockdontstock" => 'https://www.rockdontstock.com/me'
