@@ -21,7 +21,7 @@
 <div class="container home-rds-selection">
   <h2>Les dernières paires en ligne</h2>
   <div class="sneaker-cards">
-    <% Sneaker.where("state >= ?", 1).all.limit(8).each do |sneaker| %>
+    <% Sneaker.where("state >= ?", 1).all.limit(8).order("created_at DESC").each do |sneaker| %>
       <div class="sneaker-card">
         <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
           <%= cl_image_tag(sneaker.photos[0].key) %>
@@ -112,7 +112,7 @@
     <% end %>
   </div>  
 </div>
-<!-- <div class="link-home-page all_sneakers"><%= link_to "Tout voir", sneakers_path %></div> -->
+<div type="button" class="link-home-page all_sneakers">Tout voir</div>
 
 <div class="">
   <div class='article-legit-check'>
@@ -138,7 +138,7 @@
           <%= cl_image_tag(sneaker.photos[0].key) %>
         </div>
         <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
-        <div class="sneaker-price"><%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
+        <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
       </div>
       <div class="modal fade" id="exampleModal-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -191,7 +191,7 @@
                 </a>
               </div>
               <div class="modal-sneaker-infos">
-                <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification <br>
+                <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification<br>
                 <%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981", target: :_blank) %></p>
                 <div class='modal-sneaker-all'>
                   <div class="modal-sneaker-size-cond">
@@ -221,8 +221,8 @@
       </div>
     <% end %>
   </div>  
+  <div type="button" class="link-home-page all_sneakers">Tout voir</div>
 </div>
-<!-- <div class="link-home-page all_sneakers"><%= link_to "Tout voir", sneakers_path %></div> -->
 
 <div class="">
   <div class="newsletter-container">
@@ -359,4 +359,52 @@
     </a>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    // $('.glass_icon_phone').on('click', function() {
+    //   $('.toggler_icon_phone').hide();
+    //   $('.glass-search-form').show();
+    //   $('.magnify_glass_icon_phone').hide();
+    //   $('.real-nav').css('justify-content', 'center');
+    //   $('.dropdown-filter-items').hide();
+    // });
+
+    // $('.glass-search-form').show();
+    // $('.dropdown-filter-items').show();
+
+  $('.all_sneakers').on('click', function() {
+    if ($( window ).width() >= 1024) {
+        $('.glass_icon').hide();
+        $('.glass-search-form').show();
+    } else {
+        $('.toggler_icon_phone').hide();
+        $('.glass-search-form').show();
+        $('.magnify_glass_icon_phone').hide();
+        $('.real-nav').css('justify-content', 'center');
+        $('.dropdown-filter-items').hide();
+    }
+  });
+    
+    // if ($( window ).width() < 1024) {
+    //   $('.dropdown-filter').on('click', function() {
+    //     $('.dropdown-filter-items').slideToggle('fast');
+    //     $('.dropdown-filter-laptop').hide();
+    //   });
+    // } else {
+    //   $('.dropdown-filter').hide();
+    // }
+
+    $('.hide-search-arrow').on('click', function () {
+      $('.glass-search-form').hide();
+      $('toggler_icon, .glass_icon, #sell_button').show();
+    })
+
+    $('.phone-hide-search-arrow').on('click', function () {
+      $('.glass-search-form').hide();
+      $('.real-nav').css('justify-content', 'space-between');
+      $('img.toggler_icon_phone, .magnify_glass_icon_phone').show();
+    })
+  });
+</script>
 
