@@ -1052,19 +1052,6 @@
         "load": false,
         "change": []
       }
-    }, {
-      "name": "Reject announcement bad quality photos",
-      "type": "bulk",
-      "base_url": null,
-      "endpoint": "forest/actions/reject-announcement-bad-quality-photos",
-      "http_method": "POST",
-      "redirect": null,
-      "download": false,
-      "fields": [],
-      "hooks": {
-        "load": false,
-        "change": []
-      }
     }]
   }, {
     "name": "SneakerDb",
