@@ -56,11 +56,11 @@
       <%# end %>
     <%# end %>
 
-    <% if policy(@sneaker).edit? && @sneaker.state == 0 %>
-      <button type="button" class="btn btn-dark sneaker-show-btn">
-        <%= link_to "Modifier la paire", edit_sneaker_path(@sneaker), style: 'color: white;' %>
-      </button>
-    <% end %>
+    <%# if policy(@sneaker).edit? && @sneaker.state == 0 %>
+      <!-- <button type="button" class="btn btn-dark sneaker-show-btn"> -->
+        <%#= link_to "Modifier la paire", edit_sneaker_path(@sneaker), style: 'color: white;' %>
+      <!-- </button> -->
+    <%# end %>
 
     <% if policy(@sneaker).destroy? %>
       <button type="button" class="btn btn-danger sneaker-show-btn">

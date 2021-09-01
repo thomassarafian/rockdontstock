@@ -12,6 +12,7 @@ class Sneaker < ApplicationRecord
   validates :condition, presence: true
   validates :box, presence: true
 
+
   # validate :photos, if: :photos_limit_min
   monetize :price_cents
 

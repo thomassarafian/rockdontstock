@@ -9,13 +9,12 @@
   	<%= f.input :condition, prompt: "Condition", collection: [ ["5/10 et moins", 5], ["6/10", 6],["8/10", 8],["9/10",9],['10/10', 10] ], required: true, label: false,
       input_html: { class: "info-input-sneaker" },
       hint: "#{link_to "Tout savoir sur les conditions", faq_path, style:"color:#707981;", target: :_blank}".html_safe %>
-
-  	<%= f.input :box, prompt: "Box", collection: ["Og Box (Avec extras)", "Og Box (Sans extras)", "Boite de remplacement", "Pas de boite"], required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
+  	<%= f.input :box, prompt: "Box", collection: ["Og Box (Avec extras)", "Og Box (Sans extra)", "Boite de remplacement", "Pas de boite"], required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
 
   	<%= f.input :extras, required: true, placeholder: "Commentaires", label: false,
     input_html: { class: "info-input-sneaker" }, 
-    hint: "Transmets-nous ici les défauts de ta paire <br>ou toute information utile pour l'acheteur <br>(trous, traces, extra en moins...)".html_safe
- %>
+    hint: "Transmets-nous ici les défauts de ta paire <br>ou toute information utile pour l'acheteur <br>(trous, traces, extra en moins...)".html_safe %>
+    <%= f.error :extras, :id => "extras-sneaker-error" %>
 
 
     <%= f.input :price, required: true, placeholder: "Prix", label: false,
@@ -34,7 +33,7 @@
 
   <div class="photos-input">
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()",
+      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
       id: 'photo-input0',
       class: 'hidden upload-photo photo-input0',
       label: '📷 Ajoute une photo'%>
@@ -42,7 +41,7 @@
       <%= f.label :photos, "Intérieur" %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()",
+      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
       id: 'photo-input1',
       class: 'hidden upload-photo photo-input1',
       label: '📷 Ajoute une photo' %>
@@ -50,7 +49,7 @@
       <%= f.label :photos, "Extérieur"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()",
+      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
       id: 'photo-input2',
       class: 'hidden upload-photo photo-input2',
       label: '📷 Ajoute une photo' %>
@@ -58,7 +57,7 @@
       <%= f.label :photos, "Derrière"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()",
+      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
       id: 'photo-input3',
       class: 'hidden upload-photo photo-input3',
       label: '📷 Ajoute une photo' %>
@@ -66,7 +65,7 @@
       <%= f.label :photos, "Dessus"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()",
+      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
       id: 'photo-input4',
       class: 'hidden upload-photo photo-input4',
       label: '📷 Ajoute une photo' %>
@@ -74,7 +73,7 @@
       <%= f.label :photos, "Dessous"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()",
+      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
       id: 'photo-input5',
       class: 'hidden upload-photo photo-input5',
       label: '📷 Ajoute une photo' %>
@@ -82,7 +81,7 @@
       <%= f.label :photos, "Size tag"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()",
+      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
       id: 'photo-input6',
       class: 'hidden upload-photo photo-input6',
       label: '📷 Ajoute une photo' %>
@@ -90,7 +89,7 @@
       <%= f.label :photos, "Optionnel : Boite"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()",
+      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
       id: 'photo-input7',
       class: 'hidden upload-photo photo-input7',
       label: '📷 Ajoute une photo' %>
@@ -243,7 +242,7 @@
     margin-bottom: 0;
   }
   
-  #price-sneaker-error {
+  #price-sneaker-error, #extras-sneaker-error {
     width: 250px;
     visibility: hidden;
     color: #e74c3c;
@@ -300,7 +299,31 @@
 
 
 <script type="text/javascript">
+  // document.querySelectorAll('.form-control').forEach(item => {
+  //   item.addEventListener('input', event => {
+      
+  //     // if (item[0].value) {
+  //       // console.log('coool');
+  //     // }
+  //   })
+  // })
   
+  // function calculate() {
+  //   var allinputs = document.querySelectorAll('.form-control');
+  //   var myLength = allinputs.length;
+  //   console.log(myLength);
+  //   var input;
+
+  //   for (var i = 0; i < myLength; i++) {
+  //     console.log(input);
+  //     input = allinputs[i];
+  //     if (input.value) {
+  //       console.log('ok');
+  //         // input.style.backgroundColor = "lime";
+  //     }
+  //   }
+  // }
+  // calculate();
 </script>
 
 
@@ -311,10 +334,21 @@
   document.querySelector('.submit-new-sneaker').style.display = "none"
   document.querySelector('.summary-new-sneaker').style.display = "none"
 
+  function setErrorForExtras(message) {
+    const extrasSneakerError = document.querySelector('#extras-sneaker-error');
+    extrasSneakerError.style.visibility = "visible";
+    extrasSneakerError.innerHTML = message;
+      document.querySelector('#sneaker_extras').classList.add("is-invalid");
+  }
+
   document.getElementById('sneaker_price').addEventListener('input', (event) => {
     function checkInputs() {
       if (sneaker_price.value.match(/[^0-9,]/g)) {
         setErrorFor(sneaker_price, "<small>Le prix ne doit contenir que des chiffres et/ou une virgule. Ex: 199,99 ou 199</small>");
+        return -1;
+      }
+      else if (parseFloat(sneaker_price.value) > 240042 || parseFloat(sneaker_price.value) < 10)  {
+        setErrorFor(sneaker_price, "<small>Le prix ne peut pas être inférieur à 10€</small>");
         return -1;
       }
     }
@@ -322,7 +356,11 @@
       const priceSneakerError = document.querySelector('#price-sneaker-error');
       priceSneakerError.style.visibility = "visible";
       priceSneakerError.innerHTML = message;
-      document.querySelector('#sneaker_price').classList.add("is-invalid");
+      if (input == sneaker_extras) {
+        document.querySelector('#sneaker_extras').classList.add("is-invalid");
+      } else if (input == sneaker_price) {
+        document.querySelector('#sneaker_price').classList.add("is-invalid");
+      }
     }
     let photosInput = document.querySelector('.photos-input');
     let infoInput =  document.querySelector('.info-input');
@@ -334,7 +372,12 @@
       // document.querySelector('.total-price-for-seller').innerHTML = `<p>Box : ${sneaker_price.value}</p>`;
       nextBtn.style.display = "block";
       nextBtn.addEventListener('click', (event) => {
+        console.log(document.getElementById('sneaker_extras').value.length);
         if (checkInputs() == -1) {}
+        else if (document.getElementById('sneaker_extras').value.length > 15 ) {
+          console.log('ok!');
+          setErrorForExtras("<small>Tu ne peux pas dépasser 15 charactères</small>");
+        }
         else {
           photosInput.style.display = "flex";
           submitSneaker.style.display = "block";
@@ -406,7 +449,7 @@
           sndNextBtn.style.display = "none";
           document.querySelector('.submit-new-sneaker').style.display = "block"
           document.querySelector('.submit-new-sneaker>button').disabled = false;
-          document.querySelector('.search-sneaker-model-title').innerText = "Récapitulatif de la commande";
+          document.querySelector('.search-sneaker-model-title').innerText = "Récapitulatif de ton annonce";
           document.querySelector('.carousel-sneaker-photo0').innerHTML = `<img src="${photoPreview0.src}" class="sneaker-show-photos">`;
           document.querySelector('.carousel-sneaker-photo1').innerHTML = `<img src="${photoPreview1.src}" class="sneaker-show-photos">`;
           document.querySelector('.carousel-sneaker-photo2').innerHTML = `<img src="${photoPreview2.src}" class="sneaker-show-photos">`;
@@ -426,7 +469,6 @@
             carouselSneakerPhoto6.innerHTML = `<img src="${photoPreview6.src}" class="sneaker-show-photos">`;
             insertAfter(document.querySelector('.carousel-sneaker-photo5'), carouselSneakerPhoto6);
           }
-
           
           function insertAfter(referenceNode, newNode) {
             referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
@@ -470,4 +512,5 @@
     text-decoration: line-through;
   }
 </style>
+
 

@@ -11,7 +11,8 @@
 <div class="tab-content">
   <div class="purchases-pan tab-pane fade show active" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
     <% if !current_user.orders || current_user.orders.where(state: "Payé").count == 0 %>
-      <h2>Aucun achats en cours</h2>
+      <h2>Aucun achat en cours</h2>
+      <p style="text-align: center;">Les achats arrive prochainement (15/09/2021)</p>
     <% end %>
     <% if current_user.orders %>
       <% current_user.orders.where(state: "Payé").sort_by {|obj| obj.created_at }.reverse.each do |order| %>
@@ -25,7 +26,7 @@
           </div>
           <div class="purchases-infos">
             <p><span class="font-weight-bold">State : </span><%= order.state %></p>
-            <p>Achetée le <%= order.created_at.strftime("%d/%m/%Y à %H:%M") %></p>
+            <p>Achetée le <%= order.created_at.strftime("%d/%m/%Y") %></p>
             <p><span class="font-weight-bold">ÉTAT</span> : En cours d'envoi par le vendeur de colisino</p>
             <!-- <p><span class="font-weight-bold">RESULTAT : LEGIT</span></p> -->
           </div>
@@ -40,7 +41,7 @@
 
   <div class="sales-pan tab-pane fade" id="sales" role="tabpanel" aria-labelledby="sales-tab">
     <% if !current_user.sneakers[0] %>
-      <h2>Aucun ventes en cours</h2>
+      <h2>Aucune vente en cours</h2>
     <% end %>
     <% if current_user.sneakers[0] %>
       <% current_user.sneakers.sort_by {|obj| obj.created_at }.reverse.each do |sneaker| %>
@@ -54,7 +55,7 @@
           <p><span class="font-weight-bold"><%= sneaker.price %>€</span></p>
         </div>
         <div class="sales-infos">
-          <p>Mis en ligne le <%= sneaker.created_at.strftime("%d/%m/%Y à %H:%M") %></p>
+          <p>Mis en ligne le <%= sneaker.created_at.strftime("%d/%m/%Y") %></p>
           <% if sneaker.state == 0 %>
             <p><span class="font-weight-bold">ÉTAT : </span>Vérification des photos</p>
           <% elsif sneaker.state == -1  %>

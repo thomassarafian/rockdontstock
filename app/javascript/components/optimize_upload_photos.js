@@ -72,6 +72,24 @@ var dataURLToBlob = function(dataURL) {
         opti_photos.push(event.blob);
     }
   });
+  // if (document.querySelector('edit-sneaker-btn')) {
+  //   document.querySelector('.edit-sneaker-btn').addEventListener('click', (e) => {
+  //     var data = new FormData($("form[class*='edit_sneaker']")[0]);
+  //     console.log("On crée data !")
+  //     data.append('sneaker[size]', document.getElementById('sneaker_size').value);
+  //     data.append('sneaker[condition]', document.getElementById('sneaker_condition').value);
+  //     data.append('sneaker[box]', document.getElementById('sneaker_box').value);
+  //     data.append('sneaker[extras]', document.getElementById('sneaker_extras').value);
+  //     data.append('sneaker[price]', document.getElementById('sneaker_price').value);
+  //     opti_photos.forEach(elem => {
+  //       data.append('sneaker[photos][]', elem);
+  //     });
+  //     fetch(document.getElementById('new_sneaker').action, {
+  //       method: "POST",
+  //       body: data,
+  //     })
+  //   });
+  // }
   if (document.querySelector('.snd-next-btn')) {
     document.querySelector('.snd-next-btn').addEventListener('click', (e) => {
       var data = new FormData($("form[id*='newSneakerForm']")[0]);
