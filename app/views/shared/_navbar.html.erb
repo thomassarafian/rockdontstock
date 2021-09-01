@@ -182,12 +182,13 @@
               </a>
             </div>
             <div class="modal-sneaker-infos">
-              <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification</p>
-              <%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981", target: :_blank) %>
+              <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification<br>
+              <%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981", target: :_blank) %></p>
               <div class='modal-sneaker-all'>
                 <div class="modal-sneaker-size-cond">
                   <p>Taille : <strong><%=  sneaker.size %> US</strong></p> <%#= US (shoes_size[@sneaker.size] FR)%>
-                  <p>Condition : <strong><%= sneaker.condition %>/10</strong></p>
+                  <p>Condition : <strong><%= sneaker.condition %>/10</strong><br>
+                  <%= link_to("Tout savoir sur les conditions", faq_path, style:"color:#707981", target: :_blank) %></p>
                 </div>
                 <div class="modal-sneaker-box-extras">
                   <p>Box : <strong><%= sneaker.box %></strong></p>
