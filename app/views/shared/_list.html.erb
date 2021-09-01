@@ -8,7 +8,7 @@
           <%= cl_image_tag(sneaker.photos[0].key) %>
         </div>
         <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
-        <div class="sneaker-price"><%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
+        <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
       </div> 
       <% end %>
     </div>

@@ -27,7 +27,7 @@
           <%= cl_image_tag(sneaker.photos[0].key) %>
         </div>
         <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
-        <div class="sneaker-price"><%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
+        <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
       </div>
       <div class="modal fade" id="exampleModal-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
