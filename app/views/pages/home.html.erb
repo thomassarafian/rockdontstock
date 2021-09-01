@@ -84,8 +84,9 @@
                 <%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981", target: :_blank) %>
                 <div class='modal-sneaker-all'>
                   <div class="modal-sneaker-size-cond">
-                    <p>Taille : <strong><%=  sneaker.size %> US</strong></p> <%#= US (shoes_size[@sneaker.size] FR)%>
+                    <p>Taille : <strong><%=  sneaker.size %> US</strong></p>
                     <p>Condition : <strong><%= sneaker.condition %>/10</strong></p>
+                    <%= link_to("Tout savoir sur les conditions", faq_path, style:"color:#707981", target: :_blank) %>
                   </div>
                   <div class="modal-sneaker-box-extras">
                     <p>Box : <strong><%= sneaker.box %></strong></p>

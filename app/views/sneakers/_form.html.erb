@@ -10,7 +10,7 @@
       input_html: { class: "info-input-sneaker" },
       hint: "#{link_to "Tout savoir sur les conditions", faq_path, style:"color:#707981;", target: :_blank}".html_safe %>
 
-  	<%= f.input :box, prompt: "Box", collection: ["Og Box", "Boite de remplacement", "Pas de boite"], required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
+  	<%= f.input :box, prompt: "Box", collection: ["Og Box (Avec extras)", "Og Box (Sans extras)", "Boite de remplacement", "Pas de boite"], required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
 
   	<%= f.input :extras, required: true, placeholder: "Commentaires", label: false,
     input_html: { class: "info-input-sneaker" }, 

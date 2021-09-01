@@ -15,6 +15,7 @@ class Users::SessionsController < Devise::SessionsController
       @sneaker_session = Sneaker.where(id: session[:sneaker_session_id])
       @sneaker_session[0].update(user_id: current_user.id)
       @sneaker_session[0].save
+      
       variable = Mailjet::Send.create(messages: [{
         'From'=> {
           'Email'=> "elliot@rockdontstock.com",
@@ -34,9 +35,11 @@ class Users::SessionsController < Devise::SessionsController
           "modele_paire" => current_user.sneakers.last.sneaker_db.name,
         }
       }])
+      p variable
     end
-    session.delete(:sneaker_session_id)
-
+    unless session[:sneaker_session_id].nil?
+      session.delete(:sneaker_session_id)
+    end
   end
 
   # DELETE /resource/sign_out
