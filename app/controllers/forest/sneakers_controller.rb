@@ -93,6 +93,7 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
         "prenom" => @sneaker.user.first_name,
         "modele_paire" => @sneaker.sneaker_db.name,
         "lien_annonce" => "https://www.rockdontstock.com/sneakers/#{@sneaker.id}",
+        "lien_nouvelle_annonce" => "https://www.rockdontstock.com/sneakers/new",
         "lien_faq" => "https://www.rockdontstock.com/faq"
       }
     }])
