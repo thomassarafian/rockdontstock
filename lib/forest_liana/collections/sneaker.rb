@@ -6,5 +6,7 @@ class Forest::Sneaker
   action "Validate announcement"
 
   action "Reject announcement bad criteria"
+  action "Reject announcement bad quality photos"
+
 
 end

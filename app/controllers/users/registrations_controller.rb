@@ -38,6 +38,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
           }
         }])
       end
+      session.delete(:sneaker_session_id)
     end
   end
 

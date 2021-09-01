@@ -35,6 +35,7 @@ class Users::SessionsController < Devise::SessionsController
         }
       }])
     end
+    session.delete(:sneaker_session_id)
 
   end
 
