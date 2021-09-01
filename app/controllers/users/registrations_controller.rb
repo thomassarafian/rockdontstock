@@ -14,10 +14,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     # raise
     if @user.save
+      # raise
       if session[:sneaker_session_id]
+        # raise
         @sneaker_session = Sneaker.where(id: session[:sneaker_session_id])
         @sneaker_session[0].update(user_id: @user.id)
         @sneaker_session[0].save
+        # raise
         variable = Mailjet::Send.create(messages: [{
           'From'=> {
             'Email'=> "elliot@rockdontstock.com",
@@ -38,10 +41,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
           }
         }])
       end
+    end
       unless session[:sneaker_session_id].nil?
         session.delete(:sneaker_session_id)
       end
-    end
   end
 
   # GET /resource/edit
