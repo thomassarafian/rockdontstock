@@ -4,13 +4,18 @@
   source: 'acct_1JS1p42QOrqxO7EN',
 }) %>
 
-<div class='message-pub'>
- <%= link_to("Gagne des modèles exclusifs en mettant une paire en ligne + frais d’authentification offerts sur ta première vente !", new_sneaker_path) %>
-</div>
+<%= link_to(new_sneaker_path, style:"text-decoration: none; ") do  %>
+  <div class='message-pub'>
+    La plateforme est ouverte uniquement pour les vendeurs jusqu’au 15/09/2021<br>
+    Gagne des modèles exclusifs en mettant une paire en ligne + frais d’authentification offerts sur ta première vente !
+  </div>
+<% end %>
 
 <div class="banner">
-  <%= image_tag("banner/banner.jpg", class: 'desktop-banner-img') %>
-  <%= image_tag("banner/home_page_banner_phone.jpg", class: 'phone-banner-img') %>
+  <%= link_to(new_sneaker_path) do %>
+    <%= image_tag("banner/banner.jpg", class: 'desktop-banner-img') %>
+    <%= image_tag("banner/home_page_banner_phone.jpg", class: 'phone-banner-img') %>
+  <% end %>
 </div>
 
 <div class="container home-rds-selection">
@@ -76,6 +81,7 @@
               </div>
               <div class="modal-sneaker-infos">
                 <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification</p>
+                <%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981", target: :_blank) %>
                 <div class='modal-sneaker-all'>
                   <div class="modal-sneaker-size-cond">
                     <p>Taille : <strong><%=  sneaker.size %> US</strong></p> <%#= US (shoes_size[@sneaker.size] FR)%>
@@ -185,6 +191,7 @@
               </div>
               <div class="modal-sneaker-infos">
                 <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification</p>
+                <%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981", target: :_blank) %>
                 <div class='modal-sneaker-all'>
                   <div class="modal-sneaker-size-cond">
                     <p>Taille : <strong><%=  sneaker.size %> US</strong></p> <%#= US (shoes_size[@sneaker.size] FR)%>

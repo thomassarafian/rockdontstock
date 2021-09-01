@@ -84,7 +84,7 @@ class SneakersController < ApplicationController
             'Subject'=> "Ta paire est en cours de validation ⌛",
             'Variables'=> {
               "prenom" => current_user.first_name,
-              "modele_paire" => current_user.sneakers.last.sneaker_db.name,
+              "modele_paire" => current_user.sneakers.last.sneaker_db.name
             }
           }])
     		# end

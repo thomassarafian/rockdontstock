@@ -63,6 +63,7 @@
           </div>
           <div class="modal-sneaker-infos">
             <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification</p>
+            <%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981", target: :_blank) %>
             <div class='modal-sneaker-all'>
               <div class="modal-sneaker-size-cond">
                 <p>Taille : <strong><%=  sneaker.size %> US</strong></p> <%#= US (shoes_size[@sneaker.size] FR)%>
