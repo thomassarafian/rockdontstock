@@ -11,8 +11,10 @@
 <div class="tab-content">
   <div class="purchases-pan tab-pane fade show active" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
     <% if !current_user.orders || current_user.orders.where(state: "Payé").count == 0 %>
-      <h2>Aucun achat en cours</h2>
-      <p style="text-align: center;">Les achats arrive prochainement (15/09/2021)</p>
+      <div style="text-align: center;margin-top: 30px;">
+        <h2>Aucun achat en cours</h2>
+        <p style="text-align: center;">Les achats arrive prochainement (15/09/2021)</p>
+      </div>
     <% end %>
     <% if current_user.orders %>
       <% current_user.orders.where(state: "Payé").sort_by {|obj| obj.created_at }.reverse.each do |order| %>
