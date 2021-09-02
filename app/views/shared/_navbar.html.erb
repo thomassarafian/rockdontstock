@@ -6,18 +6,18 @@
       <%= image_tag("logo.svg", style: 'height: 35px;', class: 'icon') %>
     <% end %>
     <div class="icons">
-      <div class="glass_icon">
+      <div class="glass_icon" style="cursor: pointer;">
         <p style="margin:0;">Recherche ta paire</p>
         <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %>
       </div>
       <%= link_to('<button type="button" id="sell_button" class="btn btn-dark">Vendre</button>'.html_safe, 
       new_sneaker_path) %>
-      <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon navbarSideButton' %>
+      <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon navbarSideButton', style: 'cursor: pointer;' %>
     </div>
   </div>
   
   <div class="real-nav">
-    <%= image_tag "navbar/toggler_icon.svg", style: 'height: 40px;', class: 'toggler_icon_phone navbarSideButton' %>  
+    <%= image_tag "navbar/toggler_icon.svg", style: 'height: 40px; cursor: pointer;', class: 'toggler_icon_phone navbarSideButton' %>  
     
     <%= link_to "/", class: "navbar-brand-phone" do %>
       <%= image_tag("logo.svg", style: 'width: 60px;', class: 'icon_phone') %>
@@ -41,13 +41,17 @@
     <a class="side-link" href="/sneakers/new">
       <li class="navbar-side-item side-link">Vendre</li>
     </a>
-    
-    <%#= link_to(sneakers_path, class: "side-link") do %>
-      <!-- <li class="navbar-side-item side-link">Tout voir</li> -->
-    <%# end %>
+
+    <div style="margin-top: 20px; cursor: pointer" id="navbar-side-see-all">
+      <li  class="navbar-side-item side-link">Tout voir</li>
+    </div>
 
     <%= link_to(new_contact_path, class: "side-link") do %>
       <li class="navbar-side-item side-link">Nous contacter</li>
+    <% end %>
+
+    <%= link_to(faq_path, class: "side-link") do %>
+      <li class="navbar-side-item side-link">FAQ</li>
     <% end %>
 
     <div class="navbar-sign">
@@ -69,8 +73,8 @@
   <div data-controller="refresh-list" class="glass-search-form">
     <%= form_with url: root_path, method: :get, html: { class: 'glass-search-form-input', data: { refresh_list_target: 'form' } } do |f| %>
       <div class="hide-search-form">
-        <%= image_tag("arrow_back.svg", class: "phone-hide-search-arrow") %>
-        <%= image_tag("arrow_back.svg", class: "hide-search-arrow") %>
+        <%= image_tag("arrow_back.svg", class: "phone-hide-search-arrow", style: 'cursor: pointer;') %>
+        <%= image_tag("arrow_back.svg", class: "hide-search-arrow", style: 'cursor: pointer;') %>
       </div>
       <div class="home-glass-search-form">
         <%= f.text_field  :query,
@@ -230,6 +234,21 @@
       $('.overlay').hide();
     });
 
+
+    $('#navbar-side-see-all').on('click', function() {
+      $('#navbarSide').removeClass('reveal');
+      $('.overlay').hide();
+      if ($( window ).width() >= 1024) {
+        $('.glass_icon').hide();
+        $('.glass-search-form').show();
+      } else {
+        $('.toggler_icon_phone').hide();
+        $('.glass-search-form').show();
+        $('.magnify_glass_icon_phone').hide();
+        $('.real-nav').css('justify-content', 'center');
+        $('.dropdown-filter-items').hide();
+      }
+    });
 
     $('.glass_icon_phone').on('click', function() {
       $('.toggler_icon_phone').hide();
