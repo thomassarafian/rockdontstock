@@ -107,7 +107,7 @@ class SneakersController < ApplicationController
 	def destroy
 		@sneaker.photos.purge
     @sneaker.destroy
-		redirect_to user_path
+		redirect_to user_items_path
 	end
 
 	private
