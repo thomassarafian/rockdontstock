@@ -60,7 +60,6 @@ gem 'money-rails' #managing money display easily
 
 gem "httparty"
 
-
 gem 'mail_form' #page contact
 
 gem 'pg_search', '~> 2.3.0' #search

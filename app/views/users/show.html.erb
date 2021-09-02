@@ -7,8 +7,12 @@
 			</div>
 			<div class="header-infos">
 				<p><%= full_name %></p>
-				<p> <%= current_user.orders.where(state: "Payé").count %> achats</p>
-				<p> <%= current_user.sneakers.count %> ventes</p>
+				<p><%= current_user.orders.where(state: "Payé").count %> achat</p>
+        <% if current_user.sneakers.count > 1 %>
+				  <p><%= current_user.sneakers.count %> ventes</p>
+        <% elsif current_user.sneakers.count <= 1 %>
+          <p><%= current_user.sneakers.count %> vente</p>
+        <% end %>
 			</div>
 		</div>
 			<div class="basic-infos">

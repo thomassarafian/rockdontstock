@@ -1,7 +1,7 @@
 class SneakerDbsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @pagy, @sneaker_dbs = pagy(policy_scope(SneakerDb).order(release_date: :desc))
+    @pagy, @sneaker_dbs = pagy(policy_scope(SneakerDb).order(:name))
 
     if params[:query].present?
       @sneaker_dbs = @sneaker_dbs.search_by_by_name(params[:query])
