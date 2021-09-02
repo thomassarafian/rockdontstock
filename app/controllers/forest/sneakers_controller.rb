@@ -100,7 +100,7 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     p variable.attributes['Messages']
 
     render json: { 
-      success: "L'annonce est refusé pour mauvais critères et l'email a été envoyé au vendeur !"
+      success: "L'annonce est refusé pour mauvais angles et l'email a été envoyé au vendeur !"
     }
   end
 end
