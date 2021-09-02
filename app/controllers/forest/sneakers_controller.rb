@@ -69,7 +69,7 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     }
   end
   
-  def reject_announcement_bad_quality_img
+  def reject_announcement_bad_angles
     sneaker_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
 
     @sneaker = Sneaker.find(sneaker_id)

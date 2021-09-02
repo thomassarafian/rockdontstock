@@ -1053,10 +1053,10 @@
         "change": []
       }
     }, {
-      "name": "Reject announcement bad quality img",
+      "name": "Reject announcement bad angles",
       "type": "bulk",
       "base_url": null,
-      "endpoint": "forest/actions/reject-announcement-bad-quality-img",
+      "endpoint": "forest/actions/reject-announcement-bad-angles",
       "http_method": "POST",
       "redirect": null,
       "download": false,
