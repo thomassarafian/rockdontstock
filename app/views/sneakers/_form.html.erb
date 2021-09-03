@@ -38,55 +38,61 @@
   <div class="photos-input">
     <p style="text-align:center">Il faut absolument que tu respecte l’angle et le sens des photos que nous te demandons ci-dessous. Dans le cas contraire, nous serons contraints d’annuler la mise en ligne de ta paire…</p>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
+      <%= f.file_field :photos, as: :file, accept: "image/*",
       id: 'photo-input0',
       class: 'hidden upload-photo photo-input0',
       label: '📷 Ajoute une photo'%>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview0" %>
       <%= f.label :photos, "Intérieur" %>
+      <%= f.error :photos, :id => "sneaker_photo0_error" %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
+      <%= f.file_field :photos, as: :file, accept: "image/*",
       id: 'photo-input1',
       class: 'hidden upload-photo photo-input1',
       label: '📷 Ajoute une photo' %>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview1" %>
       <%= f.label :photos, "Extérieur"  %>
+      <%= f.error :photos, :id => "sneaker_photo1_error" %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
+      <%= f.file_field :photos, as: :file, accept: "image/*",
       id: 'photo-input2',
       class: 'hidden upload-photo photo-input2',
       label: '📷 Ajoute une photo' %>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview2" %>
       <%= f.label :photos, "Derrière"  %>
+      <%= f.error :photos, :id => "sneaker_photo2_error" %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
+      <%= f.file_field :photos, as: :file, accept: "image/*",
       id: 'photo-input3',
       class: 'hidden upload-photo photo-input3',
       label: '📷 Ajoute une photo' %>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview3" %>
       <%= f.label :photos, "Dessus"  %>
+      <%= f.error :photos, :id => "sneaker_photo3_error" %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
+      <%= f.file_field :photos, as: :file, accept: "image/*",
       id: 'photo-input4',
       class: 'hidden upload-photo photo-input4',
       label: '📷 Ajoute une photo' %>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview4" %>
       <%= f.label :photos, "Dessous"  %>
+      <%= f.error :photos, :id => "sneaker_photo4_error" %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
+      <%= f.file_field :photos, as: :file, accept: "image/*",
       id: 'photo-input5',
       class: 'hidden upload-photo photo-input5',
       label: '📷 Ajoute une photo' %>
       <%= image_tag "", width: 0, class: "hidden", id: "photo-preview5" %>
       <%= f.label :photos, "Size tag"  %>
+      <%= f.error :photos, :id => "sneaker_photo5_error" %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
+      <%= f.file_field :photos, as: :file, accept: "image/*",
       id: 'photo-input6',
       class: 'hidden upload-photo photo-input6',
       label: '📷 Ajoute une photo' %>
@@ -94,7 +100,7 @@
       <%= f.label :photos, "Optionnel : Boite"  %>
     </div>
     <div class='sneaker-photo-input'>
-      <%= f.file_field :photos, as: :file,  onchange:"uploadPhotos()", accept: "image/*",
+      <%= f.file_field :photos, as: :file, accept: "image/*",
       id: 'photo-input7',
       class: 'hidden upload-photo photo-input7',
       label: '📷 Ajoute une photo' %>
@@ -103,9 +109,8 @@
     </div>
   </div>
   <div class="snd-next-btn">
-    <button type="button" class="btn btn-dark">Suivant</button>
+    <button type="button" class="btn btn-dark" >Suivant</button>
   </div>
-
 
 
 
@@ -254,6 +259,9 @@
     visibility: hidden;
     color: #e74c3c;
   }
+  #sneaker_photo0_error, #sneaker_photo1_error, #sneaker_photo2_error, #sneaker_photo3_error, #sneaker_photo4_error, #sneaker_photo5_error{
+    color: #e74c3c; 
+  }
   #sneaker_price_error {
     margin-top: 0px;
   }
@@ -311,212 +319,6 @@
 </style>
 
 
-
-
-
-<script type="text/javascript">
-  // document.querySelector('.photos-input').style.display = "none";
-  // document.querySelector('.snd-next-btn').style.display = "none";
-  document.querySelector('.submit-new-sneaker').style.display = "none"
-  document.querySelector('.summary-new-sneaker').style.display = "none"
-  const sneakerSize = document.getElementById('sneaker_size');
-  const sneakerCondition = document.getElementById('sneaker_condition');
-  const sneakerBox = document.getElementById('sneaker_box');
-  const sneakerExtras = document.getElementById('sneaker_extras');
-  const sneakerPrice = document.getElementById('sneaker_price');
-
-  function setErrorForS(input, message) {
-    const formControl = input;
-    formControl.classList.add("is-invalid");
-    const inputError = document.querySelector(`#${input.id}_error`);
-    inputError.style.visibility = "visible";
-    inputError.innerHTML = `<small>${message}</small>`;
-  }
-  function setSuccessFor(input) {
-    const formControl = input;
-    formControl.classList.remove("is-invalid");
-    formControl.classList.add("is-valid");
-    const inputError = document.querySelector(`#${input.id}_error`);
-    input.parentElement.style.margin = "0px";
-    inputError.style.visibility = "hidden";
-  }
-  function newSneakerCheckInputs() {
-    const sneakerSizeValue = sneakerSize.value;
-    const sneakerConditionValue = sneakerCondition.value;
-    const sneakerBoxValue = sneakerBox.value;
-    const sneakerExtrasValue = sneakerExtras.value;
-    const sneakerPriceValue = sneakerPrice.value;
-    if (sneakerSizeValue === '') {
-      setErrorForS(sneakerSize, "Indique la taille de ta paire");
-    } else {
-      setSuccessFor(sneakerSize);
-    }
-    if (sneakerConditionValue === '') {
-      setErrorForS(sneakerCondition, "Mets une note / 10 sur la condition de ta paire");
-    } else {
-      setSuccessFor(sneakerCondition);
-    }
-    if (sneakerBoxValue === '') {
-      setErrorForS(sneakerBox, "Indique quel box tu as");
-    } else {
-      setSuccessFor(sneakerBox);
-    }
-    if (sneakerExtrasValue.length > 20) {
-      setErrorForS(sneakerExtras, "Ne dépasse pas 20 charactères");
-    } else {
-      setSuccessFor(sneakerExtras);
-    }
-    console.log(sneakerPriceValue)
-    if (sneakerPriceValue === '')  {
-      setErrorForS(sneakerPrice, "Indique le prix auquel tu veux vendre ta paire");
-    } else if (sneakerPriceValue.match(/[^0-9,]/g)) {
-      setErrorForS(sneakerPrice, "Le prix ne doit contenir que des chiffres et/ou une virgule. Ex: 199,99 ou 199");
-    } else if (parseFloat(sneakerPriceValue) > 240042 || parseFloat(sneakerPriceValue) < 10)  {
-      setErrorForS(sneakerPrice, "Le prix ne peux pas être inférieur à 10€");
-    } else {
-      setSuccessFor(sneakerPrice);
-    }
-  }
-  document.getElementById('nextBtn').addEventListener('click', (event) => {
-    event.preventDefault();
-    newSneakerCheckInputs();  
-    let photosInput = document.querySelector('.photos-input');
-    let infoInput =  document.querySelector('.info-input');
-    let submitSneaker = document.querySelector('.submit-new-sneaker');
-    let nextBtn = document.querySelector('.next-btn');    
-    if (sneaker_size.value && sneaker_price.value && sneaker_condition.value && sneaker_box.value) {
-      // document.querySelector('.total-price-for-seller').innerHTML = `<p>Box : ${sneaker_price.value}</p>`;
-      nextBtn.style.display = "block";
-      nextBtn.addEventListener('click', (event) => {
-        document.querySelector('.snd-next-btn').style.display = "block";
-        photosInput.style.display = "flex";
-        submitSneaker.style.display = "block";
-        infoInput.style.display = "none";
-        nextBtn.style.display = "none";
-        document.querySelector(".search-sneaker-model-title").scrollIntoView();
-      })
-    } 
-  });
-
-  document.querySelector('.next-btn').addEventListener('click', (event) => {
-    let photoPreview0 = document.getElementById('photo-preview0');
-    let photoPreview1 = document.getElementById('photo-preview1');
-    let photoPreview2 = document.getElementById('photo-preview2');
-    let photoPreview3 = document.getElementById('photo-preview3');
-    let photoPreview4 = document.getElementById('photo-preview4');
-    let photoPreview5 = document.getElementById('photo-preview5');
-    let photoPreview6 = document.getElementById('photo-preview6');
-    let photoPreview7 = document.getElementById('photo-preview7');
-    let photoPreview = 0;
-
-    photoPreview0.addEventListener('load', (event) => {
-      let photoInput0 = document.querySelector('.photo-input0');
-      photoInput0.style.backgroundImage = `url(${photoPreview0.src})`;
-      photoInput0.disabled = true;
-      photoPreview++;
-    })
-    photoPreview1.addEventListener('load', (event) => {
-      let photoInput1 = document.querySelector('.photo-input1');
-      photoInput1.style.backgroundImage = `url(${photoPreview1.src})`;
-      photoInput1.disabled = true;
-      photoPreview++;
-    })
-    photoPreview2.addEventListener('load', (event) => {
-      let photoInput2 = document.querySelector('.photo-input2');
-      photoInput2.style.backgroundImage = `url(${photoPreview2.src})`;
-      photoInput2.disabled = true;
-      photoPreview++;
-    })
-    photoPreview3.addEventListener('load', (event) => {
-      let photoInput3 = document.querySelector('.photo-input3');
-      photoInput3.style.backgroundImage = `url(${photoPreview3.src})`;
-      photoInput3.disabled = true;
-      photoPreview++;
-    })
-    photoPreview4.addEventListener('load', (event) => {
-      let photoInput4 = document.querySelector('.photo-input4');
-      photoInput4.style.backgroundImage = `url(${photoPreview4.src})`;
-      photoInput4.disabled = true;
-      photoPreview++;
-    })
-    photoPreview5.addEventListener('load', (event) => {
-      let photoInput5 = document.querySelector('.photo-input5');
-      photoInput5.style.backgroundImage = `url(${photoPreview5.src})`;
-      photoInput5.disabled = true;
-      photoPreview++;
-      if (photoPreview == 6) {
-        let sndNextBtn = document.querySelector('.snd-next-btn');
-        sndNextBtn.style.display = "block";
-        sndNextBtn.addEventListener('click', (event) => {
-          
-          document.querySelector(".search-sneaker-model-title").scrollIntoView();
-          let photosInput = document.querySelector('.photos-input');
-          let summaryNewSneaker = document.querySelector('.summary-new-sneaker');
-          photosInput.style.display = "none";
-          if (window.innerWidth >= 768) {
-            summaryNewSneaker.style.display = "grid";
-          } else {
-            summaryNewSneaker.style.display = "block";
-          }
-          sndNextBtn.style.display = "none";
-          document.querySelector('.submit-new-sneaker').style.display = "block"
-          document.querySelector('.submit-new-sneaker>button').disabled = false;
-          document.querySelector('.search-sneaker-model-title').innerText = "Récapitulatif de ton annonce";
-          document.querySelector('.carousel-sneaker-photo0').innerHTML = `<img src="${photoPreview0.src}" class="sneaker-show-photos">`;
-          document.querySelector('.carousel-sneaker-photo1').innerHTML = `<img src="${photoPreview1.src}" class="sneaker-show-photos">`;
-          document.querySelector('.carousel-sneaker-photo2').innerHTML = `<img src="${photoPreview2.src}" class="sneaker-show-photos">`;
-          document.querySelector('.carousel-sneaker-photo3').innerHTML = `<img src="${photoPreview3.src}" class="sneaker-show-photos">`;
-          document.querySelector('.carousel-sneaker-photo4').innerHTML = `<img src="${photoPreview4.src}" class="sneaker-show-photos">`;
-          document.querySelector('.carousel-sneaker-photo5').innerHTML = `<img src="${photoPreview5.src}" class="sneaker-show-photos">`;
-          
-          if (document.querySelector('.photo-input7').style.backgroundImage != "") {
-            let carouselSneakerPhoto7 = document.createElement("div");
-            carouselSneakerPhoto7.classList = "carousel-item carousel-sneaker-photo7"
-            carouselSneakerPhoto7.innerHTML = `<img src="${photoPreview7.src}" class="sneaker-show-photos">`;
-            insertAfter(document.querySelector('.carousel-sneaker-photo5'), carouselSneakerPhoto7);
-          }
-          if (document.querySelector('.photo-input6').style.backgroundImage != "") {
-            let carouselSneakerPhoto6 = document.createElement("div");
-            carouselSneakerPhoto6.classList = "carousel-item carousel-sneaker-photo6"
-            carouselSneakerPhoto6.innerHTML = `<img src="${photoPreview6.src}" class="sneaker-show-photos">`;
-            insertAfter(document.querySelector('.carousel-sneaker-photo5'), carouselSneakerPhoto6);
-          }
-          
-          function insertAfter(referenceNode, newNode) {
-            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-          }          
-
-          document.querySelector('.summary-size').innerHTML = `<p>Taille : ${sneaker_size.value}</p>`;
-          document.querySelector('.summary-cond').innerHTML = `<p>Condition : ${sneaker_condition.value} / 10</p>`;
-          document.querySelector('.summary-extras').innerHTML = `<p>Description : ${sneaker_extras.value}</p>`;
-          document.querySelector('.summary-box').innerHTML = `<p>Box : ${sneaker_box.value}</p>`;
-          document.querySelector('.summary-price-seller').innerHTML = `<p class="summary-price-sneaker">Prix demandé : 
-          <span id="summary-price-seller">${sneaker_price.value}€</span></p>`;
-          let summaryPriceCheck = ((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2).toFixed(2);
-          document.querySelector('.summary-price-check').innerHTML = `<p class="summary-price-sneaker">Frais d’authentification :
-          <span id="summary-price-check">${summaryPriceCheck}€</span></p>`;
-          let summaryPriceTotal = parseFloat( 
-            // ((parseFloat(sneaker_price.value.replace(/,/g, ".")) *0.12)/2) + 
-            parseFloat(sneaker_price.value.replace(/,/g, ".") ) - 4.99 ).toFixed(2);
-          document.querySelector('.summary-price-total').innerHTML = `<strong><p class="summary-price-sneaker">TOTAL : 
-          <span id="summary-price-total">${summaryPriceTotal}€</span></p></strong>`
-        });
-      }
-    })
-    photoPreview6.addEventListener('load', (event) => {
-      let photoInput6 = document.querySelector('.photo-input6');
-      photoInput6.style.backgroundImage = `url(${photoPreview6.src})`;
-      photoInput6.disabled = true;
-      photoPreview++;
-    })
-    photoPreview7.addEventListener('load', (event) => {
-      let photoInput7 = document.querySelector('.photo-input7');
-      photoInput7.style.backgroundImage = `url(${photoPreview7.src})`;
-      photoInput7.disabled = true;
-      photoPreview++;
-    })
-  })  
-</script>
 
 
 <style type="text/css">

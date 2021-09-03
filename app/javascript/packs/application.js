@@ -27,7 +27,8 @@ import { pointPicker } from "components/point_picker.js"
 import { uploadIds } from "components/upload_ids.js"
 import { ibanValidator } from "components/iban_validator.js"
 // import { editSneakerPhotos } from "components/edit_sneaker_photos.js"
-import { optimizeUploadPhotos } from "components/optimize_upload_photos.js"
+import { sneakerNew } from "components/sneaker_new.js"
+
 
 document.addEventListener('turbolinks:load', () => {
   pointPicker();
@@ -35,7 +36,8 @@ document.addEventListener('turbolinks:load', () => {
   uploadIds();
   ibanValidator();
   // editSneakerPhotos();
-  optimizeUploadPhotos()
+  sneakerNew();
+  // optimizeUploadPhotos()
 });
 
 
