@@ -12,7 +12,7 @@
       hint: "#{link_to "Tout savoir sur les conditions", faq_path, style:"color:#707981;", target: :_blank}".html_safe %>
     <%= f.error :condition, :id => "sneaker_condition_error" %>
   	
-    <%= f.input :box, prompt: "Box", collection: ["Og Box (Avec extras)", "Og Box (Sans extra)", "Boite de remplacement", "Pas de boite"], required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
+    <%= f.input :box, prompt: "Type de Box", collection: ["Og Box (Avec extras)", "Og Box (Sans extra)", "Boite de remplacement", "Pas de boite"], required: true, label: false, input_html: { class: "info-input-sneaker" }  %>
     <%= f.error :box, :id => "sneaker_box_error" %>
 
   	<%= f.input :extras, required: true, placeholder: "Commentaires", label: false,
