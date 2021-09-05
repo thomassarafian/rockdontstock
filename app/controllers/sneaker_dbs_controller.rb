@@ -1,5 +1,5 @@
 class SneakerDbsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :create]
   def index
     @pagy, @sneaker_dbs = pagy(policy_scope(SneakerDb).order(:name))
 
@@ -13,6 +13,18 @@ class SneakerDbsController < ApplicationController
     end
   end
 
+  def create
+    @sneaker_db = SneakerDb.create(name: params['add_sneaker_db'], img_url: "/assets/oeil-rds.png")
+    # if @sneaker_db.save
+    # else
+    #   if @sneaker_db.errors.any?
+    #     session[:sneaker_db_errors] = @sneaker_db.errors
+    #   end
+    # end
+
+    authorize @sneaker_db
+  end
+  
   # def show
   #   @sneaker_db = SneakerDb.find(params[:id])
   #   authorize @sneaker_db

@@ -14,6 +14,8 @@ class SneakersController < ApplicationController
 	def new
     if params['sneaker_db_id'].present?
       @sneaker_db = SneakerDb.find(params['sneaker_db_id'])
+    elsif params['add_sneaker_db_id'].present?
+      @sneaker_db = SneakerDb.create(name: params['add_sneaker_db_id'])
     end
     # raise
     # session[:sneaker_db_id] = params['sneaker_db_id'] 
@@ -22,8 +24,11 @@ class SneakersController < ApplicationController
 	end
 	
 	def create
+    raise
     if params['sneaker_db_id'].present?
       @sneaker_db = SneakerDb.find(params['sneaker_db_id'])
+    # elsif params['add_sneaker_db_id'].present?
+      # @sneaker_db = SneakerDb.create(params['add_sneaker_db_id']);
     end
     if !params['button-new-sneaker'].present?
       if current_user == nil

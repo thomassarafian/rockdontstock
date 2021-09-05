@@ -1,5 +1,6 @@
 class SneakerDb < ApplicationRecord
   has_many :sneakers
+  validates :name, uniqueness: true
 
   include PgSearch::Model
   pg_search_scope :search_by_by_name,

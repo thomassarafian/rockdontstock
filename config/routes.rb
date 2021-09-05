@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 	
   resources :sneakers, only: [:index, :new, :create, :edit, :update, :show, :destroy]
 
-  resources :sneaker_dbs, only: [:index] do
+  resources :sneaker_dbs, only: [:index, :create] do
     resources :sneakers, only: [:new, :create]
   end
 

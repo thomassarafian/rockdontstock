@@ -3,8 +3,10 @@
     <div data-controller="refresh-list">
       <div class="search-models">
         <h1 class="search-sneaker-model-title">Recherche la paire que tu souhaites vendre</h1>
-        <%= form_with url: sneaker_dbs_path, method: :get, html: { class: 'mb-5 search-sneaker-model-form', data: { refresh_list_target: 'form' } } do |f| %>
+        <div class="title-add-new-sneaker-db"></div>
+        <%= form_with url: sneaker_dbs_path, method: :get, html: { class: 'search-sneaker-model-form', data: { refresh_list_target: 'form' } } do |f| %>
           <%= f.text_field :query,
+            id: 'search_sneaker_name',
             class: "form-control",
             placeholder: 'Recherche ta paire',
             value: params[:query],
@@ -15,10 +17,18 @@
         <% end %>
         <div data-refresh-list-target="list">
         </div>
+        <div class="form-add-new-sneakerdb">
+          <hr>
+          <h5>Si tu ne trouves pas ton modèle dans la liste, ajoute-le ci-dessous :</h5>
+          <form id="addNewSneakerDb"action="/sneaker_dbs/" method="post" > 
+            <input class="form-control add-sneaker-db-name" required type="text"  placeholder="Adidas Yeezy Boost 700 Wave Runner Solid Grey" name="add_sneaker_db">
+            <input type="submit" value="Ajouter ma paire" class="btn btn-dark">
+          </form>
+        </div>
       </div>
     <% end %>
     
-    <% if params[:sneaker_db_id].present? %>
+    <% if params[:sneaker_db_id].present?  %>
       <h1 class="search-sneaker-model-title">Remplis les informations</h1>
       <div class="new-sneaker-form" >
         <%= render "form", sneaker: @sneaker, sneaker_db: @sneaker_db %>      
@@ -28,28 +38,62 @@
 </div>
 
 
-
+<script type="text/javascript">
+  document.getElementById('addNewSneakerDb').addEventListener('submit', (event) => {
+    let addSneakerDbName = document.querySelector('.add-sneaker-db-name');
+    document.querySelector('.title-add-new-sneaker-db').innerHTML = `<p style="text-align:center">Ton modèle <strong>${addSneakerDbName.value}</strong> vient d'être ajouter !<br>Tu peux vas le trouver en tapant son nom ci-dessous : </p>`;
+  });
+</script>
 
 <style type="text/css">
+  .form-add-new-sneakerdb hr {
+    width: 100%;
+  }
+  .form-add-new-sneakerdb {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .search-sneaker-model {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
+
   @media (min-width: 320px) {
+    .search-sneaker-model-form, .add-sneaker-db-name {
+      width: 250px;
+    }
+    .add-sneaker-db-name {
+      margin-bottom: 20px;
+    }
+    .form-add-new-sneakerdb h1 {
+      font-size: 25px;
+    }
+    .form-add-new-sneakerdb {
+      margin-top:30px;
+    }
+    .form-add-new-sneakerdb h5 {
+      margin-top:30px;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
     .search-sneaker-model-title {
       text-align: center;
-      font-size: 30px;
+      font-size: 25px;
     }  
   }
+
   @media (min-width: 768px) {
-    .search-sneaker-model-form {
+    .search-sneaker-model-form, .add-sneaker-db-name {
       width: 400px;
     }
   }
   @media (min-width: 1024px) {
-    .search-sneaker-model-form {
+    .search-sneaker-model-form, .add-sneaker-db-name {
       width: 500px;
     }
   }
