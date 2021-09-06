@@ -21,7 +21,8 @@ class User < ApplicationRecord
   validates :iban, presence: true
   validate :date_of_birth, if: :user_over_13, on: [:create, :update]
 
-  after_update :create_connect_account
+  # after_update :create_connect_account
+  # after_update :update_connect_account
 
   # validate :correct_ids_type?
 
@@ -152,8 +153,14 @@ class User < ApplicationRecord
   end
 
   def create_connect_account
-    if attributes_are_filled?(self)
+    unless self.stripe_account_id.present?
       Stripe::StripeCreateConnectAccount.new(self)  
+    end
+  end
+
+  def update_connect_account
+    if self.stripe_account_id.present?
+      Stripe::StripeUpdateConnectAccount.new(self)  
     end
   end
 

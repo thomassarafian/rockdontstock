@@ -53,9 +53,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+    if params['stripe-token-account'].present? && params['stripe-token-person'].present?
+      @user.update_column(:token_account, params['stripe-token-account']) 
+      @user.update_column(:token_person, params['stripe-token-person'])
+    end
+    # raise
+  end
 
   # DELETE /resource
   # def destroy
