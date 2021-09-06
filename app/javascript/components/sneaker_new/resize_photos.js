@@ -1,5 +1,5 @@
 function fetchPhotos(opti_photos) {
-  var data = new FormData($("form[id*='newSneakerForm']")[0]);
+  let data = new FormData($("form[id*='newSneakerForm']")[0]);
   data.append('sneaker[size]', document.getElementById('sneaker_size').value);
   data.append('sneaker[condition]', document.getElementById('sneaker_condition').value);
   data.append('sneaker[box]', document.getElementById('sneaker_box').value);
@@ -95,6 +95,7 @@ function resizePhotos () {
   }
 
   $(document).on("resizeImg", function (event) {
+    event.preventDefault();
     console.log("Uploaded the photo and pushed to opti photos ");
     if (event.blob && event.url) {
       opti_photos.push(event.blob);

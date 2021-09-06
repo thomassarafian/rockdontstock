@@ -55,6 +55,7 @@ const displayPreview0 = (input) => {
     const reader = new FileReader();
     // console.log(reader)
     reader.onload = (event) => {
+      event.preventDefault();
       document.getElementById('photo-preview0').src = event.currentTarget.result;
     }
     reader.readAsDataURL(input.files[0])
@@ -66,6 +67,7 @@ const displayPreview1 = (input) => {
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (event) => {
+      event.preventDefault();
       document.getElementById('photo-preview1').src = event.currentTarget.result;
     }
     reader.readAsDataURL(input.files[0])
@@ -77,6 +79,7 @@ const displayPreview2 = (input) => {
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (event) => {
+      event.preventDefault();
       document.getElementById('photo-preview2').src = event.currentTarget.result;
     }
     reader.readAsDataURL(input.files[0])
@@ -87,6 +90,7 @@ const displayPreview3 = (input) => {
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (event) => {
+      event.preventDefault();
       document.getElementById('photo-preview3').src = event.currentTarget.result;
     }
     reader.readAsDataURL(input.files[0])
@@ -97,6 +101,7 @@ const displayPreview4 = (input) => {
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (event) => {
+      event.preventDefault();
       document.getElementById('photo-preview4').src = event.currentTarget.result;
     }
     reader.readAsDataURL(input.files[0])
@@ -107,6 +112,7 @@ const displayPreview5 = (input) => {
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (event) => {
+      event.preventDefault();
       document.getElementById('photo-preview5').src = event.currentTarget.result;
     }
     reader.readAsDataURL(input.files[0])
@@ -117,6 +123,7 @@ const displayPreview6 = (input) => {
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (event) => {
+      event.preventDefault();
       document.getElementById('photo-preview6').src = event.currentTarget.result;
     }
     reader.readAsDataURL(input.files[0])
@@ -128,6 +135,7 @@ const displayPreview7 = (input) => {
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (event) => {
+      event.preventDefault();
       document.getElementById('photo-preview7').src = event.currentTarget.result;
     }
     reader.readAsDataURL(input.files[0])
