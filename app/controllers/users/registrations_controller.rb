@@ -46,9 +46,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
           p e
         end
       end
-    end
-    unless session[:sneaker_session_id].nil?
-      session.delete(:sneaker_session_id)
+      unless session[:sneaker_session_id].nil?
+        session.delete(:sneaker_session_id)
+      end
     end
   end
 

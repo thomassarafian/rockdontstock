@@ -39,9 +39,9 @@ class Users::SessionsController < Devise::SessionsController
       rescue Exception => e
         p e
       end
-    end
-    unless session[:sneaker_session_id].nil?
-      session.delete(:sneaker_session_id)
+      unless session[:sneaker_session_id].nil?
+        session.delete(:sneaker_session_id)
+      end
     end
   end
 
