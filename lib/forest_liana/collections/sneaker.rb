@@ -4,6 +4,7 @@ class Forest::Sneaker
   collection :Sneaker
   
   action "Validate announcement"
+    action "Reject announcement fake sneakers"
   action "Reject announcement bad criteria"
   action "Reject announcement bad angles"
 end

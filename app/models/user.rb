@@ -161,12 +161,7 @@ class User < ApplicationRecord
     end
   end
 
-  # def update_connect_account
-  #   if self.stripe_account_id.present?
-  #     Stripe::StripeUpdateConnectAccount.new(self)  
-  #   end
-  # end
-
+  
   def send_welcome
     variable = Mailjet::Send.create(messages: [{
       'From'=> {
