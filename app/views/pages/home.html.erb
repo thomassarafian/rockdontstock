@@ -1,4 +1,104 @@
 
+
+  <!-- <form style="margin-top:200px;" class="form-inputs stripe-live-user" >
+    <input type="hidden" name="stripe-token-account" id="stripe-token-account">
+    <input type="hidden" name="stripe-token-person" id="stripe-token-person">
+    email :
+    <input id="user_email" name="user_email">
+    prenom:
+    <input id="user_first_name" name="user_first_name">
+    nom:
+    <input id="user_last_name" name="user_last_name">
+    naissance:
+    <input id="user_date_of_birth" name="user_date_of_birth">
+    line1:
+    <input id="hide_user_line1" name="hide_user_line1">
+    city:
+    <input id="user_city" name="user_city">
+    code postal:
+    <input id="user_postal_code" name="user_postal_code">
+    phone: 
+    <input id="user_phone" name="user_phone">
+
+    <button type="submit">submit</button>
+    </form>
+   
+            
+
+<script type="text/javascript">
+  const stripe = Stripe('pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA');
+const stripeLiveForm = document.querySelector('.stripe-live-user');
+stripeLiveForm.addEventListener('submit', handleForm);
+
+async function handleForm(event) {
+  event.preventDefault();
+  let user_email = document.querySelector('#user_email').value;
+  let user_first_name = document.querySelector('#user_first_name').value;
+  let user_last_name = document.querySelector('#user_last_name').value;
+  let user_phone = document.querySelector('#user_phone').value;
+  let hide_user_line1 = document.querySelector('#hide_user_line1').value;
+  let user_city = document.querySelector('#user_city').value;
+  let user_postal_code = document.querySelector('#user_postal_code').value;
+  let user_date_of_birth = document.querySelector('#user_date_of_birth').value.split('-');
+  let user_year = user_date_of_birth[0];
+  let user_month = user_date_of_birth[1];
+  let user_day = user_date_of_birth[2];
+  console.log("here")
+
+  const accountResult = await stripe.createToken('account', {
+    business_type: 'individual',
+    individual: {
+      email: user_email,
+      first_name: user_first_name,
+      last_name: user_last_name,
+      phone: `+33${user_phone}`,
+      address: {
+        line1: hide_user_line1,
+        city: user_city,
+        postal_code: user_postal_code,
+      },
+      dob: {
+        day: user_day,
+        month: user_month,
+        year: user_year,
+      }
+    },
+    tos_shown_and_accepted: true,
+  });
+  const personResult = await stripe.createToken('person', {
+    person: {
+      email : user_email,
+      first_name: user_first_name,
+      last_name: user_last_name,
+      phone: `+33${user_phone}`,
+      address: {
+        line1: hide_user_line1,
+        city: user_city,
+        postal_code: user_postal_code,
+      },
+      dob: {
+        day: user_day,
+        month: user_month,
+        year: user_year,
+      },
+    },
+  });
+  if (accountResult.token && personResult.token) {
+    document.querySelector('#stripe-token-account').value = accountResult.token.id;
+    document.querySelector('#stripe-token-person').value = personResult.token.id;
+    stripeLiveForm.submit();
+  }
+}
+
+</script>
+
+ -->
+
+
+
+
+
+
 <%# charge = Stripe::Charge.create({
   amount: 1000,
   currency: 'eur',

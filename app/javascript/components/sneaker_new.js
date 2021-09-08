@@ -9,8 +9,6 @@ function sneakerNew() {
     document.querySelector('.snd-next-btn').style.display = "none"
     document.querySelector('.submit-new-sneaker').style.display = "none"
     document.querySelector('.photos-input').style.display = "none"
-    
-
     document.querySelector('.summary-new-sneaker').style.display = "none"
     const sneakerSize = document.getElementById('sneaker_size');
     const sneakerCondition = document.getElementById('sneaker_condition');

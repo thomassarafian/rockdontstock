@@ -9,17 +9,6 @@ module Stripe
       stripe_account = Stripe::Account.update(
         user.stripe_account_id, {
           account_token: user.token_account,
-          # # type: 'custom',
-          # # business_profile: {
-          # #   mcc: 5691,
-          # #   url: "rockdontstock.com",
-          # # },
-          # # country: 'FR',
-          # # email: user.email,
-          # capabilities: {
-          #   card_payments: {requested: true},
-          #   transfers: {requested: true},
-          # }
         }
       )
     end

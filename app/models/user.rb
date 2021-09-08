@@ -21,7 +21,7 @@ class User < ApplicationRecord
   validates :iban, presence: true
   validate :date_of_birth, if: :user_over_13, on: [:create, :update]
 
-  # after_update :create_connect_account
+  before_update :stripe_connect_account
   # after_update :update_connect_account
 
   # validate :correct_ids_type?
@@ -152,17 +152,20 @@ class User < ApplicationRecord
     end
   end
 
-  def create_connect_account
-    unless self.stripe_account_id.present?
+  def stripe_connect_account
+    if self.stripe_account_id.present? \
+      && (self.first_name_changed? || self.last_name_changed? || self.date_of_birth_changed? || self.line1_changed? || self.phone_changed?)
+      Stripe::StripeUpdateConnectAccount.new(self)  
+    elsif !self.stripe_account_id.present? && (self.email? && self.first_name? && self.last_name? && self.phone? && self.line1? && self.city? && self.postal_code? && self.date_of_birth.day.present? && self.date_of_birth.month.present? && self.date_of_birth.year.present?)
       Stripe::StripeCreateConnectAccount.new(self)  
     end
   end
 
-  def update_connect_account
-    if self.stripe_account_id.present?
-      Stripe::StripeUpdateConnectAccount.new(self)  
-    end
-  end
+  # def update_connect_account
+  #   if self.stripe_account_id.present?
+  #     Stripe::StripeUpdateConnectAccount.new(self)  
+  #   end
+  # end
 
   def send_welcome
     variable = Mailjet::Send.create(messages: [{

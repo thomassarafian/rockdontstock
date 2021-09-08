@@ -6,7 +6,7 @@
           <%= f.error_notification %>
           <div class="form-inputs">
             <input type="hidden" name="stripe-token-account" id="stripe-token-account">
-             <input type="hidden" name="stripe-token-person" id="stripe-token-person">
+            <input type="hidden" name="stripe-token-person" id="stripe-token-person">
             <%= f.input :first_name, label: 'Prénom'%>
             <%= f.input :last_name, label: 'Nom de famille' %>
             <%= f.input :email, required: true %>
@@ -21,11 +21,13 @@
                 html5: true,
                 label: 'Date de naissance'
             %>
+            <%= f.error :date_of_birth, :id => "edit_user_date_of_birth_error" %>
             
             <%= f.input :line1, label: "Adresse" %>
             <%= f.input :line1, as: :hidden, input_html: { id: "hide_user_line1" } %>
             <%= f.input :city, as: :hidden %>
             <%= f.input :postal_code, as: :hidden %>
+            <%= f.error :line1, :id => "edit_user_line1_error" %>
 
               <%= f.input :phone, label: "Numéro de téléphone", input: false  %>
             <div class="form-phone-num">
@@ -33,7 +35,7 @@
               <%= f.input :phone, label: false, as: :tel, required: true, placeholder: "0606060606" %>
 
             </div>
-              <%= f.error :phone, :id => "sneaker_phone_error" %>
+            <%= f.error :phone, :id => "edit_user_phone_error" %>
 
             <%= f.input :password, label: 'Nouveau mot de passe',
                         hint: "Ne pas remplir si vous ne voulez pas modifier votre mot de passe",
@@ -74,7 +76,7 @@
           </div>
 
           <div class="form-actions">
-            <%= f.button :submit, "Enregistrer les modifications", class: 'edit-user-btn btn btn-dark' %>
+            <button type="submit" class="edit-user-btn btn btn-dark" data-disable-with="<i class='fas fa-spinner fa-spin'></i> Chargement ...">Enregistrer les modifications</button>
           </div>
         
 
@@ -91,7 +93,7 @@
   </div>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   const user_phone = document.querySelector('#user_phone');
   const editUserBtn = document.querySelector('.edit-user-btn');
   if (user_phone) {
@@ -100,6 +102,7 @@
       if (user_phone.value.length != 9 && user_phone.value.length != 10) {
         user_phone.classList.add('is-invalid')
         document.querySelector('#sneaker_phone_error').innerHTML = "<small>Numéro de téléphone invalide</small>"
+        return (-1)
       }
       else {
         user_phone.classList.remove('is-invalid')
@@ -108,83 +111,13 @@
       }
     });
   }
-</script>
+</script> -->
 <style type="text/css">
-  #sneaker_phone_error {
+  #edit_user_date_of_birth_error, #edit_user_phone_error, #edit_user_line1_error {
     margin-top: -15px;
     color: red;
   }
 </style>
-<!-- <script type="text/javascript">
-  const editUserForm = document.querySelector('.edit_user');
-  if (editUserForm) {
-    const stripe = Stripe('pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA');
-    let user_email = document.querySelector('#user_email').value;
-    let user_first_name = document.querySelector('#user_first_name').value;
-    let user_last_name = document.querySelector('#user_last_name').value;
-    let user_phone = document.querySelector('#user_phone').value;
-    let user_line1 = document.querySelector('#hide_user_line1').value;
-    let user_city = document.querySelector('#user_city').value;
-    let user_postal_code = document.querySelector('#user_postal_code').value;
-    let user_date_of_birth = document.querySelector('#user_date_of_birth').value.split('-');
-    let user_year = user_date_of_birth[0]
-    let user_month = user_date_of_birth[1]
-    let user_day = user_date_of_birth[2]
-
-    if (user_email && user_first_name && user_last_name && user_phone && user_line1 && user_city && user_postal_code && user_date_of_birth) {
-      editUserForm.addEventListener('submit', handleForm);
-    }
-
-    async function handleForm(event) {
-      event.preventDefault();
-      const accountResult = await stripe.createToken('account', {
-        business_type: 'individual',
-        individual: {
-          email: user_email,
-          first_name: user_first_name,
-          last_name: user_last_name,
-          phone: `+33${user_phone}`,
-          address: {
-            line1: user_line1,
-            city: user_city,
-            postal_code: user_postal_code,
-          },
-          dob: {
-            day: user_day,
-            month: user_month,
-            year: user_year,
-          }
-        },
-        tos_shown_and_accepted: true,
-      });
-
-      const personResult = await stripe.createToken('person', {
-        person: {
-          email : user_email,
-          first_name: user_first_name,
-          last_name: user_last_name,
-          phone: `+33${user_phone}`,
-          address: {
-            line1: user_line1,
-            city: user_city,
-            postal_code: user_postal_code,
-          },
-          dob: {
-            day: user_day,
-            month: user_month,
-            year: user_year,
-          },
-        },
-      });
-
-      if (accountResult.token && personResult.token) {
-        document.querySelector('#stripe-token-account').value = accountResult.token.id;
-        document.querySelector('#stripe-token-person').value = personResult.token.id;
-        editUserForm.submit();
-      }
-    }
-  }
-</script> -->
 
 
 

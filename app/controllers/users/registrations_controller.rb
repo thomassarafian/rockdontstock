@@ -21,30 +21,35 @@ class Users::RegistrationsController < Devise::RegistrationsController
         @sneaker_session[0].update(user_id: @user.id)
         @sneaker_session[0].save
         # raise
-        variable = Mailjet::Send.create(messages: [{
-          'From'=> {
-            'Email'=> "elliot@rockdontstock.com",
-            'Name'=> "Rock Don't Stock"
-          },
-          'To'=> [
-            {
-              'Email'=> @user.email,
-              'Name'=> @user.first_name,
+        begin
+          variable = Mailjet::Send.create(messages: [{
+            'From'=> {
+              'Email'=> "elliot@rockdontstock.com",
+              'Name'=> "Rock Don't Stock"
+            },
+            'To'=> [
+              {
+                'Email'=> @user.email,
+                'Name'=> @user.first_name,
+              }
+            ],
+            'TemplateID'=> 2961370,
+            'TemplateLanguage'=> true,
+            'Subject'=> "Ta paire est en cours de validation ⌛",
+            'Variables'=> {
+              "prenom" => @user.first_name,
+              "modele_paire" => @user.sneakers.last.sneaker_db.name,
             }
-          ],
-          'TemplateID'=> 2961370,
-          'TemplateLanguage'=> true,
-          'Subject'=> "Ta paire est en cours de validation ⌛",
-          'Variables'=> {
-            "prenom" => @user.first_name,
-            "modele_paire" => @user.sneakers.last.sneaker_db.name,
-          }
-        }])
+          }])
+          p variable
+        rescue Exception => e
+          p e
+        end
       end
     end
-      unless session[:sneaker_session_id].nil?
-        session.delete(:sneaker_session_id)
-      end
+    unless session[:sneaker_session_id].nil?
+      session.delete(:sneaker_session_id)
+    end
   end
 
   # GET /resource/edit
@@ -54,12 +59,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    super
     if params['stripe-token-account'].present? && params['stripe-token-person'].present?
       @user.update_column(:token_account, params['stripe-token-account']) 
       @user.update_column(:token_person, params['stripe-token-person'])
     end
-    # raise
+    super
   end
 
   # DELETE /resource

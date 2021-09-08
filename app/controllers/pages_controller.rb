@@ -1,6 +1,32 @@
 class PagesController < ApplicationController
 	skip_before_action :authenticate_user!, only: [:home, :about, :newsletter, :faq, :cgv, :cgu, :authentification, :how_to_send_shoes, :trust_policy]
 	def home
+    # if params['stripe-token-account']
+    
+    # stripe_account = Stripe::Account.create({
+    #   account_token: params['stripe-token-account'],
+    #   type: 'custom',
+    #   business_profile: {
+    #     mcc: 5691,
+    #     url: "rockdontstock.com",
+    #   },
+    #   country: 'FR',
+    #   email: params['user_email'],
+    #   capabilities: {
+    #     card_payments: {requested: true},
+    #     transfers: {requested: true},
+    #   }
+    # })
+    # puts '=============================='
+    # puts "STRIPE PERSON ID ->"
+    # puts stripe_account['individual'].id
+    # puts '=============================='
+    # puts "STRIPE ACCOUNT ID ->"
+    # puts stripe_account.id
+    # puts '=============================='
+    # puts params
+    # end
+
   end
   
   def about
