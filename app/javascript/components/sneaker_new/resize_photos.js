@@ -33,7 +33,7 @@ function resizePhotos () {
   }
   // Ensure it's an image
   for (let i = 0; i < file.length; i++) {
-    if (file[i].type.match(/image.*/)) {
+    // if (file[i].type.match(/image/)) {
       console.log('An image has been loaded');
       // Load the image
       var reader = new FileReader();
@@ -71,7 +71,7 @@ function resizePhotos () {
           image.src = readerEvent.target.result;
       }
       reader.readAsDataURL(file[i]);
-    }
+    // }
   }
 
   var dataURLToBlob = function(dataURL) {
