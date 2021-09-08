@@ -67,14 +67,34 @@ function sneakerNew() {
         return -1;
       } else if (sneakerPriceValue.match(/[^0-9,]/g)) {
         setErrorFor(sneakerPrice, "Le prix ne doit contenir que des chiffres et/ou une virgule. Ex: 199,99 ou 199");
+      } else if (checkAfterComma(sneakerPriceValue)) {
+        setErrorFor(sneakerPrice, "Le prix ne doit pas avoir plus de 2 chiffres après la virgule");
         return -1;
       } else if (parseFloat(sneakerPriceValue) > 240042 || parseFloat(sneakerPriceValue) < 10)  {
-        setErrorFor(sneakerPrice, "Le prix ne peux pas être inférieur à 10€");
+        setErrorFor(sneakerPrice, "Le prix ne peux pas être inférieur à 10€ ou trop élevé");
         return -1;
       } else {
         setSuccessFor(sneakerPrice);
       }
     }
+
+    function checkAfterComma(sneakerPriceValue) {
+      let k = 0;
+      for (let i = 0; i <= sneakerPriceValue.length; i++) {
+        if (sneakerPriceValue[i] == ',') {
+          for (let j = i + 1; sneakerPriceValue[j]; j++) {
+            k++;
+            if (k > 2) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
+    }
+
+
+
     document.getElementById('nextBtn').addEventListener('click', (event) => {
       event.preventDefault();
       if (newSneakerCheckInputs() == - 1) {}

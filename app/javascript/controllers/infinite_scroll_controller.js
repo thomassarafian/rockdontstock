@@ -6,6 +6,7 @@
 //   static targets = [ "entries", "pagination" ]
 
 //   connect() {
+//     console.log('ok');
 //     useIntersection(this, {
 //       rootMargin: "150px",
 //     });
