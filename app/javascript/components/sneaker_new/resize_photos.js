@@ -33,8 +33,9 @@ function resizePhotos () {
   }
   // Ensure it's an image
   for (let i = 0; i < file.length; i++) {
-    // if (file[i].type.match(/image/)) {
+    if (file[i].type.match(/image.*/)) {
       console.log('An image has been loaded');
+
       // Load the image
       var reader = new FileReader();
       reader.onload = function (readerEvent) {
@@ -42,7 +43,7 @@ function resizePhotos () {
         image.onload = function (imageEvent) {
           // Resize the image
           var canvas = document.createElement('canvas'),
-            max_size = 1080,// TODO : pull max size from a site config
+            max_size = 720,// TODO : pull max size from a site config
             width = image.width,
             height = image.height;
           if (width > height) {
@@ -71,7 +72,7 @@ function resizePhotos () {
           image.src = readerEvent.target.result;
       }
       reader.readAsDataURL(file[i]);
-    // }
+    }
   }
 
   var dataURLToBlob = function(dataURL) {
