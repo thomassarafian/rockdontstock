@@ -1,3 +1,4 @@
+
 function fetchPhotos(opti_photos) {
   let data = new FormData($("form[id*='newSneakerForm']")[0]);
   data.append('sneaker[size]', document.getElementById('sneaker_size').value);
@@ -13,6 +14,7 @@ function fetchPhotos(opti_photos) {
     body: data,
   })
 }
+
 
 function resizePhotos () {
   let opti_photos = [];
@@ -31,15 +33,14 @@ function resizePhotos () {
   if (file7) {
     file.push(file7);
   }
-  // Ensure it's an image
+
   for (let i = 0; i < file.length; i++) {
     if (file[i].type.match(/image.*/)) {
       console.log('An image has been loaded');
-
       // Load the image
       var reader = new FileReader();
-      reader.onload = function (readerEvent) {
-        var image = new Image();
+      reader.onload = async function (readerEvent) {
+        var image = await new Image();
         image.onload = function (imageEvent) {
           // Resize the image
           var canvas = document.createElement('canvas'),
