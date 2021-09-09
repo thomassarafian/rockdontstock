@@ -41,7 +41,7 @@ function resizePhotos () {
       var reader = new FileReader();
       reader.onloadend = function (readerEvent) {
         var image = new Image();
-        image.onloadend = function (imageEvent) {
+        image.onload = function (imageEvent) {
           // Resize the image
           var canvas = document.createElement('canvas'),
             max_size = 1000,// TODO : pull max size from a site config
