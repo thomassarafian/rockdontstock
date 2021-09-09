@@ -95,8 +95,6 @@ function sneakerNew() {
       return false;
     }
 
-
-
     document.getElementById('nextBtn').addEventListener('click', (event) => {
       event.preventDefault();
       if (newSneakerCheckInputs() == - 1) {}

@@ -43,10 +43,12 @@ function resizePhotos () {
         var image = new Image();
         image.onload = function (imageEvent) {
           // Resize the image
+          console.log('image loaded !')
           var canvas = document.createElement('canvas'),
             max_size = 1000,// TODO : pull max size from a site config
             width = image.width,
             height = image.height;
+            console.log('create canva')
           if (width > height) {
             if (width > max_size) {
               height *= max_size / width;
