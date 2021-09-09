@@ -39,7 +39,7 @@ function resizePhotos () {
       console.log('An image has been loaded');
       // Load the image
       var reader = new FileReader();
-      reader.onloadend = function (readerEvent) {
+      reader.onload = function (readerEvent) {
         var image = new Image();
         image.onload = function (imageEvent) {
           // Resize the image
