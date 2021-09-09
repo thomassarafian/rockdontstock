@@ -12,8 +12,6 @@ class Sneaker < ApplicationRecord
   validates :condition, presence: true
   validates :box, presence: true
 
-
-  # validate :photos, if: :photos_limit_min
   monetize :price_cents
 
 
@@ -66,13 +64,6 @@ class Sneaker < ApplicationRecord
     UserMailer.new_sneaker(self, user).deliver
   end
 
-  private    
-  
-  def photos_limit_min
-    # return false if self.photos.empty?
-    errors.add(:photos, " You must to upload at least 7 images") if self.photos.length <= 7 || self.photos.empty?
-    # errors.add(:photos, " You must to upload at least 7 images") if self.photos.length <= 7
-    return false
-  end
+
 
 end

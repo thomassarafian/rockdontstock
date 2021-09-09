@@ -56,9 +56,9 @@ class SneakersController < ApplicationController
             redirect_to new_user_session_path, notice: "Tu dois être connecté pour que nous puissions vérifier ta paire"
           # end
       elsif user_signed_in?
-      #   @sneaker = current_user.sneakers.new(sneaker_db_id: @sneaker_db.id)
-      #   @sneaker.update(sneaker_params)
-     	# 	authorize @sneaker
+       #  @sneaker = current_user.sneakers.new(sneaker_db_id: @sneaker_db.id)
+       #  @sneaker.update(sneaker_params)
+     		# authorize @sneaker
     		# if @sneaker.save
     		# 	@sneaker.update(state: 0) # ici on devrai laisser à 0, puis si on valide la paire cote admin, alors on la passera a 1 
           if user_signed_in? && current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone?

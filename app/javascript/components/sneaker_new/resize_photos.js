@@ -15,19 +15,19 @@ function fetchPhotos(opti_photos) {
 }
 
 function resizePhotos () {
-  let opti_photos = []
-  let file0 = document.getElementById('photo-input0').files[0]
-  let file1 = document.getElementById('photo-input1').files[0]
-  let file2 = document.getElementById('photo-input2').files[0]
-  let file3 = document.getElementById('photo-input3').files[0]
-  let file4 = document.getElementById('photo-input4').files[0]
-  let file5 = document.getElementById('photo-input5').files[0]
+  let opti_photos = [];
+  let file0 = document.getElementById('photo-input0').files[0];
+  let file1 = document.getElementById('photo-input1').files[0];
+  let file2 = document.getElementById('photo-input2').files[0];
+  let file3 = document.getElementById('photo-input3').files[0];
+  let file4 = document.getElementById('photo-input4').files[0];
+  let file5 = document.getElementById('photo-input5').files[0];
   let file = [file0, file1, file2, file3, file4, file5];
-  let file6 = document.getElementById('photo-input6').files[0]
+  let file6 = document.getElementById('photo-input6').files[0];
   if (file6) {
     file.push(file6);
   }
-  let file7 = document.getElementById('photo-input7').files[0]
+  let file7 = document.getElementById('photo-input7').files[0];
   if (file7) {
     file.push(file7);
   }
@@ -43,7 +43,7 @@ function resizePhotos () {
         image.onload = function (imageEvent) {
           // Resize the image
           var canvas = document.createElement('canvas'),
-            max_size = 720,// TODO : pull max size from a site config
+            max_size = 1000,// TODO : pull max size from a site config
             width = image.width,
             height = image.height;
           if (width > height) {
@@ -74,6 +74,7 @@ function resizePhotos () {
       reader.readAsDataURL(file[i]);
     }
   }
+
 
   var dataURLToBlob = function(dataURL) {
     var BASE64_MARKER = ';base64,';
