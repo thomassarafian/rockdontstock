@@ -35,7 +35,7 @@ function resizePhotos () {
   }
 
   for (let i = 0; i < file.length; i++) {
-    if (file[i].type.match(/image.*/)) {
+    if (file[i].type.match('image/jpg') || file[i].type.match('image/jpeg') || file[i].type.match('image/png')) {
       console.log('An image has been loaded');
       // Load the image
       var reader = new FileReader();
