@@ -1,4 +1,24 @@
+function launchTimerForFinalSneakerNewButton() {
+    let i = 10;
+    document.getElementById('finishSneakerNewWaitMessage').style.display = "block";
+    document.getElementById('waitTimer10s').textContent = i;
+    i--;
+    setInterval( function () {
+      if (i >= 0) {
+        document.getElementById('waitTimer10s').textContent = i;
+        i--;
+      }
+    },1000);
+    setTimeout(function() {
+      document.getElementById('finishSneakerNewBtn').removeAttribute("disabled");
+      document.getElementById('finishSneakerNewWaitMessage').style.display = "none";
+    }, 10000);
+  }
+  
+  
+
 function displayStep3 (photoPreview) {
+  launchTimerForFinalSneakerNewButton();
   document.querySelector(".search-sneaker-model-title").scrollIntoView();
   let photosInput = document.querySelector('.photos-input');
   let summaryNewSneaker = document.querySelector('.summary-new-sneaker');
@@ -10,7 +30,6 @@ function displayStep3 (photoPreview) {
   }
   // sndNextBtn.style.display = "none";
   document.querySelector('.submit-new-sneaker').style.display = "block"
-  document.querySelector('.submit-new-sneaker>button').disabled = false;
   document.querySelector('.search-sneaker-model-title').innerText = "Récapitulatif de ton annonce";
   for (let i = 0; i < 6; i++) {
     document.querySelector(`.carousel-sneaker-photo${i}`).innerHTML = `<img src="${photoPreview[i].src}" class="sneaker-show-photos">`;  

@@ -109,7 +109,7 @@
     </div>
   </div>
   <div class="snd-next-btn">
-    <button type="button" class="btn btn-dark" >Suivant</button>
+    <button type="button" id="sndNextBtn" class="btn btn-dark" >Suivant</button>
   </div>
 
 
@@ -156,13 +156,17 @@
         </div>
         <div><%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981;", target: :_blank) %></div>
         <div class="submit-new-sneaker">
-          <button disabled name="button-new-sneaker" value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark" data-disable-with="<i class='fas fa-spinner fa-spin'></i> Chargement ...">Finaliser la mise en vente</button>
+          <button disabled="true" name="button-new-sneaker" id="finishSneakerNewBtn" value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark">Finaliser la mise en vente</button>
+          <div style="display:none" id="finishSneakerNewWaitMessage">
+            <i class='fas fa-spinner fa-spin'></i> Chargement <span id="waitTimer10s"></span> sec ...
+          </div>
         </div>
       </div>
     </div>
   </div>
 
 <% end %>
+
 
 <style type="text/css">
   /*.info-input-sneaker:focus {
@@ -443,6 +447,8 @@ function resizePhotos () {
     console.log(event)
     console.log("Uploaded the photo and pushed to opti photos ");
     if (event.blob && event.url) {
+      //prendre le dernier event.blob si possible 
+
       // console.log(event.blob)
       // fetchPhotos(event.blob)
       // opti_photos.push(event.blob);
