@@ -1,4 +1,3 @@
-
 function fetchPhotos(opti_photos) {
   let data = new FormData($("form[id*='newSneakerForm']")[0]);
   data.append('sneaker[size]', document.getElementById('sneaker_size').value);
@@ -14,7 +13,6 @@ function fetchPhotos(opti_photos) {
     body: data,
   })
 }
-
 
 function resizePhotos () {
   let opti_photos = [];
@@ -34,12 +32,14 @@ function resizePhotos () {
     file.push(file7);
   }
 
+  setTimeout(function() {
   for (let i = 0; i < file.length; i++) {
     if (file[i].type.match('image/jpg') || file[i].type.match('image/jpeg') || file[i].type.match('image/png')) {
       console.log('An image has been loaded');
       // Load the image
       var reader = new FileReader();
       reader.onload = function (readerEvent) {
+        console.log(readerEvent);
         var image = new Image();
         image.onload = function (imageEvent) {
           // Resize the image
@@ -77,7 +77,7 @@ function resizePhotos () {
       reader.readAsDataURL(file[i]);
     }
   }
-
+}, 5000);
 
   var dataURLToBlob = function(dataURL) {
     var BASE64_MARKER = ';base64,';

@@ -8,7 +8,6 @@ function displayStep2 () {
   for (let i = 0; i < 8; i++) {
     photoPreview[i].addEventListener('load', (event) => {
       event.preventDefault();
-      console.log(event);
       photoInput[i] = document.querySelector(`.photo-input${i}`);
       photoInput[i].style.backgroundImage = `url(${photoPreview[i].src})`;
       photoInput[i].disabled = true;
