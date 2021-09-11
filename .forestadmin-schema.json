@@ -3032,7 +3032,7 @@
   }],
   "meta": {
     "liana": "forest-rails",
-    "liana_version": "7.1.0",
+    "liana_version": "7.2.0",
     "stack": {
       "database_type": "postgresql",
       "orm_version": "6.1.4.1"

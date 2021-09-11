@@ -48,10 +48,6 @@
   }
 
   @media (min-width: 768px) {
-    // .sneaker-show-photos {
-    //   width: 250px;
-    //   height: 150px;
-    // }
     .sneaker-show {
       display: grid;
       grid-template-columns: [first] 300px [line2] 1fr;
@@ -63,20 +59,12 @@
   }
 
   @media (min-width: 1024px) {
-    // .sneaker-show-photos {
-    //   width: 350px;
-    //   height: 200px;
-    // }
     .sneaker-show {
       grid-template-columns: [first] 500px [line2] 1fr;
       grid-gap: 60px;
     }
   }
   @media (min-width: 1440px) {
-    // .sneaker-show-photos {
-    //   width: 450px;
-    //   height: 250px;
-    // }
     .sneaker-show {
       grid-template-columns: [first] 700px [line2] 1fr;
     }

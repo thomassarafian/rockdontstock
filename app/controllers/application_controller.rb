@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   
   def set_search_navbar
-    @pagy, @sneakers_navbar = pagy(Sneaker.includes(:photos_blobs).where("state >= ?", 1), items: 100)
+    @pagy, @sneakers_navbar = pagy(Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state >= ?", 1), items: 100)
     
     if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
       session[:filter_params] = params

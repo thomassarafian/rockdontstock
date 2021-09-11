@@ -69,6 +69,7 @@ gem 'pagy', '~> 3.5' #pagination
 gem 'forest_liana' # admin
 gem 'rack-cors'    # admin
 
+gem 'bullet', group: 'development'
 
 
 group :development, :test do
