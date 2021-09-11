@@ -103,20 +103,13 @@ function sneakerNew() {
         let infoInput =  document.querySelector('.info-input');
         let submitSneaker = document.querySelector('.submit-new-sneaker');
         let nextBtn = document.querySelector('.next-btn');    
-        // if (sneaker_size.value && sneaker_price.value && sneaker_condition.value && sneaker_box.value) {
-          // document.querySelector('.total-price-for-seller').innerHTML = `<p>Box : ${sneaker_price.value}</p>`;
-          // nextBtn.style.display = "block";
-          // nextBtn.addEventListener('click', (event) => {
-          //   document.querySelector('.snd-next-btn').style.display = "block";
-            photosInput.style.display = "flex";
-            submitSneaker.style.display = "block";
-            infoInput.style.display = "none";
-            nextBtn.style.display = "none";
-            document.querySelector(".search-sneaker-model-title").scrollIntoView();
-          // })
-        // } 
+        photosInput.style.display = "flex";
+        submitSneaker.style.display = "block";
+        infoInput.style.display = "none";
+        nextBtn.style.display = "none";
+        document.querySelector(".search-sneaker-model-title").scrollIntoView();
         let photoPreview = [];
-        photoPreview = displayStep2();  
+        photoPreview = displayStep2();
 
         let sndNextBtn = document.querySelector('.snd-next-btn');
         sndNextBtn.style.display = "block";

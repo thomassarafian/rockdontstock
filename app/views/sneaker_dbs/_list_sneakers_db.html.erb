@@ -1,7 +1,7 @@
 <div data-refresh-list-target="list">
   <div id="scroll" class="container">
     <div class="sneaker-cards">
-      <% sneaker_dbs.limit(12).each do |sneaker| %>
+      <% sneaker_dbs.each do |sneaker| %>
           <div class="sneaker-card" >
             <%= link_to new_sneaker_db_sneaker_path(sneaker), :style=>'color:#000000;' do %>
               <div class="sneaker-db-card-img">

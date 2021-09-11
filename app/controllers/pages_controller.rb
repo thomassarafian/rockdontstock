@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
 	skip_before_action :authenticate_user!, only: [:home, :about, :newsletter, :faq, :cgv, :cgu, :authentification, :how_to_send_shoes, :trust_policy]
 	def home
+    @sneakers_last_added = Sneaker.includes(:photos_blobs).where("state >= ?", 1).limit(8).order("created_at DESC")
+    @sneakers_selected = Sneaker.includes(:photos_blobs).where("state >= ?", 1).limit(8)
   end
   
   def about
