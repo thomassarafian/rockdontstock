@@ -1,5 +1,5 @@
 function launchTimerForFinalSneakerNewButton() {
-    let i = 10;
+    let i = 11;
     document.getElementById('finishSneakerNewWaitMessage').style.display = "block";
     document.getElementById('waitTimer10s').textContent = i;
     i--;
@@ -12,10 +12,8 @@ function launchTimerForFinalSneakerNewButton() {
     setTimeout(function() {
       document.getElementById('finishSneakerNewBtn').removeAttribute("disabled");
       document.getElementById('finishSneakerNewWaitMessage').style.display = "none";
-    }, 10000);
-  }
-  
-  
+    }, 11000);
+  }  
 
 function displayStep3 (photoPreview) {
   launchTimerForFinalSneakerNewButton();
