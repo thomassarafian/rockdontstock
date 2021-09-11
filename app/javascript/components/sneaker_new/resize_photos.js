@@ -77,7 +77,7 @@ function resizePhotos () {
       reader.readAsDataURL(file[i]);
     }
   }
-}, 8000);
+}, 7000);
 
   var dataURLToBlob = function(dataURL) {
     var BASE64_MARKER = ';base64,';
