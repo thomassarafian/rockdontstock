@@ -2,7 +2,7 @@
   <div class="row row-cols-4 mt-5 justify-content-center">
     <div class="col-12 col-sm-9 edit-user-form">
         <h1 style="text-align: center">Modifier son profil</h1>
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'fileinfo' }) do |f| %>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: 'edit_user_form' }) do |f| %>
           <%= f.error_notification %>
           <div class="form-inputs">
             <input type="hidden" name="stripe-token-account" id="stripe-token-account">

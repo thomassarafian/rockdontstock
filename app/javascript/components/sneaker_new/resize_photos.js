@@ -5,13 +5,9 @@ function fetchPhotos(opti_photos) {
   data.append('sneaker[box]', document.getElementById('sneaker_box').value);
   data.append('sneaker[extras]', document.getElementById('sneaker_extras').value);
   data.append('sneaker[price]', document.getElementById('sneaker_price').value);
-  console.log("END ALL ELEM -> ")
-
   opti_photos.forEach(elem => {
-    // console.log(elem);
     data.append('sneaker[photos][]', elem);
   });
-  // console.log(opti_photos);
   fetch(document.getElementById('new_sneaker').action, {
     method: "POST",
     body: data,
@@ -56,7 +52,6 @@ function resizePhotos () {
 
   setTimeout(function() {
   for (let i = 0; i < file.length; i++) {
-      // console.log(file[0]);
       if (file[i].type.match('image/jpg') || file[i].type.match('image/jpeg') || file[i].type.match('image/png')) {
         // console.log('An image has been loaded');
         // Load the image

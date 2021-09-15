@@ -3,41 +3,35 @@
   <div class="sneaker-payment-new">
     <div class="sneaker-payment-photos">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
-        </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
             <%= image_tag(@order.sneaker.photos[0].url, class: 'sneaker-show-photos') %>
           </div>
-          <!-- <div class="carousel-item ">
-            <%#= cl_image_tag(@sneaker.photos[1].key, class: 'sneaker-show-photos') %>
+          <div class="carousel-item ">
+            <%= image_tag(@order.sneaker.photos[1].url, class: 'sneaker-show-photos') %>
           </div>
           <div class="carousel-item ">
-            <%#= cl_image_tag(@sneaker.photos[2].key, class: 'sneaker-show-photos') %>
+            <%= image_tag(@order.sneaker.photos[2].url, class: 'sneaker-show-photos') %>
           </div>
           <div class="carousel-item ">
-            <%#= cl_image_tag(@sneaker.photos[3].key, class: 'sneaker-show-photos') %>
+            <%= image_tag(@order.sneaker.photos[3].url, class: 'sneaker-show-photos') %>
           </div>
           <div class="carousel-item ">
-            <%#= cl_image_tag(@sneaker.photos[4].key, class: 'sneaker-show-photos') %>
-          </div> -->
-          <!-- <div class="carousel-item ">
-            <%#= cl_image_tag(@sneaker.photos[5].key, class: 'sneaker-show-photos') %>
+            <%= image_tag(@order.sneaker.photos[4].url, class: 'sneaker-show-photos') %>
           </div>
           <div class="carousel-item ">
-            <%#= cl_image_tag(@sneaker.photos[6].key, class: 'sneaker-show-photos') %>
+            <%= image_tag(@order.sneaker.photos[5].url, class: 'sneaker-show-photos') %>
           </div>
-          <div class="carousel-item ">
-            <%#= cl_image_tag(@sneaker.photos[7].key, class: 'sneaker-show-photos') %>
-          </div> -->
+          <% unless @order.sneaker.photos[6].nil? %>
+            <div class="carousel-item ">
+              <%= image_tag(@order.sneaker.photos[6].url, class: 'sneaker-show-photos') %>
+            </div>
+          <% end %>
+          <% unless @order.sneaker.photos[7].nil? %>
+            <div class="carousel-item ">
+              <%= image_tag(@order.sneaker.photos[7].url, class: 'sneaker-show-photos') %>
+            </div>
+          <% end %>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
@@ -67,29 +61,30 @@
         <p><strong>Livraison</strong></p>
         <div class="resume-delivery-infos"></div>
         <br>
+
         <p class="resume-prices">Prix de l'article : <span class="payment-article-price"><%= @order.price %>€</span></p>
-        <p class="resume-prices">Livraison : <span class="payment-delivery-price">
-        <%# if  %>
-          <%= @order.shipping_cost %> €
-        <%# end %>
-        </span></p>
-        <p class="resume-prices">Authentification : <span class="payment-service-price"><%= @order.service / 2 %>€</span></p>
+        <p class="resume-prices">Livraison : <span class="payment-delivery-price"></span></p>
+        <p class="resume-prices">Authentification : <span class="payment-service-price"><%= (@order.service / 2) %>€</span></p>
         <br>
-        <% total =  (@order.price + @order.shipping_cost + (@order.service / 2)) %>
-        <strong><p class="resume-prices">TOTAL <span class="payment-total-price"><%= total %> €</span></p></strong>
+        <%# total =  (@order.price + @order.shipping_cost + (@order.service / 2)) %>
+        <strong><p class="resume-prices">TOTAL <span class="payment-total-price"></span></p></strong>
         <button type="button" class="pay_button btn btn-dark">Paiement</button>
       </div>
       <div class="payment-new-delivery-step">
-        <h5>Choix du point relais</h5>
+        <h5>Choix de l'expéditeur</h5>
         <hr>
         <div class="payment-delivery">
           <div>
-            <p class="delivery-brand mondial-relay"><span class="delivery-name-mondial-relay">Mondial Relay</span>
-              <span><%= @mondial_relay_price %>€</span></p>
-            <p class="delivery-brand colissimo"><span class="delivery-name-colissimo">Colissimo</span>
-              <span><%= @colissimo_price %>€</span></p>
-            <p class="delivery-brand chronopost"><span class="delivery-name-chronopost">Chronopost</span>
-              <span><%= @chronopost_price %>€</span></p>
+            <p class="delivery-brand mondial-relay">
+              <span class="delivery-name-mondial-relay">Mondial Relay</span>
+              <span><%= @mondial_relay_price %>€</span>
+            </p>
+            <p class="delivery-brand colissimo">
+              <span class="delivery-name-colissimo">Colissimo</span>
+              <span><%= @colissimo_price %>€</span>
+            </p>
+            <!-- <p class="delivery-brand chronopost"><span class="delivery-name-chronopost">Chronopost</span>
+              <span><%= @chronopost_price %>€</span></p> -->
           </div>
           <h5>Choix du point relais</h5>
           <hr>
@@ -99,9 +94,12 @@
               <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
               <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
               <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
-              <button type="button" class="address-btn btn btn-dark">
-                <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;' %>
-              </button>
+              <!-- <button type="button" class="address-btn btn btn-dark"> -->
+              
+              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;', class: 'btn btn-dark payment-address-btn-colissimo' %>
+              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;',  class: 'btn btn-dark payment-address-btn-mondial-relay' %>
+              <!-- </button> -->
+            
             <% end %>
             <div  class="payment-display-address" data-target="address.display_address"></div>
             <div data-target="address.next_btn"></div>
@@ -112,7 +110,8 @@
             <div class="point-picker-result"></div>
           </div>
         </div>
-        <button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>
+        <button type="button" class="recap-payment-mondial-relay-btn btn btn-dark">Récapitulatif</button>
+        <button type="button" class="recap-payment-colissimo-btn btn btn-dark">Récapitulatif</button>
       </div>
         
       <%= simple_form_for(current_user, remote: true, url: user_path) do |f| %>
@@ -126,10 +125,10 @@
 
 
 <script type="text/javascript">
-  
-  const recapPaymentBtn = document.querySelector('.recap-payment-btn');
-  if (recapPaymentBtn) {
-    document.querySelector('.recap-payment-btn').addEventListener('click', (event) => {
+  const recapPaymentMondialRelayBtn = document.querySelector('.recap-payment-mondial-relay-btn');
+  const recapPaymentColissimoBtn = document.querySelector('.recap-payment-colissimo-btn');
+  if (recapPaymentMondialRelayBtn && recapPaymentColissimoBtn) {
+    recapPaymentMondialRelayBtn.addEventListener('click', (event) => {
       document.querySelector('.black-circle-logo').src = "/assets/payment/white_circle.svg";
       document.querySelectorAll(".white-circle-logo")[0].src = "/assets/payment/black_circle.svg";
       document.querySelector('.payment-new-delivery-step').style.display = "none";
@@ -138,25 +137,58 @@
       if (document.querySelector('.point-picker-result').children[1]) {
         document.querySelector('.resume-delivery-infos').appendChild(document.querySelector('.point-picker-result').children[1]);
       }
+      document.querySelector('.payment-delivery-price').textContent = "<%= @mondial_relay_price %>€"
+      let mondial_relay_price = "<%= @mondial_relay_price %>".replace(',', '.');
+      let mondial_relay_order_price = "<%= @order.price %>".replace(',', '.');
+      let mondial_relay_service_price =  "<%= @order.service / 2 %>".replace(',', '.');
+      
+      let totalMondialRelay = parseFloat(mondial_relay_price)
+                            + parseFloat(mondial_relay_order_price)
+                            + parseFloat(mondial_relay_service_price)
+      document.querySelector('.payment-total-price').textContent = totalMondialRelay;
+    })
+    recapPaymentColissimoBtn.addEventListener('click', (event) => {
+      document.querySelector('.black-circle-logo').src = "/assets/payment/white_circle.svg";
+      document.querySelectorAll(".white-circle-logo")[0].src = "/assets/payment/black_circle.svg";
+      document.querySelector('.payment-new-delivery-step').style.display = "none";
+      document.querySelector('.resume-payment-infos').style.display = "block";
+      document.querySelector('.resume-delivery-infos').appendChild(document.querySelector('.payment-display-address').children[1]);
+      document.querySelector('.payment-delivery-price').textContent = "<%= @colissimo_price %>€"
+      
+      let colissimo_price = "<%= @colissimo_price %>".replace(',', '.');
+      let colissimo_order_price = "<%= @order.price %>".replace(',', '.');
+      let colissimo_service_price =  "<%= @order.service / 2 %>".replace(',', '.');
+      
+      let totalColissimo = parseFloat(colissimo_price)
+                          + parseFloat(colissimo_order_price)
+                          + parseFloat(colissimo_service_price)
+
+      document.querySelector('.payment-total-price').textContent = totalColissimo
+
+      
     })
   }
-
-
-
 </script>
 
 <style type="text/css">
+  .payment-address-btn-colissimo, .payment-address-btn-mondial-relay {
+    display: none;
+  }
+
+  .delivery-brand.colissimo, .delivery-brand.mondial-relay {
+    cursor: pointer;
+  }
   .resume-prices {
     display: flex;
     justify-content: space-between;
   }
-  .point-picker-btn, .address-btn, .recap-payment-btn, .pay_button {
+  .point-picker-btn, .address-btn, .recap-payment-mondial-relay-btn, .recap-payment-colissimo-btn, .pay_button {
     height: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .adress_form, .point-picker, .recap-payment-btn, .resume-payment-infos {
+  .adress_form, .point-picker, .recap-payment-mondial-relay-btn, .recap-payment-colissimo-btn, .resume-payment-infos {
     display: none;
   }
   .toggle-hidden {
@@ -198,6 +230,8 @@
     margin: 50px auto 20px auto;
   }
 </style>
+
+
 
 <script type="text/javascript">
   const paymentButton = document.querySelector('.pay_button');
