@@ -1,27 +1,4 @@
 function pointPicker() {
-
-  // function toggleDeliveryName(deliveryName1) {
-  //   document.querySelector(`.delivery-name-${deliveryName1}`).classList.forEach(function(element) { 
-  //     if (element == "delivery-cliked") {
-  //       document.querySelector(`.delivery-name-${deliveryName1}`).classList.toggle('delivery-cliked');
-  //       // if (deliveryName1 == 'mondial-relay') {
-  //       //   document.querySelector(".point-picker").classList.remove('toggle-hidden');
-  //       // } else if (deliveryName1 == 'colissimo') {
-  //       //   document.querySelector(".adress_form").classList.remove('toggle-hidden');
-  //       // }
-  //     }
-  //   });
-  // }
-
-  // function checkToggleHidden(deliveryName) {
-  //   if (document.querySelector(`.delivery-name-${deliveryName}`).classList[1] == 'delivery-cliked') {
-  //      document.querySelector('.adress_form').classList.add('toggle-hidden'); 
-  //   } else if (document.querySelector(`.delivery-name-${deliveryName}`).classList[1] != 'delivery-cliked') {
-  //      document.querySelector('.adress_form').classList.remove('toggle-hidden'); 
-  //   } 
-  // }
-
-
   const mondialRelay = document.querySelector('.mondial-relay');
   if (mondialRelay) {
     document.querySelector('.delivery-name-mondial-relay').classList.add('delivery-cliked');
@@ -36,7 +13,6 @@ function pointPicker() {
       document.querySelector('#select_point_picker').addEventListener('click', (event) => {
         event.stopImmediatePropagation();
         openServicePointPicker("fr", "fr-fr");
-        // let recapPaymentBtn = document.querySelector('.recap-payment-btn');
         document.querySelector('.recap-payment-mondial-relay-btn').style.display = "flex";
       });
     })
@@ -44,21 +20,16 @@ function pointPicker() {
     document.querySelector('.mondial-relay').addEventListener('click', (event) => {
       event.stopImmediatePropagation();    
       
-      clearDataForMondialRelay(); //retirer le background-noir de colissimo 
+      clearDataForMondialRelay();
 
       document.querySelector('.mondial-relay').style.pointerEvents = "none";
       document.querySelector('.delivery-name-mondial-relay').classList.add('delivery-cliked');
       document.querySelector('.payment-address-btn-mondial-relay').classList.add('toggle-hidden');
-      
-      // if (document.querySelector('.point-picker-result')) {
-        document.querySelector('.point-picker').classList.add('toggle-hidden');
-      // }
+      document.querySelector('.point-picker').classList.add('toggle-hidden');
+
       if (document.querySelector('.point-picker-result').textContent != '') {
         document.querySelector('.recap-payment-colissimo-btn').style.display = "flex";
       }
-      // document.querySelector('.delivery-name-mondial-relay').classList.add('delivery-cliked');
-
-      // document.querySelector('.adress_form').classList.toggle('toggle-hidden'); 
       
       document.querySelector('.payment-address-btn-mondial-relay').addEventListener('click', (event) => {
         event.stopImmediatePropagation();
@@ -66,7 +37,6 @@ function pointPicker() {
         document.querySelector('#select_point_picker').addEventListener('click', (event) => {
           event.stopImmediatePropagation();
           openServicePointPicker("fr", "fr-fr");
-          // let recapPaymentBtn = document.querySelector('.recap-payment-btn');
           if (document.querySelector('.point-picker-result').textContent != '') {
             document.querySelector('.recap-payment-mondial-relay-btn').style.display = "flex";
           }
@@ -78,15 +48,12 @@ function pointPicker() {
   function clearDataForMondialRelay() {
     let deliveryColissimo = document.querySelector('.delivery-name-colissimo');
     document.querySelector('.colissimo').style.pointerEvents = "auto";
-    //Retirer le background-noir
-    if (deliveryColissimo.classList[1] == "delivery-cliked") { 
+    
+    if (deliveryColissimo.classList[1] == "delivery-cliked") { //Retirer le background-noir
       deliveryColissimo.classList.remove('delivery-cliked');
     }
     document.querySelector('.payment-address-btn-colissimo').classList.remove('toggle-hidden');
     document.querySelector('.recap-payment-colissimo-btn').style.display = "none";
-    // if (document.querySelector('point-picker').style.display == "none") { 
-    // }
-
   }
 
   function clearDataForColissimo() {
@@ -105,13 +72,6 @@ function pointPicker() {
     }
     document.querySelector('.payment-address-btn-mondial-relay').classList.remove('toggle-hidden');
     document.querySelector('.recap-payment-mondial-relay-btn').style.display = "none";
-    // if (document.querySelector('.adress_form').classList[1] != "toggle-hidden") {
-    //   document.querySelector('.adress_form').classList.add('toggle-hidden'); 
-    // } else if (document.querySelector('.delivery-name-colissimo').classList[1] != "delivery-cliked") {
-    //   document.querySelector('.adress_form').classList.remove('toggle-hidden'); 
-    // }
-    // if (document.querySelector('.adress_form').classList.toggle('toggle-hidden')) {}
-    // document.querySelector('.adress_form').classList.toggle('toggle-hidden');
   }
 
 
@@ -129,12 +89,7 @@ function pointPicker() {
       
       document.querySelector('.payment-address-btn-colissimo').addEventListener('click', (event) => {
         event.stopImmediatePropagation();
-        // if (document.querySelector('.recap-payment-btn') == undefined) {
-          // let recapPaymentBtn = document.querySelector('.recap-payment-btn');
-          document.querySelector('.recap-payment-colissimo-btn').style.display = "flex";
-          // let recapPaymentBtn = '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>';
-          // document.querySelector('.payment-display-address').insertAdjacentHTML('afterEnd', recapPaymentBtn);
-        // }
+        document.querySelector('.recap-payment-colissimo-btn').style.display = "flex";
       });
     });
   }
@@ -189,18 +144,7 @@ function pointPicker() {
       }
       const data_picker = `<br><p class="point-picker-result">Votre point relais : ${result.name} - ${result.house_number} ${result.street}, ${result.postal_code} ${result.city}</p>`;
       pointPickerResult.innerHTML = data_picker;
-      // if (document.querySelector('.recap-payment-btn') == undefined) {
-        // console.log('ok');
-        // let recapPaymentBtn = '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>';
-        // pointPickerResult.insertAdjacentHTML('afterEnd', '<button type="button" class="recap-payment-btn btn btn-dark">Récapitulatif</button>');
-      // }
-
-      // resultElem.style.display = 'block';
-      // if (document.querySelector("#result").textContent != "") {
-      //   document.querySelector("#current_user_result").style.display = "none";
-      //   if (document.querySelector("#pay_rails") == undefined)
-      //   document.querySelector("#pay_js").style.display = "block";
-      // }
+      
     },
     /**
      * third arg: failure callback function

@@ -1,16 +1,73 @@
-<div class="container">
-  <div class="row py-4">
-    <div class="col-md-3"><%= image_tag @order.sneaker.photos[0].url, width: '100%' %></div>
-    <div class="col">
-      <h1>Order #<%= @order.id %> <small><span class="badge badge-primary"><%= @order.state %></span></small></h1>
-      <ul class="list-unstyled">
-        <li><strong>ISSUED ON</strong> <%= @order.created_at.to_date %></li>
-        <li><strong>sneaker</strong> <%= @order.sneaker.name %></li>
-        <li><strong>TOTAL</strong> <%= humanized_money_with_symbol @order.price %></li>
-        </li>
-      </ul>
-      <p>Estimated delivery in <strong>2 business days</strong></p>
-      <%= link_to "Retour à la liste", sneakers_path%>
+<div class="container order-show">
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <%= image_tag(@order.sneaker.photos[0].url, class: 'sneaker-show-photos') %>
+      </div>
+      <div class="carousel-item ">
+        <%= image_tag(@order.sneaker.photos[1].url, class: 'sneaker-show-photos') %>
+      </div>
+      <div class="carousel-item ">
+        <%= image_tag(@order.sneaker.photos[2].url, class: 'sneaker-show-photos') %>
+      </div>
+      <div class="carousel-item ">
+        <%= image_tag(@order.sneaker.photos[3].url, class: 'sneaker-show-photos') %>
+      </div>
+      <div class="carousel-item ">
+        <%= image_tag(@order.sneaker.photos[4].url, class: 'sneaker-show-photos') %>
+      </div>
+      <div class="carousel-item ">
+        <%= image_tag(@order.sneaker.photos[5].url, class: 'sneaker-show-photos') %>
+      </div>
+      <% unless @order.sneaker.photos[6].nil? %>
+        <div class="carousel-item ">
+          <%= image_tag(@order.sneaker.photos[6].url, class: 'sneaker-show-photos') %>
+        </div>
+      <% end %>
+      <% unless @order.sneaker.photos[7].nil? %>
+        <div class="carousel-item ">
+          <%= image_tag(@order.sneaker.photos[7].url, class: 'sneaker-show-photos') %>
+        </div>
+      <% end %>
     </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon sneaker-show-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
+  <h1>Commande #<%= @order.id %> <small><span class="badge badge-dark"> <%= @order.state %></span></small></h1>
+  <ul class="list-unstyled">
+    <li><strong>Commande passée le</strong> <%= @order.created_at.to_date.strftime("%d/%m/%Y") %></li>
+    <li><strong>Paire :</strong> <%= @order.sneaker.sneaker_db.name %></li>
+    <% if @mondial_relay_price %>
+      <li><strong>Livraison :</strong> <%= humanized_money_with_symbol @mondial_relay_price %></li>
+    <% else %>
+      <li><strong>Livraison :</strong> <%= humanized_money_with_symbol @colissimo_price %></li>
+    <% end %>
+      <li><strong>Authentification :</strong> <%= humanized_money_with_symbol @order.service / 2 %></li>
+      <li><strong>Prix de la paire :</strong> <%= humanized_money_with_symbol @order.price %></li>
+      <%# total = (@mondial_relay_price ? @mondial_relay_price : @colissimo_price) + @order_service + @order.price %>
+      <!-- <li><strong>Total :</strong> <%#= humanized_money_with_symbol total %></li> -->
+    </li>
+  </ul>
 </div>
+
+
+<style type="text/css">
+  .sneaker-show-photos {
+    width: 500px;
+    height: 500px;
+  }
+  .order-show {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  } 
+
+</style>

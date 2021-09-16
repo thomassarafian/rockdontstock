@@ -94,11 +94,9 @@
               <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
               <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
               <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
-              <!-- <button type="button" class="address-btn btn btn-dark"> -->
               
-              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;', class: 'btn btn-dark payment-address-btn-colissimo' %>
-              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;',  class: 'btn btn-dark payment-address-btn-mondial-relay' %>
-              <!-- </button> -->
+              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;', class: 'btn btn-dark payment-address-btn-colissimo', name: "colissimo-price" %>
+              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;',  class: 'btn btn-dark payment-address-btn-mondial-relay', name: 'mondial-relay-price' %>
             
             <% end %>
             <div  class="payment-display-address" data-target="address.display_address"></div>

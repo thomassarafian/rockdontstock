@@ -13,6 +13,8 @@ class OrdersController < ApplicationController
   	@order = current_user.orders.find(params[:id])
   	authorize @order
     @order.update(state: "Payé")
+    @order_service = @order.service_cents / 2
+
   	# current_stripe_session = retrieve_stripe_session
     
 		SendcloudCreateLabel.new(current_user, @order).create_label
@@ -32,6 +34,7 @@ class OrdersController < ApplicationController
 	end
 
 	def create
+    raise
 	  @sneaker = Sneaker.find(params[:sneaker_id])
     @sneaker_db = SneakerDb.find(@sneaker.sneaker_db_id)
 	  @order = Order.create!(sneaker: @sneaker, sneaker_name: @sneaker_db.name, price_cents: @sneaker.price_cents, state: 'En cours', user: current_user)

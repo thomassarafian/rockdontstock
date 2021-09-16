@@ -23,9 +23,9 @@ Rails.application.routes.draw do
   end
 
 
-	resources :orders, only: [:show, :create] do
-	  resources :payments, only: [:new]
-	end
+	# resources :orders, only: [:show, :create] do
+	  # resources :payments, only: [:new]
+	# end
 
   get 'about' => 'pages#about'
   get 'faq' => 'pages#faq'
