@@ -119,9 +119,10 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
 
-  config.action_mailer.default_url_options = { host: 'rockdontstock.com/' }
+  # config.action_mailer.default_url_options = { host: 'rockdontstock.com' }
+  config.action_mailer.default_url_options = { :protocol => 'https', :host => 'www.rockdontstock.com' }
 
-  config.action_mailer.delivery_method = :mailjet
+  config.action_mailer.delivery_method = :mailjet_api
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
   
