@@ -1078,6 +1078,19 @@
         "load": false,
         "change": []
       }
+    }, {
+      "name": "Validate announcement bad photos",
+      "type": "bulk",
+      "base_url": null,
+      "endpoint": "forest/actions/validate-announcement-bad-photos",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
     }]
   }, {
     "name": "SneakerDb",

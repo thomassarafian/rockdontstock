@@ -13,11 +13,11 @@ class OrdersController < ApplicationController
   	@order = current_user.orders.find(params[:id])
   	authorize @order
     @order.update(state: "Payé")
-    @order_service = @order.service_cents / 2
+    # @order_service = @order.service_cents / 2
 
   	# current_stripe_session = retrieve_stripe_session
     
-		SendcloudCreateLabel.new(current_user, @order).create_label
+		# SendcloudCreateLabel.new(current_user, @order).create_label
 
 
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
@@ -34,18 +34,26 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-    raise
-	  @sneaker = Sneaker.find(params[:sneaker_id])
-    @sneaker_db = SneakerDb.find(@sneaker.sneaker_db_id)
-	  @order = Order.create!(sneaker: @sneaker, sneaker_name: @sneaker_db.name, price_cents: @sneaker.price_cents, state: 'En cours', user: current_user)
-	  authorize @order
-    Stripe::StripeCreateCustomer.new(current_user)
-		create_stripe_session(@order, @sneaker)
+    if params['mondial-relay-price'].present? || params['colissimo-price'].present?
+      @order = current_user.orders.last
+      @sneaker = current_user.orders.last.sneaker
+      @sneaker_db = @sneaker.sneaker_db
+      params['mondial-relay-price'].present? ? create_stripe_session(@order, @sneaker, params['mondial-relay-price']) : create_stripe_session(@order, @sneaker, params['colissimo-price'])
+      authorize @order
+      # create_stripe_session(@order, @sneaker)
+    else
+  	  @sneaker = Sneaker.find(params[:sneaker_id])
+      @sneaker_db = SneakerDb.find(@sneaker.sneaker_db_id)
+  	  @order = Order.create!(sneaker: @sneaker, sneaker_name: @sneaker_db.name, price_cents: @sneaker.price_cents, state: 'En cours', user: current_user)
+  	  authorize @order
+      Stripe::StripeCreateCustomer.new(current_user)
+      redirect_to new_order_payment_path(@order)
+    end
 	end
 
 	private
 
-	def create_stripe_session(order, sneaker)
+	def create_stripe_session(order, sneaker, deliveryPrice)
 		stripe_session = Stripe::Checkout::Session.create({
 	  	customer: current_user.customer_id,
 	    payment_method_types: ['card'],
@@ -55,7 +63,7 @@ class OrdersController < ApplicationController
 	      		name: @sneaker_db.name,
 	    			images: [@sneaker.photos[0].url],
 	    		},
-	    		unit_amount: @order.price_cents + @order.shipping_cost_cents + (@order.service_cents / 2),
+	    		unit_amount: @order.price_cents + (deliveryPrice.to_f * 100).to_i + (@order.service_cents / 2),
 	      	currency: "EUR",
 	    	},
 	    	quantity: 1,
@@ -72,7 +80,7 @@ class OrdersController < ApplicationController
 	    cancel_url: sneaker_url(@sneaker)
 	  })
 	  @order.update(checkout_session_id: stripe_session.id)
-	  redirect_to new_order_payment_path(@order)
+	  
 	end
 
 	def retrieve_stripe_session

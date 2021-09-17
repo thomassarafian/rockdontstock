@@ -23,9 +23,9 @@ Rails.application.routes.draw do
   end
 
 
-	# resources :orders, only: [:show, :create] do
-	  # resources :payments, only: [:new]
-	# end
+	resources :orders, only: [:show, :create] do
+	  resources :payments, only: [:new]
+	end
 
   get 'about' => 'pages#about'
   get 'faq' => 'pages#faq'
@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     post '/actions/reject-announcement-bad-criteria' => 'sneakers#reject_announcement_bad_criteria'
     post '/actions/reject-announcement-bad-angles' => 'sneakers#reject_announcement_bad_angles'
     post '/actions/reject-announcement-fake-sneakers' => 'sneakers#reject_announcement_fake_sneakers'
+    post '/actions/validate-announcement-bad-photos' => 'sneakers#validate_announcement_bad_photos'
   end
 
   mount ForestLiana::Engine => '/forest'	

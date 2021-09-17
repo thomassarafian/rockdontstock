@@ -4,7 +4,10 @@ class OrderPolicy < ApplicationPolicy
       scope.all
     end
   end
-   def create? # Anyone can create a order
+  def new? # Anyone can create a order
+    true
+  end
+  def create? # Anyone can create a order
   	true
   end
   def show? # Anyone can create a order

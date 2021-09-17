@@ -65,7 +65,7 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     p variable.attributes['Messages']
 
     render json: { 
-      success: "L'annonce est refusé pour mauvais critères et l'email a été envoyé au vendeur !"
+      success: "L'annonce est refusée pour mauvais critères et l'email a été envoyé au vendeur !"
     }
   end
   
@@ -100,7 +100,7 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     p variable.attributes['Messages']
 
     render json: { 
-      success: "L'annonce est refusé pour mauvais angles et l'email a été envoyé au vendeur !"
+      success: "L'annonce est refusée pour mauvais angles et l'email a été envoyé au vendeur !"
     }
   end
 
@@ -111,31 +111,63 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     @sneaker.update(state: -3)
   
     variable = Mailjet::Send.create(messages: [{
-    'From'=> {
-      'Email'=> "elliot@rockdontstock.com",
-      'Name'=> "Rock Don't Stock"
-    },
-    'To'=> [
-      {
-        'Email'=>  @sneaker.user.email,
-        'Name'=> @sneaker.user.first_name
+      'From'=> {
+        'Email'=> "elliot@rockdontstock.com",
+        'Name'=> "Rock Don't Stock"
+      },
+      'To'=> [
+        {
+          'Email'=> @sneaker.user.email,
+          'Name'=> @sneaker.user.first_name
+        }
+      ],
+      'TemplateID'=> 3157438,
+      'TemplateLanguage'=> true,
+      'Subject'=> "Erreur lors de la mise en ligne de ta paire 🧐",
+      'Variables'=> {
+        "prenom" => @sneaker.user.first_name,
+        "modele_paire" => @sneaker.sneaker_db.name,
+        "lien_nouvelle_annonce" => "https://www.rockdontstock.com/sneakers/new"
       }
-    ],
-    'TemplateID'=> 3157438,
-    'TemplateLanguage'=> true,
-    'Subject'=> "Erreur lors de la mise en ligne de ta paire 🧐",
-    'Variables'=> {
-      "prenom" => @sneaker.user.first_name,
-      "modele_paire" => @sneaker.sneaker_db.name,
-      "lien_nouvelle_annonce" => "https://www.rockdontstock.com/sneakers/new"
-    }
-  }])
-  p variable.attributes['Messages']
+    }])
+    p variable.attributes['Messages']
     
     render json: { 
-      success: "L'annonce est refusé car la paire est fake et l'email a été envoyé au vendeur !"
+      success: "L'annonce est refusée car la paire est fake et l'email a été envoyé au vendeur !"
     }
   end
 
+  def validate_announcement_bad_photos
+    sneaker_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
+
+    @sneaker = Sneaker.find(sneaker_id)
+    @sneaker.update(state: 1)
+  
+    variable = Mailjet::Send.create(messages: [{
+      'From'=> {
+        'Email'=> "elliot@rockdontstock.com",
+        'Name'=> "Rock Don't Stock"
+      },
+      'To'=> [
+        {
+          'Email'=> @sneaker.user.email,
+          'Name'=> @sneaker.user.first_name
+        }
+      ],
+      'TemplateID'=> 3180072,
+      'TemplateLanguage'=> true,
+      'Subject'=> "Améliore ton annonce pour vendre ta paire au plus vite 🏃",
+      'Variables'=> {
+        "prenom" => @sneaker.user.first_name,
+        "modele_paire" => @sneaker.sneaker_db.name,
+        "lien_nouvelle_annonce" => "https://www.rockdontstock.com/sneakers/new"
+      }
+    }])
+    p variable.attributes['Messages']
+    
+    render json: { 
+      success: "L'annonce est validée malgré les photos :/ et l'email a été envoyé au vendeur !"
+    }
+  end
 
 end

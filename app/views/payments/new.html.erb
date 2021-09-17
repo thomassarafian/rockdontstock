@@ -68,7 +68,9 @@
         <br>
         <%# total =  (@order.price + @order.shipping_cost + (@order.service / 2)) %>
         <strong><p class="resume-prices">TOTAL <span class="payment-total-price"></span></p></strong>
+      
         <button type="button" class="pay_button btn btn-dark">Paiement</button>
+      
       </div>
       <div class="payment-new-delivery-step">
         <h5>Choix de l'expéditeur</h5>
@@ -96,7 +98,7 @@
               <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
               
               <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;', class: 'btn btn-dark payment-address-btn-colissimo', name: "colissimo-price" %>
-              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;',  class: 'btn btn-dark payment-address-btn-mondial-relay', name: 'mondial-relay-price' %>
+              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;',  class: 'btn btn-dark payment-address-btn-mondial-relay' %>
             
             <% end %>
             <div  class="payment-display-address" data-target="address.display_address"></div>
@@ -108,19 +110,36 @@
             <div class="point-picker-result"></div>
           </div>
         </div>
-        <button type="button" class="recap-payment-mondial-relay-btn btn btn-dark">Récapitulatif</button>
-        <button type="button" class="recap-payment-colissimo-btn btn btn-dark">Récapitulatif</button>
-      </div>
-        
       <%= simple_form_for(current_user, remote: true, url: user_path) do |f| %>
         <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
       <% end %>
+        
+        <form action="/orders" method="POST">
+          <input name="mondial-relay-price" value="<%= @mondial_relay_price %>" type="hidden">
+          <button class="recap-payment-mondial-relay-btn btn btn-dark" type="submit">Récapitulatif</button>
+            <!-- Récapitulatif -->
+          <!-- </button> -->
+          <!-- <button type="submit" id="checkout-button">Checkout</button> -->
+        </form>
+
+        <button name='colissimo-price' type="button" class="recap-payment-colissimo-btn btn btn-dark">Récapitulatif</button>
+      </div>
+        
       
     </div>    
     </div>
   </div>
 </div>
 
+
+<!-- <script type="text/javascript">
+  document.querySelector('.recap-payment-mondial-relay-btn').addEventListener('click', (event) => {
+    event.preventDefault();
+    // fetch('/orders/', {
+    //   method: 'POST',
+    // })
+  });
+</script> -->
 
 <script type="text/javascript">
   const recapPaymentMondialRelayBtn = document.querySelector('.recap-payment-mondial-relay-btn');
@@ -236,10 +255,10 @@
   if (paymentButton != undefined)
   {
     paymentButton.addEventListener('click', () => {
-      var stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>', {
+      let stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>', {
       });
       stripe.redirectToCheckout({
-        sessionId: '<%= @order.checkout_session_id  %>'
+        sessionId: "<%= @order.checkout_session_id  %>"
       });
     });
   }
