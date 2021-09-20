@@ -90,13 +90,19 @@
           </div>
           <h5>Choix du point relais</h5>
           <hr>
-
-          <div class="adress_form" data-controller="address">
-            <%= simple_form_for(current_user, html: {method: :PATCH }, remote: true, data: {target: "address.form", id: current_user.id }, id: 'adress-form') do |f| %>
+          
+          <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+  
+          <div class="adress_form" data-controller="address" >
+            <%= simple_form_for(current_user, as: :user, url: '/users', html: {method: :put, id: 'adress_form_payment_new' },
+            remote: true, data: {target: "address.form", id: current_user.id }) do |f| %>
+              <input type="hidden" name="stripe-token-account" id="stripe-token-account">
+              <input type="hidden" name="stripe-token-person" id="stripe-token-person">
               <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
+              <%= f.input :line1, as: :hidden, input_html: { id: "hide_user_line1" } %>
               <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
               <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
-              
+              <!-- <p id="gangok" class="btn btn-dark">CLICK BITCH </p> -->
               <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;', class: 'btn btn-dark payment-address-btn-colissimo', name: "colissimo-price" %>
               <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;',  class: 'btn btn-dark payment-address-btn-mondial-relay' %>
             
@@ -131,15 +137,69 @@
   </div>
 </div>
 
+<script type="text/javascript">
 
-<!-- <script type="text/javascript">
-  document.querySelector('.recap-payment-mondial-relay-btn').addEventListener('click', (event) => {
-    event.preventDefault();
-    // fetch('/orders/', {
-    //   method: 'POST',
-    // })
+    $(document).ready( function () {
+    $('form').submit( function () {
+      var formdata = $(this).serialize();
+      $.ajax({
+          type: "PATCH",
+          url: "/users",
+          data: formdata,
+       });
+      return false;
+    });
   });
+
+</script>
+
+<!-- 
+<script type="text/javascript">
+  const adressFormPaymentNewForm = document.querySelector('#adress_form_payment_new');
+  const gangBtn = document.getElementById('gangok');
+  // if (adressFormPaymentNewForm) {
+    const stripe = Stripe('pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA');
+    // adressFormPaymentNewForm.addEventListener('submit', editUserPaymentForm);
+    gangBtn.addEventListener('click', editUserPaymentForm)
+    async function editUserPaymentForm(event) {
+      console.log('ok');
+      event.preventDefault();
+      // let user_line1 = document.querySelector('#user_line1').value;
+      let hide_user_line1 = document.querySelector('#hide_user_line1').value;
+      let user_city = document.querySelector('#user_city').value;
+      let user_postal_code = document.querySelector('#user_postal_code').value;
+
+      const accountResult = await stripe.createToken('account', {
+        business_type: 'individual',
+        individual: {
+          address: {
+            line1: hide_user_line1,
+            city: user_city,
+            postal_code: user_postal_code,
+          },
+        },
+        tos_shown_and_accepted: true,
+      });
+      const personResult = await stripe.createToken('person', {
+        person: {
+          address: {
+            line1: hide_user_line1,
+            city: user_city,
+            postal_code: user_postal_code,
+          },
+        },
+      });
+      if (accountResult.token && personResult.token) {
+        console.log('ok');
+        document.querySelector('#stripe-token-account').value = accountResult.token.id;
+        document.querySelector('#stripe-token-person').value = personResult.token.id;
+        adressFormPaymentNewForm.submit();
+      };
+    };
+  // };
 </script> -->
+
+
 
 <script type="text/javascript">
   const recapPaymentMondialRelayBtn = document.querySelector('.recap-payment-mondial-relay-btn');
