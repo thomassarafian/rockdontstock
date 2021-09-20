@@ -1,19 +1,19 @@
 function launchTimerForFinalSneakerNewButton() {
-    let i = 12;
-    document.getElementById('finishSneakerNewWaitMessage').style.display = "block";
-    document.getElementById('waitTimer10s').textContent = i;
-    i--;
-    setInterval( function () {
-      if (i >= 0) {
-        document.getElementById('waitTimer10s').textContent = i;
-        i--;
-      }
-    },1000);
-    setTimeout(function() {
-      document.getElementById('finishSneakerNewBtn').removeAttribute("disabled");
-      document.getElementById('finishSneakerNewWaitMessage').style.display = "none";
-    }, 12000);
-  }  
+  let i = 12;
+  document.getElementById('finishSneakerNewWaitMessage').style.display = "block";
+  document.getElementById('waitTimer10s').textContent = i;
+  i--;
+  setInterval( function () {
+    if (i >= 0) {
+      document.getElementById('waitTimer10s').textContent = i;
+      i--;
+    }
+  },1000);
+  setTimeout(function() {
+    document.getElementById('finishSneakerNewBtn').removeAttribute("disabled");
+    document.getElementById('finishSneakerNewWaitMessage').style.display = "none";
+  }, 12000);
+}  
 
 function displayStep3 (photoPreview) {
   launchTimerForFinalSneakerNewButton();

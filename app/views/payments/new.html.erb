@@ -62,15 +62,19 @@
         <div class="resume-delivery-infos"></div>
         <br>
 
-        <p class="resume-prices">Prix de l'article : <span class="payment-article-price"><%= @order.price %>€</span></p>
+        <p class="resume-prices">Prix de l'article : <span class="payment-article-price"><%= @order.sneaker.price %>€</span></p>
         <p class="resume-prices">Livraison : <span class="payment-delivery-price"></span></p>
-        <p class="resume-prices">Authentification : <span class="payment-service-price"><%= (@order.service / 2) %>€</span></p>
+        <p class="resume-prices">Authentification : <span class="payment-service-price-message">
+          <span class="payment-service-price"><%= (@order.service / 2) %>€</span> OFFERT</span>
+        </p>
         <br>
         <%# total =  (@order.price + @order.shipping_cost + (@order.service / 2)) %>
         <strong><p class="resume-prices">TOTAL <span class="payment-total-price"></span></p></strong>
       
-        <button type="button" class="pay_button btn btn-dark">Paiement</button>
-      
+        <button disabled type="button" id="pay_button" class="pay_button btn btn-dark">Paiement</button>
+        <div style="display:none" id="payBtnWaitMessage">
+          <i class='fas fa-spinner fa-spin'></i> Chargement <span id="waitTimer10s"></span> sec ...
+        </div>
       </div>
       <div class="payment-new-delivery-step">
         <h5>Choix de l'expéditeur</h5>
@@ -91,10 +95,9 @@
           <h5>Choix du point relais</h5>
           <hr>
           
-          <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-  
-          <div class="adress_form" data-controller="address" >
-            <%= simple_form_for(current_user, as: :user, url: '/users', html: {method: :put, id: 'adress_form_payment_new' },
+
+            <div class="adress_form" data-controller="address" >
+            <%= simple_form_for(current_user, html: {method: :patch, id: 'adress_form_payment_new' },
             remote: true, data: {target: "address.form", id: current_user.id }) do |f| %>
               <input type="hidden" name="stripe-token-account" id="stripe-token-account">
               <input type="hidden" name="stripe-token-person" id="stripe-token-person">
@@ -102,10 +105,8 @@
               <%= f.input :line1, as: :hidden, input_html: { id: "hide_user_line1" } %>
               <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
               <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
-              <!-- <p id="gangok" class="btn btn-dark">CLICK BITCH </p> -->
               <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;', class: 'btn btn-dark payment-address-btn-colissimo', name: "colissimo-price" %>
               <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;',  class: 'btn btn-dark payment-address-btn-mondial-relay' %>
-            
             <% end %>
             <div  class="payment-display-address" data-target="address.display_address"></div>
             <div data-target="address.next_btn"></div>
@@ -137,34 +138,15 @@
   </div>
 </div>
 
-<script type="text/javascript">
 
-    $(document).ready( function () {
-    $('form').submit( function () {
-      var formdata = $(this).serialize();
-      $.ajax({
-          type: "PATCH",
-          url: "/users",
-          data: formdata,
-       });
-      return false;
-    });
-  });
 
-</script>
-
-<!-- 
 <script type="text/javascript">
   const adressFormPaymentNewForm = document.querySelector('#adress_form_payment_new');
-  const gangBtn = document.getElementById('gangok');
-  // if (adressFormPaymentNewForm) {
+  if (adressFormPaymentNewForm) {
     const stripe = Stripe('pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA');
-    // adressFormPaymentNewForm.addEventListener('submit', editUserPaymentForm);
-    gangBtn.addEventListener('click', editUserPaymentForm)
+    document.querySelector('.payment-address-btn-mondial-relay').addEventListener('click', editUserPaymentForm)
     async function editUserPaymentForm(event) {
-      console.log('ok');
       event.preventDefault();
-      // let user_line1 = document.querySelector('#user_line1').value;
       let hide_user_line1 = document.querySelector('#hide_user_line1').value;
       let user_city = document.querySelector('#user_city').value;
       let user_postal_code = document.querySelector('#user_postal_code').value;
@@ -190,18 +172,33 @@
         },
       });
       if (accountResult.token && personResult.token) {
-        console.log('ok');
         document.querySelector('#stripe-token-account').value = accountResult.token.id;
         document.querySelector('#stripe-token-person').value = personResult.token.id;
         adressFormPaymentNewForm.submit();
       };
     };
-  // };
-</script> -->
+  };
+</script>
 
 
 
 <script type="text/javascript">
+  function launchTimerToWaitStripeSession() {
+    let i = 10;
+    document.getElementById('payBtnWaitMessage').style.display = "block";
+    document.getElementById('waitTimer10s').textContent = i;
+    i--;
+    setInterval( function () {
+      if (i >= 0) {
+        document.getElementById('waitTimer10s').textContent = i;
+        i--;
+      }
+    },1000);
+    setTimeout(function() {
+      document.getElementById('pay_button').removeAttribute("disabled");
+      document.getElementById('payBtnWaitMessage').style.display = "none";
+    }, 10000);
+  }  
   const recapPaymentMondialRelayBtn = document.querySelector('.recap-payment-mondial-relay-btn');
   const recapPaymentColissimoBtn = document.querySelector('.recap-payment-colissimo-btn');
   if (recapPaymentMondialRelayBtn && recapPaymentColissimoBtn) {
@@ -210,18 +207,19 @@
       document.querySelectorAll(".white-circle-logo")[0].src = "/assets/payment/black_circle.svg";
       document.querySelector('.payment-new-delivery-step').style.display = "none";
       document.querySelector('.resume-payment-infos').style.display = "block";
+      launchTimerToWaitStripeSession()
       document.querySelector('.resume-delivery-infos').appendChild(document.querySelector('.payment-display-address').children[1]);
       if (document.querySelector('.point-picker-result').children[1]) {
         document.querySelector('.resume-delivery-infos').appendChild(document.querySelector('.point-picker-result').children[1]);
       }
       document.querySelector('.payment-delivery-price').textContent = "<%= @mondial_relay_price %>€"
       let mondial_relay_price = "<%= @mondial_relay_price %>".replace(',', '.');
-      let mondial_relay_order_price = "<%= @order.price %>".replace(',', '.');
-      let mondial_relay_service_price =  "<%= @order.service / 2 %>".replace(',', '.');
+      let mondial_relay_order_price = "<%= @order.sneaker.price %>".replace(',', '.');
+      // let mondial_relay_service_price =  "<%= @order.service / 2 %>".replace(',', '.');
       
       let totalMondialRelay = parseFloat(mondial_relay_price)
-                            + parseFloat(mondial_relay_order_price)
-                            + parseFloat(mondial_relay_service_price)
+                            + parseFloat(mondial_relay_order_price);
+                            // + parseFloat(mondial_relay_service_price)
       document.querySelector('.payment-total-price').textContent = totalMondialRelay;
     })
     recapPaymentColissimoBtn.addEventListener('click', (event) => {
@@ -229,25 +227,27 @@
       document.querySelectorAll(".white-circle-logo")[0].src = "/assets/payment/black_circle.svg";
       document.querySelector('.payment-new-delivery-step').style.display = "none";
       document.querySelector('.resume-payment-infos').style.display = "block";
+      launchTimerToWaitStripeSession()
       document.querySelector('.resume-delivery-infos').appendChild(document.querySelector('.payment-display-address').children[1]);
       document.querySelector('.payment-delivery-price').textContent = "<%= @colissimo_price %>€"
       
       let colissimo_price = "<%= @colissimo_price %>".replace(',', '.');
-      let colissimo_order_price = "<%= @order.price %>".replace(',', '.');
-      let colissimo_service_price =  "<%= @order.service / 2 %>".replace(',', '.');
+      let colissimo_order_price = "<%= @order.sneaker.price %>".replace(',', '.');
+      // let colissimo_service_price = "<%= @order.service / 2 %>".replace(',', '.');
       
       let totalColissimo = parseFloat(colissimo_price)
-                          + parseFloat(colissimo_order_price)
-                          + parseFloat(colissimo_service_price)
+                          + parseFloat(colissimo_order_price);
+                          // + parseFloat(colissimo_service_price)
 
       document.querySelector('.payment-total-price').textContent = totalColissimo
-
-      
     })
   }
 </script>
 
 <style type="text/css">
+  .payment-service-price {
+    text-decoration: line-through;
+  }
   .payment-address-btn-colissimo, .payment-address-btn-mondial-relay {
     display: none;
   }
@@ -318,7 +318,7 @@
       let stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>', {
       });
       stripe.redirectToCheckout({
-        sessionId: "<%= @order.checkout_session_id  %>"
+        sessionId: "<%= @order.checkout_session_id %>"
       });
     });
   }

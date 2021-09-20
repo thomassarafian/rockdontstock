@@ -17,7 +17,8 @@ class OrdersController < ApplicationController
 
   	# current_stripe_session = retrieve_stripe_session
     
-		# SendcloudCreateLabel.new(current_user, @order).create_label
+    #WEBHOOOK STRIPE donc apres Orders#create des qu'on est sur qeu c'est PAYÉ ->>>
+		SendcloudCreateLabel.new(current_user, @order).create_label
 
 
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
@@ -40,7 +41,6 @@ class OrdersController < ApplicationController
       @sneaker_db = @sneaker.sneaker_db
       params['mondial-relay-price'].present? ? create_stripe_session(@order, @sneaker, params['mondial-relay-price']) : create_stripe_session(@order, @sneaker, params['colissimo-price'])
       authorize @order
-      # create_stripe_session(@order, @sneaker)
     else
   	  @sneaker = Sneaker.find(params[:sneaker_id])
       @sneaker_db = SneakerDb.find(@sneaker.sneaker_db_id)
@@ -63,7 +63,7 @@ class OrdersController < ApplicationController
 	      		name: @sneaker_db.name,
 	    			images: [@sneaker.photos[0].url],
 	    		},
-	    		unit_amount: @order.price_cents + (deliveryPrice.to_f * 100).to_i + (@order.service_cents / 2),
+	    		unit_amount: @order.price_cents + (deliveryPrice.to_f * 100).to_i, #+ (@order.service_cents / 2),
 	      	currency: "EUR",
 	    	},
 	    	quantity: 1,
@@ -80,6 +80,9 @@ class OrdersController < ApplicationController
 	    cancel_url: sneaker_url(@sneaker)
 	  })
 	  @order.update(checkout_session_id: stripe_session.id)
+    @order.update(shipping_cost_cents: (deliveryPrice.to_f * 100).to_i)
+    # @order.update(service_cents: (@order.service_cents / 2))
+    @order.update(price_cents: (@order.price_cents + (deliveryPrice.to_f * 100).to_i)) #+ (@order.service_cents / 2)))
 	  
 	end
 

@@ -15,6 +15,10 @@ class UsersController < ApplicationController
         redirect_to user_transfers_path, alert: "Erreur de vérification de l'IBAN."
       end
     end
+    if params['stripe-token-account'].present? && params['stripe-token-person'].present?
+      @user.update_column(:token_account, params['stripe-token-account']) 
+      @user.update_column(:token_person, params['stripe-token-person'])
+    end
 		@user.update(user_params)
     @user.save!
     # if @user.save

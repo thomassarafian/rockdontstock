@@ -14,22 +14,22 @@ class SendcloudCreateLabel
       parcel: {
         name: "Nils Bonnavaud",
         company_name: "Rock Don't Stock",
-        address: "Place de la Comédie",
-        house_number: "11",
+        address: "rue Massilian",
+        house_number: "2",
         city: "Montpellier",
         postal_code: "34000",
         telephone: "+33676659036",
-        email: "nilsbonna@hotmail.fr",
+        email: "hello@rockdontstock.com",
         order_number: @order.id,
         weight: "1.5",
         request_label: "true",
         data: [],
         country: "FR",
         shipment: {
-         id: 8,#1680, #@user.picker_data['id'],
-         name: "Unstamped Letter", #"Mondial Relay Point Relais L 1-2kg",
+         id: 1680,#8 (pour les test),#1680, #@user.picker_data['id'],
+         name: "Mondial Relay Point Relais L 1-2kg", #"Unstamped Letter",
         },
-        # to_service_point: @user.picker_data['id'],
+        to_service_point: 10603692,
         parcel_items: [],
         from_name: @order.sneaker.user.first_name + " " + @order.sneaker.user.last_name,
         from_address_1: @order.sneaker.user.line1,
@@ -38,7 +38,7 @@ class SendcloudCreateLabel
         from_city: @order.sneaker.user.city,
         from_postal_code: @order.sneaker.user.postal_code,
         from_country: "FR",
-        from_telephone: "+33#{@order.sneaker.user.phone}", #"0606860076", #@order.sneaker.user.phone? ? @order.sneaker.user.phone : "",
+        # from_telephone: "+33#{@order.sneaker.user.phone}", #"0606860076", #@order.sneaker.user.phone? ? @order.sneaker.user.phone : "",
         from_email: @order.sneaker.user.email,
         total_order_value_currency: "EUR",
         total_order_value: @order.sneaker.price_cents / 100,
@@ -55,36 +55,66 @@ class SendcloudCreateLabel
 
     puts "=============================="
     
-    File.open("app/assets/images/my_file.pdf", "wb") do |f| 
+    File.open("app/assets/images/bon_livraison.pdf", "wb") do |f| 
       f.write HTTParty.get(create_parcel.parsed_response['parcel']['label']['label_printer'], basic_auth: @auth).body
     end
-
-    label_file = open("app/assets/images/my_file.pdf")
+    label_file = open("app/assets/images/bon_livraison.pdf")
     base_64 = Base64.encode64(label_file.read)
 
-
     variable = Mailjet::Send.create(messages: [{
-        'From'=> {
-            'Email'=> 'sarafianthomas@gmail.com',
-            'Name'=> 'Mailjet Pilot'
-        },
-        'To'=> [
-            {
-                'Email'=> 'thomassarafian@gmail.com',
-                'Name'=> 'passenger 1'
-            }
-        ],
-        'Subject'=> 'Your email coded plan!',
-        'TextPart'=> 'Dear passenger 1, welcome to Mailjet! May the delivery force be with you!',
-        'HTMLPart'=> '<h3>Dear passenger 1, welcome to <a href=\'https://www.mailjet.com/\'>Mailjet</a>!</h3><br />May the delivery force be with you!',
-        'Attachments'=> [
-            {
-                'ContentType'=> 'text/plain',
-                'Filename'=> 'app/assets/images/my_file.pdf',
-                'Base64Content'=> base_64
-            }
-        ]
+      'From'=> {
+        'Email'=> "elliot@rockdontstock.com",
+        'Name'=> "Rock Don't Stock"
+      },
+      'To'=> [
+        {
+          'Email'=> 'thomassarafian@gmail.com',#@order.sneaker.user.email,
+          'Name'=> @order.sneaker.user.first_name
+        }
+      ],
+      'TemplateID'=> 2961165,
+      'TemplateLanguage'=> true,
+      'Subject'=> "Ta paire a été vendue 🙌 #{@order.sneaker.sneaker_db.name}",
+      'Variables'=> {
+        "modele_paire" => @order.sneaker.sneaker_db.name,
+        "prenom" => @order.sneaker.user.first_name,
+        "numero_commande" => @order.id,
+        "prix_de_vente" => @order.sneaker.price_cents / 100,
+        "frais_de_livraison" => @order.shipping_cost_cents / 100,
+        "frais_authentification" => @order.service_cents / 100,
+        "somme_vendeur" => ((@order.sneaker.price_cents / 100) - (@order.shipping_cost_cents / 100) - (@order.service_cents / 100)),
+        "lien_conseils_expédition" => "https://www.rockdontstock.com/faq"
+      },
+      'Attachments'=> [{
+        'ContentType'=> 'text/plain',
+        'Filename'=> 'app/assets/images/bon_livraison.pdf',
+        'Base64Content'=> base_64
+      }]
     }])
+    p variable.attributes['Messages']
+
+    # variable = Mailjet::Send.create(messages: [{
+    #   'From'=> {
+    #       'Email'=> 'sarafianthomas@gmail.com',
+    #       'Name'=> 'Mailjet Pilot'
+    #   },
+    #   'To'=> [
+    #       {
+    #           'Email'=> 'thomassarafian@gmail.com',
+    #           'Name'=> 'passenger 1'
+    #       }
+    #   ],
+    #   'Subject'=> 'Your email coded plan!',
+    #   'TextPart'=> 'Dear passenger 1, welcome to Mailjet! May the delivery force be with you!',
+    #   'HTMLPart'=> '<h3>Dear passenger 1, welcome to <a href=\'https://www.mailjet.com/\'>Mailjet</a>!</h3><br />May the delivery force be with you!',
+    #   'Attachments'=> [
+    #       {
+    #           'ContentType'=> 'text/plain',
+    #           'Filename'=> 'app/assets/images/my_file.pdf',
+    #           'Base64Content'=> base_64
+    #       }
+    #   ]
+    # }])
 
 
     # https://panel.sendcloud.sc/api/v2/labels/normal_printer/113233996?start_from=0
