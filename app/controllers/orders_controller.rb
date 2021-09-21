@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   	# current_stripe_session = retrieve_stripe_session
     
     #WEBHOOOK STRIPE donc apres Orders#create des qu'on est sur qeu c'est PAYÉ ->>>
-		SendcloudCreateLabel.new(current_user, @order).create_label
+		# SendcloudCreateLabel.new(current_user, @order).create_label
 
 
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
@@ -63,7 +63,7 @@ class OrdersController < ApplicationController
 	      		name: @sneaker_db.name,
 	    			images: [@sneaker.photos[0].url],
 	    		},
-	    		unit_amount: @order.price_cents + (deliveryPrice.to_f * 100).to_i, #+ (@order.service_cents / 2),
+	    		unit_amount: @order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i, #+ (@order.service_cents / 2),
 	      	currency: "EUR",
 	    	},
 	    	quantity: 1,
@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
 		  # },
 	    mode: 'payment',
 	    success_url: order_url(@order),
-	    cancel_url: sneaker_url(@sneaker)
+	    cancel_url: new_order_payment_url(@order)
 	  })
 	  @order.update(checkout_session_id: stripe_session.id)
     @order.update(shipping_cost_cents: (deliveryPrice.to_f * 100).to_i)

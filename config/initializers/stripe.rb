@@ -5,7 +5,7 @@ Rails.configuration.stripe = {
 	signing_secret: ENV["STRIPE_WEBHOOK_SECRET_KEY"]
 }
 
-Stripe.api_key = ENV["STRIPE_SECRET_TEST"]
+Stripe.api_key = ENV["STRIPE_SECRET"]
 
 StripeEvent.signing_secret = Rails.configuration.stripe[:signing_secret]
 
