@@ -97,11 +97,11 @@
               </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">
-             <%# if current_user != sneaker.user %>
-                <%#= form_tag orders_path(sneaker_id: sneaker.id) do %>
-                  <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                <%# end %>
-              <%# end %>
+             <% if current_user != sneaker.user %>
+                <%= form_tag orders_path(sneaker_id: sneaker.id) do %>
+                  <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                <% end %>
+              <% end %>
               <% if policy(sneaker).edit? %>
                 <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
                   <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
@@ -213,6 +213,7 @@
                 <%#= form_tag orders_path(sneaker_id: sneaker.id) do %>
                   <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
                 <%# end %>
+              <%# end %>
               <% if policy(sneaker).edit? %>
                 <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
                   <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
@@ -363,6 +364,8 @@
   </div>
 </div>
 
+
+
 <script type="text/javascript">
   $(document).ready(function() {
     // $('.glass_icon_phone').on('click', function() {
@@ -411,12 +414,13 @@
   });
 </script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LZ3RZJJHZ3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'G-LZ3RZJJHZ3');
-    </script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LZ3RZJJHZ3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LZ3RZJJHZ3');
+</script>

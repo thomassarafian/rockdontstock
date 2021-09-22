@@ -24,4 +24,3 @@ export default class extends Controller {
   	return this.postal_codeTarget.value
   }
 }
-

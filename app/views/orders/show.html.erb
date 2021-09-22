@@ -39,6 +39,7 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+  <p id="checkout_session_id" type="hidden"><%= @order.checkout_session_id  %></p>
   <h1>Commande #<%= @order.id %> <small><span class="badge badge-dark"> <%= @order.state %></span></small></h1>
   <ul class="list-unstyled">
     <li><strong>Commande passée le</strong> <%= @order.created_at.to_date.strftime("%d/%m/%Y") %></li>

@@ -77,12 +77,18 @@ class OrdersController < ApplicationController
 		  # },
 	    mode: 'payment',
 	    success_url: order_url(@order),
-	    cancel_url: new_order_payment_url(@order)
+	    cancel_url: root_url#new_order_payment_url(@order)
 	  })
-	  @order.update(checkout_session_id: stripe_session.id)
-    @order.update(shipping_cost_cents: (deliveryPrice.to_f * 100).to_i)
-    # @order.update(service_cents: (@order.service_cents / 2))
-    @order.update(price_cents: (@order.price_cents + (deliveryPrice.to_f * 100).to_i)) #+ (@order.service_cents / 2)))
+    puts stripe_session
+    @order.checkout_session_id = stripe_session.id
+    @order.shipping_cost_cents = (deliveryPrice.to_f * 100).to_i
+    @order.price_cents = (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i) #+ (@order.service_cents / 2)))
+    @order.save!
+
+	  # @order.update_column(:checkout_session_id, stripe_session.id)
+    # @order.update_column(:shipping_cost_cents, (deliveryPrice.to_f * 100).to_i)
+    # @order.update_column(:service_cents, (@order.service_cents / 2))
+    #@order.update_column(:price_cents, (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i)) #+ (@order.service_cents / 2)))
 	  
 	end
 
