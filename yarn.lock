@@ -7962,7 +7962,7 @@
     "v8-compile-cache" "^2.1.1"
     "yargs" "^13.3.2"
 
-"webpack-cli@^4.8.0", "webpack-cli@4.x.x":
+"webpack-cli@4.x.x":
   "integrity" "sha512-+iBSWsX16uVna5aAYN6/wjhJy1q/GKk4KjKvfg90/6hykCTSgozbfz5iRgDTSJt/LgSbYxdBX3KBHeobIs+ZEw=="
   "resolved" "https://registry.npmjs.org/webpack-cli/-/webpack-cli-4.8.0.tgz"
   "version" "4.8.0"
@@ -8031,7 +8031,7 @@
     "watchpack" "^1.7.4"
     "webpack-sources" "^1.4.1"
 
-"webpack@^5.1.0", "webpack@^5.53.0", "webpack@4.x.x || 5.x.x":
+"webpack@^5.1.0", "webpack@4.x.x || 5.x.x":
   "integrity" "sha512-RZ1Z3z3ni44snoWjfWeHFyzvd9HMVYDYC5VXmlYUT6NWgEOWdCNpad5Fve2CzzHoRED7WtsKe+FCyP5Vk4pWiQ=="
   "resolved" "https://registry.npmjs.org/webpack/-/webpack-5.53.0.tgz"
   "version" "5.53.0"
