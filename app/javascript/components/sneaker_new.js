@@ -66,7 +66,6 @@ function sneakerNew() {
         setErrorFor(sneakerPrice, "Indique le prix auquel tu veux vendre ta paire");
         return -1;
       } else if (sneakerPriceValue.match(/[^0-9,]/g)) {
-        console.log("okkkkkk!!")
         setErrorFor(sneakerPrice, "Le prix ne doit contenir que des chiffres et/ou une virgule. Ex: 199,99 ou 199");
         return -1;
       } else if (checkAfterComma(sneakerPriceValue)) {

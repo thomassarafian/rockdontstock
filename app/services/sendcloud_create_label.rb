@@ -26,7 +26,7 @@ class SendcloudCreateLabel
         data: [],
         country: "FR",
         shipment: {
-         id: 1680,#8 (pour les test),#1680, #@user.picker_data['id'],
+         id: 1680, #8 (pour les test),#1680, #@user.picker_data['id'],
          name: "Mondial Relay Point Relais L 1-2kg", #"Unstamped Letter",
         },
         to_service_point: 10603692,
@@ -41,17 +41,16 @@ class SendcloudCreateLabel
         # from_telephone: "+33#{@order.sneaker.user.phone}", #"0606860076", #@order.sneaker.user.phone? ? @order.sneaker.user.phone : "",
         from_email: @order.sneaker.user.email,
         total_order_value_currency: "EUR",
-        total_order_value: @order.sneaker.price_cents / 100,
+        total_order_value: @order.price_cents / 100,
         quantity: 1,
       }
     }
     create_parcel = HTTParty.post(
-         "https://panel.sendcloud.sc/api/v2/parcels",
-         body: first_parcel_data.to_json,
-         :headers => { 'Content-Type' => 'application/json' },
-         basic_auth: @auth)
+      "https://panel.sendcloud.sc/api/v2/parcels",
+      body: first_parcel_data.to_json,
+      :headers => { 'Content-Type' => 'application/json' },
+      basic_auth: @auth)
     puts JSON.pretty_generate(JSON.parse(create_parcel.body))
-    
 
     puts "=============================="
     

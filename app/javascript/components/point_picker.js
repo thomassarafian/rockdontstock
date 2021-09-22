@@ -7,12 +7,15 @@ function pointPicker() {
       document.querySelector('.payment-address-btn-mondial-relay').classList.add('toggle-hidden');
       document.querySelector('.payment-address-btn-mondial-relay').addEventListener('click', (event) => {
         event.stopImmediatePropagation();
-        document.querySelector('.point-picker').classList.add('toggle-hidden');
-        document.querySelector('#select_point_picker').addEventListener('click', (event) => {
-          event.stopImmediatePropagation();
-          openServicePointPicker("fr", "fr-fr");
-        });
+        if (document.querySelector('#user_line1').value != '' && document.querySelector('#edit_user_phone_error').textContent == '') {
+          document.querySelector('.point-picker').classList.add('toggle-hidden');
+          document.querySelector('#select_point_picker').addEventListener('click', (event) => {
+            event.stopImmediatePropagation();
+            openServicePointPicker("fr", "fr-fr");
+          });
+        }
       })
+      
       
       document.querySelector('.mondial-relay').addEventListener('click', (event) => {
         event.stopImmediatePropagation();
@@ -28,11 +31,13 @@ function pointPicker() {
         }
         document.querySelector('.payment-address-btn-mondial-relay').addEventListener('click', (event) => {
           event.stopImmediatePropagation();
-          document.querySelector('.point-picker').classList.add('toggle-hidden');
-          document.querySelector('#select_point_picker').addEventListener('click', (event) => {
-            event.stopImmediatePropagation();
-            openServicePointPicker("fr", "fr-fr");
-          });
+          if (document.querySelector('#user_line1').value != '' && document.querySelector('#edit_user_phone_error').textContent == '') {
+            document.querySelector('.point-picker').classList.add('toggle-hidden');
+            document.querySelector('#select_point_picker').addEventListener('click', (event) => {
+              event.stopImmediatePropagation();
+              openServicePointPicker("fr", "fr-fr");
+            });
+          }
         })
       });
     }
@@ -77,10 +82,11 @@ function pointPicker() {
         if (document.querySelector('.delivery-name-colissimo').classList[1] != "delivery-cliked") {
           document.querySelector('.delivery-name-colissimo').classList.add('delivery-cliked');
         }
-
         document.querySelector('.payment-address-btn-colissimo').addEventListener('click', (event) => {
           event.stopImmediatePropagation();
-          document.querySelector('.recap-payment-colissimo-btn').style.display = "flex";
+          if (document.querySelector('#user_line1').value != '' && document.querySelector('#edit_user_phone_error').textContent == '') {
+            document.querySelector('.recap-payment-colissimo-btn').style.display = "flex";
+          }
         });
       });
     }

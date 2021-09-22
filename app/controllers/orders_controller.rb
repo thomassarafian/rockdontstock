@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
 		# @order.sneaker.user -> 
     
     #order = 1 donc ca veut dire que if current_user.order == 1 alors current_user.order.sneaker
+    
   	@order = current_user.orders.find(params[:id])
   	authorize @order
     @order.update(state: "Payé")

@@ -201,7 +201,7 @@
             </div>
           </div>
           <div class="modal-footer" style="justify-content: center;">
-            <%# if current_user != sneaker.user %>
+            <%# if current_user != sneaker.user && sneaker.user.stripe_account_id?%>
               <%#= form_tag orders_path(sneaker_id: sneaker.id) do %>
                 <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
               <%# end %>

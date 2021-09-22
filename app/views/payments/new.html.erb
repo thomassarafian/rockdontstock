@@ -89,7 +89,7 @@
               <span id="delivery_colissimo_price"><%= @colissimo_price %>€</span>
             </p>
           </div>
-          <h5>Choix du point relais</h5>
+          <h5>Informations</h5>
           <hr>
           
 
@@ -102,8 +102,14 @@
               <%= f.input :line1, as: :hidden, input_html: { id: "hide_user_line1" } %>
               <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
               <%= f.input :postal_code, input_html: { data: { target: 'address.postal_code'} }, required: true, as: :hidden %>
-              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;', class: 'btn btn-dark payment-address-btn-colissimo', name: "colissimo-price" %>
-              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;',  class: 'btn btn-dark payment-address-btn-mondial-relay' %>
+              <%= f.input :phone, label: "Numéro de téléphone", input: false  %>
+              <div class="form-phone-num">
+                <p class="france-phone">+33</p>
+                <%= f.input :phone, label: false, as: :tel, required: true, placeholder: "0606060606" %>
+              </div>
+              <%= f.error :phone, :id => "edit_user_phone_error" %>
+              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;', class: 'btn btn-dark payment-address-btn-colissimo' %>
+              <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" }, style: 'color:white;', class: 'btn btn-dark payment-address-btn-mondial-relay' %>
             <% end %>
             <div  class="payment-display-address" data-target="address.display_address"></div>
             <div data-target="address.next_btn"></div>
@@ -135,11 +141,41 @@
   <div id="ajax_request_content"></div>
 </div>
 
+
+
+<script type="text/javascript">
+  if (document.querySelector('.payment-address-btn-mondial-relay')) {
+    let user_phone = document.getElementById('user_phone');
+    document.querySelector('.payment-address-btn-mondial-relay').addEventListener('click', (event) => {
+      if (user_phone.value.length != 9 && user_phone.value.length != 10) {
+        user_phone.classList.add('is-invalid');
+        document.querySelector('#edit_user_phone_error').innerHTML = "<small>Numéro de téléphone invalide</small>";
+      } else {
+        user_phone.classList.remove('is-invalid');
+        user_phone.classList.add('is-valid');
+        document.querySelector('#edit_user_phone_error').innerHTML = "";
+      }
+    })
+  }
+  if (document.querySelector('.payment-address-btn-colissimo')) {
+    document.querySelector('.payment-address-btn-colissimo').addEventListener('click', (event) => {
+      if (user_phone.value.length != 9 && user_phone.value.length != 10) {
+        user_phone.classList.add('is-invalid');
+        document.querySelector('#edit_user_phone_error').innerHTML = "<small>Numéro de téléphone invalide</small>";
+      } else {
+        user_phone.classList.remove('is-invalid');
+        user_phone.classList.add('is-valid');
+        document.querySelector('#edit_user_phone_error').innerHTML = "";
+      }
+    })
+  }
+</script>
+
 <script type="text/javascript">
   const paymentButton = document.getElementById('pay_button');
   if (paymentButton) {
     paymentButton.addEventListener('click', () => {
-      const stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>');
+      const stripe = Stripe('<%= ENV['STRIPE_PUBLIC'] %>');
       stripe.redirectToCheckout({
         sessionId: document.getElementById('checkout_session_id').textContent
       });
@@ -149,19 +185,25 @@
 
 
 <script type="text/javascript">
-  document.querySelector('.mondial-relay').addEventListener('click', (event) => {
-    console.log('ok we click on mondial-relay')
-    document.getElementById('recap_form_btn').setAttribute("class", "recap-payment-mondial-relay-btn btn btn-dark");
-    document.getElementById('recap_form_delivery_price').setAttribute("name", "mondial-relay-price");
-    document.getElementById('recap_form_delivery_price')
-    .setAttribute("value", document.getElementById('delivery_mondial_relay_price').textContent);
-  });
-  document.querySelector('.colissimo').addEventListener('click', (event) => {
-    console.log('ok we click on colissimo')
-    document.getElementById('recap_form_btn').setAttribute("class", "recap-payment-colissimo-btn btn btn-dark");
-    document.getElementById('recap_form_delivery_price').setAttribute("name", "colissimo-price");
-    document.getElementById('recap_form_delivery_price')
-    .setAttribute("value", document.getElementById('delivery_colissimo_price').textContent);
+  document.addEventListener('turbolinks:load', () => {
+    if (document.querySelector('.mondial-relay')) {
+      document.querySelector('.mondial-relay').addEventListener('click', (event) => {
+        event.preventDefault();
+        document.getElementById('recap_form_btn').setAttribute("class", "recap-payment-mondial-relay-btn btn btn-dark");
+        document.getElementById('recap_form_delivery_price').setAttribute("name", "mondial-relay-price");
+        document.getElementById('recap_form_delivery_price')
+        .setAttribute("value", document.getElementById('delivery_mondial_relay_price').textContent);
+      });
+    }
+    if (document.querySelector('.colissimo')) {
+      document.querySelector('.colissimo').addEventListener('click', (event) => {
+        event.preventDefault();
+        document.getElementById('recap_form_btn').setAttribute("class", "recap-payment-colissimo-btn btn btn-dark");
+        document.getElementById('recap_form_delivery_price').setAttribute("name", "colissimo-price");
+        document.getElementById('recap_form_delivery_price')
+        .setAttribute("value", document.getElementById('delivery_colissimo_price').textContent);
+      });
+    };
   });
 
 </script>
@@ -233,7 +275,7 @@
         document.getElementById('waitTimer10s').textContent = i;
         i--;
       }
-    },7000);
+    },1000);
     setTimeout(function() {
       fetch("/orders/<%= @order.id  %>")
         .then(response => response.text())
@@ -299,6 +341,18 @@
 </script>
 
 <style type="text/css">
+  #edit_user_phone_error {
+    color:red;
+  }
+  .tel.optional  {
+    margin-bottom: 0.3rem;
+  }
+  .form-phone-num {
+    display: grid;
+    grid-template-columns: [first] 40px [line2] 100%;
+    margin-right: 40px;
+    align-items: baseline;
+  }
   #ajax_request {
     display: none;
   }
@@ -366,12 +420,6 @@
 </style>
 
 
-
-
-
-
-<!-- <head http-equiv="Content-Security-Policy" content="frame-src 'self'"></head>
- -->
 
 <script type="text/javascript" src="https://embed.sendcloud.sc/spp/1.0.0/api.min.js"></script>
 
