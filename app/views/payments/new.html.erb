@@ -64,7 +64,7 @@
         <p class="resume-prices">Prix de l'article : <span class="payment-article-price"><%= @order.sneaker.price %>€</span></p>
         <p class="resume-prices">Livraison : <span class="payment-delivery-price"></span></p>
         <p class="resume-prices">Authentification : <span class="payment-service-price-message">
-          <span class="payment-service-price"><%= (@order.service / 2) %>€</span> OFFERT</span>
+          <span class="payment-service-price"><%= (@order.service / 2) %>€</span></span>
         </p>
         <br>
         <%# total =  (@order.price + @order.shipping_cost + (@order.service / 2)) %>
@@ -96,8 +96,8 @@
             <div class="adress_form" data-controller="address" >
             <%= simple_form_for(current_user, html: {method: :patch, id: 'adress_form_payment_new' },
             remote: true, data: {target: "address.form", id: current_user.id }) do |f| %>
-              <input type="hidden" name="stripe-token-account" id="stripe-token-account">
-              <input type="hidden" name="stripe-token-person" id="stripe-token-person">
+              <!-- <input type="hidden" name="stripe-token-account" id="stripe-token-account"> -->
+              <!-- <input type="hidden" name="stripe-token-person" id="stripe-token-person"> -->
               <%= f.input :line1, label: 'Mon adresse', input_html: { data: {target: 'address.line1'} }, required: true  %>
               <%= f.input :line1, as: :hidden, input_html: { id: "hide_user_line1" } %>
               <%= f.input :city, input_html: { data: { target: 'address.city'} },required: true, as: :hidden %>
@@ -178,7 +178,7 @@
     const paymentButton = document.getElementById('pay_button');
     if (paymentButton) {
       paymentButton.addEventListener('click', () => {
-        const stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>');
+        const stripe = Stripe('<%= ENV['STRIPE_PUBLIC'] %>');
         stripe.redirectToCheckout({
           sessionId: document.getElementById('checkout_session_id').textContent
         });
@@ -311,11 +311,12 @@
         document.querySelector('.payment-delivery-price').textContent = "<%= @mondial_relay_price %>€"
         let mondial_relay_price = "<%= @mondial_relay_price %>".replace(',', '.');
         let mondial_relay_order_price = "<%= @order.sneaker.price %>".replace(',', '.');
-        // let mondial_relay_service_price =  "<%= @order.service / 2 %>".replace(',', '.');
+        let mondial_relay_service_price =  "<%= @order.service / 2 %>".replace(',', '.');
+
         
         let totalMondialRelay = parseFloat(mondial_relay_price)
-                              + parseFloat(mondial_relay_order_price);
-                              // + parseFloat(mondial_relay_service_price)
+                              + parseFloat(mondial_relay_order_price)
+                              + parseFloat(mondial_relay_service_price)
         document.querySelector('.payment-total-price').textContent = totalMondialRelay;
       }
       if (recapPaymentColissimoBtn) {
@@ -330,11 +331,11 @@
         
         let colissimo_price = "<%= @colissimo_price %>".replace(',', '.');
         let colissimo_order_price = "<%= @order.sneaker.price %>".replace(',', '.');
-        // let colissimo_service_price = "<%= @order.service / 2 %>".replace(',', '.');
-        
+        let colissimo_service_price = "<%= @order.service / 2 %>".replace(',', '.');
+
         let totalColissimo = parseFloat(colissimo_price)
-                            + parseFloat(colissimo_order_price);
-                            // + parseFloat(colissimo_service_price)
+                            + parseFloat(colissimo_order_price)
+                            + parseFloat(colissimo_service_price)
 
         document.querySelector('.payment-total-price').textContent = totalColissimo
         
@@ -360,9 +361,7 @@
   #ajax_request {
     display: none;
   }
-  .payment-service-price {
-    text-decoration: line-through;
-  }
+  
   .payment-address-btn-colissimo, .payment-address-btn-mondial-relay {
     display: none;
   }

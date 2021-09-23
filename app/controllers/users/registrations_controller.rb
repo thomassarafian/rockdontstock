@@ -68,6 +68,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
+    if params['stripe-token-account'].present? && params['stripe-token-person'].present?
+      @user.update_column(:token_account, params['stripe-token-account']) 
+      @user.update_column(:token_person, params['stripe-token-person'])
+    end
     super
   end
 

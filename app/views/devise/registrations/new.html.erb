@@ -152,13 +152,11 @@ document.addEventListener('turbolinks:load', () => {
 
 </script>
 <script type="text/javascript">
-  // function createStripeTokenEditUser () {
+document.addEventListener('turbolinks:load', () => {
   const newUserForm = document.querySelector('#new_user');
   if (newUserForm) {
-    const stripe = Stripe("<%= ENV['STRIPE_PUBLIC_TEST'] %>");
-    
+    const stripe = Stripe("<%= ENV['STRIPE_PUBLIC'] %>");    
     document.querySelector('.sign-up-user').addEventListener('click', (event) => {
-      console.log('cliiiiick');
       event.preventDefault();
       let user_email = document.querySelector('#user_email');
       let user_first_name = document.querySelector('#user_first_name').value;
@@ -263,19 +261,13 @@ document.addEventListener('turbolinks:load', () => {
           },
         });
         if (accountResult.token && personResult.token) {
-          console.log('go submittttttttt');
           document.querySelector('#stripe-token-account').value = accountResult.token.id;
           document.querySelector('#stripe-token-person').value = personResult.token.id;
           newUserForm.submit();
         }
-      // } 
-      // else {
-        
-      // }
     }
   }
-// }
-
+});
 
 </script>
 <%= javascript_pack_tag "algolia_autocomplete_address" %>

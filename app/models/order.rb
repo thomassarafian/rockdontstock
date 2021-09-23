@@ -18,42 +18,19 @@ class Order < ApplicationRecord
 
 
   after_create :shipping_price
-  after_commit :create_sendcloud_label, unless: :order_is_not_paid?
+  before_update :create_sendcloud_label, unless: :order_is_not_paid?
 
 
 
   def order_is_not_paid?
     if self.state_changed? && self.state == "Payé"
-      puts "STATUS IS CHANGED !!!!! AND IT'S PAIED" 
-      puts "STATUS IS CHANGED !!!!! AND IT'S PAIED" 
-      puts "STATUS IS CHANGED !!!!! AND IT'S PAIED" 
-      puts "STATUS IS CHANGED !!!!! AND IT'S PAIED" 
-      puts "STATUS IS CHANGED !!!!! AND IT'S PAIED" 
       return false
     else
-      puts self.state_changed?
-      puts self.state_changed?
-      puts self.state_changed?
-      puts self.state_changed?
-      puts self.state_changed?
-      puts self.state_changed?
-      puts self.state_changed?
-      puts "NOP NOP NOP NOP NOP NOP NOP NOP NOP"
-      puts "NOP NOP NOP NOP NOP NOP NOP NOP NOP" 
-      puts "NOP NOP NOP NOP NOP NOP NOP NOP NOP" 
-      puts "NOP NOP NOP NOP NOP NOP NOP NOP NOP" 
-      puts "NOP NOP NOP NOP NOP NOP NOP NOP NOP"  
-      puts "NOP NOP NOP NOP NOP NOP NOP NOP NOP" 
       return true
     end
   end
 
   def create_sendcloud_label
-    puts "CREATING SENDCLOUD LABEL ! ! ! ! "
-    puts "CREATING SENDCLOUD LABEL ! ! ! ! "
-    puts "CREATING SENDCLOUD LABEL ! ! ! ! "
-    puts "CREATING SENDCLOUD LABEL ! ! ! ! "
-    puts "CREATING SENDCLOUD LABEL ! ! ! ! "
     SendcloudCreateLabel.new(self.user, self).create_label
   end
 

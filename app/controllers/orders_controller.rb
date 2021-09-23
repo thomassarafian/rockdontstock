@@ -65,7 +65,7 @@ class OrdersController < ApplicationController
 	      		name: @sneaker_db.name,
 	    			images: [@sneaker.photos[0].url],
 	    		},
-	    		unit_amount: @order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i, #+ (@order.service_cents / 2),
+	    		unit_amount: @order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i + (@order.service_cents / 2),
 	      	currency: "EUR",
 	    	},
 	    	quantity: 1,
@@ -84,7 +84,7 @@ class OrdersController < ApplicationController
     puts stripe_session
     @order.checkout_session_id = stripe_session.id
     @order.shipping_cost_cents = (deliveryPrice.to_f * 100).to_i
-    @order.price_cents = (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i) #+ (@order.service_cents / 2)))
+    @order.price_cents = (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i + (@order.service_cents / 2))
     @order.save!
 
 	  # @order.update_column(:checkout_session_id, stripe_session.id)
