@@ -47,7 +47,7 @@ Rails.application.routes.draw do
 
   mount ForestLiana::Engine => '/forest'	
 
-  # mount StripeEvent::Engine, at: '/stripe-webhooks'
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
 
 
 

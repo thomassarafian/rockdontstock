@@ -10,16 +10,17 @@ class OrdersController < ApplicationController
 		# @order.sneaker.user -> 
     
     #order = 1 donc ca veut dire que if current_user.order == 1 alors current_user.order.sneaker
-    
-  	@order = current_user.orders.find(params[:id])
-  	authorize @order
-    @order.update(state: "Payé")
-    # @order_service = @order.service_cents / 2
+    # if !REQUETE AJAX 
+    	@order = current_user.orders.find(params[:id])
+    	authorize @order
+      # @order.update(state: "Payé")
+      # @order_service = @order.service_cents / 2
 
-  	# current_stripe_session = retrieve_stripe_session
-    
-    #WEBHOOOK STRIPE donc apres Orders#create des qu'on est sur qeu c'est PAYÉ ->>>
-		SendcloudCreateLabel.new(current_user, @order).create_label
+    	# current_stripe_session = retrieve_stripe_session
+      
+      #WEBHOOOK STRIPE donc apres Orders#create des qu'on est sur qeu c'est PAYÉ ->>>
+  		# SendcloudCreateLabel.new(current_user, @order).create_label
+    # end
 
 
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis

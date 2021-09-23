@@ -144,43 +144,47 @@
 
 
 <script type="text/javascript">
-  if (document.querySelector('.payment-address-btn-mondial-relay')) {
-    let user_phone = document.getElementById('user_phone');
-    document.querySelector('.payment-address-btn-mondial-relay').addEventListener('click', (event) => {
-      if (user_phone.value.length != 9 && user_phone.value.length != 10) {
-        user_phone.classList.add('is-invalid');
-        document.querySelector('#edit_user_phone_error').innerHTML = "<small>Numéro de téléphone invalide</small>";
-      } else {
-        user_phone.classList.remove('is-invalid');
-        user_phone.classList.add('is-valid');
-        document.querySelector('#edit_user_phone_error').innerHTML = "";
-      }
-    })
-  }
-  if (document.querySelector('.payment-address-btn-colissimo')) {
-    document.querySelector('.payment-address-btn-colissimo').addEventListener('click', (event) => {
-      if (user_phone.value.length != 9 && user_phone.value.length != 10) {
-        user_phone.classList.add('is-invalid');
-        document.querySelector('#edit_user_phone_error').innerHTML = "<small>Numéro de téléphone invalide</small>";
-      } else {
-        user_phone.classList.remove('is-invalid');
-        user_phone.classList.add('is-valid');
-        document.querySelector('#edit_user_phone_error').innerHTML = "";
-      }
-    })
-  }
+  document.addEventListener('turbolinks:load', () => {
+    if (document.querySelector('.payment-address-btn-mondial-relay')) {
+      let user_phone = document.getElementById('user_phone');
+      document.querySelector('.payment-address-btn-mondial-relay').addEventListener('click', (event) => {
+        if (user_phone.value.length != 9 && user_phone.value.length != 10) {
+          user_phone.classList.add('is-invalid');
+          document.querySelector('#edit_user_phone_error').innerHTML = "<small>Numéro de téléphone invalide</small>";
+        } else {
+          user_phone.classList.remove('is-invalid');
+          user_phone.classList.add('is-valid');
+          document.querySelector('#edit_user_phone_error').innerHTML = "";
+        }
+      })
+    }
+    if (document.querySelector('.payment-address-btn-colissimo')) {
+      document.querySelector('.payment-address-btn-colissimo').addEventListener('click', (event) => {
+        if (user_phone.value.length != 9 && user_phone.value.length != 10) {
+          user_phone.classList.add('is-invalid');
+          document.querySelector('#edit_user_phone_error').innerHTML = "<small>Numéro de téléphone invalide</small>";
+        } else {
+          user_phone.classList.remove('is-invalid');
+          user_phone.classList.add('is-valid');
+          document.querySelector('#edit_user_phone_error').innerHTML = "";
+        }
+      })
+    }
+  });
 </script>
 
 <script type="text/javascript">
-  const paymentButton = document.getElementById('pay_button');
-  if (paymentButton) {
-    paymentButton.addEventListener('click', () => {
-      const stripe = Stripe('<%= ENV['STRIPE_PUBLIC'] %>');
-      stripe.redirectToCheckout({
-        sessionId: document.getElementById('checkout_session_id').textContent
+  document.addEventListener('turbolinks:load', () => {
+    const paymentButton = document.getElementById('pay_button');
+    if (paymentButton) {
+      paymentButton.addEventListener('click', () => {
+        const stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>');
+        stripe.redirectToCheckout({
+          sessionId: document.getElementById('checkout_session_id').textContent
+        });
       });
-    });
-  }
+    }
+  });
 </script>
 
 

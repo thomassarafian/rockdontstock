@@ -156,7 +156,22 @@
         </div>
         <div><%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981;", target: :_blank) %></div>
         <div class="submit-new-sneaker">
-          <button disabled="true" name="button-new-sneaker" id="finishSneakerNewBtn" value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark">Finaliser la mise en vente</button>
+          <div style="display: flex;align-items: center;">
+          <input type="checkbox" id="first_check" name="first_check" checked>
+          <label for="first_check">Je certifie que la paire de sneakers mise en ligne est authentique et n’est pas l’objet d’un produit contrefaisant une marque déposée</label>
+          </div>
+          <div style="display: flex;align-items: center;">
+          <input type="checkbox" id="second_check" name="second_check" checked>
+          <label for="second_check">Je certifie que ma paire de sneakers correspond exactement à l’annonce que je m’apprête à mettre en ligne</label>
+          </div>
+          <div style="display: flex;align-items: center;">
+          <input type="checkbox" id="third_check" name="third_check" checked>
+          <label for="third_check">J’accepte les Conditions générales de vente de Rock Don’t Stock dans leur ensemble.</label>
+          </div>
+          <p style="color:red;" id="check_form_message">Tu dois cocher toutes les cases pour finaliser la mise en vente</p>
+
+          <input disabled="true" type="submit" name="button-new-sneaker" id="finishSneakerNewBtn" value="Finaliser la mise en vente" class="btn finish-sneaker-new-btn text-center btn btn-dark"
+          onClick="return checkbox_checked();"> 
           <div style="display:none" id="finishSneakerNewWaitMessage">
             <i class='fas fa-spinner fa-spin'></i> Chargement <span id="waitTimer10s"></span> sec ...
           </div>
@@ -168,7 +183,24 @@
 <% end %>
 
 
+<script type="text/javascript">
+  function checkbox_checked() {
+    if (!document.getElementById('first_check').checked || !document.getElementById('second_check').checked
+      || !document.getElementById('third_check').checked) {
+      document.getElementById('check_form_message').style.display = "block";
+      return (false)
+    }
+    else {
+     document.getElementById('check_form_message').style.display = "none"; 
+     return (true)
+    }
+  }
+</script>
+
 <style type="text/css">
+  #check_form_message {
+    display: none;
+  }
   /*.info-input-sneaker:focus {
     outline:none;
     outline-width: 0;

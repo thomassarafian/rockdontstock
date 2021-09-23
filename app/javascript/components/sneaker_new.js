@@ -108,7 +108,7 @@ function sneakerNew() {
         nextBtn.style.display = "none";
         document.querySelector(".search-sneaker-model-title").scrollIntoView();
         let photoPreview = [];
-        photoPreview = displayStep2();
+        // photoPreview = displayStep2();
 
         let sndNextBtn = document.querySelector('.snd-next-btn');
         sndNextBtn.style.display = "block";

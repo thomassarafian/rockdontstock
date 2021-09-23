@@ -1,3 +1,4 @@
+
 <ul class="navbar-items nav nav-tabs justify-content-center" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="purchases-tab" data-toggle="tab" href="#purchases" role="tab" aria-controls="purchases" aria-selected="true">Mes achats</a>
@@ -29,7 +30,22 @@
           <div class="purchases-infos">
             <p><span class="font-weight-bold">State : </span><%= order.state %></p>
             <p>Achetée le <%= order.created_at.strftime("%d/%m/%Y") %></p>
-            <p><span class="font-weight-bold">ÉTAT</span> : En cours d'envoi par le vendeur de colisino</p>
+            <% if order.sneaker.state == 2 %>
+              <p><span class="font-weight-bold">ÉTAT : </span>Le vendeur est en train d'envoyer sa paire</p>
+            <% elsif order.sneaker.state == 3  %>
+              <p><span class="font-weight-bold">ÉTAT : </span>Le vendeur n'a pas envoyé la paire dans les 48H</p>
+            <% elsif order.sneaker.state == 4 %>
+              <p><span class="font-weight-bold">ÉTAT : </span>Ta paire est bien envoyé à Rock Don't Stock</p>
+            <% elsif order.sneaker.state == 5 %>
+              <p><span class="font-weight-bold">ÉTAT : </span>Nous vérifions la paire du vendeur</p>
+            <% elsif order.sneaker.state == 6  %>
+              <p><span class="font-weight-bold">ÉTAT : </span>Ta paire est LEGIT</p>
+            <% elsif order.sneaker.state == 7  %>
+              <p><span class="font-weight-bold">ÉTAT : </span>Ta paire est FAKE</p>
+            <% elsif order.sneaker.state == 8  %>
+              <p><span class="font-weight-bold">ÉTAT : </span>Ta paire est en route chez toi</p>
+            <% end %>
+            <!-- <p><span class="font-weight-bold">ÉTAT</span> : En cours d'envoi par le vendeur de colisino</p> -->
             <!-- <p><span class="font-weight-bold">RESULTAT : LEGIT</span></p> -->
           </div>
           <button type="button" class="purchases-problem-btn btn btn-outline-dark btn-sm">

@@ -9,30 +9,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <link rel="icon" href="/assets/logo_tab.png" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%#= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
-
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
   </head>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics --> 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LZ3RZJJHZ3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LZ3RZJJHZ3');
+  </script>
   <script src="https://js.stripe.com/v3/"></script>
+  
 
   <body>
+    <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+    <script>
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#000"
+        },
+        "button": {
+          "background": "#f1d600"
+        }
+      },
+      "position": "bottom-left",
+      "content": {
+        "message": "En cliquant sur \"Accepter tous les cookies\", vous acceptez que Rock Don't Stock puisse stocker des cookies sur votre appareil et divulguer des informations conformément à notre politique en matière de cookies.",
+        "dismiss": "Accepter",
+        "link": "En savoir plus",
+        "href": "https://www.rockdontstock.com/cgu"
+      }
+    });
+    </script>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <!-- <p class="notice"><%= notice %></p> -->
     <!-- <p class="alert"><%= alert %></p>    -->
+
     <%= yield %>
+    
     <%= render 'shared/footer' %>
   </body>
 </html>
 
 
 
-<style type="text/css">
-  .input-signin {
-    border:none;
-  }
-</style>
