@@ -12,9 +12,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    # raise
+    if params['stripe-token-account'].present? && params['stripe-token-person'].present?
+      @user.token_account = params['stripe-token-account']
+      @user.token_person = params['stripe-token-person']
+      if @user.save
+        # if @user.stripe_account_id.present? && (@user.first_name_changed? || @user.last_name_changed? || @user.date_of_birth_changed? || @user.line1_changed? || @user.phone_changed?) && @user.token_account.present? && @user.token_person.present? && @user.token_person_changed? && @user.token_account_changed?
+        #   Stripe::StripeUpdateConnectAccount.new(@user)  
+        if !@user.stripe_account_id.present? && (@user.email? && @user.first_name? && @user.last_name? && @user.phone? && @user.line1? && @user.city? && @user.postal_code? && @user.date_of_birth.day.present? && @user.date_of_birth.month.present? && @user.date_of_birth.year.present?) && @user.token_account.present? && @user.token_person.present?
+          Stripe::StripeCreateConnectAccount.new(@user)  
+        end
+      end
+    end
     if @user.save
-      # raise
       if session[:sneaker_session_id]
         # raise
         @sneaker_session = Sneaker.where(id: session[:sneaker_session_id])
@@ -59,10 +68,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    if params['stripe-token-account'].present? && params['stripe-token-person'].present?
-      @user.update_column(:token_account, params['stripe-token-account']) 
-      @user.update_column(:token_person, params['stripe-token-person'])
-    end
     super
   end
 
