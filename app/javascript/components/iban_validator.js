@@ -28,7 +28,7 @@ function ibanValidator () {
   if (button && errorElement && ibanForm) {
     button.addEventListener('click', (event) => {
       let message = [];
-      user_iban = document.getElementById('user_iban').value;
+      let user_iban = document.getElementById('user_iban').value;
       if (user_iban != "")
       {
         if (smellsLikeIban(user_iban) == false || validateIbanChecksum(user_iban) == false)
