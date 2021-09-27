@@ -429,7 +429,7 @@
 
 
 <script type="text/javascript">
-  if ('<%= session[:sneaker_id_to_buy] %>') {
+  if ("order_create_<%= session[:sneaker_id_to_buy] %>") {
     document.getElementById("order_create_<%= session[:sneaker_id_to_buy] %>").submit();
   }
 </script>
