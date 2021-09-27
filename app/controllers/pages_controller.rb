@@ -4,7 +4,7 @@ class PagesController < ApplicationController
     @sneakers_last_added = Sneaker.includes(:sneaker_db, :user,:photos_attachments, photos_attachments: :blob).where("state = ?", 1).limit(8).order("created_at DESC")
 
     if Rails.env.production?
-      @sneakers_selected = Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where(ids: [342, 287, 311, 191, 292, 279, 116, 284])
+      @sneakers_selected = Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where(id: [342, 287, 311, 191, 292, 279, 116, 284])
     elsif Rails.env.development?
       @sneakers_selected = Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1).limit(8)
     end
