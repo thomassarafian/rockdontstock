@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+
 	def show
 		# On créé la commande 
 		# On envoie l'email au vendeur
@@ -36,6 +37,7 @@ class OrdersController < ApplicationController
 	end
 
 	def create
+    session.delete(:sneaker_id_to_buy)
     if params['mondial-relay-price'].present? || params['colissimo-price'].present?
       @order = current_user.orders.last
       @sneaker = current_user.orders.last.sneaker

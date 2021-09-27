@@ -1,11 +1,9 @@
 class ApplicationController < ActionController::Base
-
   include Pagy::Backend
   include Pundit
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	before_action :authenticate_user!
   before_action :set_search_navbar, unless: :skip_set_search_navbar?
-
 
 	# Pundit: white-list approach.
 	after_action :verify_authorized, except: :index, unless: :skip_pundit?

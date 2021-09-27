@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  # before_action :configure_sign_in_params, only: [:new]
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    super
+    if params['sneaker_id'].present?
+      session[:sneaker_id_to_buy] = params['sneaker_id']
+    end
+  end
 
   # POST /resource/sign_in
   def create
@@ -53,6 +56,9 @@ class Users::SessionsController < Devise::SessionsController
   # protected
   
   # def after_sign_in_path_for(resource)
+  #   if session[:sneaker_id_to_buy].present?
+  #     repost(orders_path)
+  #   end
   # end
 
   # If you have extra params to permit, append them to the sanitizer.

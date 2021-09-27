@@ -72,6 +72,7 @@ gem 'rack-cors'    # admin
 gem 'bullet', group: 'development'
 
 
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
