@@ -5,7 +5,7 @@ function uploadIds() {
   }
 
   function handleForm(event) {
-    let publishableKey = 'pk_test_51IcAgiE0gVjPTo06Q7PvnLDNztUdNY8sUL3gdkEwiIIDRn3vcDQPCRbwW4TZ1yJ4QgLQfX02OnnAhhi4GU1LxzYZ00IXcBcZkC';
+    let publishableKey = 'pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA';
     event.preventDefault();
     
     var dataFront = new FormData();
