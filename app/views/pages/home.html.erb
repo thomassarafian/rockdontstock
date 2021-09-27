@@ -428,8 +428,10 @@
 </script>
 <p><% current_user %></p>
 <script type="text/javascript">
-  if ("order_create_<%= session[:sneaker_id_to_buy] %>" && "<%= current_user %>") {
-    document.getElementById("order_create_<%= session[:sneaker_id_to_buy] %>").submit();
-  }
+  document.addEventListener('turbolinks:load', () => {
+    if ("order_create_<%= session[:sneaker_id_to_buy] %>" && "<%= current_user %>" && "<%= session[:sneaker_id_to_buy] %>") {
+      document.getElementById("order_create_<%= session[:sneaker_id_to_buy] %>").submit();
+    }
+  });
 </script>
 
