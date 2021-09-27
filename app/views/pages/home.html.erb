@@ -426,10 +426,9 @@
     })
   });
 </script>
-
-
+<p><% current_user %></p>
 <script type="text/javascript">
-  if ("order_create_<%= session[:sneaker_id_to_buy] %>") {
+  if ("order_create_<%= session[:sneaker_id_to_buy] %>" && "<%= current_user %>") {
     document.getElementById("order_create_<%= session[:sneaker_id_to_buy] %>").submit();
   }
 </script>
