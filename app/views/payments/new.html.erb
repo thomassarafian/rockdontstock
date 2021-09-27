@@ -52,9 +52,14 @@
   
     <div class="payment-input-info">
       <div class="circles">
-       <p class="circle-step"><%= image_tag("payment/black_circle.svg", class: 'black-circle-logo') %><br>Livraison</p>
-       <p class="circle-step"><%= image_tag("payment/white_circle.svg", class: 'white-circle-logo') %><br>Récapitulatif</p>
-       <p class="circle-step"><%= image_tag("payment/white_circle.svg", class: 'white-circle-logo') %><br>Paiement</p>
+        <!-- <img class="black-circle-logo" src="/assets/payment/black_circle.svg"> -->
+        <p class="circle-step"><object data="/assets/payment/black_circle.svg" class="black-circle-logo"></object>Livraison</p>
+        <p class="circle-step"><object data="/assets/payment/white_circle.svg" class="white-circle-logo"></object>Récapitulatif</p>
+        <p class="circle-step"><object data="/assets/payment/white_circle.svg" class="white-circle-logo"></object>Paiement</p>
+
+       <!-- <p class="circle-step"><%#= image_tag("payment/black_circle.svg", class: 'black-circle-logo') %><br>Livraison</p> -->
+       <!-- <p class="circle-step"><%#= image_tag("payment/white_circle.svg", class: 'white-circle-logo') %><br>Récapitulatif</p> -->
+       <!-- <p class="circle-step"><%#= image_tag("payment/white_circle.svg", class: 'white-circle-logo') %><br>Paiement</p> -->
       </div>
       <div class="resume-payment-infos">
         <p><strong>Livraison</strong></p>
@@ -178,7 +183,7 @@
     const paymentButton = document.getElementById('pay_button');
     if (paymentButton) {
       paymentButton.addEventListener('click', () => {
-        const stripe = Stripe('<%= ENV['STRIPE_PUBLIC'] %>');
+        const stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>');
         stripe.redirectToCheckout({
           sessionId: document.getElementById('checkout_session_id').textContent
         });
@@ -299,8 +304,8 @@
       console.log(recapPaymentColissimoBtn);
       if (recapPaymentMondialRelayBtn) {
         console.log('On mondial relay !');
-        document.querySelector('.black-circle-logo').src = "/assets/payment/white_circle.svg";
-        document.querySelectorAll(".white-circle-logo")[0].src = "/assets/payment/black_circle.svg";
+        document.querySelector('.black-circle-logo').data = "/assets/payment/white_circle.svg";
+        document.querySelectorAll(".white-circle-logo")[0].data = "/assets/payment/black_circle.svg";
         document.querySelector('.payment-new-delivery-step').style.display = "none";
         document.querySelector('.resume-payment-infos').style.display = "block";
         launchTimerToWaitStripeSession()
@@ -317,12 +322,13 @@
         let totalMondialRelay = parseFloat(mondial_relay_price)
                               + parseFloat(mondial_relay_order_price)
                               + parseFloat(mondial_relay_service_price)
-        document.querySelector('.payment-total-price').textContent = totalMondialRelay;
+        console.log(totalMondialRelay.toFixed(2))
+        document.querySelector('.payment-total-price').textContent = totalMondialRelay.toFixed(2);
       }
       if (recapPaymentColissimoBtn) {
         console.log('On colissimo !');
-        document.querySelector('.black-circle-logo').src = "/assets/payment/white_circle.svg";
-        document.querySelectorAll(".white-circle-logo")[0].src = "/assets/payment/black_circle.svg";
+        document.querySelector('.black-circle-logo').data = "/assets/payment/white_circle.svg";
+        document.querySelectorAll(".white-circle-logo")[0].data = "/assets/payment/black_circle.svg";
         document.querySelector('.payment-new-delivery-step').style.display = "none";
         document.querySelector('.resume-payment-infos').style.display = "block";
         launchTimerToWaitStripeSession()
@@ -337,7 +343,8 @@
                             + parseFloat(colissimo_order_price)
                             + parseFloat(colissimo_service_price)
 
-        document.querySelector('.payment-total-price').textContent = totalColissimo
+        console.log(totalColissimo.toFixed(2))
+        document.querySelector('.payment-total-price').textContent = totalColissimo.toFixed(2);
         
       }
     });
@@ -401,6 +408,8 @@
     justify-content: space-evenly;
   }
   .circle-step {
+    display: flex;
+    flex-direction: column;
     text-align: center;
   }
   

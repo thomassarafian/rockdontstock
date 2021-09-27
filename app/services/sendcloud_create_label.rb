@@ -55,13 +55,11 @@ class SendcloudCreateLabel
 
     puts json_create_parcel
     
-    puts "SOLUTION 1"
-    puts json_create_parcel['parcel']['tracking_url']
+    
     
     puts "=============================="
     
-    puts "SOLUTION 2"
-    puts create_parcel.parsed_response['parcel']['tracking_url']
+    # puts create_parcel.parsed_response['parcel']['tracking_url']
     
     File.open("app/assets/images/bon_livraison.pdf", "wb") do |f| 
       f.write HTTParty.get(create_parcel.parsed_response['parcel']['label']['label_printer'], basic_auth: @auth).body

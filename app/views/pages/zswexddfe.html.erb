@@ -1,4 +1,3 @@
-
 <div class="container home-rds-selection">
   <h2>Les dernières paires en ligne</h2>
   <div class="sneaker-cards">
@@ -25,31 +24,6 @@
                   <div class="carousel-item active">
                     <%= cl_image_tag(sneaker.photos[0].key, class: 'sneaker-show-photos') %>
                   </div>
-                  <div class="carousel-item ">
-                    <%= cl_image_tag(sneaker.photos[1].key, class: 'sneaker-show-photos') %>
-                  </div>
-                  <div class="carousel-item ">
-                    <%= cl_image_tag(sneaker.photos[2].key, class: 'sneaker-show-photos') %>
-                  </div>
-                  <div class="carousel-item ">
-                    <%= cl_image_tag(sneaker.photos[3].key, class: 'sneaker-show-photos') %>
-                  </div>
-                  <div class="carousel-item ">
-                    <%= cl_image_tag(sneaker.photos[4].key, class: 'sneaker-show-photos') %>
-                  </div>
-                  <div class="carousel-item ">
-                    <%= cl_image_tag(sneaker.photos[5].key, class: 'sneaker-show-photos') %>
-                  </div>
-                  <% unless sneaker.photos[6].nil? %>
-                    <div class="carousel-item ">
-                      <%= cl_image_tag(sneaker.photos[6].key, class: 'sneaker-show-photos') %>
-                    </div>
-                  <% end %>
-                  <% unless sneaker.photos[7].nil? %>
-                    <div class="carousel-item ">
-                      <%= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
-                    </div>
-                  <% end %>
                 </div>
                 <a class="carousel-control-prev" href="#carousel-<%= sneaker.id %>-home" role="button" data-slide="prev">
                   <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
@@ -79,7 +53,7 @@
             <div class="modal-footer" style="justify-content: center;">
              <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
                 <%= form_tag orders_path(sneaker_id: sneaker.id) do %>
-                  <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                  <%= submit_tag 'Acheter', class: 'btn btn-dark', name: 'ss' %>
                 <% end %>
               <% end %>
               <% if policy(sneaker).edit? %>

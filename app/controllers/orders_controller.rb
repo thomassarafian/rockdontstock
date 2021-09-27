@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-
 	def show
 		# On créé la commande 
 		# On envoie l'email au vendeur
