@@ -53,6 +53,7 @@
     <div class="payment-input-info">
       <div class="circles">
         <!-- <img class="black-circle-logo" src="/assets/payment/black_circle.svg"> -->
+        
         <p class="circle-step"><object data="/assets/payment/black_circle.svg" class="black-circle-logo"></object>Livraison</p>
         <p class="circle-step"><object data="/assets/payment/white_circle.svg" class="white-circle-logo"></object>Récapitulatif</p>
         <p class="circle-step"><object data="/assets/payment/white_circle.svg" class="white-circle-logo"></object>Paiement</p>
@@ -125,7 +126,8 @@
             <div class="point-picker-result"></div>
           </div>
         </div>
-        <%= simple_form_for(current_user, remote: true, url: user_path) do |f| %>
+        
+        <%= simple_form_for(current_user, remote: true, url: user_path, html: {class: 'save-user-picker-data'}) do |f| %>
           <%= f.input :picker_data, as: :hidden, :input_html => { :value => "none"} %>
         <% end %>
         

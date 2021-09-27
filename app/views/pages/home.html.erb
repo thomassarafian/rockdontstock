@@ -430,6 +430,7 @@
 <script type="text/javascript">
   document.addEventListener('turbolinks:load', () => {
     if ("order_create_<%= session[:sneaker_id_to_buy] %>" && "<%= current_user %>" && "<%= session[:sneaker_id_to_buy] %>") {
+      console.log('no way');
       document.getElementById("order_create_<%= session[:sneaker_id_to_buy] %>").submit();
     }
   });

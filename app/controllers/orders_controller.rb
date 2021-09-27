@@ -37,7 +37,9 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-    session.delete(:sneaker_id_to_buy)
+    if session[:sneaker_id_to_buy].present?
+      session.delete(:sneaker_id_to_buy)
+    end 
     if params['mondial-relay-price'].present? || params['colissimo-price'].present?
       @order = current_user.orders.last
       @sneaker = current_user.orders.last.sneaker
@@ -82,7 +84,7 @@ class OrdersController < ApplicationController
 	    success_url: order_url(@order),
 	    cancel_url: root_url#new_order_payment_url(@order)
 	  })
-    puts stripe_session
+
     @order.checkout_session_id = stripe_session.id
     @order.shipping_cost_cents = (deliveryPrice.to_f * 100).to_i
     @order.price_cents = (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i + (@order.service_cents / 2))
