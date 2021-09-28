@@ -18,11 +18,10 @@
   <% end %>
 </div>
 
-
 <div class="container home-rds-selection">
-  <h2>Les dernières releases</h2>
+  <h2>Les dernières paires en ligne</h2>
   <div class="sneaker-cards">
-    <% @sneakers_last_release.each do |sneaker| %>
+    <% @sneakers_last_added.each do |sneaker| %>
       <div class="sneaker-card">
         <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
           <%= cl_image_tag(sneaker.photos[0].key) %>
@@ -254,11 +253,10 @@
   </div>
 </div>
 
-
 <div class="container home-rds-selection">
-  <h2>Les dernières paires en ligne</h2>
+  <h2>Les dernières releases</h2>
   <div class="sneaker-cards">
-    <% @sneakers_last_added.each do |sneaker| %>
+    <% @sneakers_last_release.each do |sneaker| %>
       <div class="sneaker-card">
         <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
           <%= cl_image_tag(sneaker.photos[0].key) %>
@@ -359,12 +357,19 @@
 <div type="button" class="link-home-page all_sneakers">Tout voir</div>
 
 
+
 <div class="container">
   <div class="insta-posts-title">
     <h2>#rockdontstock</h2>
   </div>
   <div class="insta-posts">
     <div class="card-deck">
+      <div class="card">
+        <%= image_tag("insta/post9.jpeg", class: "card-img-top")  %> 
+        <p class="card-insta-post-username card-title">
+          <a href="https://www.instagram.com/vincent_m.d/" target="_blank">@vincent_m.d</a>  
+        </p>
+      </div>
       <div class="card">
         <%= image_tag("insta/post8.jpeg", class: "card-img-top") %> 
         <p class="card-insta-post-username card-title">
@@ -393,12 +398,6 @@
           <a href="https://www.instagram.com/valentin.fischlmayr/" target="_blank"> @valentin.fischlmay</a>
         </p>
       </div>
-      <div class="card">
-        <%= image_tag("insta/post4.jpeg", class: "card-img-top")  %> 
-        <p class="card-insta-post-username card-title">
-          <a href="https://www.instagram.com/sly06150/" target="_blank">@sly06150</a>  
-        </p>
-      </div>
     </div>  
   </div>
 
@@ -406,6 +405,14 @@
     
     <div class="carousel-inner">
       <div class="carousel-item active">
+        <%= image_tag("insta/post9.jpeg", class: "d-block w-100", style: "height: 300px")  %> 
+        <div class="insta-post-username carousel-caption ">
+          <p>
+            <a href="https://www.instagram.com/vincent_m.d/" target="_blank">@vincent_m.d</a>
+          </p>
+        </div>
+      </div>
+      <div class="carousel-item">
         <%= image_tag("insta/post8.jpeg", class: "d-block w-100", style: "height: 300px")  %> 
         <div class="insta-post-username carousel-caption ">
           <p>
