@@ -201,17 +201,17 @@
             </div>
           </div>
           <div class="modal-footer" style="justify-content: center;">
-            <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
-              <% unless current_user.nil? %>
-                <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
-                  <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                <% end %>
-              <% else %>
-                <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
-                  <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                <% end %>
-              <% end %>
-            <% end %>
+            <%# if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
+              <%# unless current_user.nil? %>
+                <%#= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
+                  <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                <%# end %>
+              <%# else %>
+                <%#= form_tag user_session_path(sneaker_id: sneaker.id) do %>
+                  <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                <%# end %>
+              <%# end %>
+            <%# end %>
             <% if policy(sneaker).edit? %>
               <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
                 <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
