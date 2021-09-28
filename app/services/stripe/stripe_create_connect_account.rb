@@ -11,7 +11,6 @@ module Stripe
     def create_connect_account(user)
       # create_token = stripe_create_token(user)
       # user.update_column(:token_account, create_token.id)
-
       stripe_account = Stripe::Account.create({
         account_token: user.token_account,
         type: 'custom',

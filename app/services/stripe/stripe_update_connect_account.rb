@@ -5,6 +5,7 @@ module Stripe
     end
     
     private
+
     def update_connect_account(user)
       stripe_account = Stripe::Account.update(
         user.stripe_account_id, {
