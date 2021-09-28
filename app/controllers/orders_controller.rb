@@ -52,6 +52,7 @@ class OrdersController < ApplicationController
   	  @order = Order.create!(sneaker: @sneaker, sneaker_name: @sneaker_db.name, price_cents: @sneaker.price_cents, state: 'En cours', user: current_user)
   	  authorize @order
       Stripe::StripeCreateCustomer.new(current_user)
+      create_stripe_session(@order, @sneaker, 1)
       redirect_to new_order_payment_path(@order)
     end
 	end
@@ -59,7 +60,7 @@ class OrdersController < ApplicationController
 	private
 
 	def create_stripe_session(order, sneaker, deliveryPrice)
-		stripe_session = Stripe::Checkout::Session.create({
+		puts stripe_session = Stripe::Checkout::Session.create({
 	  	customer: current_user.customer_id,
 	    payment_method_types: ['card'],
 	    line_items: [{
@@ -73,13 +74,13 @@ class OrdersController < ApplicationController
 	    	},
 	    	quantity: 1,
 	    }],
-    # 	payment_intent_data: {
-    # 		capture_method: 'manual', 
+    	payment_intent_data: {
+    		capture_method: 'manual', 
 		  #   application_fee_amount: order.price_cents / 10, #l'argent qui va au vendeur #la plateforme reçoit une commission pour le service
 		  #   transfer_data: {
 		  #     destination: sneaker.user.stripe_account_id,
-		  #   },
-		  # },
+		    # },
+		  },
 	    mode: 'payment',
 	    success_url: order_url(@order),
 	    cancel_url: root_url#new_order_payment_url(@order)

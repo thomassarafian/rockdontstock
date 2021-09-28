@@ -1,8 +1,9 @@
-function createStripeTokenEditUser () {
+function createStripeTokenEditUser() {
+  console.log("bah ouais frre");
   const editUserForm = document.querySelector('#edit_user_form');
   if (editUserForm) {
     const stripe = Stripe('pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA');
-    
+    console.log("okkkkkkk");
     document.querySelector('.edit-user-btn').addEventListener('click', (event) => {
       event.preventDefault();
       // let user_email = document.querySelector('#user_email');
@@ -21,7 +22,7 @@ function createStripeTokenEditUser () {
       let user_month = user_date_of_birth[1];
       let user_day = user_date_of_birth[2];
       let errorEditUser = 3;
-      if (user_phone.value.length != 9 && user_phone.value.length != 10) {
+      if (user_phone.value.length != 10) {
         user_phone.classList.add('is-invalid');
         document.querySelector('#edit_user_phone_error').innerHTML = "<small>Numéro de téléphone invalide</small>";
         errorEditUser--;

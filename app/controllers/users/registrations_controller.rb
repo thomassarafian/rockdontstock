@@ -71,6 +71,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if params['stripe-token-account'].present? && params['stripe-token-person'].present?
       @user.update_column(:token_account, params['stripe-token-account']) 
       @user.update_column(:token_person, params['stripe-token-person'])
+      if @user.stripe_account_id.present? #&& (self.first_name_changed? || self.last_name_changed? || self.date_of_birth_changed? || self.line1_changed? || self.phone_changed?) && self.token_account.present? && self.token_person.present? && self.token_person_changed? && self.token_account_changed?
+        Stripe::StripeUpdateConnectAccount.new(@user)  
+      end
     end
     super
   end

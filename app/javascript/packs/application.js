@@ -39,7 +39,7 @@ document.addEventListener('turbolinks:load', () => {
   // editSneakerPhotos();
   sneakerNew();
   // optimizeUploadPhotos()
-  createStripeTokenEditUser()
+  createStripeTokenEditUser();
 });
 
 

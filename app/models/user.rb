@@ -22,7 +22,8 @@ class User < ApplicationRecord
   # validates :line1, presence: true
   validate :date_of_birth, if: :user_over_13, on: [:create, :update]
 
-  before_update :stripe_connect_account
+  # after_update :stripe_connect_account
+  # before_update :stripe_connect_account
   # after_update :update_connect_account
 
   # validate :correct_ids_type?
