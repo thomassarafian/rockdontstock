@@ -16,10 +16,10 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, uniqueness: true
   validates :email, format: { with:  /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
-  validates :phone, length: {minimun: 9, maximum: 10}, format: { with: /^[0-9]*$/, multiline: true  } #, on: [:edit]
+  # validates :phone, length: {minimun: 9, maximum: 10}, format: { with: /^[0-9]*$/, multiline: true  } #, on: [:edit]
   validates :date_of_birth, presence: true
   validates :iban, presence: true
-  validates :line1, presence: true
+  # validates :line1, presence: true
   validate :date_of_birth, if: :user_over_13, on: [:create, :update]
 
   before_update :stripe_connect_account
