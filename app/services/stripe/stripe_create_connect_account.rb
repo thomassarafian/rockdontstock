@@ -8,6 +8,7 @@ module Stripe
     end
     
     private
+    
     def create_connect_account(user)
       # create_token = stripe_create_token(user)
       # user.update_column(:token_account, create_token.id)
