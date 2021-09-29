@@ -185,7 +185,7 @@
     const paymentButton = document.getElementById('pay_button');
     if (paymentButton) {
       paymentButton.addEventListener('click', () => {
-        const stripe = Stripe('<%= ENV['STRIPE_PUBLIC'] %>');
+        const stripe = Stripe('<%= ENV['STRIPE_PUBLIC_TEST'] %>');
         stripe.redirectToCheckout({
           sessionId: document.getElementById('checkout_session_id').textContent
         });

@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
     	authorize @order
     	current_stripe_session = retrieve_stripe_session
       if current_stripe_session['payment_status'] != "paid" && @order.state == "Payé"
-        capture_payment(current_stripe_session)        
+        capture_payment(current_stripe_session)
       end
 
       # @order.update(state: "Payé")
@@ -55,7 +55,6 @@ class OrdersController < ApplicationController
   	  @order = Order.create!(sneaker: @sneaker, sneaker_name: @sneaker_db.name, price_cents: @sneaker.price_cents, state: 'En cours', user: current_user)
   	  authorize @order
       Stripe::StripeCreateCustomer.new(current_user)
-      create_stripe_session(@order, @sneaker, 1)
       redirect_to new_order_payment_path(@order)
     end
 	end
