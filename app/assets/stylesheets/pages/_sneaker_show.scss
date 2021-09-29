@@ -1,7 +1,7 @@
   .sneaker-show-prev-icon,
   .sneaker-show-next-icon {
     height: 80px;
-    width: 80px;
+    width: 00px;
     outline: black;
     background-size: 100%, 100%;
     background-image: none;
@@ -10,14 +10,18 @@
   .sneaker-show-next-icon:after
   {
     content: '>';
-    font-size: 35px;
+    font-size: 50px;
     color: black;
+    font-weight: bold;
   }
 
-  .sneaker-show-prev-icon:after {
+  .sneaker-show-prev-icon:after
+  {
     content: '<';
-    font-size: 35px;
+    font-size: 50px;
     color: black;
+        font-weight: bold;
+
   }
   
   .carousel-item {
