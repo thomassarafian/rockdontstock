@@ -1,3 +1,7 @@
+.modal-sneaker-logos a:hover {
+  text-decoration: none; 
+  color: #FFCD05;
+}
 .modal-sneaker-logos-truck, .modal-sneaker-logos-microscope {
     border: 3px solid #DDDDDD;
     border-radius: 11px;
@@ -90,7 +94,8 @@
       display: block;
     }
     .modal-btn-action {
-      width: 200px;
+      width: 150px;
+      padding: 5px;
       font-style: italic;
       font-weight: bold;
       font-size: 26px;
@@ -126,8 +131,6 @@
     }
     .modal-sneaker-logos p, .modal-sneaker-logos a {
       font-size:13px;
-      color: black;
-      text-decoration: none;
     }
     .modal-sneaker-logos a {
       font-size: 11px;

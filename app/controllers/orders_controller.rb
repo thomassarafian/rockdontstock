@@ -13,10 +13,10 @@ class OrdersController < ApplicationController
     # if !REQUETE AJAX 
     	@order = current_user.orders.find(params[:id])
     	authorize @order
-    	current_stripe_session = retrieve_stripe_session
-      if current_stripe_session['payment_status'] != "paid" && @order.state == "Payé"
-        capture_payment(current_stripe_session)
-      end
+    	# current_stripe_session = retrieve_stripe_session
+      # if current_stripe_session['payment_status'] != "paid" && @order.state == "Payé"
+      #   capture_payment(current_stripe_session)
+      # end
 
       # @order.update(state: "Payé")
       # @order_service = @order.service_cents / 2
@@ -76,13 +76,13 @@ class OrdersController < ApplicationController
 	    	},
 	    	quantity: 1,
 	    }],
-    	payment_intent_data: {
-    		capture_method: 'manual', 
+    	# payment_intent_data: {
+    		# capture_method: 'manual', 
 		  #   application_fee_amount: order.price_cents / 10, #l'argent qui va au vendeur #la plateforme reçoit une commission pour le service
 		  #   transfer_data: {
 		  #     destination: sneaker.user.stripe_account_id,
 		    # },
-		  },
+		  # },
 	    mode: 'payment',
 	    success_url: order_url(@order),
 	    cancel_url: root_url#new_order_payment_url(@order)

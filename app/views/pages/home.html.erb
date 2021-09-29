@@ -93,18 +93,16 @@
                     <%= image_tag("sneaker/microscope.svg") %>
                     <h5>GARANTIES AUTHENTIQUES</h5>
                     <p>Avant que la paire te sois envoyée, cette dernière passe entre nos mains afin d’être vérifiée par des experts en Legit Check</p>
-                    <a href="">En savoir plus sur l’authentification</a>
+                    <%= link_to("En savoir plus l'authentification", authentification_path, target: :_blank) %>
                     </div>
                   <div class="modal-sneaker-logos-truck">
                     <%= image_tag("sneaker/truck.svg") %>
                     <h5>LIVRAISON A PARTIR DE 5€</h5>
                     <p>Pour réduire le coût au maximum nous te proposons la livraison MondialRelay, plus sécurisée elle à aussi l’avantage d’être la moins couteuse pour toi</p>
-                    <a href="">En savoir plus sur l’authentification </a>
                   </div>
                 </div>
                 <div class="modal-sneaker-infos">
-                  <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification <br>
-                  <%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981", target: :_blank) %></p>
+                  <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification<br></p>
                   <div class='modal-sneaker-all'>
                     <div class="modal-sneaker-size-cond">
                       <p>Taille : <strong><%=  sneaker.size %> US</strong></p>
@@ -250,18 +248,16 @@
                     <%= image_tag("sneaker/microscope.svg") %>
                     <h5>GARANTIES AUTHENTIQUES</h5>
                     <p>Avant que la paire te sois envoyée, cette dernière passe entre nos mains afin d’être vérifiée par des experts en Legit Check</p>
-                    <a href="">En savoir plus sur l’authentification</a>
+                    <%= link_to("En savoir plus l'authentification", authentification_path, target: :_blank) %>
                     </div>
                   <div class="modal-sneaker-logos-truck">
                     <%= image_tag("sneaker/truck.svg") %>
                     <h5>LIVRAISON A PARTIR DE 5€</h5>
                     <p>Pour réduire le coût au maximum nous te proposons la livraison MondialRelay, plus sécurisée elle à aussi l’avantage d’être la moins couteuse pour toi</p>
-                    <a href="">En savoir plus sur l’authentification </a>
                   </div>
                 </div>
                 <div class="modal-sneaker-infos">
-                  <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification <br>
-                  <%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981", target: :_blank) %></p>
+                  <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification <br></p>
                   <div class='modal-sneaker-all'>
                     <div class="modal-sneaker-size-cond">
                       <p>Taille : <strong><%=  sneaker.size %> US</strong></p>
@@ -286,7 +282,6 @@
                       <% end %>
                     <% end %>
                   <% end %>
-                  <!-- <button type="button" class="btn btn-dark btn-lg modal-btn-action">ACHETER</button> -->
                 </div>
               </div>
             </div>
@@ -405,23 +400,22 @@
                     <%= image_tag("sneaker/microscope.svg") %>
                     <h5>GARANTIES AUTHENTIQUES</h5>
                     <p>Avant que la paire te sois envoyée, cette dernière passe entre nos mains afin d’être vérifiée par des experts en Legit Check</p>
-                    <a href="">En savoir plus sur l’authentification</a>
+                    <%= link_to("En savoir plus l'authentification", authentification_path, target: :_blank) %>
                     </div>
                   <div class="modal-sneaker-logos-truck">
                     <%= image_tag("sneaker/truck.svg") %>
                     <h5>LIVRAISON A PARTIR DE 5€</h5>
                     <p>Pour réduire le coût au maximum nous te proposons la livraison MondialRelay, plus sécurisée elle à aussi l’avantage d’être la moins couteuse pour toi</p>
-                    <a href="">En savoir plus sur l’authentification </a>
                   </div>
                 </div>
                 <div class="modal-sneaker-infos">
                   <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification <br>
-                  <%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981", target: :_blank) %></p>
+                  </p>
                   <div class='modal-sneaker-all'>
                     <div class="modal-sneaker-size-cond">
                       <p>Taille : <strong><%=  sneaker.size %> US</strong></p>
                       <p>Condition : <strong><%= sneaker.condition %>/10</strong><br>
-                      <%= link_to("Tout savoir sur les conditions", faq_path, style:"color:#707981", target: :_blank) %></p>
+                      <%= link_to("Tout savoir sur les conditions", faq_path, style:"color:#707981", target: :_blank) %>
                     </div>
                     <div class="modal-sneaker-box-extras">
                       <p>Box : <strong><%= sneaker.box %></strong></p>
