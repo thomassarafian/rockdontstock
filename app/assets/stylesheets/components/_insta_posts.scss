@@ -63,15 +63,12 @@
 }
 
 // Small devices (landscape phones, 500px and up)
-@media (min-width: 500px) {
-
-
-}
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+
   .insta-post-carousel {
-    display:none; 
+    display:none;
   }
   .insta-posts {
     margin-bottom: 50px;
