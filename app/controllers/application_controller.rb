@@ -32,7 +32,9 @@ class ApplicationController < ActionController::Base
   def set_search_navbar
     if Rails.env.production?
       @pagy, @sneakers_navbar = pagy(Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1), items: 100)
-      
+    elsif Rails.env.development?
+      @pagy, @sneakers_navbar = pagy(Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1), items: 100)
+    end
       if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
         session[:filter_params] = params
         filtering_params(params).each do |key, value|
@@ -54,10 +56,6 @@ class ApplicationController < ActionController::Base
         format.json 
         format.text { render partial: 'shared/list.html.erb', locals: { sneakers: @sneakers_navbar, params: params}, pagination: view_context.pagy_nav(@pagy) }
       end
-    elsif Rails.env.development?
-      @pagy, @sneakers_navbar = pagy(Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1), items: 100)
-      
-    end
   end
 
   def filtering_params(params)
