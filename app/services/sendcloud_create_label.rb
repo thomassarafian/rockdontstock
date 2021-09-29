@@ -74,7 +74,7 @@ class SendcloudCreateLabel
       },
       'To'=> [
         {
-          'Email'=> 'hello@rockdontstock.com',#@order.sneaker.user.email,
+          'Email'=> @order.sneaker.user.email,
           'Name'=> @order.sneaker.user.first_name
         }
       ],
@@ -106,7 +106,7 @@ class SendcloudCreateLabel
       },
       'To'=> [
         {
-          'Email'=> 'hello@rockdontstock.com', #@order.user.email,
+          'Email'=> @order.user.email,
           'Name'=> @order.user.first_name
         }
       ],
