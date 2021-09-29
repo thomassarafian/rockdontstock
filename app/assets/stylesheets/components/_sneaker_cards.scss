@@ -43,7 +43,14 @@
   object-fit: cover;
 }
 
-@media (min-width: 100px) and (max-width: 575px) {
+.sneaker-card_img-sold>img {
+  opacity: 0.3;
+}
+.sneaker-title-sold, .sneaker-price-sold {
+ opacity: 0.3; 
+}
+
+@media (min-width: 100px) {
   .sneaker-card_img>img {
     width: 100px;
     height: 100px;

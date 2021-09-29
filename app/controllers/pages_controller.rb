@@ -8,7 +8,7 @@ class PagesController < ApplicationController
     elsif Rails.env.development?
       @sneakers_last_release = {}
       @sneakers_selected = {} #Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1).limit(8)
-      @sneakers_last_added = {} #Sneaker.includes(:sneaker_db, :user,:photos_attachments, photos_attachments: :blob).where("state = ?", 1).limit(8).order("created_at DESC")
+      @sneakers_last_added = Sneaker.includes(:sneaker_db, :user,:photos_attachments, photos_attachments: :blob).where("state = ?", 1).limit(8).order("created_at DESC")
     end
   end
   

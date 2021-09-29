@@ -6,7 +6,6 @@
 
 <%= link_to(new_sneaker_path, style:"text-decoration: none; ") do  %>
   <div class='message-pub'>
-    La plateforme est ouverte uniquement pour les vendeurs jusqu’au 26/09/2021<br>
     Gagne des modèles exclusifs en mettant une paire en ligne + frais d’authentification offerts sur ta première vente !
   </div>
 <% end %>
@@ -22,13 +21,24 @@
   <h2>Les dernières paires en ligne</h2>
   <div class="sneaker-cards">
     <% @sneakers_last_added.each do |sneaker| %>
-      <div class="sneaker-card">
-        <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
-          <%= cl_image_tag(sneaker.photos[0].key) %>
+      <% if !sneaker.orders.last.nil?  && sneaker.orders.last.state == "Payé" %>
+        <div class="sneaker-card">
+          <div class="sneaker-card_img sneaker-card_img-sold">
+            <%= cl_image_tag(sneaker.photos[0].key) %>
+            <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
+          </div>
+          <div class="sneaker-title sneaker-title-sold"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>  
         </div>
-        <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
-        <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
-      </div>
+      <% else %>
+        <div class="sneaker-card">
+          <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
+            <%= cl_image_tag(sneaker.photos[0].key) %>
+          </div>
+          <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
+        </div>
+      <% end %>
       <div class="modal fade" id="exampleModal-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -140,13 +150,24 @@
   <h2>La séléction Rock Don't Stock</h2>
   <div class="sneaker-cards">
     <% @sneakers_selected.each do |sneaker| %>
-      <div class="sneaker-card">
-        <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
-          <%= cl_image_tag(sneaker.photos[0].key) %>
+      <% if !sneaker.orders.last.nil?  && sneaker.orders.last.state == "Payé" %>
+        <div class="sneaker-card">
+          <div class="sneaker-card_img sneaker-card_img-sold">
+            <%= cl_image_tag(sneaker.photos[0].key) %>
+            <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
+          </div>
+          <div class="sneaker-title sneaker-title-sold"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>  
         </div>
-        <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
-        <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
-      </div>
+      <% else %>
+        <div class="sneaker-card">
+          <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
+            <%= cl_image_tag(sneaker.photos[0].key) %>
+          </div>
+          <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
+        </div>
+      <% end %>
       <div class="modal fade" id="exampleModal-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -236,7 +257,6 @@
       </div>
     <% end %>
   </div>  
-  <div type="button" class="link-home-page all_sneakers">Tout voir</div>
 </div>
 
 <div class="">
@@ -257,13 +277,24 @@
   <h2>Les dernières releases</h2>
   <div class="sneaker-cards">
     <% @sneakers_last_release.each do |sneaker| %>
-      <div class="sneaker-card">
-        <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
-          <%= cl_image_tag(sneaker.photos[0].key) %>
+      <% if !sneaker.orders.last.nil?  && sneaker.orders.last.state == "Payé" %>
+        <div class="sneaker-card">
+          <div class="sneaker-card_img sneaker-card_img-sold">
+            <%= cl_image_tag(sneaker.photos[0].key) %>
+            <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
+          </div>
+          <div class="sneaker-title sneaker-title-sold"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>  
         </div>
-        <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
-        <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
-      </div>
+      <% else %>
+        <div class="sneaker-card">
+          <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
+            <%= cl_image_tag(sneaker.photos[0].key) %>
+          </div>
+          <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
+        </div>
+      <% end %>
       <div class="modal fade" id="exampleModal-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -354,7 +385,6 @@
     <% end %>
   </div>  
 </div>
-<div type="button" class="link-home-page all_sneakers">Tout voir</div>
 
 
 

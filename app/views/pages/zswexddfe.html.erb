@@ -1,7 +1,7 @@
 <div class="container home-rds-selection">
   <h2>Les dernières paires en ligne</h2>
   <div class="sneaker-cards">
-    <% @sneakers_last_added.each do |sneaker| %>
+    <% @sneakers_selected.each do |sneaker| %>
       <div class="sneaker-card">
         <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
           <%= cl_image_tag(sneaker.photos[0].key) %>
@@ -50,9 +50,7 @@
                 </div>
               </div>
             </div>
-            <div class="modal-footer" style="justify-content: center;">
-              <%#= link_to "+ Service", orders_path(sneaker_id: sneaker.id), method: :post %>
-             
+            <div class="modal-footer" style="justify-content: center;">             
               <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
                 <% unless current_user.nil? %>
                   <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>

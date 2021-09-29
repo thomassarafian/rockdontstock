@@ -18,7 +18,7 @@ class Order < ApplicationRecord
 
 
   after_create :shipping_price
-  before_update :create_sendcloud_label, unless: :order_is_not_paid?
+  # before_update :create_sendcloud_label, unless: :order_is_not_paid? # A REMETTRE !! ! ! !!!! !! 
 
 
 

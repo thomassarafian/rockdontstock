@@ -13,10 +13,14 @@ class OrdersController < ApplicationController
     # if !REQUETE AJAX 
     	@order = current_user.orders.find(params[:id])
     	authorize @order
+    	current_stripe_session = retrieve_stripe_session
+      if current_stripe_session['payment_status'] != "paid" && @order.state == "Payé"
+        capture_payment(current_stripe_session)        
+      end
+
       # @order.update(state: "Payé")
       # @order_service = @order.service_cents / 2
 
-    	# current_stripe_session = retrieve_stripe_session
       
       #WEBHOOOK STRIPE donc apres Orders#create des qu'on est sur qeu c'est PAYÉ ->>>
   		# SendcloudCreateLabel.new(current_user, @order).create_label
@@ -24,7 +28,6 @@ class OrdersController < ApplicationController
 
 
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
-			# capture_payment(current_stripe_session)
 		#end
 
 		#if le vendeur n'a pas envoyé sa paire avant les 7 jours # Je crois que ca cancel tout seul si on a pas validé dans les 7 jours
@@ -98,19 +101,19 @@ class OrdersController < ApplicationController
 	  
 	end
 
-	# def retrieve_stripe_session
-	# 	Stripe.api_key = ENV['STRIPE_SECRET_TEST']
-	# 	stripe_session = Stripe::Checkout::Session.retrieve(
-	# 	  @order.checkout_session_id
-	# 	)
-	# end
+	def retrieve_stripe_session
+		Stripe.api_key = ENV['STRIPE_SECRET_TEST']
+		stripe_session = Stripe::Checkout::Session.retrieve(
+		  @order.checkout_session_id
+		)
+	end
 
-	# def capture_payment(current_stripe_session)
-	# 			Stripe.api_key = ENV['STRIPE_SECRET_TEST']
-	# 	Stripe::PaymentIntent.capture(
-	# 	  current_stripe_session.payment_intent
-	# 	)		
-	# end
+	def capture_payment(current_stripe_session)
+				Stripe.api_key = ENV['STRIPE_SECRET_TEST']
+		Stripe::PaymentIntent.capture(
+		  current_stripe_session.payment_intent
+		)		
+	end
 
 	# def cancel_payment(current_stripe_session)
 	# 			Stripe.api_key = ENV['STRIPE_SECRET_TEST']

@@ -30,28 +30,33 @@ class ApplicationController < ActionController::Base
 
   
   def set_search_navbar
-    @pagy, @sneakers_navbar = pagy(Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1), items: 100)
-    
-    if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
-      session[:filter_params] = params
-      filtering_params(params).each do |key, value|
-        @sneakers_navbar = @sneakers_navbar.public_send("filter_by_#{key}", value) if value.present?
+    if Rails.env.production?
+      @pagy, @sneakers_navbar = pagy(Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1), items: 100)
+      
+      if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
+        session[:filter_params] = params
+        filtering_params(params).each do |key, value|
+          @sneakers_navbar = @sneakers_navbar.public_send("filter_by_#{key}", value) if value.present?
+        end
+      elsif params[:page].present? && params[:page] >= "2" && session[:filter_params].present?
+        filtering_params(session[:filter_params]).each do |key, value|
+          @sneakers_navbar = @sneakers_navbar.public_send("filter_by_#{key}", value) if value.present?
+        end
+      elsif !params[:category].present? || !params[:price].present? || !params[:condition].present? || !params[:size].present?
+        session.delete(:filter_params)
       end
-    elsif params[:page].present? && params[:page] >= "2" && session[:filter_params].present?
-      filtering_params(session[:filter_params]).each do |key, value|
-        @sneakers_navbar = @sneakers_navbar.public_send("filter_by_#{key}", value) if value.present?
+      if params[:query].present?
+        @sneakers_navbar = @sneakers_navbar.search_by_name_and_brand(params[:query])
       end
-    elsif !params[:category].present? || !params[:price].present? || !params[:condition].present? || !params[:size].present?
-      session.delete(:filter_params)
-    end
-    if params[:query].present?
-      @sneakers_navbar = @sneakers_navbar.search_by_name_and_brand(params[:query])
-    end
 
-    respond_to do |format|
-      format.html
-      format.json 
-      format.text { render partial: 'shared/list.html.erb', locals: { sneakers: @sneakers_navbar, params: params}, pagination: view_context.pagy_nav(@pagy) }
+      respond_to do |format|
+        format.html
+        format.json 
+        format.text { render partial: 'shared/list.html.erb', locals: { sneakers: @sneakers_navbar, params: params}, pagination: view_context.pagy_nav(@pagy) }
+      end
+    elsif Rails.env.development?
+      @pagy, @sneakers_navbar = pagy(Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1), items: 100)
+      
     end
   end
 

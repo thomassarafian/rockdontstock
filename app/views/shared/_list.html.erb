@@ -2,14 +2,24 @@
   <div class="popup-search" id="records_table">
     <div class="sneaker-cards">
       <% @sneakers_navbar.each do |sneaker| %>
-      <!-- <div class="sneaker-cards-no-result" style="color:black;"></div> -->
-      <div class="sneaker-card">
-        <div class="sneaker-card_img" data-toggle="modal" data-target="#search-list-<%= sneaker.id %>">
-          <%= cl_image_tag(sneaker.photos[0].key) %>
-        </div>
-        <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
-        <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
-      </div> 
+        <% if !sneaker.orders.last.nil?  && sneaker.orders.last.state == "Payé" %>
+          <div class="sneaker-card">
+            <div class="sneaker-card_img sneaker-card_img-sold">
+              <%= cl_image_tag(sneaker.photos[0].key) %>
+              <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
+            </div>
+            <div class="sneaker-title sneaker-title-sold"><strong><%= sneaker.sneaker_db.name %></strong></div>
+            <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>  
+          </div>
+        <% else %>
+          <div class="sneaker-card">
+            <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
+              <%= cl_image_tag(sneaker.photos[0].key) %>
+            </div>
+            <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
+            <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>
