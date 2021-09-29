@@ -32,14 +32,14 @@
         </div>
       <% else %>
         <div class="sneaker-card">
-          <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
+          <div class="sneaker-card_img" data-toggle="modal" data-target="#modal-home-last-<%= sneaker.id %>">
             <%= cl_image_tag(sneaker.photos[0].key) %>
           </div>
           <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
           <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
         </div>
       <% end %>
-      <div class="modal fade" id="exampleModal-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modal-home-last-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -49,7 +49,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <div id="carousel-<%= sneaker.id %>-home" class="carousel slide  carousel-slide-body" data-ride="carousel">
+              <div id="carousel-home-last-<%= sneaker.id %>" class="carousel slide  carousel-slide-body" data-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <%= cl_image_tag(sneaker.photos[0].key, class: 'sneaker-show-photos') %>
@@ -79,11 +79,11 @@
                       <%= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
                     </div>
                   <% end %>
-                  <a class="carousel-control-prev" href="#carousel-<%= sneaker.id %>-home" role="button" data-slide="prev">
+                  <a class="carousel-control-prev" href="#carousel-home-last-<%= sneaker.id %>" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                   </a>
-                  <a class="carousel-control-next" href="#carousel-<%= sneaker.id %>-home" role="button" data-slide="next">
+                  <a class="carousel-control-next" href="#carousel-home-last-<%= sneaker.id %>" role="button" data-slide="next">
                     <span class="carousel-control-next-icon sneaker-show-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                   </a>
@@ -121,21 +121,7 @@
                   <button  type="button" class="btn btn-dark btn-lg modal-btn-action">ACHETER</button>
                 </div>
               </div>
-              <!-- <div class="modal-sneaker-infos">
-                <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification <br>
-                <%= link_to("Tout savoir sur l'authentification", authentification_path, style:"color:#707981", target: :_blank) %></p>
-                <div class='modal-sneaker-all'>
-                  <div class="modal-sneaker-size-cond">
-                    <p>Taille : <strong><%=  sneaker.size %> US</strong></p>
-                    <p>Condition : <strong><%= sneaker.condition %>/10</strong><br>
-                    <%= link_to("Tout savoir sur les conditions", faq_path, style:"color:#707981", target: :_blank) %></p>
-                  </div>
-                  <div class="modal-sneaker-box-extras">
-                    <p>Box : <strong><%= sneaker.box %></strong></p>
-                    <p>Description : <strong><%= sneaker.extras %></strong></p>
-                  </div>
-                </div>
-              </div> -->
+
             </div>
             <div class="modal-footer" style="justify-content: center;">
              <%# if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
@@ -193,14 +179,14 @@
         </div>
       <% else %>
         <div class="sneaker-card">
-          <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
+          <div class="sneaker-card_img" data-toggle="modal" data-target="#modal-home-selection-<%= sneaker.id %>">
             <%= cl_image_tag(sneaker.photos[0].key) %>
           </div>
           <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
           <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
         </div>
       <% end %>
-      <div class="modal fade" id="exampleModal-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modal-home-selection-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -210,7 +196,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <div id="carousel-home-<%= sneaker.id %>" class="carousel slide" data-ride="carousel">
+              <div id="carousel-home-selection-<%= sneaker.id %>" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <%= cl_image_tag(sneaker.photos[0].key, class: 'sneaker-show-photos') %>
@@ -240,11 +226,11 @@
                       <%= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
                     </div>
                   <% end %>
-                <a class="carousel-control-prev" href="#carousel-<%= sneaker.id %>-home" role="button" data-slide="prev">
+                <a class="carousel-control-prev" href="#carousel-home-selection-<%= sneaker.id %>" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                   </a>
-                  <a class="carousel-control-next" href="#carousel-<%= sneaker.id %>-home" role="button" data-slide="next">
+                  <a class="carousel-control-next" href="#carousel-home-selection-<%= sneaker.id %>" role="button" data-slide="next">
                     <span class="carousel-control-next-icon sneaker-show-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                   </a>
@@ -337,14 +323,14 @@
         </div>
       <% else %>
         <div class="sneaker-card">
-          <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>">
+          <div class="sneaker-card_img" data-toggle="modal" data-target="#modal-home-release-<%= sneaker.id %>">
             <%= cl_image_tag(sneaker.photos[0].key) %>
           </div>
           <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
           <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
         </div>
       <% end %>
-      <div class="modal fade" id="exampleModal-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modal-home-release-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -354,7 +340,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <div id="carousel-<%= sneaker.id %>-home" class="carousel slide carousel-slide-body" data-ride="carousel">
+              <div id="carousel-<%= sneaker.id %>-release" class="carousel slide carousel-slide-body" data-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <%= cl_image_tag(sneaker.photos[0].key, class: 'sneaker-show-photos') %>
@@ -384,11 +370,11 @@
                       <%= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
                     </div>
                   <% end %>
-                <a class="carousel-control-prev" href="#carousel-<%= sneaker.id %>-home" role="button" data-slide="prev">
+                <a class="carousel-control-prev" href="#carousel-<%= sneaker.id %>-release" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                   </a>
-                  <a class="carousel-control-next" href="#carousel-<%= sneaker.id %>-home" role="button" data-slide="next">
+                  <a class="carousel-control-next" href="#carousel-<%= sneaker.id %>-release" role="button" data-slide="next">
                     <span class="carousel-control-next-icon sneaker-show-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                   </a>
