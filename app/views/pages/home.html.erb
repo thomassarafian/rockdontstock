@@ -49,7 +49,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <div id="carousel-home-last-<%= sneaker.id %>" class="carousel slide  carousel-slide-body" data-ride="carousel">
+              <div id="carousel-home-last-<%= sneaker.id %>" class="carousel slide carousel-slide-body" data-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <%= cl_image_tag(sneaker.photos[0].key, class: 'sneaker-show-photos') %>
@@ -118,23 +118,33 @@
                   </div>
                 </div>
                 <div class="desktop-btn-action">
-                  <button  type="button" class="btn btn-dark btn-lg modal-btn-action">ACHETER</button>
+                  <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
+                    <% unless current_user.nil? %>
+                      <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
+                        <%= submit_tag 'Acheter', class: 'btn btn-dark btn-lg modal-btn-action' %>
+                      <% end %>
+                    <% else %>
+                      <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
+                        <%= submit_tag 'ACHETER', class: 'btn btn-dark btn-lg modal-btn-action' %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
                 </div>
               </div>
 
             </div>
             <div class="modal-footer" style="justify-content: center;">
-             <%# if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
-                <%# unless current_user.nil? %>
-                  <%#= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
-                    <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <%# end %>
-                <%# else %>
-                  <%#= form_tag user_session_path(sneaker_id: sneaker.id) do %>
-                    <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <%# end %>
-                <%# end %>
-              <%# end %>
+             <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
+                <% unless current_user.nil? %>
+                  <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
+                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                  <% end %>
+                <% else %>
+                  <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
+                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                  <% end %>
+                <% end %>
+              <% end %>
               <% if policy(sneaker).edit? %>
                 <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
                   <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
@@ -196,7 +206,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <div id="carousel-home-selection-<%= sneaker.id %>" class="carousel slide" data-ride="carousel">
+              <div id="carousel-home-selection-<%= sneaker.id %>" class="carousel slide carousel-slide-body" data-ride="carousel">
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <%= cl_image_tag(sneaker.photos[0].key, class: 'sneaker-show-photos') %>
@@ -265,22 +275,33 @@
                   </div>
                 </div>
                 <div class="desktop-btn-action">
-                  <button  type="button" class="btn btn-dark btn-lg modal-btn-action">ACHETER</button>
+                  <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
+                    <% unless current_user.nil? %>
+                      <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
+                        <%= submit_tag 'Acheter', class: 'btn btn-dark btn-lg modal-btn-action' %>
+                      <% end %>
+                    <% else %>
+                      <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
+                        <%= submit_tag 'ACHETER', class: 'btn btn-dark btn-lg modal-btn-action' %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                  <!-- <button type="button" class="btn btn-dark btn-lg modal-btn-action">ACHETER</button> -->
                 </div>
               </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">
-              <%# if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
-                <%# unless current_user.nil? %>
-                  <%#= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
-                    <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <%# end %>
-                <%# else %>
-                  <%#= form_tag user_session_path(sneaker_id: sneaker.id) do %>
-                    <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <%# end %>
-                <%# end %>
-              <%# end %>
+              <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
+                <% unless current_user.nil? %>
+                  <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
+                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                  <% end %>
+                <% else %>
+                  <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
+                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                  <% end %>
+                <% end %>
+              <% end %>
               <% if policy(sneaker).edit? %>
                 <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
                   <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
@@ -409,22 +430,32 @@
                   </div>
                 </div>
                 <div class="desktop-btn-action">
-                  <button  type="button" class="btn btn-dark btn-lg modal-btn-action">ACHETER</button>
+                  <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
+                    <% unless current_user.nil? %>
+                      <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
+                        <%= submit_tag 'Acheter', class: 'btn btn-dark btn-dark btn-lg modal-btn-action' %>
+                      <% end %>
+                    <% else %>
+                      <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
+                        <%= submit_tag 'Acheter', class: 'btn btn-dark btn-lg modal-btn-action' %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
                 </div>
               </div>
             </div>
             <div class="modal-footer" style="justify-content: center;">
-             <%# if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
-                <%# unless current_user.nil? %>
-                  <%#= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
-                    <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <%# end %>
-                <%# else %>
-                  <%#= form_tag user_session_path(sneaker_id: sneaker.id) do %>
-                    <%#= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <%# end %>
-                <%# end %>
-              <%# end %>
+             <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
+                <% unless current_user.nil? %>
+                  <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
+                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                  <% end %>
+                <% else %>
+                  <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
+                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
+                  <% end %>
+                <% end %>
+              <% end %>
               <% if policy(sneaker).edit? %>
                 <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
                   <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
@@ -483,7 +514,7 @@
     </div>  
   </div>
 
-  <div id="carouselInstaIndicators" class="insta-post-carousel carousel slide" data-ride="carousel">
+  <div id="carouselInstaIndicators" class="insta-post-carousel carousel slide carousel-slide-body" data-ride="carousel">
     
     <div class="carousel-inner">
       <div class="carousel-item active">

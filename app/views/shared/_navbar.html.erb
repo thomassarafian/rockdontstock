@@ -213,7 +213,17 @@
                   </div>
                 </div>
                 <div class="desktop-btn-action">
-                  <button  type="button" class="btn btn-dark btn-lg modal-btn-action">ACHETER</button>
+                  <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
+                    <% unless current_user.nil? %>
+                      <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
+                        <%= submit_tag 'Acheter', class: 'btn btn-dark btn-lg modal-btn-action' %>
+                      <% end %>
+                    <% else %>
+                      <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
+                        <%= submit_tag 'ACHETER', class: 'btn btn-dark btn-lg modal-btn-action' %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
                 </div>
               </div>
             </div>
