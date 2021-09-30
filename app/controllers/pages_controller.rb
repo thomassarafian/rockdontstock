@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-	skip_before_action :authenticate_user!, only: [:zswexddfe, :home, :about, :newsletter, :faq, :cgv, :cgu, :authentification, :how_to_send_shoes, :trust_policy]
+	skip_before_action :authenticate_user!, only: [:modal_bootstrap,:zswexddfe, :home, :about, :newsletter, :faq, :cgv, :cgu, :authentification, :how_to_send_shoes, :trust_policy]
 	def home 
     if Rails.env.production?
       @sneakers_selected = Sneaker.includes(:sneaker_db, :user,:photos_attachments, photos_attachments: :blob).where(id: [304, 276, 134, 122, 138, 152, 55, 56]) #.where("state = ?", 1).limit(8).order("created_at DESC")
