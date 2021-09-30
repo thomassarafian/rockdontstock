@@ -1,11 +1,11 @@
 let placesAutocomplete = places({
-      appId: process.env.ALGOLIA_APP_ID,
-      apiKey: process.env.ALGOLIA_API_KEY,
-      container: document.querySelector('#user_line1'),
-      language: 'fr', 
-      countries: ['fr'],
-      type: 'address'
-    });
+  appId: process.env.ALGOLIA_APP_ID,
+  apiKey: process.env.ALGOLIA_API_KEY,
+  container: document.querySelector('#user_line1'),
+  language: 'fr', 
+  countries: ['fr'],
+  type: 'address'
+});
     
 placesAutocomplete.on('change', function(e) {
   $('input[type=hidden]#user_city').val(e.suggestion.city);

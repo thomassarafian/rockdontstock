@@ -12,6 +12,9 @@ class PagesController < ApplicationController
     end
   end
   
+  def modal_bootstrap
+     @sneakers_last_added = Sneaker.includes(:sneaker_db, :user,:photos_attachments, photos_attachments: :blob).where("state >= ?", 1).limit(8).order("created_at DESC")
+  end  
   def about
   end
   
