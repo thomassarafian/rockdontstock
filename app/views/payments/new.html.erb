@@ -269,7 +269,8 @@
     if (document.querySelector('#recap_form_btn')) {
       document.querySelector('#recap_form_btn').addEventListener('click', (event) => {
         event.preventDefault();
-        document.querySelector('#recap_form').submit();
+        document.querySelector('#recap_form').dispatchEvent(new Event('submit', {bubbles: true}));
+        // document.querySelector('#recap_form').submit();
       })
     }
   });
@@ -306,7 +307,6 @@
       const recapPaymentMondialRelayBtn = document.querySelector('.recap-payment-mondial-relay-btn');
       const recapPaymentColissimoBtn = document.querySelector('.recap-payment-colissimo-btn');
       if (recapPaymentMondialRelayBtn) {
-        console.log('On mondial relay !');
         document.querySelector('.black-circle-logo').data = "/assets/payment/white_circle.svg";
         document.querySelectorAll(".white-circle-logo")[0].data = "/assets/payment/black_circle.svg";
         document.querySelector('.payment-new-delivery-step').style.display = "none";
