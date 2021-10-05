@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     post '/actions/reject-announcement-bad-angles' => 'sneakers#reject_announcement_bad_angles'
     post '/actions/reject-announcement-fake-sneakers' => 'sneakers#reject_announcement_fake_sneakers'
     post '/actions/validate-announcement-bad-photos' => 'sneakers#validate_announcement_bad_photos'
-    post '/actions/missing_information' => 'sneakers#missing_information'
+    post '/actions/missing-information' => 'sneakers#missing_information'
   end
 
   mount ForestLiana::Engine => '/forest'	
