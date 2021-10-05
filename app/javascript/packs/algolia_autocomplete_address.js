@@ -7,6 +7,8 @@ let placesAutocomplete = places({
   type: 'address'
 });
     
+
+
 placesAutocomplete.on('change', function(e) {
   $('input[type=hidden]#user_city').val(e.suggestion.city);
   $('input[type=hidden]#user_postal_code').val(e.suggestion.postcode);

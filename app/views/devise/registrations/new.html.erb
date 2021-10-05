@@ -193,7 +193,7 @@ document.addEventListener('turbolinks:load', () => {
         user_date_of_birth_input.classList.add('is-valid');
         document.querySelector('#edit_user_date_of_birth_error').innerHTML = "";
       }
-      if (!user_line1.value || !user_line1.value.replace(/\s/g, '').length || /^\d+$/.test(user_line1.value)) {
+      if (document.querySelector('input[type=hidden]#user_city')) {
         user_line1.classList.add('is-invalid');
         document.querySelector('#edit_user_line1_error').innerHTML = "<small>Adresse invalide</small>";
         errorEditUser--;
