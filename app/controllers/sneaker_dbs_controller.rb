@@ -1,8 +1,6 @@
 class SneakerDbsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :create]
   def index
-
-    # @sneaker_dbs = policy_scope(SneakerDb.where(nil).limit(12))
     if params[:query] == ""
       @sneaker_dbs = policy_scope(SneakerDb).limit(12)
     elsif params[:query].present?
@@ -18,18 +16,7 @@ class SneakerDbsController < ApplicationController
 
   def create
     @sneaker_db = SneakerDb.create(name: params['add_sneaker_db'], img_url: "/assets/oeil-rds.png")
-    # if @sneaker_db.save
-    # else
-    #   if @sneaker_db.errors.any?
-    #     session[:sneaker_db_errors] = @sneaker_db.errors
-    #   end
-    # end
-
     authorize @sneaker_db
   end
   
-  # def show
-  #   @sneaker_db = SneakerDb.find(params[:id])
-  #   authorize @sneaker_db
-  # end
 end

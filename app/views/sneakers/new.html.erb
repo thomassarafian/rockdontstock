@@ -20,7 +20,7 @@
         <div class="form-add-new-sneakerdb">
           <hr>
           <h2>Si tu ne trouves pas ton modèle dans la liste, ajoute-le ci-dessous :</h2>
-          <form id="addNewSneakerDb"action="/sneaker_dbs/" method="post" > 
+          <form id="addNewSneakerDb" action="/sneaker_dbs/" data-remote="true" method="post" > 
             <input class="form-control add-sneaker-db-name" required type="text"  placeholder="Adidas Yeezy Boost 700 Wave Runner Solid Grey" name="add_sneaker_db">
             <input type="submit" value="Ajouter ma paire" class="btn btn-dark">
           </form>
@@ -43,6 +43,7 @@
     let addNewSneakerDb = document.getElementById('addNewSneakerDb');
     if (addNewSneakerDb) {
       document.getElementById('addNewSneakerDb').addEventListener('submit', (event) => {
+        event.preventDefault();
         let addSneakerDbName = document.querySelector('.add-sneaker-db-name');
         document.querySelector('.title-add-new-sneaker-db').innerHTML = `<p style="text-align:center">Ton modèle <strong>${addSneakerDbName.value}</strong> vient d'être ajouter !<br>Tu peux vas le trouver en tapant son nom ci-dessous : </p>`;
       });
