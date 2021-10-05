@@ -170,4 +170,29 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     }
   end
 
+  def missing_information
+    sneaker_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
+    @sneaker = Sneaker.find(sneaker_id)
+    
+    variable = Mailjet::Send.create(messages: [{
+      'From'=> {
+        'Email'=> "elliot@rockdontstock.com",
+        'Name'=> "Rock Don't Stock"
+      },
+      'To'=> [
+        {
+          'Email'=> @sneaker.user.email,
+          'Name'=> @sneaker.user.first_name
+        }
+      ],
+      'TemplateID'=> 3229327,
+      'TemplateLanguage'=> true,
+      'Subject'=> "Complète les informations manquantes afin que nous puissions valider ta paire ✍️ 🧐",
+      'Variables'=> {
+        "prenom" => @sneaker.user.first_name,
+        "modele_paire" => @sneaker.sneaker_db.name
+      }
+    }])
+    p variable.attributes['Messages']
+  end
 end
