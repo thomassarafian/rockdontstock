@@ -137,7 +137,8 @@ function pointPicker() {
         document.querySelector('#user_picker_data').value = JSON.stringify(servicePointObject, null, 2);
         if (document.querySelector('#user_picker_data').value != "none")
         {
-          document.querySelector('.save-user-picker-data').submit();
+          document.querySelector('.save-user-picker-data').dispatchEvent(new Event('submit', {bubbles: true}));
+          // document.querySelector('.save-user-picker-data').submit();
         }
         const data_picker = `<br><p class="point-picker-result">Votre point relais : ${result.name} - ${result.house_number} ${result.street}, ${result.postal_code} ${result.city}</p>`;
         pointPickerResult.innerHTML = data_picker;
