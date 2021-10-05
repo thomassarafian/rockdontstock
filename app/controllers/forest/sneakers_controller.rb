@@ -194,5 +194,8 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
       }
     }])
     p variable.attributes['Messages']
+    render json: { 
+      success: "L'annonce n'est pas et l'email a été envoyé au vendeur !"
+    }
   end
 end
