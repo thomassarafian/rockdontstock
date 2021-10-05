@@ -144,86 +144,37 @@
             </button>
           </div>
           <div class="modal-body">
-            <div id="carousel-navbar-all-<%= sneaker.id %>" class="carousel slide carousel-slide-body-sneaker" data-ride="carousel">
+            <div id="carousel-search-list-<%= sneaker.id %>" class="carousel slide carousel-slide-body-sneaker" data-ride="carousel">
               <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <%= cl_image_tag(sneaker.photos[0].key, class: 'sneaker-show-photos') %>
-                </div>
-                <div class="carousel-item ">
-                  <%= cl_image_tag(sneaker.photos[1].key, class: 'sneaker-show-photos') %>
-                </div>
-                <div class="carousel-item ">
-                  <%= cl_image_tag(sneaker.photos[2].key, class: 'sneaker-show-photos') %>
-                </div>
-                <div class="carousel-item ">
-                  <%= cl_image_tag(sneaker.photos[3].key, class: 'sneaker-show-photos') %>
-                </div>
-                <div class="carousel-item ">
-                  <%= cl_image_tag(sneaker.photos[4].key, class: 'sneaker-show-photos') %>
-                </div>
-                <div class="carousel-item ">
-                  <%= cl_image_tag(sneaker.photos[5].key, class: 'sneaker-show-photos') %>
-                </div>
-                <% unless sneaker.photos[6].nil? %>
-                  <div class="carousel-item ">
-                    <%= cl_image_tag(sneaker.photos[6].key, class: 'sneaker-show-photos') %>
+              </div>
+              <div class="modal-sneaker-logos">
+                <div class="modal-sneaker-logos-microscope">
+                  <%= image_tag("sneaker/microscope.svg") %>
+                  <h5>AUTHENTICITÉ GARANTIE</h5>
+                  <p>Avant que la paire ne te soit envoyée, cette dernière passe entre nos mains afin d’être vérifiée par des experts en Legit Check</p>
+                  <%= link_to("En savoir plus sur l'authentification", authentification_path, target: :_blank) %>
                   </div>
-                <% end %>
-                <% unless sneaker.photos[7].nil? %>
-                  <div class="carousel-item ">
-                    <%= cl_image_tag(sneaker.photos[7].key, class: 'sneaker-show-photos') %>
-                  </div>
-                <% end %>
-                  <a class="carousel-control-prev" href="#carousel-navbar-all-<%= sneaker.id %>" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carousel-navbar-all-<%= sneaker.id %>" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon sneaker-show-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
-
+                <div class="modal-sneaker-logos-truck">
+                  <%= image_tag("sneaker/truck.svg") %>
+                  <h5>LIVRAISON A PARTIR DE 5€</h5>
+                  <p>Pour réduire le coût au maximum nous te proposons la livraison MondialRelay, plus sécurisée elle a aussi l’avantage d’être la moins coûteuse pour toi</p>
                 </div>
-                <div class="modal-sneaker-logos">
-                  <div class="modal-sneaker-logos-microscope">
-                    <%= image_tag("sneaker/microscope.svg") %>
-                    <h5>AUTHENTICITÉ GARANTIE</h5>
-                    <p>Avant que la paire ne te soit envoyée, cette dernière passe entre nos mains afin d’être vérifiée par des experts en Legit Check</p>
-                    <%= link_to("En savoir plus sur l'authentification", authentification_path, target: :_blank) %>
-                    </div>
-                  <div class="modal-sneaker-logos-truck">
-                    <%= image_tag("sneaker/truck.svg") %>
-                    <h5>LIVRAISON A PARTIR DE 5€</h5>
-                    <p>Pour réduire le coût au maximum nous te proposons la livraison MondialRelay, plus sécurisée elle a aussi l’avantage d’être la moins coûteuse pour toi</p>
+              </div>
+              <div class="modal-sneaker-infos">
+                <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification <br></p>
+                <div class='modal-sneaker-all'>
+                  <div class="modal-sneaker-size-cond">
+                    <p>Taille : <strong><%=  sneaker.size %> US</strong></p>
+                    <p>Condition : <strong><%= sneaker.condition %>/10</strong><br>
+                    <%= link_to("Tout savoir sur les conditions", faq_path, style:"color:#707981", target: :_blank) %></p>
+                  </div>
+                  <div class="modal-sneaker-box-extras">
+                    <p>Box : <strong><%= sneaker.box %></strong></p>
+                    <p>Description : <strong><%= sneaker.extras %></strong></p>
                   </div>
                 </div>
-                <div class="modal-sneaker-infos">
-                  <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification <br></p>
-                  <div class='modal-sneaker-all'>
-                    <div class="modal-sneaker-size-cond">
-                      <p>Taille : <strong><%=  sneaker.size %> US</strong></p>
-                      <p>Condition : <strong><%= sneaker.condition %>/10</strong><br>
-                      <%= link_to("Tout savoir sur les conditions", faq_path, style:"color:#707981", target: :_blank) %></p>
-                    </div>
-                    <div class="modal-sneaker-box-extras">
-                      <p>Box : <strong><%= sneaker.box %></strong></p>
-                      <p>Description : <strong><%= sneaker.extras %></strong></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="desktop-btn-action">
-                  <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
-                    <% unless current_user.nil? %>
-                      <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
-                        <%= submit_tag 'ACHETER', class: 'btn btn-dark btn-lg modal-btn-action' %>
-                      <% end %>
-                    <% else %>
-                      <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
-                        <%= submit_tag 'ACHETER', class: 'btn btn-dark btn-lg modal-btn-action' %>
-                      <% end %>
-                    <% end %>
-                  <% end %>
-                </div>
+              </div>
+                
               </div>
             </div>
           <div class="modal-footer" style="justify-content: center;">

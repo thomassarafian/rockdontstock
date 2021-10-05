@@ -3,7 +3,7 @@ let placesAutocomplete = places({
   apiKey: process.env.ALGOLIA_API_KEY,
   container: document.querySelector('#user_line1'),
   language: 'fr', 
-  countries: ['fr'],
+  countries: ['fr', 'be'],
   type: 'address'
 });
     

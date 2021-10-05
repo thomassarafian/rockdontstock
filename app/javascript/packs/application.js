@@ -29,6 +29,7 @@ import { ibanValidator } from "components/iban_validator.js"
 // import { editSneakerPhotos } from "components/edit_sneaker_photos.js"
 import { sneakerNew } from "components/sneaker_new.js"
 import { createStripeTokenEditUser } from "components/create_stripe_token_edit_user.js"
+import { getPhotosModal } from "components/get_photos_modal.js"
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -40,6 +41,7 @@ document.addEventListener('turbolinks:load', () => {
   sneakerNew();
   // optimizeUploadPhotos()
   createStripeTokenEditUser();
+  getPhotosModal();
 });
 
 
