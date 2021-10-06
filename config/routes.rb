@@ -22,30 +22,29 @@ Rails.application.routes.draw do
   	resources :transfers, only: [:index, :create]
   end
 
-
 	resources :orders, only: [:show, :create] do
 	  resources :payments, only: [:new]
 	end
-  get 'zswexddfe' => 'pages#zswexddfe'
 
+  get 'zswexddfe'                    => 'pages#zswexddfe'
 
-  get 'modal_bootstrap' => 'pages#modal_bootstrap'
-  get 'about' => 'pages#about'
-  get 'faq' => 'pages#faq'
-  get 'comment-envoyer-une-paire' => 'pages#how_to_send_shoes'
-  get 'authentification' => 'pages#authentification'
-  get 'cgu' => 'pages#cgu'
-  get 'cgv' => 'pages#cgv'
+  get 'modal_bootstrap'              => 'pages#modal_bootstrap'
+  get 'about'                        => 'pages#about'
+  get 'faq'                          => 'pages#faq'
+  get 'comment-envoyer-une-paire'    => 'pages#how_to_send_shoes'
+  get 'authentification'             => 'pages#authentification'
+  get 'cgu'                          => 'pages#cgu'
+  get 'cgv'                          => 'pages#cgv'
   get 'politique-de-confidentialite' => 'pages#trust_policy'
   post '/', to: 'pages#newsletter'
   
   namespace :forest do
-    post '/actions/validate-announcement' => 'sneakers#validate_announcement'
-    post '/actions/reject-announcement-bad-criteria' => 'sneakers#reject_announcement_bad_criteria'
-    post '/actions/reject-announcement-bad-angles' => 'sneakers#reject_announcement_bad_angles'
+    post '/actions/validate-announcement'             => 'sneakers#validate_announcement'
+    post '/actions/reject-announcement-bad-criteria'  => 'sneakers#reject_announcement_bad_criteria'
+    post '/actions/reject-announcement-bad-angles'    => 'sneakers#reject_announcement_bad_angles'
     post '/actions/reject-announcement-fake-sneakers' => 'sneakers#reject_announcement_fake_sneakers'
-    post '/actions/validate-announcement-bad-photos' => 'sneakers#validate_announcement_bad_photos'
-    post '/actions/missing-information' => 'sneakers#missing_information'
+    post '/actions/validate-announcement-bad-photos'  => 'sneakers#validate_announcement_bad_photos'
+    post '/actions/missing-information'               => 'sneakers#missing_information'
   end
 
   mount ForestLiana::Engine => '/forest'	

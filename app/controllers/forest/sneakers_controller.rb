@@ -172,8 +172,9 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
 
   def missing_information
     sneaker_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
+
     @sneaker = Sneaker.find(sneaker_id)
-    
+
     variable = Mailjet::Send.create(messages: [{
       'From'=> {
         'Email'=> "elliot@rockdontstock.com",
@@ -194,8 +195,12 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
       }
     }])
     p variable.attributes['Messages']
-    render json: { 
-      success: "L'annonce n'est pas et l'email a été envoyé au vendeur !"
+
+    render json: {
+      success: "L'annonce n'est pas en ligne et l'email a été envoyé au vendeur !"
     }
+
   end
+
 end
+

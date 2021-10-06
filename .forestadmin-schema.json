@@ -1091,6 +1091,19 @@
         "load": false,
         "change": []
       }
+    }, {
+      "name": "Missing information",
+      "type": "bulk",
+      "base_url": null,
+      "endpoint": "forest/actions/missing-information",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
     }]
   }, {
     "name": "SneakerDb",
