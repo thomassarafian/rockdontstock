@@ -4,6 +4,7 @@ class Order < ApplicationRecord
     "Payé",
     "Validé",
     "Refusé",
+    "Abandon"
     #Status -> Sendcloud Webhook
   ]
 
@@ -16,9 +17,9 @@ class Order < ApplicationRecord
 
   # validates :state, inclusion: { in: STATES } # Pareil pour les sneakers -> permet d'etre sur que l'order est tjrs le statut 
 
+  before_update :create_sendcloud_label, unless: :order_is_not_paid?
 
   after_create :shipping_price
-  before_update :create_sendcloud_label, unless: :order_is_not_paid? # A REMETTRE !! ! ! !!!! !! 
 
 
 
@@ -39,7 +40,6 @@ class Order < ApplicationRecord
   end
 
   def shipping_price
-  	# self.shipping_cost_cents = 490
     self.service = (percent_of((self.sneaker.price_cents / 100), 12))
     self.save
   end

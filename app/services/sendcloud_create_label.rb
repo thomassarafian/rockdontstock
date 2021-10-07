@@ -26,7 +26,7 @@ class SendcloudCreateLabel
         data: [],
         country: "FR",
         shipment: {
-         id: 1680, #8 (pour les test),#1680, #@user.picker_data['id'],
+         id: 1680, #8 (pour les test), #@user.picker_data['id'],
          name: "Mondial Relay Point Relais L 1-2kg", #"Unstamped Letter",
         },
         to_service_point: 10603692,
@@ -45,22 +45,20 @@ class SendcloudCreateLabel
         quantity: 1,
       }
     }
-    create_parcel = HTTParty.post(
-      "https://panel.sendcloud.sc/api/v2/parcels",
-      body: first_parcel_data.to_json,
-      :headers => { 'Content-Type' => 'application/json' },
-      basic_auth: @auth)
+    create_parcel = HTTParty.post("https://panel.sendcloud.sc/api/v2/parcels",
+                    body: first_parcel_data.to_json,
+                    :headers => { 'Content-Type' => 'application/json' },
+                    basic_auth: @auth)
 
     json_create_parcel = JSON.pretty_generate(JSON.parse(create_parcel.body))
 
     puts json_create_parcel
-    
-    
-    
+
     puts "=============================="
-    
+    puts create_parcel.parsed_response['parcel']['id']
+    @order.update(sendcloud_order_id: create_parcel.parsed_response['parcel']['id'])
     # puts create_parcel.parsed_response['parcel']['tracking_url']
-    
+
     File.open("app/assets/images/bon_livraison.pdf", "wb") do |f| 
       f.write HTTParty.get(create_parcel.parsed_response['parcel']['label']['label_printer'], basic_auth: @auth).body
     end
@@ -86,7 +84,7 @@ class SendcloudCreateLabel
         "prenom" => @order.sneaker.user.first_name,
         "numero_commande" => @order.id,
         "prix_de_vente" => @order.sneaker.price_cents.to_f / 100,
-        "frais_de_livraison" => 5.05,  
+        "frais_de_livraison" => "5,05",  
         "frais_authentification" => (@order.service_cents.to_f / 100) / 2,
         "somme_vendeur" => ((@order.sneaker.price_cents.to_f / 100) - 5.05) , # - (@order.service_cents / 100)),
         "lien_conseils_expédition" => "https://www.rockdontstock.com/faq"
@@ -126,90 +124,6 @@ class SendcloudCreateLabel
       }
     }])
     p variable2.attributes['Messages']
-    # variable = Mailjet::Send.create(messages: [{
-    #   'From'=> {
-    #       'Email'=> 'sarafianthomas@gmail.com',
-    #       'Name'=> 'Mailjet Pilot'
-    #   },
-    #   'To'=> [
-    #       {
-    #           'Email'=> 'thomassarafian@gmail.com',
-    #           'Name'=> 'passenger 1'
-    #       }
-    #   ],
-    #   'Subject'=> 'Your email coded plan!',
-    #   'TextPart'=> 'Dear passenger 1, welcome to Mailjet! May the delivery force be with you!',
-    #   'HTMLPart'=> '<h3>Dear passenger 1, welcome to <a href=\'https://www.mailjet.com/\'>Mailjet</a>!</h3><br />May the delivery force be with you!',
-    #   'Attachments'=> [
-    #       {
-    #           'ContentType'=> 'text/plain',
-    #           'Filename'=> 'app/assets/images/my_file.pdf',
-    #           'Base64Content'=> base_64
-    #       }
-    #   ]
-    # }])
-
-
-    # https://panel.sendcloud.sc/api/v2/labels/normal_printer/113233996?start_from=0
-    # https://panel.sendcloud.sc/api/v2/labels/label_printer/113233996
-
-    # create_parcel.parsed_response['parcel']['label']['normal_printer'][0-3]
-    # create_parcel.parsed_response['parcel']['label']['label_printer']
-
-    # get_pdf = HTTParty.get(create_parcel.parsed_response['parcel']['label']['label_printer'], basic_auth: auth)
-
-    # pdf_label = get_pdf_label(create_parcel.parsed_response['parcel']['id'])
-    
-    # puts "==========================="
-    # puts pdf
-
-    # # raise
-    # puts "==========================="
-    # puts pdf_label
-    # puts "==========================="
-    # puts JSON.pretty_generate(JSON.parse(pdf_label.body))
-    # puts "==========================="
-
-    # puts JSON.pretty_generate(JSON.parse(create_parcel.body))
-
-    # get_sender_adress = HTTParty.get(
-    #                     'https://panel.sendcloud.sc/api/v2/user/addresses/sender',
-    #                     basic_auth:  auth)
-
-    # service_points = {
-    #   carrier: "Mondial Relay",
-    #   country: "FR",
-      
-    # }
-
-
-    # puts JSON.pretty_generate(JSON.parse(get_sender_adress.body))
-
-    # get_service_points = HTTParty.get(
-    #                 "https://servicepoints.sendcloud.sc/api/v2/service-points/",
-    #                 basic_auth: auth)
-
-    # puts JSON.pretty_generate(JSON.parse(get_carriers.body))
-
-    # get_parcels = HTTParty.get(
-    #       "https://panel.sendcloud.sc/api/v2/parcels",
-    #       basic_auth:  auth)
-
-    #puts JSON.pretty_generate(JSON.parse(get_parcels.body))
-
-
-
   end
-
-  private
-
- 
-
-  
-
-
-
-
-
 
 end

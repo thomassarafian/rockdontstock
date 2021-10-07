@@ -11,13 +11,13 @@
 
 <div class="tab-content">
   <div class="purchases-pan tab-pane fade show active" id="purchases" role="tabpanel" aria-labelledby="purchases-tab">
-    <% if !current_user.orders || current_user.orders.where(state: "Payé").count == 0 %>
+    <% if !current_user.orders || current_user.orders.count == 0 %>
       <div style="text-align: center;margin-top: 30px;">
         <h2>Aucun achat en cours</h2>
       </div>
     <% end %>
     <% if current_user.orders %>
-      <% current_user.orders.where(state: "Payé").sort_by {|obj| obj.created_at }.reverse.each do |order| %>
+      <% current_user.orders.sort_by {|obj| obj.created_at }.reverse.each do |order| %>
         <div class="purchases">
             <%= image_tag(order.sneaker.photos[0], class: "purchases-sneaker-img") %>
           <div class="purchases-sneaker">
@@ -27,21 +27,21 @@
             <p><span class="font-weight-bold"><%= order.price %>€</span></p>
           </div>
           <div class="purchases-infos">
-            <p><span class="font-weight-bold">State : </span><%= order.state %></p>
+            <p><span class="font-weight-bold">Status : </span><%= order.state %></p>
             <p>Achetée le <%= order.created_at.strftime("%d/%m/%Y") %></p>
-            <% if order.sneaker.state == 2 %>
+            <% if order.state == "Payé" %>
               <p><span class="font-weight-bold">ÉTAT : </span>Le vendeur est en train d'envoyer sa paire</p>
-            <% elsif order.sneaker.state == 3  %>
+            <% elsif order.state == "Abandon"  %>
               <p><span class="font-weight-bold">ÉTAT : </span>Le vendeur n'a pas envoyé la paire dans les 48H</p>
-            <% elsif order.sneaker.state == 4 %>
+            <% elsif order.sneaker.state == 3 %>
               <p><span class="font-weight-bold">ÉTAT : </span>Ta paire est bien envoyé à Rock Don't Stock</p>
-            <% elsif order.sneaker.state == 5 %>
+            <% elsif order.sneaker.state == 4 %>
               <p><span class="font-weight-bold">ÉTAT : </span>Nous vérifions la paire du vendeur</p>
-            <% elsif order.sneaker.state == 6  %>
+            <% elsif order.sneaker.state == 5  %>
               <p><span class="font-weight-bold">ÉTAT : </span>Ta paire est LEGIT</p>
-            <% elsif order.sneaker.state == 7  %>
+            <% elsif order.sneaker.state == -3  %>
               <p><span class="font-weight-bold">ÉTAT : </span>Ta paire est FAKE</p>
-            <% elsif order.sneaker.state == 8  %>
+            <% elsif order.sneaker.state == 6  %>
               <p><span class="font-weight-bold">ÉTAT : </span>Ta paire est en route chez toi</p>
             <% end %>
             <!-- <p><span class="font-weight-bold">ÉTAT</span> : En cours d'envoi par le vendeur de colisino</p> -->
@@ -95,6 +95,10 @@
           <% elsif sneaker.state == 3  %>
             <p><span class="font-weight-bold">ÉTAT : </span>En attente de reception par RDS</p>
           <% elsif sneaker.state == 4  %>
+            <p><span class="font-weight-bold">ÉTAT : </span>Legit check de ta paire</p>
+          <% elsif sneaker.state == 5  %>
+            <p><span class="font-weight-bold">ÉTAT : </span>Ta paire est LEGIT</p>
+          <% elsif sneaker.state == 6  %>
             <p><span class="font-weight-bold">ÉTAT : </span>En cours d'envoi vers le client</p>
           <% end %>
           <!-- <p><span class="font-weight-bold">RESULTAT : En attente</span></p> -->

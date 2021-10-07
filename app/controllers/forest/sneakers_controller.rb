@@ -24,7 +24,7 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
         "lien_annonce" => "https://www.rockdontstock.com/sneakers/#{@sneaker.id}",
         "modele_paire" => @sneaker.sneaker_db.name,
         "prix_de_vente" => @sneaker.price_cents / 100,
-        "frais_de_livraison" => "6,30",
+        "frais_de_livraison" => "5,05",
         "frais_authentification" => ((@sneaker.price_cents / 100) * 0.12) / 2,
         "somme_vendeur" => ((@sneaker.price_cents / 100) - 6.30) #- (((@sneaker.price_cents / 100) * 0.12) / 2)
       }
@@ -199,8 +199,6 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     render json: {
       success: "L'annonce n'est pas en ligne et l'email a été envoyé au vendeur !"
     }
-
   end
-
 end
 

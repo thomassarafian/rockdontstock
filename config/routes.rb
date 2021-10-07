@@ -39,12 +39,18 @@ Rails.application.routes.draw do
   post '/', to: 'pages#newsletter'
   
   namespace :forest do
+    # Sneakers
     post '/actions/validate-announcement'             => 'sneakers#validate_announcement'
     post '/actions/reject-announcement-bad-criteria'  => 'sneakers#reject_announcement_bad_criteria'
     post '/actions/reject-announcement-bad-angles'    => 'sneakers#reject_announcement_bad_angles'
     post '/actions/reject-announcement-fake-sneakers' => 'sneakers#reject_announcement_fake_sneakers'
     post '/actions/validate-announcement-bad-photos'  => 'sneakers#validate_announcement_bad_photos'
     post '/actions/missing-information'               => 'sneakers#missing_information'
+
+    # Orders
+    post '/actions/cancel-sale-in-24h'             => 'orders#cancel_sale_in_24h'
+    post '/actions/cancel-sale-after-48h'          => 'orders#cancel_sale_after_48h'
+    post '/actions/seller-send-package'            => 'orders#seller_send_package'
   end
 
   mount ForestLiana::Engine => '/forest'	

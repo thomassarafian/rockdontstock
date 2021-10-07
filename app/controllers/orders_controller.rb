@@ -18,14 +18,11 @@ class OrdersController < ApplicationController
       #   capture_payment(current_stripe_session)
       # end
 
-      # @order.update(state: "Payé")
-      # @order_service = @order.service_cents / 2
-
+      # @order.update(state: "Payé") # for testing
+      # @order.sneaker.update(state: 2) # for testing
+      # SendcloudCreateLabel.new(@order.user, @order).create_label # for testing
       
-      #WEBHOOOK STRIPE donc apres Orders#create des qu'on est sur qeu c'est PAYÉ ->>>
-  		# SendcloudCreateLabel.new(current_user, @order).create_label
-    # end
-
+      # @order_service = @order.service_cents / 2
 
 		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
 		#end

@@ -773,9 +773,63 @@
       "inverse_of": null,
       "widget": null,
       "validations": []
+    }, {
+      "field": "sendcloud_order_id",
+      "type": "String",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
     }],
     "segments": [],
-    "actions": []
+    "actions": [{
+      "name": "Cancel sale in 24h",
+      "type": "bulk",
+      "base_url": null,
+      "endpoint": "forest/actions/cancel-sale-in-24h",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
+    }, {
+      "name": "Cancel sale after 48h",
+      "type": "bulk",
+      "base_url": null,
+      "endpoint": "forest/actions/cancel-sale-after-48h",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
+    }, {
+      "name": "Seller send package",
+      "type": "bulk",
+      "base_url": null,
+      "endpoint": "forest/actions/seller-send-package",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
+    }]
   }, {
     "name": "Sneaker",
     "name_old": "sneakers",
