@@ -829,6 +829,19 @@
         "load": false,
         "change": []
       }
+    }, {
+      "name": "Package received by rds",
+      "type": "bulk",
+      "base_url": null,
+      "endpoint": "forest/actions/package-received-by-rds",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
     }]
   }, {
     "name": "Sneaker",

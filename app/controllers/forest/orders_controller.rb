@@ -73,7 +73,6 @@ class Forest::OrdersController < ForestLiana::SmartActionsController
     p seller_mail.attributes['Messages']
   end
 
-
   def cancel_sale_in_24h
     order_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
 
@@ -163,6 +162,54 @@ class Forest::OrdersController < ForestLiana::SmartActionsController
         "frais_de_livraison" => @order.shipping_cost_cents / 100,
         "frais_authentification" => ((@order.sneaker.price_cents / 100) * 0.12) / 2,
         "prix_tot_paye_par_acheteur" => (@order.sneaker.price_cents / 100) + (((@sneaker.price_cents / 100) * 0.12) / 2) + (@order.shipping_cost_cents / 100)
+      }
+    }])
+    p buyer_mail.attributes['Messages']
+  end
+
+  def package_received_by_rds
+    order_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
+    @order = Order.find(order_id)
+
+    @order.sneaker.update(state: 4)
+    seller_mail = Mailjet::Send.create(messages: [{
+      'From'=> {
+        'Email'=> "elliot@rockdontstock.com",
+        'Name'=> "Rock Don't Stock"
+      },
+      'To'=> [
+        {
+          'Email'=> @order.sneaker.user.email,
+          'Name'=> @order.sneaker.user.first_name
+        }
+      ],
+      'TemplateID'=> 2966077,
+      'TemplateLanguage'=> true,
+      'Subject'=> "Nous authentifions ta paire 🔍",
+      'Variables'=> {
+        "prenom" => @order.sneaker.user.first_name,
+        "modele_paire" => @order.sneaker.sneaker_db.name
+      }
+    }])
+    p seller_mail.attributes['Messages']
+
+    buyer_mail = Mailjet::Send.create(messages: [{
+      'From'=> {
+        'Email'=> "elliot@rockdontstock.com",
+        'Name'=> "Rock Don't Stock"
+      },
+      'To'=> [
+        {
+          'Email'=> @order.user.email,
+          'Name'=> @order.user.first_name
+        }
+      ],
+      'TemplateID'=> 2966117,
+      'TemplateLanguage'=> true,
+      'Subject'=> "Nous authentifions ta paire 🔍",
+      'Variables'=> {
+        "prenom" => @order.user.first_name,
+        "modele_paire" => @order.sneaker.sneaker_db.name
       }
     }])
     p buyer_mail.attributes['Messages']

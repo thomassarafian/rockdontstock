@@ -48,9 +48,10 @@ Rails.application.routes.draw do
     post '/actions/missing-information'               => 'sneakers#missing_information'
 
     # Orders
-    post '/actions/cancel-sale-in-24h'             => 'orders#cancel_sale_in_24h'
-    post '/actions/cancel-sale-after-48h'          => 'orders#cancel_sale_after_48h'
-    post '/actions/seller-send-package'            => 'orders#seller_send_package'
+    post '/actions/cancel-sale-in-24h'                => 'orders#cancel_sale_in_24h'
+    post '/actions/cancel-sale-after-48h'             => 'orders#cancel_sale_after_48h'
+    post '/actions/seller-send-package'               => 'orders#seller_send_package'
+    post '/actions/package-received-by-rds'           => 'orders#package_received_by_rds'
   end
 
   mount ForestLiana::Engine => '/forest'	

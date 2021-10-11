@@ -6,4 +6,5 @@ class Forest::Order
   action "Cancel sale in 24h"
   action "Cancel sale after 48h"
   action "Seller send package"
+  action "Package received by rds"
 end
