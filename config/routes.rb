@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     post '/actions/cancel-sale-after-48h'             => 'orders#cancel_sale_after_48h'
     post '/actions/seller-send-package'               => 'orders#seller_send_package'
     post '/actions/package-received-by-rds'           => 'orders#package_received_by_rds'
+    post '/actions/sneaker-legit'                     => 'orders#sneaker_legit'
   end
 
   mount ForestLiana::Engine => '/forest'	

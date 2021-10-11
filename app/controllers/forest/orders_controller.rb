@@ -214,4 +214,12 @@ class Forest::OrdersController < ForestLiana::SmartActionsController
     }])
     p buyer_mail.attributes['Messages']
   end
+
+  def sneaker_legit
+    order_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
+    @order = Order.find(order_id)
+
+    @order.update(state: "En préparation")
+    @order.sneaker.update(state: 5)
+  end
 end

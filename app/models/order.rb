@@ -4,7 +4,9 @@ class Order < ApplicationRecord
     "Payé",
     "Validé",
     "Refusé",
-    "Abandon"
+    "Abandon",
+    "En préparation",
+    "Expédiée"
     #Status -> Sendcloud Webhook
   ]
 
@@ -19,9 +21,22 @@ class Order < ApplicationRecord
 
   before_update :create_sendcloud_label, unless: :order_is_not_paid?
 
+  before_update :create_sendcloud_label_for_buyer, unless: :order_is_not_in_preparation?
+
   after_create :shipping_price
 
+  def order_is_not_in_preparation?
+    if self.state_changed? && self.state == "En préparation"
+      return false
+    else
+      return true
+    end
+  end
 
+  def create_sendcloud_label_for_buyer
+    puts "JE PASSE DANS create_sendcloud_label_for_buyer"
+    SendcloudCreateLabelForBuyer.new(self.user, self).create_label
+  end
 
   def order_is_not_paid?
     if self.state_changed? && self.state == "Payé"
