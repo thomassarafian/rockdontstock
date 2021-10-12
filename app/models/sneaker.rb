@@ -59,7 +59,6 @@ class Sneaker < ApplicationRecord
  }
 
 
-
 	def send_notification
     UserMailer.new_sneaker(self, user).deliver
   end

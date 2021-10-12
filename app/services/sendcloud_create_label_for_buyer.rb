@@ -60,10 +60,6 @@ class SendcloudCreateLabelForBuyer
     @order.sendcloud_order_id_buyer = create_parcel.parsed_response['parcel']['id']
     # puts create_parcel.parsed_response['parcel']['tracking_url']
     
-    # sleep(4)
-    
-    puts "next after update !"
-    
     File.open("app/assets/images/bon_livraison.pdf", "wb") do |f| 
       f.write HTTParty.get(create_parcel.parsed_response['parcel']['label']['label_printer'], basic_auth: @auth).body
     end
@@ -72,7 +68,6 @@ class SendcloudCreateLabelForBuyer
     label_file = open("app/assets/images/bon_livraison.pdf")
     base_64 = Base64.encode64(label_file.read)
 
-    puts "BEFORE EMAAAAAAIL"
 
     rds_mail = Mailjet::Send.create(messages: [{
       'From'=> {

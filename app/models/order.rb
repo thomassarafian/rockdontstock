@@ -20,6 +20,7 @@ class Order < ApplicationRecord
   # validates :state, inclusion: { in: STATES } # Pareil pour les sneakers -> permet d'etre sur que l'order est tjrs le statut 
 
   before_update :create_sendcloud_label, unless: :order_is_not_paid?
+  before_update :new_list_id_for_buyer, unless: :order_is_not_paid?
 
   before_update :create_sendcloud_label_for_buyer, unless: :order_is_not_in_preparation?
 
@@ -34,7 +35,6 @@ class Order < ApplicationRecord
   end
 
   def create_sendcloud_label_for_buyer
-    puts "JE PASSE DANS create_sendcloud_label_for_buyer"
     SendcloudCreateLabelForBuyer.new(self.user, self).create_label
   end
 
@@ -48,6 +48,11 @@ class Order < ApplicationRecord
 
   def create_sendcloud_label
     SendcloudCreateLabel.new(self.user, self).create_label
+  end
+
+  
+  def new_list_id_for_buyer
+    SubscribeToNewsletterService.new(self.user).user_is_buyer
   end
 
   def percent_of(a, n)

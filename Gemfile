@@ -51,8 +51,12 @@ gem 'spring' #for reload automaticaly
 
 gem 'cloudinary', '~> 1.16.0' # for image upload
 
-gem 'mailjet' #va bientot remplacer mailchimp
-gem 'gibbon' #pour envoyer la liste des emails a elliot
+gem 'mailjet' # email transactionel
+gem 'gibbon' #pour envoyer la liste des emails a elliot sur mailchimp
+
+gem 'sib-api-v3-sdk' # Sendinblue 
+
+
 
 gem 'stripe'
 gem 'stripe_event'
