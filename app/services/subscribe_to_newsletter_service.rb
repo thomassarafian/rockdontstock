@@ -3,6 +3,7 @@ class SubscribeToNewsletterService
   require 'uri'
   require 'net/http'
   require 'openssl'
+  require 'json'
   
   def initialize(user)
     @user = user
@@ -55,9 +56,11 @@ class SubscribeToNewsletterService
     request["Content-Type"] = 'application/json'
     request["api-key"] = ENV['SENDINBLUE_API_KEY']
     request.body = "{\"listIds\":[3],\"updateEnabled\":false,\"email\":\"#{@user['email']}\"}"
+
     begin
       response = http.request(request)
       puts response.read_body
+      return JSON.parse(response.read_body)
     rescue e
       puts "Exception when calling ContactsApi->create_contact: #{e}"
     end
@@ -84,7 +87,7 @@ class SubscribeToNewsletterService
     request = Net::HTTP::Post.new(url)
     request["Accept"] = 'application/json'
     request["Content-Type"] = 'application/json'
-    request["api-key"] = ENV['SENDINBLUE_API_KEY']  #'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'
+    request["api-key"] = ENV['SENDINBLUE_API_KEY']
     request.body = "{\"attributes\":{\"NOM\":\"#{@user.last_name}\",\"PRENOM\":\"#{@user.first_name}\",\"AGE\":\"#{@user.date_of_birth}\",\"VILLE\":\"#{@user.city}\",\"SMS\":\"+33#{@user.phone}\"},\"listIds\":[4],\"updateEnabled\":false,\"email\":\"#{@user.email}\"}"
     begin
       response = http.request(request)
@@ -92,6 +95,24 @@ class SubscribeToNewsletterService
     rescue e
       puts "Exception when calling ContactsApi->create_contact: #{e}"
     end
+    if JSON(response.read_body)['message'] == "Contact already exist"
+      url = URI("https://api.sendinblue.com/v3/contacts/#{@user.email}")
+      http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true
+
+      request = Net::HTTP::Put.new(url)
+      request["Accept"] = 'application/json'
+      request["Content-Type"] = 'application/json'
+      request["api-key"] = ENV['SENDINBLUE_API_KEY']
+      request.body = "{\"attributes\":{\"NOM\":\"#{@user.last_name}\",\"PRENOM\":\"#{@user.first_name}\",\"AGE\":\"#{@user.date_of_birth}\",\"VILLE\":\"#{@user.city}\",\"SMS\":\"+33#{@user.phone}\"},\"listIds\":[4]}"
+      begin
+        response = http.request(request)
+        puts response.read_body
+      rescue e
+        puts "Exception when calling ContactsApi->update_contact: #{e}"
+      end
+    end
+
 
     # begin
     #   @gibbon.lists(@audience_id).members.create(
