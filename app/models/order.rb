@@ -19,12 +19,17 @@ class Order < ApplicationRecord
 
   # validates :state, inclusion: { in: STATES } # Pareil pour les sneakers -> permet d'etre sur que l'order est tjrs le statut 
 
+  # before_update :add_discount_coupon, unless: :order_is_not_paid?
   before_update :create_sendcloud_label, unless: :order_is_not_paid?
   before_update :new_list_id_for_buyer, unless: :order_is_not_paid?
 
   before_update :create_sendcloud_label_for_buyer, unless: :order_is_not_in_preparation?
 
   after_create :shipping_price
+
+  # def add_discount_coupon    
+  #   self.price_cents =     
+  # end
 
   def order_is_not_in_preparation?
     if self.state_changed? && self.state == "En préparation"
