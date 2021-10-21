@@ -112,16 +112,14 @@
     });
   }
 </script> -->
+
+
+
 <style type="text/css">
   #edit_user_date_of_birth_error, #edit_user_phone_error, #edit_user_line1_error {
     margin-top: -15px;
     color: red;
   }
-</style>
-
-
-
-<style type="text/css">
   .edit_user {
     display: flex;
     flex-direction: column;
@@ -136,9 +134,6 @@
     margin-right: 40px;
     align-items: baseline;
   }
-  /*.edit-user-form h1 {
-    margin-top:50px;
-  }*/
   @media (min-width: 320px) {
     .edit-user-form h1 {
       margin-top:10px;
@@ -155,156 +150,3 @@
 
 <%= javascript_pack_tag "algolia_autocomplete_address" %>
 
-
-
-
-
-
-<%#
-token = params[:token]
-Stripe::Account.update(
-  '',
-  {
-    account_token: token,
-  }
-) 
-
-%>
-
-<!-- <script type="text/javascript">
-  const myForm = document.querySelector('#fileinfo');
-  myForm.addEventListener('submit', handleForm);
-
-  async function handleForm(event) {
-    event.preventDefault();
-
-    const data = new FormData();
-    data.append('file', document.querySelector('#front_id').files[0]);
-    data.append('purpose', 'identity_document');
-    
-    const fileResult = await fetch('https://uploads.stripe.com/v1/files', {
-      method: 'POST',
-      headers: {'Authorization': 'Bearer pk_test_51IcAgiE0gVjPTo06Q7PvnLDNztUdNY8sUL3gdkEwiIIDRn3vcDQPCRbwW4TZ1yJ4QgLQfX02OnnAhhi4GU1LxzYZ00IXcBcZkC'},
-      body: data,
-    });
-    const fileData = await fileResult.json();
-
-    const result = await stripe.createToken('account', {
-      person: {
-        verification: {
-            document: {
-                front: fileData.id,
-                },
-            },
-        },
-      tos_shown_and_accepted: true,
-    });
-  }
-
-</script>
- -->
-<!-- <script type="text/javascript">
-var stripe = Stripe('pk_test_51IcAgiE0gVjPTo06Q7PvnLDNztUdNY8sUL3gdkEwiIIDRn3vcDQPCRbwW4TZ1yJ4QgLQfX02OnnAhhi4GU1LxzYZ00IXcBcZkC');
-
-document.querySelector('#fileinfo').addEventListener('submit', function(event){
-  event.preventDefault();
-  
-  var front_id = new FormData();
-  front_id.append('file', document.querySelector('#front_id').files[0]);
-  front_id.append('purpose', 'identity_document');
-
-  // var verso_id = new FormData();
-  // verso_id.append('file', document.querySelector('#verso_id').files[0]);
-  // verso_id.append('purpose', 'identity_document');
-
-  // var front_adress = new FormData();
-  // front_adress.append('file', document.querySelector('#front_adress').files[0]);
-  // front_adress.append('purpose', 'identity_document');
-
-  var oReq = new XMLHttpRequest();
-  oReq.open("POST", 'https://files.stripe.com/v1/files', true);
-
-  oReq.setRequestHeader('Authorization', 'Bearer ' + stripe._apiKey);
-
-  oReq.onload = function(oEvent) {
-    if (oReq.status == 200) {
-      console.log("SUCESS");
-    } else {
-      // document.querySelector('#label-results').textContent = 'Failure: ' + 
-      console.log(oReq.status);
-    }
-    // document.querySelector('#upload-results').textContent = 
-    console.log(oReq.response);
-    const obj_font_id = JSON.parse(oReq.response);
-    // const obj_verso_id = JSON.parse(json_verso_id);
-    // const obj_font_adress = JSON.parse(json_front_adress);
-    
-    console.log(obj_font_id.id);
-    
-    // console.log(obj_verso_id.id);
-    // console.log(obj_font_adress.id);
-  }
-  var json_front_id = oReq.send(front_id);
-  // var json_verso_id = oReq.send(verso_id);
-  // var json_front_adress = oReq.send(front_adress);
-
-});
-</script> -->
-
-<!-- <script type="text/javascript">
-  var stripe = Stripe('<%#= ENV['STRIPE_PUBLIC_TEST'] %>');
-
-
-  document.querySelector('#fileinfo').addEventListener('submit', function(event) {
-    // var formData = new FormData();
-    // formData.append('file', document.querySelector('#file-box').files[0]);
-    // formData.append('purpose', "identity_document");
-    // formData.append('stripe_account', "acct_1IsU7f2Q9nicXzen");
-
-    fetch("https://files.stripe.com/v1/files", {
-      method: "POST",
-      
-      <%#
-        require "open-uri" 
-        file =  open('https://res.cloudinary.com/dvf2yiqon/image/upload/v1621362129/yltu0y2wmpoysz22t3cougo3bsth.png')
-
-      %>
-      
-      body: JSON.stringify({
-        'file': <%#= file %>,//document.querySelector('#file-box').files[0],
-        'purpose': 'identity_document',
-        'stripe_account': 'acct_1IsU7f2Q9nicXzen'
-      }),
-      headers: {
-        "Authorization": "Bearer pk_test_51IcAgiE0gVjPTo06Q7PvnLDNztUdNY8sUL3gdkEwiIIDRn3vcDQPCRbwW4TZ1yJ4QgLQfX02OnnAhhi4GU1LxzYZ00IXcBcZkC"
-      }
-    })
-  })
-
-  // document.querySelector('#fileinfo').addEventListener('submit', function(event){
-  //   event.preventDefault();
-    
-  //   var data = new FormData();
-  //   data.append('file', document.querySelector('#file-box').files[0]);
-  //   data.append('purpose', 'identity_document');
-    
-  //   var oReq = new XMLHttpRequest();
-  //   oReq.open("POST", 'https://uploads.stripe.com/v1/files', true);
-
-  //   oReq.setRequestHeader('Authorization', 'Bearer ' + stripe._apiKey);
-
-  //   oReq.onload = function(oEvent) {
-  //     if (oReq.status == 200) {
-  //       document.querySelector('#label-results').textContent = 'Success!';
-  //     } else {
-  //       document.querySelector('#label-results').textContent = 'Failure: ' + oReq.status;
-  //     }
-  //     document.querySelector('#upload-results').textContent = oReq.response;
-  //   }
-  //   oReq.send(data);
-  // });
-
-
-</script>
-
- -->
