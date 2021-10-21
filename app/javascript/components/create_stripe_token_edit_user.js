@@ -68,8 +68,6 @@ function createStripeTokenEditUser() {
       let user_day = user_date_of_birth[2];
       // let errorEditUser = 5;
 
-      
-
       // if (errorEditUser == 5) {   
         // console.log("victoyr!!");
         const accountResult = await stripe.createToken('account', {

@@ -80,7 +80,7 @@ class OrdersController < ApplicationController
 		  #     destination: sneaker.user.stripe_account_id,
 		    # },
 		  # },
-      # allow_promotion_codes: true,
+      allow_promotion_codes: true,
 	    mode: 'payment',
 	    success_url: order_url(@order),
 	    cancel_url: root_url #new_order_payment_url(@order)
