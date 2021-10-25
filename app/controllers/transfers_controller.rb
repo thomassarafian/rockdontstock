@@ -1,5 +1,5 @@
 class TransfersController < ApplicationController
-    skip_after_action :verify_authorized, only: [:index, :create]
+  skip_after_action :verify_authorized, only: [:index, :create]
 	 
   def index
 		skip_policy_scope
@@ -25,27 +25,36 @@ class TransfersController < ApplicationController
 
 	def create
     if params['file-front-hid'].present? && params['file-back-hid'].present? && params['file-home-hid'].present?
-      token = Stripe::Token.create({
-        account: {
-          individual: {
-            verification: {
-              document: {
-                front: params['file-front-hid'],
-                back: params['file-back-hid'],
-              },
-              additional_document: {
-                front: params['file-home-hid']
-              }
-            },
-          },
-          tos_shown_and_accepted: true,
-        },
-      })
+      puts "ALL DATA ARE PRESENT YEAH"
+      puts "ALL DATA ARE PRESENT YEAH"
+      puts "ALL DATA ARE PRESENT YEAH"
+      puts "ALL DATA ARE PRESENT YEAH"
+      puts "ALL DATA ARE PRESENT YEAH"
+      # token = Stripe::Token.create({
+      #   account: {
+      #     individual: {
+      #       verification: {
+      #         document: {
+      #           front: params['file-front-hid'],
+      #           back: params['file-back-hid'],
+      #         },
+      #         additional_document: {
+      #           front: params['file-home-hid']
+      #         }
+      #       },
+      #     },
+      #     tos_shown_and_accepted: true,
+      #   },
+      # })
       begin
+        puts "BEGIN TO UPDATE USER ACCOUNT !"
+        puts "BEGIN TO UPDATE USER ACCOUNT !"
+        puts "BEGIN TO UPDATE USER ACCOUNT !"
+        puts "BEGIN TO UPDATE USER ACCOUNT !"
         Stripe::Account.update(
           current_user.stripe_account_id,
           {
-            account_token: token
+            account_token: current_user.token_account #token
           });
         redirect_to user_transfers_path, notice: "Tes documents viennent d'être envoyés"
       rescue Exception => e

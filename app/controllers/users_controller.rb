@@ -4,11 +4,10 @@ class UsersController < ApplicationController
   def show
   end
 
-	def edit
-	end
+  def edit
+  end
 	
 	def update
-   # raise
     if params['user']['iban'].present?
       @res = Stripe::StripeSendIban.new(current_user,params['user']['iban']).call
       if !@res 

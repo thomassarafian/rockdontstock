@@ -1,3 +1,4 @@
+<title>Mes documents - Rock Don't Stock</title>
 <div class="container tranfers-index">  
   <h1>Vérification des documents d'identité & virements bancaires</h1>
   <% if current_user.stripe_account_id.present? %>
@@ -5,7 +6,8 @@
       <h2>Envoyez mes documents</h2>
       <p>Si tu vends des paires sur le site, tu devras nous transférer le recto et verso de ta carte d'identité ainsi qu'un justificatif de domicile.<br>Cela nous permet d'éviter les fraudes et de travailler uniquement avec des vendeurs fiables.</p>
       <div>
-        <form method="post" class="my-form" id="fileinfo" name="fileinfo" ajax="true">
+        <form method="post" class="my-form-verification-doc" id="fileinfo" name="fileinfo" ajax="true">
+          <input type="hidden" name="stripe-token-account" id="stripe-token-account">
           <label><strong>Recto de ma carte d'identité :</strong></label>
           <input type="hidden" name="file-front-hid" id="file-front-hid">
           <input type="file" id="file-front" name="file" required />
@@ -25,7 +27,6 @@
   <% else %>
     <p>Il semblerait que tu ne sois pas un vendeur !<br>Cette page permet de vérifier l'authenticité des vendeurs sur notre site ainsi que de leurs permettre de transférer de l'argent directement sur leurs compte bancaires. </p>
   <% end %>
-
 
 
   <div class="">

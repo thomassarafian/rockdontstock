@@ -1,10 +1,12 @@
 function uploadIds() {
-  const myForm = document.querySelector('.my-form');
+  const myForm = document.querySelector('.my-form-verification-doc');
   if (myForm) {
-    myForm.addEventListener('submit', handleForm);
+    console.log('1. event!!');
+    myForm.addEventListener('click', handleFormTest);
   }
 
-  function handleForm(event) {
+  function handleFormTest(event) {
+    console.log('event!!');
     let publishableKey = 'pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA';
     event.preventDefault();
     

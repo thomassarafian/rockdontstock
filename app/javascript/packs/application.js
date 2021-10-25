@@ -31,6 +31,7 @@ import { sneakerNew } from "components/sneaker_new.js"
 import { createStripeTokenEditUser } from "components/create_stripe_token_edit_user.js"
 import { getPhotosModal } from "components/get_photos_modal.js"
 
+import { createStripeTokenDocument } from "components/create_stripe_token_document.js"
 
 document.addEventListener('turbolinks:load', () => {
   pointPicker();
@@ -42,6 +43,7 @@ document.addEventListener('turbolinks:load', () => {
   // optimizeUploadPhotos()
   createStripeTokenEditUser();
   getPhotosModal();
+  createStripeTokenDocument();
 });
 
 
