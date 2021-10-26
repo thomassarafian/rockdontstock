@@ -10,17 +10,17 @@
           <input type="hidden" name="stripe-token-account" id="stripe-token-account">
           <label><strong>Recto de ma carte d'identité :</strong></label>
           <input type="hidden" name="file-front-hid" id="file-front-hid">
-          <input type="file" id="file-front" name="file" required />
+          <input type="file" id="file-front" name="file" required accept="image/*"/>
           <br><br>
           <label><strong>Verso de ma carte d'identité :</strong></label>
           <input type="hidden" name="file-back-hid" id="file-back-hid">
-          <input type="file" id="file-back" name="file" required />
+          <input type="file" id="file-back" name="file" required accept="image/*"/>
           <br><br>
           <label><strong>Justificatif de domicile :</strong></label>
           <input type="hidden" name="file-home-hid" id="file-home-hid">
-          <input type="file" id="file-home" name="file" required />
+          <input type="file" id="file-home" name="file" required accept="image/*"/>
           <br>
-          <button  type="submit" class="btn-send-documents btn btn-dark">Envoyer mes document</button>
+          <button  type="submit" class="btn-send-documents btn btn-dark" data-disable-with="<i class='fas fa-spinner fa-spin'></i> Chargement...">Envoyer mes document</button>
         </form>
       </div>
     </div>

@@ -1,13 +1,13 @@
 function uploadIds() {
   const myForm = document.querySelector('.my-form-verification-doc');
   if (myForm) {
-    console.log('1. event!!');
-    myForm.addEventListener('click', handleFormTest);
+    myForm.addEventListener('submit', handleFormTest);
   }
 
   function handleFormTest(event) {
-    console.log('event!!');
-    let publishableKey = 'pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA';
+    console.log('handleFormTest() -> event!!');
+    const publishableKey = 'pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA';
+    const stripe = Stripe('pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA');
     event.preventDefault();
     
     var dataFront = new FormData();
@@ -60,7 +60,7 @@ function uploadIds() {
           contentType: false,
           processData: false,
           type: 'POST',
-        }).done(function(data) {
+        }).done(async function(data) {
             console.log('data->');
             console.log(data);
             document.querySelector('#file-home-hid').value = data.id;
@@ -69,11 +69,32 @@ function uploadIds() {
               console.log(document.querySelector('#file-home-hid').value);
               console.log(document.querySelector('#file-front-hid').value);
               console.log(document.querySelector('#file-back-hid').value);
-              myForm.submit();
+
+              const accountResult = await stripe.createToken('account', {
+                business_type: 'individual',
+                individual: {
+                  verification: {
+                    document: {
+                      front: document.querySelector('#file-front-hid').value,
+                      back: document.querySelector('#file-back-hid').value
+                    },
+                    additional_document: {
+                      front: document.querySelector('#file-home-hid').value
+                    }
+                  }, 
+                },
+                tos_shown_and_accepted: true,
+              });
+              if (accountResult.token) {
+                document.querySelector('#stripe-token-account').value = accountResult.token.id;
+                console.log('submit!')
+                myForm.submit();
+              }
             }     
           });
         });
       });  
+      
   };
 };
 export { uploadIds }
