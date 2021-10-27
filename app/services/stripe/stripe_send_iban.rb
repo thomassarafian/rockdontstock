@@ -8,7 +8,7 @@ module Stripe
 
   def call
     begin
-      @bank_account = Stripe::Account.create_external_account(
+      puts @bank_account = Stripe::Account.create_external_account(
         @user.stripe_account_id,
         {
           external_account: {
@@ -21,8 +21,8 @@ module Stripe
           },
         },
       )
-    rescue 
-      return
+    rescue Exception => e
+      puts e 
     end
   end
 

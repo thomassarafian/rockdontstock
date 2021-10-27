@@ -34,11 +34,15 @@ class User < ApplicationRecord
 
   after_create :subscribe_to_newsletter
   after_create :send_welcome
-
+  after_commit :send_iban
   # after_update :send_label, if: :picker_data_is_converted?
   
 
   private
+
+  def send_iban
+    Stripe::StripeSendIban.new(self, self.iban).call
+  end
 
   def user_over_13
     dob = self.date_of_birth
