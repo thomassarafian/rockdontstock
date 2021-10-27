@@ -10,45 +10,86 @@ class SendcloudCreateLabelForBuyer
   end
 
   def create_label
-    second_parcel_data = {
-      parcel: {
-        name: @order.user.first_name + " " + @order.user.last_name,
-        company_name: "",
-        address: @order.user.line1,
-        house_number: @order.user.line1.split(/\W+/)[0],
-        city: @order.user.city,
-        postal_code: @order.user.postal_code,
-        telephone: @order.user.phone,
-        email: @order.user.email,
-        order_number: @order.id,
-        weight: "1.5",
-        request_label: "true",
-        data: [],
-        country: "FR",
-        shipment: {
-         id: 8, #1680, #8 (pour les test), #@user.picker_data['id'],
-         name: "Unstamped Letter",# "Mondial Relay Point Relais L 1-2kg", #"Unstamped Letter",
-        },
-        # to_service_point: 10603692,
-        parcel_items: [],
-        from_name: "Nils Bonnavaud",
-        from_address_1: "rue Massilian",
-        from_address_2: "",
-        from_house_number: "2",
-        from_city: "Montpellier",
-        from_postal_code: "34000",
-        from_country: "FR",
-        from_telephone: "+33676659036",
-        from_email: "hello@rockdontstock.com",
-        total_order_value_currency: "EUR",
-        total_order_value: @order.price_cents / 100,
-        quantity: 1,
+    if @order.shipping_cost_cents == 883
+      colissimo_second_parcel_data = {
+        parcel: {
+          name: @order.user.first_name + " " + @order.user.last_name,
+          company_name: "",
+          address: @order.user.line1,
+          house_number: @order.user.line1.split(/\W+/)[0],
+          city: @order.user.city,
+          postal_code: @order.user.postal_code,
+          telephone: @order.user.phone,
+          email: @order.user.email,
+          order_number: @order.id,
+          weight: "1.5",
+          request_label: "true",
+          data: [],
+          country: "FR",
+          shipment: {
+           id: 1066, #1680, #8 (pour les test), #@user.picker_data['id'],
+           name: "Colissimo Home 1-2kg", #"Unstamped Letter",
+          },
+          parcel_items: [],
+          from_name: "Nils Bonnavaud",
+          from_address_1: "rue Massilian",
+          from_address_2: "",
+          from_house_number: "2",
+          from_city: "Montpellier",
+          from_postal_code: "34000",
+          from_country: "FR",
+          from_telephone: "+33676659036",
+          from_email: "hello@rockdontstock.com",
+          total_order_value_currency: "EUR",
+          total_order_value: @order.price_cents / 100,
+          quantity: 1,
+        }
       }
-    }
-    create_parcel = HTTParty.post("https://panel.sendcloud.sc/api/v2/parcels",
-                    body: second_parcel_data.to_json,
-                    :headers => { 'Content-Type' => 'application/json' },
-                    basic_auth: @auth)
+      create_parcel = HTTParty.post("https://panel.sendcloud.sc/api/v2/parcels",
+                      body: colissimo_second_parcel_data.to_json,
+                      :headers => { 'Content-Type' => 'application/json' },
+                      basic_auth: @auth)
+    elsif @order.shipping_cost_cents == 505
+      mondial_second_parcel_data = {
+        parcel: {
+          name: @order.user.first_name + " " + @order.user.last_name,
+          company_name: "",
+          address: @order.user.line1,
+          house_number: @order.user.line1.split(/\W+/)[0],
+          city: @order.user.city,
+          postal_code: @order.user.postal_code,
+          telephone: @order.user.phone,
+          email: @order.user.email,
+          order_number: @order.id,
+          weight: "1.5",
+          request_label: "true",
+          data: [],
+          country: "FR",
+          shipment: {
+           id: 1680, #1680, #8 (pour les test), #@user.picker_data['id'],
+           name: "Mondial Relay Point Relais L 1-2kg", # "Mondial Relay Point Relais L 1-2kg", #"Unstamped Letter",
+          },
+          to_service_point: @user.picker_data['id'],
+          parcel_items: [],
+          from_name: "Nils Bonnavaud",
+          from_address_1: "rue Massilian",
+          from_address_2: "",
+          from_house_number: "2",
+          from_city: "Montpellier",
+          from_postal_code: "34000",
+          from_country: "FR",
+          from_telephone: "+33676659036",
+          from_email: "hello@rockdontstock.com",
+          total_order_value_currency: "EUR",
+          total_order_value: @order.price_cents / 100,
+          quantity: 1,
+        }
+      }
+      create_parcel = HTTParty.post("https://panel.sendcloud.sc/api/v2/parcels",
+                      body: mondial_second_parcel_data.to_json,
+                      :headers => { 'Content-Type' => 'application/json' },
+                      basic_auth: @auth)
+    end
 
     json_create_parcel = JSON.pretty_generate(JSON.parse(create_parcel.body))
 
