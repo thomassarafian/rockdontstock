@@ -4,12 +4,29 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- Facebook Card data -->
+    <meta property="og:title" content="Rock Don't Stock" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.rockdontstock.com/" />
+    <meta property="og:image" content="assets/logo_tab.png" />
+    <meta property="og:description" content="Le but de Rock Don’t Stock ? Lutter contre le fake et l’explosion des prix tout en promouvant la sneakers rockée." />
+    <meta property="og:site_name" content="Rock Don't Stock" />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="https://www.rockdontstock.com/">
+    <meta name="twitter:title" content="Rock Don’t Stock">
+    <meta name="twitter:description" content="Le but de Rock Don’t Stock ? Lutter contre le fake et l’explosion des prix tout en promouvant la sneakers rockée.">
+    <meta name="twitter:image:src" content="assets/logo_tab.png">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="Description" CONTENT="Le but de Rock Don’t Stock ? Lutter contre le fake et l’explosion des prix tout en promouvant la sneakers rockée.">
+    <meta charset="utf-8">
+    <meta name="description" content="Le but de Rock Don’t Stock ? Lutter contre le fake et l’explosion des prix tout en promouvant la sneakers rockée.">
 
-    <link rel="icon" href="assets/logo_tab.png" />
+    <link rel="icon" type="image/png" href="assets/logo_tab.png" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
 
