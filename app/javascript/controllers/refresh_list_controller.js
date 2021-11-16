@@ -1,4 +1,5 @@
 import { Controller } from "stimulus"
+import { getPhotosModal } from "../components/get_photos_modal.js"
 
 export default class extends Controller {
   static targets = [ "form", "list", "searchInput"]
@@ -9,6 +10,7 @@ export default class extends Controller {
     .then(response => response.text())
     .then((data) => {
       this.listTarget.outerHTML = data;
+      getPhotosModal();
     })
   }
 }
