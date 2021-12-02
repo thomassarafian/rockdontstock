@@ -1316,8 +1316,8 @@
       "validations": []
     }, {
       "field": "subcategory",
-      "type": "String",
-      "default_value": null,
+      "type": ["String"],
+      "default_value": "{}",
       "enums": null,
       "integration": null,
       "is_filterable": true,
@@ -3153,7 +3153,7 @@
   }],
   "meta": {
     "liana": "forest-rails",
-    "liana_version": "7.3.0",
+    "liana_version": "7.4.1",
     "stack": {
       "database_type": "postgresql",
       "orm_version": "6.1.4.1"

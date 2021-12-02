@@ -1,5 +1,5 @@
 class SneakerDb < ApplicationRecord
-  has_many :sneakers
+  has_many :sneakers, dependent: :destroy
   validates :name, uniqueness: true
 
   include PgSearch::Model

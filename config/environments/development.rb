@@ -78,7 +78,7 @@ Rails.application.configure do
 
 
 
-  config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_deliveries = false
   
   config.after_initialize do
     Bullet.enable = true

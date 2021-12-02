@@ -1,7 +1,7 @@
 class Sneaker < ApplicationRecord
   include PgSearch::Model
 
-	has_many_attached :photos, service: :cloudinary
+	has_many_attached :photos, service: :cloudinary, dependent: :detach
 
   has_many :orders, dependent: :destroy
 	belongs_to :user
