@@ -68,74 +68,8 @@
   </ul>
 
   <div class="overlay"></div>
-
-
-  <div data-controller="refresh-list" class="glass-search-form">
-    <%= form_with url: root_path, method: :get, html: { class: 'glass-search-form-input', data: { refresh_list_target: 'form' } } do |f| %>
-      <div class="hide-search-form">
-        <%= image_tag("arrow_back.svg", class: "phone-hide-search-arrow", style: 'cursor: pointer;') %>
-        <%= image_tag("arrow_back.svg", class: "hide-search-arrow", style: 'cursor: pointer;') %>
-      </div>
-      <div class="home-glass-search-form">
-        <%= f.text_field  :query,
-                          class: "",
-                          id: "home-glass-search-form", 
-                          placeholder: 'Recherche ta paire',
-                          value: params[:query],
-                          data: {
-                            refresh_list_target: 'searchInput',
-                            action: "keyup->refresh-list#update",
-                          } %>
-          <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon_phone_input") %>
-        <% end %>
-      </div>
-        <div class="search-filter">
-          <div class="filters" data-controller="filters">
-            <button class="dropdown-filter btn btn-dark" type="button">Filtres</button>
-            <div class="filter-and-sneakers">
-              <div class="dropdown-filter-items">
-                <button class="dropdown-filter-laptop btn btn-dark" type="button">Filtres</button>
-                <%= select_tag :category, options_for_select(brand),
-                  include_blank: "Toute les marques",
-                  class: "form-select",
-                  data: { action: "filters#filter", target: "filters.filter" } %>
-                  
-                  <%= select_tag :price,
-                      options_for_select(
-                        [ ["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301] ], params[:price]
-                      ),
-                  include_blank: "Tous les prix",
-                  class: "form-select",
-                  data: { action: "filters#filter", target: "filters.filter" } %>
-                
-                  <%= select_tag :condition,
-                      options_for_select(
-                        [ ["5/10 et moins", 5], ["6/10", 6], ["8/10", 8], ["9/10", 9], ["10/10", 10] ], params[:condition]
-                      ),
-                  include_blank: "Toute condition",
-                  class: "form-select",
-                  data: { action: "filters#filter", target: "filters.filter" } %>
-
-                <%= select_tag :size,
-                    options_for_select([
-                      ["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], ["5", 5],
-                      ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
-                      ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
-                      ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18] ], params[:size]),
-                include_blank: "Toute taille",
-                class: "form-select",
-                data: { action: "filters#filter", target: "filters.filter" } %>
-              </div>
-              <%= render 'shared/list', sneakers: @sneakers %>
-            </div>
-      </div>
-    </div>
-  </div>
   
 </div>
-  
-
-
 
 <script type="text/javascript">
   $(document).ready(function() {
