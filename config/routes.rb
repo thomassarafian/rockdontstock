@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   get 'zswexddfe'                    => 'pages#zswexddfe'
 
-  get 'modal_bootstrap'              => 'pages#modal_bootstrap'
+  # get 'modal_bootstrap'              => 'pages#modal_bootstrap'
   get 'about'                        => 'pages#about'
   get 'faq'                          => 'pages#faq'
   get 'comment-envoyer-une-paire'    => 'pages#how_to_send_shoes'

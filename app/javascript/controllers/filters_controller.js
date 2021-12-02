@@ -12,7 +12,7 @@ export default class extends Controller {
   }
 
   after_filter(url) {
-     Rails.ajax({
+    Rails.ajax({
       type: "GET",
       url: url,
       dataType: "text",
