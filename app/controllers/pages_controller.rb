@@ -6,15 +6,16 @@ class PagesController < ApplicationController
       @sneakers_last_release = Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where(id: [342, 287, 311, 191, 292, 279, 116, 284])
       @sneakers_last_added = Sneaker.includes(:sneaker_db, :user,:photos_attachments, photos_attachments: :blob).where("state >= ?", 1).limit(8).order("created_at DESC")
     elsif Rails.env.development?
-      @sneakers_last_release = {} #Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1).limit(8)
-      @sneakers_selected = {}#Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1).limit(8)
-      @sneakers_last_added = {}#Sneaker.includes(:sneaker_db, :user,:photos_attachments, photos_attachments: :blob).where("state >= ?", 1).limit(8).order("created_at DESC")
+      @sneakers_last_release = Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob) #Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1).limit(8)
+      @sneakers_selected = Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob)#Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where("state = ?", 1).limit(8)
+      @sneakers_last_added = Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob)#Sneaker.includes(:sneaker_db, :user,:photos_attachments, photos_attachments: :blob).where("state >= ?", 1).limit(8).order("created_at DESC")
     end
   end
   
   def modal_bootstrap
      @sneakers_last_added = Sneaker.includes(:sneaker_db, :user,:photos_attachments, photos_attachments: :blob).where("state >= ?", 1).limit(8).order("created_at DESC")
-  end  
+  end
+
   def about
   end
   

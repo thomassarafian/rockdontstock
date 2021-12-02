@@ -9,6 +9,7 @@ class SneakersController < ApplicationController
 	end
 	
 	def show
+    @sneaker = Sneaker.find(params[:id])
 	end
 	
 	def new

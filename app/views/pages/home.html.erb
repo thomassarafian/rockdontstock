@@ -23,90 +23,25 @@
   <h2>Les dernières paires en ligne</h2>
   <div class="sneaker-cards">
     <% @sneakers_last_added.each do |sneaker| %>
-      <% if !sneaker.orders.last.nil? && sneaker.orders.last.state == "Payé" %>
-        <div class="sneaker-card">
+      <div class="sneaker-card">
+        <% if !sneaker.orders.last.nil? && sneaker.orders.last.state == "Payé" %>
           <div class="sneaker-card_img sneaker-card_img-sold">
             <%= cl_image_tag(sneaker.photos[0].key) %>
             <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
           </div>
-          <div class="sneaker-title sneaker-title-sold"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title sneaker-title-sold") do %>
+            <strong><%= sneaker.sneaker_db.name %></strong>
+          <% end %>
           <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>  
-        </div>
-      <% else %>
-        <div class="sneaker-card">
-          <div class="sneaker-card_img" id="sneaker_card_img" data-toggle="modal" data-target="#modal-home-last-<%= sneaker.id %>">
+        <% else %>
+          <div class="sneaker-card_img" id="sneaker_card_img">
             <%= cl_image_tag(sneaker.photos[0].key) %>
           </div>
-          <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title") do %>
+            <strong><%= sneaker.sneaker_db.name %></strong>
+          <% end %>
           <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
-        </div>
-      <% end %>
-
-      <div class="modal fade" id="modal-home-last-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel"><%= sneaker.sneaker_db.name %></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span class="close-modal" aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div id="carousel-home-last-<%= sneaker.id %>" class="carousel slide carousel-slide-body-sneaker" data-ride="carousel">
-                <div class="carousel-inner">
-
-                </div>
-                <div class="modal-sneaker-logos">
-                  <div class="modal-sneaker-logos-microscope">
-                    <%= image_tag("sneaker/microscope.svg") %>
-                    <h5>AUTHENTICITÉ GARANTIE</h5>
-                    <p>Avant que la paire ne te soit envoyée, cette dernière passe entre nos mains afin d’être vérifiée par des experts en Legit Check</p>
-                    <%= link_to("En savoir plus l'authentification", authentification_path, target: :_blank) %>
-                    </div>
-                  <div class="modal-sneaker-logos-truck">
-                    <%= image_tag("sneaker/truck.svg") %>
-                    <h5>LIVRAISON A PARTIR DE 5€</h5>
-                    <p>Pour réduire le coût au maximum nous te proposons la livraison MondialRelay, plus sécurisée elle a aussi l’avantage d’être la moins coûteuse pour toi</p>
-                  </div>
-                </div>
-                <div class="modal-sneaker-infos">
-                  <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification<br></p>
-                  <div class='modal-sneaker-all'>
-                    <div class="modal-sneaker-size-cond">
-                      <p>Taille : <strong><%=  sneaker.size %> US</strong></p>
-                      <p>Condition : <strong><%= sneaker.condition %>/10</strong><br>
-                      <%= link_to("Tout savoir sur les conditions", faq_path, style:"color:#707981", target: :_blank) %></p>
-                    </div>
-                    <div class="modal-sneaker-box-extras">
-                      <p>Box : <strong><%= sneaker.box %></strong></p>
-                      <p>Description : <strong><%= sneaker.extras %></strong></p>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-
-            </div>
-            <div class="modal-footer" style="justify-content: center;">
-             <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
-                <% unless current_user.nil? %>
-                  <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
-                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <% end %>
-                <% else %>
-                  <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
-                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <% end %>
-                <% end %>
-              <% end %>
-              <% if policy(sneaker).edit? %>
-                <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
-                  <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
-                </button>
-              <% end %>
-            </div>
-          </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>  
@@ -132,88 +67,25 @@
   <h2>La séléction Rock Don't Stock</h2>
   <div class="sneaker-cards">
     <% @sneakers_selected.each do |sneaker| %>
-      <% if !sneaker.orders.last.nil?  && sneaker.orders.last.state == "Payé" %>
-        <div class="sneaker-card">
+      <div class="sneaker-card">
+        <% if !sneaker.orders.last.nil?  && sneaker.orders.last.state == "Payé" %>
           <div class="sneaker-card_img sneaker-card_img-sold">
             <%= cl_image_tag(sneaker.photos[0].key) %>
             <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
           </div>
-          <div class="sneaker-title sneaker-title-sold"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title sneaker-title-sold") do %>
+            <strong><%= sneaker.sneaker_db.name %></strong>
+          <% end %>
           <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>  
-        </div>
-      <% else %>
-        <div class="sneaker-card">
-          <div class="sneaker-card_img" data-toggle="modal" data-target="#modal-home-selection-<%= sneaker.id %>">
+        <% else %>
+          <div class="sneaker-card_img">
             <%= cl_image_tag(sneaker.photos[0].key) %>
           </div>
-          <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title") do %>
+            <strong><%= sneaker.sneaker_db.name %></strong>
+          <% end %>
           <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
-        </div>
-      <% end %>
-      <div class="modal fade" id="modal-home-selection-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel"><%= sneaker.sneaker_db.name %></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div id="carousel-home-selection-<%= sneaker.id %>" class="carousel slide carousel-slide-body-sneaker" data-ride="carousel">
-                <div class="carousel-inner">
-                  
-                </div>
-                <div class="modal-sneaker-logos">
-                  <div class="modal-sneaker-logos-microscope">
-                    <%= image_tag("sneaker/microscope.svg") %>
-                    <h5>AUTHENTICITÉ GARANTIE</h5>
-                    <p>Avant que la paire ne te soit envoyée, cette dernière passe entre nos mains afin d’être vérifiée par des experts en Legit Check</p>
-                    <%= link_to("En savoir plus l'authentification", authentification_path, target: :_blank) %>
-                    </div>
-                  <div class="modal-sneaker-logos-truck">
-                    <%= image_tag("sneaker/truck.svg") %>
-                    <h5>LIVRAISON A PARTIR DE 5€</h5>
-                    <p>Pour réduire le coût au maximum nous te proposons la livraison MondialRelay, plus sécurisée elle a aussi l’avantage d’être la moins coûteuse pour toi</p>
-                  </div>
-                </div>
-                <div class="modal-sneaker-infos">
-                  <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification <br></p>
-                  <div class='modal-sneaker-all'>
-                    <div class="modal-sneaker-size-cond">
-                      <p>Taille : <strong><%=  sneaker.size %> US</strong></p>
-                      <p>Condition : <strong><%= sneaker.condition %>/10</strong><br>
-                      <%= link_to("Tout savoir sur les conditions", faq_path, style:"color:#707981", target: :_blank) %></p>
-                    </div>
-                    <div class="modal-sneaker-box-extras">
-                      <p>Box : <strong><%= sneaker.box %></strong></p>
-                      <p>Description : <strong><%= sneaker.extras %></strong></p>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-            <div class="modal-footer" style="justify-content: center;">
-              <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
-                <% unless current_user.nil? %>
-                  <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
-                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <% end %>
-                <% else %>
-                  <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
-                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <% end %>
-                <% end %>
-              <% end %>
-              <% if policy(sneaker).edit? %>
-                <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
-                  <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
-                </button>
-              <% end %>
-            </div>
-          </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>  
@@ -237,89 +109,25 @@
   <h2>Les dernières releases</h2>
   <div class="sneaker-cards">
     <% @sneakers_last_release.each do |sneaker| %>
-      <% if !sneaker.orders.last.nil?  && sneaker.orders.last.state == "Payé" %>
-        <div class="sneaker-card">
+      <div class="sneaker-card">
+        <% if !sneaker.orders.last.nil?  && sneaker.orders.last.state == "Payé" %>
           <div class="sneaker-card_img sneaker-card_img-sold">
             <%= cl_image_tag(sneaker.photos[0].key) %>
             <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
           </div>
-          <div class="sneaker-title sneaker-title-sold"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title sneaker-title-sold") do %>
+            <strong><%= sneaker.sneaker_db.name %></strong>
+          <% end %>          
           <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>  
-        </div>
-      <% else %>
-        <div class="sneaker-card">
-          <div class="sneaker-card_img" data-toggle="modal" data-target="#modal-home-release-<%= sneaker.id %>">
+        <% else %>
+          <div class="sneaker-card_img">
             <%= cl_image_tag(sneaker.photos[0].key) %>
           </div>
-          <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
+          <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title") do %>
+            <strong><%= sneaker.sneaker_db.name %></strong>
+          <% end %>
           <div class="sneaker-price"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
-        </div>
-      <% end %>
-      <div class="modal fade" id="modal-home-release-<%= sneaker.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel"><%= sneaker.sneaker_db.name %></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span class="close-modal" aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div id="carousel-home-release-<%= sneaker.id %>" class="carousel slide carousel-slide-body-sneaker" data-ride="carousel">
-                <div class="carousel-inner">
-                    
-                </div>
-                <div class="modal-sneaker-logos">
-                  <div class="modal-sneaker-logos-microscope">
-                    <%= image_tag("sneaker/microscope.svg") %>
-                    <h5>AUTHENTICITÉ GARANTIE</h5>
-                    <p>Avant que la paire ne te soit envoyée, cette dernière passe entre nos mains afin d’être vérifiée par des experts en Legit Check</p>
-                    <%= link_to("En savoir plus l'authentification", authentification_path, target: :_blank) %>
-                    </div>
-                  <div class="modal-sneaker-logos-truck">
-                    <%= image_tag("sneaker/truck.svg") %>
-                    <h5>LIVRAISON A PARTIR DE 5€</h5>
-                    <p>Pour réduire le coût au maximum nous te proposons la livraison MondialRelay, plus sécurisée elle a aussi l’avantage d’être la moins coûteuse pour toi</p>
-                  </div>
-                </div>
-                <div class="modal-sneaker-infos">
-                  <p><strong><%= humanized_money_with_symbol sneaker.price %></strong><br>Hors frais d'authentification <br>
-                  </p>
-                  <div class='modal-sneaker-all'>
-                    <div class="modal-sneaker-size-cond">
-                      <p>Taille : <strong><%=  sneaker.size %> US</strong></p>
-                      <p>Condition : <strong><%= sneaker.condition %>/10</strong><br>
-                      <%= link_to("Tout savoir sur les conditions", faq_path, style:"color:#707981", target: :_blank) %>
-                    </div>
-                    <div class="modal-sneaker-box-extras">
-                      <p>Box : <strong><%= sneaker.box %></strong></p>
-                      <p>Description : <strong><%= sneaker.extras %></strong></p>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-            <div class="modal-footer" style="justify-content: center;">
-             <% if current_user != sneaker.user && sneaker.user.stripe_account_id? %>
-                <% unless current_user.nil? %>
-                  <%= form_tag orders_path(sneaker_id: sneaker.id), id: "order_create_#{sneaker.id }" do %>
-                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <% end %>
-                <% else %>
-                  <%= form_tag user_session_path(sneaker_id: sneaker.id) do %>
-                    <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-                  <% end %>
-                <% end %>
-              <% end %>
-              <% if policy(sneaker).edit? %>
-                <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
-                  <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
-                </button>
-              <% end %>
-            </div>
-          </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>  

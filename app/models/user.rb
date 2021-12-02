@@ -167,25 +167,27 @@ class User < ApplicationRecord
   end
   
   def send_welcome
-    variable = Mailjet::Send.create(messages: [{
-      'From'=> {
-        'Email'=> "elliot@rockdontstock.com",
-        'Name'=> "Rock Don't Stock"
-      },
-      'To'=> [
-        {
-          'Email'=> self.email,
-          'Name'=> self.first_name
+    if Rails.env.production?
+      variable = Mailjet::Send.create(messages: [{
+        'From'=> {
+          'Email'=> "elliot@rockdontstock.com",
+          'Name'=> "Rock Don't Stock"
+        },
+        'To'=> [
+          {
+            'Email'=> self.email,
+            'Name'=> self.first_name
+          }
+        ],
+        'TemplateID'=> 2961026,
+        'TemplateLanguage'=> true,
+        'Subject'=> "Inscription validée !",
+        'Variables'=> {
+          "prenom" => self.first_name,
+          "compte_rockdontstock" => 'https://www.rockdontstock.com/me'
         }
-      ],
-      'TemplateID'=> 2961026,
-      'TemplateLanguage'=> true,
-      'Subject'=> "Inscription validée !",
-      'Variables'=> {
-        "prenom" => self.first_name,
-        "compte_rockdontstock" => 'https://www.rockdontstock.com/me'
-      }
-    }])
+      }])
+    end
   end
 
     
