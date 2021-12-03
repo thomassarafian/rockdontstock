@@ -17,7 +17,7 @@ class Sneaker < ApplicationRecord
 
 	# after_create :send_notification  # a configurer avec mailjet 
 
-  pg_search_scope :search_by_name_and_brand,
+  pg_search_scope :pg_search_by_name_and_brand,
     against: [:name],
     associated_against: {
       sneaker_db: [:name, :category]
@@ -25,6 +25,14 @@ class Sneaker < ApplicationRecord
     using: {
       tsearch: { prefix: true } 
     }
+
+  def self.search_by_name_and_brand(query)
+    if query.present?
+      pg_search_by_name_and_brand(query)
+    else
+      Sneaker.all
+    end
+  end
 
   scope :filter_by_price, -> (price) { 
     if price == "100"
@@ -43,7 +51,7 @@ class Sneaker < ApplicationRecord
   }
 
   scope :filter_by_condition, -> (condition) { 
-    where("sneakers.condition = ?", condition) 
+    where("sneakers.condition = ?", condition.to_i) 
   }
   
   # scope :filter_by_release_date, -> (release_date) { 
@@ -55,7 +63,7 @@ class Sneaker < ApplicationRecord
   # }
   
   scope :filter_by_size, -> (size) {
-    where("sneakers.size = ?", size)
+    where("sneakers.size = ?", size.to_d)
  }
 
 

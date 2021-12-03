@@ -5,11 +5,10 @@
     <% end %>
     <div class="icons">
       <%= form_with url: sneakers_path, method: :get do |f| %>
-        <%= f.text_field :search_input, placeholder: "Recherche ta paire" %>
+        <%= f.text_field :search, placeholder: "Recherche ta paire" %>
       <% end %>
       <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %>
-      <%= link_to('<button type="button" id="sell_button" class="btn btn-dark">Vendre</button>'.html_safe, 
-      new_sneaker_path) %>
+      <%= link_to "Vendre", new_sneaker_path, class: "btn btn-dark" %>
       <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon navbarSideButton', style: 'cursor: pointer;' %>
     </div>
   </div>
@@ -29,9 +28,9 @@
     <%= link_to (user_signed_in? ? user_path : user_session_path), class: "side-link" do %>
       <li class="navbar-side-item side-link">Mon compte</li>
     <% end %>
-    <a class="side-link" href="/sneakers/new">
+    <%= link_to(new_sneaker_path, class: "side-link") do %>
       <li class="navbar-side-item side-link">Vendre</li>
-    </a>
+    <% end %>
     <div style="margin-top: 20px; cursor: pointer" id="navbar-side-see-all">
       <li  class="navbar-side-item side-link">Tout voir</li>
     </div>

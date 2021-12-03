@@ -1,7 +1,7 @@
 <div class="list-sneakers-cards" data-refresh-list-target="list" data-filters-target="thelist">
   <div class="popup-search" id="records_table">
     <div class="sneaker-cards">
-      <% @sneakers_navbar.each do |sneaker| %>
+      <% @results.each do |sneaker| %>
         <div class="sneaker-card">
           <% if !sneaker.orders.last.nil? && sneaker.orders.last.state == "Payé" %>
             <div class="sneaker-card_img sneaker-card_img-sold">

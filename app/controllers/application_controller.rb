@@ -29,33 +29,6 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
-	def set_search_navbar
-		if Rails.env.production?
-			@pagy, @sneakers_navbar = pagy(Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where('state >= ?', 1), items: 120)
-		elsif Rails.env.development?
-			@pagy, @sneakers_navbar = pagy(Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where('state >= ?', 1), items: 120)
-		end
-		if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
-			session[:filter_params] = params
-			filtering_params(params).each { |key, value| @sneakers_navbar = @sneakers_navbar.public_send("filter_by_#{key}", value) if value.present? }
-		elsif params[:page].present? && params[:page] >= '2' && session[:filter_params].present?
-			filtering_params(session[:filter_params]).each { |key, value| @sneakers_navbar = @sneakers_navbar.public_send("filter_by_#{key}", value) if value.present? }
-		elsif !params[:category].present? || !params[:price].present? || !params[:condition].present? || !params[:size].present?
-			session.delete(:filter_params)
-		end
-		@sneakers_navbar = @sneakers_navbar.search_by_name_and_brand(params[:query]) if params[:query].present?
-
-		respond_to do |format|
-			format.html
-			format.json
-			format.text { render partial: 'sneakers/list_sneakers.html.erb', locals: { sneakers: @sneakers_navbar, params: params }, pagination: view_context.pagy_nav(@pagy) }
-		end
-	end
-
-	def filtering_params(params)
-		params.slice(:price, :condition, :size, :category)
-	end
-
 	def configure_permitted_parameters
 		# For additional fields in app/views/devise/registrations/new.html.erb
 		devise_parameter_sanitizer.permit(

@@ -1,20 +1,16 @@
 <title>Ajoute ta paire - Rock Don't Stock</title>
 <div class="container search-sneaker-model">
   <% unless params[:sneaker_db_id].present? %>
-    <div data-controller="refresh-list">
+    <div>
       <div class="search-models">
         <h2 class="search-sneaker-model-title">Recherche la paire que tu souhaites vendre</h2>
         <div class="title-add-new-sneaker-db"></div>
-        <%= form_with url: sneaker_dbs_path, method: :get, html: { class: 'search-sneaker-model-form', data: { refresh_list_target: 'form' } } do |f| %>
+        <%= form_with url: sneaker_dbs_path, method: :get, html: { class: 'search-sneaker-model-form' } do |f| %>
           <%= f.text_field :query,
             id: 'search_sneaker_name',
             class: "form-control",
             placeholder: 'Recherche ta paire',
-            value: params[:query],
-            data: {
-              refresh_list_target: 'searchInput',
-              action: "keyup->refresh-list#update",
-            } %>
+            value: params[:query] %>
         <% end %>
         <div data-refresh-list-target="list">
         </div>
@@ -139,7 +135,8 @@
   }
 
 </style>
-<script type="text/javascript">
+
+<%# <script type="text/javascript">
   $(document).on('turbolinks:load', () => {
     $('form').on('keypress', e => {
         if (e.keyCode == 13) {
@@ -147,4 +144,4 @@
         }
     });
 });
-</script>
+</script> %>

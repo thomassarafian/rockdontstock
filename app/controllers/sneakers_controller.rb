@@ -7,26 +7,19 @@ class SneakersController < ApplicationController
 	skip_after_action :verify_policy_scoped, only: [:index]
 
 	def index
-		if Rails.env.production?
-			@pagy, @sneakers_navbar = pagy(Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where('state >= ?', 1), items: 120)
-		elsif Rails.env.development?
-			@pagy, @sneakers_navbar = pagy(Sneaker.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob).where('state >= ?', 1), items: 120)
+		# puts params
+		# if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
+		# elsif params[:page].present? && params[:page] >= '2' && session[:filter_params].present?
+		# 	@sneakers_navbar = @sneakers_navbar.public_send("filter_by_#{key}", value) if value.present?
+		# end
+		results = Sneaker.where('state >= ?', 1).search_by_name_and_brand(params[:search])
+		
+		[:price, :condition, :size, :category].each do |filter|
+			results = results&.public_send("filter_by_#{filter.to_s}", params[filter]) if params[filter].present?
 		end
-		if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
-			session[:filter_params] = params
-			filtering_params(params).each { |key, value| @sneakers_navbar = @sneakers_navbar.public_send("filter_by_#{key}", value) if value.present? }
-		elsif params[:page].present? && params[:page] >= '2' && session[:filter_params].present?
-			filtering_params(session[:filter_params]).each { |key, value| @sneakers_navbar = @sneakers_navbar.public_send("filter_by_#{key}", value) if value.present? }
-		elsif !params[:category].present? || !params[:price].present? || !params[:condition].present? || !params[:size].present?
-			session.delete(:filter_params)
-		end
-		@sneakers_navbar = @sneakers_navbar.search_by_name_and_brand(params[:query]) if params[:query].present?
 
-		respond_to do |format|
-			format.html
-			format.json
-			format.text { render partial: 'sneakers/list_sneakers.html.erb', locals: { sneakers: @sneakers_navbar, params: params }, pagination: view_context.pagy_nav(@pagy) }
-		end
+		@pagy, @results = pagy(results&.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob), items: 10)
+
 	end
 
 	def show
@@ -136,6 +129,10 @@ class SneakersController < ApplicationController
 	end
 
 	private
+
+	def filtering_params(params)
+		params.slice(:price, :condition, :size, :category)
+	end
 
 	def sneaker_params
 		params.require(:sneaker).permit(:sneaker_db_id, :name, :size, :price, :condition, :box, :extras, :state, photos: [])

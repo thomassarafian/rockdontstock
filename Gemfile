@@ -40,7 +40,6 @@ gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
-gem 'activerecord-session_store' #store session data
 
 gem 'pundit' #rights for users 
 gem 'figaro' #hide sensible info from git
