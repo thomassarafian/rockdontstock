@@ -1,59 +1,46 @@
- <% brand = ["Adidas", "Air Jordan", "Nike", "New Balance", "Other Brands", "Luxury Brands", "Collections"]%>
-
 <div class="" id="navbar-light">
   <div class="fixed-top nav-test">
     <%= link_to "/", class: "navbar-brand" do %>
       <%= image_tag("logo.svg", style: 'height: 35px;', class: 'icon') %>
     <% end %>
     <div class="icons">
-      <div class="glass_icon" style="cursor: pointer;">
-        <p style="margin:0;">Recherche ta paire</p>
-        <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %>
-      </div>
+      <%= form_with url: sneakers_path, method: :get do |f| %>
+        <%= f.text_field :search_input, placeholder: "Recherche ta paire" %>
+      <% end %>
+      <%= image_tag("navbar/magnifying_glass_icon.svg", class: "magnify_glass_icon") %>
       <%= link_to('<button type="button" id="sell_button" class="btn btn-dark">Vendre</button>'.html_safe, 
       new_sneaker_path) %>
       <%= image_tag "navbar/toggler_icon.svg", class: 'toggler_icon navbarSideButton', style: 'cursor: pointer;' %>
     </div>
   </div>
-  
   <div class="real-nav">
     <%= image_tag "navbar/toggler_icon.svg", style: 'height: 40px; cursor: pointer;', class: 'toggler_icon_phone navbarSideButton' %>  
-    
     <%= link_to "/", class: "navbar-brand-phone" do %>
       <%= image_tag("logo.svg", style: 'width: 60px;', class: 'icon_phone') %>
     <% end %>
-
     <div class="glass_icon_phone">
       <%= image_tag("navbar/magnifying_glass_icon.svg", style: 'height: 40px;padding:10px;', class: "magnify_glass_icon_phone") %>
     </div>
   </div>
-
-
   <ul class="navbar-side" id="navbarSide">
     <div class="navbar-side-white-toggler">
       <%= image_tag "navbar/white/white_toggler_icon.svg" %>  
     </div>
-
     <%= link_to (user_signed_in? ? user_path : user_session_path), class: "side-link" do %>
       <li class="navbar-side-item side-link">Mon compte</li>
     <% end %>
-    
     <a class="side-link" href="/sneakers/new">
       <li class="navbar-side-item side-link">Vendre</li>
     </a>
-
     <div style="margin-top: 20px; cursor: pointer" id="navbar-side-see-all">
       <li  class="navbar-side-item side-link">Tout voir</li>
     </div>
-
     <%= link_to(new_contact_path, class: "side-link") do %>
       <li class="navbar-side-item side-link">Nous contacter</li>
     <% end %>
-
     <%= link_to(faq_path, class: "side-link") do %>
       <li class="navbar-side-item side-link">FAQ</li>
     <% end %>
-
     <div class="navbar-sign">
       <% if user_signed_in? %>
         <%= link_to (destroy_user_session_path), class: "", :method => :delete do %>
@@ -66,9 +53,7 @@
       <% end %>
     </div>
   </ul>
-
   <div class="overlay"></div>
-  
 </div>
 
 <script type="text/javascript">
@@ -82,7 +67,6 @@
       $('#navbarSide').removeClass('reveal');
       $('.overlay').hide();
     });
-
 
     $('#navbar-side-see-all').on('click', function() {
       $('#navbarSide').removeClass('reveal');

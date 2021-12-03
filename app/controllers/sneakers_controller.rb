@@ -1,8 +1,10 @@
 class SneakersController < ApplicationController
-	skip_before_action :authenticate_user!, only: %i[index show new create]
-	skip_after_action :verify_authorized, only: %i[new create]
+	before_action :set_sneaker, only: [:show, :edit, :update, :destroy]
 
-	before_action :set_sneaker, only: %i[show edit update destroy]
+	skip_before_action :authenticate_user!, only: [:index, :show, :new, :create]
+
+	skip_after_action :verify_authorized, only: [:new, :create]
+	skip_after_action :verify_policy_scoped, only: [:index]
 
 	def index
 		if Rails.env.production?
