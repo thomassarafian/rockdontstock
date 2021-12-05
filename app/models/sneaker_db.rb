@@ -3,11 +3,19 @@ class SneakerDb < ApplicationRecord
   validates :name, uniqueness: true
 
   include PgSearch::Model
-  pg_search_scope :search_by_by_name,
+  pg_search_scope :pg_search_by_name,
     against: [:name],
     using: {
       tsearch: { prefix: true } 
     }
+
+  def self.search_by_name(query)
+    if query.present?
+      pg_search_by_name(query)
+    else
+      SneakerDb.all
+    end
+  end
 
  #  scope :filter_by_price, -> (price) { 
  #    if price == "100"

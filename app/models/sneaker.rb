@@ -14,7 +14,6 @@ class Sneaker < ApplicationRecord
 
   monetize :price_cents
 
-
 	# after_create :send_notification  # a configurer avec mailjet 
 
   pg_search_scope :pg_search_by_name_and_brand,

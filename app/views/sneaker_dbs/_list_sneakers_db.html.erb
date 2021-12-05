@@ -1,66 +1,54 @@
-<div data-refresh-list-target="list">
-  <div id="scroll" class="container">
-    <div class="sneaker-cards">
-      <% sneaker_dbs.each do |sneaker| %>
-        <div class="sneaker-card" >
-          <%= link_to new_sneaker_db_sneaker_path(sneaker), :style=>'color:#000000;' do %>
-            <div class="sneaker-db-card-img">
-              <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
-            </div>
-          <% end %>
-          <div class="sneaker-title">
-            <strong><%= sneaker.name %></strong>
-          </div>
-        </div>
-      <% end %>
-    </div>  
-  </div>
+<div class="sneaker-cards">
+  <% @results.each do |sneaker| %>
+    <div class="sneaker-card" >
+      <div class="sneaker-db-card-img">
+        <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
+      </div>
+      <div class="sneaker-title">
+        <strong><%= sneaker.name %></strong>
+      </div>
+    </div>
+  <% end %>
 </div>
+<%== pagy_bootstrap_nav_js(@pagy) %>
 
 <style type="text/css">
-  .sneaker-card > a {
-    align-items: center;
-  }
-  .sneaker-db-card-img {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    
-  }
-  
-  .btn-sneaker-card-img {
-    border: none;
-    background-color: white;
-  }
-  @media (min-width: 100px) {
+.sneaker-card > a {
+  align-items: center;
+}
+.sneaker-db-card-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.btn-sneaker-card-img {
+  border: none;
+  background-color: white;
+}
+@media (min-width: 100px) {
   .sneaker-db-card-img>img {
     width: 100px;
     height: 100px;
     object-fit: contain;
   }
 }
-
 @media (min-width: 768px) {
   .sneaker-db-card-img>img {
     width: 140px;
     height: 140px;
   }
 }
-
 @media (min-width: 992px) {
   .sneaker-db-card-img>img {
     width: 150px;
     height: 150px;
   }
 }
-
 @media (min-width: 1200px) {
   .sneaker-db-card-img>img {
     width: 160px;
     height: 160px;
   }
 }
-
-
 </style>
 

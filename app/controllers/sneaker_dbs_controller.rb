@@ -1,16 +1,12 @@
 class SneakerDbsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :create]
-  def index
-    if params[:query] == ""
-      @sneaker_dbs = policy_scope(SneakerDb).limit(12)
-    elsif params[:query].present?
-      @sneaker_dbs = policy_scope(SneakerDb).limit(12)
-      @sneaker_dbs = @sneaker_dbs.search_by_by_name(params[:query])
-    end
 
+  def index
+		results = policy_scope(SneakerDb).search_by_name(params[:search])
+		@pagy, @results = pagy(results, link_extra: 'data-remote="true"', items: 10)
     respond_to do |format|
+      format.js
       format.html
-      format.text { render partial: 'sneaker_dbs/list_sneakers_db.html.erb', locals: { sneaker_dbs: @sneaker_dbs } }
     end
   end
 

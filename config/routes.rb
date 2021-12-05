@@ -10,12 +10,8 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
 	}
 	
-  resources :sneakers, only: [:index, :new, :create, :edit, :update, :show, :destroy]
-
-  resources :sneaker_dbs, only: [:index, :create] do
-    resources :sneakers, only: [:new, :create]
-  end
-
+  resources :sneakers
+  resources :sneaker_dbs, only: [:index, :create]
 
 	resource :user, only: [:show, :update], path: 'me' do
     resources :items, only: [:index]
@@ -56,10 +52,6 @@ Rails.application.routes.draw do
   end
 
   mount ForestLiana::Engine => '/forest'	
-
   mount StripeEvent::Engine, at: '/stripe-webhooks'
-
-
-
 
 end

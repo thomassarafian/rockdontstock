@@ -15,6 +15,7 @@
     "js-autocomplete": "^1.0.4",
     "popper.js": "^1.16.1",
     "puppeteer": "^10.0.0",
+    "rails-erb-loader": "^5.5.2",
     "stimulus": "^2.0.0",
     "stimulus-use": "^0.25.3",
     "turbolinks": "^5.2.0",

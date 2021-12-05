@@ -4,22 +4,15 @@ class SneakersController < ApplicationController
 	skip_before_action :authenticate_user!, only: [:index, :show, :new, :create]
 
 	skip_after_action :verify_authorized, only: [:new, :create]
-	skip_after_action :verify_policy_scoped, only: [:index]
 
 	def index
-		# puts params
-		# if params[:category].present? || params[:price].present? || params[:condition].present? || params[:size].present?
-		# elsif params[:page].present? && params[:page] >= '2' && session[:filter_params].present?
-		# 	@sneakers_navbar = @sneakers_navbar.public_send("filter_by_#{key}", value) if value.present?
-		# end
-		results = Sneaker.where('state >= ?', 1).search_by_name_and_brand(params[:search])
+		results = policy_scope(Sneaker).where('state >= ?', 1).search_by_name_and_brand(params[:search])
 		
 		[:price, :condition, :size, :category].each do |filter|
 			results = results&.public_send("filter_by_#{filter.to_s}", params[filter]) if params[filter].present?
 		end
 
 		@pagy, @results = pagy(results&.includes(:sneaker_db, :user, :photos_attachments, photos_attachments: :blob), items: 10)
-
 	end
 
 	def show

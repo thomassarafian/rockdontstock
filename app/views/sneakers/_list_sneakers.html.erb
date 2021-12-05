@@ -1,4 +1,4 @@
-<div class="list-sneakers-cards" data-refresh-list-target="list" data-filters-target="thelist">
+<div class="list-sneakers-cards">
   <div class="popup-search" id="records_table">
     <div class="sneaker-cards">
       <% @results.each do |sneaker| %>
@@ -8,7 +8,7 @@
               <%= cl_image_tag(sneaker.photos[0].key) %>
               <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
             </div>
-            <%= link_to sneaker_path(sneaker), class: "sneaker-title #{}sneaker-title-sold" do %>
+            <%= link_to sneaker_path(sneaker), class: "sneaker-title sneaker-title-sold" do %>
               <strong><%= sneaker.sneaker_db.name %></strong>
             <% end %>
             <div class="sneaker-price sneaker-price-sold">
@@ -36,15 +36,12 @@
   margin-top: 30px;
   text-align: center;
 }
-
 .sneaker-cards-btn a {
   color: white;
 }
-
 .sneaker-title {
   color: black;
 }
-
 .sneaker-price {
   color: black;
 }
