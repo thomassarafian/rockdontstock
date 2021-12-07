@@ -6,24 +6,11 @@
     <%= form_with url: sneaker_dbs_path, method: :get, local: false, html: { class: 'search-sneaker-model-form' } do |f| %>
       <%= f.text_field :search, placeholder: "Recherche ta paire", id: 'search_sneaker_name', class: "form-control" %>
     <% end %>
-    <div id="results"></div>
-    <div class="form-add-new-sneakerdb">
-      <hr>
-      <h2>Si tu ne trouves pas ton modèle dans la liste, ajoute-le ci-dessous :</h2>
-      <form id="addNewSneakerDb" action="/sneaker_dbs/" data-remote="true" method="post" > 
-        <input class="form-control add-sneaker-db-name" required type="text"  placeholder="Adidas Yeezy Boost 700 Wave Runner Solid Grey" name="add_sneaker_db">
-        <input type="submit" value="Ajouter ma paire" class="btn btn-dark">
-      </form>
+    <div id="form-content">
+      <%= render partial: 'sneaker_dbs/list_sneakers_db' %>
     </div>
-    <% if params[:sneaker_db_id].present?  %>
-      <h1 class="search-sneaker-model-title">Remplis les informations</h1>
-      <div class="new-sneaker-form" >
-        <%= render "form", sneaker: @sneaker, sneaker_db: @sneaker_db %>
-      </div>
-    <% end %>
   </div>
 </div>
-
 
 <script type="text/javascript">
   document.addEventListener('turbolinks:load', () => {
@@ -39,81 +26,81 @@
 </script>
 
 <style type="text/css">
-.form-add-new-sneakerdb hr {
-  width: 100%;
-}
-.form-add-new-sneakerdb {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.search-sneaker-model {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-@media (min-width: 320px) {
-  .search-sneaker-model-form, .add-sneaker-db-name {
-    width: 250px;
-  }
-  .add-sneaker-db-name {
-    margin-bottom: 20px;
-  }
-  .form-add-new-sneakerdb h2 {
-    font-size: 25px;
+  .form-add-new-sneakerdb hr {
+    width: 100%;
   }
   .form-add-new-sneakerdb {
-    margin-top:30px;
-  }
-  .form-add-new-sneakerdb h2 {
-    margin-top:30px;
-    margin-bottom: 10px;
-    font-size: 15px;
-  }
-  .search-sneaker-model-title {
     text-align: center;
-    font-size: 25px;
-  }  
-}
-@media (min-width: 768px) {
-  .form-add-new-sneakerdb h2 {
-    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  .form-add-new-sneakerdb h2 {
-    font-size: 15px;
+  .search-sneaker-model {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
-  .search-sneaker-model-form, .add-sneaker-db-name {
-    width: 400px;
+  @media (min-width: 320px) {
+    .search-sneaker-model-form, .add-sneaker-db-name {
+      width: 250px;
+    }
+    .add-sneaker-db-name {
+      margin-bottom: 20px;
+    }
+    .form-add-new-sneakerdb h2 {
+      font-size: 25px;
+    }
+    .form-add-new-sneakerdb {
+      margin-top:30px;
+    }
+    .form-add-new-sneakerdb h2 {
+      margin-top:30px;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+    .search-sneaker-model-title {
+      text-align: center;
+      font-size: 25px;
+    }
   }
-}
-@media (min-width: 1024px) {
-  .form-add-new-sneakerdb h2 {
-    font-size: 35px;
+  @media (min-width: 768px) {
+    .form-add-new-sneakerdb h2 {
+      font-size: 30px;
+    }
+    .form-add-new-sneakerdb h2 {
+      font-size: 15px;
+    }
+    .search-sneaker-model-form, .add-sneaker-db-name {
+      width: 400px;
+    }
   }
-  .form-add-new-sneakerdb h2 {
-    font-size: 20px;
+  @media (min-width: 1024px) {
+    .form-add-new-sneakerdb h2 {
+      font-size: 35px;
+    }
+    .form-add-new-sneakerdb h2 {
+      font-size: 20px;
+    }
+    .search-sneaker-model-form, .add-sneaker-db-name {
+      width: 500px;
+    }
   }
-  .search-sneaker-model-form, .add-sneaker-db-name {
-    width: 500px;
+  .search-sneaker-model {
+    margin-top: 60px;
   }
-}
-.search-sneaker-model {
-  margin-top: 60px;
-}
-.search-models {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.choose-btn {
-  display:none;
-  position:absolute;
-}
-.btn-sneaker-card-img {
-  border: none;
-  background-color: white;
-}
+  .search-models {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .choose-btn {
+    display:none;
+    position:absolute;
+  }
+  .btn-sneaker-card-img {
+    border: none;
+    background-color: white;
+  }
 </style>

@@ -18,31 +18,28 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
-
   <div class="modal-sneaker-logos">
     <div class="modal-sneaker-logos-microscope">
       <%= image_tag("sneaker/microscope.svg") %>
       <h5>AUTHENTICITÉ GARANTIE</h5>
       <p>Avant que la paire ne te soit envoyée, cette dernière passe entre nos mains afin d’être vérifiée par des experts en Legit Check</p>
       <%= link_to("En savoir plus l'authentification", authentification_path, target: :_blank) %>
-      </div>
+    </div>
     <div class="modal-sneaker-logos-truck">
       <%= image_tag("sneaker/truck.svg") %>
       <h5>LIVRAISON A PARTIR DE 5€</h5>
       <p>Pour réduire le coût au maximum nous te proposons la livraison MondialRelay, plus sécurisée elle a aussi l’avantage d’être la moins coûteuse pour toi</p>
     </div>
   </div>
-
   <div class="sneaker-show-infos">
     <h2 class="sneaker-show-infos-title"><%= @sneaker.sneaker_db.name %></h2>
-    <p><strong>Taille : </strong><%=  @sneaker.size %> US</p> <%#= US (shoes_size[@sneaker.size] FR)%>
+    <p><strong>Taille : </strong><%=  @sneaker.size %> US</p>
+ <%#= US (shoes_size[@sneaker.size] FR)%>
     <p><strong>Prix : </strong><%= humanized_money_with_symbol(@sneaker.price) %></p>
     <p><strong>Condition : </strong><%= @sneaker.condition %>/10</p>
     <p><strong>Box : </strong><%= @sneaker.box %></p>
     <p><strong>Extras : </strong><%= @sneaker.extras %></p>
-
   </div>
-
   <div class="modal-footer" style="justify-content: center;">
     <% if current_user != @sneaker.user && @sneaker.user.stripe_account_id? %>
       <% unless current_user.nil? %>

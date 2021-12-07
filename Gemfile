@@ -44,7 +44,7 @@ gem "omniauth-rails_csrf_protection"
 gem 'pundit' #rights for users 
 gem 'figaro' #hide sensible info from git
 
-gem "better_errors" #gem for debuging
+# gem "better_errors" #gem for debuging
 gem "binding_of_caller" #gem for debuging
 gem 'spring' #for reload automaticaly
 

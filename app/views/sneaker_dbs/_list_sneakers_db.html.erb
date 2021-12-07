@@ -1,54 +1,60 @@
 <div class="sneaker-cards">
-  <% @results.each do |sneaker| %>
-    <div class="sneaker-card" >
+  <% @results&.each do |sneaker_db| %>
+    <%= link_to new_sneaker_path(sneaker_db: sneaker_db), class: "sneaker-card", remote: true do %>
       <div class="sneaker-db-card-img">
-        <%= image_tag(sneaker.img_url, style: 'width: 100%; justify-content:center;') %>
+        <%= image_tag(sneaker_db.img_url, style: 'width: 100%; justify-content:center;') %>
       </div>
       <div class="sneaker-title">
-        <strong><%= sneaker.name %></strong>
+        <strong><%= sneaker_db.name %></strong>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
-<%== pagy_bootstrap_nav_js(@pagy) %>
-
+<%== pagy_bootstrap_nav_js(@pagy) if @pagy %>
+<div class="form-add-new-sneakerdb">
+  <hr>
+  <h2>Si tu ne trouves pas ton modèle dans la liste, ajoute-le ci-dessous :</h2>
+  <form id="addNewSneakerDb" action="/sneaker_dbs/" data-remote="true" method="post" >
+    <input class="form-control add-sneaker-db-name" required type="text"  placeholder="Adidas Yeezy Boost 700 Wave Runner Solid Grey" name="add_sneaker_db">
+    <input type="submit" value="Ajouter ma paire" class="btn btn-dark">
+  </form>
+</div>
 <style type="text/css">
-.sneaker-card > a {
-  align-items: center;
-}
-.sneaker-db-card-img {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.btn-sneaker-card-img {
-  border: none;
-  background-color: white;
-}
-@media (min-width: 100px) {
-  .sneaker-db-card-img>img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
+  .sneaker-card > a {
+    align-items: center;
   }
-}
-@media (min-width: 768px) {
-  .sneaker-db-card-img>img {
-    width: 140px;
-    height: 140px;
+  .sneaker-db-card-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
-}
-@media (min-width: 992px) {
-  .sneaker-db-card-img>img {
-    width: 150px;
-    height: 150px;
+  .btn-sneaker-card-img {
+    border: none;
+    background-color: white;
   }
-}
-@media (min-width: 1200px) {
-  .sneaker-db-card-img>img {
-    width: 160px;
-    height: 160px;
+  @media (min-width: 100px) {
+    .sneaker-db-card-img>img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+    }
   }
-}
+  @media (min-width: 768px) {
+    .sneaker-db-card-img>img {
+      width: 140px;
+      height: 140px;
+    }
+  }
+  @media (min-width: 992px) {
+    .sneaker-db-card-img>img {
+      width: 150px;
+      height: 150px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .sneaker-db-card-img>img {
+      width: 160px;
+      height: 160px;
+    }
+  }
 </style>
-

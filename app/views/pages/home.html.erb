@@ -4,21 +4,17 @@
   currency: 'eur',
   source: 'acct_1JXPCp2R1H63L7xP',
 }) %>
-
-
 <%= link_to(new_sneaker_path, style:"text-decoration: none; ") do  %>
   <div class='message-pub'>
     Gagne des modèles exclusifs en mettant une paire en ligne + frais d’authentification offerts sur ta première vente !
   </div>
 <% end %>
-
 <div class="banner">
   <%= link_to(new_sneaker_path) do %>
     <%= image_tag("banner/banner.jpg", class: 'desktop-banner-img') %>
     <%= image_tag("banner/home_page_banner_phone.jpg", class: 'phone-banner-img') %>
   <% end %>
 </div>
-
 <div class="container home-rds-selection">
   <h2>Les dernières paires en ligne</h2>
   <div class="sneaker-cards">
@@ -32,7 +28,7 @@
           <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title sneaker-title-sold") do %>
             <strong><%= sneaker.sneaker_db.name %></strong>
           <% end %>
-          <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>  
+          <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
         <% else %>
           <div class="sneaker-card_img" id="sneaker_card_img">
             <%= cl_image_tag(sneaker.photos[0].key) %>
@@ -44,10 +40,9 @@
         <% end %>
       </div>
     <% end %>
-  </div>  
+  </div>
 </div>
 <div type="button" class="link-home-page all_sneakers">Tout voir</div>
-
 <div class="">
   <div class='article-legit-check'>
     <div class='home-article-legit-content'>
@@ -56,13 +51,12 @@
         <h2>LEGIT CHECK</h2>
         <hr>
       </div>
-      <p>Toutes les sneakers vendues sur le sites sont inspectées minutieusement par nos experts en Legit Check avant de vous être envoyées afin de vous proposer une plateforme secure et vous permettre de cliquer l’esprit tranquille. Rockez, on s’occupe du reste !<br><br><a href="/authentification">En savoir plus sur l’authentification</a></p>
-      
+      <p>Toutes les sneakers vendues sur le sites sont inspectées minutieusement par nos experts en Legit Check avant de vous être envoyées afin de vous proposer une plateforme secure et vous permettre de cliquer l’esprit tranquille. Rockez, on s’occupe du reste !<br>
+        <br>
+        <a href="/authentification">En savoir plus sur l’authentification</a></p>
     </div>
   </div>
 </div>
-
-
 <div class="container home-rds-selection">
   <h2>La séléction Rock Don't Stock</h2>
   <div class="sneaker-cards">
@@ -76,7 +70,7 @@
           <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title sneaker-title-sold") do %>
             <strong><%= sneaker.sneaker_db.name %></strong>
           <% end %>
-          <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>  
+          <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
         <% else %>
           <div class="sneaker-card_img">
             <%= cl_image_tag(sneaker.photos[0].key) %>
@@ -88,23 +82,21 @@
         <% end %>
       </div>
     <% end %>
-  </div>  
+  </div>
 </div>
-
 <div class="">
   <div class="newsletter-container">
     <h2>INSCRIS-TOI</h2>
     <hr>
     <p>Reçois en avant-première nos futures réductions, Les jeux concours ainsi que les nombreux meet-ups et releases party !</p>
     <div class="subscribe-newsletter">
-     <%= simple_form_for :user, html: { class: 'newsletter-form' } do |f|%>
-      <%= f.input :email, placeholder: "Email", input_html: { class: 'newsletter-email' }, label: false %>
-      <%= f.button :submit, "S'inscrire", class: 'btn btn-light newsletter-btn' %>
-     <% end %>
+      <%= simple_form_for :user, html: { class: 'newsletter-form' } do |f|%>
+        <%= f.input :email, placeholder: "Email", input_html: { class: 'newsletter-email' }, label: false %>
+        <%= f.button :submit, "S'inscrire", class: 'btn btn-light newsletter-btn' %>
+      <% end %>
     </div>
   </div>
 </div>
-
 <div class="container home-rds-selection">
   <h2>Les dernières releases</h2>
   <div class="sneaker-cards">
@@ -117,8 +109,8 @@
           </div>
           <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title sneaker-title-sold") do %>
             <strong><%= sneaker.sneaker_db.name %></strong>
-          <% end %>          
-          <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>  
+          <% end %>
+          <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
         <% else %>
           <div class="sneaker-card_img">
             <%= cl_image_tag(sneaker.photos[0].key) %>
@@ -130,11 +122,8 @@
         <% end %>
       </div>
     <% end %>
-  </div>  
+  </div>
 </div>
-
-
-
 <div class="container">
   <div class="insta-posts-title">
     <h2>#rockdontstock</h2>
@@ -142,19 +131,19 @@
   <div class="insta-posts">
     <div class="card-deck">
       <div class="card">
-        <%= image_tag("insta/post9.jpeg", class: "card-img-top")  %> 
+        <%= image_tag("insta/post9.jpeg", class: "card-img-top")  %>
         <p class="card-insta-post-username card-title">
-          <a href="https://www.instagram.com/vincent_m.d/" target="_blank">@vincent_m.d</a>  
+          <a href="https://www.instagram.com/vincent_m.d/" target="_blank">@vincent_m.d</a>
         </p>
       </div>
       <div class="card">
-        <%= image_tag("insta/post8.jpeg", class: "card-img-top") %> 
+        <%= image_tag("insta/post8.jpeg", class: "card-img-top") %>
         <p class="card-insta-post-username card-title">
-          <a href="https://www.instagram.com/inabrh/" target="_blank">@inabrh</a>  
+          <a href="https://www.instagram.com/inabrh/" target="_blank">@inabrh</a>
         </p>
       </div>
       <div class="card">
-        <%= image_tag("insta/post7.jpeg", class: "card-img-top")  %> 
+        <%= image_tag("insta/post7.jpeg", class: "card-img-top")  %>
         <p class="card-insta-post-username card-title">
           <a href="https://www.instagram.com/sneakers_ink_/" target="_blank">@sneakers_ink_</a>
           &nbsp;&
@@ -162,27 +151,25 @@
         </p>
       </div>
       <div class="card">
-        <%= image_tag("insta/post6.jpeg", class: "card-img-top")  %> 
+        <%= image_tag("insta/post6.jpeg", class: "card-img-top")  %>
         <p class="card-insta-post-username card-title">
           <a href="https://www.instagram.com/keomx_/" target="_blank">@keomx_</a>
         </p>
       </div>
       <div class="card">
-        <%= image_tag("insta/post5.jpeg", class: "card-img-top")  %> 
+        <%= image_tag("insta/post5.jpeg", class: "card-img-top")  %>
         <p class="card-insta-post-username card-title">
-          <a href="https://www.instagram.com/kfnemo/" target="_blank">@kfnemo</a>  
+          <a href="https://www.instagram.com/kfnemo/" target="_blank">@kfnemo</a>
           &nbsp;&&nbsp;  
           <a href="https://www.instagram.com/valentin.fischlmayr/" target="_blank"> @valentin.fischlmay</a>
         </p>
       </div>
-    </div>  
+    </div>
   </div>
-
   <div id="carouselInstaIndicators" class="insta-post-carousel carousel slide carousel-slide-body" data-ride="carousel">
-    
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <%= image_tag("insta/post9.jpeg", class: "d-block w-100", style: "height: 300px")  %> 
+        <%= image_tag("insta/post9.jpeg", class: "d-block w-100", style: "height: 300px")  %>
         <div class="insta-post-username carousel-caption ">
           <p>
             <a href="https://www.instagram.com/vincent_m.d/" target="_blank">@vincent_m.d</a>
@@ -190,7 +177,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <%= image_tag("insta/post8.jpeg", class: "d-block w-100", style: "height: 300px")  %> 
+        <%= image_tag("insta/post8.jpeg", class: "d-block w-100", style: "height: 300px")  %>
         <div class="insta-post-username carousel-caption ">
           <p>
             <a href="https://www.instagram.com/inabrh/" target="_blank">@inabrh</a>
@@ -198,7 +185,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <%= image_tag("insta/post7.jpeg", class: "d-block w-100", style: "height: 300px")  %> 
+        <%= image_tag("insta/post7.jpeg", class: "d-block w-100", style: "height: 300px")  %>
         <div class="insta-post-username carousel-caption ">
           <p>
             <a href="https://www.instagram.com/sneakers_ink_/" target="_blank">@sneakers_ink_</a>
@@ -208,45 +195,45 @@
         </div>
       </div>
       <div class="carousel-item">
-        <%= image_tag("insta/post6.jpeg", class: "d-block w-100", style: "height: 300px")  %> 
+        <%= image_tag("insta/post6.jpeg", class: "d-block w-100", style: "height: 300px")  %>
         <div class="insta-post-username carousel-caption ">
           <p><a href="https://www.instagram.com/keomx_/" target="_blank">@keomx_</a></p>
         </div>
       </div>
       <div class="carousel-item">
-        <%= image_tag("insta/post5.jpeg", class: "d-block w-100", style: "height: 300px")  %> 
+        <%= image_tag("insta/post5.jpeg", class: "d-block w-100", style: "height: 300px")  %>
         <div class="insta-post-username carousel-caption ">
           <p>
-            <a href="https://www.instagram.com/kfnemo/" target="_blank">@kfnemo</a>  
-          & 
-          <a href="https://www.instagram.com/valentin.fischlmayr/" target="_blank"> @valentin.fischlmay</a>
-        </p>
+            <a href="https://www.instagram.com/kfnemo/" target="_blank">@kfnemo</a>
+            & 
+            <a href="https://www.instagram.com/valentin.fischlmayr/" target="_blank"> @valentin.fischlmay</a>
+          </p>
         </div>
       </div>
       <div class="carousel-item">
-        <%= image_tag("insta/post4.jpeg", class: "d-block w-100", style: "height: 300px")  %> 
+        <%= image_tag("insta/post4.jpeg", class: "d-block w-100", style: "height: 300px")  %>
         <div class="insta-post-username carousel-caption">
           <p><a href="https://www.instagram.com/sly06150/" target="_blank">@sly06150</a></p>
         </div>
       </div>
       <div class="carousel-item">
-        <%= image_tag("insta/post3.jpeg", class: "d-block w-100", style: "height: 300px")  %> 
+        <%= image_tag("insta/post3.jpeg", class: "d-block w-100", style: "height: 300px")  %>
         <div class="insta-post-username carousel-caption">
           <p>
-            <a href="https://www.instagram.com/cozykozo/" target="_blank">@cozykozo</a>  
+            <a href="https://www.instagram.com/cozykozo/" target="_blank">@cozykozo</a>
             & 
             <a href="https://www.instagram.com/olyn_lyn/" target="_blank">@olyn_lyn</a>
           </p>
         </div>
       </div>
       <div class="carousel-item">
-        <%= image_tag("insta/post2.jpeg", class: "d-block w-100", style: "height: 300px")  %> 
+        <%= image_tag("insta/post2.jpeg", class: "d-block w-100", style: "height: 300px")  %>
         <div class="insta-post-username carousel-caption">
           <p><a href="https://www.instagram.com/thenewerarog/" target="_blank">@thenewerarog</a></p>
         </div>
       </div>
       <div class="carousel-item">
-        <%= image_tag("insta/post1.jpeg", class: "d-block w-100", style: "height: 300px")  %> 
+        <%= image_tag("insta/post1.jpeg", class: "d-block w-100", style: "height: 300px")  %>
         <div class="insta-post-username carousel-caption">
           <p><a href="https://www.instagram.com/karl_bukowski_/" target="_blank">@karl_bukowski_</a></p>
         </div>
@@ -262,9 +249,6 @@
     </a>
   </div>
 </div>
-
-
-
 <script type="text/javascript">
   $(document).ready(function() {
     // $('.glass_icon_phone').on('click', function() {
@@ -290,7 +274,7 @@
         $('.dropdown-filter-items').hide();
     }
   });
-    
+
     // if ($( window ).width() < 1024) {
     //   $('.dropdown-filter').on('click', function() {
     //     $('.dropdown-filter-items').slideToggle('fast');
@@ -312,10 +296,6 @@
     })
   });
 </script>
-
-
-
-
 <script type="text/javascript">
   document.addEventListener('turbolinks:load', () => {
     if ("order_create_<%= session[:sneaker_id_to_buy] %>" && "<%= current_user %>" &&
@@ -324,4 +304,3 @@
     }
   });
 </script>
-

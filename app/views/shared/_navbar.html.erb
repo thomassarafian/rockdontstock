@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="real-nav">
-    <%= image_tag "navbar/toggler_icon.svg", style: 'height: 40px; cursor: pointer;', class: 'toggler_icon_phone navbarSideButton' %>  
+    <%= image_tag "navbar/toggler_icon.svg", style: 'height: 40px; cursor: pointer;', class: 'toggler_icon_phone navbarSideButton' %>
     <%= link_to "/", class: "navbar-brand-phone" do %>
       <%= image_tag("logo.svg", style: 'width: 60px;', class: 'icon_phone') %>
     <% end %>
@@ -23,7 +23,7 @@
   </div>
   <ul class="navbar-side" id="navbarSide">
     <div class="navbar-side-white-toggler">
-      <%= image_tag "navbar/white/white_toggler_icon.svg" %>  
+      <%= image_tag "navbar/white/white_toggler_icon.svg" %>
     </div>
     <%= link_to (user_signed_in? ? user_path : user_session_path), class: "side-link" do %>
       <li class="navbar-side-item side-link">Mon compte</li>
@@ -54,7 +54,6 @@
   </ul>
   <div class="overlay"></div>
 </div>
-
 <script type="text/javascript">
   $(document).ready(function() {
     $('.navbarSideButton').on('click', function() {
@@ -89,15 +88,15 @@
       $('.real-nav').css('justify-content', 'center');
       $('.dropdown-filter-items').hide();
     });
-    
+
       // $('.glass-search-form').show();
     // $('.dropdown-filter-items').show();
-    
+
     $('.glass_icon').on('click', function() {
       $('.glass_icon').hide();
       $('.glass-search-form').show();
     });
-    
+
     if ($( window ).width() < 1024) {
       $('.dropdown-filter').on('click', function() {
         $('.dropdown-filter-items').slideToggle('fast');

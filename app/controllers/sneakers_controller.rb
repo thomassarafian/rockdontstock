@@ -20,12 +20,13 @@ class SneakersController < ApplicationController
 	end
 
 	def new
-		@sneaker_db = SneakerDb.find(params['sneaker_db_id']) if params['sneaker_db_id'].present?
-
-		# raise
-		# session[:sneaker_db_id] = params['sneaker_db_id']
+		@sneaker_db = SneakerDb.find(params[:sneaker_db]) if params[:sneaker_db].present?
 		@sneaker = Sneaker.new
 		authorize @sneaker
+		respond_to do |format|
+			format.js
+			format.html
+		end
 	end
 
 	def create
