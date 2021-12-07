@@ -3,7 +3,7 @@ class SneakerDbsController < ApplicationController
 
   def index
 		results = policy_scope(SneakerDb).search_by_name(params[:search])
-		@pagy, @results = pagy(results, link_extra: 'data-remote="true"', items: 10)
+		@pagy, @results = pagy(results, link_extra: 'data-remote="true"', items: 12)
     respond_to do |format|
       format.js
       format.html
