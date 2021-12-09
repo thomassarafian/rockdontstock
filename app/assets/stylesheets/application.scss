@@ -1,50 +1,20 @@
-$black: #0E0E0E;
-$yellow: #FECD07;
-
-// Graphical variables
-@import "config/fonts";
-@import "config/colors";
-@import "config/bootstrap_variables";
-
 // External libraries
 @import "bootstrap/scss/bootstrap";
-// @import "font-awesome-sprockets";
-// @import "font-awesome";
-
-// Your CSS partials
+@import "../fonts/fonts";
+@import "config/variables";
+@import "config/mixins";
 @import "components/index";
 @import "pages/index";
 
-////////////////////////////////////////
-
-// Global CSS
-.cta-button {
-  border: none;
-  text-decoration: none;
-  padding: 0.6rem 1.4rem;
-  font-size: 1.1rem;
-  background-color: $black;
-  color: white;
-  text-transform: uppercase;
-}
-.primary-button {
-  border: none;
-  text-decoration: none;
-  padding: 0.6rem 1.4rem;
-  font-size: 1.1rem;
-  background-color: white;
+body {
+  font-family: "DM Sans", "Helvetica", "sans-serif";
   color: $black;
-  text-transform: uppercase;
 }
-.primary-button:hover {
-  background-color: $black;
-  color: white;
+h1 {
+  font-size: $font-size-5;
+  font-weight: 700;
 }
-.secondary-button {
-  border: none;
-  text-decoration: none;
-  padding: 0.6rem 1.4rem;
-  font-size: 1.1rem;
-  background-color: transparent;
-  color: inherit;
+h2 {
+  font-size: $font-size-3;
+  margin-bottom: 0.8em;
 }

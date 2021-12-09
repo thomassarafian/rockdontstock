@@ -1,0 +1,44 @@
+@mixin h1-variant {
+  font-family: "Permanent Marker", "DM Sans", "Helvetica", "sans-serif";
+  font-size: $font-size-4;
+}
+@mixin reset-button {
+  border: none;
+  text-decoration: none;
+  padding: 0.6rem 1.4rem;
+  font-size: 1.1rem;
+}
+@mixin cta-button {
+  @include reset-button;
+  color: white;
+  background-color: $black;
+  text-transform: uppercase;
+}
+@mixin primary-button {
+  @include reset-button;
+  color: $black;
+  background-color: white;
+  border: 1px solid $black;
+  text-transform: uppercase;
+  &:hover {
+    color: white;
+    border: 1px solid white;
+    background-color: $black;
+  }
+}
+@mixin secondary-button {
+  @include reset-button;
+  color: inherit;
+  background-color: transparent;
+}
+@mixin para-1 {
+  font-size: $font-size-2;
+}
+@mixin para-2 {
+  font-size: $font-size-1;
+  font-weight: 700;
+}
+@mixin head-3 {
+  font-size: $font-size-3;
+  font-weight: 700;
+}
