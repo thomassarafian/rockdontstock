@@ -11,6 +11,7 @@
     </div>
   </div>
 </div>
+<%= link_to 'skip', next_wizard_path if @next_step %>
 
 <script type="text/javascript">
   document.addEventListener('turbolinks:load', () => {

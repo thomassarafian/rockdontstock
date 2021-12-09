@@ -19,42 +19,43 @@
     <input type="submit" value="Ajouter ma paire" class="btn btn-dark">
   </form>
 </div>
+
 <style type="text/css">
-  .sneaker-card > a {
-    align-items: center;
+.sneaker-card > a {
+  align-items: center;
+}
+.sneaker-db-card-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.btn-sneaker-card-img {
+  border: none;
+  background-color: white;
+}
+@media (min-width: 100px) {
+  .sneaker-db-card-img>img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
   }
-  .sneaker-db-card-img {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+}
+@media (min-width: 768px) {
+  .sneaker-db-card-img>img {
+    width: 140px;
+    height: 140px;
   }
-  .btn-sneaker-card-img {
-    border: none;
-    background-color: white;
+}
+@media (min-width: 992px) {
+  .sneaker-db-card-img>img {
+    width: 150px;
+    height: 150px;
   }
-  @media (min-width: 100px) {
-    .sneaker-db-card-img>img {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
-    }
+}
+@media (min-width: 1200px) {
+  .sneaker-db-card-img>img {
+    width: 160px;
+    height: 160px;
   }
-  @media (min-width: 768px) {
-    .sneaker-db-card-img>img {
-      width: 140px;
-      height: 140px;
-    }
-  }
-  @media (min-width: 992px) {
-    .sneaker-db-card-img>img {
-      width: 150px;
-      height: 150px;
-    }
-  }
-  @media (min-width: 1200px) {
-    .sneaker-db-card-img>img {
-      width: 160px;
-      height: 160px;
-    }
-  }
+}
 </style>

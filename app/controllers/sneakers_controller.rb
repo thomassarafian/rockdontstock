@@ -1,8 +1,9 @@
 class SneakersController < ApplicationController
+	include Wicked::Wizard
+  steps :add_sneaker_db, :add_infos, :add_pics
+
 	before_action :set_sneaker, only: [:show, :edit, :update, :destroy]
-
 	skip_before_action :authenticate_user!, only: [:index, :show, :new, :create]
-
 	skip_after_action :verify_authorized, only: [:new, :create]
 
 	def index
@@ -20,9 +21,17 @@ class SneakersController < ApplicationController
 	end
 
 	def new
-		@sneaker_db = SneakerDb.find(params[:sneaker_db]) if params[:sneaker_db].present?
 		@sneaker = Sneaker.new
 		authorize @sneaker
+		@step = step
+		puts "*******************", step
+
+		case step
+		when :form_sneaker_infos
+			@sneaker_db = SneakerDb.find(params[:sneaker_db])
+		when :form_sneaker_pics_upload
+		end
+
 		respond_to do |format|
 			format.js
 			format.html
@@ -123,6 +132,17 @@ class SneakersController < ApplicationController
 	end
 
 	private
+
+	def render_step(the_step, options = {}, params = {})
+		if the_step.nil? || the_step.to_s == Wicked::FINISH_STEP
+			redirect_to_finish_wizard options, params
+		else
+			respond_to do |format|
+				format.js
+				format.html
+			end
+		end
+	end
 
 	def filtering_params(params)
 		params.slice(:price, :condition, :size, :category)

@@ -1,0 +1,58 @@
+<div class="photos-input">
+  <p style="text-align:center">Attention : les photos que tu implémentes doivent respecter l’ordre et les angles
+    présentés ci-dessous. Dans le cas contraire, ton annonce ne sera pas validée.</p>
+  <div class='sneaker-photo-input'>
+    <%= f.file_field :photos, as: :file, accept: "image/jpg, image/jpeg, image/png" , id: 'photo-input0' ,
+      class: 'hidden upload-photo photo-input0' , label: '📷 Ajoute une photo' %>
+    <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview0" %>
+    <%= f.label :photos, "Intérieur" %>
+    <%= f.error :photos, :id=> "sneaker_photo0_error" %>
+  </div>
+  <div class='sneaker-photo-input'>
+    <%= f.file_field :photos, as: :file, accept: "image/jpg, image/jpeg, image/png" , id: 'photo-input1' ,
+      class: 'hidden upload-photo photo-input1' , label: '📷 Ajoute une photo' %>
+    <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview1" %>
+    <%= f.label :photos, "Extérieur" %>
+    <%= f.error :photos, :id=> "sneaker_photo1_error" %>
+  </div>
+  <div class='sneaker-photo-input'>
+    <%= f.file_field :photos, as: :file, accept: "image/jpg, image/jpeg, image/png" , id: 'photo-input2' ,
+      class: 'hidden upload-photo photo-input2' , label: '📷 Ajoute une photo' %>
+    <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview2" %>
+    <%= f.label :photos, "Derrière" %>
+    <%= f.error :photos, :id=> "sneaker_photo2_error" %>
+  </div>
+  <div class='sneaker-photo-input'>
+    <%= f.file_field :photos, as: :file, accept: "image/jpg, image/jpeg, image/png" , id: 'photo-input3' ,
+      class: 'hidden upload-photo photo-input3' , label: '📷 Ajoute une photo' %>
+    <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview3" %>
+    <%= f.label :photos, "Dessus" %>
+    <%= f.error :photos, :id=> "sneaker_photo3_error" %>
+  </div>
+  <div class='sneaker-photo-input'>
+    <%= f.file_field :photos, as: :file, accept: "image/jpg, image/jpeg, image/png" , id: 'photo-input4' ,
+      class: 'hidden upload-photo photo-input4' , label: '📷 Ajoute une photo' %>
+    <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview4" %>
+    <%= f.label :photos, "Dessous" %>
+    <%= f.error :photos, :id=> "sneaker_photo4_error" %>
+  </div>
+  <div class='sneaker-photo-input'>
+    <%= f.file_field :photos, as: :file, accept: "image/jpg, image/jpeg, image/png" , id: 'photo-input5' ,
+      class: 'hidden upload-photo photo-input5' , label: '📷 Ajoute une photo' %>
+    <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview5" %>
+    <%= f.label :photos, "Size tag" %>
+    <%= f.error :photos, :id=> "sneaker_photo5_error" %>
+  </div>
+  <div class='sneaker-photo-input'>
+    <%= f.file_field :photos, as: :file, accept: "image/jpg, image/jpeg, image/png" , id: 'photo-input6' ,
+      class: 'hidden upload-photo photo-input6' , label: '📷 Ajoute une photo' %>
+    <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview6" %>
+    <%= f.label :photos, "Optionnel : Boite" %>
+  </div>
+  <div class='sneaker-photo-input'>
+    <%= f.file_field :photos, as: :file, accept: "image/jpg, image/jpeg, image/png" , id: 'photo-input7' ,
+      class: 'hidden upload-photo photo-input7' , label: '📷 Ajoute une photo' %>
+    <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview7" %>
+    <%= f.label :photos, "Optionnel : Défaults sur la paire" %>
+  </div>
+</div>

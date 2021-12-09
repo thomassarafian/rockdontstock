@@ -1,0 +1,27 @@
+<div class="info-input">
+  <%= f.input :size, collection: [ ["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4],
+    ["4.5", 4.5], ["5", 5], ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5],
+    ["9", 9], ["9.5", 9.5], ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5],
+    ["13", 13], ["13.5", 13.5], ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18]
+    ],required: true, prompt: "Taille US" , label: false, input_html: { class: "info-input-sneaker" } %>
+  <%= f.error :size, :id=> "sneaker_size_error" %>
+  <%= f.input :condition, prompt: "Condition" , collection: [ ["5/10 et moins", 5], ["6/10", 6],["8/10",
+        8],["9/10",9],['10/10', 10] ], required: true, label: false, input_html: { class: "info-input-sneaker" },
+        hint: "#{link_to " Tout savoir sur les conditions", faq_path, style:"color:#707981;", target:
+        :_blank}".html_safe %>
+  <%= f.error :condition, :id=> "sneaker_condition_error" %>
+  <%= f.input :box, prompt: "Type de Box" , collection: ["Og Box (Avec extras)", "Og Box (Sans extra)", "Boite de remplacement" , "Pas de boite" ], required: true, label: false, input_html: {
+            class: "info-input-sneaker" } %>
+  <%= f.error :box, :id=> "sneaker_box_error" %>
+  <%= f.input :extras, required: true, placeholder: "Commentaires" , label: false, input_html: {
+                class: "info-input-sneaker" },
+                hint: "Transmets-nous ici les défauts de ta paire <br>ou toute information utile pour l'acheteur <br>(trous, traces, extra en moins...)"
+                .html_safe %>
+  <%= f.error :extras, :id=> "sneaker_extras_error" %>
+  <%= f.input :price, required: true, placeholder: "Prix" , label: false, input_html: {
+                    class: "info-input-sneaker" , value: nil} %>
+  <%= f.error :price, :id=> "sneaker_price_error" %>
+  <div clas="total-price-for-seller">
+    <p></p>
+  </div>
+</div>

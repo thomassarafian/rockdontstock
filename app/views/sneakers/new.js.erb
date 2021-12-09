@@ -1,1 +1,6 @@
-document.getElementById('form-content').innerHTML = "<%= j render partial: 'sneakers/form' %>"
+<% case @step %>
+<% when "list_sneakers_db" %>
+  document.getElementById('form-content').innerHTML = "<%= j render partial: "sneaker_dbs/#{@step}" %>"
+<% else %>
+  document.getElementById('form-content').innerHTML = "<%= j render partial: "#{@step}" %>"
+<% end %>
