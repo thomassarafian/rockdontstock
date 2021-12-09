@@ -1,0 +1,42 @@
+.auth-header {
+
+}
+.auth-infos {
+
+}
+.auth-infos__content {
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.auth-infos__content__stats {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.auth-infos__content__stat-element {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.auth-infos__content__stat-element div:first-child {
+  font-weight: 700;
+  font-size: 3.815rem;
+  line-height: 1;
+}
+.auth-infos__content__stat-element div:last-child {
+  font-size: 1.563rem;
+}
+.auth-infos__footer {
+  display: flex;
+  padding: 1rem;
+  width: 100%;
+}
+.auth-infos__footer div:first-child {
+  padding-right: 0.4rem;
+}
+.auth-infos__footer div:last-child {
+  padding-left: 0.4rem;
+}

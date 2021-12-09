@@ -4,7 +4,6 @@ import { displayStep2 } from "components/sneaker_new/display_step2.js";
 import { displayStep3 } from "components/sneaker_new/display_step3.js";
 
 function sneakerNew() {
-  alert('coucou')
   let newSneakerForm = document.querySelector('.new-sneaker-form');
   if (newSneakerForm) {
     document.querySelector('.snd-next-btn').style.display = "none"

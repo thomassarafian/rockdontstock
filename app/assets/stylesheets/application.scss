@@ -1,3 +1,6 @@
+$black: #0E0E0E;
+$yellow: #FECD07;
+
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
@@ -11,3 +14,37 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+////////////////////////////////////////
+
+// Global CSS
+.cta-button {
+  border: none;
+  text-decoration: none;
+  padding: 0.6rem 1.4rem;
+  font-size: 1.1rem;
+  background-color: $black;
+  color: white;
+  text-transform: uppercase;
+}
+.primary-button {
+  border: none;
+  text-decoration: none;
+  padding: 0.6rem 1.4rem;
+  font-size: 1.1rem;
+  background-color: white;
+  color: $black;
+  text-transform: uppercase;
+}
+.primary-button:hover {
+  background-color: $black;
+  color: white;
+}
+.secondary-button {
+  border: none;
+  text-decoration: none;
+  padding: 0.6rem 1.4rem;
+  font-size: 1.1rem;
+  background-color: transparent;
+  color: inherit;
+}
