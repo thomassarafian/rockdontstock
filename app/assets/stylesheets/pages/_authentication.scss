@@ -7,8 +7,9 @@ section {
 .auth-infos__subtitle {
   @include para-1;
 }
-.auth-infos-card {
+.auth-infos-block {
   border: 1px solid $black;
+  border-top: 20px solid $black;
 }
 .auth-infos__content {
   padding: 3rem;
@@ -58,17 +59,109 @@ section {
 .auth-guides__subtitle {
   @include para-1;
 }
-.auth-guides-card {
+.auth-guides-block {
   border: 1px solid $black;
+  border-top: 20px solid $black;
 }
 .auth-guides__content {
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+.auth-guides__content__card {
+  position: relative;
+  height: 300px;
+  width: 200px;
+  border: 1px solid $black;
+}
+.auth-guides__content__card:hover::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%; 
+  top: 10px;
+  left: 10px;
+  border-right: 10px solid $black;
+  border-bottom: 10px solid $black;
+  z-index: -1;
+}
+.auth-guides__footer {
+  padding: 2rem;
+  border-top: 1px solid $black;
+}
+
+
+/////////////// SECTION SERVICE ///////////////
+
+.auth-service__subtitle {
+  @include para-1;
+}
+.auth-service-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.auth-service__description,
+.auth-service__card {
+  width: 45%;
+}
+.auth-service__description {
+  margin-right: 5%;
+}
+.auth-service__card {
+  height: 300px;
+  width: 250px;
+  border: 1px solid $black;
+}
+
+
+/////////////// SECTION INSTA ///////////////
+
+.auth-insta__subtitle {
+  @include para-1;
+}
+.auth-insta-block {
+  border: 1px solid $black;
+  border-top: 20px solid $black;
+}
+.auth-insta__content {
   padding: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
-.auth-guides__footer {
+.auth-insta__content__image {
+  // TODO 
+}
+.auth-insta__content__button {
+  @include cta-button;
+}
+.auth-insta__footer {
   padding: 2rem;
   border-top: 1px solid $black;
 }
+
+
+/////////////// MODALS ///////////////
+
+.auth-modal__subtitle {
+  @include para-1;
+}
+.auth-modal__checklist {
+  margin-bottom: 2rem;
+}
+.auth-modal__form__bottom-infos {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.auth-modal__form__bottom-infos div:first-child{
+  font-weight: 700;
+}
+.auth-modal__form__submit {
+  @include cta-button;
+  width: 100%;
+}
+
+

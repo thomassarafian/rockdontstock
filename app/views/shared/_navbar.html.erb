@@ -34,6 +34,9 @@
     <div style="margin-top: 20px; cursor: pointer" id="navbar-side-see-all">
       <li  class="navbar-side-item side-link">Tout voir</li>
     </div>
+    <%= link_to(authentication_path, class: "side-link") do %>
+      <li class="navbar-side-item side-link">L'authentification</li>
+    <% end %>
     <%= link_to(new_contact_path, class: "side-link") do %>
       <li class="navbar-side-item side-link">Nous contacter</li>
     <% end %>

@@ -4,7 +4,7 @@
   <section class="auth-infos">
     <div class="auth-infos__subtitle">Notre Marketplace</div>
     <h2>L'authentification sur notre marketplace</h2>
-    <div class="auth-infos-card">
+    <div class="auth-infos-block">
       <div class="auth-infos__content">
         <div class="auth-infos__content__stats">
           <div class="auth-infos__content__stat-element">
@@ -45,17 +45,68 @@
   <section class="auth-guides">
     <div class="auth-guides__subtitle">Découvrez</div>
     <h2>Nos guides gratuits</h2>
-    <div class="auth-guides-card">
+    <div class="auth-guides-block">
       <div class="auth-guides__content">
+        <div class="auth-guides__content__card">
+          card
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-auth">
+            Launch demo modal
+          </button>
+        </div>
+        <div class="auth-guides__content__card">
+          card
+        </div>
+        <div class="auth-guides__content__card">
+          card
+        </div>
       </div>
       <div class="auth-guides__footer">
-        <div>
-          Chaque guide te permet de connaitre différents points d’authentification essentiels afin de Legit Check le modèle en toute autonomie. N’hésites pas à t’en servir afin d’éviter l’achat d’un modèle suspicieux.        </div>
+        Chaque guide te permet de connaitre différents points d’authentification essentiels afin de Legit Check le modèle en toute autonomie. N’hésites pas à t’en servir afin d’éviter l’achat d’un modèle suspicieux.
       </div>
     </div>
   </section>
-  <div class="auth-guides"></div>
-  <div class="auth-service"></div>
-  <div class="auth-insta"></div>
+  <section class="auth-service">
+    <div class="auth-service__subtitle">Notre service</div>
+    <h2>Service d'authentification premium</h2>
+    <div class="auth-service-block">
+      <div class="auth-service__description">
+        Envie d’être 100% sur d’un modèle que tu souhaites acquérir en dehors de notre plateforme de vente ? N’hésites pas à faire appel a notre service d’authentification. Déposes tes photos, on s’occupe du reste.
+      </div>
+      <div class="auth-service__card">
+        card
+      </div>
+    </div>
+  </section>
+  <section class="auth-insta">
+    <div class="auth-insta__subtitle">Suivez-nous</div>
+    <h2>Check notre Instagram</h2>
+    <div class="auth-insta-block">
+      <div class="auth-insta__content">
+        <div class="auth-insta__content__image">
+          image
+        </div>
+        <button class="auth-insta__content__button">@rockdontstock</button>
+      </div>
+      <div class="auth-insta__footer">
+        Plus qu’un outil de promotion, notre Instagram a pour vocation de te donner d’autres informations et les clés afin de pouvoir t’aider à authentifier les dernières releases. Tu pourras aussi retrouver des stories informatives sur l’histoire des sneakers, des sondages participatifs ou des mini jeux dans le but de developper tes compétences en Legit Check !
+      </div>
+    </div>
+  </section>
   <div class="auth-footer"></div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-auth" tabindex="-1" role="dialog" aria-labelledby="modal-authTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div id="form-container">
+          <%= render partial: "authentication/form_guide" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
