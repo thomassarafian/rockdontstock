@@ -1,62 +1,59 @@
 footer {
-  margin-top: 50px;
+  background-color: #0E0E0E;
+  color: white;
+  display: flex;
+  align-items:center;
+  justify-content:space-evenly;
+  padding: 3rem;
 }
-
-footer a:hover { 
-  text-decoration: none; 
-  color: #FFCD05;
+footer a {
+  color: white;
 }
-
-
-@media (min-width: 100px) {
-  footer a{
-    font-size: 13px;
-    color: #cecece;
-  }
-
-  footer h5 {
-    font-size: 17px;
-  }
-
-  .first-text {
-    margin-top: 10px;
-  }
+footer li {
+  line-height: 1.6;
 }
-
-// Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {
-  .first-text {
-    margin-top: 10px;
-  }
+.footer-left-block {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  padding-right: 1.5rem;
 }
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {
-  .first-text {
-    margin-top: 32px;
-  }
-  .contact-title {
-    margin-top: 32px;
-  }
+.footer-right-block {
+  display: flex;
+  justify-content: space-evenly;
+  padding-left: 1.5rem;
 }
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) {
-  .first-text {
-	 margin-top: 32px;
-	}
-  .contact-title {
-    margin-top: 0px;
-  }
+.footer__newsletter {
+  margin-bottom: 2rem;
 }
-
-// Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {
-	.first-text {
-		margin-top: 32px;
-	}
-  .contact-title {
-    margin-top: 0px;
-  }
+.footer__newsletter__title {
+  @include para-1-bold;
+  margin-bottom: 0.2em;
 }
-
+.footer__newsletter__input {
+  background-color: transparent;
+  border: 1px solid #b0b0b0;
+  color: #b0b0b0;
+  margin-top: 1rem;
+}
+.footer__trustpilot {
+  border: 1px solid white;
+  height: 200px;
+  width: 300px;
+}
+.footer__bottom-line {
+  max-width: 0px;
+  white-space: nowrap;
+  margin-top: 6rem;
+}
+.footer__list-block {
+  margin-right: 3rem;
+}
+.footer__list-title {
+  @include para-1-bold;
+  margin-bottom: 0.2em;
+}
+.footer__list {
+  list-style-type: none;
+  padding: 0;
+}

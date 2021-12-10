@@ -1,116 +1,45 @@
-
-<footer class="text-center text-white" style="background-color: black;">
-  <!-- Grid container -->
-  <div class="container p-4">
-    <!-- Section: Social media -->
-    <section class="mb-4">
-      <!-- Facebook -->
-      <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/rockdntstock/" target='_blank' role="button"
-        ><i class="fab fa-facebook-f"></i
-      ></a>
-
-      <!-- Instagram -->
-      <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/rockdontstock/" target='_blank' role="button"
-        ><i class="fab fa-instagram"></i
-      ></a>
-
-
-    </section>
-
-    <!-- Section: Text -->
-    
-    <!-- Section: Text -->
-
-    <!-- Section: Links -->
-    <section class="">
-      <!--Grid row-->
-      <div class="row">
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="font-weight-bold">Plan du site</h5>
-
-          <ul class="list-unstyled mb-0">
-            <!-- <li>
-              <a href="/sneakers">Acheter</a>
-            </li> -->
-            <li>
-              <a href="/sneakers/new">Vendre</a>
-            </li>
-            <li>
-              <%= link_to 'Mon compte', user_signed_in?? user_path : new_user_registration_path %>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <ul class="list-unstyled mb-0">
-            <li class="first-text">
-              <a href="/about">Qui sommes-nous ?</a>
-            </li>
-            <!-- <li>
-              <a href="/about">Comment acheter ?</a>
-            </li> -->
-            <!-- <li>
-              <a href="#!">Questions courantes</a>
-            </li> -->
-            <li>
-              <a href="/faq">FAQ</a>
-            </li>
-            <li>
-              <a href="/comment-envoyer-une-paire">Comment envoyer ma paire ?</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-
-          <ul class="list-unstyled mb-0">
-            <li class="first-text">
-              <a href="/cgu">CGU</a>
-            </li>
-            <li>
-              <a href="/cgv">CGV</a>
-            </li>
-            <li>
-              <a href="/politique-de-confidentialite">Politique de confidentialité</a>
-            </li>
-            <li>
-              <a href="/authentication">Authentification</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="contact-title font-weight-bold">Nous contacter </h5>
-
-          <ul class="list-unstyled mb-0">
-            <li>
-              <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %>
-            </li>
-            <li>
-              Follow nous sur IG : <br><a href="https://www.instagram.com/rockdontstock/" target="_blank">@rockdntstock</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-      </div>
-      <!--Grid row-->
-    </section>
-    <!-- Section: Links -->
+<footer>
+  <div class="footer-left-block">
+    <div class="footer__newsletter">
+      <div class="footer__newsletter__title">Abonne-toi !</div>
+      <div class="footer__newsletter__descr">Reçois toutes nos dernières news, guides gratuits et nouveautés...</div>
+      <input class="footer__newsletter__input"></input>
+    </div>
+    <div class="footer__trustpilot">trustpilot</div>
+    <div class="footer__bottom-line">Copyright ©, 2021, Rock Don’t Stock. Tous droits réservés. N°135094456839</div>
   </div>
-  <!-- Grid container -->
-
-  <!-- Copyright -->
-  <div class="text-center p-3" style="background-color: black;">
-    © Copyright, 2021, Rock don’t Stock, Tout droits reservés.<br>
-    N°135094456839 
+  <div class="footer-right-block">
+    <div class="footer__list-block">
+      <div class="footer__list-title">A propos</div>
+      <ul class="footer__list">
+        <li>Qui sommes-nous ?</li>
+        <li>Comment envoyer ma paire ?</li>
+        <li>Plan du site</li>
+        <li>FAQ</li>
+      </ul>
+    </div>
+    <div class="footer__list-block">
+      <div class="footer__list-title">Conditions</div>
+      <ul class="footer__list">
+        <li>CGU</li>
+        <li>CGV</li>
+        <li>Politique de confidentialité</li>
+        <li>Authentification</li>
+      </ul>
+    </div>
+    <div class="footer__list-block">
+      <div class="footer__list-title">Nous contacter</div>
+      <ul class="footer__list">
+        <li>
+          <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/rockdontstock/" target="_blank">@rockdontstock</a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/rockdntstock/" target='_blank'>Sur Facebook</a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <!-- Copyright -->
 </footer>
-<!-- Footer
