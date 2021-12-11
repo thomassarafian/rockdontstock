@@ -1,10 +1,10 @@
-<!-- <% brand = ["Adidas", "Air Jordan", "Nike", "New Balance", "Other Brands", "Luxury Brands", "Collections"] %>
+<% brand = ["Adidas", "Air Jordan", "Nike", "New Balance", "Other Brands", "Luxury Brands", "Collections"] %>
 <% price = [["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301]] %>
 <% condition = [["5/10 et moins", 5], ["6/10", 6], ["8/10", 8], ["9/10", 9], ["10/10", 10]] %>
 <% size = [["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], ["5", 5],
                 ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
                 ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
-                ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18]] %> -->
+                ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18]] %>
 <!-- <div class="glass-search-form">
   <div class="search-filter">
     <div class="filters">
@@ -20,9 +20,9 @@
           <% end %>
         </div>
         <div style="margin-top: 10vh">
-          <%= render partial: 'sneakers/list_sneakers' %>
+          
         </div>
-        <%== pagy_bootstrap_nav(@pagy) %>
+        
       </div>
     </div>
   </div>
@@ -50,4 +50,46 @@
       </div>
     </div>
   </section>
+  <div style="font-size: 1.563rem; margin-bottom: 3rem">Toutes les sneakers</div>
+  <div class="d-flex align-items-start">
+    <div class="w-25" style="position: sticky; top: 100px;">
+      <%= form_with url: sneakers_path, method: :get do |f| %>
+        <div class="form-group">
+          <%= f.label "Marques", style: "font-weight: 700" %>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "Nike", nil %> <span>Nike</span></div>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "Jordan", nil %> <span>Jordan</span></div>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "Adidas", nil %> <span>Adidas</span></div>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "Yeezy", nil %> <span>Yeezy</span></div>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "New Balance", nil %> <span>New Balance</span></div>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "Asics", nil %> <span>Asics</span></div>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "Autres", nil %> <span>Autres</span></div>
+        </div>
+        <div class="form-group">
+          <%= f.label "Prix", style: "font-weight: 700" %>
+        <div class="form-row">
+          <%= f.number_field :min_price, min: 0, class: "col-4 mr-3", placeholder: "Min" %>
+          <%= f.number_field :max_price, class: "col-4", placeholder: "Max" %>
+        </div>
+        </div>
+        <div class="form-group">
+          <%= f.label "Condition", style: "font-weight: 700" %>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "6", nil %> <span>6/10 ou moins</span></div>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "7", nil %> <span>7/10</span></div>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "8", nil %> <span>8/10</span></div>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "9", nil %> <span>9/10</span></div>
+          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block" }, "10", nil %> <span>10/10</span></div>
+        </div>
+        <div class="form-group">
+          <%= f.label "Taille", style: "font-weight: 700" %>
+          <div>
+            <%= f.select :size, size, { include_blank: "Toute taille" }, {  style: "color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 0.5rem; background: none;" } %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <%= render partial: 'sneakers/list_sneakers' %>
+      <%== pagy_bootstrap_nav(@pagy) %>
+    </div>
+  </div>
 </div>

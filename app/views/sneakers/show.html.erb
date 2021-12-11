@@ -31,19 +31,47 @@
     <h2>Pourquoi nous ?</h2>
     <div class="sneaker-service-block">
       <div class="sneaker-service__card">
-        card
+        <%= image_tag("images/sticker_approved.png", class: "sneaker-service__card__img") %>
+        <div>
+          <div class="sneaker-service__card__title">100% authentiques</div>
+          <div>Cette paire passera entre les mains de nos experts en Legit Check afin de te garantir son authenticité</div>
+        </div>
       </div>
       <div class="sneaker-service__card">
-        card
+        <%= image_tag("images/sticker_truck.png", class: "sneaker-service__card__img") %>
+        <div>
+          <div class="sneaker-service__card__title">Livraison dès 5€</div>
+          <div>Nous collaborons avec les transporteurs les plus sûrs pour plus de sécurité.</div>
+        </div>
       </div>
       <div class="sneaker-service__card">
-        card
+        <%= image_tag("images/sticker_clock.png", class: "sneaker-service__card__img") %>
+        <div>
+          <div class="sneaker-service__card__title">Déjà expédié</div>
+          <div>Le vendeur dispose de 2 jours pour envoyer ta commande, passé ce délai ton argent te sera réstitué.</div>
+        </div>
       </div>
     </div>
   </section>
   <section class="sneaker-similar">
     <div class="sneaker-similar__subtitle">Vous aimerez aussi</div>
     <div class="sneaker-similar-block">
+      <div class="sneaker-similar__card">
+        <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+        <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
+        <div class="sneaker-similar__card__options">
+          <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+        </div>
+        <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
+      </div>
+      <div class="sneaker-similar__card">
+        <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+        <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
+        <div class="sneaker-similar__card__options">
+          <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+        </div>
+        <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
+      </div>
       <div class="sneaker-similar__card">
         <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
         <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>

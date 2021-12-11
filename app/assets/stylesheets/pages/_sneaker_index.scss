@@ -8,6 +8,7 @@
 }
 .sneaker-featured-block__title {
   @include para-1;
+  margin-bottom: 3rem;
 }
 .sneaker-featured-block__content {
   display: flex;

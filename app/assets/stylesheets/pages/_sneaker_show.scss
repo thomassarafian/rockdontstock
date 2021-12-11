@@ -49,9 +49,13 @@
 }
 .sneaker-service__card {
   position: relative;
-  height: 300px;
-  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 320px;
   border: 1px solid $black;
+  padding: 3rem 1.5rem;
   &:hover::before {
     content: "";
     position: absolute;
@@ -63,6 +67,14 @@
     border-bottom: 10px solid $black;
     z-index: -1;
   }
+}
+.sneaker-service__card__img {
+  margin-bottom: 2rem;
+}
+.sneaker-service__card__title {
+  @include para-1;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
 }
 .sneaker-similar__subtitle {
   @include para-1;
@@ -76,10 +88,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 280px;
   height: 450px;
   padding: 1.5rem 2rem;
+  margin-right: 5rem;
   &:hover {
     outline: 1px solid $black;
   }
