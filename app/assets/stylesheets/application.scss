@@ -17,6 +17,10 @@ h1 {
 h2 {
   font-size: $font-size-3;
   margin-bottom: 0.8em;
+  line-height: 1;
+}
+a, a:hover {
+  color: inherit;
 }
 input {
   display: block;
@@ -37,4 +41,12 @@ input {
 }
 .modal-body {
   padding: 2rem;
+}
+.back-button {
+  @include para-1;
+  display: block;
+  margin-bottom: 3rem;
+  &:hover {
+    text-decoration: none;
+  }
 }

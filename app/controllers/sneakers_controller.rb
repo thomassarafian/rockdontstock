@@ -1,6 +1,4 @@
 class SneakersController < ApplicationController
-	include Wicked::Wizard
-  steps :add_sneaker_db, :add_infos, :add_pics
 
 	before_action :set_sneaker, only: [:show, :edit, :update, :destroy]
 	skip_before_action :authenticate_user!, only: [:index, :show, :new, :create]
@@ -23,14 +21,8 @@ class SneakersController < ApplicationController
 	def new
 		@sneaker = Sneaker.new
 		authorize @sneaker
-		@step = step
-		puts "*******************", step
 
-		case step
-		when :form_sneaker_infos
-			@sneaker_db = SneakerDb.find(params[:sneaker_db])
-		when :form_sneaker_pics_upload
-		end
+		@sneaker_db = SneakerDb.find(params[:sneaker_db]) if params[:sneaker_db]
 
 		respond_to do |format|
 			format.js

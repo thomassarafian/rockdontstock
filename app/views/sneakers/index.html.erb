@@ -1,11 +1,11 @@
-<% brand = ["Adidas", "Air Jordan", "Nike", "New Balance", "Other Brands", "Luxury Brands", "Collections"] %>
+<!-- <% brand = ["Adidas", "Air Jordan", "Nike", "New Balance", "Other Brands", "Luxury Brands", "Collections"] %>
 <% price = [["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301]] %>
 <% condition = [["5/10 et moins", 5], ["6/10", 6], ["8/10", 8], ["9/10", 9], ["10/10", 10]] %>
 <% size = [["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], ["5", 5],
                 ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
                 ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
-                ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18]] %>
-<div class="glass-search-form">
+                ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18]] %> -->
+<!-- <div class="glass-search-form">
   <div class="search-filter">
     <div class="filters">
       <button class="dropdown-filter btn btn-dark" type="button">Filtres</button>
@@ -26,4 +26,28 @@
       </div>
     </div>
   </div>
+</div> -->
+<title>Recherche - Rock Don't Stock</title>
+<div class="container">
+  <section class="sneaker-featured">
+    <div class="sneaker-featured__subtitle">Parcourir nos</div>
+    <h2>Sneakers</h2>
+    <div class="sneaker-featured-block">
+      <div class="sneaker-featured-block__title">Sélection du jour</div>
+      <div class="sneaker-featured-block__content">
+        <%= cl_image_tag(Sneaker.first.photos.first.key, class: 'sneaker-featured-photo') %>
+        <div class="sneaker-featured-details">
+          <h2 class="sneaker-featured__name"><%= Sneaker.first.sneaker_db.name %></h2>
+          <div class="sneaker-featured-details__options">
+            <%= Sneaker.first.sneaker_db.category %> - Taille <%= Sneaker.first.size %> - Condition: <%= Sneaker.first.condition %>/10
+          </div>
+          <div class="sneaker-featured-details__price"><%= Sneaker.first.price %>€</div>
+          <div>
+            <button class="sneaker-featured-details__purchase">Acheter</button>
+            <button class="sneaker-featured-details__discover">Découvrir le modèle</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

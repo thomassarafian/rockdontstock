@@ -1,61 +1,57 @@
 <title>Article - Rock Don't Stock</title>
-<h1 class="sneaker-show-title"><%= @sneaker.sneaker_db.name %></h1>
-<div class="sneaker-show">
-  <div id="carouselSneakerShow" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-      <% @sneaker.photos.each_with_index do |photo, index| %>
-        <div class="carousel-item <%= "active" if index == 0 %>">
-          <%=cl_image_tag(photo.key, class: 'sneaker-show-photos') %>
+<div class="container">
+  <%= link_to :back, class: "back-button" do %>
+    <div>&larr; La marketplace</div>
+  <% end %>
+  <section class="sneaker-infos">
+    <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos-photos') %>
+    <div class="sneaker-details">
+      <div>
+        <h2 class="sneaker-details__name"><%= @sneaker.sneaker_db.name %></h2>
+        <div class="sneaker-details__options">
+          <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
         </div>
-      <% end %>
+      </div>
+      <div class="sneaker-details__price"><%= @sneaker.price %>€</div>
+      <div>
+        <div class="sneaker-details__box">Livrée avec une <%= @sneaker.box %></div>
+        <div class="sneaker-details__legal-descr">L’authenticité et la conformité du modèle seront vérifiées par nos experts avant de t’être envoyée afin de t’assurer la meilleure experience possible.</div>
+      </div>
+      <button class="sneaker-details__purchase">Commander</button>
+      <ul class="sneaker-details__legal-infos-list mb-0">
+        <li><%= image_tag("images/icon_calendar.svg") %> Expédition garantie</li>
+        <li><%= image_tag("images/icon_truck.svg") %> Livraison à partir de 5€</li>
+        <li><%= image_tag("images/icon_verified.svg") %> Authentifiée par nos experts</li>
+      </ul>
+      <!-- <div class="trustpilot"></div> -->
     </div>
-    <a class="carousel-control-prev" href="#carouselSneakerShow" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon sneaker-show-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselSneakerShow" role="button" data-slide="next">
-      <span class="carousel-control-next-icon sneaker-show-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-  <div class="modal-sneaker-logos">
-    <div class="modal-sneaker-logos-microscope">
-      <%= image_tag("sneaker/microscope.svg") %>
-      <h5>AUTHENTICITÉ GARANTIE</h5>
-      <p>Avant que la paire ne te soit envoyée, cette dernière passe entre nos mains afin d’être vérifiée par des experts en Legit Check</p>
-      <%= link_to("En savoir plus l'authentification", authentication_path, target: :_blank) %>
+  </section>
+  <section class="sneaker-service">
+    <div class="sneaker-service__subtitle">Le service Rock Dont't Stock</div>
+    <h2>Pourquoi nous ?</h2>
+    <div class="sneaker-service-block">
+      <div class="sneaker-service__card">
+        card
+      </div>
+      <div class="sneaker-service__card">
+        card
+      </div>
+      <div class="sneaker-service__card">
+        card
+      </div>
     </div>
-    <div class="modal-sneaker-logos-truck">
-      <%= image_tag("sneaker/truck.svg") %>
-      <h5>LIVRAISON A PARTIR DE 5€</h5>
-      <p>Pour réduire le coût au maximum nous te proposons la livraison MondialRelay, plus sécurisée elle a aussi l’avantage d’être la moins coûteuse pour toi</p>
+  </section>
+  <section class="sneaker-similar">
+    <div class="sneaker-similar__subtitle">Vous aimerez aussi</div>
+    <div class="sneaker-similar-block">
+      <div class="sneaker-similar__card">
+        <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+        <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
+        <div class="sneaker-similar__card__options">
+          <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+        </div>
+        <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
+      </div>
     </div>
-  </div>
-  <div class="sneaker-show-infos">
-    <h2 class="sneaker-show-infos-title"><%= @sneaker.sneaker_db.name %></h2>
-    <p><strong>Taille : </strong><%=  @sneaker.size %> US</p>
- <%#= US (shoes_size[@sneaker.size] FR)%>
-    <p><strong>Prix : </strong><%= humanized_money_with_symbol(@sneaker.price) %></p>
-    <p><strong>Condition : </strong><%= @sneaker.condition %>/10</p>
-    <p><strong>Box : </strong><%= @sneaker.box %></p>
-    <p><strong>Extras : </strong><%= @sneaker.extras %></p>
-  </div>
-  <div class="modal-footer" style="justify-content: center;">
-    <% if current_user != @sneaker.user && @sneaker.user.stripe_account_id? %>
-      <% unless current_user.nil? %>
-        <%= form_tag orders_path(sneaker_id: @sneaker.id), id: "order_create_#{@sneaker.id }" do %>
-          <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-        <% end %>
-      <% else %>
-        <%= form_tag user_session_path(sneaker_id: @sneaker.id) do %>
-          <%= submit_tag 'Acheter', class: 'btn btn-dark' %>
-        <% end %>
-      <% end %>
-    <% end %>
-    <!-- <% if policy(@sneaker).edit? %>
-      <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
-        <a onclick="location.href='<%= sneaker_path(@sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
-      </button>
-    <% end %> -->
-  </div>
+  </section>
 </div>
