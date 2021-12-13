@@ -29,12 +29,15 @@ input:not([type='select']) {
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
-  background-color: #fff;
+  background-color: transparent;
   background-clip: padding-box;
   border: 1px solid $black;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   &:not([type='checkbox']) {
     width: 100%;
+  }
+  &:focus {
+    outline: 1px solid #495057;
   }
 }
 .modal-content {
@@ -51,4 +54,7 @@ input:not([type='select']) {
   &:hover {
     text-decoration: none;
   }
+}
+ul > li {
+  line-height: 2;
 }

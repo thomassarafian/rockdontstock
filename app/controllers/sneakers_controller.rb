@@ -23,11 +23,6 @@ class SneakersController < ApplicationController
 		authorize @sneaker
 
 		@sneaker_db = SneakerDb.find(params[:sneaker_db]) if params[:sneaker_db]
-
-		respond_to do |format|
-			format.js
-			format.html
-		end
 	end
 
 	def create

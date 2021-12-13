@@ -28,18 +28,18 @@ footer li {
 }
 .footer__newsletter__title {
   @include para-1-bold;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.8em;
 }
 .footer__newsletter__input {
-  background-color: transparent;
-  border: 1px solid #b0b0b0;
-  color: #b0b0b0;
+  background-color: #0E0E0E;
+  border: 1px solid #b0b0b0 !important;
+  color: #b0b0b0 !important;
   margin-top: 1rem;
 }
 .footer__trustpilot {
   border: 1px solid white;
+  background-color: white;
   height: 200px;
-  width: 300px;
 }
 .footer__bottom-line {
   max-width: 0px;
@@ -51,7 +51,7 @@ footer li {
 }
 .footer__list-title {
   @include para-1-bold;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.8em;
 }
 .footer__list {
   list-style-type: none;

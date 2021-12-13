@@ -1,4 +1,5 @@
 <title>Ajoute ta paire - Rock Don't Stock</title>
+
 <div class="container search-sneaker-model">
   <div class="search-models">
     <h2 class="search-sneaker-model-title">Recherche la paire que tu souhaites vendre</h2>
@@ -11,19 +12,20 @@
     </div>
   </div>
 </div>
+
 <%= link_to 'skip', next_wizard_path if @next_step %>
 
-<script type="text/javascript">
-  document.addEventListener('turbolinks:load', () => {
-    let addNewSneakerDb = document.getElementById('addNewSneakerDb');
-    if (addNewSneakerDb) {
-      document.getElementById('addNewSneakerDb').addEventListener('submit', (event) => {
-        event.preventDefault();
-        let addSneakerDbName = document.querySelector('.add-sneaker-db-name');
-        document.querySelector('.title-add-new-sneaker-db').innerHTML = `<p style="text-align:center">Ton modèle <strong>${addSneakerDbName.value}</strong> vient d'être ajouter !<br>Tu peux vas le trouver en tapant son nom ci-dessous : </p>`;
-      });
-    }
-  });
+<script>
+  // document.addEventListener('turbolinks:load', () => {
+  //   let addNewSneakerDb = document.getElementById('addNewSneakerDb');
+  //   if (addNewSneakerDb) {
+  //     document.getElementById('addNewSneakerDb').addEventListener('submit', (event) => {
+  //       event.preventDefault();
+  //       let addSneakerDbName = document.querySelector('.add-sneaker-db-name');
+  //       document.querySelector('.title-add-new-sneaker-db').innerHTML = `<p style="text-align:center">Ton modèle <strong>${addSneakerDbName.value}</strong> vient d'être ajouter !<br>Tu peux vas le trouver en tapant son nom ci-dessous : </p>`;
+  //     });
+  //   }
+  // });
 </script>
 
 <style type="text/css">

@@ -5,7 +5,10 @@
     <% end %>
     <%= link_to "L'authentification", root_path, class: "navbar__auth-button", style: "margin: auto 1rem;" %>
     <%= form_with url: sneakers_path, method: :get do |f| %>
-      <%= f.text_field :search, placeholder: "Recherche ta paire" %>
+      <div style="position: relative;">
+        <%= f.text_field :search, placeholder: "Recherche ta paire" %>
+        <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 0; transform: translateY(50%)" %>
+      </div>
     <% end %>
     <button class="navbar__sell-button" style="margin: auto 1rem;">Vendre</button>
     <%= image_tag "navbar/toggler_icon.svg", class: "toggler_icon navbarSideButton", style: "cursor: pointer; height: 40px;" %>

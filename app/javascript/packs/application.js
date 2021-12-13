@@ -20,6 +20,7 @@ require('dotenv').config()
 
 import "controllers"
 import './pagy.js.erb'
+import './wizard.js'
 
 import { previewImageOnFileSelect } from "components/photo_preview.js"
 import { pointPicker } from "components/point_picker.js"

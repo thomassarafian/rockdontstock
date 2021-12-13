@@ -101,19 +101,37 @@ section {
   justify-content: center;
   align-items: center;
 }
-.auth-service__description,
-.auth-service__card {
+.auth-service__description {
   width: 45%;
+}
+.auth-service__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: max-content;
+  padding: 3rem;
+  border: 1px solid $black;
 }
 .auth-service__description {
   margin-right: 5%;
 }
-.auth-service__card {
-  height: 300px;
-  width: 250px;
-  border: 1px solid $black;
+.auth-service__card__title {
+  @include para-1;
 }
-
+.auth-service__card__price {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 2.5rem auto;
+}
+.auth-service__card__checklist {
+  align-self: flex-start;
+  margin-bottom: 3rem;
+}
+.auth-service__card__purchase {
+  @include cta-button;
+  width: 100%;
+}
 
 /////////////// SECTION INSTA ///////////////
 
@@ -130,9 +148,6 @@ section {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-}
-.auth-insta__content__image {
-  // TODO 
 }
 .auth-insta__content__button {
   @include cta-button;

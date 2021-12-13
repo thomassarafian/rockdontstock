@@ -87,6 +87,7 @@
 .sneaker-similar__card {
   position: relative;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   width: 280px;
   height: 450px;

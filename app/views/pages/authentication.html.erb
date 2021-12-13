@@ -73,9 +73,19 @@
         Envie d’être 100% sur d’un modèle que tu souhaites acquérir en dehors de notre plateforme de vente ? N’hésites pas à faire appel a notre service d’authentification. Déposes tes photos, on s’occupe du reste.
       </div>
       <div class="auth-service__card">
-        card
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-auth">
-          Launch demo modal
+        <div class="auth-service__card__title">
+          Authentification de votre paire
+        </div>
+        <div class="auth-service__card__price">
+          4.90€
+        </div>
+        <ul class="auth-service__card__checklist">
+          <li>Résultats en 24h</li>
+          <li>Tout modèle</li>
+          <li>Expertise complète</li>
+        </ul>
+        <button class="auth-service__card__purchase" data-toggle="modal" data-target="#modal-auth">
+          Commander
         </button>
       </div>
     </div>
@@ -86,9 +96,20 @@
     <div class="auth-insta-block">
       <div class="auth-insta__content">
         <div class="auth-insta__content__image">
-          image
+          <div class="comparison-slider-wrapper">
+            <div class="comparison-slider">
+              <%= image_tag "images/real.png", style: "width: 300px" %>
+              <div class="resize">
+                <%= image_tag "images/fake.png", style: "width: 300px" %>
+              </div>
+              <div class="divider">
+                <div style="left: -40px; position: absolute;">Fake</div>
+                <div style="right: -40px; position: absolute;">Real</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <button class="auth-insta__content__button">@rockdontstock</button>
+        <button class="auth-insta__content__button mt-5">@rockdontstock</button>
       </div>
       <div class="auth-insta__footer">
         Plus qu’un outil de promotion, notre Instagram a pour vocation de te donner d’autres informations et les clés afin de pouvoir t’aider à authentifier les dernières releases. Tu pourras aussi retrouver des stories informatives sur l’histoire des sneakers, des sondages participatifs ou des mini jeux dans le but de developper tes compétences en Legit Check !
@@ -113,3 +134,178 @@
     </div>
   </div>
 </div>
+
+<style>
+
+.comparison-slider-wrapper {
+	position: relative;
+	width: 100%;
+	margin: 20px 0;
+	background-color: white;
+}
+.comparison-slider {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  border: 5px white solid;
+  box-sizing: border-box;
+}
+.comparison-slider > img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.comparison-slider .resize {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
+  overflow: hidden;
+}
+.comparison-slider > img {
+  display: block;
+}
+.comparison-slider .divider {
+  position: absolute;
+  width: 2px;
+  height: calc(100% + 40px);
+  background-color: #0E0E0E;
+  left: 50%;
+  top: -20px;
+  bottom: 0;
+  margin-left: -1px;
+  cursor: ew-resize;
+}
+.comparison-slider .divider:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: -9px;
+  top: 50%;
+  margin-top: -10px;
+  background-color: #FECD07;
+  transform: rotate(45deg);
+  transition: all 0.1s ease-in-out;
+}
+.comparison-slider .divider:after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: -5px;
+  top: 50%;
+  margin-top: -6px;
+  background-color: #FECD07;
+  transform: rotate(45deg);
+  transition: all 0.1s ease-in-out;
+}
+.comparison-slider.draggable:before {
+  width: 30px;
+  height: 30px;
+  left: -14px;
+  margin-top: -15px;
+}
+.comparison-slider.draggable:after {
+  width: 20px;
+  height: 20px;
+  left: -9px;
+  margin-top: -10px;
+  background-color: #555;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+	
+	// If the comparison slider is present on the page lets initialise it, this is good you will include this in the main js to prevent the code from running when not needed
+	if ($(".comparison-slider")[0]) {
+		let compSlider = $(".comparison-slider");
+	
+		//let's loop through the sliders and initialise each of them
+		compSlider.each(function() {
+			let compSliderWidth = $(this).width() + "px";
+			$(this).find(".resize img").css({ width: compSliderWidth });
+			drags($(this).find(".divider"), $(this).find(".resize"), $(this));
+		});
+
+		//if the user resizes the windows lets update our variables and resize our images
+		$(window).on("resize", function() {
+			let compSliderWidth = compSlider.width() + "px";
+			compSlider.find(".resize img").css({ width: compSliderWidth });
+		});
+	}
+});
+
+// This is where all the magic happens
+// This is a modified version of the pen from Ege Görgülü - https://codepen.io/bamf/pen/jEpxOX - and you should check it out too.
+function drags(dragElement, resizeElement, container) {
+	
+	// This creates a variable that detects if the user is using touch input insted of the mouse.
+	let touched = false;
+	window.addEventListener('touchstart', function() {
+		touched = true;
+	});
+	window.addEventListener('touchend', function() {
+		touched = false;
+	});
+	
+	// clicp the image and move the slider on interaction with the mouse or the touch input
+	dragElement.on("mousedown touchstart", function(e) {
+			
+			//add classes to the emelents - good for css animations if you need it to
+			dragElement.addClass("draggable");
+			resizeElement.addClass("resizable");
+			//create vars
+			let startX = e.pageX ? e.pageX : e.originalEvent.touches[0].pageX;
+			let dragWidth = dragElement.outerWidth();
+			let posX = dragElement.offset().left + dragWidth - startX;
+			let containerOffset = container.offset().left;
+			let containerWidth = container.outerWidth();
+			let minLeft = containerOffset;
+			let maxLeft = containerOffset + containerWidth - dragWidth;
+			
+			//add event listner on the divider emelent
+			dragElement.parents().on("mousemove touchmove", function(e) {
+				
+				// if the user is not using touch input let do preventDefault to prevent the user from slecting the images as he moves the silder arround.
+				if ( touched === false ) {
+					e.preventDefault();
+				}
+				
+				let moveX = e.pageX ? e.pageX : e.originalEvent.touches[0].pageX;
+				let leftValue = moveX + posX - dragWidth;
+
+				// stop the divider from going over the limits of the container
+				if (leftValue < minLeft) {
+					leftValue = minLeft;
+				} else if (leftValue > maxLeft) {
+					leftValue = maxLeft;
+				}
+
+				let widthValue = (leftValue + dragWidth / 2 - containerOffset) * 100 / containerWidth + "%";
+
+				$(".draggable").css("left", widthValue).on("mouseup touchend touchcancel", function() {
+					$(this).removeClass("draggable");
+					resizeElement.removeClass("resizable");
+				});
+				
+				$(".resizable").css("width", widthValue);
+				
+			}).on("mouseup touchend touchcancel", function() {
+				dragElement.removeClass("draggable");
+				resizeElement.removeClass("resizable");
+				
+			});
+		
+		}).on("mouseup touchend touchcancel", function(e) {
+			// stop clicping the image and move the slider
+			dragElement.removeClass("draggable");
+			resizeElement.removeClass("resizable");
+		
+		});
+	
+}
+</script>
