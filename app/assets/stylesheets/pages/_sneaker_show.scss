@@ -81,8 +81,7 @@
   margin-bottom: 3rem;
 }
 .sneaker-similar-block {
-  display: flex;
-  justify-content: space-between;
+  overflow: hidden;
 }
 .sneaker-similar__card {
   position: relative;

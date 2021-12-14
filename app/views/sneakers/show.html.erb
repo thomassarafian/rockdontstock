@@ -55,7 +55,31 @@
   </section>
   <section class="sneaker-similar">
     <div class="sneaker-similar__subtitle">Vous aimerez aussi</div>
-    <div class="sneaker-similar-block">
+    <div class="sneaker-similar-block" data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".sneaker-similar__card" }'>
+      <div class="sneaker-similar__card">
+        <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+        <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
+        <div class="sneaker-similar__card__options">
+          <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+        </div>
+        <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
+      </div>
+      <div class="sneaker-similar__card">
+        <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+        <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
+        <div class="sneaker-similar__card__options">
+          <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+        </div>
+        <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
+      </div>
+      <div class="sneaker-similar__card">
+        <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+        <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
+        <div class="sneaker-similar__card__options">
+          <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+        </div>
+        <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
+      </div>
       <div class="sneaker-similar__card">
         <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
         <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
