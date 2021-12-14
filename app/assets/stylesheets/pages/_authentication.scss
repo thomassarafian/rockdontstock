@@ -65,19 +65,24 @@ section {
 }
 .auth-guides__content {
   padding: 3rem;
-  display: flex;
-  justify-content: space-between;
+  overflow-x: hidden;
 }
 .auth-guides__content__card {
   position: relative;
-  height: 300px;
-  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  margin-right: 5rem;
+  width: 380px;
+  height: 420px;
+  padding: 3rem;
   border: 1px solid $black;
 }
 .auth-guides__content__card:hover::before {
   content: "";
   position: absolute;
-  width: 100%;
+  min-width: 100%;
   height: 100%; 
   top: 10px;
   left: 10px;
@@ -89,7 +94,15 @@ section {
   padding: 2rem;
   border-top: 1px solid $black;
 }
-
+.auth-guides__content__card__image {
+  max-height: calc(420px / 2);
+}
+.auth-guides__content__card__name {
+  @include para-2-bold
+}
+.auth-guides__content__card__btn {
+  @include cta-button;
+}
 
 /////////////// SECTION SERVICE ///////////////
 
@@ -127,6 +140,8 @@ section {
 .auth-service__card__checklist {
   align-self: flex-start;
   margin-bottom: 3rem;
+  list-style-type: none;
+  padding: 0;
 }
 .auth-service__card__purchase {
   @include cta-button;

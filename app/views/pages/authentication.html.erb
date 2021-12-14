@@ -46,18 +46,36 @@
     <div class="auth-guides__subtitle">Découvrez</div>
     <h2>Nos guides gratuits</h2>
     <div class="auth-guides-block">
-      <div class="auth-guides__content">
+      <div class="auth-guides__content" data-flickity='{ "adaptiveHeight": true, "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".auth-guides__content__card" }'>
         <div class="auth-guides__content__card">
-          card
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-auth">
-            Launch demo modal
-          </button>
+          <%= cl_image_tag(Sneaker.first.photos.first.key, class: "auth-guides__content__card__image") %>
+          <div class="auth-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
+          <button class="auth-guides__content__card__btn" data-toggle="modal" data-target="#modal-auth">Commander</button>
         </div>
         <div class="auth-guides__content__card">
-          card
+          <%= cl_image_tag(Sneaker.first.photos.first.key, class: "auth-guides__content__card__image") %>
+          <div class="auth-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
+          <button class="auth-guides__content__card__btn" data-toggle="modal" data-target="#modal-auth">Commander</button>
         </div>
         <div class="auth-guides__content__card">
-          card
+          <%= cl_image_tag(Sneaker.first.photos.first.key, class: "auth-guides__content__card__image") %>
+          <div class="auth-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
+          <button class="auth-guides__content__card__btn" data-toggle="modal" data-target="#modal-auth">Commander</button>
+        </div>
+        <div class="auth-guides__content__card">
+          <%= cl_image_tag(Sneaker.first.photos.first.key, class: "auth-guides__content__card__image") %>
+          <div class="auth-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
+          <button class="auth-guides__content__card__btn" data-toggle="modal" data-target="#modal-auth">Commander</button>
+        </div>
+        <div class="auth-guides__content__card">
+          <%= cl_image_tag(Sneaker.first.photos.first.key, class: "auth-guides__content__card__image") %>
+          <div class="auth-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
+          <button class="auth-guides__content__card__btn" data-toggle="modal" data-target="#modal-auth">Commander</button>
+        </div>
+        <div class="auth-guides__content__card">
+          <%= cl_image_tag(Sneaker.first.photos.first.key, class: "auth-guides__content__card__image") %>
+          <div class="auth-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
+          <button class="auth-guides__content__card__btn" data-toggle="modal" data-target="#modal-auth">Commander</button>
         </div>
       </div>
       <div class="auth-guides__footer">
@@ -136,7 +154,9 @@
 </div>
 
 <style>
-
+.flickity-viewport {
+  height: 430px !important;
+}
 .comparison-slider-wrapper {
 	position: relative;
 	width: 100%;
@@ -219,6 +239,14 @@
 
 <script>
 $(document).ready(function() {
+  
+  // var flkt = new Flickity( '.auth-guides__content', {
+  //   "freeScroll": true,
+  //   "contain": true,
+  //   "prevNextButtons": false,
+  //   "pageDots": false,
+  //   "cellSelector": ".auth-guides__content__card"
+  // });
 	
 	// If the comparison slider is present on the page lets initialise it, this is good you will include this in the main js to prevent the code from running when not needed
 	if ($(".comparison-slider")[0]) {

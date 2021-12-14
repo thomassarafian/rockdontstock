@@ -5,6 +5,7 @@
 // that code so it'll be compiled.
 
 import "bootstrap";
+require("flickity")
 // import "../../assets/stylesheets/application.scss";
 
 import Rails from "@rails/ujs"
@@ -19,8 +20,7 @@ ActiveStorage.start()
 require('dotenv').config()
 
 import "controllers"
-import './pagy.js.erb'
-import './wizard.js'
+import "./pagy.js.erb"
 
 import { previewImageOnFileSelect } from "components/photo_preview.js"
 import { pointPicker } from "components/point_picker.js"

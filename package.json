@@ -9,6 +9,7 @@
     "@webpack-cli/init": "^1.0.3",
     "bootstrap": "4.6",
     "dotenv": "^10.0.0",
+    "flickity": "^2.2.2",
     "font-awesome": "^4.7.0",
     "hotkeys-js": "^3.8.7",
     "jquery": "^3.6.0",
