@@ -3,6 +3,8 @@
   padding-top: 0;
   padding-bottom: 0;
   height: 38px;
+  margin: auto 1rem;
+  background-color: transparent;
 }
 .navbar__auth-button {
   @include secondary-button;

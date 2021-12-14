@@ -2,6 +2,25 @@ section {
   margin-bottom: 8rem;
 }
 
+.auth-hero__title {
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.auth-hero__title-variant {
+  font-family: "Permanent Marker", "DM Sans", "Helvetica", "sans-serif";
+  font-size: 3.5vw;
+}
+.auth-hero__title > h1 {
+  font-size: 4vw;
+  margin-bottom: 0;
+  line-height: 1.1;
+}
+
 /////////////// SECTION INFOS ///////////////
 
 .auth-infos__subtitle {
@@ -72,6 +91,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   width: max-content;
   margin-right: 5rem;
   width: 380px;
