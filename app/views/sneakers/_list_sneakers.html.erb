@@ -1,48 +1,11 @@
-<div class="list-sneakers-cards">
-  <div class="popup-search" id="records_table">
-    <div class="sneaker-cards">
-      <% @results.each do |sneaker| %>
-        <div class="sneaker-card">
-          <% if !sneaker.orders.last.nil? && sneaker.orders.last.state == "Payé" %>
-            <div class="sneaker-card_img sneaker-card_img-sold">
-              <%= cl_image_tag(sneaker.photos[0].key) %>
-              <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
-            </div>
-            <%= link_to sneaker_path(sneaker), class: "sneaker-title sneaker-title-sold" do %>
-              <strong><%= sneaker.sneaker_db.name %></strong>
-            <% end %>
-            <div class="sneaker-price sneaker-price-sold">
-              <%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %>
-            </div>
-          <% else %>
-            <div class="sneaker-card_img">
-              <%= cl_image_tag(sneaker.photos[0].key) %>
-            </div>
-            <%= link_to sneaker_path(sneaker), class: "sneaker-title" do %>
-              <strong><%= sneaker.sneaker_db.name %></strong>
-            <% end %>
-            <div class="sneaker-price">
-              <%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+<% @results.each do |sneaker| %>
+<div class="sneaker-index__card">
+  <%= cl_image_tag(sneaker.photos.first.key, class: 'sneaker-index__card__photo') %>
+  <div class="sneaker-index__card__name"><%= sneaker.sneaker_db.name %></div>
+  <div class="sneaker-index__card__options">
+    <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> - Condition: <%= sneaker.condition %>/10
   </div>
+  <div class="sneaker-index__card__price"><%= sneaker.price %>€</div>
 </div>
-
-<style>
-.sneaker-cards-btn {
-  margin-top: 30px;
-  text-align: center;
-}
-.sneaker-cards-btn a {
-  color: white;
-}
-.sneaker-title {
-  color: black;
-}
-.sneaker-price {
-  color: black;
-}
-</style>
+<% end %>
+<%== pagy_bootstrap_nav_js(@pagy) if @pagy %>
