@@ -22,23 +22,21 @@ h2 {
 a, a:hover {
   color: inherit;
 }
-input:not([type='select']) {
-  display: block;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #495057;
-  background-color: transparent;
-  background-clip: padding-box;
-  border: 1px solid $black;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  &:not([type='checkbox']) {
-    width: 100%;
-  }
+.form-control {
+	color: #495057;
+	background-color: transparent;
+	border: 1px solid $dark-gray;
+	border-radius: 0;
   &:focus {
-    outline: 1px solid #495057;
+    border-color: $black;
+    box-shadow: 0 0 0 0.2rem rgba(100, 100, 100, 0.25)
   }
+  &:hover:not(:focus) {
+    outline: 1px solid rgba(100, 100, 100, 0.25);
+  }
+}
+input[type="checkbox"] {
+  filter: grayscale(1);
 }
 .modal-content {
   border: none;

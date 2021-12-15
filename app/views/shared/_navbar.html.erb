@@ -6,7 +6,7 @@
     <%= link_to "L'authentification", root_path, class: "navbar__auth-button", style: "margin: auto 1rem;" %>
     <%= form_with url: sneakers_path, method: :get do |f| %>
       <div style="position: relative;">
-        <%= f.text_field :search, placeholder: "Recherche ta paire" %>
+        <%= f.text_field :search, class: "form-control", placeholder: "Recherche ta paire" %>
         <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 0; transform: translateY(50%)" %>
       </div>
     <% end %>

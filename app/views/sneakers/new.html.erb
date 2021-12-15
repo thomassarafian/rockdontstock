@@ -5,7 +5,7 @@
     <h2 class="search-sneaker-model-title">Recherche la paire que tu souhaites vendre</h2>
     <div class="title-add-new-sneaker-db"></div>
     <%= form_with url: sneaker_dbs_path, method: :get, local: false, html: { class: 'search-sneaker-model-form' } do |f| %>
-      <%= f.text_field :search, placeholder: "Recherche ta paire", id: 'search_sneaker_name' %>
+      <%= f.text_field :search, class: "form-control", placeholder: "Recherche ta paire", id: 'search_sneaker_name' %>
     <% end %>
     <div id="form-content">
       <%= render partial: 'sneaker_dbs/list_sneakers_db' %>

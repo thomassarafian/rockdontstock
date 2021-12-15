@@ -53,31 +53,67 @@
   <div style="font-size: 1.563rem; margin-bottom: 3rem">Toutes les sneakers</div>
   <div class="d-flex align-items-start justify-content-between">
     <div style="width: 20%; position: sticky; top: 100px;">
-      <%= form_with url: sneakers_path, method: :get do |f| %>
+      <%= form_with url: sneakers_path, local: false, method: :get do |f| %>
         <div class="form-group">
           <%= f.label "Marques", style: "font-weight: 700" %>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "Nike", nil %> <span>Nike</span></div>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "Jordan", nil %> <span>Jordan</span></div>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "Adidas", nil %> <span>Adidas</span></div>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "Yeezy", nil %> <span>Yeezy</span></div>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "New Balance", nil %> <span>New Balance</span></div>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "Asics", nil %> <span>Asics</span></div>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "Autres", nil %> <span>Autres</span></div>
+          <div class="form-check mb-1">
+            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Nike", nil %>
+            <%= f.label "Nike", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Jordan", nil %>
+            <%= f.label "Jordan", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Adidas", nil %>
+            <%= f.label "Adidas", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Yeezy", nil %>
+            <%= f.label "Yeezy", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "New Balance", nil %>
+            <%= f.label "New Balance", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Asics", nil %>
+            <%= f.label "Asics", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Autres", nil %>
+            <%= f.label "Autres", class: "form-check-label" %>
+          </div>
         </div>
         <div class="form-group">
           <%= f.label "Prix", style: "font-weight: 700" %>
-        <div class="form-row">
-          <%= f.number_field :min_price, min: 0, class: "col-4 mr-3", placeholder: "Min" %>
-          <%= f.number_field :max_price, class: "col-4", placeholder: "Max" %>
-        </div>
+          <div class="form-row">
+            <%= f.number_field :min_price, min: 0, class: "form-control col-4 mr-3", placeholder: "Min" %>
+            <%= f.number_field :max_price, class: "form-control col-4", placeholder: "Max" %>
+          </div>
         </div>
         <div class="form-group">
           <%= f.label "Condition", style: "font-weight: 700" %>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "6", nil %> <span>6/10 ou moins</span></div>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "7", nil %> <span>7/10</span></div>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "8", nil %> <span>8/10</span></div>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "9", nil %> <span>9/10</span></div>
-          <div><%= f.check_box :category, { multiple: true, class: "d-inline-block mb-2" }, "10", nil %> <span>10/10</span></div>
+          <div class="form-check mb-1">
+            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "6", nil %>
+            <%= f.label "6/10 ou moins", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "7", nil %>
+            <%= f.label "7/10", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "8", nil %>
+            <%= f.label "8/10", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "9", nil %>
+            <%= f.label "9/10", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "10", nil %>
+            <%= f.label "10/10", class: "form-check-label" %>
+          </div>
         </div>
         <div class="form-group">
           <%= f.label "Taille", style: "font-weight: 700" %>

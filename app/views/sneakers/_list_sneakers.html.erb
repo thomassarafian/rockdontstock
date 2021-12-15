@@ -1,11 +1,11 @@
 <% @results.each do |sneaker| %>
-<div class="sneaker-index__card">
-  <%= cl_image_tag(sneaker.photos.first.key, class: 'sneaker-index__card__photo') %>
-  <div class="sneaker-index__card__name"><%= sneaker.sneaker_db.name %></div>
-  <div class="sneaker-index__card__options">
-    <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> - Condition: <%= sneaker.condition %>/10
+  <div class="sneaker-index__card">
+    <%= cl_image_tag(sneaker.photos.first.key, class: 'sneaker-index__card__photo') %>
+    <div class="sneaker-index__card__name"><%= sneaker.sneaker_db.name %></div>
+    <div class="sneaker-index__card__options">
+      <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> - Condition: <%= sneaker.condition %>/10
+    </div>
+    <div class="sneaker-index__card__price"><%= sneaker.price %>€</div>
   </div>
-  <div class="sneaker-index__card__price"><%= sneaker.price %>€</div>
-</div>
 <% end %>
-<%== pagy_bootstrap_nav_js(@pagy) if @pagy %>
+<%== pagy_bootstrap_nav(@pagy) if @pagy %>

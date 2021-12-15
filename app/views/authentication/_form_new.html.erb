@@ -9,21 +9,21 @@
   <%= form_for root_path do |f| %>
     <div class="form-row">
       <div class="form-group col">
-        <%= f.text_field :last_name, placeholder: "Nom" %>
+        <%= f.text_field :last_name, class: "form-control", placeholder: "Nom" %>
       </div>
       <div class="form-group col">
-        <%= f.text_field :first_name, placeholder: "Prénom" %>
+        <%= f.text_field :first_name, class: "form-control", placeholder: "Prénom" %>
       </div>
     </div>
     <div class="form-group">
-      <%= f.text_field :email, placeholder: "Email" %>
+      <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
     </div>
     <div class="form-row">
       <div class="form-group col-4">
-        <%= f.number_field :age, placeholder: "Age" %>
+        <%= f.number_field :age, class: "form-control", placeholder: "Age" %>
       </div>
       <div class="form-group col">
-        <%= f.text_field :city, placeholder: "Ville" %>
+        <%= f.text_field :city, class: "form-control", placeholder: "Ville" %>
       </div>
     </div>
     <div class="auth-modal__form__bottom-infos">
