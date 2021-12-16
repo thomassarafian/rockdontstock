@@ -14,17 +14,16 @@ class Sneakers::BuildController < ApplicationController
   def update
     @sneaker = Sneaker.find(params[:sneaker_id])
     authorize @sneaker
-    sneaker_params[:sneaker][:status] = step.to_s
-    sneaker_params[:sneaker][:status] = "active" if step == steps.last
-    @sneaker.update(sneaker_params)
+    status = (step == steps.last ? "active" : step.to_s)
+    @sneaker.update(sneaker_params.merge(status: status))
     render_wizard @sneaker
   end
 
-  def create
-    @sneaker = Sneaker.create
-    authorize @sneaker
-    redirect_to wizard_path(steps.first, sneaker_id: @sneaker.id)
-  end
+  # def create
+  #   @sneaker = Sneaker.create
+  #   authorize @sneaker
+  #   redirect_to wizard_path(steps.first, sneaker_id: @sneaker.id)
+  # end
 
   private
 

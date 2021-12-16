@@ -1,12 +1,15 @@
 <div class="sneaker-cards">
   <% @results&.each do |sneaker_db| %>
-    <%= link_to sneaker_build_path(@sneaker, :add_infos) do %>
-      <div class="sneaker-db-card-img">
-        <%= image_tag(sneaker_db.img_url, style: 'width: 100%; justify-content:center;') %>
-      </div>
-      <div class="sneaker-title">
-        <strong><%= sneaker_db.name %></strong>
-      </div>
+    <%= form_for @sneaker, url: sneaker_build_path(@sneaker.id, :add_sneaker_db), method: :put do |f| %>
+      <%= f.hidden_field :sneaker_db_id, value: sneaker_db.id %>
+      <%= button_to do %>
+        <div class="sneaker-db-card-img">
+          <%= image_tag(sneaker_db.img_url, style: 'width: 100%; justify-content:center;') %>
+        </div>
+        <div class="sneaker-title">
+          <strong><%= sneaker_db.name %></strong>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>
