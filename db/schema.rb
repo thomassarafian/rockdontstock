@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_08_153822) do
+ActiveRecord::Schema.define(version: 2021_12_16_145528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2021_12_08_153822) do
     t.integer "price_cents", default: 0, null: false
     t.date "release_date"
     t.string "category"
-    t.text "subcategory", default: [], array: true
+    t.string "subcategory"
     t.string "img_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2021_12_08_153822) do
     t.integer "price_cents", default: 0, null: false
     t.integer "state"
     t.bigint "sneaker_db_id"
+    t.string "status"
     t.index ["sneaker_db_id"], name: "index_sneakers_on_sneaker_db_id"
     t.index ["user_id"], name: "index_sneakers_on_user_id"
   end

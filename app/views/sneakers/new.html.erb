@@ -12,8 +12,7 @@
     </div>
   </div>
 </div>
-
-<%= link_to 'skip', next_wizard_path if @next_step %>
+<%= link_to 'next', next_wizard_path %>
 
 <script>
   // document.addEventListener('turbolinks:load', () => {
@@ -27,83 +26,3 @@
   //   }
   // });
 </script>
-
-<style type="text/css">
-  .form-add-new-sneakerdb hr {
-    width: 100%;
-  }
-  .form-add-new-sneakerdb {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .search-sneaker-model {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  @media (min-width: 320px) {
-    .search-sneaker-model-form, .add-sneaker-db-name {
-      width: 250px;
-    }
-    .add-sneaker-db-name {
-      margin-bottom: 20px;
-    }
-    .form-add-new-sneakerdb h2 {
-      font-size: 25px;
-    }
-    .form-add-new-sneakerdb {
-      margin-top:30px;
-    }
-    .form-add-new-sneakerdb h2 {
-      margin-top:30px;
-      margin-bottom: 10px;
-      font-size: 15px;
-    }
-    .search-sneaker-model-title {
-      text-align: center;
-      font-size: 25px;
-    }
-  }
-  @media (min-width: 768px) {
-    .form-add-new-sneakerdb h2 {
-      font-size: 30px;
-    }
-    .form-add-new-sneakerdb h2 {
-      font-size: 15px;
-    }
-    .search-sneaker-model-form, .add-sneaker-db-name {
-      width: 400px;
-    }
-  }
-  @media (min-width: 1024px) {
-    .form-add-new-sneakerdb h2 {
-      font-size: 35px;
-    }
-    .form-add-new-sneakerdb h2 {
-      font-size: 20px;
-    }
-    .search-sneaker-model-form, .add-sneaker-db-name {
-      width: 500px;
-    }
-  }
-  .search-sneaker-model {
-    margin-top: 60px;
-  }
-  .search-models {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  .choose-btn {
-    display:none;
-    position:absolute;
-  }
-  .btn-sneaker-card-img {
-    border: none;
-    background-color: white;
-  }
-</style>

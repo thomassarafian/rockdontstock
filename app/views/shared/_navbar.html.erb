@@ -10,7 +10,7 @@
         <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 0; transform: translateY(50%)" %>
       </div>
     <% end %>
-    <button class="navbar__sell-button">Vendre</button>
+    <%= button_to "Vendre", sneakers_path, class: "navbar__sell-button" %>
     <%= image_tag "navbar/toggler_icon.svg", class: "toggler_icon navbarSideButton", style: "cursor: pointer; height: 40px;" %>
   </div>
 </div>

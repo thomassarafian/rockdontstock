@@ -1,0 +1,7 @@
+<%= form_for @sneaker, url: wizard_path, method: :put, multipart: true do |f| %>
+  <%= f.file_field :photos, multiple: true %>
+  <%= f.file_field :photos, multiple: true %>
+  <%= f.file_field :photos, multiple: true %>
+  <%= f.file_field :photos, multiple: true %>
+  <%= f.submit "Valider" %>
+<% end %>

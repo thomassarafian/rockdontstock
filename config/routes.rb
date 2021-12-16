@@ -6,11 +6,12 @@ Rails.application.routes.draw do
 	
   devise_for :users, controllers: { 
 		omniauth_callbacks: 'users/omniauth_callbacks',
-		registrations: 'users/registrations',
-    sessions: 'users/sessions'
+		registrations: 'users/registrations'
 	}
 	
-  resources :sneakers
+  resources :sneakers do 
+    resources :build, controller: 'sneakers/build'
+  end
   resources :sneaker_dbs, only: [:index, :create]
 
 	resource :user, only: [:show, :update], path: 'me' do

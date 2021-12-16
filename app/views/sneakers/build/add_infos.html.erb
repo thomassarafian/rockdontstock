@@ -1,0 +1,8 @@
+<%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
+  <%= f.number_field :size %>
+  <%= f.number_field :condition %>
+  <%= f.text_field :box %>
+  <%= f.text_field :extras %>
+  <%= f.number_field :price %>
+  <%= f.submit "Next" %>
+<% end %>

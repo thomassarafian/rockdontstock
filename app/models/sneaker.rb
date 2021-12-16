@@ -1,37 +1,22 @@
 class Sneaker < ApplicationRecord
   include PgSearch::Model
-
+	# after_create :send_notification  # a configurer avec mailjet 
+  
 	has_many_attached :photos, service: :cloudinary, dependent: :detach
-
   has_many :orders, dependent: :destroy
 	belongs_to :user
-  belongs_to :sneaker_db
-
-	validates :size, presence: true
-  validates :price, presence: true
-  validates :condition, presence: true
-  validates :box, presence: true
+  belongs_to :sneaker_db, optional: true
+  
+  validates :sneaker_db, presence: true, if: :active_or_step_sneaker_db?
+  validates :size, :condition, :box, :price, presence: true, if: :active_or_step_infos?
+  validates :photos, presence: true, if: :active_or_step_photos?
 
   monetize :price_cents
-
-	# after_create :send_notification  # a configurer avec mailjet 
-
+  
   pg_search_scope :pg_search_by_name_and_brand,
-    against: [:name],
-    associated_against: {
-      sneaker_db: [:name, :category]
-    },
-    using: {
-      tsearch: { prefix: true } 
-    }
-
-  def self.search_by_name_and_brand(query)
-    if query.present?
-      pg_search_by_name_and_brand(query)
-    else
-      Sneaker.all
-    end
-  end
+  against: [:name],
+  associated_against: { sneaker_db: [:name, :category] },
+  using: { tsearch: { prefix: true } }
 
   scope :filter_by_price, -> (price) { 
     if price == "100"
@@ -41,35 +26,45 @@ class Sneaker < ApplicationRecord
     elsif price == "300"
       Sneaker.where(price_cents: 0..30000)
     elsif price == "301"
-     Sneaker.where(price_cents: 30000..10000000)
+      Sneaker.where(price_cents: 30000..10000000)
     end
   }
-
   scope :filter_by_category, -> (category) { 
     joins(:sneaker_db).where(:sneaker_dbs => { :category => category })
   }
-
   scope :filter_by_condition, -> (condition) { 
     where("sneakers.condition = ?", condition.to_i) 
   }
-  
-  # scope :filter_by_release_date, -> (release_date) { 
-  #   if release_date == "2001"
-  #     where("extract(year from release_date) >= ? and extract(year from release_date) <= ?", "1900", "2001")
-  #   else
-  #     where('extract(year from release_date) = ?', release_date) 
-  #   end
-  # }
-  
   scope :filter_by_size, -> (size) {
     where("sneakers.size = ?", size.to_d)
- }
+  }
 
+  def self.search_by_name_and_brand(query)
+    if query.present?
+      pg_search_by_name_and_brand(query)
+    else
+      Sneaker.all
+    end
+  end
 
-	def send_notification
+  def send_notification
     UserMailer.new_sneaker(self, user).deliver
   end
 
+  def active?
+    status == "active"
+  end
 
+  def active_or_step_sneaker_db?
+    status&.include?("sneaker_db") || active?
+  end
+
+  def active_or_step_infos?
+    status&.include?("infos") || active?
+  end
+
+  def active_or_step_photos?
+    status&.include?("photos") || active?
+  end
 
 end
