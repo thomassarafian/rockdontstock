@@ -33,7 +33,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # gem 'jquery-rails'
 
 gem 'autoprefixer-rails'
-gem 'font-awesome-sass', '~> 5.15.1'
+# gem 'font-awesome-sass', '~> 5.15.1'
 gem 'simple_form'
 gem 'wicked' # wizard form
 gem 'whenever', require: false # cron job

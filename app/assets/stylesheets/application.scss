@@ -22,6 +22,15 @@ h2 {
 a, a:hover {
   color: inherit;
 }
+input[type="checkbox"] {
+  filter: grayscale(1);
+}
+ul > li {
+  line-height: 2;
+}
+i.fas {
+  margin-right: 0.25rem;
+}
 .form-control {
 	color: #495057;
 	background-color: transparent;
@@ -34,9 +43,6 @@ a, a:hover {
   &:hover:not(:focus) {
     outline: 1px solid rgba(100, 100, 100, 0.25);
   }
-}
-input[type="checkbox"] {
-  filter: grayscale(1);
 }
 .modal-content {
   border: none;
@@ -52,9 +58,6 @@ input[type="checkbox"] {
   &:hover {
     text-decoration: none;
   }
-}
-ul > li {
-  line-height: 2;
 }
 .container {
   max-width: 85vw;

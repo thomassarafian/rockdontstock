@@ -118,9 +118,9 @@
           4.90€
         </div>
         <ul class="auth-service__card__checklist">
-          <li>Résultats en 24h</li>
-          <li>Tout modèle</li>
-          <li>Expertise complète</li>
+          <li><i class="fas fa-check-circle"></i> Résultats en 24h</li>
+          <li><i class="fas fa-check-circle"></i> Tout modèle</li>
+          <li><i class="fas fa-check-circle"></i> Expertise complète</li>
         </ul>
         <button class="auth-service__card__purchase" data-toggle="modal" data-target="#modal-auth">
           Commander
@@ -157,8 +157,23 @@
   <div class="auth-footer"></div>
 </div>
 
-<!-- Modal -->
+<!-- Modals -->
 <div class="modal fade" id="modal-auth" tabindex="-1" role="dialog" aria-labelledby="modal-authTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div id="form-container">
+          <%= render partial: "authentication/form_new" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modal-guide" tabindex="-1" role="dialog" aria-labelledby="modal-guideTitle" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -174,7 +189,7 @@
 </div>
 
 <style>
-.flickity-viewport {
+.auth-guides__content .flickity-viewport {
   height: 430px !important;
 }
 .comparison-slider-wrapper {

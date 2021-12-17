@@ -4,8 +4,7 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import "bootstrap";
-require("flickity")
+
 // import "../../assets/stylesheets/application.scss";
 
 import Rails from "@rails/ujs"
@@ -19,6 +18,9 @@ ActiveStorage.start()
 
 require('dotenv').config()
 
+import "bootstrap";
+import("flickity")
+import("./fullscreen.js")
 import "controllers"
 import "./pagy.js.erb"
 

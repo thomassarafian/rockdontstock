@@ -1,12 +1,21 @@
 <div class="auth-modal__subtitle">Service premium</div>
 <h2>Authentification</h2>
 <ul class="auth-modal__checklist">
-  <li>Résultats en 24h</li>
-  <li>Tout modèle</li>
-  <li>Expertise complète</li>
+  <li><i class="fas fa-check-circle"></i> Résultats en 24h</li>
+  <li><i class="fas fa-check-circle"></i> Tout modèle</li>
+  <li><i class="fas fa-check-circle"></i> Expertise complète</li>
 </ul>
 <div class="auth-modal__form">
-  <%= form_for root_path do |f| %>
+  <%= form_for :authentication do |f| %>
+    <div class="form-group">
+      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1">
+      <%= f.file_field :photos, direct_upload: true, data: { target: 'dropzone.input' } %>
+      <div class="dropzone-msg dz-message needsclick text-gray-600">
+        <h4 class="dropzone-msg-title">Glisser ou rechercher des photos</h4>
+        <span class="dropzone-msg-desc text-sm">Types de fichiers autorisés : jpg, png.</span>
+        </div>
+      </div>
+    </div>
     <div class="form-row">
       <div class="form-group col">
         <%= f.text_field :last_name, class: "form-control", placeholder: "Nom" %>

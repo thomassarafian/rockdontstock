@@ -1,18 +1,20 @@
 // Import your components CSS files here.
-// @import "flickity";
+@import "flickity";
+// @import "./flickity-fullscreen.css";
 // @import "alert";
 // @import "avatar";
-@import "navbar";
 // @import "upload_image_button";
-@import "sneaker_cards";
 // @import "container";
-@import "banner";
-@import "footer";
 // @import "newsletter";
 // @import "insta_posts";
 // @import "sign_in";
 // @import "sign_up";
+// @import "modal_sneaker";
+@import "navbar";
+@import "sneaker_cards";
+@import "banner";
+@import "footer";
 @import "side_navbar";
 @import "pagy_navigation";
 @import "wizard";
-// @import "modal_sneaker";
+@import "dropzone";

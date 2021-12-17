@@ -29,7 +29,7 @@ class Sneakers::BuildController < ApplicationController
 
   def filtering_params(params)
 		params.slice(:price, :condition, :size, :category)
-	end
+  end
 
 	def sneaker_params
 		params.require(:sneaker).permit(:sneaker_db_id, :size, :price, :condition, :box, :extras, photos: [])
