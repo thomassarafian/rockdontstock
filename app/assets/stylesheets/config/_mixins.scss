@@ -7,8 +7,13 @@
 @mixin cta-button {
   @include reset-button;
   color: white;
+  border: 1px solid $black;
   background-color: $black;
   text-transform: uppercase;
+  &:hover {
+    color: $black;
+    background-color: white;
+  }
 }
 @mixin primary-button {
   @include reset-button;

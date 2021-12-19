@@ -1,8 +1,28 @@
-<%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
-  <%= f.number_field :size %>
-  <%= f.number_field :condition %>
-  <%= f.text_field :box %>
-  <%= f.text_field :extras %>
-  <%= f.number_field :price %>
-  <%= f.submit "Next" %>
-<% end %>
+<% brand = ["Adidas", "Air Jordan", "Nike", "New Balance", "Other Brands", "Luxury Brands", "Collections"] %>
+<% price = [["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301]] %>
+<% condition = [["5/10 et moins", 5], ["6/10", 6], ["8/10", 8], ["9/10", 9], ["10/10", 10]] %>
+<% size = [["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], ["5", 5],
+                ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
+                ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
+                ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18]] %>
+<div class="container">
+  <div class="d-flex w-25 flex-column m-auto">
+    <%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
+      <%= f.select :size, size, { include_blank: "Taille FR" }, {  class: "form-group", style: "width: 100%; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 1rem; background: none;" } %>
+      <%= f.select :condition, condition, { include_blank: "Condition" }, {  class: "form-group form-select", style: "width: 100%; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 1rem; background: none;" } %>
+      <%= f.select :box, brand, { include_blank: "Type de boîte" }, {  class: "form-group form-select", style: "width: 100%; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 1rem; background: none;" } %>
+      <div class="form-group">
+        <%= f.label "Commentaire" %>
+        <%= f.text_area :extras, rows: 5, class: "form-control", placeholder: "Transmets-nous ici les défauts de ta paire ou toute information utile pour l’acheteur (trous, traçes, extra manquant...). " %>
+      </div>
+      <%= f.number_field :price, class: "form-group form-control", placeholder: "Mon prix de vente (€)" %>
+    <% end %>
+  </div>
+  <div class="d-flex justify-content-end" style="margin-top: 3rem; gap: 2rem">
+    <%= link_to "Précédent", previous_wizard_path, class: "sneaker-form__previous-btn" %>
+    <%= link_to "Suivant", next_wizard_path, class: "sneaker-form__next-btn" %>
+  </div>
+</div>
+
+
+

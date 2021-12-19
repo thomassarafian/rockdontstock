@@ -11,12 +11,19 @@
   &__shipping,
   &__payment {
     &__title {
+      @include para-1;
+      display: flex;
+      align-items: center;
       margin-bottom: 2rem;
     }
     &__fields {
       margin-bottom: 3rem;
     }
   }
+  &__validation__btn {
+    @include cta-button;
+    margin-bottom: 1rem;
+  } 
 }
 .purchase-recap {
   &__card {

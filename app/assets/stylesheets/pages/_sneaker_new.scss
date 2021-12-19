@@ -1,0 +1,6 @@
+.sneaker-form__previous-btn {
+  @include secondary-button;
+}
+.sneaker-form__next-btn {
+  @include primary-button;
+}
