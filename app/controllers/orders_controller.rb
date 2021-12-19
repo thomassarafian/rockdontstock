@@ -1,5 +1,10 @@
 class OrdersController < ApplicationController
 
+	def new 
+		@order = Order.new(user: current_user, sneaker_id: params[:sneaker_id])
+		authorize @order
+	end
+
 	def show
 		# On créé la commande 
 		# On envoie l'email au vendeur

@@ -22,14 +22,15 @@ h2 {
 a, a:hover {
   color: inherit;
 }
-input[type="checkbox"] {
+input[type="checkbox"],
+input[type="radio"] {
   filter: grayscale(1);
 }
 ul > li {
   line-height: 2;
 }
 i.fas {
-  margin-right: 0.25rem;
+  margin-right: 0.3em;
 }
 .form-control {
 	color: #495057;

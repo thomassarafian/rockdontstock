@@ -1,0 +1,122 @@
+<!-- <title>Achat de <%= @order.sneaker.sneaker_db.name %> - Rock Don't Stock</title> -->
+<div class="container">
+  <h2><i class="fas fa-arrow-left"></i> Commander</h2>
+  <div class="purchase">
+    <%= form_with url: root_url, class: "purchase-form" do |f| %>
+      <div class="purchase-form__infos">
+        <div class="purchase-form__infos__title">
+          <%= image_tag("images/icon_shopping.svg") %> Informations de contact
+        </div>
+        <div class="purchase-form__infos__fields">
+          <div class="form-row">
+            <div class="form-group col-5">
+              <%= f.label "Nom" %>
+              <%= f.text_field :last_name, class: "form-control" %>
+            </div>
+            <div class="form-group col-5 mr-3">
+              <%= f.label "Prénom" %>
+              <%= f.text_field :first_name, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-5">
+              <%= f.label "Téléphone" %>
+              <%= f.text_field :phone, class: "form-control" %>
+            </div>
+            <div class="form-group col-5 mr-3">
+              <%= f.label "E-mail" %>
+              <%= f.email_field :email, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="purchase-form__shipping">
+        <div class="purchase-form__shipping__title">
+          <%= image_tag("images/icon_truck.svg") %> Méthode de livraison
+        </div>
+        <div class="purchase-form__shipping__fields">
+          <div class="form-row form-group ml-0">
+            <div class="form-check mr-3">
+              <%= f.check_box :delivery, { class: "form-check-input" }, "1", nil %>
+              <%= f.label "Colissimo", class: "form-check-label" %>
+            </div>
+            <div class="form-check">
+              <%= f.check_box :delivery, { class: "form-check-input" }, "2", nil %>
+              <%= f.label "Mondial Relay", class: "form-check-label" %>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-5">
+              <%= f.label "Adresse" %>
+              <%= f.text_field :address, class: "form-control" %>
+            </div>
+            <div class="form-group col-5 mr-3">
+              <%= f.label "Ville" %>
+              <%= f.text_field :city, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-5">
+              <%= f.label "Code postal" %>
+              <%= f.text_field :zip_code, class: "form-control" %>
+            </div>
+            <div class="form-group col-5 mr-3">
+              <%= f.label "Numéro de porte" %>
+              <%= f.text_field :door_number, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="purchase-form__payment">
+        <div class="purchase-form__payment__title">
+          <%= image_tag("images/icon_bill.svg") %> Moyen de paiement
+        </div>
+        <div class="purchase-form__payment__fields">
+        </div>
+      </div>
+      <div class="purchase-form__validation">
+        <button class="purchase-form__validation__btn">Valider ma commande</button>
+        <div class="form-check">
+          <%= f.check_box :legal, { class: "form-check-input" }, 1, nil %>
+          <%= f.label class: "form-check-label" do %>
+            En confirmant ma commande j'accepte les <a href="/cgv">conditions générales de vente</a>.
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="purchase-recap">
+      <div class="purchase-recap__card">
+        <div class="purchase-recap__card__title">
+          Ma commande
+        </div>
+        <div class="purchase-recap__card__sneaker">
+          <div class="purchase-recap__card__sneaker-photo"></div>
+          <div class="purchase-recap__card__sneaker-details">
+            <div class="purchase-recap__card__sneaker-name"></div>
+            <div class="purchase-recap__card__sneaker-options"></div>
+            <div class="purchase-recap__card__sneaker-price"></div>
+          </div>
+        </div>
+        <div class="purchase-recap__card__order-infos">
+          <div class="purchase-recap__card__order-infos__item">
+            <div>Livraison</div>
+            <div>prix €</div>
+          </div>
+          <div class="purchase-recap__card__order-infos__item">
+            <div>Authentification Premium</div>
+            <div>prix €</div>
+          </div>
+          <div class="purchase-recap__card__order-infos__item">
+            <div>Code promo</div>
+            <div>-prix €</div>
+          </div>
+        </div>
+        <div class="purchase-recap__card__total">
+          <div>Total</div>
+          <div>prix €</div>
+        </div>
+        <div class="purchase-recap__card__trustpilot"></div>
+      </div>
+    </div>
+  </div>
+</div>

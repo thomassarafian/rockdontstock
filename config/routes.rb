@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 	
   resources :sneakers do 
     resources :build, controller: 'sneakers/build'
+    resources :orders, only: [:new, :show, :create] do
+      resources :payments, only: [:new]
+    end
   end
   resources :sneaker_dbs, only: [:index, :create]
 
@@ -19,9 +22,6 @@ Rails.application.routes.draw do
   	resources :transfers, only: [:index, :create]
   end
 
-	resources :orders, only: [:show, :create] do
-	  resources :payments, only: [:new]
-	end
 
   get 'zswexddfe'                    => 'pages#zswexddfe'
 
