@@ -2,7 +2,7 @@
   <% @results&.each do |sneaker_db| %>
     <%= form_for @sneaker, url: sneaker_build_path(@sneaker.id, :add_sneaker_db), method: :put do |f| %>
       <%= f.hidden_field :sneaker_db_id, value: sneaker_db.id %>
-      <%= link_to method: :post, class: "sneaker-db__card" do %>
+      <%= button_to do %>
         <%= image_tag(sneaker_db.img_url, class: "sneaker-db__card-img") %>
         <div class="sneaker-db__card-title">
           <strong><%= sneaker_db.name %></strong>
