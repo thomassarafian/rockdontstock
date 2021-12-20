@@ -24,22 +24,22 @@ import("./fullscreen.js")
 import "controllers"
 import "./pagy.js.erb"
 
-import { previewImageOnFileSelect } from "components/photo_preview.js"
-import { pointPicker } from "components/point_picker.js"
-import { uploadIds } from "components/upload_ids.js"
-import { ibanValidator } from "components/iban_validator.js"
-import { sneakerNew } from "components/sneaker_new.js"
-import { createStripeTokenEditUser } from "components/create_stripe_token_edit_user.js"
+// import { sneakerNew } from "components/sneaker_new.js"
+// import { pointPicker } from "components/point_picker.js"
 // import { editSneakerPhotos } from "components/edit_sneaker_photos.js"
 // import { getPhotosModal } from "components/get_photos_modal.js"
+import { previewImageOnFileSelect } from "components/photo_preview.js"
+import { uploadIds } from "components/upload_ids.js"
+import { ibanValidator } from "components/iban_validator.js"
+import { createStripeTokenEditUser } from "components/create_stripe_token_edit_user.js"
 
 document.addEventListener('turbolinks:load', () => {
-  pointPicker();
   previewImageOnFileSelect();
   uploadIds();
   ibanValidator();
-  sneakerNew();
   createStripeTokenEditUser();
+  // sneakerNew();
+  // pointPicker();
   // editSneakerPhotos();
   // optimizeUploadPhotos()
   // getPhotosModal();
