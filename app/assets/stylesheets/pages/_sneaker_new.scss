@@ -4,3 +4,57 @@
 .sneaker-form__next-btn {
   @include primary-button;
 }
+.sell-wizard__subtitle {
+  @include para-1;
+}
+.sell-wizard__progress {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  color: #dbdbdb;
+  margin-bottom: 5rem;
+
+  &__step {
+    flex-grow: 1;
+  }
+  
+  &__step-title {
+    color: #dbdbdb;
+    &--active,
+    &--complete {
+      color: $black;
+    }
+  }
+  &__step-display {
+    background-color: #dbdbdb;
+    height: 10px;
+    &--active,
+    &--complete {
+      height: 10px;
+      background-color: $black;
+    }
+  }
+}
+.sneaker-db__card {
+  padding: 2rem;
+  text-align: center;
+  &:hover {
+    outline: 1px solid $black;
+  }
+  &:hover::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 10px;
+    left: 10px;
+    border-right: 10px solid $black;
+    border-bottom: 10px solid $black;
+    z-index: -1;
+  }
+  &-img {
+    width: 300px;
+    height: 180px;
+    object-fit: contain;
+  }
+}

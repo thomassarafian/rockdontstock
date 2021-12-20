@@ -6,6 +6,26 @@
                 ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
                 ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18]] %>
 <div class="container">
+  <div class="sell-wizard__subtitle">Etape 2</div>
+    <h2 class="sell-wizard__title">Vendre ma paire</h2>
+    <div class="sell-wizard__progress">
+      <div class="sell-wizard__progress__step">
+        <div class="sell-wizard__progress__step-title--complete">Modèle</div>
+        <div class="sell-wizard__progress__step-display--complete"></div>
+      </div>
+      <div class="sell-wizard__progress__step">
+        <div class="sell-wizard__progress__step-title--active">Informations</div>
+        <div class="sell-wizard__progress__step-display--active"></div>
+      </div>
+      <div class="sell-wizard__progress__step">
+        <div class="sell-wizard__progress__step-title">Photos</div>
+        <div class="sell-wizard__progress__step-display"></div>
+      </div>
+      <div class="sell-wizard__progress__step">
+        <div class="sell-wizard__progress__step-title">Récapitulatif</div>
+        <div class="sell-wizard__progress__step-display"></div>
+      </div>
+    </div>
   <div class="d-flex w-25 flex-column m-auto">
     <%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
       <%= f.select :size, size, { include_blank: "Taille FR" }, {  class: "form-group", style: "width: 100%; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 1rem; background: none;" } %>
