@@ -1,5 +1,18 @@
 <title>Accueil - Rock Don't Stock</title>
 <div class="container">
+  <section class="home-header">
+    <%= image_tag("images/auth-paysage.png", class: "home-header__img") %>
+    <div class="home-header__caption">
+      <h2 class="home-header__caption__title">Des sneakers d’occasion authentifiées par nos experts</h2>
+      <div class="home-header__caption__descr">
+        Nike, Air Jordan, Adidas et toutes les plus grandes marques.
+      </div>
+      <div class="home-header__caption__buttons">
+        <%= link_to "Parcourir les modèles", root_path, class: "home-header__caption__browse-btn" %>
+        <%= link_to "Vendre ma paire", root_path, class: "home-header__caption__sell-btn" %>
+      </div>
+    </div>
+  </section>
   <section class="home-last-sneakers">
     <div class="home-last-sneakers__title">Les dernières paires ajoutées</div>
     <div class="home-last-sneakers__block">
