@@ -1,12 +1,14 @@
 <!-- <title>Achat de <%= @order.sneaker.sneaker_db.name %> - Rock Don't Stock</title> -->
 <div class="container">
-  <h2><i class="fas fa-arrow-left"></i> Commander</h2>
+  <%= link_to :back, class: "back-button" do %>
+    <h2><i class="fas fa-arrow-left ml-0"></i> Commander</h2>
+  <% end %>
   <div class="purchase">
     <%= form_with url: root_url, class: "purchase-form" do |f| %>
       <div class="purchase-form__infos">
         <div class="purchase-form__infos__title">
           <%= image_tag("images/icon_shopping.svg") %>
-          <span>Informations de contact</span>
+          <span class="ml-2">Informations de contact</span>
         </div>
         <div class="purchase-form__infos__fields">
           <div class="form-row">
@@ -34,7 +36,7 @@
       <div class="purchase-form__shipping">
         <div class="purchase-form__shipping__title">
           <%= image_tag("images/icon_truck.svg", width: "24", height: "24") %>
-          <span>Méthode de livraison</span>
+          <span class="ml-2">Méthode de livraison</span>
         </div>
         <div class="purchase-form__shipping__fields">
           <div class="form-row form-group ml-0">
@@ -76,7 +78,7 @@
       <div class="purchase-form__payment">
         <div class="purchase-form__payment__title">
           <%= image_tag("images/icon_bill.svg") %>
-          <span>Moyen de paiement</span>
+          <span class="ml-2">Moyen de paiement</span>
         </div>
         <div class="purchase-form__payment__fields">
         </div>
