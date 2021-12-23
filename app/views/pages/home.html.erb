@@ -8,8 +8,8 @@
         Nike, Air Jordan, Adidas et toutes les plus grandes marques.
       </div>
       <div class="home-header__caption__buttons">
-        <%= link_to "Parcourir les modèles", root_path, class: "home-header__caption__browse-btn" %>
-        <%= link_to "Vendre ma paire", root_path, class: "home-header__caption__sell-btn" %>
+        <%= button_to "Parcourir les modèles", sneakers_path, method: :get, class: "home-header__caption__browse-btn" %>
+        <%= button_to "Vendre ma paire", sneakers_path, class: "home-header__caption__sell-btn" %>
       </div>
     </div>
   </section>
@@ -28,7 +28,7 @@
       <% end %>
     </div>
     <div class="home-last-sneakers__btn-block">
-      <button class="home-last-sneakers__btn">Voir toutes les paires</button>
+      <%= button_to "Voir toutes les paires", sneakers_path, method: :get, class: "home-last-sneakers__btn" %>
     </div>
   </section>
   <section class="home-selected-sneakers">
@@ -46,13 +46,13 @@
       <% end %>
     </div>
     <div class="home-selected-sneakers__btn-block">
-      <button class="home-selected-sneakers__btn">Parcourir la marketplace</button>
+      <%= button_to "Parcourir la marketplace", sneakers_path, method: :get, class: "home-selected-sneakers__btn" %>
     </div>
   </section>
   <section class="home-signup">
     <div class="home-signup__msg">Bénéficie des frais d’authentification offerts sur ta première commande et reste informé de toutes les nouveautés!</div>
     <div class="home-signup__form">
-      <%= form_with url: root_path do |f| %>
+      <%= form_with url: new_user_registration_path, method: :get do |f| %>
         <%= f.email_field :email, class: "form-control", placeholder: "john.doe@gmail.com" %>
         <button class="home-signup__form-submit">M'inscrire</button>
       <% end %>

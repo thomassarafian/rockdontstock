@@ -3,11 +3,11 @@
     <%= link_to "/", class: "mr-auto" do %>
       <%= image_tag("logo.svg", style: 'height: 35px;', class: 'icon') %>
     <% end %>
-    <%= link_to "L'authentification", root_path, class: "navbar__auth-button" %>
+    <%= link_to "L'authentification", authentication_path, class: "navbar__auth-button" %>
     <%= form_with url: sneakers_path, method: :get do |f| %>
       <div style="position: relative;">
         <%= f.text_field :search, class: "form-control", placeholder: "Recherche ta paire" %>
-        <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 0; transform: translateY(50%)" %>
+        <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 0; transform: translateY(50%); cursor: pointer", onclick: "this.closest('form').submit()" %>
       </div>
     <% end %>
     <%= button_to "Vendre", sneakers_path, class: "navbar__sell-button" %>
@@ -22,7 +22,7 @@
   <%= link_to (user_signed_in? ? user_path : user_session_path), class: "side-link" do %>
     <li class="navbar-side-item side-link">Mon compte</li>
   <% end %>
-  <%= link_to(new_sneaker_path, class: "side-link") do %>
+  <%= link_to(sneakers_path, method: :post, class: "side-link") do %>
     <li class="navbar-side-item side-link">Vendre</li>
   <% end %>
   <div style="margin-top: 20px; cursor: pointer" id="navbar-side-see-all">
