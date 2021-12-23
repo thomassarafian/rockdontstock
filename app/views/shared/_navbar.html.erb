@@ -3,7 +3,7 @@
     <%= link_to "/", class: "mr-auto" do %>
       <%= image_tag("logo.svg", style: 'height: 35px;', class: 'icon') %>
     <% end %>
-    <%= link_to "L'authentification", root_path, class: "navbar__auth-button", style: "margin: auto 1rem;" %>
+    <%= link_to "L'authentification", root_path, class: "navbar__auth-button" %>
     <%= form_with url: sneakers_path, method: :get do |f| %>
       <div style="position: relative;">
         <%= f.text_field :search, class: "form-control", placeholder: "Recherche ta paire" %>
@@ -11,7 +11,7 @@
       </div>
     <% end %>
     <%= button_to "Vendre", sneakers_path, class: "navbar__sell-button" %>
-    <%= image_tag "navbar/toggler_icon.svg", class: "toggler_icon navbarSideButton", style: "cursor: pointer; height: 40px;" %>
+    <%= image_tag "navbar/toggler_icon.svg", class: "toggler_icon navbarSideButton", style: "cursor: pointer; height: 15px;" %>
   </div>
 </div>
 

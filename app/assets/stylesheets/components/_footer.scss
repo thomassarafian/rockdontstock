@@ -16,7 +16,7 @@ footer li {
 .footer-left-block {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  width: 25%;
   padding-right: 1.5rem;
 }
 .footer-right-block {
@@ -28,7 +28,7 @@ footer li {
   margin-bottom: 2rem;
 }
 .footer__newsletter__title {
-  @include para-1-bold;
+  @include para-2-bold;
   margin-bottom: 0.8em;
 }
 .footer__newsletter__input {
@@ -51,7 +51,7 @@ footer li {
   margin-right: 3rem;
 }
 .footer__list-title {
-  @include para-1-bold;
+  @include para-2-bold;
   margin-bottom: 0.8em;
 }
 .footer__list {
