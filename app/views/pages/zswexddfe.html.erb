@@ -3,7 +3,7 @@
   <div class="sneaker-cards">
     <% @sneakers_selected.each do |sneaker| %>
       <div class="sneaker-card">
-        <div class="sneaker-card_img" data-toggle="modal" data-target="#exampleModal-<%= sneaker.id %>" id="okok">
+        <div class="sneaker-card_img" data-bs-toggle="modal" data-bs-target="#exampleModal-<%= sneaker.id %>" id="okok">
           <%= cl_image_tag(sneaker.photos[0].key) %>
         </div>
         <div class="sneaker-title"><strong><%= sneaker.sneaker_db.name %></strong></div>
@@ -14,7 +14,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel"><%= sneaker.sneaker_db.name %></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <span class="close-modal" aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -86,7 +86,7 @@
               <% end %>
               <% if policy(sneaker).edit? %>
                 <button type="button" class="btn sneaker-show-btn" style="background-color: #2e3338;" >
-                  <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-dismiss="modal" style="color:white">Voir mon annonce</a>
+                  <a onclick="location.href='<%= sneaker_path(sneaker) %>';" data-bs-dismiss="modal" style="color:white">Voir mon annonce</a>
                 </button>
               <% end %>
             </div>

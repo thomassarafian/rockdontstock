@@ -19,8 +19,8 @@ ActiveStorage.start()
 require('dotenv').config()
 
 import "bootstrap";
-import("flickity")
-import("./fullscreen.js")
+import "flickity"
+import "./fullscreen.js"
 import "controllers"
 import "./pagy.js.erb"
 

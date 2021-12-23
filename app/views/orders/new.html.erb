@@ -1,33 +1,33 @@
 <!-- <title>Achat de <%= @order.sneaker.sneaker_db.name %> - Rock Don't Stock</title> -->
 <div class="container">
   <%= link_to :back, class: "back-button" do %>
-    <h2><i class="fas fa-arrow-left ml-0"></i> Commander</h2>
+    <h2><i class="fas fa-arrow-left ms-0"></i> Commander</h2>
   <% end %>
   <div class="purchase">
     <%= form_with url: root_url, class: "purchase-form" do |f| %>
       <div class="purchase-form__infos">
         <div class="purchase-form__infos__title">
           <%= image_tag("images/icon_shopping.svg") %>
-          <span class="ml-2">Informations de contact</span>
+          <span class="ms-2">Informations de contact</span>
         </div>
         <div class="purchase-form__infos__fields">
-          <div class="form-row">
-            <div class="form-group col-5">
-              <%= f.label "Nom" %>
+          <div class="row g-2">
+            <div class="col-5">
+              <%= f.label "Nom", class: "form-label" %>
               <%= f.text_field :last_name, class: "form-control" %>
             </div>
-            <div class="form-group col-5 mr-3">
-              <%= f.label "Prénom" %>
+            <div class="col-5 me-3">
+              <%= f.label "Prénom", class: "form-label" %>
               <%= f.text_field :first_name, class: "form-control" %>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group col-5">
-              <%= f.label "Téléphone" %>
+          <div class="row g-2">
+            <div class="col-5">
+              <%= f.label "Téléphone", class: "form-label" %>
               <%= f.text_field :phone, class: "form-control" %>
             </div>
-            <div class="form-group col-5 mr-3">
-              <%= f.label "E-mail" %>
+            <div class="col-5 me-3">
+              <%= f.label "E-mail", class: "form-label" %>
               <%= f.email_field :email, class: "form-control" %>
             </div>
           </div>
@@ -36,11 +36,11 @@
       <div class="purchase-form__shipping">
         <div class="purchase-form__shipping__title">
           <%= image_tag("images/icon_truck.svg", width: "24", height: "24") %>
-          <span class="ml-2">Méthode de livraison</span>
+          <span class="ms-2">Méthode de livraison</span>
         </div>
         <div class="purchase-form__shipping__fields">
-          <div class="form-row form-group ml-0">
-            <div class="form-check mr-3">
+          <div class="row g-2 ms-0">
+            <div class="form-check me-3">
               <%= f.check_box :delivery, { class: "form-check-input" }, "1", nil %>
               <%= f.label "Colissimo", class: "form-check-label" %>
             </div>
@@ -53,23 +53,23 @@
             <div id="mondial-relay-map"></div>
             <input type="hidden" id="mondial-relay-target" />
           </div>
-          <div class="form-row">
-            <div class="form-group col-5">
-              <%= f.label "Adresse" %>
+          <div class="row g-2">
+            <div class="col-5">
+              <%= f.label "Adresse", class: "form-label" %>
               <%= f.text_field :address, class: "form-control" %>
             </div>
-            <div class="form-group col-5 mr-3">
-              <%= f.label "Ville" %>
+            <div class="col-5 me-3">
+              <%= f.label "Ville", class: "form-label" %>
               <%= f.text_field :city, class: "form-control" %>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group col-5">
-              <%= f.label "Code postal" %>
+          <div class="row g-2">
+            <div class="col-5">
+              <%= f.label "Code postal", class: "form-label" %>
               <%= f.text_field :zip_code, class: "form-control" %>
             </div>
-            <div class="form-group col-5 mr-3">
-              <%= f.label "Numéro de porte" %>
+            <div class="col-5 me-3">
+              <%= f.label "Numéro de porte", class: "form-label" %>
               <%= f.text_field :door_number, class: "form-control" %>
             </div>
           </div>
@@ -78,7 +78,7 @@
       <div class="purchase-form__payment">
         <div class="purchase-form__payment__title">
           <%= image_tag("images/icon_bill.svg") %>
-          <span class="ml-2">Moyen de paiement</span>
+          <span class="ms-2">Moyen de paiement</span>
         </div>
         <div class="purchase-form__payment__fields">
         </div>

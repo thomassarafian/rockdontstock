@@ -5,7 +5,7 @@
       <h2 class="contact-form-title">Formulaire de contact</h2>
       <div class="contact-form-inputs">
         <%= simple_form_for(@contact, :url => contact_path) do |f| %>
-          <div class="row">
+          <div class="row g-2">
             <div class="col-md">
               <%= f.input :name,  placeholder: 'Prénom Nom', label: false %>
             </div>
