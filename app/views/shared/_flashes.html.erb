@@ -14,11 +14,9 @@
 </div>
 
 <script>
-let alertContainer = document.getElementById('alert-container')
-
-if (alertContainer) {
+if (document.getElementById('alert-container')) {
   setTimeout(() => {
-    alertContainer.remove()
+    document.getElementById('alert-container').remove()
   }, 3000)
 }
 </script>

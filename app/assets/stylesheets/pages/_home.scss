@@ -1,206 +1,178 @@
-// Specific CSS for your home-page
+/////////////// GUIDES ///////////////
 
-body {
-	background-color: white;
-  font-weight: 200;
+.home-guides__title {
+  @include para-1;
+  margin-bottom: 3rem;
+}
+.home-guides-block {
+  border: 1px solid $black;
+  border-top: 20px solid $black;
+}
+.home-guides__content {
+  padding: 3rem;
+  overflow-x: hidden;
+}
+.home-guides__content__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 5rem;
+  width: 380px;
+  height: 420px;
+  padding: 3rem;
+  border: 1px solid $black;
+}
+.home-guides__content__card:hover::before {
+  content: "";
+  position: absolute;
+  min-width: 100%;
+  height: 100%; 
+  top: 10px;
+  left: 10px;
+  border-right: 10px solid $black;
+  border-bottom: 10px solid $black;
+  z-index: -1;
+}
+.home-guides__footer {
+  padding: 2rem;
+  border-top: 1px solid $black;
+}
+.home-guides__content__card__image {
+  max-height: calc(420px / 2);
+}
+.home-guides__content__card__name {
+  @include para-2-bold
+}
+.home-guides__content__card__btn {
+  @include cta-button;
 }
 
-select {
-  // font: Questrial !important;
+
+/////////////// LAST/SELECTED SNEAKERS ///////////////
+
+.home-last-sneakers,
+.home-selected-sneakers {
+  &__title {
+    @include para-1;
+    margin-bottom: 3rem;
+  }
+  &__block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+  &__btn-block {
+    text-align: center;
+  }
+  &__btn {
+    @include cta-button;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+  } 
+}
+.sneaker-home__card {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 280px;
+  height: 450px;
+  padding: 1.5rem 2rem;
+  &:hover {
+    outline: 1px solid $black;
+  }
+  &:hover::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 10px;
+    left: 10px;
+    border-right: 10px solid $black;
+    border-bottom: 10px solid $black;
+    z-index: -1;
+  }
+}
+.sneaker-home__card__name {
+  line-height: 1.2;
+}
+.sneaker-home__card__photo {
+  width: 200px;
+  height: 275px;
+  object-fit: contain;
+  align-self: center;
+}
+.sneaker-home__card__options {
+  color: #727272;
+  font-size: 0.8rem;
+}
+.sneaker-home__card__price {
+  font-weight: 700;
 }
 
-.page-item.active .page-link {
-  background-color: #FFCD05;
-  border-color: #FFCD05;
-}
 
-.article-legit-check {
-  background-image: url('/assets/home/article_background_img.png');
-  background-size: cover;
-  height: auto;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  color: white;
+/////////////// SIGNUP ///////////////
+
+.home-signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  padding: 20px 20px;
-}
-.article-legit-check hr {
-  background-color: white;
-  margin: 0 20rem;
-}
-.article-legit-check h2 {
-  font-size: 40px;
-  font-weight: bold;
-}
-.article-legit-check p {
-  margin-top:20px;
-}
-
-.article-legit-check a {
-  text-decoration: none; 
-  color: white;
-}
-
-.article-legit-check a:hover {
-  text-decoration: none; 
-  color: #FFCD05;
-}
-
-@media (min-width: 320px) {
-  .message-pub  {
-    font-size: 11px;
+  gap: 1.5rem;
+  &__msg {
+    @include para-1;
+    width: 50%;
   }
-  .home-rds-selection h2 {
-    font-size:20px;
-    margin-bottom: 30px;
+  &__form {
+    width: 330px;
   }
-  .home-article-legit-content {
-    display: grid;
-    grid-template-columns: 50px auto;
-    align-items: center;
-  } 
-  .home-article-legit-content p {
-    padding: 0 10px;
-  }
-  .home-article-legit-img {
-    width: 50px;
-    grid-row: 1/3;
-  }
-  .article-legit-check h2 {
-    font-size: 20px;
-  }
-  .article-legit-check hr {
-    margin: 0 10px;
-  }
-  .article-legit-check p, .article-legit-check a{
-    font-size: 13px;
-  }
-}
-@media (min-width: 768px) {
-  .message-pub  {
-    font-size: 13px;
-  }
-  .home-rds-selection h2 {
-    font-size:26px;
-  }
-  .home-article-legit-content {
-    margin: 0 50px;
-  }
-  .article-legit-check h2 {
-    font-size: 30px;
-  }
-  .article-legit-check hr {
-    margin: 0 50px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .message-pub  {
-    font-size: 14px;
-  }
-  .home-rds-selection h2 {
-    font-size:32px;
-  }
-  .home-article-legit-content {
-    margin: 0 100px;
-  }
-  .home-article-legit-content {
-    grid-template-columns: 80px auto;
-  }
-  .home-article-legit-img {
-    width: 80px;
-  }
-  .article-legit-check h2 {
-    font-size: 40px;
-  }
-  .article-legit-check hr {
-    margin: 0 100px;
-  }
-  .article-legit-check p, a{
-    font-size: 14px;
-  } 
-}
-@media (min-width: 1440px) {
-  .message-pub  {
-    font-size: 15px;
-  }
-  .home-article-legit-content {
-    grid-template-columns: 100px auto;
-  } 
-  .home-article-legit-content p {
-    padding: 0 100px;
-  }
-  .home-article-legit-img {
-    width: 100px;
+  &__form-submit {
+    @include cta-button;
+    width: 100%;
+    margin-top: 1.5rem;
   }
 }
 
 
-.message-pub {
-  line-height: 17px;
-  margin-top:50px;
-  padding: 5px 10px;
-  background-color: black;
-  color: white;
-  text-align: center;
-  margin-bottom: 0;
-}
-.message-pub  {
-  color: white;
-}
-.message-pub:hover {
-  text-decoration: none; 
-  color: #FFCD05;
-}
+/////////////// AUTHENTICATION ///////////////
 
-
-
-.link-home-page a {
-  color: black;
+.home-auth {
+  &__title {
+    @include para-1;
+    margin-bottom: 3rem;
+  }
+  &__block {
+    position: relative;
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    &-sticker {
+      position: absolute;
+      bottom: 5%;
+      right: 5%
+    }
+    &-caption {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      background: white;
+      padding: 2rem;
+      width: 30%;
+      &__title {
+        @include para-1;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+      }
+      &__descr {
+        margin-bottom: 1rem;
+      }
+      &__btn {
+        font-weight: 700;
+      }
+    }
+  }
 }
-.btn-dark {
-  background-color: black;
-}
-
-.link-home-page a:hover {
-  text-decoration: none; 
-  color: #FFCD05;
-}
-
-.missing_infos {
- 	display: flex;
-  justify-content: center;
-	height: 25px;
-	background-color: #f8d7d9;
-}
-
-.btn-ghost {
-  color: #4A4A4A;
-  border: 1px solid #4A4A4A;
-  padding: 0px 2px;
-  margin-top: 15px;
-  border-radius: 50px;
-  font-weight: lighter;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-.btn-ghost:hover {
-  opacity: 1;
-}
-
-
-.btn-flat {
-  margin-top: 15px;
-  color: white;
-  padding: 0px 2px;
-  border-radius: 4px;
-  background: #FFCD05;
-  transition: background 0.3s ease;
-}
-
-.btn-flat:hover {
-  background: #e6c233;
-  color: white;
-}
-

@@ -86,7 +86,7 @@
   margin-bottom: 3rem;
 }
 .sneaker-similar-block {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .sneaker-similar__card {
   position: relative;
@@ -97,6 +97,8 @@
   height: 450px;
   padding: 1.5rem 2rem;
   margin-right: 5rem;
+  top: 1px;
+  left: 1px;
   &:hover {
     outline: 1px solid $black;
   }
