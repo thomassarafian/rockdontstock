@@ -8,10 +8,18 @@ https://flickity.metafizzy.co
 
 .flickity-enabled:focus { outline: none; }
 
+/* hacky way to allow horizontal scroll with pad */
+/* ie overflow scroll but invisible scrollbar */
 .flickity-viewport {
-  overflow: hidden;
+  overflow-x: scroll;
+  overflow-y: hidden;
   position: relative;
   height: 100%;
+  scrollbar-width: none; /* firefox */
+  -ms-overflow-style: none;  /* ie and edge */
+}
+.flickity-viewport::-webkit-scrollbar {
+  display: none; /* chrome, safari, opera*/
 }
 
 .flickity-slider {

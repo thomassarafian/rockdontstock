@@ -3,8 +3,9 @@
     <div class="footer__newsletter">
       <div class="footer__newsletter__title">Abonne-toi !</div>
       <div class="footer__newsletter__descr">Reçois toutes nos dernières news, guides gratuits et nouveautés...</div>
-      <%= form_with url: root_path do |f| %>
+      <%= form_with url: root_path, html: { style: "position: relative;" } do |f| %>
         <%= f.email_field :email, class: "footer__newsletter__input form-control", placeholder: "Email" %>
+        <i class="fas fa-arrow-right" style="position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%)"></i>
       <% end %>
     </div>
     <div class="footer__trustpilot">
@@ -40,12 +41,15 @@
       <div class="footer__list-title">Nous contacter</div>
       <ul class="footer__list">
         <li>
+          <i class="far fa-envelope mr-2"></i>
           <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %>
         </li>
         <li>
+        <i class="fab fa-instagram mr-2"></i>
           <a href="https://www.instagram.com/rockdontstock/" target="_blank">@rockdontstock</a>
         </li>
         <li>
+          <i class="fab fa-facebook mr-2"></i>
           <a href="https://www.facebook.com/rockdntstock/" target='_blank'>Sur Facebook</a>
         </li>
       </ul>

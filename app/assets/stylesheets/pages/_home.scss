@@ -46,8 +46,7 @@
   border-top: 20px solid $black;
 }
 .home-guides__content {
-  padding: 3rem;
-  overflow-x: hidden;
+  padding: 3rem 0;
 }
 .home-guides__content__card {
   position: relative;
@@ -55,6 +54,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  left: 3rem;
   margin-right: 5rem;
   width: 380px;
   height: 420px;
@@ -105,8 +105,8 @@
   }
   &__btn {
     @include cta-button;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 0;
   } 
 }
 .sneaker-home__card {
