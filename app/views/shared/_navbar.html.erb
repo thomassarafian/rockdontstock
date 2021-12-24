@@ -6,7 +6,7 @@
     <%= link_to "L'authentification", authentication_path, class: "navbar__auth-button" %>
     <%= form_with url: sneakers_path, method: :get do |f| %>
       <div style="position: relative;">
-        <%= f.text_field :search, class: "form-control", placeholder: "Recherche ta paire" %>
+        <%= f.text_field :search, class: "form-control", style: "width: 320px", placeholder: "Essaye Nike, Air Jordan..." %>
         <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 0; transform: translateY(50%); cursor: pointer", onclick: "this.closest('form').submit()" %>
       </div>
     <% end %>
@@ -40,7 +40,7 @@
   <div class="navbar-sign">
     <% if user_signed_in? %>
       <%= link_to (destroy_user_session_path), class: "", :method => :delete do %>
-        <li class="">Déconnexion</li>
+        <li style="display: flex; align-items: center; justify-content: center; height: 3rem;">Déconnexion</li>
       <% end %>
     <% else %>
       <%= link_to (user_session_path) do %>

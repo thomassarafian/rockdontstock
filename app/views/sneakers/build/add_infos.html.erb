@@ -29,8 +29,8 @@
   <div class="d-flex w-25 flex-column m-auto">
     <%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
       <%= f.select :size, size, { include_blank: "Taille FR" }, {  class: "form-group", style: "width: 100%; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 1rem; background: none;" } %>
-      <%= f.select :condition, condition, { include_blank: "Condition" }, {  class: "form-select", style: "width: 100%; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 1rem; background: none;" } %>
-      <%= f.select :box, brand, { include_blank: "Type de boîte" }, {  class: "form-select", style: "width: 100%; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 1rem; background: none;" } %>
+      <%= f.select :condition, condition, { include_blank: "Condition" }, {  class: "form-group form-select", style: "width: 100%; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 1rem; background: none;" } %>
+      <%= f.select :box, brand, { include_blank: "Type de boîte" }, {  class: "form-group form-select", style: "width: 100%; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 1rem; background: none;" } %>
       <div class="form-group">
         <%= f.label "Commentaire", class: "form-label" %>
         <%= f.text_area :extras, rows: 5, class: "form-control", placeholder: "Transmets-nous ici les défauts de ta paire ou toute information utile pour l’acheteur (trous, traçes, extra manquant...). " %>
