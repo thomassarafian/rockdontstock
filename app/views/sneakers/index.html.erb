@@ -87,9 +87,13 @@
         </div>
         <div class="form-group">
           <%= f.label "Prix", class: "form-label", style: "font-weight: 700" %>
-          <div class="row g-3">
-            <%= f.number_field :min_price, min: 0, class: "form-control col-4", placeholder: "Min" %>
-            <%= f.number_field :max_price, class: "form-control col-4", placeholder: "Max" %>
+          <div class="row g-2">
+            <div class="col-5">
+              <%= f.number_field :min_price, min: 0, class: "form-control", placeholder: "Min" %>
+            </div>
+            <div class="col-5">
+              <%= f.number_field :max_price, class: "form-control", placeholder: "Max" %>
+            </div>
           </div>
         </div>
         <div class="form-group">
@@ -117,9 +121,7 @@
         </div>
         <div class="form-group">
           <%= f.label "Taille", class: "form-label", style: "font-weight: 700" %>
-          <div>
-            <%= f.select :size, size, { include_blank: "Toute taille" }, {  style: "color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 0.5rem; background: none;" } %>
-          </div>
+          <%= f.select :size, size, { include_blank: "Toute taille" }, {  style: "display: block; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 0.5rem; background: none;" } %>
         </div>
       <% end %>
     </div>
