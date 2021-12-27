@@ -4,7 +4,7 @@
     <h2><i class="fas fa-arrow-left ms-0"></i> Commander</h2>
   <% end %>
   <div class="purchase">
-    <%= form_with url: root_url, class: "purchase-form" do |f| %>
+    <%= form_with data: { secret: @intent.client_secret }, id: "payment-form", class: "purchase-form" do |f| %>
       <div class="purchase-form__infos">
         <div class="purchase-form__infos__title">
           <%= image_tag("images/icon_shopping.svg") %>
@@ -14,21 +14,21 @@
           <div class="row g-2">
             <div class="col-5">
               <%= f.label "Nom", class: "form-label" %>
-              <%= f.text_field :last_name, class: "form-control" %>
+              <%= f.text_field :last_name, class: "form-control", required: true %>
             </div>
             <div class="col-5 me-3">
               <%= f.label "Prénom", class: "form-label" %>
-              <%= f.text_field :first_name, class: "form-control" %>
+              <%= f.text_field :first_name, class: "form-control", required: true %>
             </div>
           </div>
           <div class="row g-2">
             <div class="col-5">
               <%= f.label "Téléphone", class: "form-label" %>
-              <%= f.text_field :phone, class: "form-control" %>
+              <%= f.text_field :phone, class: "form-control", required: true %>
             </div>
             <div class="col-5 me-3">
               <%= f.label "E-mail", class: "form-label" %>
-              <%= f.email_field :email, class: "form-control" %>
+              <%= f.email_field :email, class: "form-control", required: true %>
             </div>
           </div>
         </div>
@@ -65,21 +65,21 @@
             <div class="row g-2">
               <div class="col-5">
                 <%= f.label "Adresse", class: "form-label" %>
-                <%= f.text_field :address, class: "form-control" %>
+                <%= f.text_field :address, class: "form-control", required: true %>
               </div>
               <div class="col-5 me-3">
                 <%= f.label "Ville", class: "form-label" %>
-                <%= f.text_field :city, class: "form-control" %>
+                <%= f.text_field :city, class: "form-control", required: true %>
               </div>
             </div>
             <div class="row g-2">
               <div class="col-5">
                 <%= f.label "Code postal", class: "form-label" %>
-                <%= f.text_field :zip_code, class: "form-control" %>
+                <%= f.text_field :zip_code, class: "form-control", required: true %>
               </div>
               <div class="col-5 me-3">
                 <%= f.label "Numéro de porte", class: "form-label" %>
-                <%= f.text_field :door_number, class: "form-control" %>
+                <%= f.text_field :door_number, class: "form-control", required: true %>
               </div>
             </div>
           </div>
@@ -91,21 +91,18 @@
           <span class="ms-2">Moyen de paiement</span>
         </div>
         <div class="purchase-form__payment__fields">
-          <form id="payment-form">
-            <div id="payment-element">
-              <!-- Elements will create form elements here -->
-            </div>
-            <button id="submit">Submit</button>
-            <div id="error-message">
-              <!-- Display error message to your customers here -->
-            </div>
-          </form>
+          <div id="payment-element">
+            <!-- Elements will create form elements here -->
+          </div>
+          <div id="error-message">
+            <!-- Display error message to your customers here -->
+          </div>
         </div>
       </div>
       <div class="purchase-form__validation">
         <button class="purchase-form__validation__btn">Valider ma commande</button>
         <div class="form-check">
-          <%= f.check_box :legal, { class: "form-check-input" }, 1, nil %>
+          <%= f.check_box :legal, { class: "form-check-input", required: true }, 1, nil %>
           <%= f.label class: "form-check-label" do %>
             En confirmant ma commande j'accepte les <a href="/cgv">conditions générales de vente</a>.
           <% end %>
@@ -118,11 +115,17 @@
           Ma commande
         </div>
         <div class="purchase-recap__card__sneaker">
-          <div class="purchase-recap__card__sneaker-photo"></div>
+          <%= cl_image_tag(@sneaker.photos.first.key, class: 'purchase-recap__card__sneaker-photo') %>
           <div class="purchase-recap__card__sneaker-details">
-            <div class="purchase-recap__card__sneaker-name"></div>
-            <div class="purchase-recap__card__sneaker-options"></div>
-            <div class="purchase-recap__card__sneaker-price"></div>
+            <div class="purchase-recap__card__sneaker-name">
+              <%= @sneaker.sneaker_db.name %>
+            </div>
+            <div class="purchase-recap__card__sneaker-options">
+              <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+            </div>
+            <div class="purchase-recap__card__sneaker-price">
+              <%= @sneaker.price %>€
+            </div>
           </div>
         </div>
         <div class="purchase-recap__card__order-infos">
@@ -176,88 +179,33 @@ relayChangeBtn.addEventListener('click', () => {
 })
 
 // STRIPE
-const stripe = Stripe('pk_test_zpov5qjbp0bFgRxn6qQo64l000jjN2sW1y');
+const stripe = Stripe("<%= ENV['STRIPE_PUBLIC_TEST'] %>");
 
 const options = {
-  clientSecret: '{{CLIENT_SECRET}}',
-  // Fully customizable with appearance API.
+  clientSecret: '<%= @intent.client_secret %>',
   appearance: {/*...*/},
 };
 
-// Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in step 2
 const elements = stripe.elements(options);
-
-// Create and mount the Payment Element
 const paymentElement = elements.create('payment');
 paymentElement.mount('#payment-element');
 
 const form = document.getElementById('payment-form');
 
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
   const {error} = await stripe.confirmPayment({
-    //`Elements` instance that was used to create the Payment Element
     elements,
     confirmParams: {
-      return_url: 'https://my-site.com/order/123/complete',
+      return_url: "<%= payment_complete_url + "?sneaker_id=" + @sneaker.id.to_s %>",
     },
   });
 
   if (error) {
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Show error to your customer (e.g., payment
-    // details incomplete)
     const messageContainer = document.querySelector('#error-message');
     messageContainer.textContent = error.message;
-  } else {
-    // Your customer will be redirected to your `return_url`. For some payment
-    // methods like iDEAL, your customer will be redirected to an intermediate
-    // site first to authorize the payment, then redirected to the `return_url`.
   }
 });
-
-// Retrieve the "payment_intent_client_secret" query parameter appended to
-// your return_url by Stripe.js
-const clientSecret = new URLSearchParams(window.location.search).get(
-  'payment_intent_client_secret'
-);
-
-// Retrieve the PaymentIntent
-stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent}) => {
-  const message = document.querySelector('#message')
-
-  // Inspect the PaymentIntent `status` to indicate the status of the payment
-  // to your customer.
-  //
-  // Some payment methods will [immediately succeed or fail][0] upon
-  // confirmation, while others will first enter a `processing` state.
-  //
-  // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
-  switch (paymentIntent.status) {
-    case 'succeeded':
-      message.innerText = 'Success! Payment received.';
-      break;
-
-    case 'processing':
-      message.innerText = "Payment processing. We'll update you when payment is received.";
-      break;
-
-    case 'requires_payment_method':
-      message.innerText = 'Payment failed. Please try another payment method.';
-      // Redirect your user back to your payment page to attempt collecting
-      // payment again
-      break;
-
-    default:
-      message.innerText = 'Something went wrong.';
-      break;
-  }
-});
-
-
-
-
-// ALLOW APPLE PAY
 
 </script>

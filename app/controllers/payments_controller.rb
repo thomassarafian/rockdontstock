@@ -1,4 +1,8 @@
 class PaymentsController < ApplicationController
+  skip_after_action :verify_authorized
+
+  def complete
+  end
 
   def new
     @order = current_user.orders.where(state: 'En cours').find(params[:order_id])

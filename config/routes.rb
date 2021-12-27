@@ -9,11 +9,11 @@ Rails.application.routes.draw do
 		registrations: 'users/registrations'
 	}
 	
+  get '/payment-complete', to: "payments#complete"
+
   resources :sneakers do 
     resources :build, controller: 'sneakers/build'
-    resources :orders, only: [:new, :show, :create] do
-      resources :payments, only: [:new]
-    end
+    resources :orders, only: [:new, :show, :create]
   end
   resources :sneaker_dbs, only: [:index, :create]
 

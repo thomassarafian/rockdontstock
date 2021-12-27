@@ -1,8 +1,17 @@
 class OrdersController < ApplicationController
+	skip_after_action :verify_authorized
 
 	def new 
 		@order = Order.new(user: current_user, sneaker_id: params[:sneaker_id])
-		authorize @order
+		@sneaker = @order.sneaker
+
+		@intent = Stripe::PaymentIntent.create(
+			amount: @sneaker.price * 100,
+			currency: 'eur',
+			automatic_payment_methods: {
+				enabled: true,
+			},
+		)
 	end
 
 	def show
@@ -42,9 +51,6 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-    if session[:sneaker_id_to_buy].present?
-      session.delete(:sneaker_id_to_buy)
-    end 
     if params['mondial-relay-price'].present? || params['colissimo-price'].present?
       @order = current_user.orders.last
       @sneaker = current_user.orders.last.sneaker
@@ -63,59 +69,59 @@ class OrdersController < ApplicationController
 
 	private
 
-	def create_stripe_session(order, sneaker, deliveryPrice)
-		puts stripe_session = Stripe::Checkout::Session.create({
-	  	customer: current_user.customer_id,
-	    payment_method_types: ['card'],
-	    line_items: [{
-	    	price_data: {
-	    		product_data: {
-	      		name: @sneaker_db.name,
-	    			images: [@sneaker.photos[0].url],
-	    		},
-	    		unit_amount: @order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i + (@order.service_cents / 2),
-	      	currency: "EUR",
-	    	},
-	    	quantity: 1,
-	    }],
-    	# payment_intent_data: {
-    		# capture_method: 'manual', 
-		  #   application_fee_amount: order.price_cents / 10, #l'argent qui va au vendeur #la plateforme reçoit une commission pour le service
-		  #   transfer_data: {
-		  #     destination: sneaker.user.stripe_account_id,
-		    # },
-		  # },
-      allow_promotion_codes: true,
-	    mode: 'payment',
-	    success_url: order_url(@order),
-	    cancel_url: root_url #new_order_payment_url(@order)
-	  })
+	# def create_stripe_session(order, sneaker, deliveryPrice)
+	# 	puts stripe_session = Stripe::Checkout::Session.create({
+	#   	customer: current_user.customer_id,
+	#     payment_method_types: ['card'],
+	#     line_items: [{
+	#     	price_data: {
+	#     		product_data: {
+	#       		name: @sneaker_db.name,
+	#     			images: [@sneaker.photos[0].url],
+	#     		},
+	#     		unit_amount: @order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i + (@order.service_cents / 2),
+	#       	currency: "EUR",
+	#     	},
+	#     	quantity: 1,
+	#     }],
+  #   	# payment_intent_data: {
+  #   		# capture_method: 'manual', 
+	# 	  #   application_fee_amount: order.price_cents / 10, #l'argent qui va au vendeur #la plateforme reçoit une commission pour le service
+	# 	  #   transfer_data: {
+	# 	  #     destination: sneaker.user.stripe_account_id,
+	# 	    # },
+	# 	  # },
+  #     allow_promotion_codes: true,
+	#     mode: 'payment',
+	#     success_url: order_url(@order),
+	#     cancel_url: root_url #new_order_payment_url(@order)
+	#   })
 
-    @order.checkout_session_id = stripe_session.id
-    @order.shipping_cost_cents = (deliveryPrice.to_f * 100).to_i
-    @order.price_cents = (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i + (@order.service_cents / 2))
-    @order.save!
+  #   @order.checkout_session_id = stripe_session.id
+  #   @order.shipping_cost_cents = (deliveryPrice.to_f * 100).to_i
+  #   @order.price_cents = (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i + (@order.service_cents / 2))
+  #   @order.save!
 
-	  # @order.update_column(:checkout_session_id, stripe_session.id)
-    # @order.update_column(:shipping_cost_cents, (deliveryPrice.to_f * 100).to_i)
-    # @order.update_column(:service_cents, (@order.service_cents / 2))
-    #@order.update_column(:price_cents, (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i)) #+ (@order.service_cents / 2)))
+	#   # @order.update_column(:checkout_session_id, stripe_session.id)
+  #   # @order.update_column(:shipping_cost_cents, (deliveryPrice.to_f * 100).to_i)
+  #   # @order.update_column(:service_cents, (@order.service_cents / 2))
+  #   #@order.update_column(:price_cents, (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i)) #+ (@order.service_cents / 2)))
 	  
-	end
+	# end
 
-	def retrieve_stripe_session
-		Stripe.api_key = ENV['STRIPE_SECRET_TEST']
-		stripe_session = Stripe::Checkout::Session.retrieve(
-		  @order.checkout_session_id
-		)
-	end
+	# def retrieve_stripe_session
+	# 	Stripe.api_key = ENV['STRIPE_SECRET_TEST']
+	# 	stripe_session = Stripe::Checkout::Session.retrieve(
+	# 	  @order.checkout_session_id
+	# 	)
+	# end
 
-	def capture_payment(current_stripe_session)
-				Stripe.api_key = ENV['STRIPE_SECRET_TEST']
-		Stripe::PaymentIntent.capture(
-		  current_stripe_session.payment_intent
-		)		
-	end
+	# def capture_payment(current_stripe_session)
+	# 			Stripe.api_key = ENV['STRIPE_SECRET_TEST']
+	# 	Stripe::PaymentIntent.capture(
+	# 	  current_stripe_session.payment_intent
+	# 	)		
+	# end
 
 	# def cancel_payment(current_stripe_session)
 	# 			Stripe.api_key = ENV['STRIPE_SECRET_TEST']

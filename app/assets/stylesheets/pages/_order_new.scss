@@ -55,13 +55,9 @@
     flex-direction: column;
     justify-content: space-between;
     width: 400px;
-    height: 600px;
-    padding: 2rem 1.5rem;
+    padding: 2rem;
     border: 1px solid $black;
-    &:hover {
-      outline: 1px solid $black;
-    }
-    &:hover::before {
+    &::before {
       content: "";
       position: absolute;
       width: 100%;
@@ -76,27 +72,34 @@
       @include para-1;
     }
     &__sneaker {
+      display: flex;
+      gap: 1rem;
       padding: 1.5rem 0;
       border-top: 1px solid $black;
       border-bottom: 1px solid $black;
       &-photo {
-        height: 100%;
+        width: 100%;
+        min-height: 100%;
         object-fit: cover;
       }
       &-details {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
+        gap: 1rem;
       }
       &-options {
-        @include para-1;
-        color: #b81e1e;
+        color: #727272;
       }
       &-price {
         @include para-2-bold;
       }
     }
     &__order-infos {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
       border-bottom: 1px solid $black;
+      margin-bottom: 3rem;
       &__item {
         display: flex;
         justify-content: space-between;
@@ -107,6 +110,7 @@
       }
     }
     &__total {
+      @include para-2-bold;
       display: flex;
       justify-content: space-between;
     }
