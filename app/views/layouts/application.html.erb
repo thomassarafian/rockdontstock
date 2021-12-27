@@ -45,6 +45,7 @@
     <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
     <script type="text/javascript" src="https://widget.mondialrelay.com/parcelshop-picker/jquery.plugin.mondialrelay.parcelshoppicker.min.js"></script>  
     <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+    <script src="https://js.stripe.com/v3/"></script>
   </head>
   
   <!-- Global site tag (gtag.js) - Google Analytics --> 
@@ -96,13 +97,20 @@
 
 <script>
 $(document).ready(function () {
-  $("#mondial-relay-map").MR_ParcelShopPicker({
-    Target: "#mondial-relay-target",
+  $(".purchase-form__shipping__relay-map").MR_ParcelShopPicker({
+    Target: "#purchase-form__shipping__relay-id",
     Brand: "CC22982B", // code client Mondial Relay  
     Country: "FR",
+    PostCode: "75001",
+    AutoSelect: "FR-062049",
     Responsive: true,
     ShowResultsOnMap: true,
-    NbResults: "8"
+    NbResults: "8",
+    OnParcelShopSelected: function(shop) {
+      document.querySelector('.purchase-form__shipping__relay-target-address').innerHTML = `${shop.Nom}, ${shop.Adresse1?.toLowerCase()} ${shop.Adresse2?.toLowerCase() || ''}`
+      document.querySelector('.purchase-form__shipping__relay-target-city').innerHTML = `${shop.CP} ${shop.Ville?.toLowerCase()}`
+      document.querySelector('.purchase-form__shipping__relay-map').style.display = "none"
+    }
   });
 });
 </script>

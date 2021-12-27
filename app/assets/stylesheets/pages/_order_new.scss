@@ -7,6 +7,18 @@
   flex-direction: column;
   width: 66%;
 
+  &__shipping {
+    &__relay-target {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    &__relay-btn {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
   &__infos,
   &__shipping,
   &__payment {
@@ -24,6 +36,17 @@
     @include cta-button;
     margin-bottom: 1rem;
   } 
+}
+.purchase-form__shipping__relay,
+.purchase-form__shipping__relay-map {
+  display: none;
+}
+.purchase-form__shipping__relay-target-address {
+  font-weight: 700;
+}
+.purchase-form__shipping__relay-target-city {
+  text-transform: capitalize;
+  color: $dark-gray;
 }
 .purchase-recap {
   &__card {

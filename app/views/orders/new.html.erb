@@ -40,37 +40,47 @@
         </div>
         <div class="purchase-form__shipping__fields">
           <div class="row g-2 ms-0">
-            <div class="form-check me-3">
-              <%= f.check_box :delivery, { class: "form-check-input" }, "1", nil %>
+            <div class="col-auto form-check me-3">
+              <%= f.radio_button :delivery, :colissimo, { class: "form-check-input", checked: true } %>
               <%= f.label "Colissimo", class: "form-check-label" %>
             </div>
-            <div class="form-check">
-              <%= f.check_box :delivery, { class: "form-check-input" }, "2", nil %>
+            <div class="col-auto form-check">
+              <%= f.radio_button :delivery, :relay, { class: "form-check-input" } %>
               <%= f.label "Mondial Relay", class: "form-check-label" %>
             </div>
           </div>
-          <div class="purchase-form__shipping__map">
-            <div id="mondial-relay-map"></div>
-            <input type="hidden" id="mondial-relay-target" />
+          <div class="purchase-form__shipping__relay">
+            <div class="purchase-form__shipping__relay-target">
+              <%= image_tag("images/map-pin.svg") %>
+              <div>
+                <div class="purchase-form__shipping__relay-target-address"></div>
+                <div class="purchase-form__shipping__relay-target-city"></div>
+                <div class="purchase-form__shipping__relay-btn">Changer</div>
+              </div>
+            </div>
+            <div class="purchase-form__shipping__relay-map"></div>
+            <input type="hidden" id="purchase-form__shipping__relay-id" />
           </div>
-          <div class="row g-2">
-            <div class="col-5">
-              <%= f.label "Adresse", class: "form-label" %>
-              <%= f.text_field :address, class: "form-control" %>
+          <div class="purchase-form__shipping__address">          
+            <div class="row g-2">
+              <div class="col-5">
+                <%= f.label "Adresse", class: "form-label" %>
+                <%= f.text_field :address, class: "form-control" %>
+              </div>
+              <div class="col-5 me-3">
+                <%= f.label "Ville", class: "form-label" %>
+                <%= f.text_field :city, class: "form-control" %>
+              </div>
             </div>
-            <div class="col-5 me-3">
-              <%= f.label "Ville", class: "form-label" %>
-              <%= f.text_field :city, class: "form-control" %>
-            </div>
-          </div>
-          <div class="row g-2">
-            <div class="col-5">
-              <%= f.label "Code postal", class: "form-label" %>
-              <%= f.text_field :zip_code, class: "form-control" %>
-            </div>
-            <div class="col-5 me-3">
-              <%= f.label "Numéro de porte", class: "form-label" %>
-              <%= f.text_field :door_number, class: "form-control" %>
+            <div class="row g-2">
+              <div class="col-5">
+                <%= f.label "Code postal", class: "form-label" %>
+                <%= f.text_field :zip_code, class: "form-control" %>
+              </div>
+              <div class="col-5 me-3">
+                <%= f.label "Numéro de porte", class: "form-label" %>
+                <%= f.text_field :door_number, class: "form-control" %>
+              </div>
             </div>
           </div>
         </div>
@@ -81,6 +91,15 @@
           <span class="ms-2">Moyen de paiement</span>
         </div>
         <div class="purchase-form__payment__fields">
+          <form id="payment-form">
+            <div id="payment-element">
+              <!-- Elements will create form elements here -->
+            </div>
+            <button id="submit">Submit</button>
+            <div id="error-message">
+              <!-- Display error message to your customers here -->
+            </div>
+          </form>
         </div>
       </div>
       <div class="purchase-form__validation">
@@ -129,3 +148,116 @@
     </div>
   </div>
 </div>
+
+<script>
+const radioRelay = document.getElementById('delivery_relay');
+const radioColissimo = document.getElementById('delivery_colissimo');
+const relayMap = document.querySelector('.purchase-form__shipping__relay-map');
+
+const colissimoBlock = document.querySelector('.purchase-form__shipping__address');
+const relayBlock = document.querySelector('.purchase-form__shipping__relay');
+const relayChangeBtn = document.querySelector('.purchase-form__shipping__relay-btn');
+
+[radioRelay, radioColissimo].forEach((radio) => {
+  radio.addEventListener('change', function() {
+    if (this === radioRelay) {
+      relayBlock.style.display = "block"
+      colissimoBlock.style.display = "none"
+    }
+    if (this === radioColissimo) {
+      relayBlock.style.display = "none"
+      colissimoBlock.style.display = "block"
+    }
+  });
+})
+
+relayChangeBtn.addEventListener('click', () => {
+  relayMap.style.display = "block"
+})
+
+// STRIPE
+const stripe = Stripe('pk_test_zpov5qjbp0bFgRxn6qQo64l000jjN2sW1y');
+
+const options = {
+  clientSecret: '{{CLIENT_SECRET}}',
+  // Fully customizable with appearance API.
+  appearance: {/*...*/},
+};
+
+// Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in step 2
+const elements = stripe.elements(options);
+
+// Create and mount the Payment Element
+const paymentElement = elements.create('payment');
+paymentElement.mount('#payment-element');
+
+const form = document.getElementById('payment-form');
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const {error} = await stripe.confirmPayment({
+    //`Elements` instance that was used to create the Payment Element
+    elements,
+    confirmParams: {
+      return_url: 'https://my-site.com/order/123/complete',
+    },
+  });
+
+  if (error) {
+    // This point will only be reached if there is an immediate error when
+    // confirming the payment. Show error to your customer (e.g., payment
+    // details incomplete)
+    const messageContainer = document.querySelector('#error-message');
+    messageContainer.textContent = error.message;
+  } else {
+    // Your customer will be redirected to your `return_url`. For some payment
+    // methods like iDEAL, your customer will be redirected to an intermediate
+    // site first to authorize the payment, then redirected to the `return_url`.
+  }
+});
+
+// Retrieve the "payment_intent_client_secret" query parameter appended to
+// your return_url by Stripe.js
+const clientSecret = new URLSearchParams(window.location.search).get(
+  'payment_intent_client_secret'
+);
+
+// Retrieve the PaymentIntent
+stripe.retrievePaymentIntent(clientSecret).then(({paymentIntent}) => {
+  const message = document.querySelector('#message')
+
+  // Inspect the PaymentIntent `status` to indicate the status of the payment
+  // to your customer.
+  //
+  // Some payment methods will [immediately succeed or fail][0] upon
+  // confirmation, while others will first enter a `processing` state.
+  //
+  // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
+  switch (paymentIntent.status) {
+    case 'succeeded':
+      message.innerText = 'Success! Payment received.';
+      break;
+
+    case 'processing':
+      message.innerText = "Payment processing. We'll update you when payment is received.";
+      break;
+
+    case 'requires_payment_method':
+      message.innerText = 'Payment failed. Please try another payment method.';
+      // Redirect your user back to your payment page to attempt collecting
+      // payment again
+      break;
+
+    default:
+      message.innerText = 'Something went wrong.';
+      break;
+  }
+});
+
+
+
+
+// ALLOW APPLE PAY
+
+</script>
