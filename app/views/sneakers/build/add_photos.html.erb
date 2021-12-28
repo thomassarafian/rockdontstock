@@ -20,64 +20,85 @@
     </div>
   </div>
   <%= form_for @sneaker, url: wizard_path, method: :put, multipart: true do |f| %>
-    <div class="photos-input">
-      <p style="text-align:center">Attention : les photos que tu implémentes doivent respecter l’ordre et les angles
-        présentés ci-dessous. Dans le cas contraire, ton annonce ne sera pas validée.</p>
-      <div class='sneaker-photo-input'>
-        <%= f.file_field :photos, multiple: true, id: 'photo-input0' ,
-          class: 'hidden upload-photo photo-input0' , label: '📷 Ajoute une photo' %>
-        <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview0" %>
-        <%= f.label :photos, "Intérieur" %>
+    <div class="d-flex flex-column">
+      <div>
+        <div style="font-weight: 700">
+          Importe tes photos
+        </div>
+        <div style="font-size: 0.8rem">
+          <i class="fas fa-exclamation-circle ml-0"></i> Attention : les photos que tu implémentes doivent respecter l’ordre et les angles présentés ci-dessous. Dans le cas contraire, ton annonce ne sera pas validée.
+        </div>
       </div>
-      <div class='sneaker-photo-input'>
-        <%= f.file_field :photos, multiple: true, id: 'photo-input1' ,
-          class: 'hidden upload-photo photo-input1' , label: '📷 Ajoute une photo' %>
-        <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview1" %>
-        <%= f.label :photos, "Extérieur" %>
-      </div>
-      <div class='sneaker-photo-input'>
-        <%= f.file_field :photos, multiple: true, id: 'photo-input2' ,
-          class: 'hidden upload-photo photo-input2' , label: '📷 Ajoute une photo' %>
-        <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview2" %>
-        <%= f.label :photos, "Derrière" %>
-      </div>
-      <div class='sneaker-photo-input'>
-        <%= f.file_field :photos, multiple: true, id: 'photo-input3' ,
-          class: 'hidden upload-photo photo-input3' , label: '📷 Ajoute une photo' %>
-        <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview3" %>
-        <%= f.label :photos, "Dessus" %>
-      </div>
-      <div class='sneaker-photo-input'>
-        <%= f.file_field :photos, multiple: true, id: 'photo-input4' ,
-          class: 'hidden upload-photo photo-input4' , label: '📷 Ajoute une photo' %>
-        <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview4" %>
-        <%= f.label :photos, "Dessous" %>
-      </div>
-      <div class='sneaker-photo-input'>
-        <%= f.file_field :photos, multiple: true, id: 'photo-input5' ,
-          class: 'hidden upload-photo photo-input5' , label: '📷 Ajoute une photo' %>
-        <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview5" %>
-        <%= f.label :photos, "Size tag" %>
-      </div>
-      <div class='sneaker-photo-input'>
-        <%= f.file_field :photos, multiple: true, id: 'photo-input6' ,
-          class: 'hidden upload-photo photo-input6' , label: '📷 Ajoute une photo' %>
-        <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview6" %>
-        <%= f.label :photos, "Optionnel : Boite" %>
-      </div>
-      <div class='sneaker-photo-input'>
-        <%= f.file_field :photos, multiple: true, id: 'photo-input7' ,
-          class: 'hidden upload-photo photo-input7' , label: '📷 Ajoute une photo' %>
-        <%= image_tag "" , width: 0, class: "hidden" , id: "photo-preview7" %>
-        <%= f.label :photos, "Optionnel : Défaults sur la paire" %>
+      <div class="sneaker-form__photos">
+        <div class="sneaker-form__photo sneaker-form__photo-0">
+          <img id="preview-photo-0" class="sneaker-form__photo__preview" src="" />
+          <%= f.file_field :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
+          <%= f.label "Intérieur" %>
+        </div>
+        <div class="sneaker-form__photo sneaker-form__photo-1">
+          <img id="preview-photo-1" class="sneaker-form__photo__preview" src="" />
+          <%= f.file_field :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
+          <%= f.label "Extérieur" %>
+        </div>
+        <div class="sneaker-form__photo sneaker-form__photo-2">
+          <img id="preview-photo-2" class="sneaker-form__photo__preview" src="" />
+          <%= f.file_field :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
+          <%= f.label "Derrière" %>
+        </div>
+        <div class="sneaker-form__photo sneaker-form__photo-3">
+          <img id="preview-photo-3" class="sneaker-form__photo__preview" src="" />
+          <%= f.file_field :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
+          <%= f.label "Dessus" %>
+        </div>
+        <div class="sneaker-form__photo sneaker-form__photo-4">
+          <img id="preview-photo-4" class="sneaker-form__photo__preview" src="" />
+          <%= f.file_field :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
+          <%= f.label "Dessous" %>
+        </div>
+        <div class="sneaker-form__photo sneaker-form__photo-5">
+          <img id="preview-photo-5" class="sneaker-form__photo__preview" src="" />
+          <%= f.file_field :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
+          <%= f.label "Size Tag" %>
+        </div>
+        <div class="sneaker-form__photo sneaker-form__photo-6">
+          <img id="preview-photo-6" class="sneaker-form__photo__preview" src="" />
+          <%= f.file_field :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
+          <%= f.label "Optionnel : boîte" %>
+        </div>
+        <div class="sneaker-form__photo sneaker-form__photo-7">
+          <img id="preview-photo-7" class="sneaker-form__photo__preview" src="" />
+          <%= f.file_field :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
+          <%= f.label "Optionnel : défauts sur la paire" %>
+        </div>
       </div>
     </div>
-    <%= f.submit "Valider" %>
+    <div class="d-flex justify-content-end" style="margin-top: 6rem; gap: 2rem">
+      <%= link_to "Précédent", previous_wizard_path, class: "sneaker-form__previous-btn" %>
+      <button class="sneaker-form__next-btn">
+        Suivant <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
   <% end %>
-  <div class="d-flex justify-content-end" style="margin-top: 3rem; gap: 2rem">
-    <%= link_to "Précédent", previous_wizard_path, class: "sneaker-form__previous-btn" %>
-    <%= link_to next_wizard_path, class: "sneaker-form__next-btn" do %>
-      Suivant <i class="fas fa-arrow-right"></i>
-    <% end %>
-  </div>
 </div>
+
+<script>
+  document.querySelectorAll('.sneaker-form__photo__input').forEach((input, index) => {
+    let preview = document.getElementById("preview-photo-" + index)
+
+    input.addEventListener('change', _ => {
+      const [file] = input.files
+      if (file) {
+        preview.style.visibility = "visible"
+        preview.src = URL.createObjectURL(file)
+      }
+    })
+  })
+</script>
