@@ -11,7 +11,7 @@
 .sneaker-infos__photo {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .sneaker-details{
   display: flex;
@@ -21,7 +21,7 @@
 .sneaker-details__name {
   margin-bottom: 0.2em;
 }
-.sneaker-details__options{
+.sneaker-details__options {
   @include para-1;
   color: #727272;
 }

@@ -3,7 +3,7 @@ class Sneakers::BuildController < ApplicationController
 
   skip_after_action :verify_policy_scoped, only: [:index]
 
-  steps :add_sneaker_db, :add_infos, :add_photos
+  steps :add_sneaker_db, :add_infos, :add_photos, :add_recap
 
   def show
     @sneaker = Sneaker.find(params[:sneaker_id])
@@ -17,7 +17,8 @@ class Sneakers::BuildController < ApplicationController
     status = (step == steps.last ? "active" : step.to_s)
 
     if @sneaker.update(sneaker_params.merge(status: status))
-      render_wizard @sneaker       
+      flash[:notice] = "Ton annonce a bien été envoyée !" if step == steps.last
+      render_wizard @sneaker
     else
       flash[:alert] = @sneaker.errors.full_messages.join(', ')
       redirect_to request.referrer

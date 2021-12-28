@@ -4,10 +4,10 @@
 .sneaker-form__next-btn {
   @include cta-button;
 }
-.sell-wizard__subtitle {
+.sale-wizard__subtitle {
   @include para-1;
 }
-.sell-wizard__progress {
+.sale-wizard__progress {
   display: flex;
   width: 100%;
   gap: 1rem;
@@ -131,4 +131,106 @@
   height: 100%;
   object-fit: cover;
   visibility: hidden;
+}
+.sneaker-form__recap {
+  &__card {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 400px;
+    padding: 2rem;
+    border: 1px solid $black;
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 10px;
+      left: 10px;
+      border-right: 10px solid $black;
+      border-bottom: 10px solid $black;
+      z-index: -1;
+    }
+    &__title {
+      @include para-1;
+    }
+    &__sneaker {
+      display: flex;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid $black;
+      border-bottom: 1px solid $black;
+      &-photo {
+        width: 100%;
+        min-height: 100%;
+        object-fit: cover;
+      }
+      &-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      &-options {
+        color: #727272;
+      }
+      &-price {
+        @include para-2-bold;
+      }
+    }
+    &__order-infos {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid $black;
+      border-top: 1px solid $black;
+      margin-top: 2rem;
+      margin-bottom: 2.5rem;
+      &__item {
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem 0;
+        & > div:last-child {
+          font-weight: 700;
+        }
+      }
+    }
+    &__total {
+      @include para-2-bold;
+      display: flex;
+      justify-content: space-between;
+    }
+    &__btn {
+      @include cta-button;
+      margin: 2rem 0;
+    }
+  }
+}
+.sneaker-form__recap__content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+}
+.sneaker-form__recap__left {
+  width: 45%;
+}
+.sneaker-form__recap__photos {
+  display: inline-block;
+  width: 100%;
+  height: 300px;
+  margin-bottom: 2rem;
+}
+.sneaker-form__recap__details {
+  margin-top: 2rem;
+  color: #727272;
+  & > a,
+  & > a:hover {
+    color: $black;
+  }
+}
+.sneaker-form__recap__photo {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }

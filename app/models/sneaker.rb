@@ -12,6 +12,7 @@ class Sneaker < ApplicationRecord
   validates :sneaker_db, presence: true, if: :active_or_step_sneaker_db?
   validates :size, :condition, :box, :price, presence: true, if: :active_or_step_infos?
   validates :photos, presence: true, if: :active_or_step_photos?
+  validates :legal1, :legal2, :legal3, acceptance: true
 
   accepts_nested_attributes_for :sneaker_db
 
