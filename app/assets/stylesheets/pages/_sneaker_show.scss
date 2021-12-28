@@ -1,12 +1,14 @@
 .sneaker-infos{
   display: flex;
-  align-items: center;
   width: 100%;
   gap: 3rem;
 }
 .sneaker-infos__photo-block {
   display: inline-block;
   height: 580px;
+}
+.sneaker-infos__photos-carousel {
+ width: 100%;
 }
 .sneaker-infos__photo {
   height: 100%;
@@ -32,6 +34,7 @@
 }
 .sneaker-details__box{
   color: #727272;
+  margin-bottom: 0.6rem;
 }
 .sneaker-details__purchase{
   @include cta-button;

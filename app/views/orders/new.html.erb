@@ -16,7 +16,7 @@
               <%= f.label "Nom", class: "form-label" %>
               <%= f.text_field :last_name, class: "form-control", required: true %>
             </div>
-            <div class="col-5 me-3">
+            <div class="col-5">
               <%= f.label "Prénom", class: "form-label" %>
               <%= f.text_field :first_name, class: "form-control", required: true %>
             </div>
@@ -26,7 +26,7 @@
               <%= f.label "Téléphone", class: "form-label" %>
               <%= f.text_field :phone, class: "form-control", required: true %>
             </div>
-            <div class="col-5 me-3">
+            <div class="col-5">
               <%= f.label "E-mail", class: "form-label" %>
               <%= f.email_field :email, class: "form-control", required: true %>
             </div>
@@ -85,7 +85,7 @@
           </div>
         </div>
       </div>
-      <div class="purchase-form__payment">
+      <div class="purchase-form__payment col-10">
         <div class="purchase-form__payment__title">
           <%= image_tag("images/icon_bill.svg") %>
           <span class="ms-2">Moyen de paiement</span>
@@ -100,10 +100,10 @@
         </div>
       </div>
       <div class="purchase-form__validation">
-        <button class="purchase-form__validation__btn">Valider ma commande</button>
+        <button type="submit" class="purchase-form__validation__btn">Valider ma commande</button>
         <div class="form-check">
           <%= f.check_box :legal, { class: "form-check-input", required: true }, 1, nil %>
-          <%= f.label class: "form-check-label" do %>
+          <%= f.label "", class: "form-check-label" do %>
             En confirmant ma commande j'accepte les <a href="/cgv">conditions générales de vente</a>.
           <% end %>
         </div>
@@ -153,59 +153,60 @@
 </div>
 
 <script>
-const radioRelay = document.getElementById('delivery_relay');
-const radioColissimo = document.getElementById('delivery_colissimo');
-const relayMap = document.querySelector('.purchase-form__shipping__relay-map');
+document.addEventListener('DOMContentLoaded', function(event) {
+  const radioRelay = document.getElementById('delivery_relay');
+  const radioColissimo = document.getElementById('delivery_colissimo');
+  const relayMap = document.querySelector('.purchase-form__shipping__relay-map');
+  const colissimoBlock = document.querySelector('.purchase-form__shipping__address');
+  const relayBlock = document.querySelector('.purchase-form__shipping__relay');
+  const relayChangeBtn = document.querySelector('.purchase-form__shipping__relay-btn');
 
-const colissimoBlock = document.querySelector('.purchase-form__shipping__address');
-const relayBlock = document.querySelector('.purchase-form__shipping__relay');
-const relayChangeBtn = document.querySelector('.purchase-form__shipping__relay-btn');
+  [radioRelay, radioColissimo].forEach((radio) => {
+    radio.addEventListener('change', function() {
+      if (this === radioRelay) {
+        relayBlock.style.display = "block"
+        colissimoBlock.style.display = "none"
+      }
+      if (this === radioColissimo) {
+        relayBlock.style.display = "none"
+        colissimoBlock.style.display = "block"
+      }
+    });
+  })
 
-[radioRelay, radioColissimo].forEach((radio) => {
-  radio.addEventListener('change', function() {
-    if (this === radioRelay) {
-      relayBlock.style.display = "block"
-      colissimoBlock.style.display = "none"
-    }
-    if (this === radioColissimo) {
-      relayBlock.style.display = "none"
-      colissimoBlock.style.display = "block"
+  relayChangeBtn.addEventListener('click', () => {
+    relayMap.style.display = "block"
+  })
+
+  // STRIPE
+  const stripe = Stripe("<%= ENV['STRIPE_PUBLIC_TEST'] %>");
+
+  const options = {
+    clientSecret: '<%= @intent.client_secret %>',
+    appearance: {/*...*/},
+  };
+
+  const elements = stripe.elements(options);
+  const paymentElement = elements.create('payment');
+  paymentElement.mount('#payment-element');
+
+  const form = document.getElementById('payment-form');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const {error} = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: "<%= payment_complete_url + "?sneaker_id=" + @sneaker.id.to_s %>",
+      },
+    });
+
+    if (error) {
+      const messageContainer = document.querySelector('#error-message');
+      messageContainer.textContent = error.message;
     }
   });
 })
-
-relayChangeBtn.addEventListener('click', () => {
-  relayMap.style.display = "block"
-})
-
-// STRIPE
-const stripe = Stripe("<%= ENV['STRIPE_PUBLIC_TEST'] %>");
-
-const options = {
-  clientSecret: '<%= @intent.client_secret %>',
-  appearance: {/*...*/},
-};
-
-const elements = stripe.elements(options);
-const paymentElement = elements.create('payment');
-paymentElement.mount('#payment-element');
-
-const form = document.getElementById('payment-form');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const {error} = await stripe.confirmPayment({
-    elements,
-    confirmParams: {
-      return_url: "<%= payment_complete_url + "?sneaker_id=" + @sneaker.id.to_s %>",
-    },
-  });
-
-  if (error) {
-    const messageContainer = document.querySelector('#error-message');
-    messageContainer.textContent = error.message;
-  }
-});
 
 </script>

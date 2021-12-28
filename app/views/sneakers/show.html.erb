@@ -4,12 +4,12 @@
     <div><i class="fas fa-arrow-left ms-0"></i> La marketplace</div>
   <% end %>
   <section class="sneaker-infos">
-    <div class="sneaker-infos__photos-carousel w-100 align-self-stretch" data-flickity='{ "imagesLoaded": true, "percentPosition": false, "wrapAround": true, "cellSelector": ".sneaker-infos__photo", "fullscreen": true }'>
+    <div class="sneaker-infos__photos-carousel" data-flickity='{ "imagesLoaded": true, "percentPosition": false, "wrapAround": true, "cellSelector": ".sneaker-infos__photo", "fullscreen": true }'>
         <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
         <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
         <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
     </div>
-    <div class="sneaker-details">
+    <div class="sneaker-details" style="flex-shrink: 2">
       <div>
         <h2 class="sneaker-details__name"><%= @sneaker.sneaker_db.name %></h2>
         <div class="sneaker-details__options">
@@ -21,7 +21,7 @@
         <div class="sneaker-details__box">Livrée avec une <%= @sneaker.box %></div>
         <div class="sneaker-details__legal-descr">L’authenticité et la conformité du modèle seront vérifiées par nos experts avant de t’être envoyée afin de t’assurer la meilleure experience possible.</div>
       </div>
-      <button class="sneaker-details__purchase">Commander</button>
+      <%= button_to "Commander", new_sneaker_order_path(@sneaker.id), method: :get, class: "sneaker-details__purchase" %>
       <ul class="sneaker-details__legal-infos-list mb-0">
         <li><%= image_tag("images/icon_calendar.svg") %> Expédition garantie</li>
         <li><%= image_tag("images/icon_truck.svg") %> Livraison à partir de 5€</li>

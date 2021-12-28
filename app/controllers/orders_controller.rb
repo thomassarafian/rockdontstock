@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 		@sneaker = @order.sneaker
 
 		@intent = Stripe::PaymentIntent.create(
-			amount: @sneaker.price * 100,
+			amount: @sneaker.price_cents,
 			currency: 'eur',
 			automatic_payment_methods: {
 				enabled: true,

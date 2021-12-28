@@ -53,7 +53,6 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    justify-content: space-between;
     width: 400px;
     padding: 2rem;
     border: 1px solid $black;
@@ -70,6 +69,7 @@
     }
     &__title {
       @include para-1;
+      margin-bottom: 2rem;
     }
     &__sneaker {
       display: flex;
@@ -78,7 +78,7 @@
       border-top: 1px solid $black;
       border-bottom: 1px solid $black;
       &-photo {
-        width: 100%;
+        width: 33%;
         min-height: 100%;
         object-fit: cover;
       }
