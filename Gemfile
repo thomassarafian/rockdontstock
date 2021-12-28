@@ -37,6 +37,7 @@ gem 'autoprefixer-rails'
 gem 'simple_form'
 gem 'wicked' # wizard form
 gem 'whenever', require: false # cron job
+gem 'friendly_id'
 
 gem 'devise'
 gem 'omniauth-facebook'

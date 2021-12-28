@@ -2,7 +2,7 @@
   @include secondary-button;
 }
 .sneaker-form__next-btn {
-  @include primary-button;
+  @include cta-button;
 }
 .sell-wizard__subtitle {
   @include para-1;

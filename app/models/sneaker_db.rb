@@ -2,6 +2,8 @@ class SneakerDb < ApplicationRecord
   has_many :sneakers, dependent: :destroy
   validates :name, uniqueness: true
 
+  before_create :set_default_image
+
   include PgSearch::Model
   pg_search_scope :pg_search_by_name,
     against: [:name],
@@ -15,6 +17,12 @@ class SneakerDb < ApplicationRecord
     else
       SneakerDb.all
     end
+  end
+
+  private
+
+  def set_default_image
+    self.img_url = "/assets/oeil-rds.png"
   end
 
  #  scope :filter_by_price, -> (price) { 

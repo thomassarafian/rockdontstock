@@ -151,6 +151,8 @@ GEM
       useragent
     forestadmin-jsonapi-serializers (2.0.0.pre.beta.2)
       activesupport
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     gibbon (3.4.2)
       faraday (>= 1.0)
       multi_json (>= 1.11.0)
@@ -427,6 +429,7 @@ DEPENDENCIES
   dotenv-rails
   figaro
   forest_liana
+  friendly_id
   gibbon
   httparty
   jbuilder (~> 2.7)

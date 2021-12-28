@@ -1,14 +1,13 @@
-<div class="sneaker-cards">
+<div class="sneakerdb-index">
   <% @results&.each do |sneaker_db| %>
     <%= form_for @sneaker, url: sneaker_build_path(@sneaker.id, :add_sneaker_db), method: :put do |f| %>
       <%= f.hidden_field :sneaker_db_id, value: sneaker_db.id %>
-      <%= button_to do %>
-        <%= image_tag(sneaker_db.img_url, class: "sneaker-db__card-img") %>
-        <div class="sneaker-db__card-title">
+      <div type="button" class="sneakerdb-index__card" onclick="this.closest('form').submit();">
+        <%= image_tag(sneaker_db.img_url, class: "sneakerdb-index__card__photo") %>
+        <div class="sneakerdb-index__card__name">
           <strong><%= sneaker_db.name %></strong>
         </div>
-      <% end %>
+      </div>
     <% end %>
   <% end %>
 </div>
-<%== pagy_bootstrap_nav(@pagy) if @pagy %>

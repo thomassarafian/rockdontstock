@@ -28,11 +28,7 @@ class Order < ApplicationRecord
 
 
   def order_is_not_in_preparation?
-    if self.state_changed? && self.state == "En préparation"
-      return false
-    else
-      return true
-    end
+    !self.state_changed? || !self.state == "En préparation"
   end
 
   def create_sendcloud_label_for_buyer
@@ -40,11 +36,7 @@ class Order < ApplicationRecord
   end
 
   def order_is_not_paid?
-    if self.state_changed? && self.state == "Payé"
-      return false
-    else
-      return true
-    end
+    !self.state_changed? || !self.state == "Payé"
   end
 
   def create_sendcloud_label

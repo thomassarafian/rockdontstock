@@ -15,8 +15,13 @@ class Sneakers::BuildController < ApplicationController
     @sneaker = Sneaker.find(params[:sneaker_id])
     authorize @sneaker
     status = (step == steps.last ? "active" : step.to_s)
-    @sneaker.update(sneaker_params.merge(status: status))
-    render_wizard @sneaker
+
+    if @sneaker.update(sneaker_params.merge(status: status))
+      render_wizard @sneaker       
+    else
+      flash[:alert] = @sneaker.errors.full_messages.join(', ')
+      redirect_to request.referrer
+    end
   end
 
   # def create
@@ -32,7 +37,7 @@ class Sneakers::BuildController < ApplicationController
   end
 
 	def sneaker_params
-		params.require(:sneaker).permit(:sneaker_db_id, :size, :price, :condition, :box, :extras, photos: [])
+		params.require(:sneaker).permit(:sneaker_db_id, :size, :price, :condition, :box, :extras, sneaker_db_attributes: [:name], photos: [])
 	end
 
 end

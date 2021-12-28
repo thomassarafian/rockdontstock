@@ -1,5 +1,7 @@
 class Sneaker < ApplicationRecord
   include PgSearch::Model
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :finders]
 	# after_create :send_notification  # a configurer avec mailjet 
   
 	has_many_attached :photos, service: :cloudinary, dependent: :detach
@@ -10,6 +12,8 @@ class Sneaker < ApplicationRecord
   validates :sneaker_db, presence: true, if: :active_or_step_sneaker_db?
   validates :size, :condition, :box, :price, presence: true, if: :active_or_step_infos?
   validates :photos, presence: true, if: :active_or_step_photos?
+
+  accepts_nested_attributes_for :sneaker_db
 
   monetize :price_cents
   

@@ -11,9 +11,11 @@ class SneakerDbsController < ApplicationController
     end
   end
 
-  def create
-    @sneaker_db = SneakerDb.create(name: params['add_sneaker_db'], img_url: "/assets/oeil-rds.png")
-    authorize @sneaker_db
-  end
+  # def create
+  #   @sneaker_db = SneakerDb.create(sneaker_db_params.merge(img_url: "/assets/oeil-rds.png"))
+  #   authorize @sneaker_db
+
+  #   redirect_to params[:sneaker_db][:next_wizard_path]
+  # end
   
 end

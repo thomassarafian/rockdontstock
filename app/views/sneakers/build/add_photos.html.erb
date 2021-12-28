@@ -74,4 +74,10 @@
     </div>
     <%= f.submit "Valider" %>
   <% end %>
+  <div class="d-flex justify-content-end" style="margin-top: 3rem; gap: 2rem">
+    <%= link_to "Précédent", previous_wizard_path, class: "sneaker-form__previous-btn" %>
+    <%= link_to next_wizard_path, class: "sneaker-form__next-btn" do %>
+      Suivant <i class="fas fa-arrow-right"></i>
+    <% end %>
+  </div>
 </div>

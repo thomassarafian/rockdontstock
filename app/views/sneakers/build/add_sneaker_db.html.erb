@@ -22,25 +22,55 @@
         <div class="sell-wizard__progress__step-display"></div>
       </div>
     </div>
-    <div style="font-weight: 700">Recherche la paire que tu souhaites vendre</div>
-    <%= form_with url: sneaker_dbs_path, method: :get, local: false, html: { class: 'search-sneaker-model-form my-2' } do |f| %>
-      <div style="position: relative; width: 380px">
-        <%= f.text_field :search, class: "form-control", placeholder: "Adidas Yeezy Boost 350 v2 Bred...", id: 'search_sneaker_name' %>
-        <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 0; transform: translateY(50%)" %>
+    <div class="form-search">
+      <div style="font-weight: 700">Recherche la paire que tu souhaites vendre</div>
+      <%= form_with url: sneaker_dbs_path, method: :get, local: false, html: { class: 'search-sneaker-model-form' } do |f| %>
+        <div style="position: relative; width: 380px">
+          <%= f.text_field :search, class: "form-control my-2", placeholder: "Adidas Yeezy Boost 350 v2 Bred...", id: 'search_sneaker_name' %>
+          <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 0; transform: translateY(50%)" %>
+        </div>
+        <%= f.hidden_field :sneaker_id, value: @sneaker.id %>
+      <% end %>
+      <a href="javascript:;" style="font-size: 0.8rem" onclick="displayForm('add')">
+        Je ne trouve pas ma paire
+      </a>
+      <div id="form-content" class="mt-5">
+        <%= render partial: 'sneaker_dbs/list_sneakers_db' %>
       </div>
-      <%= f.hidden_field :sneaker_id, value: @sneaker.id %>
-    <% end %>
-    <a href="#">Je ne trouve pas ma paire</a>
-    <div id="form-content">
-      <%= render partial: 'sneaker_dbs/list_sneakers_db' %>
+    </div>
+    <div class="form-add" style="display: none;">
+      <div style="font-weight: 700">Il n'y a pas ton modèle ? Ajoute-le ci-dessous</div>
+      <%= form_for @sneaker, url: sneaker_build_path(@sneaker.id, :add_sneaker_db), method: :put, class: "my-2" do |f| %>
+        <div style="position: relative; width: 380px">
+          <%= f.fields_for :sneaker_db, SneakerDb.new do |new_sneaker_db| %>
+            <%= new_sneaker_db.text_field :name, class: "form-control my-2", required: true, placeholder: "Mon modèle" %>
+          <% end %>
+        </div>
+        <a href="javascript:;" style="font-size: 0.8rem" onclick="displayForm('search')">
+          Parcourir les modèles
+        </a>
+        <div class="d-flex justify-content-end">
+          <button class="sneaker-form__next-btn">
+            Suivant <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
-<!-- <div class="form-add-new-sneakerdb">
-  <hr>
-  <h2>Si tu ne trouves pas ton modèle dans la liste, ajoute-le ci-dessous :</h2>
-  <form id="addNewSneakerDb" action="/sneaker_dbs/" data-remote="true" method="post" >
-    <input class="add-sneaker-db-name" required type="text"  placeholder="Adidas Yeezy Boost 700 Wave Runner Solid Grey" name="add_sneaker_db">
-    <input type="submit" value="Ajouter ma paire" class="btn btn-dark">
-  </form>
-</div> -->
+<script>
+function displayForm(which) {
+  let formSearch = document.querySelector('.form-search');
+  let formAdd = document.querySelector('.form-add');
+
+  if (which === 'add') {
+    formAdd.style.display = "block"
+    formSearch.style.display = "none"
+  }
+
+  if (which === 'search') {
+    formAdd.style.display = "none"
+    formSearch.style.display = "block"
+  }
+}
+</script>
