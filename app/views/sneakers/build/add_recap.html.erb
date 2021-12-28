@@ -84,8 +84,8 @@
         </div>
         <div class="form-check mb-1">
           <%= f.check_box :legal3, { class: "form-check-input", required: true }, 1, nil %>
-          <%= f.label class: "form-check-label", style: "font-size: 0.8rem" do %>
-            J'accepte les <%= link_to "conditions de vente de Rock Don't Stock", cgv_path %> dans leur ensemble.
+          <%= f.label class: "form-check-label" do %>
+            <span style="font-size: 0.8rem">J'accepte les <%= link_to "conditions de vente de Rock Don't Stock", cgv_path, style: "text-decoration: underline" %> dans leur ensemble.</span>
           <% end %>
         </div>
       <% end %>
