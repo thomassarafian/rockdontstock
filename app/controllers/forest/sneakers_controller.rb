@@ -1,12 +1,14 @@
 class Forest::SneakersController < ForestLiana::SmartActionsController
 
   def set_as_day_selection
-    selected_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
-    
-    if selected_id
-      Sneaker.where(highlighted: true).update_all(highlighted: false)
-      Sneaker.find(selected_id).update(highlighted: true)
-    end
+    selected_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0)
+    selected_idfirst = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
+    puts "*"*100, selected_id
+    puts "*"*100, selected_idfirst
+    # if selected_id
+    #   Sneaker.where(highlighted: true).update_all(highlighted: false)
+    #   Sneaker.find(selected_id).update(highlighted: true)
+    # end
   end
 
   def set_as_home_selection
