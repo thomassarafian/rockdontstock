@@ -1,4 +1,23 @@
 class Forest::SneakersController < ForestLiana::SmartActionsController
+
+  def set_as_day_selection
+    selected_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
+    
+    if selected_id
+      Sneaker.where(highlighted: true).update_all(highlighted: false)
+      Sneaker.find(selected_id).update(highlighted: true)
+    end
+  end
+
+  def set_as_home_selection
+    selected_ids = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0)
+    
+    if !selected_ids.empty?
+      Sneaker.where(selected: true).update_all(selected: false)
+      Sneaker.where(id: selected_ids).update_all(selected: true)
+    end
+  end
+
   def validate_announcement
     sneaker_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
 

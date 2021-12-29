@@ -3,6 +3,8 @@ class Forest::Sneaker
 
   collection :Sneaker
 
+  action "Set as home selection"
+  action "Set as day selection", type: "single"
   action "Validate announcement"
   action "Reject announcement fake sneakers"
   action "Reject announcement bad criteria"

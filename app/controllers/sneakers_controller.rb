@@ -5,6 +5,7 @@ class SneakersController < ApplicationController
 	skip_after_action :verify_authorized, only: [:new, :create]
 
 	def index
+		@selection_of_the_day = Sneaker.find_by(highlighted: true) || Sneaker.find_by(selected: true) || Sneaker.first
 		results = policy_scope(Sneaker).where('state >= ?', 1).search_by_name_and_brand(params[:search])
 		
 		[:price, :condition, :size, :category].each do |filter|

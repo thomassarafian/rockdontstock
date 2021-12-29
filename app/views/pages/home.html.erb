@@ -16,7 +16,7 @@
   <section class="home-last-sneakers">
     <div class="home-last-sneakers__title">Les dernières paires ajoutées</div>
     <div class="home-last-sneakers__block">
-      <% Sneaker.limit(8).each do |sneaker| %>
+      <% @sneakers_last_added.each do |sneaker| %>
         <div class="sneaker-home__card">
           <%= cl_image_tag(sneaker.photos.first.key, class: 'sneaker-home__card__photo') %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>
@@ -34,7 +34,7 @@
   <section class="home-selected-sneakers">
     <div class="home-selected-sneakers__title">Notre sélection</div>
     <div class="home-selected-sneakers__block">
-      <% Sneaker.limit(8).each do |sneaker| %>
+      <% @sneakers_selected.each do |sneaker| %>
         <div class="sneaker-home__card">
           <%= cl_image_tag(sneaker.photos.first.key, class: 'sneaker-home__card__photo') %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>

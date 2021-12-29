@@ -1170,6 +1170,36 @@
       "widget": null,
       "validations": []
     }, {
+      "field": "selected",
+      "type": "Boolean",
+      "default_value": "false",
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "highlighted",
+      "type": "Boolean",
+      "default_value": "false",
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
+    }, {
       "field": "photos_attachments",
       "type": ["Number"],
       "default_value": null,
@@ -1220,6 +1250,32 @@
     }],
     "segments": [],
     "actions": [{
+      "name": "Set as home selection",
+      "type": "bulk",
+      "base_url": null,
+      "endpoint": "forest/actions/set-as-home-selection",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
+    }, {
+      "name": "Set as day selection",
+      "type": "single",
+      "base_url": null,
+      "endpoint": "forest/actions/set-as-day-selection",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
+    }, {
       "name": "Validate announcement",
       "type": "bulk",
       "base_url": null,
@@ -1490,7 +1546,31 @@
       "validations": []
     }],
     "segments": [],
-    "actions": []
+    "actions": [{
+      "name": "Upload Legal Docs",
+      "type": "single",
+      "base_url": null,
+      "endpoint": "forest/actions/upload-legal-docs",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [{
+        "field": "Certificate of Incorporation",
+        "type": "File",
+        "default_value": null,
+        "enums": null,
+        "is_required": true,
+        "is_read_only": false,
+        "reference": null,
+        "description": "The legal document relating to the formation of a company or corporation.",
+        "position": 0,
+        "widget": null
+      }],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
+    }]
   }, {
     "name": "User",
     "name_old": "users",

@@ -37,6 +37,8 @@ Rails.application.routes.draw do
   
   namespace :forest do
     # Sneakers
+    post '/actions/set-as-day-selection'              => 'sneakers#set_as_day_selection'
+    post '/actions/set-as-home-selection'             => 'sneakers#set_as_home_selection'
     post '/actions/validate-announcement'             => 'sneakers#validate_announcement'
     post '/actions/reject-announcement-bad-criteria'  => 'sneakers#reject_announcement_bad_criteria'
     post '/actions/reject-announcement-bad-angles'    => 'sneakers#reject_announcement_bad_angles'

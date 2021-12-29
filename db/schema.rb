@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_28_092907) do
+ActiveRecord::Schema.define(version: 2021_12_29_142451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,8 @@ ActiveRecord::Schema.define(version: 2021_12_28_092907) do
     t.bigint "sneaker_db_id"
     t.string "status"
     t.string "slug"
+    t.boolean "selected", default: false
+    t.boolean "highlighted", default: false
     t.index ["slug"], name: "index_sneakers_on_slug", unique: true
     t.index ["sneaker_db_id"], name: "index_sneakers_on_sneaker_db_id"
     t.index ["user_id"], name: "index_sneakers_on_user_id"

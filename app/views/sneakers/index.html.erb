@@ -35,13 +35,13 @@
     <div class="sneaker-featured-block">
       <div class="sneaker-featured-block__title">Sélection du jour</div>
       <div class="sneaker-featured-block__content">
-        <%= cl_image_tag(Sneaker.first.photos.first.key, class: 'sneaker-featured-photo') %>
+        <%= cl_image_tag(@selection_of_the_day.photos.first.key, class: 'sneaker-featured-photo') %>
         <div class="sneaker-featured-details">
-          <h2 class="sneaker-featured__name"><%= Sneaker.first.sneaker_db.name %></h2>
+          <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
           <div class="sneaker-featured-details__options">
-            <%= Sneaker.first.sneaker_db.category %> - Taille <%= Sneaker.first.size %> - Condition: <%= Sneaker.first.condition %>/10
+            <%= @selection_of_the_day.sneaker_db.category %> - Taille <%= @selection_of_the_day.size %> - Condition: <%= @selection_of_the_day.condition %>/10
           </div>
-          <div class="sneaker-featured-details__price"><%= Sneaker.first.price %>€</div>
+          <div class="sneaker-featured-details__price"><%= @selection_of_the_day.price %>€</div>
           <div>
             <button class="sneaker-featured-details__purchase">Acheter</button>
             <button class="sneaker-featured-details__discover">Découvrir le modèle</button>
