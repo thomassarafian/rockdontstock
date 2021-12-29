@@ -38,7 +38,7 @@ class Sneaker < ApplicationRecord
     joins(:sneaker_db).where(:sneaker_dbs => { :category => category })
   }
   scope :filter_by_condition, -> (condition) { 
-    where("sneakers.condition = ?", condition.to_i) 
+    where("sneakers.condition = ?", condition) 
   }
   scope :filter_by_size, -> (size) {
     where("sneakers.size = ?", size.to_d)
