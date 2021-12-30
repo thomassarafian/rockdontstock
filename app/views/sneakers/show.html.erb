@@ -4,10 +4,25 @@
     <div><i class="fas fa-arrow-left ms-0"></i> La marketplace</div>
   <% end %>
   <section class="sneaker-infos">
-    <div class="sneaker-infos__photos-carousel" data-flickity='{ "imagesLoaded": true, "percentPosition": false, "wrapAround": true, "cellSelector": ".sneaker-infos__photo", "fullscreen": true }'>
-        <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
-        <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
-        <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
+    <div class="sneaker-infos__photos-carousel">
+      <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
+      <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
+      <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
+      
+      <!-- <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
+        </div>
+        <div class="swiper-slide">
+          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
+        </div>
+        <div class="swiper-slide">
+          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
+        </div>
+      </div> -->
+      <!-- <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div> -->
     </div>
     <div class="sneaker-details" style="flex-shrink: 2">
       <div>
@@ -130,3 +145,22 @@
   height: 461px !important;
 }
 </style>
+
+<script>
+var flkty = new Flickity( '.sneaker-infos__photos-carousel', {
+  cellSelector: '.sneaker-infos__photo',
+  wrapAround: true,
+  imagesLoaded: true,
+  fullscreen: true
+});
+// const swiper = new Swiper('.swiper', {
+//   loop: true,
+//   pagination: {
+//     el: '.swiper-pagination',
+//   },
+//   navigation: {
+//     nextEl: '.swiper-button-next',
+//     prevEl: '.swiper-button-prev',
+//   },
+// });
+</script>

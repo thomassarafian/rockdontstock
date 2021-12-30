@@ -134,4 +134,3 @@ class SubscribeToNewsletterService
     # end
   end
 end
-

@@ -32,7 +32,7 @@
             <div>Par Legit Check</div>
           </div>
         </div>
-        <button class="auth-infos__content__cta">Parcourir la marketplace</button>
+        <%= button_to "Parcourir la marketplace", sneakers_path, method: :get, class: "auth-infos__content__cta" %>
       </div>
       <div class="auth-infos__footer">
         <div>
@@ -138,7 +138,7 @@
             <div class="comparison-slider">
               <%= image_tag "images/real.png", style: "width: 300px" %>
               <div class="resize">
-                <%= image_tag "images/fake.png", style: "width: 300px" %>
+                <%= image_tag "images/fake2.png", style: "width: 300px" %>
               </div>
               <div class="divider">
                 <div style="left: -40px; position: absolute;">Fake</div>

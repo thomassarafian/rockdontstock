@@ -12,7 +12,7 @@ class SneakersController < ApplicationController
 			results = results&.public_send("filter_by_#{filter.to_s}", params[filter]) if params[filter].present?
 		end
 
-		@pagy, @results = pagy(results&.includes(:sneaker_db, :photos_attachments, photos_attachments: :blob), items: 3)
+		@pagy, @results = pagy(results&.includes(:sneaker_db, :photos_attachments, photos_attachments: :blob), items: 18)
 		
 		respond_to do |format|
       format.js

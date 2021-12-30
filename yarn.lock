@@ -2999,6 +2999,13 @@ dom-serializer@0:
     domelementtype "^2.0.1"
     entities "^2.0.0"
 
+dom7@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/dom7/-/dom7-4.0.2.tgz#b3595f34c9658d72e88bb6fa6a6e7b430d4bd5fd"
+  integrity sha512-Ji4t3Y/vNQg6Q9bR+Syx6Td8qiq8116LE9h4OzbPuxdxK7DyyX7i8EXkYgBX6+EiX6+oYXDTH5BSN29G/n4jug==
+  dependencies:
+    ssr-window "^4.0.0"
+
 domain-browser@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
@@ -3266,7 +3273,7 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
-ev-emitter@^1.0.1, ev-emitter@^1.1.1:
+ev-emitter@^1.0.0, ev-emitter@^1.0.1, ev-emitter@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ev-emitter/-/ev-emitter-1.1.1.tgz#8f18b0ce5c76a5d18017f71c0a795c65b9138f2a"
   integrity sha512-ipiDYhdQSCZ4hSbX4rMW+XzNKMD1prg/sTvoVmSLkuQ1MVlwjJQQA+sW8tMYR3BLUr9KjodFV4pvzunvRhd33Q==
@@ -3618,6 +3625,33 @@ flatten@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.3.tgz#c1283ac9f27b368abc1e36d1ff7b04501a30356b"
   integrity sha512-dVsPA/UwQ8+2uoFe5GHtiBMu48dWLTdsuEd7CKGlZlD78r1TTWBvDuFaFGKCo/ZfEr95Uk56vZoX86OsHkUeIg==
+
+flickity-fullscreen@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/flickity-fullscreen/-/flickity-fullscreen-1.1.1.tgz#76d8c621ff45f086d5f4eab841f788e1fc48169b"
+  integrity sha512-r9hxDXizjvXgBSwCwbqfaXDZRy02uH8UM73VvnxCml0ogKexpqZSlsit5hmGcJUKrtEx3svklJbGX0XUO8Z6DA==
+  dependencies:
+    flickity "^2.1.0"
+
+flickity-imagesloaded@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/flickity-imagesloaded/-/flickity-imagesloaded-2.0.0.tgz#a2d1d6aae6c26369ef2fa44f3eb948ea474e976b"
+  integrity sha1-otHWqubCY2nvL6RPPrlI6kdOl2s=
+  dependencies:
+    flickity "^2.0.0"
+    imagesloaded "^4.1.0"
+
+flickity@^2.0.0, flickity@^2.1.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/flickity/-/flickity-2.3.0.tgz#6763eb4d9cfeee6eedd96d042a21fff4ad439944"
+  integrity sha512-x4cJBVywsaCWmId3I6wvBYJtWk3gcr+gz8UJQ48P57W5G7ER5OUgc3GUK0rtTrbMy/HYB9wL6u+I7EC4qrLO8g==
+  dependencies:
+    desandro-matches-selector "^2.0.0"
+    ev-emitter "^1.1.1"
+    fizzy-ui-utils "^2.0.7"
+    get-size "^2.0.3"
+    unidragger "^2.4.0"
+    unipointer "^2.4.0"
 
 flickity@^2.2.2:
   version "2.2.2"
@@ -4235,6 +4269,13 @@ ignore@^4.0.3:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
+
+imagesloaded@^4.1.0:
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/imagesloaded/-/imagesloaded-4.1.4.tgz#1376efcd162bb768c34c3727ac89cc04051f3cc7"
+  integrity sha512-ltiBVcYpc/TYTF5nolkMNsnREHW+ICvfQ3Yla2Sgr71YFwQ86bDwV9hgpFhFtrGPuwEx5+LqOHIrdXBdoWwwsA==
+  dependencies:
+    ev-emitter "^1.0.0"
 
 import-cwd@^2.0.0:
   version "2.1.0"
@@ -7665,6 +7706,11 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
 
+ssr-window@^4.0.0, ssr-window@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-4.0.2.tgz#dc6b3ee37be86ac0e3ddc60030f7b3bc9b8553be"
+  integrity sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ==
+
 ssri@^6.0.1:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/ssri/-/ssri-6.0.2.tgz#157939134f20464e7301ddba3e90ffa8f7728ac5"
@@ -7918,6 +7964,14 @@ svgo@^1.0.0:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+swiper@^7.4.1:
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-7.4.1.tgz#99fc586d1335b45250d2c6b3128dc91f8047d3e7"
+  integrity sha512-dhbL4tpYFvHug1J7GnKElfTi6EYhlZy/vNZRhHkWFyUsWZ1Vovipxj3la5gqllMogygXJMe3zvVv+f6eppvWiA==
+  dependencies:
+    dom7 "^4.0.2"
+    ssr-window "^4.0.2"
 
 tapable@^1.0.0, tapable@^1.1.3:
   version "1.1.3"
@@ -8220,6 +8274,13 @@ unidragger@^2.3.0:
   dependencies:
     unipointer "^2.3.0"
 
+unidragger@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/unidragger/-/unidragger-2.4.0.tgz#4cd7e564317af0ef42632d5984a82d4ae6314d8d"
+  integrity sha512-MueZK2oXuGE6OAlGKIrSXK2zCq+8yb1QUZgqyTDCSJzvwYL0g2Llrad+TtoQTYxtFnNyxxSw0IMnKNIgEMia1w==
+  dependencies:
+    unipointer "^2.4.0"
+
 union-value@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/union-value/-/union-value-1.0.1.tgz#0b6fe7b835aecda61c6ea4d4f02c14221e109847"
@@ -8234,6 +8295,13 @@ unipointer@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/unipointer/-/unipointer-2.3.0.tgz#ba0dc462ce31c2a88e80810e19c3bae0ce47ed9f"
   integrity sha512-m85sAoELCZhogI1owtJV3Dva7GxkHk2lI7A0otw3o0OwCuC/Q9gi7ehddigEYIAYbhkqNdri+dU1QQkrcBvirQ==
+  dependencies:
+    ev-emitter "^1.0.1"
+
+unipointer@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/unipointer/-/unipointer-2.4.0.tgz#ac7316aff6170ff87a4b008e55e842fb4bf13181"
+  integrity sha512-VjzDLPjGK7aYpQKH7bnDZS8X4axF5AFU/LQi+NQe1oyEHfaz6lWKhaQ7n4o7vJ1iJ4i2T0quCIfrQM139p05Sw==
   dependencies:
     ev-emitter "^1.0.1"
 
