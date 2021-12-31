@@ -52,6 +52,9 @@ Rails.application.routes.draw do
     post '/actions/seller-send-package'               => 'orders#seller_send_package'
     post '/actions/package-received-by-rds'           => 'orders#package_received_by_rds'
     post '/actions/sneaker-legit'                     => 'orders#sneaker_legit'
+
+    # Guides
+    post '/actions/upload-file'                        => 'guides#upload_file'
   end
 
   mount ForestLiana::Engine => '/forest'	
