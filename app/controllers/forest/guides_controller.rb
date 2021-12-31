@@ -3,7 +3,7 @@ class Forest::GuidesController < ForestLiana::SmartActionsController
     guide_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
     guide = Guide.find(guide_id)
 
-    attrs = params.dig('data', 'attributes', 'values')
+    attrs = req.body.dig('data', 'attributes', 'values')
     file = attrs['File']
     puts "*"*100, file
     guide.file.attach({
