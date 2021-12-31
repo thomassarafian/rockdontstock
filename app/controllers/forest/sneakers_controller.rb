@@ -4,8 +4,10 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     selected_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
 
     if selected_id
-      Sneaker.where(highlighted: true).update_all(highlighted: false)
       Sneaker.find(selected_id).update(highlighted: true)
+
+      # unselect oldest one
+      Sneaker.highlighted.first.update(highlighted: false)
     end
   end
 
@@ -13,8 +15,12 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     selected_ids = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0)
     
     if !selected_ids.empty?
-      Sneaker.where(selected: true).update_all(selected: false)
-      Sneaker.where(id: selected_ids).update_all(selected: true)
+      selection = Sneaker.where(id: selected_ids)
+      selection.update_all(selected: true)
+
+      # unselect oldest ones (keeps total amount equal)
+      count = selection.length
+      Sneaker.selected[0..count - 1].update_all(selected: false)
     end
   end
 

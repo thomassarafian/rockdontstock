@@ -1,6 +1,6 @@
 <% @results.each do |sneaker| %>
   <div class="sneaker-index__card">
-    <%= cl_image_tag(sneaker.photos.first.key, class: 'sneaker-index__card__photo') %>
+    <%= cl_image_tag(sneaker.photos.first&.key, class: 'sneaker-index__card__photo') %>
     <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-index__card__name" %>
     <div class="sneaker-index__card__options">
       <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> - Condition: <%= sneaker.condition %>/10

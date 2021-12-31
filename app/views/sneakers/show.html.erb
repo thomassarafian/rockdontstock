@@ -5,19 +5,19 @@
   <% end %>
   <section class="sneaker-infos">
     <div class="sneaker-infos__photos-carousel">
-      <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
-      <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
-      <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
+      <% @sneaker.photos.each do |photo| %>
+        <%= cl_image_tag(photo.key, class: 'sneaker-infos__photo') %>
+      <% end %>
       
       <!-- <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-infos__photo') %>
         </div>
         <div class="swiper-slide">
-          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-infos__photo') %>
         </div>
         <div class="swiper-slide">
-          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-infos__photo') %>
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-infos__photo') %>
         </div>
       </div> -->
       <!-- <div class="swiper-pagination"></div>
@@ -77,7 +77,7 @@
     <div class="sneaker-similar-block" data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
       <div class="flickity-cell d-inline-block">
         <div class="sneaker-similar__card">
-          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
             <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
@@ -87,7 +87,7 @@
       </div>
       <div class="flickity-cell d-inline-block">
         <div class="sneaker-similar__card">
-          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
             <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
@@ -97,7 +97,7 @@
       </div>
       <div class="flickity-cell d-inline-block">
         <div class="sneaker-similar__card">
-          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
             <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
@@ -107,7 +107,7 @@
       </div>
       <div class="flickity-cell d-inline-block">
         <div class="sneaker-similar__card">
-          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
             <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
@@ -117,7 +117,7 @@
       </div>
       <div class="flickity-cell d-inline-block">
         <div class="sneaker-similar__card">
-          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
             <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
@@ -127,7 +127,7 @@
       </div>
       <div class="flickity-cell d-inline-block">
         <div class="sneaker-similar__card">
-          <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-similar__card__photo') %>
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
             <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10

@@ -2,8 +2,8 @@ class PagesController < ApplicationController
 	skip_before_action :authenticate_user!, only: [:zswexddfe, :home, :about, :newsletter, :faq, :cgv, :cgu, :authentication, :how_to_send_shoes, :trust_policy]
 	
   def home 
-    @sneakers_selected = Sneaker.includes(:sneaker_db, :user, :orders, :photos_attachments, photos_attachments: :blob).where(selected: true).limit(8)
-    @sneakers_last_added = Sneaker.includes(:sneaker_db, :user, :orders, :photos_attachments, photos_attachments: :blob).where("state >= ?", 1).limit(8).order("created_at DESC")
+    @sneakers_selected = Sneaker.includes(:sneaker_db, :user, :orders, :photos_attachments, photos_attachments: :blob).where(selected: true).limit(8) || Sneaker.limit(8)
+    @sneakers_last_added = Sneaker.includes(:sneaker_db, :user, :orders, :photos_attachments, photos_attachments: :blob).where("state >= ?", 1).limit(8).order("created_at DESC") || Sneaker.limit(8)
   end
   
   # def modal_bootstrap

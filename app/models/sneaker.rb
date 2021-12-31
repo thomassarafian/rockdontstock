@@ -1,7 +1,10 @@
 class Sneaker < ApplicationRecord
   include PgSearch::Model
   extend FriendlyId
+
   friendly_id :name, use: [:slugged, :finders]
+
+  before_save :timestamp_selection, if: -> { selected_changed? || highlighted_changed? }
 	# after_create :send_notification  # a configurer avec mailjet 
   
 	has_many_attached :photos, service: :cloudinary, dependent: :detach
@@ -23,6 +26,8 @@ class Sneaker < ApplicationRecord
   associated_against: { sneaker_db: [:name, :category] },
   using: { tsearch: { prefix: true } }
 
+  scope :highlighted, -> { where(highlighted: true).order(highlighted_at: :asc) }
+  scope :selected, -> { where(selected: true).order(selected_at: :asc) }
   scope :filter_by_price, -> (price) { 
     if price == "100"
       Sneaker.where(price_cents: 0..10000)
@@ -70,6 +75,11 @@ class Sneaker < ApplicationRecord
 
   def active_or_step_photos?
     status&.include?("photos") || active?
+  end
+
+  def timestamp_selection
+    self.selected_at = Time.zone.now if selected_changed?
+    self.highlighted_at = Time.zone.now if highlighted_changed?
   end
 
 end

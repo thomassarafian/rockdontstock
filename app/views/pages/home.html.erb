@@ -20,7 +20,7 @@
     <div class="home-last-sneakers__block">
       <% @sneakers_last_added.each do |sneaker| %>
         <div class="sneaker-home__card" style="cursor: pointer;" onclick="window.location.href = '<%= sneaker_path(sneaker) %>'">
-          <%= cl_image_tag(sneaker.photos.first.key, class: 'sneaker-home__card__photo') %>
+          <%= cl_image_tag(sneaker.photos.first&.key, class: 'sneaker-home__card__photo') %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>
           <div class="sneaker-home__card__options">
             <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> - Condition: <%= sneaker.condition %>/10
@@ -38,7 +38,7 @@
     <div class="home-selected-sneakers__block">
       <% @sneakers_selected.each do |sneaker| %>
         <div class="sneaker-home__card" style="cursor: pointer;" onclick="window.location.href = '<%= sneaker_path(sneaker) %>'">
-          <%= cl_image_tag(sneaker.photos.first.key, class: 'sneaker-home__card__photo') %>
+          <%= cl_image_tag(sneaker.photos.first&.key, class: 'sneaker-home__card__photo') %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>
           <div class="sneaker-home__card__options">
             <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> - Condition: <%= sneaker.condition %>/10
@@ -85,42 +85,42 @@
       <div class="home-guides__content" data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
         <div class="flickity-cell">
           <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first.key, class: "home-guides__content__card__image") %>
+            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
             <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
           </div>
         </div>
         <div class="flickity-cell">
           <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first.key, class: "home-guides__content__card__image") %>
+            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
             <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
           </div>
         </div>
         <div class="flickity-cell">
           <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first.key, class: "home-guides__content__card__image") %>
+            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
             <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
           </div>
         </div>
         <div class="flickity-cell">
           <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first.key, class: "home-guides__content__card__image") %>
+            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
             <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
           </div>
         </div>
         <div class="flickity-cell">
           <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first.key, class: "home-guides__content__card__image") %>
+            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
             <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
           </div>
         </div>
         <div class="flickity-cell">
           <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first.key, class: "home-guides__content__card__image") %>
+            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
             <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
           </div>

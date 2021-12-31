@@ -35,7 +35,7 @@
     <div class="sneaker-featured-block">
       <div class="sneaker-featured-block__title">Sélection du jour</div>
       <div class="sneaker-featured-block__content">
-        <%= cl_image_tag(@selection_of_the_day.photos.first.key, class: 'sneaker-featured-photo') %>
+        <%= cl_image_tag(@selection_of_the_day.photos.first&.key, class: 'sneaker-featured-photo') %>
         <div class="sneaker-featured-details">
           <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
           <div class="sneaker-featured-details__options">

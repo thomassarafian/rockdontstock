@@ -115,7 +115,7 @@
           Ma commande
         </div>
         <div class="purchase-recap__card__sneaker">
-          <%= cl_image_tag(@sneaker.photos.first.key, class: 'purchase-recap__card__sneaker-photo') %>
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'purchase-recap__card__sneaker-photo') %>
           <div class="purchase-recap__card__sneaker-details">
             <div class="purchase-recap__card__sneaker-name">
               <%= @sneaker.sneaker_db.name %>
