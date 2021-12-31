@@ -5,7 +5,12 @@ class Forest::GuidesController < ForestLiana::SmartActionsController
 
     attrs = params.dig('data', 'attributes', 'values')
     file = attrs['File']
-    guide.file.attach(file)
+    puts "*"*100, file
+    guide.file.attach({
+      io: File.open(file),
+      filename: "guide.pdf",
+      content_type: "application/pdf"
+    })
 
     render json: { success: 'Guide uploadé avec succès.' }
   end
