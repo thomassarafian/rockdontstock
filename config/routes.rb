@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   	resources :transfers, only: [:index, :create]
   end
 
+  resources :guides
+
 
   get 'zswexddfe'                    => 'pages#zswexddfe'
 
