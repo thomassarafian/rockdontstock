@@ -1,7 +1,9 @@
 <title>Accueil - Rock Don't Stock</title>
 <div class="container">
   <section class="home-header">
-    <%= image_tag("images/auth-paysage.png", class: "home-header__img") %>
+    <video autoplay muted loop style="width: 100%; height: 100%; object-fit: cover;">
+      <source src="/assets/images/video.webm" type="video/webm">
+    </video>
     <div class="home-header__caption">
       <h2 class="home-header__caption__title">Des sneakers d’occasion authentifiées par nos experts</h2>
       <div class="home-header__caption__descr">
@@ -17,7 +19,7 @@
     <div class="home-last-sneakers__title">Les dernières paires ajoutées</div>
     <div class="home-last-sneakers__block">
       <% @sneakers_last_added.each do |sneaker| %>
-        <div class="sneaker-home__card">
+        <div class="sneaker-home__card" style="cursor: pointer;" onclick="window.location.href = '<%= sneaker_path(sneaker) %>'">
           <%= cl_image_tag(sneaker.photos.first.key, class: 'sneaker-home__card__photo') %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>
           <div class="sneaker-home__card__options">
@@ -35,7 +37,7 @@
     <div class="home-selected-sneakers__title">Notre sélection</div>
     <div class="home-selected-sneakers__block">
       <% @sneakers_selected.each do |sneaker| %>
-        <div class="sneaker-home__card">
+        <div class="sneaker-home__card" style="cursor: pointer;" onclick="window.location.href = '<%= sneaker_path(sneaker) %>'">
           <%= cl_image_tag(sneaker.photos.first.key, class: 'sneaker-home__card__photo') %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>
           <div class="sneaker-home__card__options">
@@ -50,7 +52,7 @@
     </div>
   </section>
   <section class="home-signup">
-    <div class="home-signup__msg">Bénéficie des frais d’authentification offerts sur ta première commande et reste informé de toutes les nouveautés!</div>
+    <div class="home-signup__msg">Bénéficie des meilleures annonces avant tout le monde et reste informé de toutes les nouveautés en t’inscrivant à notre newsletter !</div>
     <div class="home-signup__form">
       <%= form_with url: new_user_registration_path, method: :get do |f| %>
         <%= f.email_field :email, class: "form-control", placeholder: "john.doe@gmail.com" %>
