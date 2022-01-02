@@ -183,7 +183,22 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   const options = {
     clientSecret: '<%= @intent.client_secret %>',
-    appearance: {/*...*/},
+    appearance: {
+      theme: 'flat',
+      rules: {
+        '.Input:hover': {
+          outline: '1px solid rgba(100, 100, 100, 0.25)'
+        },
+        '.Input:focus': {
+          boxShadow: '0 0 0 0.2rem rgba(100, 100, 100, 0.25)'
+        },
+      },
+      variables: {
+        colorText: '#0E0E0E',
+        spacingUnit: '4px',
+        borderRadius: '0'
+      }
+    },
   };
 
   const elements = stripe.elements(options);
