@@ -2,6 +2,7 @@ class Sneakers::BuildController < ApplicationController
   include Wicked::Wizard
 
   skip_after_action :verify_policy_scoped, only: [:index]
+  skip_after_action :verify_authorized, only: [:success]
 
   steps :add_sneaker_db, :add_infos, :add_photos, :add_recap
 
@@ -17,12 +18,20 @@ class Sneakers::BuildController < ApplicationController
     status = (step == steps.last ? "active" : step.to_s)
 
     if @sneaker.update(sneaker_params.merge(status: status))
-      flash[:notice] = "Ton annonce a bien été envoyée !" if step == steps.last
-      render_wizard @sneaker
+      if step == steps.last
+        flash[:notice] = "Ton annonce a bien été envoyée !"
+        redirect_to success_sneaker_build_index_path(@sneaker)
+      else
+        render_wizard @sneaker
+      end
     else
       flash[:alert] = @sneaker.errors.full_messages.join(', ')
       redirect_to request.referrer
     end
+  end
+
+  def success
+    @sneaker = Sneaker.find(params[:sneaker_id])
   end
 
   # def create

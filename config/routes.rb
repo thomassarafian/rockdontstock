@@ -1,33 +1,33 @@
 Rails.application.routes.draw do
   root to: "pages#home"
-  resources :pages, only: [:index]
   
+  resources :pages, only: [:index]
   resource :contact, only: [:create, :new], controller: 'contact'
+  resources :guides
+  resources :sneaker_dbs, only: [:index, :create]
 	
   devise_for :users, controllers: { 
 		omniauth_callbacks: 'users/omniauth_callbacks',
 		registrations: 'users/registrations'
 	}
-	
-  get '/payment-complete', to: "payments#complete"
-
+  
   resources :sneakers do 
-    resources :build, controller: 'sneakers/build'
+    resources :build, controller: 'sneakers/build' do
+      collection do
+        get 'success'
+      end
+    end
     resources :orders, only: [:new, :show, :create]
   end
-  resources :sneaker_dbs, only: [:index, :create]
-
+  
 	resource :user, only: [:show, :update], path: 'me' do
     resources :items, only: [:index]
   	resources :transfers, only: [:index, :create]
   end
-
-  resources :guides
-
-
-  get 'zswexddfe'                    => 'pages#zswexddfe'
-
-  # get 'modal_bootstrap'              => 'pages#modal_bootstrap'
+  
+  
+  get 'payment-complete', to: "payments#complete"
+  get 'payment-complete', to: "payments#complete"
   get 'about'                        => 'pages#about'
   get 'faq'                          => 'pages#faq'
   get 'comment-envoyer-une-paire'    => 'pages#how_to_send_shoes'
@@ -35,7 +35,8 @@ Rails.application.routes.draw do
   get 'cgu'                          => 'pages#cgu'
   get 'cgv'                          => 'pages#cgv'
   get 'politique-de-confidentialite' => 'pages#trust_policy'
-  post '/', to: 'pages#newsletter'
+
+  post 'stripe-webhooks', to: 'payments#stripe_webhooks'
   
   namespace :forest do
     # Sneakers
@@ -60,6 +61,5 @@ Rails.application.routes.draw do
   end
 
   mount ForestLiana::Engine => '/forest'	
-  mount StripeEvent::Engine, at: '/stripe-webhooks'
 
 end

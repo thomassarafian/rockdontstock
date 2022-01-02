@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="d-flex flex-column align-items-center justify-content-center" style="margin-top: 3rem">
+    <div>
+      <%= image_tag("images/check.svg") %>
+    </div>
+    <h2 class="mb-0">
+      Ta paire est en ligne !
+    </h2>
+  </div>
+  <div class="d-flex align-items-center justify-content-center" style="gap: 5rem">
+    <div style="width:40%">
+      <div style="font-size: 25px; font-weight: 700">
+        Prochaine étape...
+      </div>
+      <div>
+        Attends qu’un acheteur commande ta paire de sneakers. Tu auras ensuite 48 heures pour nous l’envoyer.
+        Dès la récéption, Nos experts en authentification vérifierons la basket. Après cette étape, le montant de ta vente sera crédité sur ton portefeuille virtuel.
+      </div>
+    </div>
+    <div class="sneaker-form__recap__left" style="width: 40%">
+      <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-form__recap__photo', style: "height: auto; width: 60%; object-fit: contain") %>
+      <div class="sneaker-form__recap__details">
+        <div class="sneaker-form__recap__sneaker-name">
+          Modèle : <%= @sneaker.sneaker_db.name %>
+        </div>
+        <div class="sneaker-form__recap__sneaker-options">
+          <div>
+            Taille FR : <%= @sneaker.size %>
+          </div>
+          <div>
+            Conditions : <%= @sneaker.condition %>/10
+          </div>
+          <div>
+            Boîte : <%= @sneaker.box %>
+          </div>
+          <div>
+            Commentaire : <%= @sneaker.extras || "Aucun" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

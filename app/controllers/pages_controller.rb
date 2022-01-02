@@ -29,10 +29,6 @@ class PagesController < ApplicationController
     end
   end
 
-  def zswexddfe
-    @sneakers_selected = Sneaker.includes(:sneaker_db, :user,:photos_attachments, photos_attachments: :blob).where(id: [304, 276, 134, 122, 138, 152, 55, 56]) #.where("state = ?", 1).limit(8).order("created_at DESC")
-  end
-
   private
   
   def newsletter_params
