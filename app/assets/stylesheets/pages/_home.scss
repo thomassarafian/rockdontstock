@@ -2,7 +2,9 @@
 
 .home-header {
   position: relative;
-  color: white;
+  @include media-breakpoint-up(lg) {
+    color: white;
+  }
 }
 .home-header__img {
   width: 100%;
@@ -10,11 +12,16 @@
   object-fit: contain;
 }
 .home-header__caption {
-  position: absolute;
-  left: 50px;
-  bottom: 50px;
-  padding: 2rem;
-  width: 70%;
+  display: flex;
+  flex-direction: column;
+  
+  @include media-breakpoint-up(lg) {
+    position: absolute;
+    padding: 2rem;
+    width: 70%;
+    bottom: 50px;
+    left: 50px;
+  }
 }
 .home-header__caption__title {
   margin-bottom: 0.4em;
@@ -25,14 +32,24 @@
 }
 .home-header__caption__buttons {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
 }
 .home-header__caption__browse-btn {
   @include primary-button;
+  
+  @include media-breakpoint-down(lg) {
+    @include cta-button;
+    width: 100%;
+  }
 }
 .home-header__caption__sell-btn {
   @include secondary-button;
+  @include media-breakpoint-down(lg) {
+    width: 100%;
+  }
 }
 
 
@@ -79,8 +96,10 @@
   }
 }
 .home-guides__footer {
-  padding: 2rem;
-  border-top: 1px solid $black;
+  @include media-breakpoint-up(lg) {
+    padding: 2rem;
+    border-top: 1px solid $black;
+  }
 }
 .home-guides__content__card__image {
   max-height: calc(420px / 2);
@@ -89,7 +108,7 @@
   @include para-2-bold
 }
 .home-guides__content__card__btn {
-  @include cta-button;
+  @include primary-button;
 }
 
 
@@ -166,12 +185,20 @@
   align-items: center;
   text-align: center;
   gap: 1.5rem;
+  
   &__msg {
     @include para-1;
-    width: 50%;
+    width: 80%;
+    
+    @include media-breakpoint-up(lg) {
+      width: 50%;
+    }
   }
   &__form {
-    width: 330px;
+    width: 100%;
+    @include media-breakpoint-up(lg) {
+      width: 330px;
+    }
   }
   &__form-submit {
     @include cta-button;
@@ -198,15 +225,23 @@
     &-sticker {
       position: absolute;
       bottom: 5%;
-      right: 5%
+      right: 5%;
+      
+      @include media-breakpoint-down(lg) {
+        width: 100px;
+      }
     }
     &-caption {
-      position: absolute;
-      top: 50px;
-      left: 50px;
-      background: white;
-      padding: 2rem;
-      width: 30%;
+      margin-top: 1rem;
+      
+      @include media-breakpoint-up(lg) {
+        background: white;
+        position: absolute;
+        padding: 2rem;
+        top: 50px;
+        left: 50px;
+        width: 30%;
+      }
       &__title {
         @include para-1;
         text-transform: uppercase;

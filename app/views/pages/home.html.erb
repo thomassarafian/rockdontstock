@@ -63,8 +63,10 @@
   <section class="home-auth">
     <div class="home-auth__title">L'authentification</div>
     <div class="home-auth__block">
-      <%= image_tag("images/auth-paysage.png", class: "home-auth__img") %>
-      <%= image_tag("images/sticker_approved.png", class: "home-auth__img-sticker") %>
+      <div style="position: relative;">
+        <%= image_tag("images/auth-paysage.png", class: "home-auth__img") %>
+        <%= image_tag("images/sticker_approved.png", class: "home-auth__img-sticker") %>
+      </div>
       <div class="home-auth__img-caption">
         <div class="home-auth__img-caption__title">
           100% authentiques
@@ -87,42 +89,42 @@
           <div class="home-guides__content__card">
             <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
+            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
           </div>
         </div>
         <div class="flickity-cell">
           <div class="home-guides__content__card">
             <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
+            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
           </div>
         </div>
         <div class="flickity-cell">
           <div class="home-guides__content__card">
             <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
+            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
           </div>
         </div>
         <div class="flickity-cell">
           <div class="home-guides__content__card">
             <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
+            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
           </div>
         </div>
         <div class="flickity-cell">
           <div class="home-guides__content__card">
             <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
+            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
           </div>
         </div>
         <div class="flickity-cell">
           <div class="home-guides__content__card">
             <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
             <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Commander</button>
+            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
           </div>
         </div>
       </div>
