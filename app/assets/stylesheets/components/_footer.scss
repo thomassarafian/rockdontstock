@@ -22,6 +22,7 @@ footer li {
 .footer-right-block {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   padding-left: 1.5rem;
 }
 .footer__newsletter {
@@ -46,8 +47,11 @@ footer li {
 }
 .footer__bottom-line {
   max-width: 0px;
-  white-space: nowrap;
   margin-top: 6rem;
+  
+  @include media-breakpoint-up(lg) {
+    white-space: nowrap;
+  }
 }
 .footer__list-block {
   margin-right: 3rem;
