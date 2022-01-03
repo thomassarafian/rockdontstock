@@ -6,6 +6,10 @@ footer {
   justify-content:space-evenly;
   padding: 3rem;
   margin-top: 12rem;
+  gap: 3rem;
+  @include media-breakpoint-down(lg) {
+    flex-direction: column;
+  }
 }
 footer a {
   color: white;
@@ -16,14 +20,14 @@ footer li {
 .footer-left-block {
   display: flex;
   flex-direction: column;
-  width: 25%;
-  padding-right: 1.5rem;
+  @include media-breakpoint-up(lg) {
+    width: 25%;
+  }
 }
 .footer-right-block {
   display: flex;
-  justify-content: space-evenly;
+  gap: 2rem;
   flex-wrap: wrap;
-  padding-left: 1.5rem;
 }
 .footer__newsletter {
   margin-bottom: 2rem;
@@ -46,11 +50,28 @@ footer li {
   height: 200px;
 }
 .footer__bottom-line {
+  display: flex;
+  gap: 3rem;
   max-width: 0px;
   margin-top: 6rem;
+  white-space: nowrap;
   
+  @include media-breakpoint-down(lg) {
+    display: none;
+  }
+}
+.footer__bottom-line--mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  & > img {
+    align-self: start;
+  }
+
   @include media-breakpoint-up(lg) {
-    white-space: nowrap;
+    display: none;
   }
 }
 .footer__list-block {

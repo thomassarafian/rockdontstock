@@ -43,8 +43,10 @@
   margin-bottom: 3rem;
 }
 .home-guides-block {
-  border: 1px solid $black;
-  border-top: 20px solid $black;
+  @include media-breakpoint-up(lg) {
+    border: 1px solid $black;
+    border-top: 20px solid $black;
+  }
 }
 .home-guides__content {
   padding: 3rem 0;

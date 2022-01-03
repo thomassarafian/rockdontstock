@@ -27,8 +27,10 @@ section {
   @include para-1;
 }
 .auth-infos-block {
-  border: 1px solid $black;
-  border-top: 20px solid $black;
+  @include media-breakpoint-up(lg) {
+    border: 1px solid $black;
+    border-top: 20px solid $black;
+  }
 }
 .auth-infos__content {
   padding: 3rem;
@@ -41,12 +43,22 @@ section {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  gap: 2rem;
   flex-wrap: wrap;
+  @include media-breakpoint-down(lg) {
+    gap: 1rem;
+  }
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
 }
 .auth-infos__content__stat-element {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @include media-breakpoint-down(md) {
+    text-align: center;
+  }
 }
 .auth-infos__content__stat-element div:first-child {
   @include head-3;
@@ -63,7 +75,10 @@ section {
   display: flex;
   padding: 2rem;
   width: 100%;
-  border-top: 1px solid $black;
+
+  @include media-breakpoint-up(lg) {
+    border-top: 1px solid $black;
+  }
 }
 .auth-infos__footer div:first-child {
   padding-right: 0.4rem;
@@ -79,8 +94,10 @@ section {
   @include para-1;
 }
 .auth-guides-block {
-  border: 1px solid $black;
-  border-top: 20px solid $black;
+  @include media-breakpoint-up(lg) {
+    border: 1px solid $black;
+    border-top: 20px solid $black;
+  }
 }
 .auth-guides__content {
   padding: 3rem 0;
@@ -97,21 +114,25 @@ section {
   height: 420px;
   padding: 3rem;
   border: 1px solid $black;
-}
-.auth-guides__content__card:hover::before {
-  content: "";
-  position: absolute;
-  min-width: 100%;
-  height: 100%; 
-  top: 10px;
-  left: 10px;
-  border-right: 10px solid $black;
-  border-bottom: 10px solid $black;
-  z-index: -1;
+  @include media-breakpoint-up(lg) {
+    &:hover::before {
+      content: "";
+      position: absolute;
+      min-width: 100%;
+      height: 100%; 
+      top: 10px;
+      left: 10px;
+      border-right: 10px solid $black;
+      border-bottom: 10px solid $black;
+      z-index: -1;
+    }
+  }
 }
 .auth-guides__footer {
-  padding: 2rem;
-  border-top: 1px solid $black;
+  @include media-breakpoint-up(lg) {
+    padding: 2rem;
+    border-top: 1px solid $black;
+  }
 }
 .auth-guides__content__card__image {
   max-height: calc(420px / 2);
@@ -132,9 +153,13 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
+  @include media-breakpoint-down(lg) {
+    flex-direction: column-reverse;
+  }
 }
 .auth-service__description {
-  width: 45%;
+  
 }
 .auth-service__card {
   display: flex;
@@ -147,6 +172,9 @@ section {
 }
 .auth-service__description {
   margin-right: 5%;
+  @include media-breakpoint-up(lg) {
+    width: 45%;
+  }
 }
 .auth-service__card__title {
   @include para-1;
@@ -173,8 +201,10 @@ section {
   @include para-1;
 }
 .auth-insta-block {
-  border: 1px solid $black;
-  border-top: 20px solid $black;
+  @include media-breakpoint-up(lg) {
+    border: 1px solid $black;
+    border-top: 20px solid $black;
+  }
 }
 .auth-insta__content {
   padding: 3rem;
@@ -187,8 +217,10 @@ section {
   @include cta-button;
 }
 .auth-insta__footer {
-  padding: 2rem;
-  border-top: 1px solid $black;
+  @include media-breakpoint-up(lg) {
+    padding: 2rem;
+    border-top: 1px solid $black;
+  }
 }
 
 
