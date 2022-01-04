@@ -13,15 +13,10 @@ class PagesController < ApplicationController
   end
   
   def newsletter
-
-    if !params[:email]&.match(/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
-      flash.now[:alert] = "Adresse email invalide"
-    end
-
-    if subscription = Subscription.new(email: params[:email]).as_prospect
-      redirect_to root_path, notice: "Félicitation ! Tu vas bientôt recevoir nos offres"
-    elsif subscription['message'] == "Contact already exist"
-      redirect_to root_path, notice:"Tu es dejà inscrit à notre newsletter"
+    if Subscription.new(email: params[:email]).as_prospect
+      redirect_to request.referer, notice: "Félicitations ! Tu vas bientôt recevoir nos offres"
+    else
+      redirect_to request.referer, notice: "Tu es dejà inscrit à notre newsletter"
     end
   end
 

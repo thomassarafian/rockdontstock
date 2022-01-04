@@ -51,14 +51,16 @@
     <div class="navbar-close-icon" style="display: none; font-size: 35px;" onclick="hideInput()">&times;</div>
   </div>
 </div>
-<div style="background-color: #EFEFEF" data-flickity='{ "draggable": false, "pageDots": false, "prevNextButtons": false, "autoPlay": true, "wrapAround": true, "cellSelector": ".banner-link" }'>
-  <div class="banner-link w-100 text-center py-3">
-    <a href="/sneakers" class="">🤙 Découvrez notre sélection à moins de 200€</a>
+<% if current_page?('/') %>
+  <div style="background-color: #EFEFEF" data-flickity='{ "draggable": false, "pageDots": false, "prevNextButtons": false, "autoPlay": true, "wrapAround": true, "cellSelector": ".banner-link" }'>
+    <div class="banner-link w-100 text-center py-3">
+      <a href="/sneakers" class="">🤙 Découvrez notre sélection à moins de 200€</a>
+    </div>
+    <div class="banner-link w-100 text-center py-3">
+      <a href="/" class="">🤙Frais d’authentification offerts sur la première vente</a>
+    </div>
   </div>
-  <div class="banner-link w-100 text-center py-3">
-    <a href="/" class="">🤙Frais d’authentification offerts sur la première vente</a>
-  </div>
-</div>
+<% end %>
 
 <ul class="navbar-side" id="navbarSide">
   <div class="navbar-side-white-toggler">

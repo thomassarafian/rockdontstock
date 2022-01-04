@@ -59,7 +59,7 @@
         </div>
         <div class="sneaker-form__recap__card__order-infos__item">
           <div>Authentification</div>
-          <div>-15 €</div>
+          <div><%= current_user.sneakers.where(status: "active").count == 0 ? "GRATUIT" : "-15 €" %></div>
         </div>
         <div class="sneaker-form__recap__card__order-infos__item">
           <div>Frais d'expédition</div>

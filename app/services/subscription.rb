@@ -26,7 +26,8 @@ class Subscription
       sib_contact = SibApiV3Sdk::AddContactToList.new(ids: [@sib_contact.id])
       @sib.add_contact_to_list(7, sib_contact)
     else
-      create_and_save_to_list(7)
+      new_contact = SibApiV3Sdk::CreateContact.new(email: @user.email, attributes: {"NOM": "#{@user.last_name}", "PRENOM": "#{@user.first_name}", "AGE": "#{@user.date_of_birth}", "VILLE": "#{@user.city}", "SMS": "#{@user.phone}"}, list_ids: [7])
+      @sib.create_contact(new_contact)
     end
   end
 
@@ -36,7 +37,8 @@ class Subscription
       sib_contact = SibApiV3Sdk::AddContactToList.new(ids: [@sib_contact.id])
       @sib.add_contact_to_list(6, sib_contact)
     else
-      create_and_save_to_list(6)
+      new_contact = SibApiV3Sdk::CreateContact.new(email: @user.email, attributes: {"NOM": "#{@user.last_name}", "PRENOM": "#{@user.first_name}", "AGE": "#{@user.date_of_birth}", "VILLE": "#{@user.city}", "SMS": "#{@user.phone}"}, list_ids: [6])
+      @sib.create_contact(new_contact)
     end
   end
   
@@ -59,25 +61,9 @@ class Subscription
       sib_contact = SibApiV3Sdk::AddContactToList.new(ids: [@sib_contact.id])
       @sib.add_contact_to_list(4, sib_contact)
     else
-      create_and_save_to_list(4)
+      new_contact = SibApiV3Sdk::CreateContact.new(email: @user.email, attributes: {"NOM": "#{@user.last_name}", "PRENOM": "#{@user.first_name}", "AGE": "#{@user.date_of_birth}", "VILLE": "#{@user.city}", "SMS": "#{@user.phone}"}, list_ids: [4])
+      @sib.create_contact(new_contact)
     end
-  end
-
-  private
-
-  def create_and_save_to_list(list_id)
-    new_contact = SibApiV3Sdk::CreateContact.new(
-      email: @user.email,
-      list_ids: [list_id],
-      attributes: {
-        "NOM": @user.last_name,
-        "PRENOM": @user.first_name,
-        "AGE": @user.date_of_birth,
-        "VILLE": @user.city,
-        "SMS": @user.phone,
-      }
-    )
-    @sib.create_contact(new_contact)
   end
 
 end
