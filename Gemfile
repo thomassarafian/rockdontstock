@@ -56,6 +56,7 @@ gem 'cloudinary', '~> 1.16.0' # for image upload
 
 gem 'mailjet' # email transactionel
 gem 'gibbon' #pour envoyer la liste des emails a elliot sur mailchimp
+gem 'sib-api-v3-sdk'
 
 gem 'stripe'
 gem 'stripe_event'

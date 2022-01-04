@@ -58,7 +58,7 @@ class User < ApplicationRecord
   end
 
   def subscribe_to_newsletter
-    SubscribeToNewsletterService.new(self).call
+    Subscription.new(user: self).as_user
   end
 
   def picker_data_is_converted?

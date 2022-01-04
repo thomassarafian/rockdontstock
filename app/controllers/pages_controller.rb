@@ -8,30 +8,21 @@ class PagesController < ApplicationController
     @sneakers_last_added = Sneaker.includes(:sneaker_db, :user, :orders, :photos_attachments, photos_attachments: :blob).where("state >= ?", 1).limit(8).order("created_at DESC")
     @sneakers_last_added = Sneaker.limit(8) if @sneakers_last_added.empty?
   end
-  
-  # def modal_bootstrap
-  #    @sneakers_last_added = Sneaker.includes(:sneaker_db, :user,:photos_attachments, photos_attachments: :blob).where("state >= ?", 1).limit(8).order("created_at DESC")
-  # end
 
   def about
   end
   
   def newsletter
-    if params['user']['email'].present? && params['user']['email'].match(/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
-      @result = SubscribeToNewsletterService.new(params['user']).home_page_signup
-      if @result['message'] == "Contact already exist"
-        redirect_to root_path, alert:"Tu es dejà inscrit à notre newsletter"
-      else
-        redirect_to root_path, notice: "Félicitation ! Tu vas bientôt recevoir nos offres"
-      end
-    else 
-      redirect_to root_path, alert: "Adresse email invalide"
+
+    if !params[:email]&.match(/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
+      flash.now[:alert] = "Adresse email invalide"
+    end
+
+    if subscription = Subscription.new(email: params[:email]).as_prospect
+      redirect_to root_path, notice: "Félicitation ! Tu vas bientôt recevoir nos offres"
+    elsif subscription['message'] == "Contact already exist"
+      redirect_to root_path, notice:"Tu es dejà inscrit à notre newsletter"
     end
   end
 
-  private
-  
-  def newsletter_params
-    params.permit(:user, :commit, :first_name, :email)
-  end
 end

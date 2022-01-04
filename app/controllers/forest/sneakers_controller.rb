@@ -56,7 +56,7 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     }])
     p variable.attributes['Messages']
     
-    SubscribeToNewsletterService.new(@sneaker.user).user_is_seller
+    Subscription.new(user: @sneaker.user).as_seller
     
     render json: { 
       success: "L'annonce est en ligne et l'email a été envoyé au vendeur !"

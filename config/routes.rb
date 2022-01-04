@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   get 'politique-de-confidentialite' => 'pages#trust_policy'
 
   post 'stripe-webhooks', to: 'payments#stripe_webhooks'
+  post 'newsletter', to: 'pages#newsletter'
   
   namespace :forest do
     # Sneakers
