@@ -55,7 +55,10 @@
     <div class="home-signup__msg">Bénéficie des meilleures annonces avant tout le monde et reste informé de toutes les nouveautés en t’inscrivant à notre newsletter !</div>
     <div class="home-signup__form">
       <%= form_with url: new_user_registration_path, method: :get do |f| %>
-        <%= f.email_field :email, class: "form-control", placeholder: "john.doe@gmail.com" %>
+        <div style="position: relative;">
+          <%= f.email_field :email, class: "form-control", placeholder: "john.doe@gmail.com" %>
+          <i class="fas fa-check-circle" style="position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%)"></i>
+        </div>
         <button class="home-signup__form-submit">M'inscrire</button>
       <% end %>
     </div>
