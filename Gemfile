@@ -39,6 +39,7 @@ gem 'wicked' # wizard form
 gem 'whenever', require: false # cron job
 gem 'friendly_id'
 gem 'data_uri'
+gem 'addressable'
 
 gem 'devise'
 gem 'omniauth-facebook'
