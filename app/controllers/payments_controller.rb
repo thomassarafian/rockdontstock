@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:lc_complete]
+  skip_before_action :authenticate_user!, only: [:lc_complete, :lc_stripe_checkout, :stripe_webhooks]
   
   def lc_stripe_checkout
     lc = Authentication.new(lc_request_params)
