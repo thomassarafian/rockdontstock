@@ -35,10 +35,11 @@ Rails.application.routes.draw do
   post 'guide', to: 'pages#guide_request'
   
   # PAYMENTS
-  get 'payment-complete', to: "payments#complete"
+  get 'sneaker-payment-complete', to: "payments#sneaker_complete"
+  post 'sneaker-stripe-checkout', to: 'payments#sneaker_stripe_checkout'
   get 'lc-payment-complete', to: "payments#lc_complete"
-  post 'stripe-webhooks', to: 'payments#stripe_webhooks'
   post 'lc-stripe-checkout', to: 'payments#lc_stripe_checkout'
+  post 'stripe-webhooks', to: 'payments#stripe_webhooks'
   
   namespace :forest do
     # Sneakers

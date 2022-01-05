@@ -17,6 +17,7 @@ class Order < ApplicationRecord
   monetize :shipping_cost_cents
   monetize :service_cents
 
+  validates :legal, acceptance: true
   # validates :state, inclusion: { in: STATES } # Pareil pour les sneakers -> permet d'etre sur que l'order est tjrs le statut 
 
   before_update :create_sendcloud_label, unless: :order_is_not_paid?

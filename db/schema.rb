@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_170615) do
+ActiveRecord::Schema.define(version: 2022_01_05_191307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,15 @@ ActiveRecord::Schema.define(version: 2022_01_05_170615) do
     t.string "sendcloud_order_id_seller"
     t.string "sendcloud_order_id_buyer"
     t.string "payment_intent_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "delivery"
+    t.string "address"
+    t.string "city"
+    t.string "zip_code"
+    t.string "door_number"
+    t.integer "payment_status", default: 0
     t.index ["sneaker_id"], name: "index_orders_on_sneaker_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

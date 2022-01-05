@@ -1,16 +1,16 @@
 class OrdersController < ApplicationController
 
 	def new 
-		@order = Order.new(user: current_user, sneaker_id: params[:sneaker_id])
-		@sneaker = @order.sneaker
+		@sneaker = Sneaker.find(params[:sneaker_id])
 
-		@intent = Stripe::PaymentIntent.create(
-			amount: @sneaker.price_cents,
-			currency: 'eur',
-			automatic_payment_methods: {
-				enabled: true,
-			},
-		)
+		# NOTE only for Payment Elements
+		# @intent = Stripe::PaymentIntent.create(
+		# 	amount: @sneaker.price_cents,
+		# 	currency: 'eur',
+		# 	automatic_payment_methods: {
+		# 		enabled: true,
+		# 	},
+		# )
 	end
 
 	def show
@@ -49,18 +49,18 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-    if params['mondial-relay-price'].present? || params['colissimo-price'].present?
-      @order = current_user.orders.last
-      @sneaker = current_user.orders.last.sneaker
-      @sneaker_db = @sneaker.sneaker_db
-      params['mondial-relay-price'].present? ? create_stripe_session(@order, @sneaker, params['mondial-relay-price']) : create_stripe_session(@order, @sneaker, params['colissimo-price'])
-    else
-  	  @sneaker = Sneaker.find(params[:sneaker_id])
-      @sneaker_db = SneakerDb.find(@sneaker.sneaker_db_id)
-  	  @order = Order.create!(sneaker: @sneaker, sneaker_name: @sneaker_db.name, price_cents: @sneaker.price_cents, state: 'En cours', user: current_user)
-      Stripe::StripeCreateCustomer.new(current_user)
-      redirect_to new_order_payment_path(@order)
-    end
+    # if params['mondial-relay-price'].present? || params['colissimo-price'].present?
+    #   @order = current_user.orders.last
+    #   @sneaker = current_user.orders.last.sneaker
+    #   @sneaker_db = @sneaker.sneaker_db
+    #   params['mondial-relay-price'].present? ? create_stripe_session(@order, @sneaker, params['mondial-relay-price']) : create_stripe_session(@order, @sneaker, params['colissimo-price'])
+    # else
+  	#   @sneaker = Sneaker.find(params[:sneaker_id])
+    #   @sneaker_db = SneakerDb.find(@sneaker.sneaker_db_id)
+  	#   @order = Order.create!(sneaker: @sneaker, sneaker_name: @sneaker_db.name, price_cents: @sneaker.price_cents, state: 'En cours', user: current_user)
+    #   Stripe::StripeCreateCustomer.new(current_user)
+    #   redirect_to new_order_payment_path(@order)
+    # end
 	end
 
 	private

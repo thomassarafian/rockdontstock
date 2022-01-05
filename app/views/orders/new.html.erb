@@ -1,10 +1,12 @@
-<!-- <title>Achat de <%= @order.sneaker.sneaker_db.name %> - Rock Don't Stock</title> -->
+<title>Achat de <%= @sneaker.sneaker_db.name %> - Rock Don't Stock</title>
 <div class="container">
   <%= link_to :back, class: "back-button" do %>
     <h2><i class="fas fa-arrow-left ms-0"></i> Commander</h2>
   <% end %>
   <div class="purchase">
-    <%= form_with data: { secret: @intent.client_secret }, id: "payment-form", class: "purchase-form" do |f| %>
+    <!-- NOTE data-secret used to Payment Elements -->
+    <%= form_for :order, url: sneaker_stripe_checkout_path, style: "flex-grow: 1.5" do |f| %>
+      <%= f.hidden_field :sneaker_id, value: @sneaker.id %>
       <div class="purchase-form__infos">
         <div class="purchase-form__infos__title">
           <%= image_tag("images/icon_shopping.svg") %>
@@ -28,7 +30,7 @@
             </div>
             <div class="col-5">
               <%= f.label "E-mail", class: "form-label" %>
-              <%= f.email_field :email, class: "form-control", required: true %>
+              <%= f.email_field :email, class: "form-control", value: current_user.email, disabled: true %>
             </div>
           </div>
         </div>
@@ -85,20 +87,21 @@
           </div>
         </div>
       </div>
-      <div class="purchase-form__payment col-10">
+      <!-- NOTE replaced by Stripe Checkout for now -->
+      <!-- <div class="purchase-form__payment col-10">
         <div class="purchase-form__payment__title">
           <%= image_tag("images/icon_bill.svg") %>
           <span class="ms-2">Moyen de paiement</span>
         </div>
         <div class="purchase-form__payment__fields">
           <div id="payment-element">
-            <!-- Elements will create form elements here -->
+            Elements will create form elements here
           </div>
           <div id="error-message">
-            <!-- Display error message to your customers here -->
+            Display error message to your customers here
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="purchase-form__validation">
         <button type="submit" class="purchase-form__validation__btn">Valider ma commande</button>
         <div class="form-check">
@@ -154,6 +157,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function(event) {
+
   const radioRelay = document.getElementById('delivery_relay');
   const radioColissimo = document.getElementById('delivery_colissimo');
   const relayMap = document.querySelector('.purchase-form__shipping__relay-map');
@@ -177,50 +181,49 @@ document.addEventListener('DOMContentLoaded', function(event) {
   relayChangeBtn.addEventListener('click', () => {
     relayMap.style.display = "block"
   })
+});
+// STRIPE
+// NOTE replaced by Stripe Checkout for now
+// const stripe = Stripe("<%= ENV['STRIPE_PUBLIC_TEST'] %>");
 
-  // STRIPE
-  const stripe = Stripe("<%= ENV['STRIPE_PUBLIC_TEST'] %>");
+// const options = {
+//   clientSecret: '<%= @intent.client_secret %>',
+//   appearance: {
+//     theme: 'flat',
+//     rules: {
+//       '.Input:hover': {
+//         outline: '1px solid rgba(100, 100, 100, 0.25)'
+//       },
+//     },
+//     variables: {
+//       colorPrimary: '#0E0E0E',
+//       colorText: '#0E0E0E',
+//       spacingUnit: '4px',
+//       borderRadius: '0',
+//       focusBoxShadow: '0 0 0 0.2rem rgba(100, 100, 100, 0.25)'
+//     }
+//   },
+// };
 
-  const options = {
-    clientSecret: '<%= @intent.client_secret %>',
-    appearance: {
-      theme: 'flat',
-      rules: {
-        '.Input:hover': {
-          outline: '1px solid rgba(100, 100, 100, 0.25)'
-        },
-      },
-      variables: {
-        colorPrimary: '#0E0E0E',
-        colorText: '#0E0E0E',
-        spacingUnit: '4px',
-        borderRadius: '0',
-        focusBoxShadow: '0 0 0 0.2rem rgba(100, 100, 100, 0.25)'
-      }
-    },
-  };
+// const elements = stripe.elements(options);
+// const paymentElement = elements.create('payment');
+// paymentElement.mount('#payment-element');
 
-  const elements = stripe.elements(options);
-  const paymentElement = elements.create('payment');
-  paymentElement.mount('#payment-element');
+// const form = document.getElementById('payment-form');
 
-  const form = document.getElementById('payment-form');
+// form.addEventListener('submit', async (e) => {
+//   e.preventDefault();
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+//   const {error} = await stripe.confirmPayment({
+//     elements,
+//     confirmParams: {
+//       return_url: "<%= payment_complete_url + "?sneaker_id=" + @sneaker.id.to_s %>",
+//     },
+//   });
 
-    const {error} = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: "<%= payment_complete_url + "?sneaker_id=" + @sneaker.id.to_s %>",
-      },
-    });
-
-    if (error) {
-      const messageContainer = document.querySelector('#error-message');
-      messageContainer.textContent = error.message;
-    }
-  });
-})
-
+//   if (error) {
+//     const messageContainer = document.querySelector('#error-message');
+//     messageContainer.textContent = error.message;
+//   }
+// })
 </script>
