@@ -36,7 +36,10 @@ class PaymentsController < ApplicationController
       shipping_fees = { relay: 6.30, colissimo: 9.15 }
 
       # price of sneaker + shipping + 6% of sneaker price
-      total_price = 1.06 * order.sneaker.price + shipping_fees[params[:delivery]]
+      puts order.sneaker.price
+      puts order_params[:delivery]
+      puts order_params[:delivery].class
+      total_price = 1.06 * order.sneaker.price + shipping_fees[order_params[:delivery]]
 
       session = Stripe::Checkout::Session.create({
         line_items: [{

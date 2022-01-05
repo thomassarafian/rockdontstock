@@ -5,7 +5,7 @@
   <% end %>
   <div class="purchase">
     <!-- NOTE data-secret used to Payment Elements -->
-    <%= form_for :order, url: sneaker_stripe_checkout_path, style: "flex-grow: 1.5" do |f| %>
+    <%= form_for :order, url: sneaker_stripe_checkout_path, html: {style: "flex-grow: 1.5"} do |f| %>
       <%= f.hidden_field :sneaker_id, value: @sneaker.id %>
       <div class="purchase-form__infos">
         <div class="purchase-form__infos__title">
@@ -158,8 +158,8 @@
 <script>
 document.addEventListener('DOMContentLoaded', function(event) {
 
-  const radioRelay = document.getElementById('delivery_relay');
-  const radioColissimo = document.getElementById('delivery_colissimo');
+  const radioRelay = document.getElementById('order_delivery_relay');
+  const radioColissimo = document.getElementById('order_delivery_colissimo');
   const relayMap = document.querySelector('.purchase-form__shipping__relay-map');
   const colissimoBlock = document.querySelector('.purchase-form__shipping__address');
   const relayBlock = document.querySelector('.purchase-form__shipping__relay');
@@ -182,48 +182,4 @@ document.addEventListener('DOMContentLoaded', function(event) {
     relayMap.style.display = "block"
   })
 });
-// STRIPE
-// NOTE replaced by Stripe Checkout for now
-// const stripe = Stripe("<%= ENV['STRIPE_PUBLIC_TEST'] %>");
-
-// const options = {
-//   clientSecret: '<%= @intent.client_secret %>',
-//   appearance: {
-//     theme: 'flat',
-//     rules: {
-//       '.Input:hover': {
-//         outline: '1px solid rgba(100, 100, 100, 0.25)'
-//       },
-//     },
-//     variables: {
-//       colorPrimary: '#0E0E0E',
-//       colorText: '#0E0E0E',
-//       spacingUnit: '4px',
-//       borderRadius: '0',
-//       focusBoxShadow: '0 0 0 0.2rem rgba(100, 100, 100, 0.25)'
-//     }
-//   },
-// };
-
-// const elements = stripe.elements(options);
-// const paymentElement = elements.create('payment');
-// paymentElement.mount('#payment-element');
-
-// const form = document.getElementById('payment-form');
-
-// form.addEventListener('submit', async (e) => {
-//   e.preventDefault();
-
-//   const {error} = await stripe.confirmPayment({
-//     elements,
-//     confirmParams: {
-//       return_url: "<%= payment_complete_url + "?sneaker_id=" + @sneaker.id.to_s %>",
-//     },
-//   });
-
-//   if (error) {
-//     const messageContainer = document.querySelector('#error-message');
-//     messageContainer.textContent = error.message;
-//   }
-// })
 </script>
