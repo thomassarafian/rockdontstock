@@ -128,27 +128,27 @@
               <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
             </div>
             <div class="purchase-recap__card__sneaker-price">
-              <%= @sneaker.price %>€
+              <%= @sneaker.price %> €
             </div>
           </div>
         </div>
         <div class="purchase-recap__card__order-infos">
           <div class="purchase-recap__card__order-infos__item">
             <div>Livraison</div>
-            <div>prix €</div>
+            <div id="shipping-fee"></div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
-            <div>prix €</div>
+            <div><%= 0.06 * @sneaker.price %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Code promo</div>
-            <div>-prix €</div>
+            <div>-0 €</div>
           </div>
         </div>
         <div class="purchase-recap__card__total">
           <div>Total</div>
-          <div><%= @sneaker.price %> €</div>
+          <div id="total-price"><%= @sneaker.price %> €</div>
         </div>
         <div class="purchase-recap__card__trustpilot"></div>
       </div>
@@ -165,16 +165,22 @@ document.addEventListener('DOMContentLoaded', function(event) {
   const colissimoBlock = document.querySelector('.purchase-form__shipping__address');
   const relayBlock = document.querySelector('.purchase-form__shipping__relay');
   const relayChangeBtn = document.querySelector('.purchase-form__shipping__relay-btn');
+  const shippingFee = document.getElementById('shipping-fee');
+  const totalPrice = document.getElementById('total-price');
 
   [radioRelay, radioColissimo].forEach((radio) => {
     radio.addEventListener('change', function() {
       if (this === radioRelay) {
         relayBlock.style.display = "block"
         colissimoBlock.style.display = "none"
+        shippingFee.innerText = "6.30 €"
+        totalPrice.innerText = "<%= (@sneaker.price_cents * 1.06 + 630) / 100 %> €"
       }
       if (this === radioColissimo) {
         relayBlock.style.display = "none"
         colissimoBlock.style.display = "block"
+        shippingFee.innerText = "9.15 €"
+        totalPrice.innerText = "<%= (@sneaker.price_cents * 1.06 + 915) / 100 %> €"
       }
     });
   })
