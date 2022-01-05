@@ -3,7 +3,7 @@
     <div class="footer__newsletter">
       <div class="footer__newsletter__title">Abonne-toi !</div>
       <div class="footer__newsletter__descr">Reçois toutes nos dernières news, guides gratuits et nouveautés...</div>
-      <%= form_with url: root_path, html: { style: "position: relative;" } do |f| %>
+      <%= form_with url: newsletter_path, html: { style: "position: relative;" } do |f| %>
         <%= f.email_field :email, class: "footer__newsletter__input form-control", placeholder: "Email" %>
         <i class="fas fa-arrow-right" style="position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); cursor: pointer;" onclick="this.closest('form').submit()"></i>
       <% end %>
