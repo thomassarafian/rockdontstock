@@ -6,7 +6,7 @@
   <li><i class="fas fa-check-circle"></i> Expertise complète</li>
 </ul>
 <div class="auth-modal__form">
-  <%= form_for :authentication do |f| %>
+  <%= form_for :user, url: lc_stripe_checkout_path do |f| %>
     <div class="form-group">
       <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1">
       <%= f.file_field :photos, direct_upload: true, data: { "dropzone-target": "input" } %>
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="form-group">
-      <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+      <%= f.email_field :email, class: "form-control", placeholder: "Email", required: true %>
     </div>
     <div class="row g-2">
       <div class="col-4">
@@ -41,6 +41,6 @@
       </div>
       <%= link_to "Contacter le support", new_contact_path %>
     </div>
-    <button type="submit" class="auth-modal__form__submit">Acheter</button>
+    <button class="auth-modal__form__submit">Acheter</button>
   <% end %>
 </div>

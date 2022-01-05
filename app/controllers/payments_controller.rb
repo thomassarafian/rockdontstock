@@ -1,6 +1,30 @@
 class PaymentsController < ApplicationController
+  
+  def lc_stripe_checkout
+    lc = Authentication.new(lc_request_params)
 
-  def complete
+    if lc.save
+      Subscription.new(lc).as_lc_requester
+    else
+      redirect_to request.referer, alert: lc.errors.full_messages.join(', ')
+    end
+
+    session = Stripe::Checkout::Session.create({
+      line_items: [{
+        price_data: {
+          currency: 'eur',
+          product_data: {
+            name: 'Legit Check',
+          },
+          unit_amount: 490,
+        },
+        quantity: 1,
+      }],
+      mode: 'payment',
+      success_url: lc_payment_complete_url,
+      cancel_url: 'https://example.com/cancel',
+    })
+    redirect_to session.url, status: 303
   end
 
   # def new
@@ -38,22 +62,32 @@ class PaymentsController < ApplicationController
     begin
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
     rescue JSON::ParserError
-      return head :bad_request
+      return status 400
     rescue Stripe::SignatureVerificationError
-      return head :unauthorized
+      return status 422
     end
 
     case event.type
     when 'payment_intent.payment_failed'
-      payment_intent = event.data.object
+      # payment_intent = event.data.object
     when 'payment_intent.processing'
-      payment_intent = event.data.object
+      # payment_intent = event.data.object
     when 'payment_intent.requires_action'
-      payment_intent = event.data.object
+      # payment_intent = event.data.object
     when 'payment_intent.succeeded'
-      payment_intent = event.data.object
+      # payment_intent = event.data.object
+    when checkout.session.completed
+      puts "*"*100, event.data.object
+    when checkout.session.expired
     end
 
-    head :ok
+    status 200
   end
+
+  private
+
+  def lc_request_params
+    params.require(:user).permit(:first_name, :last_name, :email, :age, :city, :photos)
+  end
+
 end

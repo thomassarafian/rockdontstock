@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="d-flex flex-column align-items-center justify-content-center" style="margin-top: 3rem">
+    <div>
+      <%= image_tag("images/check.svg") %>
+    </div>
+    <h2 class="mb-0">
+      Merci pour votre commande
+    </h2>
+  </div>
+  <div class="d-flex align-items-center justify-content-center" style="gap: 5rem">
+    <div class="d-flex flex-column" style="width: 30%; gap: 2rem;">
+      <div class="sneaker-form__recap__sneaker-options mt-3" style="color: #727272;">
+        <div>
+          Numéro de commande : test
+        </div>
+        <div>
+          Date de commande : test
+        </div>
+        <div>
+          Moyen de paiement : test
+        </div>
+        <div>
+          Nom de l'acheteur : test
+        </div>
+      </div>
+      <div>Télécharger le récapitulatif</div>
+      <div>
+        <div style="font-size: 25px; font-weight: 700">Prochaine étape...</div>
+        <div>
+          Le vendeur dispose maintenant de 48 heures afin de nous envoyer ta paire de sneakers pour l’authentification.
+          Nous te tiendrons informé par e-mail des prochaines étapes de commande (réception, authentification, expédition finale).
+        </div>
+      </div>
+    </div>
+    <div class="purchase-recap">
+      <div class="purchase-recap__card">
+        <div class="purchase-recap__card__title">
+          Ma commande
+        </div>
+        <div class="purchase-recap__card__sneaker">
+          <%= cl_image_tag(Sneaker.first.photos.first&.key, class: 'purchase-recap__card__sneaker-photo') %>
+          <div class="purchase-recap__card__sneaker-details">
+            <div class="purchase-recap__card__sneaker-name">
+              <%= Sneaker.first.sneaker_db.name %>
+            </div>
+            <div class="purchase-recap__card__sneaker-options">
+              <%= Sneaker.first.sneaker_db.category %> - Taille <%= Sneaker.first.size %> - Condition: <%= Sneaker.first.condition %>/10
+            </div>
+            <div class="purchase-recap__card__sneaker-price">
+              <%= Sneaker.first.price %>€
+            </div>
+          </div>
+        </div>
+        <div class="purchase-recap__card__order-infos">
+          <div class="purchase-recap__card__order-infos__item">
+            <div>Livraison</div>
+            <div>prix €</div>
+          </div>
+          <div class="purchase-recap__card__order-infos__item">
+            <div>Authentification Premium</div>
+            <div>prix €</div>
+          </div>
+          <div class="purchase-recap__card__order-infos__item">
+            <div>Code promo</div>
+            <div>-prix €</div>
+          </div>
+        </div>
+        <div class="purchase-recap__card__total">
+          <div>Total</div>
+          <div>prix €</div>
+        </div>
+        <div class="purchase-recap__card__trustpilot"></div>
+      </div>
+    </div>
+  </div>
+</div>

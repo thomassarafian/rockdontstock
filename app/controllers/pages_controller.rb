@@ -13,7 +13,7 @@ class PagesController < ApplicationController
     if Subscription.new(params[:email]).as_prospect
       redirect_to request.referer, notice: "Félicitations ! Tu vas bientôt recevoir nos offres"
     else
-      redirect_to request.referer, notice: "Tu es dejà inscrit à notre newsletter"
+      redirect_to request.referer, notice: "Tu es dejà inscrit à notre newsletter !"
     end
   end
 
@@ -22,10 +22,10 @@ class PagesController < ApplicationController
     sib_list_id = guide.fetch_sendinblue["id"]
     temp_user = User.new(user_params.except(:guide_id))
 
-    if Subscription.new(temp_user).to_lg_guide(sib_list_id)
+    if Subscription.new(temp_user).to_lc_guide(sib_list_id)
       redirect_to request.referer, notice: "Félicitations ! Tu vas bientôt recevoir ton guide par email"
     else
-      redirect_to request.referer, notice: "Tu l'as déjà reçu !"
+      redirect_to request.referer, notice: "Tu as déjà reçu ton guide !"
     end
   end
 

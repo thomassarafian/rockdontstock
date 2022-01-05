@@ -32,11 +32,13 @@ Rails.application.routes.draw do
   get 'cgv', to: 'pages#cgv'
   get 'politique-de-confidentialite', to: 'pages#trust_policy'
   post 'newsletter', to: 'pages#newsletter'
-  post 'guide', to: 'pages#guide'
+  post 'guide', to: 'pages#guide_request'
   
   # PAYMENTS
   get 'payment-complete', to: "payments#complete"
+  get 'lc-payment-complete', to: "payments#lc_complete"
   post 'stripe-webhooks', to: 'payments#stripe_webhooks'
+  post 'lc-stripe-checkout', to: 'payments#lc_stripe_checkout'
   
   namespace :forest do
     # Sneakers
