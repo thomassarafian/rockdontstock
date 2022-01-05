@@ -10,22 +10,24 @@ class Order < ApplicationRecord
     #Status -> Sendcloud Webhook
   ]
 
+  enum payment_status: { unpaid: 0, paid: 10 }
+  enum payment_method: { card: 0 }
+
   belongs_to :user
   belongs_to :sneaker
 
-  monetize :price_cents
-  monetize :shipping_cost_cents
-  monetize :service_cents
+  monetize :total_price_cents
+  monetize :shipping_fee_cents
+  monetize :service_fee_cents
 
   validates :legal, acceptance: true
   # validates :state, inclusion: { in: STATES } # Pareil pour les sneakers -> permet d'etre sur que l'order est tjrs le statut 
 
   before_update :create_sendcloud_label, unless: :order_is_not_paid?
   before_update :new_list_id_for_buyer, unless: :order_is_not_paid?
-
   before_update :create_sendcloud_label_for_buyer, unless: :order_is_not_in_preparation?
 
-  after_create :shipping_price
+  # after_create :shipping_price
 
 
   def order_is_not_in_preparation?
@@ -44,18 +46,13 @@ class Order < ApplicationRecord
     SendcloudCreateLabel.new(self.user, self).create_label
   end
 
-  
   def new_list_id_for_buyer
     Subscription.new(self.user).as_buyer
   end
 
-  def percent_of(a, n)
-    a.to_f * (n.to_f / 100.0)
-  end
-
-  def shipping_price
-    self.service = (percent_of((self.sneaker.price_cents / 100), 12))
-    self.save
-  end
+  # def shipping_price
+  #   self.service = (percent_of((self.sneaker.price_cents / 100), 12))
+  #   self.save
+  # end
 
 end

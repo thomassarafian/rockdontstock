@@ -10,7 +10,7 @@ class SendcloudCreateLabelForBuyer
   end
 
   def create_label
-    if @order.shipping_cost_cents == 883
+    if @order.shipping_fee_cents == 883
       colissimo_second_parcel_data = {
         parcel: {
           name: @order.user.first_name + " " + @order.user.last_name,
@@ -41,7 +41,7 @@ class SendcloudCreateLabelForBuyer
           from_telephone: "+33676659036",
           from_email: "hello@rockdontstock.com",
           total_order_value_currency: "EUR",
-          total_order_value: @order.price_cents / 100,
+          total_order_value: @order.total_price_cents / 100,
           quantity: 1,
         }
       }
@@ -49,7 +49,7 @@ class SendcloudCreateLabelForBuyer
                       body: colissimo_second_parcel_data.to_json,
                       :headers => { 'Content-Type' => 'application/json' },
                       basic_auth: @auth)
-    elsif @order.shipping_cost_cents == 505
+    elsif @order.shipping_fee_cents == 505
       mondial_second_parcel_data = {
         parcel: {
           name: @order.user.first_name + " " + @order.user.last_name,
@@ -81,7 +81,7 @@ class SendcloudCreateLabelForBuyer
           from_telephone: "+33676659036",
           from_email: "hello@rockdontstock.com",
           total_order_value_currency: "EUR",
-          total_order_value: @order.price_cents / 100,
+          total_order_value: @order.total_price_cents / 100,
           quantity: 1,
         }
       }

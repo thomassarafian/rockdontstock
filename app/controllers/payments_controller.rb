@@ -33,13 +33,11 @@ class PaymentsController < ApplicationController
     order = Order.new(order_params.merge(user: current_user))
 
     if order.save
-      shipping_fees = { relay: 6.30, colissimo: 9.15 }
+      shipping_fees = { relay: 630, colissimo: 915 }
 
-      # price of sneaker + shipping + 6% of sneaker price
-      puts order.sneaker.price
-      puts order_params[:delivery]
-      puts order_params[:delivery].class
-      total_price = 1.06 * order.sneaker.price + shipping_fees[order_params[:delivery]]
+      @shipping_fee = shipping_fees[order_params[:delivery].to_sym]
+      @service_fee = order.sneaker.price_cents * 0.06
+      @total_price = order.sneaker.price_cents + @shipping_fee + @service_fee
 
       session = Stripe::Checkout::Session.create({
         line_items: [{
@@ -49,7 +47,7 @@ class PaymentsController < ApplicationController
               name: order.sneaker.sneaker_db.name,
               images: [order.sneaker.photos.first.url]
             },
-            unit_amount: total_price * 100,
+            unit_amount: @total_price.to_i,
           },
           quantity: 1,
         }],
@@ -64,7 +62,17 @@ class PaymentsController < ApplicationController
     end
 
   end
-
+  
+  def sneaker_complete
+    session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    @order = Order.find(session.metadata.order_id)
+    @order.update(
+      shipping_fee_cents: @shipping_fee,
+      service_fee_cents: @service_fee,
+      total_price_cents: @total_price
+    )
+  end
+  
   def stripe_webhooks
     payload = request.body.read
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
@@ -80,32 +88,29 @@ class PaymentsController < ApplicationController
     end
 
     case event.type
-    when 'payment_intent.succeeded'
-
     when 'checkout.session.completed'
       checkout = event.data.object
-
       if lc_id = checkout.metadata.lc_id
         lc = Authentication.find(lc_id)
-        lc.update(payment_status: "paid")
-        
+        lc.update(
+          checkout_session_id: checkout.id,
+          payment_method: checkout.payment_method_types[0],
+          payment_status: "paid"
+        )
       elsif order_id = checkout.metadata.order_id
         order = Order.find(order_id)
-        order.update(payment_status: "paid")
+        order.update(
+          checkout_session_id: checkout.id,
+          payment_method: checkout.payment_method_types[0],
+          payment_status: "paid"
+        )
       end
     end
 
     status 200
   end
 
-  def sneaker_complete
-    session = Stripe::Checkout::Session.retrieve(params[:session_id])
-    customer = Stripe::Customer.retrieve(session.customer)
-    puts "*"*100, session
-    puts "!"*100, customer
-  end
-
-    # def new
+  # def new
   #   @order = current_user.orders.where(state: 'En cours').find(params[:order_id])
   #   @auth = {
   #     username: ENV["SENDCLOUD_API_KEY"],
@@ -138,7 +143,7 @@ class PaymentsController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:first_name, :last_name, :phone, :address, :city, :zip_code, :door_number, :delivery, :sneaker_id)
+    params.require(:order).permit(:first_name, :last_name, :phone, :address, :city, :zip_code, :door_number, :delivery, :sneaker_id, :legal)
   end
 
 end

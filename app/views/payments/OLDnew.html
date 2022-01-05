@@ -75,7 +75,7 @@
           <span class="payment-service-price"><%= (@order.service / 2) %>€</span></span>
         </p>
         <br>
-        <%# total =  (@order.price + @order.shipping_cost + (@order.service / 2)) %>
+        <%# total =  (@order.total_price + @order.shipping_cost + (@order.service / 2)) %>
         <strong><p class="resume-prices">TOTAL <span class="payment-total-price"></span></p></strong>
       
         <button disabled type="button" id="pay_button" class="pay_button btn btn-dark">Paiement</button>
@@ -483,7 +483,7 @@
   let event_data = {
     "id": "<%= @order.id %>",
     "data": {
-        "total": "<%= @order.price_cents %>",
+        "total": "<%= @order.total_price_cents %>",
         "currency": "EUR",
         "items": [{
           "name": "<%= @order.sneaker.sneaker_db.name %>",

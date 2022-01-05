@@ -11,19 +11,18 @@
     <div class="d-flex flex-column" style="width: 30%; gap: 2rem;">
       <div class="sneaker-form__recap__sneaker-options mt-3" style="color: #727272;">
         <div>
-          Numéro de commande : <%= @order.id %>
+          Numéro de commande : test
         </div>
         <div>
-          Date de commande : <%= I18n.l(Order.last.created_at, format: :short, locale: :'fr') %>
+          Date de commande : test
         </div>
         <div>
-          Moyen de paiement : <%= @order.payment_method %>
+          Moyen de paiement : test
         </div>
         <div>
-          Nom de l'acheteur : <%= @order.user.full_name %>
+          Nom de l'acheteur : test
         </div>
       </div>
-      <%= link_to "Télécharger le récapitulatif", order_path(@order.id, format: :pdf), target: "_blank" %>
       <div>
         <div style="font-size: 25px; font-weight: 700">Prochaine étape...</div>
         <div>
@@ -38,16 +37,15 @@
           Ma commande
         </div>
         <div class="purchase-recap__card__sneaker">
-          <%= cl_image_tag(@order.sneaker.photos.first&.key, class: 'purchase-recap__card__sneaker-photo') %>
           <div class="purchase-recap__card__sneaker-details">
             <div class="purchase-recap__card__sneaker-name">
-              <%= @order.sneaker.sneaker_db.name %>
+              <%= Sneaker.first.sneaker_db.name %>
             </div>
             <div class="purchase-recap__card__sneaker-options">
-              <%= @order.sneaker.sneaker_db.category %> - Taille <%= @order.sneaker.size %> - Condition: <%= @order.sneaker.condition %>/10
+              <%= Sneaker.first.sneaker_db.category %> - Taille <%= Sneaker.first.size %> - Condition: <%= Sneaker.first.condition %>/10
             </div>
             <div class="purchase-recap__card__sneaker-price">
-              <%= @order.sneaker.price %> €
+              <%= Sneaker.first.price %>€
             </div>
           </div>
         </div>

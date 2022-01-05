@@ -29,52 +29,39 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-# gem 'bootstrap', '~> 5.0.0.beta2'
-# gem 'jquery-rails'
-
 gem 'autoprefixer-rails'
-# gem 'font-awesome-sass', '~> 5.15.1'
 gem 'simple_form'
 gem 'wicked' # wizard form
 gem 'whenever', require: false # cron job
 gem 'friendly_id'
 gem 'data_uri'
 gem 'addressable'
-
 gem 'devise'
+
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
-
-gem 'figaro' #hide sensible info from git
-
 # gem "better_errors" #gem for debuging
-gem "binding_of_caller" #gem for debuging
+# gem "binding_of_caller" #gem for debuging
 gem 'spring' #for reload automaticaly
-
 gem 'cloudinary', '~> 1.16.0' # for image upload
-
 gem 'mailjet' # email transactionel
-gem 'gibbon' #pour envoyer la liste des emails a elliot sur mailchimp
+# gem 'gibbon' #pour envoyer la liste des emails a elliot sur mailchimp
 gem 'sib-api-v3-sdk'
+gem 'rails-i18n'
+
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 gem 'stripe'
-gem 'stripe_event'
+# gem 'stripe_event'
 gem 'money-rails' #managing money display easily
-
-gem "httparty"
-
+# gem "httparty"
 gem 'mail_form' #page contact
-
 gem 'pg_search', '~> 2.3.0' #search
-
 gem 'pagy', '~> 3.5' #pagination
-
 gem 'forest_liana' # admin
 gem 'rack-cors'    # admin
-
-gem 'bullet', group: 'development'
-
 
 
 group :development, :test do
@@ -95,6 +82,7 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring'
+  gem 'bullet'
 end
 
 group :test do

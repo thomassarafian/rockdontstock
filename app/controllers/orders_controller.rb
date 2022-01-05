@@ -14,39 +14,46 @@ class OrdersController < ApplicationController
 	end
 
 	def show
-		# On créé la commande 
-		# On envoie l'email au vendeur
-		# On passe la commande dans un autre state
-		# On passe la sneaker dans un autre state
-		# On retire la sneaker côté public
-		# Nous on va recevoir l'argent sur Stripe par exemple 220 euros. L'order elle appartient a une sneaker en particulier et la sneaker au vendeur
-		# @order.sneaker.user -> 
-    
-    #order = 1 donc ca veut dire que if current_user.order == 1 alors current_user.order.sneaker
-    # if !REQUETE AJAX 
-    	@order = current_user.orders.find(params[:id])
-    	# current_stripe_session = retrieve_stripe_session
-      # if current_stripe_session['payment_status'] != "paid" && @order.state == "Payé"
-      #   capture_payment(current_stripe_session)
-      # end
-
-      # @order.update(state: "Payé") # for testing
-      # @order.sneaker.update(state: 2) # for testing
-      # SendcloudCreateLabel.new(@order.user, @order).create_label # for testing
-      
-      # @order_service = @order.service_cents / 2
-
-		#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
-		#end
-
-		#if le vendeur n'a pas envoyé sa paire avant les 7 jours # Je crois que ca cancel tout seul si on a pas validé dans les 7 jours
-		#	cancel_payment(current_stripe_session)
-		#end
-
-		#if on s'apercoit que le vendeur nous a envoyé une fausse paire
-			# refund_payment(current_stripe_session)
-		#end		
+		@order = Order.find(params[:id])
+    respond_to do |format|
+      format.pdf { render pdf: "Récapitulatif de commande", encoding: "UTF-8" }
+    end
 	end
+
+	# def show
+	# 	# On créé la commande 
+	# 	# On envoie l'email au vendeur
+	# 	# On passe la commande dans un autre state
+	# 	# On passe la sneaker dans un autre state
+	# 	# On retire la sneaker côté public
+	# 	# Nous on va recevoir l'argent sur Stripe par exemple 220 euros. L'order elle appartient a une sneaker en particulier et la sneaker au vendeur
+	# 	# @order.sneaker.user -> 
+    
+  #   #order = 1 donc ca veut dire que if current_user.order == 1 alors current_user.order.sneaker
+  #   # if !REQUETE AJAX 
+  #   	@order = current_user.orders.find(params[:id])
+  #   	# current_stripe_session = retrieve_stripe_session
+  #     # if current_stripe_session['payment_status'] != "paid" && @order.state == "Payé"
+  #     #   capture_payment(current_stripe_session)
+  #     # end
+
+  #     # @order.update(state: "Payé") # for testing
+  #     # @order.sneaker.update(state: 2) # for testing
+  #     # SendcloudCreateLabel.new(@order.user, @order).create_label # for testing
+      
+  #     # @order_service = @order.service_cents / 2
+
+	# 	#if @order.user.send_package == true # Si l'acheteur a envoyé le colis
+	# 	#end
+
+	# 	#if le vendeur n'a pas envoyé sa paire avant les 7 jours # Je crois que ca cancel tout seul si on a pas validé dans les 7 jours
+	# 	#	cancel_payment(current_stripe_session)
+	# 	#end
+
+	# 	#if on s'apercoit que le vendeur nous a envoyé une fausse paire
+	# 		# refund_payment(current_stripe_session)
+	# 	#end		
+	# end
 
 	def create
     # if params['mondial-relay-price'].present? || params['colissimo-price'].present?
@@ -82,7 +89,7 @@ class OrdersController < ApplicationController
 	#     }],
   #   	# payment_intent_data: {
   #   		# capture_method: 'manual', 
-	# 	  #   application_fee_amount: order.price_cents / 10, #l'argent qui va au vendeur #la plateforme reçoit une commission pour le service
+	# 	  #   application_fee_amount: order.total_price_cents / 10, #l'argent qui va au vendeur #la plateforme reçoit une commission pour le service
 	# 	  #   transfer_data: {
 	# 	  #     destination: sneaker.user.stripe_account_id,
 	# 	    # },
@@ -94,12 +101,12 @@ class OrdersController < ApplicationController
 	#   })
 
   #   @order.checkout_session_id = stripe_session.id
-  #   @order.shipping_cost_cents = (deliveryPrice.to_f * 100).to_i
-  #   @order.price_cents = (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i + (@order.service_cents / 2))
+  #   @order.shipping_fee_cents = (deliveryPrice.to_f * 100).to_i
+  #   @order.total_price_cents = (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i + (@order.service_cents / 2))
   #   @order.save!
 
 	#   # @order.update_column(:checkout_session_id, stripe_session.id)
-  #   # @order.update_column(:shipping_cost_cents, (deliveryPrice.to_f * 100).to_i)
+  #   # @order.update_column(:shipping_fee_cents, (deliveryPrice.to_f * 100).to_i)
   #   # @order.update_column(:service_cents, (@order.service_cents / 2))
   #   #@order.update_column(:price_cents, (@order.sneaker.price_cents + (deliveryPrice.to_f * 100).to_i)) #+ (@order.service_cents / 2)))
 	  

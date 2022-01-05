@@ -23,7 +23,6 @@
           Nom de l'acheteur : <%= @order.user.full_name %>
         </div>
       </div>
-      <%= link_to "Télécharger le récapitulatif", order_path(@order.id, format: :pdf), target: "_blank" %>
       <div>
         <div style="font-size: 25px; font-weight: 700">Prochaine étape...</div>
         <div>
@@ -38,7 +37,6 @@
           Ma commande
         </div>
         <div class="purchase-recap__card__sneaker">
-          <%= cl_image_tag(@order.sneaker.photos.first&.key, class: 'purchase-recap__card__sneaker-photo') %>
           <div class="purchase-recap__card__sneaker-details">
             <div class="purchase-recap__card__sneaker-name">
               <%= @order.sneaker.sneaker_db.name %>

@@ -43,7 +43,7 @@ class Forest::OrdersController < ForestLiana::SmartActionsController
         "prenom" => @order.user.first_name,
         "numero_commande" => @order.id,
         "modele_paire" => @order.sneaker.sneaker_db.name,
-        "prix_de_vente" => @order.price_cents / 100
+        "prix_de_vente" => @order.total_price_cents / 100
       }
     }])
     p buyer_mail.attributes['Messages']
@@ -67,7 +67,7 @@ class Forest::OrdersController < ForestLiana::SmartActionsController
         "prenom" => @order.sneaker.user.first_name,
         "numero_commande" => @order.id,
         "modele_paire" => @order.sneaker.sneaker_db.name,
-        "prix_de_vente" => @order.price_cents / 100
+        "prix_de_vente" => @order.total_price_cents / 100
       }
     }])
     p seller_mail.attributes['Messages']
@@ -159,9 +159,9 @@ class Forest::OrdersController < ForestLiana::SmartActionsController
         "numero_commande" => @order.id,
         "modele_paire" => @order.sneaker.sneaker_db.name,
         "prix_de_vente" => @order.sneaker.price_cents / 100,
-        "frais_de_livraison" => @order.shipping_cost_cents / 100,
+        "frais_de_livraison" => @order.shipping_fee_cents / 100,
         "frais_authentification" => ((@order.sneaker.price_cents / 100) * 0.12) / 2,
-        "prix_tot_paye_par_acheteur" => (@order.sneaker.price_cents / 100) + (((@sneaker.price_cents / 100) * 0.12) / 2) + (@order.shipping_cost_cents / 100)
+        "prix_tot_paye_par_acheteur" => (@order.sneaker.price_cents / 100) + (((@sneaker.price_cents / 100) * 0.12) / 2) + (@order.shipping_fee_cents / 100)
       }
     }])
     p buyer_mail.attributes['Messages']

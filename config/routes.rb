@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 		omniauth_callbacks: 'users/omniauth_callbacks',
 		registrations: 'users/registrations'
 	}
+
+  resources :authentication, only: [:show]
   
   resources :sneakers do 
     resources :build, controller: 'sneakers/build' do
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
         get 'success'
       end
     end
-    resources :orders, only: [:new, :show, :create]
+    resources :orders, shallow: true, only: [:new, :show, :create]
   end
   
 	resource :user, only: [:show, :update], path: 'me' do

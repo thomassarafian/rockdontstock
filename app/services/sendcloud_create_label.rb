@@ -41,7 +41,7 @@ class SendcloudCreateLabel
         # from_telephone: "+33#{@order.sneaker.user.phone}", #"0606860076", #@order.sneaker.user.phone? ? @order.sneaker.user.phone : "",
         from_email: @order.sneaker.user.email,
         total_order_value_currency: "EUR",
-        total_order_value: @order.price_cents / 100,
+        total_order_value: @order.total_price_cents / 100,
         quantity: 1,
       }
     }
@@ -118,9 +118,9 @@ class SendcloudCreateLabel
         "compte_rockdontstock" => "https://www.rockdontstock.com/me/items",
         "numero_commande" => @order.id,
         "prix_de_vente" => @order.sneaker.price_cents.to_f / 100,
-        "frais_de_livraison" => @order.shipping_cost_cents.to_f / 100, 
+        "frais_de_livraison" => @order.shipping_fee_cents.to_f / 100, 
         "frais_authentification" => (@order.service_cents.to_f / 100) / 2,
-        "prix_tot_paye_par_acheteur" => (@order.sneaker.price_cents.to_f / 100) + (@order.shipping_cost_cents.to_f / 100) + ((@order.service_cents.to_f / 100) / 2) 
+        "prix_tot_paye_par_acheteur" => (@order.sneaker.price_cents.to_f / 100) + (@order.shipping_fee_cents.to_f / 100) + ((@order.service_cents.to_f / 100) / 2) 
       }
     }])
     p variable2.attributes['Messages']

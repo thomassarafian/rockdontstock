@@ -10,15 +10,15 @@
     <li><strong>Commande passée le</strong> <%= @order.created_at.to_date.strftime("%d/%m/%Y") %></li>
     <li><strong>Paire :</strong> <%= @order.sneaker.sneaker_db.name %></li>
 
-    <%# if @order.shipping_cost_cents == 883 %>
+    <%# if @order.shipping_fee_cents == 883 %>
       <li><strong>Livraison :</strong> <%= humanized_money_with_symbol @order.shipping_cost %></li>
-      <%# total = @order.price - 5.05 + (@order.service / 2 ) %>
+      <%# total = @order.total_price - 5.05 + (@order.service / 2 ) %>
     <%# else %>
       <!-- <li><strong>Livraison :</strong>€5,05</li> -->
     <%# end %>
       <li><strong>Authentification :</strong> <%= humanized_money_with_symbol @order.service / 2 %></li>
       <li><strong>Prix de la paire :</strong> <%= humanized_money_with_symbol @order.sneaker.price %></li>
-      <% total_price_order =  (@order.price_cents + (@order.service_cents / 2)).to_f / 100 %>
+      <% total_price_order =  (@order.total_price_cents + (@order.service_cents / 2)).to_f / 100 %>
       <li><strong>Prix total :</strong> €<%= total_price_order %></li>
       <!-- <li><strong>Total :</strong> <%#= humanized_money_with_symbol total %></li> -->
     </li>

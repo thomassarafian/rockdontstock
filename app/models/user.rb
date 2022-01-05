@@ -36,6 +36,10 @@ class User < ApplicationRecord
   after_create :send_welcome
   after_commit :send_iban
   # after_update :send_label, if: :picker_data_is_converted?
+
+  def full_name
+    self.first_name.capitalize + " " + self.last_name.capitalize
+  end
   
 
   private
