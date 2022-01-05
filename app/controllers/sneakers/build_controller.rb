@@ -1,20 +1,15 @@
 class Sneakers::BuildController < ApplicationController
   include Wicked::Wizard
 
-  skip_after_action :verify_policy_scoped, only: [:index]
-  skip_after_action :verify_authorized, only: [:success]
-
   steps :add_sneaker_db, :add_infos, :add_photos, :add_recap
 
   def show
     @sneaker = Sneaker.find(params[:sneaker_id])
-    authorize @sneaker
     render_wizard
   end
 
   def update
     @sneaker = Sneaker.find(params[:sneaker_id])
-    authorize @sneaker
     status = (step == steps.last ? "active" : step.to_s)
 
     if @sneaker.update(sneaker_params.merge(status: status))
@@ -36,7 +31,6 @@ class Sneakers::BuildController < ApplicationController
 
   # def create
   #   @sneaker = Sneaker.create
-  #   authorize @sneaker
   #   redirect_to wizard_path(steps.first, sneaker_id: @sneaker.id)
   # end
 

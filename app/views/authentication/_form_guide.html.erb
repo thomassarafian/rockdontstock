@@ -1,7 +1,7 @@
 <div class="auth-modal__subtitle">Le guide gratuit</div>
-<h2>NOM DE LA PAIRE</h2>
+<h2 class="auth-modal__guide-name"></h2>
 <div class="auth-modal__form">
-  <%= form_for root_path do |f| %>
+  <%= form_with url: guide_path do |f| %>
     <div class="row g-2">
       <div class="col">
         <%= f.text_field :last_name, class: "form-control", placeholder: "Nom" %>

@@ -1,8 +1,6 @@
 class TransfersController < ApplicationController
-  skip_after_action :verify_authorized, only: [:index, :create]
 	 
   def index
-		skip_policy_scope
     @user = current_user
     if @user.stripe_account_id?
       @account = Stripe::Account.retrieve(@user.stripe_account_id)

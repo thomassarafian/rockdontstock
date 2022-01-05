@@ -1,12 +1,10 @@
 class SneakersController < ApplicationController
 
 	before_action :set_sneaker, only: [:show, :edit, :update, :destroy]
-	skip_before_action :authenticate_user!, only: [:index, :show]
-	skip_after_action :verify_authorized, only: [:new, :create]
 
 	def index
 		@selection_of_the_day = Sneaker.highlighted.last || Sneaker.selected.last || Sneaker.first
-		results = policy_scope(Sneaker).where('state >= ?', 1).search_by_name_and_brand(params[:search])
+		results = Sneaker.where('state >= ?', 1).search_by_name_and_brand(params[:search])
 		
 		[:price, :condition, :size, :category].each do |filter|
 			results = results&.public_send("filter_by_#{filter.to_s}", params[filter]) if params[filter].present?
@@ -26,7 +24,6 @@ class SneakersController < ApplicationController
 
 	def create
 		@sneaker = Sneaker.create(user: current_user)
-		authorize @sneaker
 		redirect_to sneaker_build_path(@sneaker.id, :add_sneaker_db)
 		# @sneaker_db = SneakerDb.find(params[:sneaker_db]) if params[:sneaker_db]
 	end
@@ -54,7 +51,6 @@ class SneakersController < ApplicationController
 	# 			@sneaker = current_user.sneakers.new(sneaker_db_id: @sneaker_db.id)
 	# 			@sneaker.update(sneaker_params)
 	# 			@sneaker.update(state: 0)
-	# 			authorize @sneaker
 	# 			@sneaker.save!
 	# 		end
 	# 	else
@@ -73,7 +69,6 @@ class SneakersController < ApplicationController
 	# 		elsif user_signed_in?
 	# 			#  @sneaker = current_user.sneakers.new(sneaker_db_id: @sneaker_db.id)
 	# 			#  @sneaker.update(sneaker_params)
-	# 			# authorize @sneaker
 	# 			# if @sneaker.save
 	# 			# 	@sneaker.update(state: 0) # ici on devrai laisser à 0, puis si on valide la paire cote admin, alors on la passera a 1
 	# 			if user_signed_in? && current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone?
@@ -136,6 +131,5 @@ class SneakersController < ApplicationController
 
 	def set_sneaker
 		@sneaker = Sneaker.find(params[:id])
-		authorize @sneaker
 	end
 end

@@ -88,48 +88,15 @@
     <div class="home-guides__title">Découvrez nos guides</div>
     <div class="home-guides-block">
       <div class="home-guides__content" data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
-        <div class="flickity-cell">
-          <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
-            <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
+        <% Guide.all.each do |guide| %>
+          <div class="flickity-cell">
+            <div class="home-guides__content__card">
+              <%= image_tag(guide.img_url, class: "home-guides__content__card__image") %>
+              <div class="home-guides__content__card__name"><%= guide.name %></div>
+              <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-guide" data-bs-guideName="<%= guide.name %>" data-bs-guideId="<%= guide.id %>">Découvrir</button>
+            </div>
           </div>
-        </div>
-        <div class="flickity-cell">
-          <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
-            <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
-          </div>
-        </div>
-        <div class="flickity-cell">
-          <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
-            <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
-          </div>
-        </div>
-        <div class="flickity-cell">
-          <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
-            <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
-          </div>
-        </div>
-        <div class="flickity-cell">
-          <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
-            <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
-          </div>
-        </div>
-        <div class="flickity-cell">
-          <div class="home-guides__content__card">
-            <%= cl_image_tag(Sneaker.first.photos.first&.key, class: "home-guides__content__card__image") %>
-            <div class="home-guides__content__card__name"><%= Sneaker.first.sneaker_db.name %></div>
-            <button class="home-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-auth">Découvrir</button>
-          </div>
-        </div>
+        <% end %>
       </div>
       <div class="home-guides__footer">
         Chaque guide te permet de connaitre différents points d’authentification essentiels afin de Legit Check le modèle en toute autonomie. N’hésites pas à t’en servir afin d’éviter l’achat d’un modèle suspicieux.
@@ -137,6 +104,41 @@
     </div>
   </section>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-guide" tabindex="-1" role="dialog" aria-labelledby="modal-guideTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div id="form-container">
+          <%= render partial: "authentication/form_guide" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let guideModal = document.getElementById('modal-guide')
+
+  guideModal.addEventListener('show.bs.modal', function (e) {
+    let url = new URL(window.location.href)
+    url.searchParams.add('guideId', guideId)
+
+    let button = e.relatedTarget
+    let guideName = button.getAttribute('data-bs-guideName')
+    let guideId = button.getAttribute('data-bs-guideId')
+    let modalTitle = guideModal.querySelector('.auth-modal__guide-name')
+
+    modalTitle.textContent = guideName
+  })
+
+  guideModal.addEventListener('hide.bs.modal', function (e) {
+    let url = new URL(window.location.href)
+    url.searchParams.delete('guideId')
+  })
+</script>
 
 <style>
 /* offset to allow border to be seen */

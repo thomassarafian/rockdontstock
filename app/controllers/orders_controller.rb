@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-	skip_after_action :verify_authorized
 
 	def new 
 		@order = Order.new(user: current_user, sneaker_id: params[:sneaker_id])
@@ -26,7 +25,6 @@ class OrdersController < ApplicationController
     #order = 1 donc ca veut dire que if current_user.order == 1 alors current_user.order.sneaker
     # if !REQUETE AJAX 
     	@order = current_user.orders.find(params[:id])
-    	authorize @order
     	# current_stripe_session = retrieve_stripe_session
       # if current_stripe_session['payment_status'] != "paid" && @order.state == "Payé"
       #   capture_payment(current_stripe_session)
@@ -56,12 +54,10 @@ class OrdersController < ApplicationController
       @sneaker = current_user.orders.last.sneaker
       @sneaker_db = @sneaker.sneaker_db
       params['mondial-relay-price'].present? ? create_stripe_session(@order, @sneaker, params['mondial-relay-price']) : create_stripe_session(@order, @sneaker, params['colissimo-price'])
-      authorize @order
     else
   	  @sneaker = Sneaker.find(params[:sneaker_id])
       @sneaker_db = SneakerDb.find(@sneaker.sneaker_db_id)
   	  @order = Order.create!(sneaker: @sneaker, sneaker_name: @sneaker_db.name, price_cents: @sneaker.price_cents, state: 'En cours', user: current_user)
-  	  authorize @order
       Stripe::StripeCreateCustomer.new(current_user)
       redirect_to new_order_payment_path(@order)
     end

@@ -1,12 +1,10 @@
 class PaymentsController < ApplicationController
-  skip_after_action :verify_authorized
 
   def complete
   end
 
   # def new
   #   @order = current_user.orders.where(state: 'En cours').find(params[:order_id])
-  #   authorize @order
   #   @auth = {
   #     username: ENV["SENDCLOUD_API_KEY"],
   #     password: ENV["SENDCLOUD_SECRET_KEY"]

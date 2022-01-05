@@ -1,12 +1,9 @@
 class ApplicationController < ActionController::Base
 	include Pagy::Backend
-	include Pundit
 
 	before_action :store_user_location!, if: :storable_location?
 	before_action :configure_permitted_parameters, if: :devise_controller?
 	before_action :authenticate_user!
-	after_action :verify_authorized, except: :index, unless: :skip_pundit?
-	after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
 	protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 	
@@ -24,10 +21,6 @@ class ApplicationController < ActionController::Base
 	end
 
 	private
-
-	def skip_pundit?
-		devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
-	end
 
 	def storable_location?
 		request.get? && is_navigational_format? && !devise_controller? && !request.xhr?

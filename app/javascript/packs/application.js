@@ -9,7 +9,7 @@ ActiveStorage.start()
 
 require('dotenv').config()
 
-import "bootstrap";
+import "bootstrap"
 
 var Flickity = require('flickity');
 require("./flickity-fullscreen.js");

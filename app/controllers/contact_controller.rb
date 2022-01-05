@@ -3,13 +3,11 @@ class ContactController < ApplicationController
 
   def new
     @contact = Contact.new
-    authorize @contact
   end
   
   
   def create
     @contact = Contact.new(contact_params)
-    authorize @contact
 
     @contact.name = params[:contact][:name]
     @contact.email = params[:contact][:email]

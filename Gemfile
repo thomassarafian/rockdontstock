@@ -46,7 +46,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 
-gem 'pundit' #rights for users 
 gem 'figaro' #hide sensible info from git
 
 # gem "better_errors" #gem for debuging
