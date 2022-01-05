@@ -70,20 +70,13 @@ class PaymentsController < ApplicationController
     end
 
     case event.type
-    when 'payment_intent.payment_failed'
-      # payment_intent = event.data.object
-    when 'payment_intent.processing'
-      # payment_intent = event.data.object
-    when 'payment_intent.requires_action'
-      # payment_intent = event.data.object
     when 'payment_intent.succeeded'
-      # payment_intent = event.data.object
-    when checkout.session.completed
+
+    when 'checkout.session.completed'
       checkout = event.data.object
       lc_id = checkout.metadata.lc_id
       lc = Authentication.find(lc_id)
       lc.update(payment_status: "paid")
-    when checkout.session.expired
     end
 
     status 200
