@@ -54,20 +54,20 @@
         <div class="purchase-recap__card__order-infos">
           <div class="purchase-recap__card__order-infos__item">
             <div>Livraison</div>
-            <div>prix €</div>
+            <div><%= @order.shipping_fee %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
-            <div>prix €</div>
+            <div><%= @order.service_fee %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Code promo</div>
-            <div>-prix €</div>
+            <div>-0 €</div>
           </div>
         </div>
         <div class="purchase-recap__card__total">
           <div>Total</div>
-          <div>prix €</div>
+          <div><%= @order.total_price %> €</div>
         </div>
         <div class="purchase-recap__card__trustpilot"></div>
       </div>

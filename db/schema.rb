@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_222953) do
+ActiveRecord::Schema.define(version: 2022_01_05_230206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2022_01_05_222953) do
     t.integer "shipping_fee_cents", default: 0, null: false
     t.integer "service_fee_cents", default: 0, null: false
     t.integer "total_price_cents", default: 0, null: false
+    t.string "relay_address"
     t.index ["sneaker_id"], name: "index_orders_on_sneaker_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

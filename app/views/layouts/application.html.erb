@@ -111,6 +111,10 @@ $(document).ready(function () {
       document.querySelector('.purchase-form__shipping__relay-target-address').innerHTML = `${shop.Nom}, ${shop.Adresse1?.toLowerCase()} ${shop.Adresse2?.toLowerCase() || ''}`
       document.querySelector('.purchase-form__shipping__relay-target-city').innerHTML = `${shop.CP} ${shop.Ville?.toLowerCase()}`
       document.querySelector('.purchase-form__shipping__relay-map').style.display = "none"
+
+      document.getElementById('order_relay_address').value = shop.Nom + " " + shop.Adresse1 + " " + (shop.Adresse2 ? shop.Adresse2 + " " : "") + shop.CP + " " + shop.Ville
+
+      
     },
     OnSearchSuccess: function(data) {
       let result = data.PRList[0]

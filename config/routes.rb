@@ -8,8 +8,6 @@ Rails.application.routes.draw do
 		omniauth_callbacks: 'users/omniauth_callbacks',
 		registrations: 'users/registrations'
 	}
-
-  resources :authentication, only: [:show]
   
   resources :sneakers do 
     resources :build, controller: 'sneakers/build' do

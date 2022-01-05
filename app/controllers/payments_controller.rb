@@ -66,11 +66,7 @@ class PaymentsController < ApplicationController
   def sneaker_complete
     session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @order = Order.find(session.metadata.order_id)
-    @order.update(
-      shipping_fee_cents: @shipping_fee,
-      service_fee_cents: @service_fee,
-      total_price_cents: @total_price
-    )
+    @order.update(shipping_fee: @shipping_fee, service_fee: @service_fee, total_price: @total_price)
   end
   
   def stripe_webhooks
