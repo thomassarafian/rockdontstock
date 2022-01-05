@@ -45,7 +45,7 @@ class Order < ApplicationRecord
 
   
   def new_list_id_for_buyer
-    Subscription.new(user: self.user).as_buyer
+    Subscription.new(self.user).as_buyer
   end
 
   def percent_of(a, n)

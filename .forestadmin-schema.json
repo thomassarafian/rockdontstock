@@ -655,6 +655,21 @@
       "widget": null,
       "validations": []
     }, {
+      "field": "sendinblue_list_id",
+      "type": "Number",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
+    }, {
       "field": "file_attachment",
       "type": "Number",
       "default_value": null,
@@ -2161,6 +2176,21 @@
     }, {
       "field": "picker_data",
       "type": "Json",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "age",
+      "type": "Number",
       "default_value": null,
       "enums": null,
       "integration": null,
