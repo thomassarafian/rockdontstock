@@ -22,6 +22,7 @@ class PaymentsController < ApplicationController
         quantity: 1,
       }],
       mode: 'payment',
+      metadata: { lc_id: lc.id },
       success_url: lc_payment_complete_url,
       cancel_url: 'https://example.com/cancel',
     })
@@ -78,7 +79,10 @@ class PaymentsController < ApplicationController
     when 'payment_intent.succeeded'
       # payment_intent = event.data.object
     when checkout.session.completed
-      puts "*"*100, event.data.object
+      checkout = event.data.object
+      lc_id = checkout.metadata.lc_id
+      lc = Authentication.find(lc_id)
+      lc.update(payment_status: "paid")
     when checkout.session.expired
     end
 
