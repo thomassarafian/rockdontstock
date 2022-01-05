@@ -29,135 +29,6 @@
 </div> -->
 <title>Recherche - Rock Don't Stock</title>
 <div class="container">
-  <div class="d-flex justify-content-evenly align-items-center d-block d-lg-none" style="height: 30px">
-    <div class="popup-close-icon me-auto" style="display: none; font-size: 35px; line-height: 0;" onclick="hidePopup()">&times;</div>
-    <div class="filter-btn text-center" style="cursor: pointer;" onclick="revealPopup('filter')">Filtrer</div>
-    <div class="sort-btn text-center" style="cursor: pointer;" onclick="revealPopup('sort')">Trier</div>
-  </div>
-  <div class="popup sort-popup">
-    <%= form_with url: sneakers_path, local: false, method: :get do |f| %>
-      <div class="form-group" style="border: 1px solid #0E0E0E; padding: 1rem;">
-        <div class="form-check mb-1">
-          <%= f.check_box :category, { class: "form-check-input" }, "Nike", nil %>
-          <%= f.label "Du plus ancien au plus récent", class: "form-check-label" %>
-        </div>
-      </div>
-      <div class="form-group" style="border: 1px solid #0E0E0E; padding: 1rem;">
-        <div class="form-check mb-1">
-          <%= f.check_box :category, { class: "form-check-input" }, "Nike", nil %>
-          <%= f.label "Prix croissant", class: "form-check-label" %>
-        </div>
-      </div>
-      <div class="form-group" style="border: 1px solid #0E0E0E; padding: 1rem;">
-        <div class="form-check mb-1">
-          <%= f.check_box :price, { class: "form-check-input" }, "Nike", nil %>
-          <%= f.label "Prix décroissant", class: "form-check-label" %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="popup filter-popup">
-    <%= form_with url: sneakers_path, local: false, method: :get do |f| %>
-      <div class="form-group togglable-dropdowns" style="border: 1px solid #0E0E0E; padding: 1rem;">
-        <%= f.label "", style: "font-weight: 700; width: 100%;" do %>
-          <div class="d-flex align-items-center">
-            <span>Marques</span>
-            <i class="fas fa-angle-down ms-auto"></i>
-          </div>
-        <% end %>
-        <div class="dropdown-fields" style="display: none; margin-top: 0.5rem;">
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Nike", nil %>
-            <%= f.label "Nike", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Jordan", nil %>
-            <%= f.label "Jordan", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Adidas", nil %>
-            <%= f.label "Adidas", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Yeezy", nil %>
-            <%= f.label "Yeezy", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "New Balance", nil %>
-            <%= f.label "New Balance", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Asics", nil %>
-            <%= f.label "Asics", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Autres", nil %>
-            <%= f.label "Autres", class: "form-check-label" %>
-          </div>
-        </div>
-      </div>
-      <div class="form-group togglable-dropdowns" style="border: 1px solid #0E0E0E; padding: 1rem;">
-        <%= f.label "", style: "font-weight: 700; width: 100%;" do %>
-          <div class="d-flex align-items-center">
-            <span>Prix</span>
-            <i class="fas fa-angle-down ms-auto"></i>
-          </div>
-        <% end %>
-        <div class="dropdown-fields" style="display: none; margin-top: 0.5rem;">
-          <div class="row g-2">
-            <div class="col-5">
-              <%= f.number_field :min_price, min: 0, class: "form-control", placeholder: "Min" %>
-            </div>
-            <div class="col-5">
-              <%= f.number_field :max_price, class: "form-control", placeholder: "Max" %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-group togglable-dropdowns" style="border: 1px solid #0E0E0E; padding: 1rem;">
-        <%= f.label "", style: "font-weight: 700; width: 100%;" do %>
-          <div class="d-flex align-items-center">
-            <span>Condition</span>
-            <i class="fas fa-angle-down ms-auto"></i>
-          </div>
-        <% end %>
-        <div class="dropdown-fields" style="display: none; margin-top: 0.5rem;">
-          <div class="form-check mb-1">
-            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "6", nil %>
-            <%= f.label "6/10 ou moins", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "7", nil %>
-            <%= f.label "7/10", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "8", nil %>
-            <%= f.label "8/10", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "9", nil %>
-            <%= f.label "9/10", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "10", nil %>
-            <%= f.label "10/10", class: "form-check-label" %>
-          </div>
-        </div>
-      </div>
-      <div class="form-group togglable-dropdowns" style="border: 1px solid #0E0E0E; padding: 1rem;">
-        <%= f.label "", style: "font-weight: 700; width: 100%;" do %>
-          <div class="d-flex align-items-center">
-            <span>Taille</span>
-            <i class="fas fa-angle-down ms-auto"></i>
-          </div>
-        <% end %>
-        <div class="dropdown-fields" style="display: none; margin-top: 0.5rem;">
-          <%= f.select :size, size, { include_blank: "Toute taille" }, {  style: "display: block; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 0.5rem; background: none;" } %>
-        </div>
-      </div>
-      <button type="submit">Mettre à jour</button>
-    <% end %>
-  </div>
   <section class="sneaker-featured">
     <div class="sneaker-featured__subtitle">Parcourir nos</div>
     <h2>Sneakers</h2>
@@ -181,7 +52,8 @@
   </section>
   <div style="font-size: 1.563rem; margin-bottom: 3rem">Toutes les sneakers</div>
   <div class="d-flex align-items-start justify-content-between">
-    <div class="d-none d-lg-block" style="width: 20%; position: sticky; top: 100px;">
+    <!-- FILTERS DESKTOP -->
+    <div class="d-none d-lg-block" style="flex-grow: 1; top: 100px;">
       <%= form_with url: sneakers_path, local: false, method: :get do |f| %>
         <div class="form-group">
           <%= f.label "Marques", class: "form-label", style: "font-weight: 700" %>
@@ -250,12 +122,55 @@
         </div>
         <div class="form-group">
           <%= f.label "Taille", class: "form-label", style: "font-weight: 700" %>
-          <%= f.select :size, size, { include_blank: "Toute taille" }, {  style: "display: block; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 0.5rem; background: none;" } %>
+          <!-- <%= f.select :size, size, { include_blank: "Toute taille" }, {  style: "display: block; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 0.5rem; background: none;" } %> -->
+          <!-- <div class="dropdown-fields" style="display: none; margin-top: 0.5rem;"> -->
+            <!-- <%= f.select :size, size, { include_blank: "Toute taille" }, {  style: "display: block; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 0.5rem; background: none;" } %> -->
+            <div class="form-check mb-1">
+              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "1", nil %>
+              <%= f.label "1", class: "form-check-label" %>
+            </div>
+            <div class="form-check mb-1">
+              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "2", nil %>
+              <%= f.label "2", class: "form-check-label" %>
+            </div>
+            <div class="form-check mb-1">
+              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "3", nil %>
+              <%= f.label "3", class: "form-check-label" %>
+            </div>
+            <div class="form-check mb-1">
+              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "4", nil %>
+              <%= f.label "4", class: "form-check-label" %>
+            </div>
+            <div class="form-check mb-1">
+              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "5", nil %>
+              <%= f.label "5", class: "form-check-label" %>
+            </div>
+            <div class="form-check mb-1">
+              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "6", nil %>
+              <%= f.label "6", class: "form-check-label" %>
+            </div>
+            <div class="form-check mb-1">
+              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "7", nil %>
+              <%= f.label "7", class: "form-check-label" %>
+            </div>
+            <div class="form-check mb-1">
+              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "8", nil %>
+              <%= f.label "8", class: "form-check-label" %>
+            </div>
+            <div class="form-check mb-1">
+              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "9", nil %>
+              <%= f.label "9", class: "form-check-label" %>
+            </div>
+            <div class="form-check mb-1">
+              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "10", nil %>
+              <%= f.label "10", class: "form-check-label" %>
+            </div>
+          <!-- </div> -->
         </div>
         <button type="submit">Mettre à jour</button>
       <% end %>
     </div>
-    <div id="search-results" class="d-flex flex-wrap justify-content-center" style="width: 80%; gap: 2rem;">
+    <div id="search-results" class="d-flex flex-wrap justify-content-center" style="flex-shrink: 2; gap: 2rem;">
       <%= render partial: 'sneakers/list_sneakers' %>
     </div>
   </div>
@@ -281,18 +196,6 @@
     document.querySelector('.filter-popup').style.display = "none"
     document.querySelector('.sort-popup').style.display = "none"
   }
-
-  function toggleDropdown(el) {
-    let content = el.querySelector('.dropdown-fields')
-    if(content.style.display == 'none') content.style.display = 'block';
-    else content.style.display = 'none';
-  }
-
-  document.querySelectorAll('.togglable-dropdowns').forEach(el => {
-    el.addEventListener('click', function(e) {
-      toggleDropdown(el);
-    })
-  })
 </script>
 
 <style>
@@ -310,6 +213,19 @@
   background: white;
 }
 .form-group {
-  transition: height: 0.5s ease;
+  transition: height 0.5s ease;
+}
+.card {
+  margin-bottom: 1rem;
+}
+.card-header {
+  background-color: white;
+  border: 1px solid #0E0E0E;
+  border-radius: 0 !important;
+  padding: 1rem;
+}
+.filter-title {
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 </style>
