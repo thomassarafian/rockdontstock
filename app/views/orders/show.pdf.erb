@@ -14,10 +14,10 @@
           Numéro de commande : <%= @order.id %>
         </div>
         <div>
-          Date de commande : <%= I18n.l(Order.last.created_at, format: :short, locale: :'fr') %>
+          Date de commande : <%= I18n.l(@order.created_at, format: :short, locale: :'fr') %>
         </div>
         <div>
-          Moyen de paiement : <%= @order.payment_method %>
+          Moyen de paiement : <%= @payment_method %>
         </div>
         <div>
           Nom de l'acheteur : <%= @order.user.full_name %>
@@ -37,6 +37,7 @@
           Ma commande
         </div>
         <div class="purchase-recap__card__sneaker">
+          <%= cl_image_tag(@order.sneaker.photos.first&.key, class: 'purchase-recap__card__sneaker-photo') %>
           <div class="purchase-recap__card__sneaker-details">
             <div class="purchase-recap__card__sneaker-name">
               <%= @order.sneaker.sneaker_db.name %>
@@ -52,22 +53,21 @@
         <div class="purchase-recap__card__order-infos">
           <div class="purchase-recap__card__order-infos__item">
             <div>Livraison</div>
-            <div>prix €</div>
+            <div><%= @shipping_fee %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
-            <div>prix €</div>
+            <div><%= @service_fee %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Code promo</div>
-            <div>-prix €</div>
+            <div>-0 €</div>
           </div>
         </div>
         <div class="purchase-recap__card__total">
           <div>Total</div>
-          <div>prix €</div>
+          <div><%= @total_price %> €</div>
         </div>
-        <div class="purchase-recap__card__trustpilot"></div>
       </div>
     </div>
   </div>

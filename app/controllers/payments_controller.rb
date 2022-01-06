@@ -54,7 +54,7 @@ class PaymentsController < ApplicationController
           quantity: 1,
         }],
         mode: 'payment',
-        metadata: { order_id: order.id },
+        metadata: { order_id: order.id, shipping_fee: @shipping_fee, service_fee: @service_fee, total_price: @total_price },
         success_url: sneaker_payment_complete_url + "?session_id={CHECKOUT_SESSION_ID}&shipping_fee=#{@shipping_fee}&service_fee=#{@service_fee}&total_price=#{@total_price}",
         cancel_url: 'https://example.com/cancel',
       })
@@ -93,22 +93,32 @@ class PaymentsController < ApplicationController
     case event.type
     when 'checkout.session.completed'
       checkout = event.data.object
-      if lc_id = checkout.metadata["lc_id"]
+      puts "*"*100
+      puts checkout
+      puts checkout.metadata
+      puts checkout.metadata.order_id
+      puts checkout.metadata["order_id"]
+      puts checkout["metadata"]["order_id"]
+      puts "*"*100
+
+      if checkout.metadata["lc_id"]
+        lc_id = checkout.metadata["lc_id"]
         lc = Authentication.find(lc_id)
         lc.update(
           checkout_session_id: checkout.id,
           payment_method: checkout["payment_method_types"][0],
           payment_status: "paid"
         )
-      elsif order_id = checkout.metadata["order_id"]
+      elsif checkout.metadata["order_id"]
+        order_id = checkout.metadata["order_id"]
         order = Order.find(order_id)
         order.update(
           checkout_session_id: checkout.id,
           payment_method: checkout["payment_method_types"][0],
           payment_status: "paid",
-          shipping_fee: @shipping_fee,
-          service_fee: @service_fee,
-          total_price: @total_price
+          shipping_fee: checkout.metadata["shipping_fee"],
+          service_fee: checkout.metadata["service_fee"],
+          total_price: checkout.metadata["total_price"]
         )
       end
     end
