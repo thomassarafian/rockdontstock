@@ -123,7 +123,7 @@ class PaymentsController < ApplicationController
       end
     end
 
-    return status 200
+    head :ok
   end
 
   # def new
