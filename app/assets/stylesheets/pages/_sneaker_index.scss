@@ -47,3 +47,8 @@
 .sneaker-index {
   @include card
 }
+
+.filter-popup-update-btn {
+  @include cta-button;
+  width: 100%;
+}

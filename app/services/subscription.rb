@@ -21,6 +21,7 @@ class Subscription
     when String
       @email = arg
     end
+    puts "*"*20, @email
 
     @sib = SibApiV3Sdk::ContactsApi.new
     begin
@@ -67,7 +68,7 @@ class Subscription
     else
       new_contact = SibApiV3Sdk::CreateContact.new(email: @email)
       @sib.create_contact(new_contact)
-      Subscription.new(email: @email).as_prospect
+      Subscription.new(@email).as_prospect
     end
   end
 
