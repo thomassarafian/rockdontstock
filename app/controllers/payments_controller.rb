@@ -123,7 +123,7 @@ class PaymentsController < ApplicationController
       end
     end
 
-    render status: 200
+    return status 200
   end
 
   # def new
