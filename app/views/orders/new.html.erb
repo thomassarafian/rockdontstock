@@ -135,7 +135,7 @@
         <div class="purchase-recap__card__order-infos">
           <div class="purchase-recap__card__order-infos__item">
             <div>Livraison</div>
-            <div id="shipping-fee"></div>
+            <div id="shipping-fee">9.15 €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
@@ -148,7 +148,7 @@
         </div>
         <div class="purchase-recap__card__total">
           <div>Total</div>
-          <div id="total-price"><%= @sneaker.price %> €</div>
+          <div id="total-price"><%= (@sneaker.price_cents + 915) / 100 %> €</div>
         </div>
         <div class="purchase-recap__card__trustpilot"></div>
       </div>
@@ -173,12 +173,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
       if (this === radioRelay) {
         relayBlock.style.display = "block"
         colissimoBlock.style.display = "none"
+        colissimoBlock.querySelectorAll('input').forEach(input => input.required = false)
         shippingFee.innerText = "6.30 €"
         totalPrice.innerText = "<%= (@sneaker.price_cents * 1.06 + 630) / 100 %> €"
       }
       if (this === radioColissimo) {
         relayBlock.style.display = "none"
         colissimoBlock.style.display = "block"
+        colissimoBlock.querySelectorAll('input').forEach(input => input.required = true)
         shippingFee.innerText = "9.15 €"
         totalPrice.innerText = "<%= (@sneaker.price_cents * 1.06 + 915) / 100 %> €"
       }

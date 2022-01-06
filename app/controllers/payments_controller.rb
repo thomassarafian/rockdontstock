@@ -55,7 +55,7 @@ class PaymentsController < ApplicationController
         }],
         mode: 'payment',
         metadata: { order_id: order.id },
-        success_url: sneaker_payment_complete_url + "?session_id={CHECKOUT_SESSION_ID}",
+        success_url: sneaker_payment_complete_url + "?session_id={CHECKOUT_SESSION_ID}&shipping_fee=#{@shipping_fee}&service_fee=#{@service_fee}&total_price=#{@total_price}",
         cancel_url: 'https://example.com/cancel',
       })
       redirect_to session.url, status: 303
@@ -71,9 +71,9 @@ class PaymentsController < ApplicationController
     session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @order = Order.find(session.metadata.order_id)
     @payment_method = session.payment_method_types[0]
-    @shipping_fee = @shipping_fee
-    @service_fee = @service_fee
-    @total_price = @total_price
+    @shipping_fee = Money.new(params[:shipping_fee])
+    @service_fee = Money.new(params[:service_fee])
+    @total_price = Money.new(params[:total_price])
   end
   
   def stripe_webhooks
@@ -149,7 +149,7 @@ class PaymentsController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:first_name, :last_name, :phone, :address, :city, :zip_code, :door_number, :delivery, :sneaker_id, :legal)
+    params.require(:order).permit(:first_name, :last_name, :phone, :address, :city, :zip_code, :door_number, :delivery, :relay_address, :sneaker_id, :legal)
   end
 
 end

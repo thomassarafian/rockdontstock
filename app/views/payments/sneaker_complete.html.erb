@@ -14,10 +14,10 @@
           Numéro de commande : <%= @order.id %>
         </div>
         <div>
-          Date de commande : <%= I18n.l(Order.last.created_at, format: :short, locale: :'fr') %>
+          Date de commande : <%= I18n.l(@order.created_at, format: :short, locale: :'fr') %>
         </div>
         <div>
-          Moyen de paiement : <%= @order.payment_method %>
+          Moyen de paiement : <%= @payment_method %>
         </div>
         <div>
           Nom de l'acheteur : <%= @order.user.full_name %>
@@ -54,11 +54,11 @@
         <div class="purchase-recap__card__order-infos">
           <div class="purchase-recap__card__order-infos__item">
             <div>Livraison</div>
-            <div><%= @order.shipping_fee %> €</div>
+            <div><%= @shipping_fee %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
-            <div><%= @order.service_fee %> €</div>
+            <div><%= @service_fee %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Code promo</div>
@@ -67,7 +67,7 @@
         </div>
         <div class="purchase-recap__card__total">
           <div>Total</div>
-          <div><%= @order.total_price %> €</div>
+          <div><%= @total_price %> €</div>
         </div>
         <div class="purchase-recap__card__trustpilot"></div>
       </div>
