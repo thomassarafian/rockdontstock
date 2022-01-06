@@ -223,10 +223,15 @@
 <% if current_page?('/') %>
   <div style="background-color: #EFEFEF" data-flickity='{ "draggable": false, "pageDots": false, "prevNextButtons": false, "autoPlay": true, "wrapAround": true, "cellSelector": ".banner-link" }'>
     <div class="banner-link w-100 text-center py-3">
-      <a href="/sneakers" class="">🤙 Découvrez notre sélection à moins de 200€</a>
+      <%= link_to sneakers_path(max_price: 200) do %>
+        🤙 Découvrez notre sélection à moins de 200€
+      <% end %>
     </div>
     <div class="banner-link w-100 text-center py-3">
-      <a href="/" class="">🤙Frais d’authentification offerts sur la première vente</a>
+      <%= link_to sneakers_path, method: :post do %>
+        🤙 Frais d’authentification offerts sur la première vente
+      <% end %>
+      <a href="/" class=""></a>
     </div>
   </div>
 <% end %>

@@ -6,7 +6,7 @@ class SneakersController < ApplicationController
 		@selection_of_the_day = Sneaker.highlighted.last || Sneaker.selected.last || Sneaker.first
 		results = Sneaker.where('state >= ?', 1).search_by_name_and_brand(params[:search])
 		
-		[:price, :condition, :size, :category].each do |filter|
+		[:min_price, :max_price, :condition, :size, :category].each do |filter|
 			results = results&.public_send("filter_by_#{filter.to_s}", params[filter]) if params[filter].present?
 		end
 

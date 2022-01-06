@@ -1,26 +1,20 @@
 import Rails from "@rails/ujs"
-// import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
 Rails.start()
-// Turbolinks.start()
 ActiveStorage.start()
 
-require('dotenv').config()
-
-import "bootstrap"
 
 var Flickity = require('flickity');
 require("./flickity-fullscreen.js");
 require("./flickity-imagesloaded.js");
+require('dotenv').config()
+
 window.Flickity = Flickity
+window.Rails = Rails
 
-// import Swiper, { Navigation, Pagination } from 'swiper';
-// import 'swiper/swiper-bundle.min.css';
-// Swiper.use([Navigation, Pagination]);
-// window.Swiper = Swiper;
-
+import "bootstrap"
 import "controllers";
 import "./pagy.js.erb";
 

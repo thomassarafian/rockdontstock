@@ -28,25 +28,21 @@ class Sneaker < ApplicationRecord
 
   scope :highlighted, -> { where(highlighted: true).order(highlighted_at: :asc) }
   scope :selected, -> { where(selected: true).order(selected_at: :asc) }
-  scope :filter_by_price, -> (price) { 
-    if price == "100"
-      Sneaker.where(price_cents: 0..10000)
-    elsif price == "200"
-      Sneaker.where(price_cents: 0..20000)
-    elsif price == "300"
-      Sneaker.where(price_cents: 0..30000)
-    elsif price == "301"
-      Sneaker.where(price_cents: 30000..10000000)
-    end
+
+  scope :filter_by_min_price, -> (min) {
+    where("price_cents >= ?", min.to_i * 100)
+  }
+  scope :filter_by_max_price, -> (max) { 
+    where("price_cents <= ?", max.to_i * 100)
   }
   scope :filter_by_category, -> (category) { 
     joins(:sneaker_db).where(:sneaker_dbs => { :category => category })
   }
   scope :filter_by_condition, -> (condition) { 
-    where("sneakers.condition = ?", condition) 
+    where(condition: condition) 
   }
   scope :filter_by_size, -> (size) {
-    where("sneakers.size = ?", size.to_d)
+    where(size: size)
   }
 
   def self.search_by_name_and_brand(query)

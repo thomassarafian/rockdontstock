@@ -54,7 +54,7 @@
   <div class="d-flex align-items-start justify-content-between">
     <!-- FILTERS DESKTOP -->
     <div class="d-none d-lg-block" style="flex-grow: 1; top: 100px;">
-      <%= form_with url: sneakers_path, local: false, method: :get do |f| %>
+      <%= form_with url: sneakers_path, method: :get, html: {id: "filter-form"} do |f| %>
         <div class="form-group">
           <%= f.label "Marques", class: "form-label", style: "font-weight: 700" %>
           <div class="form-check mb-1">
@@ -167,7 +167,6 @@
             </div>
           <!-- </div> -->
         </div>
-        <button type="submit">Mettre à jour</button>
       <% end %>
     </div>
     <div id="search-results" class="d-flex flex-wrap justify-content-center" style="flex-shrink: 2; gap: 2rem;">
@@ -177,6 +176,23 @@
 </div>
 
 <script>
+  let form = document.getElementById("filter-form");
+
+  form.querySelectorAll('input').forEach(input => {
+    input.addEventListener('change', _ => {
+      let formData = new FormData(form);
+
+      Rails.ajax({
+        type: form.method,
+        url: form.action,
+        dataType: "json",
+        data: new URLSearchParams(formData),
+        processData: false,
+        contentType: false
+      })
+    })
+  })
+
   function revealPopup(which) {
     if (which == "filter") {
       document.querySelector('.sort-btn').style.display = "none"
