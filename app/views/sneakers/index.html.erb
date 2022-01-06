@@ -194,23 +194,35 @@
   })
 
   function revealPopup(which) {
+    document.body.style.overflowY = 'hidden'
+    document.querySelector('.popup-close-icon').style.display = "block"
+
     if (which == "filter") {
       document.querySelector('.sort-btn').style.display = "none"
+      document.querySelector('.filter-btn').style.textAlign = "right"
+      document.querySelector('.filter-btn').style.border = "none"
       document.querySelector('.filter-popup').style.display = "block"
     } else {
       document.querySelector('.filter-btn').style.display = "none"
+      document.querySelector('.sort-btn').style.textAlign = "right"
+      document.querySelector('.sort-btn').style.border = "none"
       document.querySelector('.sort-popup').style.display = "block"
     }
-
-    document.querySelector('.popup-close-icon').style.display = "block"
   }
 
   function hidePopup() {
+    // reset buttons
+    document.querySelector('.filter-btn').style.textAlign = "center"
+    document.querySelector('.filter-btn').style.border = "1px solid #0E0E0E"
+    document.querySelector('.sort-btn').style.textAlign = "center"
+    document.querySelector('.sort-btn').style.border = "1px solid #0E0E0E"
+
     document.querySelector('.popup-close-icon').style.display = "none"
     document.querySelector('.filter-btn').style.display = "block"
     document.querySelector('.sort-btn').style.display = "block"
     document.querySelector('.filter-popup').style.display = "none"
     document.querySelector('.sort-popup').style.display = "none"
+    document.body.style.overflowY = ''
   }
 </script>
 
@@ -223,13 +235,12 @@
   display: none;
   position: fixed;
   left: 0;
-  height: calc(100vh - 80px - 30px);
-  width: 100%;
+  right: 0;
+  top: 140px;
+  bottom: 0;
+  overflow-y: scroll;
   padding: 2rem 1rem;
   background: white;
-}
-.form-group {
-  transition: height 0.5s ease;
 }
 .card {
   margin-bottom: 1rem;

@@ -93,13 +93,6 @@ class PaymentsController < ApplicationController
     case event.type
     when 'checkout.session.completed'
       checkout = event.data.object
-      puts "*"*100
-      puts checkout
-      puts checkout.metadata
-      puts checkout.metadata.order_id
-      puts checkout.metadata["order_id"]
-      puts checkout["metadata"]["order_id"]
-      puts "*"*100
 
       if checkout.metadata["lc_id"]
         lc_id = checkout.metadata["lc_id"]

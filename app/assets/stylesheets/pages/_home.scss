@@ -70,16 +70,21 @@
 }
 .home-guides__content__card {
   position: relative;
+  left: 3rem; // offset
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  left: 3rem;
-  margin-right: 5rem;
+  gap: 1rem;
   width: 380px;
-  height: 420px;
   padding: 3rem;
+  margin-right: 5rem;
   border: 1px solid $black;
+
+  @include media-breakpoint-down(md) {
+    width: 60vw; // making sure we see one full card and part of the next one
+    left: 0rem;
+    margin-right: 2rem;
+  }
 
   @include media-breakpoint-up(lg) {
     &:hover::before {
@@ -123,7 +128,12 @@
   &__block {
     display: flex;
     flex-wrap: wrap;
+    align-items: baseline;
     gap: 3rem;
+    @include media-breakpoint-down(md) {
+      gap: 1rem;
+      justify-content: center;
+    }
   }
   &__btn-block {
     text-align: center;
@@ -137,11 +147,15 @@
 .sneaker-home__card {
   position: relative;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   width: 280px;
-  height: 450px;
   padding: 1.5rem 2rem;
+  gap: 1rem;
+  @include media-breakpoint-down(md) {
+    padding: 0;
+    width: 45%;
+    gap: 0.5rem;
+  }
   @include media-breakpoint-up(lg) {
     &:hover {
       outline: 1px solid $black;
@@ -167,6 +181,15 @@
   height: 275px;
   object-fit: contain;
   align-self: center;
+  margin-bottom: 1.5rem;
+
+  @include media-breakpoint-down(md) {
+    width: unset;
+    height: unset;
+    align-self: unset;
+    margin-bottom: 1rem;
+    max-height: 50vh;
+  }
 }
 .sneaker-home__card__options {
   color: #727272;
