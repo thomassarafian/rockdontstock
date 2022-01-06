@@ -52,8 +52,9 @@ section {
   }
 }
 .auth-hero__caption__primary-btn {
-  @include primary-button;
-  
+  @include media-breakpoint-up(lg) {
+    @include primary-button;
+  }
   @include media-breakpoint-down(lg) {
     @include cta-button;
     width: 100%;
