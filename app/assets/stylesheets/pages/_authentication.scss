@@ -1,24 +1,69 @@
 section {
   margin-bottom: 8rem;
 }
-
+.auth-hero {
+  @include media-breakpoint-up(lg) {
+    justify-content: space-between;
+    height: 100vh;
+    margin-top: -80px;
+  }
+  @include media-breakpoint-down(lg) {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+  }
+}
 .auth-hero__title {
   display: flex; 
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+  // to fit with the desktop header
+  @include media-breakpoint-up(lg) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 .auth-hero__title-variant {
   font-family: "Permanent Marker", "DM Sans", "Helvetica", "sans-serif";
   font-size: 3.5vw;
+
+  @include media-breakpoint-down(lg) {
+    font-size: 2rem;
+  }
 }
 .auth-hero__title > h1 {
   font-size: 4vw;
   margin-bottom: 0;
   line-height: 1.1;
+
+  @include media-breakpoint-down(lg) {
+    font-size: 2.3rem;
+  }
+}
+.auth-hero__caption__buttons {
+  display: flex;
+  gap: 1rem;
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
+}
+.auth-hero__caption__primary-btn {
+  @include primary-button;
+  
+  @include media-breakpoint-down(lg) {
+    @include cta-button;
+    width: 100%;
+  }
+}
+.auth-hero__caption__secondary-btn {
+  @include secondary-button;
+  @include media-breakpoint-down(lg) {
+    width: 100%;
+  }
 }
 
 /////////////// SECTION INFOS ///////////////
@@ -90,58 +135,8 @@ section {
 
 /////////////// SECTION GUIDES ///////////////
 
-.auth-guides__subtitle {
-  @include para-1;
-}
-.auth-guides-block {
-  @include media-breakpoint-up(lg) {
-    border: 1px solid $black;
-    border-top: 20px solid $black;
-  }
-}
-.auth-guides__content {
-  padding: 3rem 0;
-}
-.auth-guides__content__card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  left: 3rem;
-  margin-right: 5rem;
-  width: 380px;
-  height: 420px;
-  padding: 3rem;
-  border: 1px solid $black;
-  @include media-breakpoint-up(lg) {
-    &:hover::before {
-      content: "";
-      position: absolute;
-      min-width: 100%;
-      height: 100%; 
-      top: 10px;
-      left: 10px;
-      border-right: 10px solid $black;
-      border-bottom: 10px solid $black;
-      z-index: -1;
-    }
-  }
-}
-.auth-guides__footer {
-  @include media-breakpoint-up(lg) {
-    padding: 2rem;
-    border-top: 1px solid $black;
-  }
-}
-.auth-guides__content__card__image {
-  max-height: calc(420px / 2);
-}
-.auth-guides__content__card__name {
-  @include para-2-bold
-}
-.auth-guides__content__card__btn {
-  @include primary-button;
+.auth-guides {
+  @include guide;
 }
 
 /////////////// SECTION SERVICE ///////////////

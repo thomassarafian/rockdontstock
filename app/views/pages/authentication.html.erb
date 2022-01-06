@@ -1,6 +1,20 @@
 <title>Authentification - Rock Don't Stock</title>
 <div class="container">
-  <div class="auth-hero d-flex justify-content-between" style="height: 100vh; margin-top: -80px">
+  <!-- MOBILE -->
+  <div class="auth-hero d-flex d-lg-none">
+    <div class="auth-hero__title">
+      <h1>1er produit</h1>
+      <h1><span class="auth-hero__title-variant">contrefait</span> dans</h1>
+      <h1>le monde</h1>
+    </div>
+    <%= image_tag "images/mobile-auth-header.png", style: "object-fit: contain; max-width: 100%" %>
+    <div class="auth-hero__caption__buttons">
+      <%= button_to "Parcourir les modèles", sneakers_path, method: :get, class: "auth-hero__caption__auth-btn" %>
+      <%= button_to "Vendre ma paire", sneakers_path, class: "auth-hero__caption__more-btn" %>
+    </div>
+  </div>
+  <!-- DESKTOP -->
+  <div class="auth-hero d-none d-lg-block">
     <%= image_tag "images/banner-fake.png", style: "object-fit: contain; max-width: 100%" %>
     <div class="auth-hero__title">
       <h1>1er produit</h1>
@@ -51,7 +65,7 @@
     </div>
   </section>
   <section class="auth-guides">
-    <div class="auth-guides__subtitle">Découvrez</div>
+    <div class="auth-guides__title">Découvrez</div>
     <h2>Nos guides gratuits</h2>
     <div class="auth-guides-block">
       <div class="auth-guides__content" data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>

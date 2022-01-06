@@ -44,45 +44,6 @@
 .sneaker-featured-details__discover {
   @include secondary-button;
 }
-.sneaker-index__card {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  width: 280px;
-  height: 450px;
-  padding: 1.5rem 2rem;
-
-  @include media-breakpoint-up(lg) {
-    &:hover {
-      outline: 1px solid $black;
-    }
-    &:hover::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 10px;
-      left: 10px;
-      border-right: 10px solid $black;
-      border-bottom: 10px solid $black;
-      z-index: -1;
-    }
-  }
-}
-.sneaker-index__card__name {
-  line-height: 1.2;
-}
-.sneaker-index__card__photo {
-  width: 200px;
-  height: 275px;
-  object-fit: contain;
-  align-self: center;
-}
-.sneaker-index__card__options {
-  color: #727272;
-  font-size: 0.8rem;
-}
-.sneaker-index__card__price {
-  font-weight: 700;
+.sneaker-index {
+  @include card
 }

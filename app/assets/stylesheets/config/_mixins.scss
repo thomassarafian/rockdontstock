@@ -70,3 +70,122 @@
     font-size: $font-size-3-sm;
   }
 }
+
+@mixin guide {
+  &__title {
+    @include para-1;
+  }
+  &-block {
+    @include media-breakpoint-up(lg) {
+      border: 1px solid $black;
+      border-top: 20px solid $black;
+    }
+  }
+  &__content {
+    padding: 3rem 0;
+  }
+  &__content__card {
+    position: relative;
+    left: 3rem; // offset
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 380px;
+    padding: 3rem;
+    margin-right: 5rem;
+    border: 1px solid $black;
+  
+    @include media-breakpoint-down(md) {
+      width: 60vw; // making sure we see one full card and part of the next one
+      left: 0rem;
+      margin-right: 2rem;
+    }
+  
+    @include media-breakpoint-up(lg) {
+      &:hover::before {
+        content: "";
+        position: absolute;
+        min-width: 100%;
+        height: 100%; 
+        top: 10px;
+        left: 10px;
+        border-right: 10px solid $black;
+        border-bottom: 10px solid $black;
+        z-index: -1;
+      }
+    }
+  }
+  &__footer {
+    @include media-breakpoint-up(lg) {
+      padding: 2rem;
+      border-top: 1px solid $black;
+    }
+  }
+  &__content__card__image {
+    max-height: calc(420px / 2);
+  }
+  &__content__card__name {
+    @include para-2-bold
+  }
+  &__content__card__btn {
+    @include primary-button;
+  }
+}
+
+@mixin card {
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    padding: 1.5rem 2rem;
+    gap: 1rem;
+    @include media-breakpoint-down(md) {
+      padding: 0;
+      width: 45%;
+      gap: 0.5rem;
+    }
+    @include media-breakpoint-up(lg) {
+      &:hover {
+        outline: 1px solid $black;
+      }
+      &:hover::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 10px;
+        left: 10px;
+        border-right: 10px solid $black;
+        border-bottom: 10px solid $black;
+        z-index: -1;
+      }
+    }
+  }
+  &__card__name {
+    line-height: 1.2;
+  }
+  &__card__photo {
+    width: 200px;
+    height: 275px;
+    object-fit: contain;
+    align-self: center;
+    margin-bottom: 1.5rem;
+  
+    @include media-breakpoint-down(md) {
+      width: unset;
+      height: unset;
+      align-self: unset;
+      margin-bottom: 1rem;
+      max-height: 50vh;
+    }
+  }
+  &__card__options {
+    color: #727272;
+    font-size: 0.8rem;
+  }
+  &__card__price {
+    font-weight: 700;
+  }
+}
