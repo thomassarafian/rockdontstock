@@ -11,6 +11,7 @@ class PaymentsController < ApplicationController
     end
 
     session = Stripe::Checkout::Session.create({
+      customer_email: lc.email,
       line_items: [{
         price_data: {
           currency: 'eur',
@@ -40,6 +41,7 @@ class PaymentsController < ApplicationController
       @total_price = order.sneaker.price_cents + @shipping_fee + @service_fee
 
       session = Stripe::Checkout::Session.create({
+        customer_email: order.user.email,
         line_items: [{
           price_data: {
             currency: 'eur',
@@ -64,9 +66,14 @@ class PaymentsController < ApplicationController
   end
   
   def sneaker_complete
+    # here we only want proper display informations,
+    # the update of the order happens in webhooks
     session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @order = Order.find(session.metadata.order_id)
-    @order.update(shipping_fee: @shipping_fee, service_fee: @service_fee, total_price: @total_price)
+    @payment_method = session.payment_method_types[0]
+    @shipping_fee = @shipping_fee
+    @service_fee = @service_fee
+    @total_price = @total_price
   end
   
   def stripe_webhooks
@@ -98,7 +105,10 @@ class PaymentsController < ApplicationController
         order.update(
           checkout_session_id: checkout.id,
           payment_method: checkout["payment_method_types"][0],
-          payment_status: "paid"
+          payment_status: "paid",
+          shipping_fee: @shipping_fee,
+          service_fee: @service_fee,
+          total_price: @total_price
         )
       end
     end

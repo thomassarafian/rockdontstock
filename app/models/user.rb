@@ -16,49 +16,44 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, uniqueness: true
   validates :email, format: { with:  /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
-  # validates :phone, length: {minimun: 9, maximum: 10}, format: { with: /^[0-9]*$/, multiline: true  } #, on: [:edit]
   validates :date_of_birth, presence: true
   validates :iban, presence: true
+  validate :user_must_be_over_13, on: [:create, :update]
+  # validates :phone, length: {minimun: 9, maximum: 10}, format: { with: /^[0-9]*$/, multiline: true  } #, on: [:edit]
   # validates :line1, presence: true
-  validate :date_of_birth, if: :user_over_13, on: [:create, :update]
-
-  # after_update :stripe_connect_account
-  # before_update :stripe_connect_account
-  # after_update :update_connect_account
-
   # validate :correct_ids_type?
 
+  
+  # after_update :stripe_connect_account
+  # after_update :send_label, if: :picker_data_is_converted?
+  # before_update :stripe_connect_account
+  # after_update :update_connect_account
+  
   # after_update :send_ids #, if: :ids_are_filled?
-
-  after_update :convert_picker_data_to_json, if: :picker_data_is_filled?
-
+  
   after_create :subscribe_to_newsletter
   after_create :send_welcome
   after_commit :send_iban
-  # after_update :send_label, if: :picker_data_is_converted?
-
+  after_update :convert_picker_data_to_json, if: :picker_data_is_filled?
+  
   def full_name
     self.first_name.capitalize + " " + self.last_name.capitalize
   end
   
-
-  private
-
-  def send_iban
-    Stripe::StripeSendIban.new(self, self.iban).call
+  def age
+    ((Time.zone.now - self.date_of_birth.to_time) / 1.year.seconds).floor
   end
-
-  def user_over_13
-    dob = self.date_of_birth
-    now = Time.now.utc.to_date
-    if dob.nil? || dob.year < 1950 || dob.year >= now.year
-      errors.add(:date_of_birth, " : Format invalide")
-      return false
-    end
-    age = now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
-    if age <= 13
+  
+  private
+  
+  def user_must_be_over_13
+    if date_of_birth > (Date.today - 13.years)
       errors.add(:date_of_birth, " : Tu dois avoir au moins 13 ans")
     end
+  end
+  
+  def send_iban
+    Stripe::StripeSendIban.new(self, self.iban).call
   end
 
   def subscribe_to_newsletter
@@ -138,13 +133,6 @@ class User < ApplicationRecord
       {
         person_token: person_token
       })    
-  end
-
-
-
-  def age(dob)
-    now = Time.now.utc.to_date
-    now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
   
   def attributes_are_filled?(user)
