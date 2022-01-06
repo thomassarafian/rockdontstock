@@ -86,18 +86,18 @@ class PaymentsController < ApplicationController
     case event.type
     when 'checkout.session.completed'
       checkout = event.data.object
-      if lc_id = checkout.metadata.lc_id
+      if lc_id = checkout.metadata["lc_id"]
         lc = Authentication.find(lc_id)
         lc.update(
           checkout_session_id: checkout.id,
-          payment_method: checkout.payment_method_types[0],
+          payment_method: checkout["payment_method_types"][0],
           payment_status: "paid"
         )
-      elsif order_id = checkout.metadata.order_id
+      elsif order_id = checkout.metadata["order_id"]
         order = Order.find(order_id)
         order.update(
           checkout_session_id: checkout.id,
-          payment_method: checkout.payment_method_types[0],
+          payment_method: checkout["payment_method_types"][0],
           payment_status: "paid"
         )
       end
