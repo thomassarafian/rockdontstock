@@ -116,9 +116,9 @@ class PaymentsController < ApplicationController
           checkout_session_id: checkout.id,
           payment_method: checkout["payment_method_types"][0],
           payment_status: "paid",
-          shipping_fee: checkout.metadata["shipping_fee"],
-          service_fee: checkout.metadata["service_fee"],
-          total_price: checkout.metadata["total_price"]
+          shipping_fee: Money.new(checkout.metadata["shipping_fee"]),
+          service_fee: Money.new(checkout.metadata["service_fee"]),
+          total_price: Money.new(checkout.metadata["total_price"])
         )
       end
     end
