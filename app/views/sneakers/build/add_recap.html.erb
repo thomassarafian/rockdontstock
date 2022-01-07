@@ -21,7 +21,7 @@
   </div>
   <div class="sneaker-form__recap__content">
     <div class="sneaker-form__recap__left">
-      <div class="sneaker-form__recap__photos" data-flickity='{ "imagesLoaded": true, "percentPosition": false, "wrapAround": true, "cellSelector": ".sneaker-form__recap__photo", "fullscreen": true }'>
+      <div class="sneaker-form__recap__photos" data-flickity='{ "pageDots": false, "imagesLoaded": true, "percentPosition": false, "wrapAround": true, "cellSelector": ".sneaker-form__recap__photo", "fullscreen": true }'>
         <% @sneaker.photos.each do |photo| %>
           <%= cl_image_tag(photo.key, class: 'sneaker-form__recap__photo') %>
         <% end %>

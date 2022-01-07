@@ -8,7 +8,7 @@
     <%= form_with url: sneakers_path, method: :get do |f| %>
       <div style="position: relative;">
         <%= f.text_field :search, class: "form-control", style: "width: 320px", placeholder: "Essaye Nike, Air Jordan..." %>
-        <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 0; transform: translateY(50%); cursor: pointer", onclick: "this.closest('form').submit()" %>
+        <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); cursor: pointer", onclick: "this.closest('form').submit()" %>
       </div>
     <% end %>
     <%= button_to "Vendre", sneakers_path, class: "navbar__sell-button" %>
@@ -28,26 +28,26 @@
 
 <!-- MOBILE -->
 <div class="container d-lg-none backdrop" style="position: sticky; top: 0; z-index: 1;">
-  <div class="d-flex justify-content-between align-items-center" style="width: 100%; height: 50px;">
+  <div class="d-flex justify-content-between align-items-center" style="width: 100%; height: 80px;">
+    <div class="navbar-burger">
+      <% if user_signed_in? %>
+        <div class="d-flex toggler_icon navbarSideButton" style="cursor: pointer;">
+          <%= image_tag("images/icon_avatar.svg", style: "height: 30px; width: auto; fill: #0E0E0E") %>
+        </div>
+      <% else %>
+        <%= image_tag "navbar/toggler_icon.svg", class: "toggler_icon navbarSideButton", style: "cursor: pointer; height: 30px;" %>
+      <% end %>
+    </div>
+    <%= link_to "/", class: "navbar-logo-link" do %>
+      <%= image_tag("logo.svg", style: 'height: 32px;', class: 'icon') %>
+    <% end %>
     <%= form_with url: sneakers_path, html: { id: "navbar-search-form" }, method: :get do |f| %>
       <div style="position: relative;">
         <%= f.text_field :search, class: "navbar-search-input form-control", placeholder: "Essaye Nike, Air Jordan..." %>
-        <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 0; transform: translateY(50%); cursor: pointer", onclick: "handleLensClick()" %>
+        <%= image_tag "images/lens.svg", style: "height: 30px; position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); cursor: pointer", onclick: "handleLensClick()" %>
       </div>
     <% end %>
-    <%= link_to "/", class: "navbar-logo-link" do %>
-      <%= image_tag("logo.svg", style: 'height: 25px;', class: 'icon') %>
-    <% end %>
-    <div class="navbar-burger">
-      <% if user_signed_in? %>
-        <div class="d-flex toggler_icon navbarSideButton" style="cursor: pointer; gap: 0.6rem; align-items: center; margin-left: 1rem">
-          <%= image_tag("images/icon_avatar.svg", style: "height: 25px; width: auto; fill: #0E0E0E") %>
-        </div>
-      <% else %>
-        <%= image_tag "navbar/toggler_icon.svg", class: "toggler_icon navbarSideButton", style: "cursor: pointer; height: 25px;" %>
-      <% end %>
-    </div>
-    <div class="navbar-close-icon" style="display: none; font-size: 35px;" onclick="hideInput()">&times;</div>
+    <div class="navbar-close-icon" style="display: none; line-height: 0; font-size: 40px;" onclick="hideInput()">&times;</div>
   </div>
   <% if current_page?('/sneakers') %>
     <div class="d-flex align-items-center d-block d-lg-none mb-4">
@@ -280,21 +280,28 @@
     if (form.status == "inputVisible") form.submit()
     else {
       form.style.width = "100%"
+
       document.querySelector('.navbar-logo-link').style.display = "none"
       document.querySelector('.navbar-burger').style.display = "none"
       document.querySelector('.navbar-close-icon').style.display = "block"
+
       document.querySelector('.navbar-search-input').style.border = "1px solid #0E0E0E"
+      document.querySelector('.navbar-search-input').style.visibility = "visible"
+
       form.status = "inputVisible"
     }
   }
 
   function hideInput() {
     let form = document.getElementById('navbar-search-form')
-    form.style.width = "1.6rem"
+
     document.querySelector('.navbar-search-input').style.border = "none"
+    document.querySelector('.navbar-search-input').style.visibility = "hidden"
+
     document.querySelector('.navbar-close-icon').style.display = "none"
     document.querySelector('.navbar-burger').style.display = "block"
     document.querySelector('.navbar-logo-link').style.display = "block"
+    form.style.width = "0"
     form.status = ""
   }
   
@@ -365,10 +372,11 @@
 
 <style>
 #navbar-search-form {
-  width: 1.6rem; 
-  transition: width 0.2s ease;
+  width: 0;
+  transition: all 0.2s ease;
 }
 .navbar-search-input {
+  visibility: hidden;
   border: none;
 }
 .navbar-close-icon {
