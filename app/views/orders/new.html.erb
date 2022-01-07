@@ -5,8 +5,9 @@
   <% end %>
   <div class="purchase">
     <!-- NOTE data-secret used to Payment Elements -->
-    <%= form_for :order, url: sneaker_stripe_checkout_path, html: {style: "flex-grow: 1.5"} do |f| %>
+    <%= form_for :order, data: { secret: @intent.client_secret }, html: { id: "payment-form", style: "flex-grow: 1.5" } do |f| %>
       <%= f.hidden_field :sneaker_id, value: @sneaker.id %>
+      <%= f.hidden_field :payment_intent_id, value: @intent.id %>
       <div class="purchase-form__infos">
         <div class="purchase-form__infos__title">
           <%= image_tag("images/icon_shopping.svg") %>
@@ -88,23 +89,22 @@
           </div>
         </div>
       </div>
-      <!-- NOTE replaced by Stripe Checkout for now -->
-      <!-- <div class="purchase-form__payment col-10">
+      <div class="purchase-form__payment col-10">
         <div class="purchase-form__payment__title">
           <%= image_tag("images/icon_bill.svg") %>
           <span class="ms-2">Moyen de paiement</span>
         </div>
         <div class="purchase-form__payment__fields">
           <div id="payment-element">
-            Elements will create form elements here
+            <!-- Elements will create form elements here -->
           </div>
           <div id="error-message">
-            Display error message to your customers here
+            <!-- Display error message to your customers here -->
           </div>
         </div>
-      </div> -->
+      </div>
       <div class="purchase-form__validation">
-        <button type="submit" class="purchase-form__validation__btn">Valider ma commande</button>
+        <button class="purchase-form__validation__btn">Valider ma commande</button>
         <div class="form-check">
           <%= f.check_box :legal, { class: "form-check-input", required: true }, 1, nil %>
           <%= f.label "", class: "form-check-label" do %>
@@ -189,6 +189,64 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   relayChangeBtn.addEventListener('click', () => {
     relayMap.style.display = "block"
+  })
+
+  // STRIPE
+  const stripe = Stripe("<%= ENV['STRIPE_PUBLIC_TEST'] %>");
+
+  const options = {
+    clientSecret: '<%= @intent.client_secret %>',
+    appearance: {
+      theme: 'flat',
+      rules: {
+        '.Input:hover': {
+          outline: '1px solid rgba(100, 100, 100, 0.25)'
+        },
+      },
+      variables: {
+        colorPrimary: '#0E0E0E',
+        colorText: '#0E0E0E',
+        spacingUnit: '4px',
+        borderRadius: '0',
+        focusBoxShadow: '0 0 0 0.2rem rgba(100, 100, 100, 0.25)'
+      }
+    },
+  };
+
+  const elements = stripe.elements(options);
+  const paymentElement = elements.create('payment');
+  paymentElement.mount('#payment-element');
+
+  const form = document.getElementById('payment-form');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    let formData = new FormData(form);
+
+    Rails.ajax({
+      type: "POST",
+      url: "<%= sneaker_orders_url(@sneaker.id) %>",
+      data: formData,
+      success: (resp) => {
+        handlePayment(resp.orderId)
+      },
+      error: () => alert("Une erreur est survenue.")
+    })
+
+    async function handlePayment(orderId) {
+      const {error} = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: "<%= sneaker_payment_complete_url %>" + "?order_id=" + orderId
+        },
+      });
+  
+      if (error) {
+        const messageContainer = document.querySelector('#error-message');
+        messageContainer.textContent = error.message;
+      }
+    }
   })
 });
 </script>

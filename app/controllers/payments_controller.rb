@@ -1,79 +1,77 @@
 class PaymentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:lc_complete, :lc_stripe_checkout, :stripe_webhooks]
   
-  def lc_stripe_checkout
-    lc = Authentication.new(lc_request_params)
+  # def lc_stripe_checkout
+  #   lc = Authentication.new(lc_request_params)
 
-    if lc.save
-      Subscription.new(lc).as_lc_requester
-    else
-      redirect_to request.referer, alert: lc.errors.full_messages.join(', ')
-    end
+  #   if lc.save
+  #     Subscription.new(lc).as_lc_requester
+  #   else
+  #     redirect_to request.referer, alert: lc.errors.full_messages.join(', ')
+  #   end
 
-    session = Stripe::Checkout::Session.create({
-      customer_email: lc.email,
-      line_items: [{
-        price_data: {
-          currency: 'eur',
-          product_data: {
-            name: 'Legit Check',
-          },
-          unit_amount: 490,
-        },
-        quantity: 1,
-      }],
-      mode: 'payment',
-      metadata: { lc_id: lc.id },
-      success_url: lc_payment_complete_url,
-      cancel_url: 'https://example.com/cancel',
-    })
-    redirect_to session.url, status: 303
-  end
+  #   session = Stripe::Checkout::Session.create({
+  #     customer_email: lc.email,
+  #     line_items: [{
+  #       price_data: {
+  #         currency: 'eur',
+  #         product_data: {
+  #           name: 'Legit Check',
+  #         },
+  #         unit_amount: 490,
+  #       },
+  #       quantity: 1,
+  #     }],
+  #     mode: 'payment',
+  #     metadata: { lc_id: lc.id },
+  #     success_url: lc_payment_complete_url,
+  #     cancel_url: 'https://example.com/cancel',
+  #   })
+  #   redirect_to session.url, status: 303
+  # end
   
-  def sneaker_stripe_checkout
-    order = Order.new(order_params.merge(user: current_user))
+  # def sneaker_stripe_checkout
+  #   order = Order.new(order_params.merge(user: current_user))
 
-    if order.save
-      shipping_fees = { relay: 630, colissimo: 915 }
+  #   if order.save
+  #     shipping_fees = { relay: 630, colissimo: 915 }
 
-      @shipping_fee = shipping_fees[order_params[:delivery].to_sym]
-      @service_fee = order.sneaker.price_cents * 0.06
-      @total_price = order.sneaker.price_cents + @shipping_fee + @service_fee
+  #     @shipping_fee = shipping_fees[order_params[:delivery].to_sym]
+  #     @service_fee = order.sneaker.price_cents * 0.06
+  #     @total_price = order.sneaker.price_cents + @shipping_fee + @service_fee
 
-      session = Stripe::Checkout::Session.create({
-        customer_email: order.user.email,
-        line_items: [{
-          price_data: {
-            currency: 'eur',
-            product_data: {
-              name: order.sneaker.sneaker_db.name,
-              images: [order.sneaker.photos.first.url]
-            },
-            unit_amount: @total_price.to_i,
-          },
-          quantity: 1,
-        }],
-        mode: 'payment',
-        metadata: { order_id: order.id, shipping_fee: @shipping_fee, service_fee: @service_fee, total_price: @total_price },
-        success_url: sneaker_payment_complete_url + "?session_id={CHECKOUT_SESSION_ID}&shipping_fee=#{@shipping_fee}&service_fee=#{@service_fee}&total_price=#{@total_price}",
-        cancel_url: 'https://example.com/cancel',
-      })
-      redirect_to session.url, status: 303
-    else
-      redirect_to request.referer, alert: order.errors.full_messages.join(', ')
-    end
+  #     session = Stripe::Checkout::Session.create({
+  #       customer_email: order.user.email,
+  #       line_items: [{
+  #         price_data: {
+  #           currency: 'eur',
+  #           product_data: {
+  #             name: order.sneaker.sneaker_db.name,
+  #             images: [order.sneaker.photos.first.url]
+  #           },
+  #           unit_amount: @total_price.to_i,
+  #         },
+  #         quantity: 1,
+  #       }],
+  #       mode: 'payment',
+  #       metadata: { order_id: order.id, shipping_fee: @shipping_fee, service_fee: @service_fee, total_price: @total_price },
+  #       success_url: sneaker_payment_complete_url + "?session_id={CHECKOUT_SESSION_ID}&shipping_fee=#{@shipping_fee}&service_fee=#{@service_fee}&total_price=#{@total_price}",
+  #       cancel_url: 'https://example.com/cancel',
+  #     })
+  #     redirect_to session.url, status: 303
+  #   else
+  #     redirect_to request.referer, alert: order.errors.full_messages.join(', ')
+  #   end
 
-  end
+  # end
   
   def sneaker_complete
-    # here we only want proper display informations,
-    # the update of the order happens in webhooks
-    session = Stripe::Checkout::Session.retrieve(params[:session_id])
-    @order = Order.find(session.metadata.order_id)
-    @payment_method = session.payment_method_types[0]
-    @shipping_fee = Money.new(params[:shipping_fee])
-    @service_fee = Money.new(params[:service_fee])
-    @total_price = Money.new(params[:total_price])
+    # here we only want proper display informations, the actual update
+    # of payment status and payment method happens through webhooks
+
+    @order = Order.find(params[:order_id])
+    intent = Stripe::PaymentIntent.retrieve(params[:payment_intent])
+    @payment_method = intent.payment_method_types[0]
   end
   
   def stripe_webhooks
@@ -91,29 +89,14 @@ class PaymentsController < ApplicationController
     end
 
     case event.type
-    when 'checkout.session.completed'
-      checkout = event.data.object
+    when 'payment_intent.succeeded'
+      payment_intent = event.data.object
 
-      if checkout.metadata["lc_id"]
-        lc_id = checkout.metadata["lc_id"]
-        lc = Authentication.find(lc_id)
-        lc.update(
-          checkout_session_id: checkout.id,
-          payment_method: checkout["payment_method_types"][0],
-          payment_status: "paid"
-        )
-      elsif checkout.metadata["order_id"]
-        order_id = checkout.metadata["order_id"]
-        order = Order.find(order_id)
-        order.update(
-          checkout_session_id: checkout.id,
-          payment_method: checkout["payment_method_types"][0],
-          payment_status: "paid",
-          shipping_fee: Money.new(checkout.metadata["shipping_fee"]),
-          service_fee: Money.new(checkout.metadata["service_fee"]),
-          total_price: Money.new(checkout.metadata["total_price"])
-        )
-      end
+      order = Order.find_by(payment_intent_id: payment_intent.id)
+      order.update(
+        payment_method: payment_intent["payment_method_types"][0],
+        payment_status: "paid",
+      )
     end
 
     head :ok
@@ -149,10 +132,6 @@ class PaymentsController < ApplicationController
 
   def lc_request_params
     params.require(:user).permit(:first_name, :last_name, :email, :age, :city, :photos)
-  end
-
-  def order_params
-    params.require(:order).permit(:first_name, :last_name, :phone, :address, :city, :zip_code, :door_number, :delivery, :relay_address, :sneaker_id, :legal)
   end
 
 end

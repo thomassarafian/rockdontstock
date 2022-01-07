@@ -3,7 +3,7 @@
     <div>
       <%= image_tag("images/check.svg") %>
     </div>
-    <h2 class="mb-0">
+    <h2 class="mb-0" id="message">
       Merci pour votre commande
     </h2>
   </div>
@@ -54,11 +54,11 @@
         <div class="purchase-recap__card__order-infos">
           <div class="purchase-recap__card__order-infos__item">
             <div>Livraison</div>
-            <div><%= @shipping_fee %> €</div>
+            <div><%= @order.shipping_fee %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
-            <div><%= @service_fee %> €</div>
+            <div><%= @order.service_fee %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Code promo</div>
@@ -67,7 +67,7 @@
         </div>
         <div class="purchase-recap__card__total">
           <div>Total</div>
-          <div><%= @total_price %> €</div>
+          <div><%= @order.total_price %> €</div>
         </div>
         <div class="purchase-recap__card__trustpilot"></div>
       </div>
