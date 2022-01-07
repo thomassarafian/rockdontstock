@@ -2,6 +2,9 @@
   display: flex;
   width: 100%;
   gap: 3rem;
+  @include media-breakpoint-down(lg) {
+    flex-direction: column;
+  }
 }
 .sneaker-infos__photo-block {
   display: inline-block;
@@ -52,6 +55,7 @@
 }
 .sneaker-service-block {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
 }
