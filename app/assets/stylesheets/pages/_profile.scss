@@ -16,6 +16,9 @@
 .profile__business,
 .profile__infos {
   width: 50%;
+  @include media-breakpoint-down(lg) {
+    width: 100%;
+  }
 }
 .profile__infos {
   display: flex;
