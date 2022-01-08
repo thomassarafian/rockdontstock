@@ -107,3 +107,12 @@ form .form-group {
   border-color: $black;
   background-color: $black;
 }
+// offset so borders aren't cropped
+.auth-guides__content .flickity-viewport,
+.home-guides__content .flickity-viewport {
+  height: 430px !important;
+  
+  @include media-breakpoint-down(md) {
+    height: 330px;
+  }
+}

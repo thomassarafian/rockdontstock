@@ -9,9 +9,9 @@
     </div>
     <%= image_tag "images/mobile-auth-header.png", style: "object-fit: contain; max-width: 90%" %>
     <div class="auth-hero__caption__buttons">
-      <%= button_to sneakers_path, method: :get, data: { "bs-toggle": "modal", "bs-target": "#modal-auth"}, class: "auth-hero__caption__primary-btn" do %>
+      <button class="auth-hero__caption__primary-btn" data-bs-toggle="modal" data-bs-target="#modal-auth">
         Authentifier ma paire <i class="fas fa-arrow-right"></i>
-      <% end %>
+      </button>
       <%= button_to "En savoir plus", sneakers_path, class: "auth-hero__caption__secondary-btn" %>
     </div>
   </div>
@@ -200,10 +200,6 @@
 </script>
 
 <style>
-/* offset to allow border to be seen */
-.auth-guides__content .flickity-viewport {
-  height: 430px !important;
-}
 .comparison-slider-wrapper {
 	position: relative;
 	width: 100%;
