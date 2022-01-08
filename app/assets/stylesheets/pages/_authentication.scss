@@ -121,16 +121,24 @@ section {
   display: flex;
   padding: 2rem;
   width: 100%;
+  gap: 1rem;
 
   @include media-breakpoint-up(lg) {
+    padding: 0;
     border-top: 1px solid $black;
   }
+  @include media-breakpoint-down(lg) {
+    padding: 0;
+    flex-direction: column;
+  }
 }
-.auth-infos__footer div:first-child {
-  padding-right: 0.4rem;
-}
-.auth-infos__footer div:last-child {
-  padding-left: 0.4rem;
+.auth-infos__footer__more-btn {
+  text-decoration: none;
+  font-weight: 700;
+
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
 }
 
 

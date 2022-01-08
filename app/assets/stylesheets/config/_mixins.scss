@@ -84,6 +84,10 @@
   }
   &__content {
     padding: 3rem 0;
+    
+    @include media-breakpoint-down(lg) {
+      padding: 2rem 0;
+    }
   }
   &__content__card {
     position: relative;

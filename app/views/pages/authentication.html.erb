@@ -57,7 +57,10 @@
           un maximum d’éléments et ainsi certifier la conformité de ton modèle. En tant que produit le plus contrefait, nous
           accordons une importance primordiale à l’authenticité des sneakers vendues via notre plateforme !
         </div>
-        <div>
+        <a class="auth-infos__footer__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          En savoir plus <i class="fas fa-chevron-down"></i>
+        </a>
+        <div class="collapse" id="collapseExample">
           Rock Don’t Stock met tout en oeuvre afin de te proposer un service des plus fiables. De paires décortiquées en
           passant par des informations récupérées directement via les fabricants, nos authentifications sont le fruit de
           recherches et d’un sourcing minutieux. Nous mettons quotidiennement à jour nos fiches produits pour chaque
@@ -70,7 +73,7 @@
     <div class="auth-guides__title">Découvrez</div>
     <h2>Nos guides gratuits</h2>
     <div class="auth-guides-block">
-      <div class="auth-guides__content" data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
+      <div class="auth-guides__content" data-flickity='{ "setGallerySize": false, "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
         <% Guide.all.order("created_at DESC").each do |guide| %>
           <div class="flickity-cell">
             <div class="auth-guides__content__card">

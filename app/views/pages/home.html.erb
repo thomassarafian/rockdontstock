@@ -87,7 +87,7 @@
   <section class="home-guides">
     <div class="home-guides__title">Découvrez nos guides</div>
     <div class="home-guides-block">
-      <div class="home-guides__content" data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
+      <div class="home-guides__content" data-flickity='{ "setGallerySize": false, "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
         <% Guide.all.order("created_at DESC").each do |guide| %>
           <div class="flickity-cell">
             <div class="home-guides__content__card">
