@@ -57,7 +57,7 @@
       <div class="sort-btn" style="cursor: pointer; flex-grow: 1; padding: 0.5rem; border: 1px solid #0E0E0E; text-align: center;" onclick="revealPopup('sort')">Trier</div>
     </div>
     <div class="popup sort-popup">
-      <%= form_with url: sneakers_path, local: false, method: :get, html: {id: "sort-form"} do |f| %>
+      <%= form_with url: sneakers_path, local: false, method: :get, html: {id: "sort-form-mobile"} do |f| %>
         <div class="form-group" style="border: 1px solid #0E0E0E; padding: 1rem;">
           <div class="form-check mb-1">
             <%= f.radio_button :sort_by, "price_cents ASC", { class: "form-check-input" } %>

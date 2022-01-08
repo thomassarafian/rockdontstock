@@ -57,7 +57,7 @@
         Trier par <i class="fas fa-chevron-down"></i>
       </div>
       <div class="popover sortby-popover">
-        <%= form_with url: sneakers_path, local: false, method: :get do |f| %>
+        <%= form_with url: sneakers_path, method: :get, html: { id: "sort-form-desktop" } do |f| %>
           <div class="form-check mb-1">
             <%= f.radio_button :sort_by, "price_cents ASC", { class: "form-check-input" } %>
             <%= f.label "Prix croissant", class: "form-check-label" %>
@@ -249,7 +249,8 @@
 
 <script>
   let filterForm = document.getElementById("filter-form");
-  let sortForm = document.getElementById("sort-form");
+  let sortFormMobile = document.getElementById("sort-form-mobile");
+  let sortForm = document.getElementById("sort-form-desktop");
 
   filterForm.querySelectorAll('input').forEach(input => {
     input.addEventListener('change', _ => {
@@ -264,10 +265,23 @@
       })
     })
   })
-  sortForm.querySelectorAll('input').forEach(input => {
+  sortFormMobile.querySelectorAll('input').forEach(input => {
     input.addEventListener('change', _ => {
       hidePopup();
 
+      let formData = new FormData(sortFormMobile);
+      Rails.ajax({
+        type: sortFormMobile.method,
+        url: sortFormMobile.action,
+        dataType: "json",
+        data: new URLSearchParams(formData),
+        processData: false,
+        contentType: false
+      })
+    })
+  })
+  sortForm.querySelectorAll('input').forEach(input => {
+    input.addEventListener('change', _ => {
       let formData = new FormData(sortForm);
       Rails.ajax({
         type: sortForm.method,
