@@ -1,7 +1,7 @@
 <title>Authentification - Rock Don't Stock</title>
 <div class="container">
   <!-- MOBILE -->
-  <div class="auth-hero d-flex d-lg-none" style="margin-top: 100px;">
+  <div class="auth-hero d-flex d-lg-none mb-5">
     <div class="auth-hero__title">
       <h1>1er produit</h1>
       <h1><span class="auth-hero__title-variant">contrefait</span> dans</h1>
@@ -9,12 +9,14 @@
     </div>
     <%= image_tag "images/mobile-auth-header.png", style: "object-fit: contain; max-width: 90%" %>
     <div class="auth-hero__caption__buttons">
-      <%= button_to "Parcourir les modèles", sneakers_path, method: :get, class: "auth-hero__caption__primary-btn" %>
-      <%= button_to "Vendre ma paire", sneakers_path, class: "auth-hero__caption__secondary-btn" %>
+      <%= button_to sneakers_path, method: :get, data: { "bs-toggle": "modal", "bs-target": "#modal-auth"}, class: "auth-hero__caption__primary-btn" do %>
+        Authentifier ma paire <i class="fas fa-arrow-right"></i>
+      <% end %>
+      <%= button_to "En savoir plus", sneakers_path, class: "auth-hero__caption__secondary-btn" %>
     </div>
   </div>
   <!-- DESKTOP -->
-  <div class="auth-hero d-none d-lg-block">
+  <div class="auth-hero d-none d-lg-flex">
     <%= image_tag "images/banner-fake.png", style: "object-fit: contain; max-width: 100%" %>
     <div class="auth-hero__title">
       <h1>1er produit</h1>

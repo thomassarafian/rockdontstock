@@ -23,6 +23,7 @@ h2 {
   line-height: 1;
   @include media-breakpoint-down(lg) {
     font-size: $font-size-3-sm;
+    margin-bottom: 0.1em;
   }
 }
 a, a:hover {
