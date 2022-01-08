@@ -23,6 +23,7 @@
           Nom de l'acheteur : <%= @order.user.full_name %>
         </div>
       </div>
+      <%= image_tag("images/download-btn.svg", style: "margin-right: 1rem") %>
       <%= link_to "Télécharger le récapitulatif", order_path(@order.id, format: :pdf), target: "_blank" %>
       <div>
         <div style="font-size: 25px; font-weight: 700">Prochaine étape...</div>

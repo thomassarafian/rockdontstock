@@ -1,5 +1,5 @@
 <title>Inscription - Rock Don't Stock</title>
-<div class="container">
+<div class="container" style="margin-top: 4rem">
   <h2 class="title-signup text-center">Inscription</h2>
   <div class="row justify-content-center align-items-center">
     <div class="input-signup col-md-5">
@@ -55,7 +55,12 @@
         </div>
 
         <!-- <div class="form-actions"> -->
-          <%= f.button :submit, "S'inscrire", class: "text-center btn btn-dark sign-up-user", id: "btn-submit" %>
+        <div class="d-flex justify-content-end align-items-center" style="gap: 2rem">
+          <%- if controller_name != 'sessions' %>
+            <%= link_to "Se connecter", new_session_path(resource_name) %>
+          <% end %>
+          <%= f.button :submit, "S'inscrire", class: "signup__submit-btn", id: "btn-submit" %>
+        </div>
         <!-- </div> -->
       <% end %>
     </div>
@@ -66,11 +71,7 @@
   
   </div>
 
-  <div class="signin-btn">
-    <%- if controller_name != 'sessions' %>
-      <%= link_to "Se connecter", new_session_path(resource_name) %>
-    <% end %>
-  </div>
+
 
 </div>
 

@@ -44,7 +44,7 @@
     <%= form_with url: sneakers_path, html: { id: "navbar-search-form" }, method: :get do |f| %>
       <div style="position: relative;">
         <%= f.text_field :search, class: "navbar-search-input form-control", placeholder: "Essaye Nike, Air Jordan..." %>
-        <%= image_tag "images/lens.svg", style: "height: 30px; position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); cursor: pointer", onclick: "handleLensClick()" %>
+        <%= image_tag "images/lens.svg", style: "height: 24px; position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); cursor: pointer", onclick: "handleLensClick()" %>
       </div>
     <% end %>
     <div class="navbar-close-icon" style="display: none; line-height: 0; font-size: 40px;" onclick="hideInput()">&times;</div>
