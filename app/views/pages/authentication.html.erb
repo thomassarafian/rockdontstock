@@ -50,8 +50,19 @@
         </div>
         <%= button_to "Parcourir la marketplace", sneakers_path, method: :get, class: "auth-infos__content__cta" %>
       </div>
-      <div class="auth-infos__footer">
-        <div>
+      <div class="auth-infos__footer d-none d-lg-block">
+        Chez Rock Don’t Stock, tous les articles sont authentifiés par nos soins. Chaque modèle acheté passe entre les
+        mains de nos experts afin de garantir un Legit Check de qualité. Nous prenons le temps qu’il faut afin de vérifier
+        un maximum d’éléments et ainsi certifier la conformité de ton modèle. En tant que produit le plus contrefait, nous
+        accordons une importance primordiale à l’authenticité des sneakers vendues via notre plateforme !
+        <br /><br />
+        Rock Don’t Stock met tout en oeuvre afin de te proposer un service des plus fiables. De paires décortiquées en
+        passant par des informations récupérées directement via les fabricants, nos authentifications sont le fruit de
+        recherches et d’un sourcing minutieux. Nous mettons quotidiennement à jour nos fiches produits pour chaque
+        nouvelle release ou amélioration d’un modèle antérieur afin de rester dans la course face aux contrefaiseurs.
+      </div>
+      <div class="auth-infos__footer d-block d-lg-none">
+        <div class="mb-1">
           Chez Rock Don’t Stock, tous les articles sont authentifiés par nos soins. Chaque modèle acheté passe entre les
           mains de nos experts afin de garantir un Legit Check de qualité. Nous prenons le temps qu’il faut afin de vérifier
           un maximum d’éléments et ainsi certifier la conformité de ton modèle. En tant que produit le plus contrefait, nous
@@ -60,7 +71,7 @@
         <a class="auth-infos__footer__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
           En savoir plus <i class="fas fa-chevron-down"></i>
         </a>
-        <div class="collapse" id="collapseExample">
+        <div class="mt-1 collapse" id="collapseExample">
           Rock Don’t Stock met tout en oeuvre afin de te proposer un service des plus fiables. De paires décortiquées en
           passant par des informations récupérées directement via les fabricants, nos authentifications sont le fruit de
           recherches et d’un sourcing minutieux. Nous mettons quotidiennement à jour nos fiches produits pour chaque
@@ -181,8 +192,10 @@
     let guideName = button.getAttribute('data-bs-guideName')
     let guideId = button.getAttribute('data-bs-guideId')
     let modalTitle = guideModal.querySelector('.auth-modal__guide-name')
+    let guideInput = guideModal.querySelector('#user_guide_id')
 
     modalTitle.textContent = guideName
+    guideInput.value = guideId
   })
 </script>
 

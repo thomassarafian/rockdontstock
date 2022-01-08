@@ -62,13 +62,15 @@
 .profile__business-items__content {
   display: flex;
   justify-content: space-between;
-  gap: 30%;
+  gap: 20%;
 }
 .profile__business-items__content__btns {
   align-self: flex-end;
+  text-align: right;
   &--modify {
     @include cta-button;
     margin-bottom: 0.5rem;
+    width: 100%;
   }
   &--delete {
     @include red-button;

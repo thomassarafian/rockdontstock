@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get 'cgv', to: 'pages#cgv'
   get 'politique-de-confidentialite', to: 'pages#trust_policy'
   post 'newsletter', to: 'pages#newsletter'
-  post 'guide', to: 'pages#guide_request'
+  post 'guide-request', to: 'pages#guide_request'
   
   # PAYMENTS
   get 'sneaker-payment-complete', to: "payments#sneaker_complete"
@@ -59,8 +59,6 @@ Rails.application.routes.draw do
     post '/actions/package-received-by-rds', to: 'orders#package_received_by_rds'
     post '/actions/sneaker-legit', to: 'orders#sneaker_legit'
 
-    # Guides
-    post '/actions/upload-file', to: 'guides#upload_file'
   end
 
   mount ForestLiana::Engine => '/forest'	

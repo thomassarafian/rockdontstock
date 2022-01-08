@@ -119,12 +119,11 @@ section {
 }
 .auth-infos__footer {
   display: flex;
-  padding: 2rem;
   width: 100%;
   gap: 1rem;
 
   @include media-breakpoint-up(lg) {
-    padding: 0;
+    padding: 2rem;
     border-top: 1px solid $black;
   }
   @include media-breakpoint-down(lg) {
@@ -135,10 +134,6 @@ section {
 .auth-infos__footer__more-btn {
   text-decoration: none;
   font-weight: 700;
-
-  @include media-breakpoint-up(lg) {
-    display: none;
-  }
 }
 
 
