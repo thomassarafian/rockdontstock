@@ -4,6 +4,15 @@
 .sneaker-form__next-btn {
   @include cta-button;
 }
+.sneaker-form__btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  @include media-breakpoint-down(md) {
+    justify-content: unset;
+    width: 100%;
+  }
+}
 .sale-wizard__subtitle {
   @include para-1;
 }
@@ -61,11 +70,28 @@
     object-fit: contain;
   }
 }
+.sneaker-form__infos {
+	display: flex;
+	width: 25%;
+	flex-direction: column;
+	margin: auto;
+	@include media-breakpoint-down(lg) {
+		width: 50%;
+	}
+	@include media-breakpoint-down(md) {
+		width: 100%;
+	}
+}
 .sneaker-form__photos {
   display: flex;
   flex-wrap: wrap;
   gap: 3rem 2rem;
   margin-top: 3rem;
+
+  @include media-breakpoint-down(md) {
+    gap: 1.5rem;
+    justify-content: center;
+  }
 
   & label {
     text-align: center;
@@ -79,6 +105,10 @@
   width: 250px;
   height: 250px;
   border: 2px dashed #d6d6d6;
+
+  @include media-breakpoint-down(md) {
+    width: 45%;
+  }
 
   &-0 {
     background-image: url("/assets/sneaker_new/1.jpg");
@@ -143,17 +173,25 @@
     justify-content: space-between;
     width: 400px;
     padding: 2rem;
-    border: 1px solid $black;
-    &::before {
-      content: "";
-      position: absolute;
+
+    @include media-breakpoint-down(md) {
+      padding: 0;
       width: 100%;
-      height: 100%;
-      top: 10px;
-      left: 10px;
-      border-right: 10px solid $black;
-      border-bottom: 10px solid $black;
-      z-index: -1;
+    }
+
+    @include media-breakpoint-up(lg) {
+      border: 1px solid $black;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 10px;
+        left: 10px;
+        border-right: 10px solid $black;
+        border-bottom: 10px solid $black;
+        z-index: -1;
+      }
     }
     &__title {
       @include para-1;
@@ -206,6 +244,9 @@
     &__btn {
       @include cta-button;
       margin: 2rem 0;
+      @include media-breakpoint-down(md) {
+        width: 100%;
+      }
     }
   }
 }
@@ -214,9 +255,15 @@
   justify-content: center;
   align-items: flex-start;
   gap: 3rem;
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
 }
 .sneaker-form__recap__left {
   width: 45%;
+  @include media-breakpoint-down(md) {
+    width: 100%;
+  }
 }
 .sneaker-form__recap__photos {
   display: inline-block;
