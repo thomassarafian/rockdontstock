@@ -20,6 +20,17 @@
     background-color: white;
   }
 }
+@mixin red-button {
+  @include reset-button;
+  color: white;
+  border: 1px solid $red;
+  background-color: $red;
+  text-transform: uppercase;
+  &:hover {
+    color: $red;
+    background-color: white;
+  }
+}
 @mixin primary-button {
   @include reset-button;
   color: $black;
