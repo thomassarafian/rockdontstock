@@ -1,15 +1,21 @@
 .sneaker-form__previous-btn {
   @include secondary-button;
+  @include media-breakpoint-down(md) {
+    text-align: center;
+    width: 100%;
+  }
 }
 .sneaker-form__next-btn {
   @include cta-button;
+  @include media-breakpoint-down(md) {
+    width: 100%;
+  }
 }
 .sneaker-form__btns {
   display: flex;
   justify-content: flex-end;
   gap: 2rem;
   @include media-breakpoint-down(md) {
-    justify-content: unset;
     width: 100%;
   }
 }
