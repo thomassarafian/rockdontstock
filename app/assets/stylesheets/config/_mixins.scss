@@ -175,7 +175,7 @@
       height: 320px;
       padding: 0;
       width: 45%;
-      gap: 0.8rem;
+      gap: 0.5rem;
       @supports (-webkit-touch-callout: none) and (not (translate: none)) {
         &:not(:last-child) {
           margin-right: 0.8rem;
@@ -207,7 +207,7 @@
     line-height: 1.2;
   }
   &__card__photo {
-    height: 65%;
+    max-height: 60%;
     width: 100%;
     object-fit: cover;
     align-self: center;
