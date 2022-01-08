@@ -71,7 +71,6 @@
   &__block {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
     gap: 3rem;
     @include media-breakpoint-down(md) {
       gap: 1rem;
