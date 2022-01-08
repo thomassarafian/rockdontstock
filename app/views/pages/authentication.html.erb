@@ -69,7 +69,7 @@
     <h2>Nos guides gratuits</h2>
     <div class="auth-guides-block">
       <div class="auth-guides__content" data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
-        <% Guide.all.each do |guide| %>
+        <% Guide.all.order("created_at DESC").each do |guide| %>
           <div class="flickity-cell">
             <div class="auth-guides__content__card">
               <%= image_tag(guide.img_url, class: "auth-guides__content__card__image") %>
