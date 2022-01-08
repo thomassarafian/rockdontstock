@@ -147,7 +147,7 @@
     height: 45%;
   }
   &__content__card__name {
-    @include para-2-bold
+    @include para-2-bold;
     text-align: center;
   }
   &__content__card__btn {
