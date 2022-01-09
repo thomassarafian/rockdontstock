@@ -3,14 +3,13 @@ class OrdersController < ApplicationController
 	def new 
 		@sneaker = Sneaker.find(params[:sneaker_id])
 
-		# NOTE only for Payment Elements
-		# @intent = Stripe::PaymentIntent.create(
-		# 	amount: @sneaker.price_cents,
-		# 	currency: 'eur',
-		# 	automatic_payment_methods: {
-		# 		enabled: true,
-		# 	},
-		# )
+		@intent = Stripe::PaymentIntent.create(
+			amount: @sneaker.price_cents,
+			currency: 'eur',
+			automatic_payment_methods: {
+				enabled: true,
+			}
+		)
 	end
 
 	def show
@@ -56,21 +55,47 @@ class OrdersController < ApplicationController
 	# end
 
 	def create
-    # if params['mondial-relay-price'].present? || params['colissimo-price'].present?
-    #   @order = current_user.orders.last
-    #   @sneaker = current_user.orders.last.sneaker
-    #   @sneaker_db = @sneaker.sneaker_db
-    #   params['mondial-relay-price'].present? ? create_stripe_session(@order, @sneaker, params['mondial-relay-price']) : create_stripe_session(@order, @sneaker, params['colissimo-price'])
-    # else
-  	#   @sneaker = Sneaker.find(params[:sneaker_id])
-    #   @sneaker_db = SneakerDb.find(@sneaker.sneaker_db_id)
-  	#   @order = Order.create!(sneaker: @sneaker, sneaker_name: @sneaker_db.name, price_cents: @sneaker.price_cents, state: 'En cours', user: current_user)
-    #   Stripe::StripeCreateCustomer.new(current_user)
-    #   redirect_to new_order_payment_path(@order)
-    # end
+		shipping_fees = { relay: 630, colissimo: 915 }
+		sneaker_price = Sneaker.find(order_params[:sneaker_id]).price_cents
+		shipping_fee = shipping_fees[order_params[:delivery].to_sym]
+		service_fee = sneaker_price * 0.06
+		total_price = sneaker_price + shipping_fee + service_fee
+
+		order = Order.new(order_params.merge(
+			user: current_user,
+			shipping_fee: Money.new(shipping_fee),
+			service_fee: Money.new(service_fee),
+			total_price: Money.new(total_price),
+		))
+
+		if order.save
+			render json: { orderId: order.id }, status: 200
+		else
+			redirect_to request.referer, alert: order.errors.full_messages.join(', ')
+		end
+	end
+	
+	private
+	
+	def order_params
+    params.require(:order).permit(:first_name, :last_name, :phone, :address, :city, :zip_code, :door_number, :delivery, :relay_address, :sneaker_id, :legal, :payment_intent_id)
 	end
 
-	private
+	# OLD CREATE
+	# def create
+	# if params['mondial-relay-price'].present? || params['colissimo-price'].present?
+	#   @order = current_user.orders.last
+	#   @sneaker = current_user.orders.last.sneaker
+	#   @sneaker_db = @sneaker.sneaker_db
+	#   params['mondial-relay-price'].present? ? create_stripe_session(@order, @sneaker, params['mondial-relay-price']) : create_stripe_session(@order, @sneaker, params['colissimo-price'])
+	# else
+	#   @sneaker = Sneaker.find(params[:sneaker_id])
+	#   @sneaker_db = SneakerDb.find(@sneaker.sneaker_db_id)
+	#   @order = Order.create!(sneaker: @sneaker, sneaker_name: @sneaker_db.name, price_cents: @sneaker.price_cents, state: 'En cours', user: current_user)
+	#   Stripe::StripeCreateCustomer.new(current_user)
+	#   redirect_to new_order_payment_path(@order)
+	# end
+	# end
 
 	# def create_stripe_session(order, sneaker, deliveryPrice)
 	# 	puts stripe_session = Stripe::Checkout::Session.create({

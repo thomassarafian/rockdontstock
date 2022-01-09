@@ -1,8 +1,8 @@
 <title>Accueil - Rock Don't Stock</title>
 <div class="container">
   <section class="home-header">
-    <video style="width: 100%; height: 100%; object-fit: cover;" playsinline autoplay muted loop>
-      <source src="/assets/images/video.webm" type="video/webm">
+    <video autoplay loop muted playsinline style="margin-top: 1rem; margin-bottom: 1rem; width: 100%; height: 100%; object-fit: cover;">
+      <source src="/assets/images/video.mp4" type="video/mp4">
     </video>
     <div class="home-header__caption">
       <h2 class="home-header__caption__title">Des sneakers d’occasion authentifiées par nos experts</h2>
@@ -87,8 +87,8 @@
   <section class="home-guides">
     <div class="home-guides__title">Découvrez nos guides</div>
     <div class="home-guides-block">
-      <div class="home-guides__content" data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
-        <% Guide.all.each do |guide| %>
+      <div class="home-guides__content" data-flickity='{ "setGallerySize": false, "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
+        <% Guide.all.order("created_at DESC").each do |guide| %>
           <div class="flickity-cell">
             <div class="home-guides__content__card">
               <%= image_tag(guide.img_url, class: "home-guides__content__card__image") %>
@@ -128,16 +128,8 @@
     let guideId = button.getAttribute('data-bs-guideId')
     let modalTitle = guideModal.querySelector('.auth-modal__guide-name')
     let hiddenInput = document.getElementById('user_guide_id')
-    alert(guideId)
 
     modalTitle.textContent = guideName
     hiddenInput.value = guideId
   })
 </script>
-
-<style>
-/* offset to allow border to be seen */
-.home-guides__content .flickity-viewport {
-  height: 430px !important;
-}
-</style>

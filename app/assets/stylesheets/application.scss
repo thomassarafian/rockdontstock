@@ -21,8 +21,10 @@ h2 {
   font-size: $font-size-3;
   margin-bottom: 0.8em;
   line-height: 1;
+  
   @include media-breakpoint-down(lg) {
     font-size: $font-size-3-sm;
+    margin-bottom: 0.1em;
   }
 }
 a, a:hover {
@@ -104,4 +106,13 @@ form .form-group {
 .page-item.active .page-link {
   border-color: $black;
   background-color: $black;
+}
+// offset so borders aren't cropped
+.auth-guides__content .flickity-viewport,
+.home-guides__content .flickity-viewport {
+  height: 430px !important;
+  
+  @include media-breakpoint-down(md) {
+    height: 330px;
+  }
 }

@@ -17,7 +17,7 @@ class PagesController < ApplicationController
     end
   end
 
-  def guide
+  def guide_request
     guide = Guide.find(user_params[:guide_id])
     sib_list_id = guide.fetch_sendinblue["id"]
     temp_user = User.new(user_params.except(:guide_id))

@@ -1,7 +1,7 @@
 <div class="auth-modal__subtitle">Le guide gratuit</div>
 <h2 class="auth-modal__guide-name"></h2>
 <div class="auth-modal__form">
-  <%= form_for :user, url: guide_path do |f| %>
+  <%= form_for :user, url: guide_request_path do |f| %>
     <%= f.hidden_field :guide_id %>
     <div class="row g-2">
       <div class="col">

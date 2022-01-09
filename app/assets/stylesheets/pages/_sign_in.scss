@@ -1,0 +1,38 @@
+.signin__submit-btn {
+  @include cta-button;
+  margin-top: 2rem;
+  float: right;
+}
+.signin__content {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  @include media-breakpoint-down(lg) {
+    flex-direction: column;
+  }
+}
+.signin__form {
+  width: 100%;
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  border-right: none;
+  border-bottom: 1px solid #0E0E0E;
+
+  @include media-breakpoint-up(lg) {
+    width: 40%;
+    padding-right: 5rem;
+    margin-right: 5rem;
+    border-bottom: none;
+    border-right: 1px solid #0E0E0E;
+  }
+}
+.signin__registration-btn {
+  @include cta-button;
+}
+.signup__submit-btn {
+  @include cta-button;
+}
+.password__change-btn {
+  @include cta-button;
+}

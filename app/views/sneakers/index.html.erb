@@ -50,7 +50,34 @@
       </div>
     </div>
   </section>
-  <div style="font-size: 1.563rem; margin-bottom: 3rem">Toutes les sneakers</div>
+  <div class="d-flex justify-content-between">
+    <div style="font-size: 1.563rem; margin-bottom: 3rem">Toutes les sneakers</div>
+    <div style="position: relative;">
+      <div class="toggle-popover-btn" type="button" onclick="togglePopover('sortby')">
+        Trier par <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="popover sortby-popover">
+        <%= form_with url: sneakers_path, method: :get, html: { id: "sort-form-desktop" } do |f| %>
+          <div class="form-check mb-1">
+            <%= f.radio_button :sort_by, "price_cents ASC", { class: "form-check-input" } %>
+            <%= f.label "Prix croissant", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.radio_button :sort_by, "price_cents DESC", { class: "form-check-input" } %>
+            <%= f.label "Prix décroissant", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.radio_button :sort_by, "created_at DESC", { class: "form-check-input", checked: true } %>
+            <%= f.label "Du plus récent au plus ancien", class: "form-check-label" %>
+          </div>
+          <div class="form-check mb-1">
+            <%= f.radio_button :sort_by, "created_at ASC", { class: "form-check-input" } %>
+            <%= f.label "Du plus ancien au plus récent", class: "form-check-label" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
   <div class="d-flex align-items-start justify-content-between">
     <!-- FILTERS DESKTOP -->
     <div class="d-none d-lg-block" style="flex-grow: 1; top: 100px;">
@@ -121,7 +148,7 @@
           </div>
         </div>
         <div class="form-group" style="position:relative;">
-          <div class="size-checkboxes">
+          <div class="popover size-popover">
             <div class="form-check mb-1">
               <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "1", nil %>
               <%= f.label "1", class: "form-check-label" %>
@@ -203,7 +230,10 @@
               <%= f.label "10", class: "form-check-label" %>
             </div>
           </div>
-          <%= f.label "Taille", class: "form-label", style: "font-weight: 700; cursor: pointer;", onclick: "toggleSizes()" %>
+          <%= f.label '', class: "form-label toggle-popover-btn", style: "font-weight: 700; cursor: pointer;", onclick: "togglePopover('size')" do %>
+            Taille
+            <i class="fas fa-chevron-down"></i>
+          <% end %>
           <!-- <%= f.select :size, size, { include_blank: "Toute taille" }, {  style: "display: block; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 0.5rem; background: none;" } %> -->
           <!-- <div class="dropdown-fields" style="display: none; margin-top: 0.5rem;"> -->
             <!-- <%= f.select :size, size, { include_blank: "Toute taille" }, {  style: "display: block; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 0.5rem; background: none;" } %> -->
@@ -211,22 +241,51 @@
         </div>
       <% end %>
     </div>
-    <div id="search-results" class="d-flex flex-wrap justify-content-center" style="flex-shrink: 2; gap: 2rem;">
+    <div id="search-results" class="d-flex flex-wrap justify-content-center" style="width: 100%; flex-shrink: 2; gap: 2rem;">
       <%= render partial: 'sneakers/list_sneakers' %>
     </div>
   </div>
 </div>
 
 <script>
-  let form = document.getElementById("filter-form");
+  let filterForm = document.getElementById("filter-form");
+  let sortFormMobile = document.getElementById("sort-form-mobile");
+  let sortForm = document.getElementById("sort-form-desktop");
 
-  form.querySelectorAll('input').forEach(input => {
+  filterForm.querySelectorAll('input').forEach(input => {
     input.addEventListener('change', _ => {
-      let formData = new FormData(form);
-
+      let formData = new FormData(filterForm);
       Rails.ajax({
-        type: form.method,
-        url: form.action,
+        type: filterForm.method,
+        url: filterForm.action,
+        dataType: "json",
+        data: new URLSearchParams(formData),
+        processData: false,
+        contentType: false
+      })
+    })
+  })
+  sortFormMobile.querySelectorAll('input').forEach(input => {
+    input.addEventListener('change', _ => {
+      hidePopup();
+
+      let formData = new FormData(sortFormMobile);
+      Rails.ajax({
+        type: sortFormMobile.method,
+        url: sortFormMobile.action,
+        dataType: "json",
+        data: new URLSearchParams(formData),
+        processData: false,
+        contentType: false
+      })
+    })
+  })
+  sortForm.querySelectorAll('input').forEach(input => {
+    input.addEventListener('change', _ => {
+      let formData = new FormData(sortForm);
+      Rails.ajax({
+        type: sortForm.method,
+        url: sortForm.action,
         dataType: "json",
         data: new URLSearchParams(formData),
         processData: false,
@@ -267,25 +326,47 @@
     document.body.style.overflowY = ''
   }
 
-  function toggleSizes() {
-    let el = document.querySelector('.size-checkboxes');
+  function togglePopover(which) {
+    let el = document.querySelector(`.${which}-popover`);
 
     if (el.style.display === "block") el.style.display = "none"
     else el.style.display = "block"
   }
+
+  // close popovers when clicking outside
+  document.body.addEventListener('click', (e) => {
+    if (e.target.classList.contains('toggle-popover-btn')) return
+
+    if (!e.target.closest('.popover')) {
+      let popovers = document.querySelectorAll('.popover');
+      popovers.forEach(p => p.style.display = "none")
+    }
+  })
 </script>
 
 <style>
-.size-checkboxes {
+.size-popover {
   display: none;
   position: absolute;
-  width: 100%;
   top: 2rem;
-  padding: 1rem;
-  box-shadow: 0 0 6px rgba(0,0,0,.12);
-  border-radius: 4px;
-  overflow-y: scroll;
+  width: 100%;
   height: 10rem;
+  padding: 1rem;
+  box-shadow: 0 0 2px rgba(0,0,0,.2);
+  background: white;
+  overflow-y: scroll;
+  z-index: 999;
+}
+.sortby-popover {
+  display: none;
+  position: absolute;
+  width: max-content;
+  top: 2rem;
+  right: 0;
+  padding: 1rem;
+  box-shadow: 0 0 2px rgba(0,0,0,.2);
+  background: white;
+  z-index: 999;
 }
 .popup-close-icon {
   cursor: pointer;
@@ -296,7 +377,7 @@
   position: fixed;
   left: 0;
   right: 0;
-  top: 100px;
+  top: 120px; /* height of navbar + filter/sort buttons*/
   bottom: 0;
   overflow-y: scroll;
   padding: 2rem 1rem;

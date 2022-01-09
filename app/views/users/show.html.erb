@@ -1,4 +1,65 @@
 <title>Mon profil - Rock Don't Stock</title>
+
+<div class="container">
+  <%= link_to :back, class: "back-button" do %>
+    <h3><i class="fas fa-arrow-left ms-0"></i> Retour</h3>
+  <% end %>
+  <div class="profile">
+    <h2 class="profile__title">Mon compte</h2>
+    <div class="profile__content">
+      <div class="profile__infos">
+				<div class="profile__infos-personal">
+					<div class="profile__infos-personal__title">Mes informations</div>
+					<div>Nom : <%= current_user.full_name %></div>
+					<div>Date de naissance : <%= current_user.date_of_birth %></div>
+					<div>Adresse : <%= current_user.city %></div>
+					<div>Email : <%= current_user.email %></div>
+					<div>Téléphone : <%= current_user.phone %></div>
+				</div>
+				<div class="profile__infos-documents">
+					<div class="profile__infos-documents__title">Mes documents</div>
+					<div>IBAN : </div>
+					<div>Carte d’identité (recto/verso): </div>
+					<div>Justificatif de domicile: </div>
+				</div>
+				<button class="profile__infos-btn">Modifier</button>
+      </div>
+      <div class="profile__business">
+				<div class="profile__business-items">
+					<div class="profile__business-items__title">
+						<div>Mes achats</div>
+						<div>Mes ventes</div>
+					</div>
+					<div class="profile__business-items__content">
+						<div class="profile__business-item">
+							<%= cl_image_tag(Sneaker.first.photos.first&.key, class: 'profile__business-item-photo') %>
+							<div class="profile__business-item-details">
+								<div class="profile__business-item-name">
+									<%= Sneaker.first.sneaker_db.name %>
+								</div>
+								<div class="profile__business-item-options">
+									<%= Sneaker.first.sneaker_db.category %> - Taille <%= Sneaker.first.size %> - Condition: <%= Sneaker.first.condition %>/10
+								</div>
+								<div class="profile__business-item-price">
+									<%= Sneaker.first.price %> €
+								</div>
+							</div>
+						</div>
+						<div class="profile__business-items__content__btns">
+							<button class="profile__business-items__content__btns--modify">Modifier</button>
+							<button class="profile__business-items__content__btns--delete">Supprimer</button>
+						</div>
+					</div>
+				</div>
+				<div class="profile__business-wallet">
+					<div class="profile__business-wallet__title">Mon portefeuille virtuel</div>
+					<div>Montant disponible :</div>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 
 <div class="container users-show">
 	<div class="profil-page">
 		<div class="header">
@@ -49,100 +110,11 @@
 					<p>Numéro de téléphone : <p>
 				<% end %>
 			</div>
-      
-      <!-- <div class="section-profil"> -->
-  			<%= link_to user_items_path, class: 'bought-sales-items' do %>
-  				<div class="my-items">
-  					<h5>Mes achats / ventes</h5> 
-  					<%= image_tag "profil/my_purchases", class: "" %>
-  				</div>
-  			<% end %>
-
-  			<%= link_to user_transfers_path, class: 'document-verif' do %>
-  				<div class="my-sales">
-  					<h5>Mes documents / RIB</h5> 
-  					<%= image_tag "profil/my_sales", class: "my-sales-icon" %>
-  				</div>
-  			<% end %>
-      <!-- </div> -->
+    
 			
 		
 
   </div>	
 
 
-</div>	
-
-
-
-
-		<!-- Si l'utilisateur il a une senaker qui est en state 1 (donc validé côté admin) -->
-			<!-- Il est majeur -->
-				<!-- Il remplit ses informations -->
-			<!-- Il est mineur -->
-				<!-- Il remplit les informations d'un adulte + ID adulte -->
-	
-	<!-- <div class="adult-infos">
-		<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? && current_user.date_of_birth? && current_user.sneakers.present? %>
-			<% if current_user.sneakers[0].state == 1 %>
-				<% if age(current_user.date_of_birth) < 18  %>
-					<h3>Tu es mineur</h3>
-					<p>En France, our recevoir de l'argent sur ton compte bancaire, tu dois renseigner ces informations concernant une personne majeur : </p>
-					<%= simple_form_for(current_user, remote: true, data: {target: "address.form", id: current_user.id }) do |f| %>
-		        <%= f.input :first_name, label: 'Prénom', input_html: { data: {target: 'address.line1'} }, required: true  %>
-		        <%= f.input :last_name, label: 'Nom de famille', input_html: { data: { target: 'address.city'} },required: true %>
-		        <%= f.input :line1, label: 'Adresse', input_html: { data: { target: 'address.postal_code'} }, required: true %>
-		        <%= f.input :city, label: 'Ville', input_html: { data: { target: 'address.postal_code'} }, required: true %>
-		        <%= f.input :postal_code, label: 'Code postal', input_html: { data: { target: 'address.postal_code'} }, required: true %>
-		        <%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le recto de ma carte d'identité" %>
-						<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le verso de ma carte d'identité" %>
-						<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer un justificatif de domicile" %>
-		        <%= f.button :submit, "Confirmer mes informations", data: { action: "click->address#refresh" } %>  
-		      <% end %>
-				<% end %>
-			<% end %>
-		<% end %>
-	</div>
- -->
-		<%# if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
-			<%#= link_to "Ajouter mon IBAN", edit_user_registration_path(@user, anchor: "iban-error") %>			
-			<!-- <h3>Mes virements vers mon comptes bancaires</h3> -->
-			<!-- <%#= simple_form_for(@user) do |f| %> -->
-				<!-- <div id="iban-error"></div> -->
-				<%#= f.input :iban, label: "Remplir l'IBAN pour recevoir ton solde",  placeholder: 'FR1420041010050500013M02606' %>
-				<%#= f.button :submit %>
-			<%# end %>
-		<%# end %>
-<!-- 		<br>
-		<div class="my-transfers">
-			<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? && current_user.date_of_birth? && current_user.sneakers.present? %>
-				<%= link_to "Mes virements", user_transfers_path(@user) %>
-			<% end %>
-		</div>
-
-
-		<% if current_user.date_of_birth? && current_user.line1? && current_user.city? && current_user.postal_code? && current_user.phone? %>
-			<h3>Mes documents</h3>
-			<% if current_user.ids[0].present? &&  current_user.ids[1].present? &&  current_user.ids[2].present? %>
-				<%= simple_form_for(@user, remote:true) do |f| %>
-					<p>Attention ! Si vous voulez transmettre à nouveaux vos documents, cela supprimera les anciens. Vous devez donc nous renvoyer vos 3 documents ci-dessous : </p>
-					<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer une nouvelle fois le recto de ma carte d'identité" %>
-					<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer une nouvelle fois le recto de ma carte d'identité" %>
-					<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer un nouveau justificatif de domicile" %>
-				    <%= f.button :submit %>
-				<% end %>
-			<% else %>
-				<%= simple_form_for(@user, remote:true) do |f| %>
-				  	<p>Attention ! Vous devez nous envoyer les 3 documents ci-dessous au même moment : </p>
-				  	<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le recto de ma carte d'identité" %>
-					<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer le verso de ma carte d'identité" %>
-					<%= f.input :ids, as: :file,  input_html: {multiple: true}, label: "Envoyer un justificatif de domicile" %>
-					<%= f.button :submit %>
-			    <% end %>
-			<% end %>
-		<% end %>
- -->    
-    
-
-	
-<%#= javascript_pack_tag "iban_validator" %>
+</div> -->

@@ -1,6 +1,12 @@
 .alert {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  z-index: 1000;
+  width: 400px;
+  padding: 1.5rem;
+  background-color: #F0F0F0;
+  color: #0E0E0E;
+  border: none;
+
+  @include media-breakpoint-down(md) {
+    width: 80vw;
+  }
 }
+

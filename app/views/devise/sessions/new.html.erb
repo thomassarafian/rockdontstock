@@ -1,115 +1,32 @@
 <title>Se connecter - Rock Don't Stock</title>
-<div class="container session-new">
-  <h2 class="title-login text-center">Se connecter</h2>
-  <div class="session-new-form row justify-content-center align-items-center">
-    <div class="input-signin">
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-        <%= f.input :email,
-                    required: false,
-                    autofocus: true,
-                    input_html: { autocomplete: "email" }, label: false, placeholder: 'Email' %>
-        <%= f.input :password,
-                    label: "Mot de passe",
-                    required: false,
-                    input_html: { autocomplete: "current-password" }, label: false, placeholder: 'Mot de passe' %>
-        
-        <div class="forgot-password">
-          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-            <%= link_to "Mot de passe oublié ?", new_password_path(resource_name) %><br />
+<div class="container">
+  <%= link_to :back, class: "back-button" do %>
+    <h3><i class="fas fa-arrow-left ms-0"></i> Retour</h3>
+  <% end %>
+  <div class="signin d-flex flex-column align-items-center" style="gap: 3rem;">
+    <h2 class="signin__title">Connexion</h2>
+    <div class="signin__content">
+      <div class="signin__form">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-group">
+            <%= f.label "Email", class: "form-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: 'Email' %>
+          </div>
+          <%= f.label "Mot de passe", class: "form-label" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: 'Mot de passe' %>
+          <% if devise_mapping.recoverable? %>
+            <%= link_to "Mot de passe oublié ?", new_password_path(resource_name), class: "float-right" %>
           <% end %>
+          <%= f.submit "Se connecter", class: "signin__submit-btn" %>
+        <% end %>
+      </div>
+      <div class="signin__registration d-flex flex-column justify-content-center align-items-center" style="gap: 2rem">
+        <div>
+          Pas encore de compte <br/> Rock Don't Stock ?
         </div>
-        <%#= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-        <%= f.button :submit, "Connexion", id: 'connect-btn', class: 'text-center btn btn-dark' %>
-      <% end %>
+        <%= link_to "Créer un compte", new_registration_path(resource_name), class: "signin__registration-btn" %>
+      </div>
     </div>
-    <!-- <div class="col-md-5 omniauth text-left">
-      <%#= render "devise/shared/links" %>
-    </div> -->
-  </div>
-  
-  <div class="signup_button">
-    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-      <%= link_to "Créer un compte", new_registration_path(resource_name) %><br />
-    <% end %>
   </div>
 </div>
-
-<style type="text/css">
-  .forgot-password>a {
-    color: #606060;
-  }
-  @media (min-width: 320px) {
-    #user_email, #user_password {
-      height: 30px;
-      width: 200px;
-    }
-    #new_user {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    #connect-btn {
-      padding: 5px 5px;
-      font-size: 13px;
-    }
-    .omniauth-btn {
-      font-size: 13px;
-    }
-    .input-signin {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 150px;
-      height: 230px;
-    }
-    .signup_button {
-      padding-top: 0px;
-    }
-    .title-login {
-      margin-top: 50px;
-      font-size: 25px;
-      margin: 0;
-      padding: 0;
-    }
-  }
-  @media (min-width: 768px) {
-    .input-signin {
-      justify-content: flex-end;
-      width: 320px;
-      height: 230px;
-    }
-  }
-  @media (min-width: 1024px) {
-    .input-signin {
-      width: 450px;
-    }
-    #user_email, #user_password {
-      width: 300px;
-    }
-  }
-  @media (min-width: 1440px) {
-    .input-signin {
-      width: 550px;
-    }
-    #user_email, #user_password {
-      width: 390px;
-    }
-  }
-  .omniauth-btn {
-    margin-bottom: 0;
-  }
-  .session-new-form {
-    display: flex;
-    flex-direction: column;
-  }
-  .session-new {
-    display: flex;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .signup_button {
-    margin-top: 50px;
-  }
-</style>

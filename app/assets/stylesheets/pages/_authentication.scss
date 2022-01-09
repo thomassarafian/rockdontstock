@@ -8,10 +8,10 @@ section {
     margin-top: -80px;
   }
   @include media-breakpoint-down(lg) {
-    justify-content: center;
+    height: calc(100vh - 80px);
+    justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    height: 80vh;
   }
 }
 .auth-hero__title {
@@ -119,18 +119,21 @@ section {
 }
 .auth-infos__footer {
   display: flex;
-  padding: 2rem;
   width: 100%;
+  gap: 1rem;
 
   @include media-breakpoint-up(lg) {
+    padding: 2rem;
     border-top: 1px solid $black;
   }
+  @include media-breakpoint-down(lg) {
+    padding: 0;
+    flex-direction: column;
+  }
 }
-.auth-infos__footer div:first-child {
-  padding-right: 0.4rem;
-}
-.auth-infos__footer div:last-child {
-  padding-left: 0.4rem;
+.auth-infos__footer__more-btn {
+  text-decoration: none;
+  font-weight: 700;
 }
 
 
@@ -151,11 +154,9 @@ section {
   align-items: center;
   gap: 2rem;
   @include media-breakpoint-down(lg) {
+    margin-top: 2rem;
     flex-direction: column-reverse;
   }
-}
-.auth-service__description {
-  
 }
 .auth-service__card {
   display: flex;
@@ -165,9 +166,12 @@ section {
   width: max-content;
   padding: 3rem;
   border: 1px solid $black;
+
+  @include media-breakpoint-down(lg) {
+    width: 100%;
+  }
 }
 .auth-service__description {
-  margin-right: 5%;
   @include media-breakpoint-up(lg) {
     width: 45%;
   }

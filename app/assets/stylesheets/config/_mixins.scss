@@ -1,4 +1,5 @@
 @mixin reset-button {
+  border-radius: 0;
   border: none;
   text-decoration: none;
   padding: 0.6rem 1.4rem;
@@ -16,6 +17,17 @@
   text-transform: uppercase;
   &:hover {
     color: $black;
+    background-color: white;
+  }
+}
+@mixin red-button {
+  @include reset-button;
+  color: white;
+  border: 1px solid $red;
+  background-color: $red;
+  text-transform: uppercase;
+  &:hover {
+    color: $red;
     background-color: white;
   }
 }
@@ -83,6 +95,10 @@
   }
   &__content {
     padding: 3rem 0;
+    
+    @include media-breakpoint-down(lg) {
+      padding: 2rem 0;
+    }
   }
   &__content__card {
     position: relative;
@@ -90,8 +106,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
     width: 380px;
+    height: 420px;
     padding: 3rem;
     margin-right: 5rem;
     border: 1px solid $black;
@@ -99,6 +117,7 @@
     @include media-breakpoint-down(md) {
       width: 60vw; // making sure we see one full card and part of the next one
       left: 0rem;
+      height: 320px;
       margin-right: 2rem;
     }
   
@@ -123,10 +142,13 @@
     }
   }
   &__content__card__image {
-    max-height: calc(420px / 2);
+    object-fit: contain;
+    width: 100%;
+    height: 45%;
   }
   &__content__card__name {
-    @include para-2-bold
+    @include para-2-bold;
+    text-align: center;
   }
   &__content__card__btn {
     @include primary-button;
@@ -138,13 +160,28 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 280px;
-    padding: 1.5rem 2rem;
-    gap: 1rem;
+    height: 430px;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    @supports (-webkit-touch-callout: none) and (not (translate: none)) {
+      &:not(:last-child) {
+        margin-right: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+    }
     @include media-breakpoint-down(md) {
+      height: 320px;
       padding: 0;
       width: 45%;
       gap: 0.5rem;
+      @supports (-webkit-touch-callout: none) and (not (translate: none)) {
+        &:not(:last-child) {
+          margin-right: 0.8rem;
+          margin-bottom: 0.8rem;
+        }
+      }
     }
     @include media-breakpoint-up(lg) {
       &:hover {
@@ -164,26 +201,22 @@
     }
   }
   &__card__name {
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+    // white-space: nowrap;
     line-height: 1.2;
   }
   &__card__photo {
-    width: 200px;
-    height: 275px;
-    object-fit: contain;
+    max-height: 60%;
+    width: 100%;
+    object-fit: cover;
     align-self: center;
-    margin-bottom: 1.5rem;
-  
-    @include media-breakpoint-down(md) {
-      width: unset;
-      height: unset;
-      align-self: unset;
-      margin-bottom: 1rem;
-      max-height: 50vh;
-    }
   }
   &__card__options {
     color: #727272;
     font-size: 0.8rem;
+    margin-top: auto;
+    margin-bottom: auto;
   }
   &__card__price {
     font-weight: 700;

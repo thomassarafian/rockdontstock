@@ -1,14 +1,14 @@
 <div class="container" style="position: relative">
   <div id="alert-container" style="position: absolute; right: 1rem; display: flex; justify-content: right; z-index: 999">
     <% if notice %>
-      <div class="alert alert-info alert-dismissible fade show" style="color: #0E0E0E; padding: 1.5rem; background-color: #F0F0F0; border: none; width: 400px" role="alert">
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">Notification</h4>
         <%= notice %>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <% end %>
     <% if alert %>
-      <div class="alert alert-warning alert-dismissible fade show" style="color: #0E0E0E; padding: 1.5rem; background-color: #F0F0F0; border: none; width: 400px" role="alert">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <h4 class="alert-heading">Notification</h4>
         <%= alert %>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

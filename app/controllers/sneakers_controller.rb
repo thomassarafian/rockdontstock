@@ -1,5 +1,5 @@
 class SneakersController < ApplicationController
-
+	skip_before_action :authenticate_user!, only: [:index, :show]
 	before_action :set_sneaker, only: [:show, :edit, :update, :destroy]
 
 	def index
@@ -10,6 +10,7 @@ class SneakersController < ApplicationController
 			results = results&.public_send("filter_by_#{filter.to_s}", params[filter]) if params[filter].present?
 		end
 
+		results = results.order(params[:sort_by]) if params[:sort_by]
 		@pagy, @results = pagy(results&.includes(:sneaker_db, :photos_attachments, photos_attachments: :blob), items: 18)
 		
 		respond_to do |format|

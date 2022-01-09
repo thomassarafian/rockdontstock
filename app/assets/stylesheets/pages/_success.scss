@@ -1,0 +1,172 @@
+.success {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    @include media-breakpoint-down(lg) {
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    &__infos {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+      gap: 2rem;
+      @include media-breakpoint-down(lg) {
+        width: 100%;
+      }
+    }
+    &__recap {
+      &__card {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        width: 400px;
+        padding: 2rem;
+        border: 1px solid $black;
+        @include media-breakpoint-down(lg) {
+          width: 100%;
+        }
+        @include media-breakpoint-up(lg) {
+          &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 10px;
+            left: 10px;
+            border-right: 10px solid $black;
+            border-bottom: 10px solid $black;
+            z-index: -1;
+          }
+        }
+        &__title {
+          @include para-1;
+          margin-bottom: 2rem;
+    
+          &.is-mobile {
+            @include media-breakpoint-up(lg) {
+              display: none;
+            }
+          }
+        }
+        &__sneaker {
+          display: flex;
+          gap: 1rem;
+          padding: 1.5rem 0;
+          border-top: 1px solid $black;
+          border-bottom: 1px solid $black;
+    
+          @include media-breakpoint-down(lg) {
+            border: none;
+          }
+    
+          &.is-mobile {
+            @include media-breakpoint-up(lg) {
+              display: none;
+            }
+          }
+    
+          &-photo {
+            width: 33%;
+            min-height: 100%;
+            object-fit: cover;
+          }
+          &-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1rem;
+          }
+          &-options {
+            color: #727272;
+          }
+          &-price {
+            @include para-2-bold;
+          }
+        }
+        &__order-infos {
+          padding-top: 1.5rem;
+          padding-bottom: 1.5rem;
+          border-bottom: 1px solid $black;
+          margin-bottom: 3rem;
+    
+          &.is-mobile {
+            margin-bottom: 2rem;
+            border-top: 1px solid $black;
+            @include media-breakpoint-up(lg) {
+              display: none;
+            }
+          }
+          &__item {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            & > div:last-child {
+              font-weight: 700;
+            }
+          }
+        }
+        &__total {
+          @include para-2-bold;
+          display: flex;
+          justify-content: space-between;
+    
+          &.is-mobile {
+            @include media-breakpoint-up(lg) {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.new-sneaker-success {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    @include media-breakpoint-down(lg) {
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    &__infos {
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+      gap: 2rem;
+      @include media-breakpoint-down(lg) {
+        width: 100%;
+      }
+    }
+    &__recap {
+      width: 40%;
+      @include media-breakpoint-down(lg) {
+        width: 100%;
+      }
+    }
+  }
+}

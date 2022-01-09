@@ -74,7 +74,7 @@
   </section>
   <section class="sneaker-similar">
     <div class="sneaker-similar__subtitle">Vous aimerez aussi</div>
-    <div class="sneaker-similar-block" data-flickity='{ "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
+    <div class="sneaker-similar-block" data-flickity='{ "setGallerySize": false, "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
       <div class="flickity-cell d-inline-block">
         <div class="sneaker-similar__card">
           <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
@@ -151,6 +151,9 @@ var flkty = new Flickity( '.sneaker-infos__photos-carousel', {
   cellSelector: '.sneaker-infos__photo',
   wrapAround: true,
   imagesLoaded: true,
-  fullscreen: true
+  fullscreen: true,
+  setGallerySize: false,
+  draggable: false,
+  pageDots: false
 });
 </script>
