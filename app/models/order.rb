@@ -1,15 +1,15 @@
 class Order < ApplicationRecord
   STATES = [
     "En cours",
-    "Payé",
+    "Payé", # >>> sneaker.state = 2
     "Validé",
     "Refusé",
-    "Abandon",
-    "En préparation",
+    "Abandon", # >>> sneaker.state = 1
+    "En préparation", # <<< sneaker.state = 5
     "Expédiée"
     #Status -> Sendcloud Webhook
   ]
-
+  
   enum payment_status: { unpaid: 0, paid: 10 }
   enum payment_method: { card: 0 }
 
@@ -23,9 +23,9 @@ class Order < ApplicationRecord
   validates :legal, acceptance: true
   # validates :state, inclusion: { in: STATES } # Pareil pour les sneakers -> permet d'etre sur que l'order est tjrs le statut 
 
-  before_update :create_sendcloud_label, unless: :order_is_not_paid?
+  # before_update :create_sendcloud_label, unless: :order_is_not_paid?
   before_update :new_list_id_for_buyer, unless: :order_is_not_paid?
-  before_update :create_sendcloud_label_for_buyer, unless: :order_is_not_in_preparation?
+  # before_update :create_sendcloud_label_for_buyer, unless: :order_is_not_in_preparation?
 
   # after_create :shipping_price
 

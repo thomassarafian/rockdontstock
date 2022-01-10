@@ -2,9 +2,23 @@ class Sneaker < ApplicationRecord
   include PgSearch::Model
   extend FriendlyId
 
+  enum state: {
+    "Paire Fake": -3,
+    "Photos non conformes": -2,
+    "Critères non conformes": -1,
+    "Vérification des photos": 0, # DEFAULT
+    "Mise en ligne": 1,
+    "Paire vendue": 2,
+    "En attente de reception par RDS": 3,
+    "Legit check de ta paire": 4,
+    "Ta paire est LEGIT": 5,
+    "En cours d'envoi vers le client": 6,
+  }
+
   friendly_id :name, use: [:slugged, :finders]
 
   before_save :timestamp_selection, if: -> { selected_changed? || highlighted_changed? }
+  before_create -> { self.state = 0 }
 	# after_create :send_notification  # a configurer avec mailjet 
   
 	has_many_attached :photos, service: :cloudinary, dependent: :detach
