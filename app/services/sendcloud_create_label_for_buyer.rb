@@ -3,10 +3,10 @@ class SendcloudCreateLabelForBuyer
   def initialize(user, order)
     @user = user
     @order = order
-    @auth = {
-      username: ENV["SENDCLOUD_API_KEY"],
-      password: ENV["SENDCLOUD_SECRET_KEY"]
-    }
+    # @auth = {
+    #   username: ENV["SENDCLOUD_API_KEY"],
+    #   password: ENV["SENDCLOUD_SECRET_KEY"]
+    # }
   end
 
   def create_label
