@@ -13,19 +13,16 @@
 }
 .sneaker-infos__photos-carousel {
   width: 100%;
-  min-height: 100%;
-  @include media-breakpoint-down(lg) {
-    height: 50vh;
-  }
 }
 .sneaker-infos__photo {
-  height: 100%;
   width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 .sneaker-details{
   display: flex;
   flex-direction: column;
+  min-width: 50%;
 }
 .sneaker-details__name {
   margin-bottom: 0.2em;
@@ -114,54 +111,11 @@
 .sneaker-similar-block {
   overflow-x: hidden;
 }
-.sneaker-similar__card {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  width: 280px;
-  height: 450px;
-  padding: 1.5rem 2rem;
-  margin-right: 5rem;
-  top: 1px;
-  left: 1px;
-
-  @include media-breakpoint-down(lg) {
-    margin-right: 3.5rem;
-  }
-  @include media-breakpoint-down(md) {
+.sneaker-similar {
+  @include card;
+  &__card {
     margin-right: 2rem;
+    top: 1px;
+    left: 1px;
   }
-
-  @include media-breakpoint-up(lg) {
-    &:hover {
-      outline: 1px solid $black;
-    }
-    &:hover::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%; 
-      top: 10px;
-      left: 10px;
-      border-right: 10px solid $black;
-      border-bottom: 10px solid $black;
-      z-index: -1;
-    }
-  }
-}
-.sneaker-similar__card__name {
-  line-height: 1.2;
-}
-.sneaker-similar__card__photo {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-.sneaker-similar__card__options {
-  color: #727272;
-  font-size: 0.8rem;
-}
-.sneaker-similar__card__price {
-  font-weight: 700;
 }

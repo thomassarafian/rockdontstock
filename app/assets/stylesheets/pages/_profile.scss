@@ -102,3 +102,10 @@
 .profile__business-item-price {
   font-weight: 700;
 }
+.profile__business-wallet__btn {
+  @include cta-button;
+  margin-right: 0.5rem;
+  padding: 0.3rem 1rem;
+  font-size: 0.85rem;
+  float: right;
+}

@@ -33,17 +33,19 @@
     <div class="sneaker-featured__subtitle">Parcourir nos</div>
     <h2>Sneakers</h2>
     <div class="sneaker-featured-block">
-      <%= link_to "Sélection du jour", sneaker_path(@selection_of_the_day), class: "sneaker-featured-block__title" %>
+      <div class="sneaker-featured-block__title">Sélection du jour</div>
       <div class="sneaker-featured-block__content">
         <%= cl_image_tag(@selection_of_the_day.photos.first&.key, class: 'sneaker-featured-photo') %>
         <div class="sneaker-featured-details">
-          <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
+          <%= link_to sneaker_path(@selection_of_the_day) do %>
+            <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
+          <% end %>
           <div class="sneaker-featured-details__options">
             <%= @selection_of_the_day.sneaker_db.category %> - Taille <%= @selection_of_the_day.size %> <br />Condition: <%= @selection_of_the_day.condition %>/10
           </div>
           <div class="sneaker-featured-details__price"><%= @selection_of_the_day.price %>€</div>
           <div>
-            <%= link_to "Acheter", new_sneaker_order_path(@selection_of_the_day), class: "sneaker-featured-details__purchase" %>
+            <button action="<%= new_sneaker_order_url(@selection_of_the_day) %>" class="sneaker-featured-details__purchase">Acheter</button>
             <button class="sneaker-featured-details__discover">Découvrir le modèle</button>
           </div>
         </div>
@@ -80,7 +82,7 @@
   </div>
   <div class="d-flex align-items-start justify-content-between">
     <!-- FILTERS DESKTOP -->
-    <div class="d-none d-lg-block" style="flex-grow: 1; top: 100px;">
+    <div class="d-none d-lg-block" style="min-width: 30%; top: 100px;">
       <%= form_with url: sneakers_path, method: :get, html: {id: "filter-form"} do |f| %>
         <div class="form-group">
           <%= f.label "Marques", class: "form-label", style: "font-weight: 700" %>
