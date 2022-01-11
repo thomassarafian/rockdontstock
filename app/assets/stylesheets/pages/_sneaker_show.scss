@@ -13,6 +13,9 @@
 }
 .sneaker-infos__photos-carousel {
   width: 100%;
+  @include media-breakpoint-down(md) {
+    height: 50vh;
+  }
 }
 .sneaker-infos__photo {
   width: 100%;
@@ -114,6 +117,9 @@
 .sneaker-similar {
   @include card;
   &__card {
+    @include media-breakpoint-down(md) {
+      width: 220px;
+    }
     margin-right: 2rem;
     top: 1px;
     left: 1px;
