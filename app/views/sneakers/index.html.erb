@@ -56,7 +56,7 @@
       <div class="toggle-popover-btn" type="button" onclick="togglePopover('sortby')">
         Trier par <i class="fas fa-chevron-down"></i>
       </div>
-      <div class="popover sortby-popover">
+      <div class="custom-popover sortby-popover">
         <%= form_with url: sneakers_path, method: :get, html: { id: "sort-form-desktop" } do |f| %>
           <div class="form-check mb-1">
             <%= f.radio_button :sort_by, "price_cents ASC", { class: "form-check-input" } %>
@@ -148,7 +148,7 @@
           </div>
         </div>
         <div class="form-group" style="position:relative;">
-          <div class="popover size-popover">
+          <div class="custom-popover size-popover">
             <div class="form-check mb-1">
               <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "1", nil %>
               <%= f.label "1", class: "form-check-label" %>
@@ -241,7 +241,7 @@
         </div>
       <% end %>
     </div>
-    <div id="search-results">
+    <div class="search-results" id="search-results">
       <%= render partial: 'sneakers/list_sneakers' %>
     </div>
   </div>
@@ -338,7 +338,7 @@
   document.body.addEventListener('click', (e) => {
     if (e.target.classList.contains('toggle-popover-btn')) return
 
-    if (!e.target.closest('.popover')) {
+    if (!e.target.closest('.custom-popover')) {
       let popovers = document.querySelectorAll('.popover');
       popovers.forEach(p => p.style.display = "none")
     }
