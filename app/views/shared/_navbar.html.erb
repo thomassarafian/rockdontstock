@@ -221,7 +221,41 @@
   </div>
 <% end %>
 
-<ul class="navbar-side" id="navbarSide">
+<div class="navbar-side" id="navbarSide">
+  <div class="navbar-side__menu d-flex flex-column align-items-end" style="gap: 0.8rem; height: 100%; padding: 2rem 1rem; color: white;">
+    <div class="navbar-side__menu__close" style="cursor: pointer; font-size: 30px; line-height: 1;">
+      &times;
+    </div>
+    <div class="navbar-side__menu__item">
+      <%= link_to "Mon compte", user_path %>
+    </div>
+    <div class="navbar-side__menu__item">
+      <%= link_to "Vendre", sneakers_path, method: :post %>
+    </div>
+    <div class="navbar-side__menu__item">
+      <%= link_to "Tout voir", sneakers_path %>
+    </div>
+    <div class="navbar-side__menu__item"> 
+      <%= link_to "Nous contacter", new_contact_path %>
+    </div>
+    <div class="navbar-side__menu__item">
+      <%= link_to "L'authentification", authentication_path %>
+    </div>
+    <div class="navbar-side__menu__item">
+      <a href="https://www.instagram.com/rockdontstock/" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+    <div class="navbar-side__login mt-auto align-self-center">
+      <% if user_signed_in? %>
+        <%= link_to "Me déconnecter", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "Me connecter", user_session_path %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<ul class="navbar-side d-none" id="navbarSide">
   <div class="navbar-side-white-toggler">
     <% if user_signed_in? %>
     <div class="d-flex justify-content-center toggler_icon navbarSideButton" style="cursor: pointer; gap: 0.6rem; align-items: center; margin-left: 1rem">
@@ -233,37 +267,6 @@
     </div>
     <% else %>
       <%= image_tag "navbar/white/white_toggler_icon.svg" %>
-    <% end %>
-  </div>
-<% if !user_signed_in? %>
-  <%= link_to (user_signed_in? ? user_path : user_session_path), class: "side-link" do %>
-    <li class="navbar-side-item side-link">Mon compte</li>
-  <% end %>
-<% end %>
-  <%= link_to(sneakers_path, method: :post, class: "side-link") do %>
-    <li class="navbar-side-item side-link">Vendre</li>
-  <% end %>
-  <%= link_to(sneakers_path, class: "side-link") do %>
-    <li class="navbar-side-item side-link">Tout voir</li>
-  <% end %>
-  <%= link_to(authentication_path, class: "side-link") do %>
-    <li class="navbar-side-item side-link">L'authentification</li>
-  <% end %>
-  <%= link_to(new_contact_path, class: "side-link") do %>
-    <li class="navbar-side-item side-link">Nous contacter</li>
-  <% end %>
-  <%= link_to(faq_path, class: "side-link") do %>
-    <li class="navbar-side-item side-link">FAQ</li>
-  <% end %>
-  <div class="navbar-sign">
-    <% if user_signed_in? %>
-      <%= link_to (destroy_user_session_path), class: "", :method => :delete do %>
-        <li style="display: flex; align-items: center; justify-content: center; height: 3rem;">Déconnexion</li>
-      <% end %>
-    <% else %>
-      <%= link_to (user_session_path) do %>
-        <li style="display: flex; align-items: center; justify-content: center; height: 3rem;">Me connecter</li>
-      <% end %>
     <% end %>
   </div>
 </ul>
@@ -309,7 +312,7 @@
       $('.overlay').show();
     });
 
-    $('.overlay, .navbar-side-item>a, .navbar-side-white-toggler').on('click', function(){
+    $('.overlay, .navbar-side-item>a, .navbar-side-white-toggler, .navbar-side__menu__close').on('click', function(){
       $('#navbarSide').removeClass('reveal');
       $('.overlay').hide();
     });
