@@ -18,37 +18,57 @@
 				</div>
 				<div class="profile__infos-documents">
 					<div class="profile__infos-documents__title">Mes documents</div>
-					<div>IBAN : </div>
+					<div>IBAN : <%= current_user.iban %></div>
 					<div>Carte d’identité (recto/verso): </div>
 					<div>Justificatif de domicile: </div>
 				</div>
-				<button class="profile__infos-btn">Modifier</button>
+				<%= link_to "Modifier", edit_user_registration_path, class: "profile__infos-btn" %>
       </div>
       <div class="profile__business">
 				<div class="profile__business-items">
 					<div class="profile__business-items__title">
-						<div>Mes achats</div>
-						<div>Mes ventes</div>
+						<div id="orders-display-btn" type="button">Mes achats</div>
+						<div id="sales-display-btn" type="button">Mes ventes</div>
 					</div>
-					<div class="profile__business-items__content">
-						<div class="profile__business-item">
-							<%= cl_image_tag(Sneaker.first.photos.first&.key, class: 'profile__business-item-photo') %>
-							<div class="profile__business-item-details">
-								<div class="profile__business-item-name">
-									<%= Sneaker.first.sneaker_db.name %>
-								</div>
-								<div class="profile__business-item-options">
-									<%= Sneaker.first.sneaker_db.category %> - Taille <%= Sneaker.first.size %> <br />Condition: <%= Sneaker.first.condition %>/10
-								</div>
-								<div class="profile__business-item-price">
-									<%= Sneaker.first.price %> €
+					<div id="orders-carousel" class="items-carousel" data-flickity='{ "setGallerySize": false, "draggable": false, "contain": true, "pageDots": false, "cellSelector": ".orders-cells" }'>
+						<% current_user.orders.each do |order| %>
+							<div class="profile__business-item orders-cells">
+								<%= cl_image_tag(order.sneaker.photos.first&.key, class: 'profile__business-item-photo') %>
+								<div class="profile__business-item-details">
+									<div class="profile__business-item-name">
+										<%= order.sneaker.sneaker_db.name %>
+									</div>
+									<div class="profile__business-item-options">
+										<%= order.sneaker.sneaker_db.category %> - Taille <%= order.sneaker.size %> <br />Condition: <%= order.sneaker.condition %>/10
+									</div>
+									<div class="profile__business-item-price">
+										<%= order.sneaker.price %> €
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="profile__business-items__content__btns">
-							<button class="profile__business-items__content__btns--modify">Modifier</button>
-							<button class="profile__business-items__content__btns--delete">Supprimer</button>
-						</div>
+						<% end %>
+					</div>
+					<div id="sales-carousel" class="items-carousel">
+						<% current_user.sneakers.each do |sneaker| %>
+							<div class="profile__business-item sales-cells">
+								<%= cl_image_tag(sneaker.photos.first&.key, class: 'profile__business-item-photo') %>
+								<div class="profile__business-item-details">
+									<div class="profile__business-item-name">
+										<%= sneaker.sneaker_db.name %>
+									</div>
+									<div class="profile__business-item-options">
+										<%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
+									</div>
+									<div class="profile__business-item-price">
+										<%= sneaker.price %> €
+									</div>
+								</div>
+							</div>
+						<% end %>
+					</div>
+					<div class="profile__business-items__btns">
+						<button class="profile__business-items__btns--modify">Modifier</button>
+						<button class="profile__business-items__btns--delete">Supprimer</button>
 					</div>
 				</div>
 				<div class="profile__business-wallet">
@@ -59,6 +79,85 @@
     </div>
   </div>
 </div>
+
+<script>
+let ordersBtn = document.getElementById('orders-display-btn');
+let salesBtn = document.getElementById('sales-display-btn');
+let ordersCarousel = document.getElementById('orders-carousel');
+let salesCarousel = document.getElementById('sales-carousel');
+let actionBtns = document.querySelectorAll('.profile__business-items__btns > button');
+
+function toggleCarousel(block) {
+	if (block === "orders") {
+		ordersCarousel.style.display = ''
+		salesCarousel.style.display = 'none'
+	} else {
+		ordersCarousel.style.display = 'none'
+		salesCarousel.style.display = ''
+	}
+}
+function disableButtons() {
+	actionBtns.forEach(btn => {
+		btn.disabled = true
+		btn.style.opacity = '0.25'
+		btn.style.pointerEvents = 'none'
+	})
+}
+function enableButtons() {
+	actionBtns.forEach(btn => {
+		btn.disabled = false
+		btn.style.opacity = '1'
+		btn.style.pointerEvents = ''
+	})
+}
+function underline(btn) {
+	if (btn === "orders") {
+		ordersBtn.style.textDecoration = 'underline';
+		salesBtn.style.textDecoration = 'none'
+	} else {
+		ordersBtn.style.textDecoration = 'none';
+		salesBtn.style.textDecoration = 'underline'
+	}
+}
+function init() {
+	// initial state
+	underline('orders');
+	disableButtons();
+
+	// init sales carousel then hide it
+	var flkty = new Flickity( '#sales-carousel', {
+		"setGallerySize": false,
+		"draggable": false,
+		"contain": true,
+		"pageDots": false,
+		"cellSelector": ".sales-cells",
+		on: {
+			ready: function() {
+				salesCarousel.style.display = "none"
+			}
+		}
+	});
+
+	// init listeners
+	ordersBtn.addEventListener('click', function() {
+		toggleCarousel('orders')
+		underline('orders')
+		disableButtons()
+	})
+	salesBtn.addEventListener('click', function() {
+		toggleCarousel('sales')
+		underline('sales')
+		enableButtons()
+	})
+}
+init()
+</script>
+
+<style>
+.items-carousel {
+	height: 150px;
+}
+</style>
 <!-- 
 <div class="container users-show">
 	<div class="profil-page">
