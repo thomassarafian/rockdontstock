@@ -33,7 +33,7 @@
     <div class="sneaker-featured__subtitle">Parcourir nos</div>
     <h2>Sneakers</h2>
     <div class="sneaker-featured-block">
-      <div class="sneaker-featured-block__title">Sélection du jour</div>
+      <%= link_to "Sélection du jour", sneaker_path(@selection_of_the_day), class: "sneaker-featured-block__title" %>
       <div class="sneaker-featured-block__content">
         <%= cl_image_tag(@selection_of_the_day.photos.first&.key, class: 'sneaker-featured-photo') %>
         <div class="sneaker-featured-details">
@@ -315,6 +315,7 @@
     // reset buttons
     document.querySelector('.filter-btn').style.textAlign = "center"
     document.querySelector('.filter-btn').style.border = "1px solid #0E0E0E"
+    document.querySelector('.filter-btn').style.borderRight = "none"
     document.querySelector('.sort-btn').style.textAlign = "center"
     document.querySelector('.sort-btn').style.border = "1px solid #0E0E0E"
 
@@ -341,6 +342,17 @@
       let popovers = document.querySelectorAll('.popover');
       popovers.forEach(p => p.style.display = "none")
     }
+  })
+
+  document.querySelectorAll('.sneaker-index__card').forEach(el => {
+
+    el.addEventListener('click', function() {
+      window.location.href = "<%= sneakers_url %>/" + this.dataset.sneakerId;
+    })
+    el.addEventListener('touchstart', function() {
+      window.location.href = "<%= sneakers_url %>/" + this.dataset.sneakerId;
+    })
+
   })
 </script>
 

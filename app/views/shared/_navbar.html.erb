@@ -53,8 +53,8 @@
     <div class="d-flex align-items-center d-block d-lg-none mb-4">
       <div class="popup-close-icon me-auto" style="display: none; font-size: 35px; line-height: 0;" onclick="hidePopup()">&times;</div>
       <!-- FILTERS MOBILE -->
-      <div class="filter-btn" style="cursor: pointer; flex-grow: 1; padding: 0.5rem; border: 1px solid #0E0E0E; text-align: center;" onclick="revealPopup('filter')">Filtrer</div>
-      <div class="sort-btn" style="cursor: pointer; flex-grow: 1; padding: 0.5rem; border: 1px solid #0E0E0E; text-align: center;" onclick="revealPopup('sort')">Trier</div>
+      <div class="filter-btn" style="cursor: pointer; width: 50%; padding: 0.5rem; border: 1px solid #0E0E0E; border-right: none; text-align: center;" onclick="revealPopup('filter')">Filtrer</div>
+      <div class="sort-btn" style="cursor: pointer; width: 50%; padding: 0.5rem; border: 1px solid #0E0E0E; text-align: center;" onclick="revealPopup('sort')">Trier</div>
     </div>
     <div class="popup sort-popup">
       <%= form_with url: sneakers_path, local: false, method: :get, html: {id: "sort-form-mobile"} do |f| %>
@@ -377,7 +377,7 @@
 
 <style>
 #navbar-search-form {
-  width: 0;
+  width: 30px;
   transition: all 0.2s ease;
 }
 .navbar-search-input {

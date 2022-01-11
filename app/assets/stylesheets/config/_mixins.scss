@@ -165,6 +165,7 @@
     height: 430px;
     padding: 1.5rem;
     gap: 1.5rem;
+    cursor: pointer;
     @supports (-webkit-touch-callout: none) and (not (translate: none)) {
       &:not(:last-child) {
         margin-right: 1.5rem;
