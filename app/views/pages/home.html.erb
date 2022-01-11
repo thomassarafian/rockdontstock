@@ -23,7 +23,7 @@
           <%= cl_image_tag(sneaker.photos.first&.key || Sneaker.first.photos.first.key, class: 'sneaker-home__card__photo') %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>
           <div class="sneaker-home__card__options">
-            <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> - Condition: <%= sneaker.condition %>/10
+            <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
           </div>
           <div class="sneaker-home__card__price"><%= sneaker.price %>€</div>
         </div>
@@ -41,7 +41,7 @@
           <%= cl_image_tag(sneaker.photos.first&.key || Sneaker.first.photos.first.key, class: 'sneaker-home__card__photo') %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>
           <div class="sneaker-home__card__options">
-            <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> - Condition: <%= sneaker.condition %>/10
+            <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
           </div>
           <div class="sneaker-home__card__price"><%= sneaker.price %>€</div>
         </div>
