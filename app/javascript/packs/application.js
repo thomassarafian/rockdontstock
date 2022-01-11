@@ -14,7 +14,7 @@ require('dotenv').config()
 window.Flickity = Flickity
 window.Rails = Rails
 
-import "bootstrap"
+import "bootstrap";
 import "controllers";
 import "./pagy.js.erb";
 

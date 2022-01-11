@@ -26,6 +26,11 @@
   object-fit: contain;
   height: auto;
   width: 300px;
+
+  @include media-breakpoint-down(lg) {
+    width: 100%;
+    margin-right: 0;
+  }
 }
 .sneaker-featured-details {
   display: flex;
@@ -62,4 +67,16 @@
 .filter-popup-update-btn {
   @include cta-button;
   width: 100%;
+}
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  flex-shrink: 2;
+  gap: 2rem;
+
+  @include media-breakpoint-down(md) {
+    gap: 1rem 0.8rem;
+  }
 }

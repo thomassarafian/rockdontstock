@@ -43,7 +43,7 @@
           </div>
           <div class="sneaker-featured-details__price"><%= @selection_of_the_day.price %>€</div>
           <div>
-            <button class="sneaker-featured-details__purchase">Acheter</button>
+            <%= link_to "Acheter", new_sneaker_order_path(@selection_of_the_day), class: "sneaker-featured-details__purchase" %>
             <button class="sneaker-featured-details__discover">Découvrir le modèle</button>
           </div>
         </div>
@@ -241,7 +241,7 @@
         </div>
       <% end %>
     </div>
-    <div id="search-results" class="d-flex flex-wrap justify-content-center" style="width: 100%; flex-shrink: 2; gap: 2rem;">
+    <div id="search-results">
       <%= render partial: 'sneakers/list_sneakers' %>
     </div>
   </div>

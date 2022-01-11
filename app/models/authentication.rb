@@ -15,7 +15,7 @@ class Authentication < ApplicationRecord
       },
       'To'=> [
         {
-          'Email'=> 'hello@rockdontstock.com',
+          'Email'=> "hello@rockdontstock.com",
           'Name'=> "Rock Don't Stock"
         }
       ],
