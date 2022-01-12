@@ -226,9 +226,14 @@
     <div class="navbar-side__menu__close">
       &times;
     </div>
-    <div class="navbar-side__menu__item">
-      <%= link_to "Mon compte", user_path %>
-    </div>
+    <% if user_signed_in? %>
+      <div class="d-flex flex-column align-items-center justify-content-center my-3">
+        <%= link_to user_path do %>
+          <%= image_tag("images/icon_avatar.svg", style: "height: 40px; width: auto; margin-bottom: 0.5rem;") %>
+        <% end %>
+        <div>Salut <span style="font-weight: 700"><%= current_user.first_name %></span> !</div>
+      </div>
+    <% end %>
     <div class="navbar-side__menu__item">
       <%= link_to "Vendre", sneakers_path, method: :post %>
     </div>
@@ -259,11 +264,7 @@
   <div class="navbar-side-white-toggler">
     <% if user_signed_in? %>
     <div class="d-flex justify-content-center toggler_icon navbarSideButton" style="cursor: pointer; gap: 0.6rem; align-items: center; margin-left: 1rem">
-      <%= image_tag("images/icon_avatar.svg", style: "height: 50px; width: auto; fill: #FFFFFF") %>
-      <div style="line-height: 1">
-        <div>Salut</div>
-        <span style="font-weight: 700"><%= current_user.first_name %></span> !
-      </div>
+
     </div>
     <% else %>
       <%= image_tag "navbar/white/white_toggler_icon.svg" %>
