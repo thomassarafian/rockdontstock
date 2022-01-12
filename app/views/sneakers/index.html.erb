@@ -29,7 +29,7 @@
   <div class="d-flex justify-content-between">
     <div style="font-size: 1.563rem; margin-bottom: 3rem">Toutes les sneakers</div>
     <div style="position: relative;">
-      <div class="toggle-popover-btn" type="button" onclick="togglePopover('sortby')">
+      <div class="toggle-popover-btn d-none d-lg-block" type="button" onclick="togglePopover('sortby')">
         Trier par <i class="fas fa-chevron-down"></i>
       </div>
       <div class="custom-popover sortby-popover">
@@ -206,7 +206,7 @@
     if (e.target.classList.contains('toggle-popover-btn')) return
 
     if (!e.target.closest('.custom-popover')) {
-      let popovers = document.querySelectorAll('.popover');
+      let popovers = document.querySelectorAll('.custom-popover');
       popovers.forEach(p => p.style.display = "none")
     }
   })
