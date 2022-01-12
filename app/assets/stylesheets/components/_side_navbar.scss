@@ -16,6 +16,15 @@
   transform: translateX(100%);
   -webkit-transition: 400ms ease;
   transition: 400ms ease;
+
+  @include media-breakpoint-down(lg) {
+    max-width: 65%;
+    right: unset;
+    left: 0;
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
 }
 
 .reveal {
