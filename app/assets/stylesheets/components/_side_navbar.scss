@@ -47,3 +47,24 @@
   opacity: .6;
   z-index: 1100;
 }
+.navbar-side__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  height: 100%;
+  padding: 2rem 1rem;
+  color: white;
+  
+  @include media-breakpoint-up(lg) {
+    align-items: flex-end;
+  }
+}
+.navbar-side__menu__close {
+  cursor: pointer;
+  font-size: 30px;
+  line-height: 1;
+}
+.navbar-side__login {
+  margin-top: auto;
+  align-self: center;
+}

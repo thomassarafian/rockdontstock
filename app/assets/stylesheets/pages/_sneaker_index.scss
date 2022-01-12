@@ -3,14 +3,22 @@
 }
 .sneaker-featured-block {
   border: 1px solid $black;
-  padding: 3rem;
+  padding: 1.5rem;
+  margin-top: 2rem;
+
   @include media-breakpoint-up(lg) {
+    margin-top: 0;
+    padding: 3rem;
     border-top: 20px solid $black;
   }
 }
 .sneaker-featured-block__title {
   @include para-1;
   margin-bottom: 3rem;
+
+  @include media-breakpoint-down(lg) {
+    margin-bottom: 1.5rem;
+  }
 }
 .sneaker-featured-block__content {
   display: flex;
@@ -27,6 +35,7 @@
 
   @include media-breakpoint-down(lg) {
     width: 100%;
+    height: 80vw;
     margin-right: 0;
   }
 }
@@ -34,9 +43,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1rem;
 }
 .sneaker-featured__name {
+  font-size: 3.5rem;
   margin-bottom: 0.2em;
+  @include media-breakpoint-down(lg) {
+    font-size: 2.4rem;
+  }
 }
 .sneaker-featured-details__options {
   @include para-1;
@@ -46,6 +60,11 @@
   @include para-1-bold;
   margin-top: 2rem;
   margin-bottom: 2rem;
+
+  @include media-breakpoint-down(lg) {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 .sneaker-featured-details__purchase {
   @include cta-button;

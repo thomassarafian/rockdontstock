@@ -222,8 +222,8 @@
 <% end %>
 
 <div class="navbar-side" id="navbarSide">
-  <div class="navbar-side__menu d-flex flex-column align-items-end" style="gap: 0.8rem; height: 100%; padding: 2rem 1rem; color: white;">
-    <div class="navbar-side__menu__close" style="cursor: pointer; font-size: 30px; line-height: 1;">
+  <div class="navbar-side__menu">
+    <div class="navbar-side__menu__close">
       &times;
     </div>
     <div class="navbar-side__menu__item">
@@ -246,7 +246,7 @@
         <i class="fab fa-instagram"></i>
       </a>
     </div>
-    <div class="navbar-side__login mt-auto align-self-center">
+    <div class="navbar-side__login">
       <% if user_signed_in? %>
         <%= link_to "Me déconnecter", destroy_user_session_path, method: :delete %>
       <% else %>
