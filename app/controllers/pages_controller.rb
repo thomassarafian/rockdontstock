@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-	skip_before_action :authenticate_user!, only: [:home, :about, :newsletter, :faq, :cgv, :cgu, :authentication, :how_to_send_shoes, :trust_policy]
+	skip_before_action :authenticate_user!, only: [:home, :about, :newsletter, :faq, :cgv, :cgu, :authentication, :how_to_send_shoes, :trust_policy, :guide_request]
 	
   def home 
     @sneakers_selected = Sneaker.includes(:sneaker_db, :user, :orders, :photos_attachments, photos_attachments: :blob).selected.limit(8)

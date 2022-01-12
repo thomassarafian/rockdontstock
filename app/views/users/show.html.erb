@@ -36,10 +36,10 @@
 								<%= cl_image_tag(order.sneaker.photos.first&.key, class: 'profile__business-item-photo') %>
 								<div class="profile__business-item-details">
 									<div class="profile__business-item-name">
-										<%= order.sneaker.sneaker_db.name %>
+										<%= order.sneaker.sneaker_db&.name %>
 									</div>
 									<div class="profile__business-item-options">
-										<%= order.sneaker.sneaker_db.category %> - Taille <%= order.sneaker.size %> <br />Condition: <%= order.sneaker.condition %>/10
+										<%= order.sneaker.sneaker_db&.category %> - Taille <%= order.sneaker.size %> <br />Condition: <%= order.sneaker.condition %>/10
 									</div>
 									<div class="profile__business-item-price">
 										<%= order.sneaker.price %> €
@@ -54,10 +54,10 @@
 								<%= cl_image_tag(sneaker.photos.first&.key, class: 'profile__business-item-photo') %>
 								<div class="profile__business-item-details">
 									<div class="profile__business-item-name">
-										<%= sneaker.sneaker_db.name %>
+										<%= sneaker.sneaker_db&.name %>
 									</div>
 									<div class="profile__business-item-options">
-										<%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
+										<%= sneaker.sneaker_db&.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
 									</div>
 									<div class="profile__business-item-price">
 										<%= sneaker.price %> €
