@@ -17,7 +17,7 @@ class Subscription
     when Authentication
       @user = arg
       @email = @user.email
-      @attributes = {"NOM": "#{@user.last_name}", "PRENOM": "#{@user.first_name}", "AGE": "#{@user.age}", "VILLE": "#{@user.city}"}.as_json
+      @attributes = {"NOM": "#{@user.last_name}", "PRENOM": "#{@user.first_name}", "AGENUMBER": "#{@user.age}", "VILLE": "#{@user.city}"}.as_json
     when String
       @email = arg
     end
