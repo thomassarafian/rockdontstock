@@ -50,7 +50,7 @@
 					</div>
 					<div id="sales-carousel" class="items-carousel">
 						<% current_user.sneakers.each do |sneaker| %>
-							<div class="profile__business-item sales-cells">
+							<div class="profile__business-item sales-cells" data-id="<%= sneaker.id %>">
 								<%= cl_image_tag(sneaker.photos.first&.key, class: 'profile__business-item-photo') %>
 								<div class="profile__business-item-details">
 									<div class="profile__business-item-name">
@@ -61,6 +61,14 @@
 									</div>
 									<div class="profile__business-item-price">
 										<%= sneaker.price %> €
+									</div>
+									<div class="profile__business-item-price--edit" style="display: none">
+										<%= form_for sneaker, method: :put do |f| %>
+											<div class="input-group w-75">
+												<span class="input-group-text">€</span>
+												<%= f.text_field :price, class: "form-control", value: sneaker.price %><span type="button" class="close-form-btn my-auto px-3" ><i class="fas fa-times fa-lg"></i></span>
+											</div>
+										<% end %>
 									</div>
 								</div>
 							</div>
@@ -87,6 +95,10 @@ let salesBtn = document.getElementById('sales-display-btn');
 let ordersCarousel = document.getElementById('orders-carousel');
 let salesCarousel = document.getElementById('sales-carousel');
 let actionBtns = document.querySelectorAll('.profile__business-items__btns > button');
+let editBtn =	document.querySelector('.profile__business-items__btns--modify');
+let deleteBtn =	document.querySelector('.profile__business-items__btns--delete');
+let closeFormBtns =	document.querySelectorAll('.input-group .close-form-btn');
+
 
 function toggleCarousel(block) {
 	if (block === "orders") {
@@ -150,13 +162,35 @@ function init() {
 		underline('sales')
 		enableButtons()
 	})
+	editBtn.addEventListener('click', function() {
+		document.querySelectorAll('.sales-cells .profile__business-item-price').forEach((el) => el.style.display = "none")
+		document.querySelectorAll('.sales-cells .profile__business-item-price--edit').forEach((el) => el.style.display = "")
+	})
+	deleteBtn.addEventListener('click', function(e) {
+		e.preventDefault();
+
+		let sneakerId = document.querySelector('.sales-cells.is-selected').dataset.id
+
+		Rails.ajax({
+			type: "DELETE",
+			url: `/sneakers/${sneakerId}`,
+			confirm: "Es-tu certain de vouloir supprimer cette annonce ?",
+			success: () => window.location.reload()
+		})
+	})
+	closeFormBtns.forEach(btn => {
+		btn.addEventListener('click', function() {
+			document.querySelectorAll('.sales-cells .profile__business-item-price').forEach((el) => el.style.display = "")
+			document.querySelectorAll('.sales-cells .profile__business-item-price--edit').forEach((el) => el.style.display = "none")
+		})
+	})
 }
 init()
 </script>
 
 <style>
 .items-carousel {
-	height: 150px;
+	height: 180px;
 }
 </style>
 <!-- 

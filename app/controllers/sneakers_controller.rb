@@ -103,31 +103,25 @@ class SneakersController < ApplicationController
 	# 	end
 	# end
 
-	def edit; end
-
 	def update
-		if @sneaker.state == 0
-			@sneaker.update(sneaker_params)
-			redirect_to sneaker_path(@sneaker)
+		if @sneaker.update(sneaker_params)
+			redirect_to request.referer, notice: "Le prix de ta #{@sneaker.sneaker_db&.name} a été modifié avec succès"
 		else
-			redirect_to root_path, notice: 'Tu ne pas pas modifié une paire déjà en ligne'
+			redirect_to root_path, alert: @sneaker.errors.full_messages.join(', ')
 		end
 	end
 
 	def destroy
+		name = @sneaker.sneaker_db&.name
 		@sneaker.photos.purge
 		@sneaker.destroy
-		redirect_to user_items_path
+		redirect_to request.referer, notice: "L'annonce de ta #{name} a été supprimée avec succès"
 	end
 
 	private
 
-	def filtering_params(params)
-		params.slice(:price, :condition, :size, :category)
-	end
-
 	def sneaker_params
-		params.require(:sneaker).permit(:sneaker_db_id, :name, :size, :price, :condition, :box, :extras, :state, photos: [])
+		params.require(:sneaker).permit(:price)
 	end
 
 	def set_sneaker
