@@ -154,8 +154,9 @@ section {
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  
   @include media-breakpoint-down(lg) {
-    margin-top: 2rem;
+    margin-top: 1rem;
     flex-direction: column-reverse;
   }
 }
@@ -170,6 +171,8 @@ section {
 
   @include media-breakpoint-down(lg) {
     width: 100%;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
   }
 }
 .auth-service__description {
