@@ -5,6 +5,7 @@ class AuthenticationsController < ApplicationController
     lc = Authentication.new(lc_request_params)
 
     if lc.save
+      lc.reload
       Subscription.new(lc).as_lc_requester
       render json: { lcId: lc.id }, status: 200
     else
