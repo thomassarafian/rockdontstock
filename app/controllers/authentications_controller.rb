@@ -15,7 +15,8 @@ class AuthenticationsController < ApplicationController
 
   def success
     lc = Authentication.find(params[:id])
-    lc.update(payment_status: "paid") 
+    lc.update(payment_status: "paid")
+    lc.send_information_email
     redirect_to authentication_path, notice: "Merci, ta demande a bien été envoyée !"
   end
 
@@ -29,7 +30,7 @@ class AuthenticationsController < ApplicationController
   private
 
   def lc_request_params
-    params.require(:user).permit(:first_name, :last_name, :email, :age, :city, :photos)
+    params.require(:user).permit(:first_name, :last_name, :email, :age, :city, photos: [])
   end
 
 end

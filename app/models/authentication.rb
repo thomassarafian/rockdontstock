@@ -3,11 +3,9 @@ class Authentication < ApplicationRecord
 
   enum payment_status: { unpaid: 0, paid: 10 }
 
-  before_update :send_information_email, if: -> { payment_status_changed? && payment_status == "paid" }
-
-  private
-
   def send_information_email
+    photos_urls = self.photos.map{ |photo| photo.blob.url }.join("\n")
+
     Mailjet::Send.create(messages: [{
       'From'=> {
         'Email'=> "hello@rockdontstock.com",
@@ -15,7 +13,7 @@ class Authentication < ApplicationRecord
       },
       'To'=> [
         {
-          'Email'=> "nayow@yopmail.com",
+          'Email'=> "hello@rockdontstock.com",
           'Name'=> "Rock Don't Stock"
         }
       ],
@@ -27,7 +25,8 @@ class Authentication < ApplicationRecord
         "prenom" => self.first_name,
         "email" => self.email,
         "age" => self.age,
-        "ville" => self.city
+        "ville" => self.city,
+        "photos" => photos_urls
       }
     }])
   end
