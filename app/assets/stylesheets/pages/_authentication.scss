@@ -2,6 +2,7 @@ section {
   margin-bottom: 8rem;
 }
 .auth-hero {
+  margin-bottom: 5rem;
   @include media-breakpoint-up(lg) {
     justify-content: space-between;
     height: 100vh;
