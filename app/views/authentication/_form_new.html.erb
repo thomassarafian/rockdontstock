@@ -6,7 +6,7 @@
   <li><i class="fas fa-check-circle"></i> Expertise complète</li>
 </ul>
 <div class="auth-modal__form">
-  <%= form_for :user, url: lc_stripe_checkout_path do |f| %>
+  <%= form_for :user, html: { id: 'auth-modal__form' } do |f| %>
     <div class="form-group">
       <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="1">
       <%= f.file_field :photos, direct_upload: true, data: { "dropzone-target": "input" } %>
@@ -41,43 +41,57 @@
       </div>
       <%= link_to "Contacter le support", new_contact_path %>
     </div>
-    <button class="auth-modal__form__submit">Acheter</button>
-    <div id="paypal-button-container"></div>
+    <div id="paypal-btn"></div>
   <% end %>
 </div>
 
 <script>
 
   paypal.Buttons({
-
     // Sets up the transaction when a payment button is clicked
     createOrder: function(data, actions) {
       return actions.order.create({
         purchase_units: [{
           amount: {
-            value: '77.44' // Can reference variables or functions. Example: `value: document.getElementById('...').value`
+            value: '4.90' // Can reference variables or functions. Example: `value: document.getElementById('...').value`
           }
         }]
       });
     },
-
     // Finalize the transaction after payer approval
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(orderData) {
 
-        // Successful capture! For dev/demo purposes:
-        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-        var transaction = orderData.purchase_units[0].payments.captures[0];
-        alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+        let form = document.getElementById('auth-modal__form');
+        let formData = new FormData(form);
 
-        // When ready to go live, remove the alert and show a success message within this page. For example:
-        // var element = document.getElementById('paypal-button-container');
-        // element.innerHTML = '';
-        // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-        // Or go to another URL:  actions.redirect('thank_you.html');
+        return Rails.ajax({
+          type: "POST",
+          url: "<%= authentications_url %>",
+          data: formData,
+          success: (resp) => {
+            actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
+          },
+          error: () => alert("Une erreur est survenue.")
+        })
+
+        // let form = document.getElementById('auth-modal__form')
+        // let formData = new formData(form)
+        // console.log(formData)
+
+        // // Successful capture! For dev/demo purposes:
+        // console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+        // var transaction = orderData.purchase_units[0].payments.captures[0];
+        // alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+        // // When ready to go live, remove the alert and show a success message within this page. For example:
+        // // var element = document.getElementById('paypal-button-container');
+        // // element.innerHTML = '';
+        // // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+        // // Or go to another URL:  
+        // // actions.redirect("<%= authentications_url %>");
       });
     }
-  }).render('#paypal-button-container');
-
+  }).render('#paypal-btn');
 
 </script>

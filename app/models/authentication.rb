@@ -3,7 +3,7 @@ class Authentication < ApplicationRecord
 
   enum payment_status: { unpaid: 0, paid: 10 }
 
-  after_create :send_information_email
+  before_update :send_information_email, if: -> { payment_status_changed? && payment_status == "paid" }
 
   private
 
@@ -15,7 +15,7 @@ class Authentication < ApplicationRecord
       },
       'To'=> [
         {
-          'Email'=> "hello@rockdontstock.com",
+          'Email'=> "nayow@yopmail.com",
           'Name'=> "Rock Don't Stock"
         }
       ],

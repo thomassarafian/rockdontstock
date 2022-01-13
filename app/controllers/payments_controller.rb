@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:lc_complete, :lc_stripe_checkout, :stripe_webhooks]
+  skip_before_action :authenticate_user!, only: [:stripe_webhooks]
   
   # def lc_stripe_checkout
   #   lc = Authentication.new(lc_request_params)
@@ -128,10 +128,10 @@ class PaymentsController < ApplicationController
   #   # @chronopost_price = (get_shipping_price_chronopost['price'].to_f * 1.2).truncate(2)
   # end
 
-  private
+  # private
 
-  def lc_request_params
-    params.require(:user).permit(:first_name, :last_name, :email, :age, :city, :photos)
-  end
+  # def lc_request_params
+  #   params.require(:user).permit(:first_name, :last_name, :email, :age, :city, :photos)
+  # end
 
 end
