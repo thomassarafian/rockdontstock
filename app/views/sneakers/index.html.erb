@@ -1,32 +1,6 @@
-<% brand = ["Adidas", "Air Jordan", "Nike", "New Balance", "Other Brands", "Luxury Brands", "Collections"] %>
-<% price = [["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301]] %>
-<% condition = [["5/10 et moins", 5], ["6/10", 6], ["8/10", 8], ["9/10", 9], ["10/10", 10]] %>
-<% size = [["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], ["5", 5],
-                ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
-                ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
-                ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18]] %>
-<!-- <div class="glass-search-form">
-  <div class="search-filter">
-    <div class="filters">
-      <button class="dropdown-filter btn btn-dark" type="button">Filtres</button>
-      <div class="filter-and-sneakers">
-        <div class="dropdown-filter-items">
-          <button class="dropdown-filter-laptop btn btn-dark" type="button">Filtres</button>
-          <%= form_with url: sneakers_path, method: :get do |f| %>
-            <%= f.select :category, brand, { include_blank: "Toute les marques" }, { class: "form-select", onchange: "this.form.submit();" } %>
-            <%= f.select :price, price, { include_blank: "Tous les prix" }, {  class: "form-select", onchange: "this.form.submit();" } %>
-            <%= f.select :condition, condition, { include_blank: "Toute condition" }, {  class: "form-select", onchange: "this.form.submit();" } %>
-            <%= f.select :size, size, { include_blank: "Toute taille" }, {  class: "form-select", onchange: "this.form.submit();" } %>
-          <% end %>
-        </div>
-        <div style="margin-top: 10vh">
-          
-        </div>
-        
-      </div>
-    </div>
-  </div>
-</div> -->
+<% brands = ["Nike", "Jordan", "Adidas", "Yeezy", "New Balance", "Asics", "Autres"] %>
+<% conditions = {"6/10 ou moins": 6, "7/10": 7, "8/10": 8, "9/10": 9, "10/10": 10} %>
+
 <title>Recherche - Rock Don't Stock</title>
 <div class="container">
   <section class="sneaker-featured">
@@ -37,13 +11,15 @@
       <div class="sneaker-featured-block__content">
         <%= cl_image_tag(@selection_of_the_day.photos.first&.key, class: 'sneaker-featured-photo') %>
         <div class="sneaker-featured-details">
-          <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
+          <%= link_to sneaker_path(@selection_of_the_day) do %>
+            <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
+          <% end %>
           <div class="sneaker-featured-details__options">
-            <%= @selection_of_the_day.sneaker_db.category %> - Taille <%= @selection_of_the_day.size %> - Condition: <%= @selection_of_the_day.condition %>/10
+            <%= @selection_of_the_day.sneaker_db.category %> - Taille <%= @selection_of_the_day.size %> <br />Condition: <%= @selection_of_the_day.condition %>/10
           </div>
           <div class="sneaker-featured-details__price"><%= @selection_of_the_day.price %>€</div>
           <div>
-            <button class="sneaker-featured-details__purchase">Acheter</button>
+            <button action="<%= new_sneaker_order_url(@selection_of_the_day) %>" class="sneaker-featured-details__purchase">Acheter</button>
             <button class="sneaker-featured-details__discover">Découvrir le modèle</button>
           </div>
         </div>
@@ -53,10 +29,10 @@
   <div class="d-flex justify-content-between">
     <div style="font-size: 1.563rem; margin-bottom: 3rem">Toutes les sneakers</div>
     <div style="position: relative;">
-      <div class="toggle-popover-btn" type="button" onclick="togglePopover('sortby')">
+      <div class="toggle-popover-btn d-none d-lg-block" type="button" onclick="togglePopover('sortby')">
         Trier par <i class="fas fa-chevron-down"></i>
       </div>
-      <div class="popover sortby-popover">
+      <div class="custom-popover sortby-popover">
         <%= form_with url: sneakers_path, method: :get, html: { id: "sort-form-desktop" } do |f| %>
           <div class="form-check mb-1">
             <%= f.radio_button :sort_by, "price_cents ASC", { class: "form-check-input" } %>
@@ -80,38 +56,16 @@
   </div>
   <div class="d-flex align-items-start justify-content-between">
     <!-- FILTERS DESKTOP -->
-    <div class="d-none d-lg-block" style="flex-grow: 1; top: 100px;">
+    <div class="d-none d-lg-block" style="min-width: 30%; top: 100px;">
       <%= form_with url: sneakers_path, method: :get, html: {id: "filter-form"} do |f| %>
         <div class="form-group">
           <%= f.label "Marques", class: "form-label", style: "font-weight: 700" %>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Nike", nil %>
-            <%= f.label "Nike", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Jordan", nil %>
-            <%= f.label "Jordan", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Adidas", nil %>
-            <%= f.label "Adidas", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Yeezy", nil %>
-            <%= f.label "Yeezy", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "New Balance", nil %>
-            <%= f.label "New Balance", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Asics", nil %>
-            <%= f.label "Asics", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :category, { multiple: true, class: "form-check-input" }, "Autres", nil %>
-            <%= f.label "Autres", class: "form-check-label" %>
-          </div>
+          <% brands.each do |brand| %>
+            <div class="form-check mb-1">
+              <%= f.check_box :category, { multiple: true, class: "form-check-input" }, brand, nil %>
+              <%= f.label brand, class: "form-check-label" %>
+            </div>
+          <% end %>
         </div>
         <div class="form-group">
           <%= f.label "Prix", class: "form-label", style: "font-weight: 700" %>
@@ -126,122 +80,35 @@
         </div>
         <div class="form-group">
           <%= f.label "Condition", class: "form-label", style: "font-weight: 700" %>
-          <div class="form-check mb-1">
-            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "6", nil %>
-            <%= f.label "6/10 ou moins", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "7", nil %>
-            <%= f.label "7/10", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "8", nil %>
-            <%= f.label "8/10", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "9", nil %>
-            <%= f.label "9/10", class: "form-check-label" %>
-          </div>
-          <div class="form-check mb-1">
-            <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, "10", nil %>
-            <%= f.label "10/10", class: "form-check-label" %>
-          </div>
+          <% conditions.each do |key, val| %>
+            <div class="form-check mb-1">
+              <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, val, nil %>
+              <%= f.label key, class: "form-check-label" %>
+            </div>
+          <% end %>
         </div>
         <div class="form-group" style="position:relative;">
-          <div class="popover size-popover">
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "1", nil %>
-              <%= f.label "1", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "2", nil %>
-              <%= f.label "2", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "3", nil %>
-              <%= f.label "3", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "4", nil %>
-              <%= f.label "4", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "5", nil %>
-              <%= f.label "5", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "6", nil %>
-              <%= f.label "6", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "7", nil %>
-              <%= f.label "7", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "8", nil %>
-              <%= f.label "8", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "9", nil %>
-              <%= f.label "9", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "10", nil %>
-              <%= f.label "10", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "1", nil %>
-              <%= f.label "1", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "2", nil %>
-              <%= f.label "2", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "3", nil %>
-              <%= f.label "3", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "4", nil %>
-              <%= f.label "4", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "5", nil %>
-              <%= f.label "5", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "6", nil %>
-              <%= f.label "6", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "7", nil %>
-              <%= f.label "7", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "8", nil %>
-              <%= f.label "8", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "9", nil %>
-              <%= f.label "9", class: "form-check-label" %>
-            </div>
-            <div class="form-check mb-1">
-              <%= f.check_box :size, { multiple: true, class: "form-check-input" }, "10", nil %>
-              <%= f.label "10", class: "form-check-label" %>
-            </div>
+          <div class="custom-popover size-popover">
+            <% (34..47).each do |size| %>
+              <div class="form-check mb-1">
+                <%= f.check_box :size, { multiple: true, class: "form-check-input" }, size, nil %>
+                <%= f.label size, class: "form-check-label" %>
+              </div>
+              <% break if size == 47%>
+              <div class="form-check mb-1">
+                <%= f.check_box :size, { multiple: true, class: "form-check-input" }, (size + 0.5), nil %>
+                <%= f.label (size + 0.5), class: "form-check-label" %>
+              </div>
+            <% end %>
           </div>
           <%= f.label '', class: "form-label toggle-popover-btn", style: "font-weight: 700; cursor: pointer;", onclick: "togglePopover('size')" do %>
             Taille
             <i class="fas fa-chevron-down"></i>
           <% end %>
-          <!-- <%= f.select :size, size, { include_blank: "Toute taille" }, {  style: "display: block; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 0.5rem; background: none;" } %> -->
-          <!-- <div class="dropdown-fields" style="display: none; margin-top: 0.5rem;"> -->
-            <!-- <%= f.select :size, size, { include_blank: "Toute taille" }, {  style: "display: block; color: #495057; border-radius: 0; border: 1px solid #0E0E0E; padding: 0.5rem; background: none;" } %> -->
-          <!-- </div> -->
         </div>
       <% end %>
     </div>
-    <div id="search-results" class="d-flex flex-wrap justify-content-center" style="width: 100%; flex-shrink: 2; gap: 2rem;">
+    <div class="search-results" id="search-results">
       <%= render partial: 'sneakers/list_sneakers' %>
     </div>
   </div>
@@ -315,6 +182,7 @@
     // reset buttons
     document.querySelector('.filter-btn').style.textAlign = "center"
     document.querySelector('.filter-btn').style.border = "1px solid #0E0E0E"
+    document.querySelector('.filter-btn').style.borderRight = "none"
     document.querySelector('.sort-btn').style.textAlign = "center"
     document.querySelector('.sort-btn').style.border = "1px solid #0E0E0E"
 
@@ -337,10 +205,18 @@
   document.body.addEventListener('click', (e) => {
     if (e.target.classList.contains('toggle-popover-btn')) return
 
-    if (!e.target.closest('.popover')) {
-      let popovers = document.querySelectorAll('.popover');
+    if (!e.target.closest('.custom-popover')) {
+      let popovers = document.querySelectorAll('.custom-popover');
       popovers.forEach(p => p.style.display = "none")
     }
+  })
+
+  document.querySelectorAll('.sneaker-index__card').forEach(el => {
+
+    el.addEventListener('click', function() {
+      window.location.href = "<%= sneakers_url %>/" + this.dataset.sneakerId;
+    })
+
   })
 </script>
 

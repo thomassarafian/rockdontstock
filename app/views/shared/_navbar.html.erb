@@ -12,17 +12,7 @@
       </div>
     <% end %>
     <%= button_to "Vendre", sneakers_path, class: "navbar__sell-button" %>
-    <% if user_signed_in? %>
-      <div class="d-flex toggler_icon navbarSideButton" style="cursor: pointer; gap: 0.6rem; align-items: center; margin-left: 1rem">
-        <%= image_tag("images/icon_avatar.svg", style: "height: 25px; width: auto; fill: #0E0E0E") %>
-        <div style="line-height: 1">
-          <div>Salut</div>
-          <span style="font-weight: 700"><%= current_user.first_name %></span> !
-        </div>
-      </div>
-    <% else %>
-      <%= image_tag "navbar/toggler_icon.svg", class: "toggler_icon navbarSideButton", style: "cursor: pointer; height: 35px;" %>
-    <% end %>
+    <%= image_tag "navbar/toggler_icon.svg", class: "toggler_icon navbarSideButton", style: "cursor: pointer; height: 35px;" %>
   </div>
 </div>
 
@@ -30,13 +20,7 @@
 <div class="container d-lg-none backdrop" style="position: sticky; top: 0; z-index: 1;">
   <div class="d-flex justify-content-between align-items-center" style="width: 100%; height: 80px;">
     <div class="navbar-burger">
-      <% if user_signed_in? %>
-        <div class="d-flex toggler_icon navbarSideButton" style="cursor: pointer;">
-          <%= image_tag("images/icon_avatar.svg", style: "height: 30px; width: auto; fill: #0E0E0E") %>
-        </div>
-      <% else %>
-        <%= image_tag "navbar/toggler_icon.svg", class: "toggler_icon navbarSideButton", style: "cursor: pointer; height: 30px;" %>
-      <% end %>
+    <%= image_tag "navbar/toggler_icon.svg", class: "toggler_icon navbarSideButton", style: "cursor: pointer; height: 30px;" %>
     </div>
     <%= link_to "/", class: "navbar-logo-link" do %>
       <%= image_tag("logo.svg", style: 'height: 32px;', class: 'icon') %>
@@ -44,7 +28,7 @@
     <%= form_with url: sneakers_path, html: { id: "navbar-search-form" }, method: :get do |f| %>
       <div style="position: relative;">
         <%= f.text_field :search, class: "navbar-search-input form-control", placeholder: "Essaye Nike, Air Jordan..." %>
-        <%= image_tag "images/lens.svg", style: "height: 24px; position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); cursor: pointer", onclick: "handleLensClick()" %>
+        <%= image_tag "images/lens.svg", style: "height: 20px; position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); cursor: pointer", onclick: "handleLensClick()" %>
       </div>
     <% end %>
     <div class="navbar-close-icon" style="display: none; line-height: 0; font-size: 40px;" onclick="hideInput()">&times;</div>
@@ -53,8 +37,8 @@
     <div class="d-flex align-items-center d-block d-lg-none mb-4">
       <div class="popup-close-icon me-auto" style="display: none; font-size: 35px; line-height: 0;" onclick="hidePopup()">&times;</div>
       <!-- FILTERS MOBILE -->
-      <div class="filter-btn" style="cursor: pointer; flex-grow: 1; padding: 0.5rem; border: 1px solid #0E0E0E; text-align: center;" onclick="revealPopup('filter')">Filtrer</div>
-      <div class="sort-btn" style="cursor: pointer; flex-grow: 1; padding: 0.5rem; border: 1px solid #0E0E0E; text-align: center;" onclick="revealPopup('sort')">Trier</div>
+      <div class="filter-btn" style="cursor: pointer; width: 50%; padding: 0.5rem; border: 1px solid #0E0E0E; border-right: none; text-align: center;" onclick="revealPopup('filter')">Filtrer</div>
+      <div class="sort-btn" style="cursor: pointer; width: 50%; padding: 0.5rem; border: 1px solid #0E0E0E; text-align: center;" onclick="revealPopup('sort')">Trier</div>
     </div>
     <div class="popup sort-popup">
       <%= form_with url: sneakers_path, local: false, method: :get, html: {id: "sort-form-mobile"} do |f| %>
@@ -237,41 +221,53 @@
   </div>
 <% end %>
 
-<ul class="navbar-side" id="navbarSide">
-  <div class="navbar-side-white-toggler d-none d-lg-block">
+<div class="navbar-side" id="navbarSide">
+  <div class="navbar-side__menu">
+    <div class="navbar-side__menu__close">
+      &times;
+    </div>
     <% if user_signed_in? %>
-      <%= image_tag("images/icon_avatar.svg", style: "height: 50px; width: auto; fill: #ffffff") %>
+      <div class="d-flex flex-column align-items-center justify-content-center w-100 mb-4 mt-1">
+        <%= link_to user_path do %>
+          <%= image_tag("images/icon_avatar.svg", style: "height: 40px; width: auto; margin-bottom: 0.5rem;") %>
+        <% end %>
+        <div>Salut <span style="font-weight: 700"><%= current_user.first_name %></span> !</div>
+      </div>
+    <% end %>
+    <div class="navbar-side__menu__item">
+      <%= link_to "Vendre", sneakers_path, method: :post %>
+    </div>
+    <div class="navbar-side__menu__item">
+      <%= link_to "Tout voir", sneakers_path %>
+    </div>
+    <div class="navbar-side__menu__item"> 
+      <%= link_to "Nous contacter", new_contact_path %>
+    </div>
+    <div class="navbar-side__menu__item">
+      <%= link_to "L'authentification", authentication_path %>
+    </div>
+    <div class="navbar-side__menu__item">
+      <a href="https://www.instagram.com/rockdontstock/" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+    <div class="navbar-side__login">
+      <% if user_signed_in? %>
+        <%= link_to "Me déconnecter", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "Me connecter", user_session_path %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<ul class="navbar-side d-none" id="navbarSide">
+  <div class="navbar-side-white-toggler">
+    <% if user_signed_in? %>
+    <div class="d-flex justify-content-center toggler_icon navbarSideButton" style="cursor: pointer; gap: 0.6rem; align-items: center; margin-left: 1rem">
+
+    </div>
     <% else %>
       <%= image_tag "navbar/white/white_toggler_icon.svg" %>
-    <% end %>
-  </div>
-  <%= link_to (user_signed_in? ? user_path : user_session_path), class: "side-link" do %>
-    <li class="navbar-side-item side-link">Mon compte</li>
-  <% end %>
-  <%= link_to(sneakers_path, method: :post, class: "side-link") do %>
-    <li class="navbar-side-item side-link">Vendre</li>
-  <% end %>
-  <%= link_to(sneakers_path, class: "side-link") do %>
-    <li class="navbar-side-item side-link">Tout voir</li>
-  <% end %>
-  <%= link_to(authentication_path, class: "side-link") do %>
-    <li class="navbar-side-item side-link">L'authentification</li>
-  <% end %>
-  <%= link_to(new_contact_path, class: "side-link") do %>
-    <li class="navbar-side-item side-link">Nous contacter</li>
-  <% end %>
-  <%= link_to(faq_path, class: "side-link") do %>
-    <li class="navbar-side-item side-link">FAQ</li>
-  <% end %>
-  <div class="navbar-sign">
-    <% if user_signed_in? %>
-      <%= link_to (destroy_user_session_path), class: "", :method => :delete do %>
-        <li style="display: flex; align-items: center; justify-content: center; height: 3rem;">Déconnexion</li>
-      <% end %>
-    <% else %>
-      <%= link_to (user_session_path) do %>
-        <li style="display: flex; align-items: center; justify-content: center; height: 3rem;">Me connecter</li>
-      <% end %>
     <% end %>
   </div>
 </ul>
@@ -317,67 +313,17 @@
       $('.overlay').show();
     });
 
-    $('.overlay, .navbar-side-item>a, .navbar-side-white-toggler').on('click', function(){
+    $('.overlay, .navbar-side__menu__close').on('click', function(){
       $('#navbarSide').removeClass('reveal');
       $('.overlay').hide();
     });
-
-    $('#navbar-side-see-all').on('click', function() {
-      $('#navbarSide').removeClass('reveal');
-      $('.overlay').hide();
-      if ($( window ).width() >= 1024) {
-        $('.glass_icon').hide();
-        $('.glass-search-form').show();
-      } else {
-        $('.toggler_icon_phone').hide();
-        $('.glass-search-form').show();
-        $('.magnify_glass_icon_phone').hide();
-        $('.real-nav').css('justify-content', 'center');
-        $('.dropdown-filter-items').hide();
-      }
-    });
-
-    $('.glass_icon_phone').on('click', function() {
-      $('.toggler_icon_phone').hide();
-      $('.glass-search-form').show();
-      $('.magnify_glass_icon_phone').hide();
-      $('.real-nav').css('justify-content', 'center');
-      $('.dropdown-filter-items').hide();
-    });
-
-      // $('.glass-search-form').show();
-    // $('.dropdown-filter-items').show();
-
-    $('.glass_icon').on('click', function() {
-      $('.glass_icon').hide();
-      $('.glass-search-form').show();
-    });
-
-    if ($( window ).width() < 1024) {
-      $('.dropdown-filter').on('click', function() {
-        $('.dropdown-filter-items').slideToggle('fast');
-        $('.dropdown-filter-laptop').hide();
-      });
-    } else {
-      $('.dropdown-filter').hide();
-    }
-
-    $('.hide-search-arrow').on('click', function () {
-      $('.glass-search-form').hide();
-      $('toggler_icon, .glass_icon, #sell_button').show();
-    })
-
-    $('.phone-hide-search-arrow').on('click', function () {
-      $('.glass-search-form').hide();
-      $('.real-nav').css('justify-content', 'space-between');
-      $('img.toggler_icon_phone, .magnify_glass_icon_phone').show();
-    })
+    
   });
 </script>
 
 <style>
 #navbar-search-form {
-  width: 0;
+  width: 30px;
   transition: all 0.2s ease;
 }
 .navbar-search-input {

@@ -52,6 +52,7 @@
 .profile__business-items__title,
 .profile__business-wallet__title {
   font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 .profile__business-items {
   display: flex;
@@ -62,30 +63,31 @@
   display: flex;
   justify-content: space-evenly;
 }
-.profile__business-items__content {
-  display: flex;
-  justify-content: space-between;
-  gap: 20%;
-}
-.profile__business-items__content__btns {
-  align-self: flex-end;
+.profile__business-items__btns {
   text-align: right;
   &--modify {
     @include cta-button;
-    margin-bottom: 0.5rem;
-    width: 100%;
+    margin-right: 0.5rem;
+    padding: 0.3rem 1rem;
+    font-size: 0.85rem;
   }
   &--delete {
     @include red-button;
+    margin-right: 0.5rem;
+    padding: 0.3rem 1rem;
+    font-size: 0.85rem;
   }
 }
 .profile__business-item {
+  height: 100%;
+  width: 100%;
   display: flex;
   gap: 2rem;
 }
 .profile__business-item-photo {
-  max-width: 50%;
-  object-fit: contain;
+  width: 40%;
+  height: 100%;
+  object-fit: cover;
 }
 .profile__business-item-details {
   display: flex;
@@ -99,4 +101,11 @@
 }
 .profile__business-item-price {
   font-weight: 700;
+}
+.profile__business-wallet__btn {
+  @include cta-button;
+  margin-right: 0.5rem;
+  padding: 0.3rem 1rem;
+  font-size: 0.85rem;
+  float: right;
 }

@@ -7,6 +7,7 @@ ActiveStorage.start()
 
 
 var Flickity = require('flickity');
+Flickity.prototype._touchActionValue = 'pan-y pinch-zoom'
 require("./flickity-fullscreen.js");
 require("./flickity-imagesloaded.js");
 require('dotenv').config()
@@ -14,7 +15,7 @@ require('dotenv').config()
 window.Flickity = Flickity
 window.Rails = Rails
 
-import "bootstrap"
+import "bootstrap";
 import "controllers";
 import "./pagy.js.erb";
 

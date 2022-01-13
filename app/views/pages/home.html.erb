@@ -1,8 +1,10 @@
 <title>Accueil - Rock Don't Stock</title>
 <div class="container">
   <section class="home-header">
-    <video autoplay loop muted playsinline style="margin-top: 1rem; margin-bottom: 1rem; width: 100%; height: 100%; object-fit: cover;">
+    <video autoplay loop muted playsinline class="home-header__video">
+      <source src="/assets/images/video-mobile.mp4" type="video/mp4" media="(max-width:576px)">
       <source src="/assets/images/video.mp4" type="video/mp4">
+      <img src="/assets/images/video-mobile-fallback.png">
     </video>
     <div class="home-header__caption">
       <h2 class="home-header__caption__title">Des sneakers d’occasion authentifiées par nos experts</h2>
@@ -19,11 +21,11 @@
     <div class="home-last-sneakers__title">Les dernières paires ajoutées</div>
     <div class="home-last-sneakers__block">
       <% @sneakers_last_added.each do |sneaker| %>
-        <div class="sneaker-home__card" style="cursor: pointer;" onclick="window.location.href = '<%= sneaker_path(sneaker) %>'">
+        <div class="sneaker-home__card" data-sneaker-id="<%= sneaker.id %>">
           <%= cl_image_tag(sneaker.photos.first&.key || Sneaker.first.photos.first.key, class: 'sneaker-home__card__photo') %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>
           <div class="sneaker-home__card__options">
-            <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> - Condition: <%= sneaker.condition %>/10
+            <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
           </div>
           <div class="sneaker-home__card__price"><%= sneaker.price %>€</div>
         </div>
@@ -37,11 +39,11 @@
     <div class="home-selected-sneakers__title">Notre sélection</div>
     <div class="home-selected-sneakers__block">
       <% @sneakers_selected.each do |sneaker| %>
-        <div class="sneaker-home__card" style="cursor: pointer;" onclick="window.location.href = '<%= sneaker_path(sneaker) %>'">
+        <div class="sneaker-home__card" data-sneaker-id="<%= sneaker.id %>">
           <%= cl_image_tag(sneaker.photos.first&.key || Sneaker.first.photos.first.key, class: 'sneaker-home__card__photo') %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>
           <div class="sneaker-home__card__options">
-            <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> - Condition: <%= sneaker.condition %>/10
+            <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
           </div>
           <div class="sneaker-home__card__price"><%= sneaker.price %>€</div>
         </div>
@@ -67,7 +69,8 @@
     <div class="home-auth__title">L'authentification</div>
     <div class="home-auth__block">
       <div style="position: relative;">
-        <%= image_tag("images/auth-paysage.png", class: "home-auth__img") %>
+        <%= image_tag("images/auth-paysage.png", class: "home-auth__img d-none d-md-block") %>
+        <%= image_tag("images/auth-portrait.png", class: "home-auth__img d-md-none") %>
         <%= image_tag("images/sticker_approved.png", class: "home-auth__img-sticker") %>
       </div>
       <div class="home-auth__img-caption">
@@ -131,5 +134,13 @@
 
     modalTitle.textContent = guideName
     hiddenInput.value = guideId
+  })
+
+  document.querySelectorAll('.sneaker-home__card').forEach(el => {
+
+    el.addEventListener('click', function() {
+      window.location.href = "<%= sneakers_url %>/" + this.dataset.sneakerId;
+    })
+
   })
 </script>

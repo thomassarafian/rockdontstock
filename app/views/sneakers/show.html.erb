@@ -24,11 +24,11 @@
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div> -->
     </div>
-    <div class="sneaker-details" style="flex-shrink: 2">
+    <div class="sneaker-details">
       <div>
         <h2 class="sneaker-details__name"><%= @sneaker.sneaker_db.name %></h2>
         <div class="sneaker-details__options">
-          <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+          <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
         </div>
       </div>
       <div class="sneaker-details__price"><%= @sneaker.price %>€</div>
@@ -80,7 +80,7 @@
           <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
-            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
           </div>
           <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
         </div>
@@ -90,7 +90,7 @@
           <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
-            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
           </div>
           <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
         </div>
@@ -100,7 +100,7 @@
           <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
-            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
           </div>
           <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
         </div>
@@ -110,7 +110,7 @@
           <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
-            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
           </div>
           <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
         </div>
@@ -120,7 +120,7 @@
           <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
-            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
           </div>
           <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
         </div>
@@ -130,7 +130,7 @@
           <%= cl_image_tag(@sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
           <div class="sneaker-similar__card__name"><%= @sneaker.sneaker_db.name %></div>
           <div class="sneaker-similar__card__options">
-            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> - Condition: <%= @sneaker.condition %>/10
+            <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
           </div>
           <div class="sneaker-similar__card__price"><%= @sneaker.price %>€</div>
         </div>

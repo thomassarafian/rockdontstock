@@ -50,9 +50,4 @@ class Order < ApplicationRecord
     Subscription.new(self.user).as_buyer
   end
 
-  # def shipping_price
-  #   self.service = (percent_of((self.sneaker.price_cents / 100), 12))
-  #   self.save
-  # end
-
 end
