@@ -20,7 +20,7 @@ class PagesController < ApplicationController
   def guide_request
     guide = Guide.find(user_params[:guide_id])
     sib_list_id = guide.fetch_sendinblue["id"]
-    temp_user = User.new(user_params.except(:guide_id))
+    temp_user = User.new(user_params.except(:guide_id, :newsletter))
 
     if Subscription.new(temp_user).to_lc_guide(sib_list_id)
       redirect_to request.referer, notice: "Félicitations ! Tu vas bientôt recevoir ton guide par email"
