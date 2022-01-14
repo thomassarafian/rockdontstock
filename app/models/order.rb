@@ -1,15 +1,15 @@
 class Order < ApplicationRecord
   STATES = [
     "En cours",
-    "Payé",
+    "Payé", # >>> sneaker.state = 2
     "Validé",
     "Refusé",
-    "Abandon",
-    "En préparation",
+    "Abandon", # >>> sneaker.state = 1
+    "En préparation", # <<< sneaker.state = 5
     "Expédiée"
     #Status -> Sendcloud Webhook
   ]
-
+  
   enum payment_status: { unpaid: 0, paid: 10 }
   enum payment_method: { card: 0 }
 

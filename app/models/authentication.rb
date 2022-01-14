@@ -3,11 +3,9 @@ class Authentication < ApplicationRecord
 
   enum payment_status: { unpaid: 0, paid: 10 }
 
-  after_create :send_information_email
-
-  private
-
   def send_information_email
+    photos_urls = self.photos.map{ |photo| photo.blob.url }.join("\n")
+
     Mailjet::Send.create(messages: [{
       'From'=> {
         'Email'=> "hello@rockdontstock.com",
@@ -27,7 +25,8 @@ class Authentication < ApplicationRecord
         "prenom" => self.first_name,
         "email" => self.email,
         "age" => self.age,
-        "ville" => self.city
+        "ville" => self.city,
+        "photos" => photos_urls
       }
     }])
   end

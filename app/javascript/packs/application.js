@@ -12,12 +12,16 @@ require("./flickity-fullscreen.js");
 require("./flickity-imagesloaded.js");
 require('dotenv').config()
 
+var clamp = require("clamp-js");
+window.clamp = clamp;
+
 window.Flickity = Flickity
 window.Rails = Rails
 
 import "bootstrap";
 import "controllers";
 import "./pagy.js.erb";
+
 
 // import { uploadIds } from "components/upload_ids.js"
 // import { ibanValidator } from "components/iban_validator.js"

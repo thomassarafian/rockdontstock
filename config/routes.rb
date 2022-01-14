@@ -22,6 +22,12 @@ Rails.application.routes.draw do
     resources :items, only: [:index]
   	resources :transfers, only: [:index, :create]
   end
+
+  resources :authentications, only: [:new, :create] do 
+    member do
+      get 'success'
+    end
+  end
   
   # PAGES
   get 'about', to: 'pages#about'

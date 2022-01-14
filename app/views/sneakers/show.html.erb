@@ -156,4 +156,9 @@ var flkty = new Flickity( '.sneaker-infos__photos-carousel', {
   draggable: false,
   pageDots: false
 });
+
+// max card name is 3 lines
+document.querySelectorAll('.sneaker-home__card__name').forEach(cardName => {
+  clamp(cardName, { clamp: 2, useNativeClamp: false })
+})
 </script>

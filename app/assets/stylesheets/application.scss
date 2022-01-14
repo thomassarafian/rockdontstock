@@ -113,6 +113,6 @@ form .form-group {
   height: 430px !important;
   
   @include media-breakpoint-down(md) {
-    height: 330px;
+    height: 330px !important;
   }
 }
