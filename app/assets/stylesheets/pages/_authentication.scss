@@ -236,7 +236,7 @@ section {
 .auth-modal__h2 {
   // smaller size for the word "authentification" to avoid overflow
   @include media-breakpoint-down(md) {
-    font-size: 3rem;
+    font-size: 34px;
   }
 }
 .auth-modal__checklist {
