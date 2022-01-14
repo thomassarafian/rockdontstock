@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   })
 
   // STRIPE
-  const stripe = Stripe("<%= ENV['STRIPE_PUBLIC_TEST'] %>");
+  const stripe = Stripe("<%= ENV['STRIPE_PUBLIC'] %>");
 
   const options = {
     clientSecret: '<%= @intent.client_secret %>',
