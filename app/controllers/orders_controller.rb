@@ -138,28 +138,28 @@ class OrdersController < ApplicationController
 	# end
 
 	# def retrieve_stripe_session
-	# 	Stripe.api_key = ENV['STRIPE_SECRET_TEST']
+	# 	Stripe.api_key = ENV['STRIPE_SECRET']
 	# 	stripe_session = Stripe::Checkout::Session.retrieve(
 	# 	  @order.checkout_session_id
 	# 	)
 	# end
 
 	# def capture_payment(current_stripe_session)
-	# 			Stripe.api_key = ENV['STRIPE_SECRET_TEST']
+	# 			Stripe.api_key = ENV['STRIPE_SECRET']
 	# 	Stripe::PaymentIntent.capture(
 	# 	  current_stripe_session.payment_intent
 	# 	)		
 	# end
 
 	# def cancel_payment(current_stripe_session)
-	# 			Stripe.api_key = ENV['STRIPE_SECRET_TEST']
+	# 			Stripe.api_key = ENV['STRIPE_SECRET']
 	# 	Stripe::PaymentIntent.cancel(
  #  		current_stripe_session.payment_intent
 	# 	)
 	# end
 
 	# def refund_payment(current_stripe_session)
-	# 			Stripe.api_key = ENV['STRIPE_SECRET_TEST']
+	# 			Stripe.api_key = ENV['STRIPE_SECRET']
 
 	# 	Stripe::Refund.create({
 	# 		payment_intent: current_stripe_session.payment_intent,
