@@ -3,6 +3,12 @@ class Authentication < ApplicationRecord
 
   enum payment_status: { unpaid: 0, paid: 10 }
 
+  validates :newsletter, acceptance: true
+
+  after_create :send_information_email
+
+  private
+
   def send_information_email
     photos_urls = self.photos.map{ |photo| photo.blob.url }.join("\n")
 
