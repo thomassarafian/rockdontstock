@@ -56,6 +56,7 @@ class SendcloudCreateLabel
 
     puts "=============================="
     puts create_parcel.parsed_response['parcel']['id']
+    # @order.update(sendcloud_order_id_seller: create_parcel.parsed_response['parcel']['id'])
     @order.sendcloud_order_id_seller = create_parcel.parsed_response['parcel']['id']
     # puts create_parcel.parsed_response['parcel']['tracking_url']
 
