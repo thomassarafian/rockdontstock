@@ -21,6 +21,17 @@ class SneakersController < ApplicationController
 
 	def show
 		@sneaker = Sneaker.find(params[:id])
+
+		category = @sneaker.sneaker_db.category
+		size = @sneaker.size
+		price = @sneaker.price.to_i
+
+		similar_by_category = Sneaker.filter_by_category(category).limit(10)
+		similar_by_size = Sneaker.filter_by_size(size).limit(10)
+		similar_by_price = Sneaker.filter_by_min_price(price - 50).filter_by_max_price(price).limit(10)
+
+		@similar_sneakers = similar_by_category + similar_by_size + similar_by_price
+		@similar_sneakers = @similar_sneakers.uniq.sample(20) || Sneaker.all.sample(6)
 	end
 
 	def create
