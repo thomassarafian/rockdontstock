@@ -26,6 +26,9 @@ h2 {
     font-size: $font-size-3-sm;
     margin-bottom: 0.1em;
   }
+  @include media-breakpoint-down(md) {
+    font-size: 34px;
+  }
 }
 a, a:hover {
   color: inherit;
