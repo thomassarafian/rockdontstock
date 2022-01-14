@@ -233,10 +233,19 @@ section {
 .auth-modal__subtitle {
   @include para-1;
 }
+.auth-modal__h2 {
+  // smaller size for the word "authentification" to avoid overflow
+  @include media-breakpoint-down(md) {
+    font-size: 3rem;
+  }
+}
 .auth-modal__checklist {
   margin-bottom: 3rem;
   list-style-type: none;
   padding: 0;
+  @include media-breakpoint-down(lg) {
+    margin-top: 1.5rem;
+  }
 }
 .auth-modal__form__bottom-infos {
   display: flex;
