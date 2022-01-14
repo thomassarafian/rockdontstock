@@ -491,21 +491,6 @@
       "widget": null,
       "validations": []
     }, {
-      "field": "age",
-      "type": "Number",
-      "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": true,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": null,
-      "inverse_of": null,
-      "widget": null,
-      "validations": []
-    }, {
       "field": "created_at",
       "type": "Date",
       "default_value": null,
@@ -553,6 +538,21 @@
     }, {
       "field": "checkout_session_id",
       "type": "String",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "date_of_birth",
+      "type": "Dateonly",
       "default_value": null,
       "enums": null,
       "integration": null,
