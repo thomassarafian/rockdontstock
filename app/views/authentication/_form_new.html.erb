@@ -35,6 +35,12 @@
         <%= f.text_field :city, class: "form-control", placeholder: "Ville" %>
       </div>
     </div>
+    <div class="form-check mb-3">
+      <%= f.check_box :newsletter, { class: "form-check-input", checked: true }, 1, nil %>
+      <%= f.label "", class: "form-check-label" do %>
+        J'accepte de recevoir les dernières nouveautés de Rock Don't Stock par email.
+      <% end %>
+    </div>
     <div class="auth-modal__form__bottom-infos">
       <div>
         TOTAL: 4.90€

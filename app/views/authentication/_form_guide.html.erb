@@ -14,13 +14,19 @@
     <div class="form-group">
       <%= f.email_field :email, class: "form-control", placeholder: "Email", required: true %>
     </div>
-    <div class="row g-2">
-      <div class="col-4">
-        <%= f.text_field :date_of_birth, class: "form-control", placeholder: "Date de naissance", onfocus: "(this.type='date')", onblur: "(this.type='text')"%>
+    <div class="row mb-2 g-2">
+      <div class="col-12 col-lg-4">
+        <%= f.text_field :date_of_birth, class: "form-control", placeholder: "Date de naissance", onfocus: "(this.type='date')", onblur: "(this.type='text')" %>
       </div>
       <div class="col">
         <%= f.text_field :city, class: "form-control", placeholder: "Ville" %>
       </div>
+    </div>
+    <div class="form-check mb-3">
+      <%= f.check_box :newsletter, { class: "form-check-input", checked: true }, 1, nil %>
+      <%= f.label "", class: "form-check-label" do %>
+        J'accepte de recevoir les dernières nouveautés de Rock Don't Stock par email.
+      <% end %>
     </div>
     <button type="submit" class="auth-modal__form__submit">Recevoir mon guide</button>
   <% end %>

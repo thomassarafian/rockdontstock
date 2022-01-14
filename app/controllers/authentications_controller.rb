@@ -31,7 +31,7 @@ class AuthenticationsController < ApplicationController
   private
 
   def lc_request_params
-    params.require(:user).permit(:first_name, :last_name, :email, :date_of_birth, :city, photos: [])
+    params.require(:user).permit(:first_name, :last_name, :email, :date_of_birth, :city, :newsletter, photos: [])
   end
 
 end

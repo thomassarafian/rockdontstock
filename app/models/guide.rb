@@ -1,7 +1,8 @@
 class Guide < ApplicationRecord
   before_create :set_default_image
   after_create :create_sendinblue_list
-  # after_destroy :delete_sendinblue_list
+
+  attribute :newsletter, :boolean
   
   def fetch_sendinblue
     sib = SibApiV3Sdk::ContactsApi.new

@@ -3,7 +3,7 @@ class Authentication < ApplicationRecord
 
   enum payment_status: { unpaid: 0, paid: 10 }
 
-  validates :newsletter, acceptance: true
+  attribute :newsletter, :boolean
 
   after_create :send_information_email
 
