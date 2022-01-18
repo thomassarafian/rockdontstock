@@ -8,7 +8,7 @@
 <div class="auth-modal__form">
   <%= form_for :user, html: { id: 'auth-modal__form' } do |f| %>
     <div class="form-group">
-      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="2" data-dropzone-max-files="10">
+      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="10" data-dropzone-max-files="10">
       <%= f.file_field :photos, multiple: true, direct_upload: true, data: { "dropzone-target": "input" } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h4 class="dropzone-msg-title">Glisser ou rechercher des photos</h4>

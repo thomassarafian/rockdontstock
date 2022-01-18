@@ -150,6 +150,7 @@ function createDropZone(controller) {
     maxFilesize: controller.maxFileSize,
     acceptedFiles: controller.acceptedFiles,
     addRemoveLinks: controller.addRemoveLinks,
+    resizeWidth: "1500",
     autoQueue: false,
     uploadMultiple: true
   });
