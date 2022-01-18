@@ -33,9 +33,17 @@ a, a:hover {
 a:not(:hover) {
   text-decoration: none;
 }
+input {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
 input[type="checkbox"],
 input[type="radio"] {
   filter: grayscale(1);
+  &:focus {
+    filter: grayscale(1);
+  }
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

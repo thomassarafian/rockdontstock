@@ -62,8 +62,9 @@
           <%= f.label "Marques", class: "form-label", style: "font-weight: 700" %>
           <% brands.each do |brand| %>
             <div class="form-check mb-1">
-              <%= f.check_box :category, { multiple: true, class: "form-check-input" }, brand, nil %>
-              <%= f.label brand, class: "form-check-label" %>
+              <label class="form-check-label">
+                <%= f.check_box :category, { multiple: true, class: "form-check-input" }, brand, nil %> <%= brand %>
+              </label>
             </div>
           <% end %>
         </div>
@@ -82,8 +83,9 @@
           <%= f.label "Condition", class: "form-label", style: "font-weight: 700" %>
           <% conditions.each do |key, val| %>
             <div class="form-check mb-1">
-              <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, val, nil %>
-              <%= f.label key, class: "form-check-label" %>
+              <label class="form-check-label">
+                <%= f.check_box :condition, { multiple: true, class: "form-check-input" }, val, nil %> <%= key %>
+              </label>
             </div>
           <% end %>
         </div>
@@ -91,13 +93,15 @@
           <div class="custom-popover size-popover">
             <% (34..47).each do |size| %>
               <div class="form-check mb-1">
-                <%= f.check_box :size, { multiple: true, class: "form-check-input" }, size, nil %>
-                <%= f.label size, class: "form-check-label" %>
+                <label class="form-check-label">
+                  <%= f.check_box :size, { multiple: true, class: "form-check-input" }, size, nil %> <%= size %>
+                </label>
               </div>
               <% break if size == 47%>
               <div class="form-check mb-1">
-                <%= f.check_box :size, { multiple: true, class: "form-check-input" }, (size + 0.5), nil %>
-                <%= f.label (size + 0.5), class: "form-check-label" %>
+                <label class="form-check-label">
+                  <%= f.check_box :size, { multiple: true, class: "form-check-input" }, (size + 0.5), nil %> <%= size + 0.5 %>
+                </label>
               </div>
             <% end %>
           </div>
@@ -258,6 +262,7 @@
   overflow-y: scroll;
   padding: 2rem 1rem;
   background: white;
+  -webkit-backface-visibility: hidden;
 }
 .popup::-webkit-scrollbar {
   display: none; /* chrome safari opera */
