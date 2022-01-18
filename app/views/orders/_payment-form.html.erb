@@ -1,0 +1,15 @@
+<div class="purchase-form__payment__title">
+  <%= image_tag("images/icon_bill.svg") %>
+  <span class="ms-2">Moyen de paiement</span>
+</div>
+<div class="purchase-form__payment__fields col-12 col-lg-9">
+  <form id="payment-form" data-secret="<%= @intent.client_secret %>">
+    <div id="payment-element">
+      <!-- Elements will create form elements here -->
+    </div>
+    <div id="error-message">
+      <!-- Display error message to your customers here -->
+    </div>
+    <button class="purchase-form__validation__btn">Valider ma commande (<%= @intent.amount / 100.00 %>€)</button>
+  </form>
+</div>

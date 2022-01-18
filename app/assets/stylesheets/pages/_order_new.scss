@@ -1,6 +1,7 @@
 .purchase {
   display: flex;
   gap: 5rem;
+  justify-content: space-between;
   @include media-breakpoint-down(lg) {
     flex-direction: column;
     gap: 3rem;
@@ -9,7 +10,7 @@
 .purchase-form {
   display: flex;
   flex-direction: column;
-  width: 66%;
+  width: 100%;
 
   &__shipping {
     &__relay-target {
@@ -26,6 +27,8 @@
   &__infos,
   &__shipping,
   &__payment {
+    width: 100%;
+
     &__title {
       @include para-1;
       display: flex;
