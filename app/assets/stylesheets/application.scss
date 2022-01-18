@@ -41,7 +41,8 @@ input {
 input[type="checkbox"],
 input[type="radio"] {
   filter: grayscale(1);
-  &:focus {
+  &:focus,
+  &:checked {
     filter: grayscale(1);
   }
 }

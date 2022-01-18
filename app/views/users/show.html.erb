@@ -30,7 +30,7 @@
 						<div id="orders-display-btn" type="button">Mes achats</div>
 						<div id="sales-display-btn" type="button">Mes ventes</div>
 					</div>
-					<div id="orders-carousel" class="items-carousel" data-flickity='{ "setGallerySize": false, "draggable": false, "contain": true, "pageDots": false, "cellSelector": ".orders-cells" }'>
+					<div id="orders-carousel" class="items-carousel" data-flickity='{ "setGallerySize": false, "contain": true, "pageDots": false, "cellSelector": ".orders-cells" }'>
 						<% current_user.orders.each do |order| %>
 							<div class="profile__business-item orders-cells">
 								<%= cl_image_tag(order.sneaker.photos.first&.key, class: 'profile__business-item-photo') %>
@@ -140,7 +140,6 @@ function init() {
 	// init sales carousel then hide it
 	var flkty = new Flickity( '#sales-carousel', {
 		"setGallerySize": false,
-		"draggable": false,
 		"contain": true,
 		"pageDots": false,
 		"cellSelector": ".sales-cells",
