@@ -2,14 +2,6 @@ class OrdersController < ApplicationController
 
 	def new 
 		@sneaker = Sneaker.find(params[:sneaker_id])
-
-		@intent = Stripe::PaymentIntent.create(
-			amount: @sneaker.price_cents,
-			currency: 'eur',
-			automatic_payment_methods: {
-				enabled: true,
-			}
-		)
 	end
 
 	def show
@@ -61,17 +53,30 @@ class OrdersController < ApplicationController
 		service_fee = sneaker_price * 0.06
 		total_price = sneaker_price + shipping_fee + service_fee
 
-		order = Order.new(order_params.merge(
+		@order = Order.new(order_params.merge(
 			user: current_user,
 			shipping_fee: Money.new(shipping_fee),
 			service_fee: Money.new(service_fee),
 			total_price: Money.new(total_price),
 		))
 
-		if order.save
-			render json: { orderId: order.id }, status: 200
+		@intent = Stripe::PaymentIntent.create(
+			amount: total_price.to_i,
+			currency: 'eur',
+			automatic_payment_methods: {
+				enabled: true,
+			}
+		)
+
+		@order.payment_intent_id = @intent.id
+
+		if @order.save
+			respond_to do |format|
+				format.js
+				format.html
+			end
 		else
-			redirect_to request.referer, alert: order.errors.full_messages.join(', ')
+			redirect_to request.referer, alert: @order.errors.full_messages.join(', ')
 		end
 	end
 	

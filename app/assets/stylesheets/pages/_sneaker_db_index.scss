@@ -2,6 +2,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 3rem;
+  @supports (-webkit-touch-callout: none) and (not (translate: none)) {
+    &:not(:last-child) {
+      margin-right: 3rem;
+      margin-bottom: 3rem;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
 }
 .sneakerdb-index__card {
   position: relative;
@@ -10,6 +20,12 @@
   padding: 1.5rem 2rem;
   gap: 1rem;
   width: 380px;
+  height: 280px;
+  @supports (-webkit-touch-callout: none) and (not (translate: none)) {
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
 
   @include media-breakpoint-up(lg) {
     &:hover {
