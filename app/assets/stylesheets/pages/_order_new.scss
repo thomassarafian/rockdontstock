@@ -40,6 +40,10 @@
     }
   }
   &__validation__btn {
+    margin-top: 1rem;
+  }
+  &__validation__btn,
+  &__get-payment__btn {
     @include cta-button;
     margin-bottom: 1rem;
 
