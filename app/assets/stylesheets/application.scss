@@ -41,6 +41,9 @@ input {
 input[type="checkbox"],
 input[type="radio"] {
   filter: grayscale(1);
+  &:focus {
+    filter: grayscale(1);
+  }
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
