@@ -28,9 +28,10 @@
   gap: 1rem;
   color: #dbdbdb;
   margin-bottom: 5rem;
+  margin-top: 1rem;
 
   &__step {
-    flex-grow: 1;
+    width: 25%;
   }
   
   &__step-title {
@@ -38,6 +39,13 @@
     &--active,
     &--complete {
       color: $black;
+    }
+    @include media-breakpoint-down(md) {
+      &,
+      &--active,
+      &--complete {
+        font-size: 0.75rem;
+      }
     }
   }
   &__step-display {
@@ -74,6 +82,13 @@
     width: 300px;
     height: 180px;
     object-fit: contain;
+  }
+}
+.sneaker-form__sneaker__input {
+  width: 380px;
+  position: relative;
+  @include media-breakpoint-down(md) {
+    width: 100%;
   }
 }
 .sneaker-form__infos {

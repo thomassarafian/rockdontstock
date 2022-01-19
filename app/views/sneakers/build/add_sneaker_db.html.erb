@@ -25,7 +25,7 @@
     <div class="form-search">
       <div style="font-weight: 700">Recherche la paire que tu souhaites vendre</div>
       <%= form_with url: sneaker_dbs_path, method: :get, local: false, html: { class: 'search-sneaker-model-form' } do |f| %>
-        <div style="position: relative; width: 380px">
+        <div class="sneaker-form__sneaker__input">
           <%= f.text_field :search, class: "form-control my-2", placeholder: "Adidas Yeezy Boost 350 v2 Bred...", id: 'search_sneaker_name' %>
           <%= image_tag "images/lens.svg", style: "position: absolute; right: 0.5rem; top: 0; transform: translateY(50%)" %>
         </div>
