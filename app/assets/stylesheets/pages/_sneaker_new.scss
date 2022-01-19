@@ -109,7 +109,7 @@
 .sneaker-form__photo {
   position: relative;
   width: 250px;
-  height: 250px;
+  height: 220px;
   border: 2px dashed #d6d6d6;
 
   @include media-breakpoint-down(md) {
@@ -164,7 +164,7 @@
   width: 100%;
   opacity: 0;
   z-index: 999;
-  height: 60px;
+  height: 30%;
   cursor: pointer;
 }
 .sneaker-form__photo__btn {
