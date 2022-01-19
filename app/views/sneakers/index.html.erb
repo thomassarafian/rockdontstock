@@ -175,33 +175,34 @@
     document.body.style.overflowY = 'hidden'
     document.querySelector('.popup-close-icon').style.display = "block"
 
+
     if (which == "filter") {
-      document.querySelector('.sort-btn').style.display = "none"
-      document.querySelector('.filter-btn').style.textAlign = "right"
-      document.querySelector('.filter-btn').style.border = "none"
+      sortBtn.style.display = "none"
+      filterBtn.style.textAlign = "right"
+      filterBtn.style.border = "none"
       document.querySelector('.filter-popup').style.display = "block"
     } else {
-      document.querySelector('.filter-btn').style.display = "none"
-      document.querySelector('.sort-btn').style.textAlign = "right"
-      document.querySelector('.sort-btn').style.border = "none"
+      filterBtn.style.display = "none"
+      sortBtn.style.textAlign = "right"
+      sortBtn.style.border = "none"
       document.querySelector('.sort-popup').style.display = "block"
     }
   }
 
   function hidePopup() {
     // reset buttons
-    document.querySelector('.filter-btn').style.textAlign = "center"
-    document.querySelector('.filter-btn').style.border = "1px solid #0E0E0E"
-    document.querySelector('.filter-btn').style.borderRight = "none"
-    document.querySelector('.sort-btn').style.textAlign = "center"
-    document.querySelector('.sort-btn').style.border = "1px solid #0E0E0E"
+    filterBtn.style.textAlign = "center"
+    filterBtn.style.border = "1px solid #0E0E0E"
+    filterBtn.style.borderRight = "none"
+    sortBtn.style.textAlign = "center"
+    sortBtn.style.border = "1px solid #0E0E0E"
 
     document.querySelector('.popup-close-icon').style.display = "none"
-    document.querySelector('.filter-btn').style.display = "block"
-    document.querySelector('.sort-btn').style.display = "block"
+    filterBtn.style.display = "block"
+    sortBtn.style.display = "block"
     document.querySelector('.filter-popup').style.display = "none"
     document.querySelector('.sort-popup').style.display = "none"
-    document.body.style.overflowY = ''
+    document.body.style.overflowY = ""
   }
 
   function togglePopover(which) {
@@ -228,6 +229,12 @@
     })
 
   })
+
+  let filterBtn = document.querySelector('.filter-btn')
+  let sortBtn = document.querySelector('.sort-btn')
+  filterBtn.addEventListener('click', () => revealPopup('filter'))
+  sortBtn.addEventListener('click', () => revealPopup('sort'))
+
 </script>
 
 <style>
@@ -268,7 +275,6 @@
   overflow-y: scroll;
   padding: 2rem 1rem;
   background: white;
-  -webkit-backface-visibility: hidden;
 }
 .popup::-webkit-scrollbar {
   display: none; /* chrome safari opera */
@@ -276,7 +282,7 @@
 .popup {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-} 
+}
 .card {
   margin-bottom: 1rem;
 }
