@@ -28,6 +28,7 @@
   gap: 1rem;
   color: #dbdbdb;
   margin-bottom: 5rem;
+  margin-top: 1rem;
 
   &__step {
     flex-grow: 1;
@@ -38,6 +39,13 @@
     &--active,
     &--complete {
       color: $black;
+    }
+    @include media-breakpoint-down(md) {
+      &,
+      &--active,
+      &--complete {
+        font-size: 0.75rem;
+      }
     }
   }
   &__step-display {
@@ -76,6 +84,13 @@
     object-fit: contain;
   }
 }
+.sneaker-form__sneaker__input {
+  width: 380px;
+  position: relative;
+  @include media-breakpoint-down(md) {
+    width: 100%;
+  }
+}
 .sneaker-form__infos {
 	display: flex;
 	width: 25%;
@@ -93,10 +108,22 @@
   flex-wrap: wrap;
   gap: 3rem 2rem;
   margin-top: 3rem;
+  @supports (-webkit-touch-callout: none) and (not (translate: none)) {
+    &:not(:last-child) {
+      margin-right: 2rem;
+      margin-bottom: 3rem;
+    }
+  }
 
   @include media-breakpoint-down(md) {
     justify-content: center;
-    gap: 3rem 1rem;
+    gap: 3rem 0.8rem;
+    @supports (-webkit-touch-callout: none) and (not (translate: none)) {
+      &:not(:last-child) {
+        margin-right: 0.8rem;
+        margin-bottom: 3rem;
+      }
+    }
   }
 
   & label {

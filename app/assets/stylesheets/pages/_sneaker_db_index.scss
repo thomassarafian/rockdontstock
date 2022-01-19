@@ -28,6 +28,10 @@
     }
   }
 
+  @include media-breakpoint-down(md) {
+    width: 100%;
+  }
+
   @include media-breakpoint-up(lg) {
     &:hover {
       outline: 1px solid $black;
