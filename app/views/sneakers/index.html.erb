@@ -35,20 +35,24 @@
       <div class="custom-popover sortby-popover">
         <%= form_with url: sneakers_path, method: :get, html: { id: "sort-form-desktop" } do |f| %>
           <div class="form-check mb-1">
-            <%= f.radio_button :sort_by, "price_cents ASC", { class: "form-check-input" } %>
-            <%= f.label "Prix croissant", class: "form-check-label" %>
+            <label class="form-check-label">
+              <%= f.radio_button :sort_by, "price_cents ASC", { class: "form-check-input" } %> Prix croissant
+            </label>
           </div>
           <div class="form-check mb-1">
-            <%= f.radio_button :sort_by, "price_cents DESC", { class: "form-check-input" } %>
-            <%= f.label "Prix décroissant", class: "form-check-label" %>
+            <label class="form-check-label">
+              <%= f.radio_button :sort_by, "price_cents DESC", { class: "form-check-input" } %> Prix décroissant
+            </label>
           </div>
           <div class="form-check mb-1">
-            <%= f.radio_button :sort_by, "created_at DESC", { class: "form-check-input", checked: true } %>
-            <%= f.label "Du plus récent au plus ancien", class: "form-check-label" %>
+            <label class="form-check-label">
+              <%= f.radio_button :sort_by, "created_at DESC", { class: "form-check-input", checked: true } %> Du plus récent au plus ancien
+            </label>us ancien", class: "form-check-label" %>
           </div>
           <div class="form-check mb-1">
-            <%= f.radio_button :sort_by, "created_at ASC", { class: "form-check-input" } %>
-            <%= f.label "Du plus ancien au plus récent", class: "form-check-label" %>
+            <label class="form-check-label">
+              <%= f.radio_button :sort_by, "created_at ASC", { class: "form-check-input" } %> Du plus ancien au plus récent
+            </label>
           </div>
         <% end %>
       </div>
