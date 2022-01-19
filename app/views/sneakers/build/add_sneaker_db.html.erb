@@ -73,4 +73,19 @@ function displayForm(which) {
     formSearch.style.display = "block"
   }
 }
+
+function initAjaxSubmit() {
+  let input = document.getElementById('search_sneaker_name')
+  
+  input.addEventListener('input', function() {
+    let queryString = "sneaker_id=<%= @sneaker.id %>" + "&search=" + input.value
+
+    Rails.ajax({
+      type: "GET",
+      url: "<%= sneaker_dbs_url %>",
+      data: queryString
+    })
+  })
+}
+initAjaxSubmit()
 </script>
