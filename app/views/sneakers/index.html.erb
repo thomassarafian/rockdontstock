@@ -19,7 +19,7 @@
           </div>
           <div class="sneaker-featured-details__price"><%= @selection_of_the_day.price %>€</div>
           <div>
-            <button action="<%= new_sneaker_order_url(@selection_of_the_day) %>" class="sneaker-featured-details__purchase">Acheter</button>
+            <%= link_to "Acheter", new_sneaker_order_url(@selection_of_the_day), class: "sneaker-featured-details__purchase" %>
             <button class="sneaker-featured-details__discover">Découvrir le modèle</button>
           </div>
         </div>
