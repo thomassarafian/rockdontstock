@@ -77,6 +77,7 @@
 }
 .sneaker-featured-details__discover {
   @include secondary-button;
+
   @include media-breakpoint-down(md) {
     width: 100%;
   }
