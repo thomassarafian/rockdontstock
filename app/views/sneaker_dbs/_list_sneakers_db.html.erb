@@ -3,7 +3,7 @@
     <%= form_for @sneaker, url: sneaker_build_path(@sneaker.id, :add_sneaker_db), method: :put do |f| %>
       <%= f.hidden_field :sneaker_db_id, value: sneaker_db.id %>
       <div class="sneakerdb-index__card">
-        <%= image_tag(sneaker_db.img_url, class: "sneakerdb-index__card__photo") %>
+        <img src="<%= sneaker_db.img_url%>" class="sneakerdb-index__card__photo">
         <div class="sneakerdb-index__card__name">
           <strong><%= sneaker_db.name %></strong>
         </div>
