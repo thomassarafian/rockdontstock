@@ -3,29 +3,31 @@
 
 <title>Recherche - Rock Don't Stock</title>
 <div class="container">
-  <section class="sneaker-featured">
-    <div class="sneaker-featured__subtitle">Parcourir nos</div>
-    <h2>Sneakers</h2>
-    <div class="sneaker-featured-block">
-      <div class="sneaker-featured-block__title">Sélection du jour</div>
-      <div class="sneaker-featured-block__content">
-        <%= cl_image_tag(@selection_of_the_day.photos.first&.key, class: 'sneaker-featured-photo') %>
-        <div class="sneaker-featured-details">
-          <%= link_to sneaker_path(@selection_of_the_day) do %>
-            <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
-          <% end %>
-          <div class="sneaker-featured-details__options">
-            <%= @selection_of_the_day.sneaker_db.category %> - Taille <%= @selection_of_the_day.size %> <br />Condition: <%= @selection_of_the_day.condition %>/10
-          </div>
-          <div class="sneaker-featured-details__price"><%= @selection_of_the_day.price %>€</div>
-          <div>
-            <%= button_to "Acheter", new_sneaker_order_path(@selection_of_the_day), method: :get, class: "sneaker-featured-details__purchase" %>
-            <%= button_to "Découvrir le modèle", sneaker_path(@selection_of_the_day), method: :get, class: "sneaker-featured-details__discover" %>
+  <% if !@referer&.match?("/sneakers?") %>
+    <section class="sneaker-featured">
+      <div class="sneaker-featured__subtitle">Parcourir nos</div>
+      <h2>Sneakers</h2>
+      <div class="sneaker-featured-block">
+        <div class="sneaker-featured-block__title">Sélection du jour</div>
+        <div class="sneaker-featured-block__content">
+          <%= cl_image_tag(@selection_of_the_day.photos.first&.key, class: 'sneaker-featured-photo') %>
+          <div class="sneaker-featured-details">
+            <%= link_to sneaker_path(@selection_of_the_day) do %>
+              <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
+            <% end %>
+            <div class="sneaker-featured-details__options">
+              <%= @selection_of_the_day.sneaker_db.category %> - Taille <%= @selection_of_the_day.size %> <br />Condition: <%= @selection_of_the_day.condition %>/10
+            </div>
+            <div class="sneaker-featured-details__price"><%= @selection_of_the_day.price %>€</div>
+            <div>
+              <%= button_to "Acheter", new_sneaker_order_path(@selection_of_the_day), method: :get, class: "sneaker-featured-details__purchase" %>
+              <%= button_to "Découvrir le modèle", sneaker_path(@selection_of_the_day), method: :get, class: "sneaker-featured-details__discover" %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <% end %>
   <div class="d-flex justify-content-between">
     <div style="font-size: 1.563rem; margin-bottom: 3rem">Toutes les sneakers</div>
     <div style="position: relative;">
