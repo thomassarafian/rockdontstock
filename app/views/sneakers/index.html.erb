@@ -3,29 +3,31 @@
 
 <title>Recherche - Rock Don't Stock</title>
 <div class="container">
-  <section class="sneaker-featured">
-    <div class="sneaker-featured__subtitle">Parcourir nos</div>
-    <h2>Sneakers</h2>
-    <div class="sneaker-featured-block">
-      <div class="sneaker-featured-block__title">Sélection du jour</div>
-      <div class="sneaker-featured-block__content">
-        <%= cl_image_tag(@selection_of_the_day.photos.first&.key, class: 'sneaker-featured-photo') %>
-        <div class="sneaker-featured-details">
-          <%= link_to sneaker_path(@selection_of_the_day) do %>
-            <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
-          <% end %>
-          <div class="sneaker-featured-details__options">
-            <%= @selection_of_the_day.sneaker_db.category %> - Taille <%= @selection_of_the_day.size %> <br />Condition: <%= @selection_of_the_day.condition %>/10
-          </div>
-          <div class="sneaker-featured-details__price"><%= @selection_of_the_day.price %>€</div>
-          <div>
-            <%= button_to "Acheter", new_sneaker_order_path(@selection_of_the_day), method: :get, class: "sneaker-featured-details__purchase" %>
-            <%= button_to "Découvrir le modèle", sneaker_path(@selection_of_the_day), method: :get, class: "sneaker-featured-details__discover" %>
+  <% if !@referer&.match?("/sneakers?") %>
+    <section class="sneaker-featured">
+      <div class="sneaker-featured__subtitle">Parcourir nos</div>
+      <h2>Sneakers</h2>
+      <div class="sneaker-featured-block">
+        <div class="sneaker-featured-block__title">Sélection du jour</div>
+        <div class="sneaker-featured-block__content">
+          <%= cl_image_tag(@selection_of_the_day.photos.first&.key, class: 'sneaker-featured-photo') %>
+          <div class="sneaker-featured-details">
+            <%= link_to sneaker_path(@selection_of_the_day) do %>
+              <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
+            <% end %>
+            <div class="sneaker-featured-details__options">
+              <%= @selection_of_the_day.sneaker_db.category %> - Taille <%= @selection_of_the_day.size %> <br />Condition: <%= @selection_of_the_day.condition %>/10
+            </div>
+            <div class="sneaker-featured-details__price"><%= @selection_of_the_day.price %>€</div>
+            <div>
+              <%= button_to "Acheter", new_sneaker_order_path(@selection_of_the_day), method: :get, class: "sneaker-featured-details__purchase" %>
+              <%= button_to "Découvrir le modèle", sneaker_path(@selection_of_the_day), method: :get, class: "sneaker-featured-details__discover" %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <% end %>
   <div class="d-flex justify-content-between">
     <div style="font-size: 1.563rem; margin-bottom: 3rem">Toutes les sneakers</div>
     <div style="position: relative;">
@@ -173,33 +175,34 @@
     document.body.style.overflowY = 'hidden'
     document.querySelector('.popup-close-icon').style.display = "block"
 
+
     if (which == "filter") {
-      document.querySelector('.sort-btn').style.display = "none"
-      document.querySelector('.filter-btn').style.textAlign = "right"
-      document.querySelector('.filter-btn').style.border = "none"
+      sortBtn.style.display = "none"
+      filterBtn.style.textAlign = "right"
+      filterBtn.style.border = "none"
       document.querySelector('.filter-popup').style.display = "block"
     } else {
-      document.querySelector('.filter-btn').style.display = "none"
-      document.querySelector('.sort-btn').style.textAlign = "right"
-      document.querySelector('.sort-btn').style.border = "none"
+      filterBtn.style.display = "none"
+      sortBtn.style.textAlign = "right"
+      sortBtn.style.border = "none"
       document.querySelector('.sort-popup').style.display = "block"
     }
   }
 
   function hidePopup() {
     // reset buttons
-    document.querySelector('.filter-btn').style.textAlign = "center"
-    document.querySelector('.filter-btn').style.border = "1px solid #0E0E0E"
-    document.querySelector('.filter-btn').style.borderRight = "none"
-    document.querySelector('.sort-btn').style.textAlign = "center"
-    document.querySelector('.sort-btn').style.border = "1px solid #0E0E0E"
+    filterBtn.style.textAlign = "center"
+    filterBtn.style.border = "1px solid #0E0E0E"
+    filterBtn.style.borderRight = "none"
+    sortBtn.style.textAlign = "center"
+    sortBtn.style.border = "1px solid #0E0E0E"
 
     document.querySelector('.popup-close-icon').style.display = "none"
-    document.querySelector('.filter-btn').style.display = "block"
-    document.querySelector('.sort-btn').style.display = "block"
+    filterBtn.style.display = "block"
+    sortBtn.style.display = "block"
     document.querySelector('.filter-popup').style.display = "none"
     document.querySelector('.sort-popup').style.display = "none"
-    document.body.style.overflowY = ''
+    document.body.style.overflowY = ""
   }
 
   function togglePopover(which) {
@@ -226,6 +229,12 @@
     })
 
   })
+
+  let filterBtn = document.querySelector('.filter-btn')
+  let sortBtn = document.querySelector('.sort-btn')
+  filterBtn.addEventListener('click', () => revealPopup('filter'))
+  sortBtn.addEventListener('click', () => revealPopup('sort'))
+
 </script>
 
 <style>
@@ -266,7 +275,8 @@
   overflow-y: scroll;
   padding: 2rem 1rem;
   background: white;
-  -webkit-backface-visibility: hidden;
+  z-index: 990;
+  min-height: 100vh;
 }
 .popup::-webkit-scrollbar {
   display: none; /* chrome safari opera */
@@ -274,7 +284,7 @@
 .popup {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-} 
+}
 .card {
   margin-bottom: 1rem;
 }
