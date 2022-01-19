@@ -1,2 +1,13 @@
 document.getElementById('form-content').innerHTML = "<%= j render partial: 'sneaker_dbs/list_sneakers_db' %>"
 Pagy.init(document.getElementById('form-content'))
+updateListeners()
+
+function updateListeners() {
+  let btns = document.querySelectorAll('.sneakerdb-index__card')
+  btns.forEach(btn => {
+    console.log(btn)
+    btn.addEventListener('click', function() {
+      btn.closest('form').submit();
+    })
+  })
+}

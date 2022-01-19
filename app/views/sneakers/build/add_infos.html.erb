@@ -1,10 +1,8 @@
-<% brand = ["Adidas", "Air Jordan", "Nike", "New Balance", "Other Brands", "Luxury Brands", "Collections"] %>
-<% price = [["Moins de 100€", 100], ["Moins de 200€", 200], ["Moins de 300€", 300], ["Plus de 300€", 301]] %>
-<% condition = [["5/10 et moins", 5], ["6/10", 6], ["8/10", 8], ["9/10", 9], ["10/10", 10]] %>
-<% size = [["1", 1], ["1.5", 1.5], ["2", 2], ["2.5", 2.5], ["3", 3], ["3.5", 3.5], ["4", 4], ["4.5", 4.5], ["5", 5],
-                ["5.5", 5.5], ["6", 6], ["6.5", 6.5], ["7", 7], ["7.5", 7.5], ["8", 8], ["8.5", 8.5], ["9", 9], ["9.5", 9.5],
-                ["10", 10], ["10.5", 10.5], ["11", 11], ["11.5", 11.5], ["12",12], ["12.5", 12.5], ["13", 13], ["13.5", 13.5],
-                ["14", 14], ["14.5", 14.5], ["15", 15], ["16", 16], ["17", 17], ["18", 18]] %>
+<% brands = ["Nike", "Jordan", "Adidas", "Yeezy", "New Balance", "Asics", "Autres"] %>
+<% conditions = {"6/10 ou moins": 6, "7/10": 7, "8/10": 8, "9/10": 9, "10/10": 10} %>
+<% boxes = ["Boîte d'origine (avec extra)","Boîte d'origine (sans extra)","Boîte de remplacement","Sans boîte"] %>
+<% sizes = [36, 36.5, 37, 37.5, 38, 38.5, 39, 39.5, 40, 40.5, 41, 41.5, 42, 42.5, 43, 43.5, 44, 44.5, 45, 45.5, 46, 46.5, 47] %>
+
 <div class="container">
   <div class="sale-wizard__subtitle">Etape 2</div>
   <h2 class="sale-wizard__title">Vendre ma paire</h2>
@@ -28,12 +26,12 @@
   </div>
   <%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
     <div class="sneaker-form__infos">
-      <%= f.select :size, size, { include_blank: "Taille FR" }, {  class: "form-group form-control form-select", required: true } %>
+      <%= f.select :size, sizes, { include_blank: "Taille FR" }, {  class: "form-group form-control form-select", required: true } %>
       <div class="form-group">
-        <%= f.select :condition, condition, { include_blank: "Condition" }, {  class: "form-control form-select", required: true } %>
+        <%= f.select :condition, conditions, { include_blank: "Condition" }, {  class: "form-control form-select", required: true } %>
         <%= link_to "Tout savoir sur les conditions", root_path, style: "font-size: 0.8rem" %>
       </div>
-      <%= f.select :box, brand, { include_blank: "Type de boîte" }, {  class: "form-group form-control form-select", required: true } %>
+      <%= f.select :box, boxes, { include_blank: "Type de boîte" }, {  class: "form-group form-control form-select", required: true } %>
       <div class="form-group">
         <%= f.label "Commentaire", class: "form-label" %>
         <%= f.text_area :extras, rows: 5, class: "form-control", placeholder: "Transmets-nous ici les défauts de ta paire ou toute information utile pour l’acheteur (trous, traçes, extra manquant...). " %>
