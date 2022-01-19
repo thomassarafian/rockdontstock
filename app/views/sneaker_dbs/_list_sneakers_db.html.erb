@@ -4,9 +4,9 @@
       <%= f.hidden_field :sneaker_db_id, value: sneaker_db.id %>
       <div class="sneakerdb-index__card">
         <%= image_tag("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png", class: "sneakerdb-index__card__photo") %>
-        <%= image_tag(URI.escape(sneaker_db.img_url), class: "sneakerdb-index__card__photo") %>
-        <img src="<%= URI.escape(sneaker_db.img_url) %>" class="sneakerdb-index__card__photo">
-        <img src="<%= URI.escape(sneaker_db.img_url) %>" class="sneakerdb-index__card__photo" style="width: 200px; height: 200px;">
+        <%= image_tag(CGI.escape(sneaker_db.img_url), class: "sneakerdb-index__card__photo") %>
+        <img src="<%= CGI.escape(sneaker_db.img_url) %>" class="sneakerdb-index__card__photo">
+        <img src="<%= CGI.escape(sneaker_db.img_url) %>" class="sneakerdb-index__card__photo" style="width: 200px; height: 200px;">
         <div class="sneakerdb-index__card__name">
           <strong><%= sneaker_db.name %></strong>
         </div>
