@@ -108,10 +108,22 @@
   flex-wrap: wrap;
   gap: 3rem 2rem;
   margin-top: 3rem;
+  @supports (-webkit-touch-callout: none) and (not (translate: none)) {
+    &:not(:last-child) {
+      margin-right: 2rem;
+      margin-bottom: 3rem;
+    }
+  }
 
   @include media-breakpoint-down(md) {
     justify-content: center;
     gap: 3rem 0.8rem;
+    @supports (-webkit-touch-callout: none) and (not (translate: none)) {
+      &:not(:last-child) {
+        margin-right: 0.8rem;
+        margin-bottom: 3rem;
+      }
+    }
   }
 
   & label {
