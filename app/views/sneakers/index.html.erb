@@ -118,8 +118,13 @@
         </div>
       <% end %>
     </div>
-    <div class="search-results" id="search-results">
-      <%= render partial: 'sneakers/list_sneakers' %>
+    <div class="d-flex flex-column align-items-center">
+      <div class="search-results" id="search-results">
+        <%= render partial: 'sneakers/list_sneakers' %>
+      </div>
+      <div style="position: relative; top: 5rem">
+        <%== pagy_bootstrap_nav(@pagy) if @pagy %>
+      </div>
     </div>
   </div>
 </div>
