@@ -2,6 +2,9 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
 
   def set_as_day_selection
     selected_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
+    puts "*"*100
+    puts params
+    puts selected_id
 
     if selected_id
       Sneaker.find(selected_id).update(highlighted: true)
