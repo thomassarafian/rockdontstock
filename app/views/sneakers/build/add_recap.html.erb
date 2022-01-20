@@ -59,7 +59,7 @@
         </div>
         <div class="sneaker-form__recap__card__order-infos__item">
           <div>Authentification</div>
-          <div><%= current_user.sneakers.where(status: "active").count == 0 ? "GRATUIT" : "-15 €" %></div>
+          <div><%= current_user.sneakers.where(status: "active").count == 0 ? "GRATUIT" : "-#{@sneaker.price * 0.06} €" %></div>
         </div>
         <div class="sneaker-form__recap__card__order-infos__item">
           <div>Frais d'expédition</div>
@@ -68,7 +68,7 @@
       </div>
       <div class="sneaker-form__recap__card__total">
         <div>Total</div>
-        <div><%= @sneaker.price %> €</div>
+        <div><%= (1.06 * @sneaker.price_cents - 499) / 100.00 %> €</div>
       </div>
       <%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
         <button class="sneaker-form__recap__card__btn">
