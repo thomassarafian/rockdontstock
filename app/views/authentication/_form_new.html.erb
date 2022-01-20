@@ -55,6 +55,12 @@
 <script>
 
   paypal.Buttons({
+    style: {
+      layout:  'horizontal',
+      color:   'black',
+      label:   'paypal',
+      tagline: 'false'
+    },
     // Sets up the transaction when a payment button is clicked
     createOrder: function(data, actions) {
       return actions.order.create({
