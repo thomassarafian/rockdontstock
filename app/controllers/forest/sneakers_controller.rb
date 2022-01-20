@@ -6,12 +6,13 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     puts params
     puts selected_id
 
-    if !selected_id.nil?
-      Sneaker.find(selected_id).update(highlighted: true)
+    Sneaker.find(selected_id).update(highlighted: true)
 
-      # unselect oldest ones (keeps total amount equal)
-      Sneaker.highlighted.first.update(highlighted: false) if Sneaker.highlighted.count > 3
+    # unselect oldest ones (keeps total amount equal)
+    if Sneaker.highlighted.count > 3
+      Sneaker.highlighted.first.update(highlighted: false)
     end
+    
   end
 
   def set_as_home_selection
