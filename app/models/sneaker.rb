@@ -88,8 +88,8 @@ class Sneaker < ApplicationRecord
   end
 
   def timestamp_selection
-    self.selected_at = Time.zone.now if self.selected_change&.last === true
-    self.highlighted_at = Time.zone.now if self.highlighted_change&.last === true
+    self.selected_at = Time.zone.now if self.selected_change&.last === true || self.selected_at.nil?
+    self.highlighted_at = Time.zone.now if self.highlighted_change&.last === true || self.highlighted_at.nil?
   end
 
 end
