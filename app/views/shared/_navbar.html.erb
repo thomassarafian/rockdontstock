@@ -1,5 +1,6 @@
 <% brands = ["Nike", "Jordan", "Adidas", "Yeezy", "New Balance", "Asics", "Autres"] %>
 <% conditions = {"6/10 ou moins": 6, "7/10": 7, "8/10": 8, "9/10": 9, "10/10": 10} %>
+<% sizes = [36, 36.5, 37, 37.5, 38, 38.5, 39, 39.5, 40, 40.5, 41, 41.5, 42, 42.5, 43, 43.5, 44, 44.5, 45, 45.5, 46, 46.5, 47, 47.5, 48, 48.5, 49, 49.5] %>
 
 <!-- DESKTOP -->
 <div class="container d-none d-lg-block backdrop" style="position: sticky; top: 0; z-index: 1;">
@@ -133,16 +134,10 @@
             </div>
             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordion">
               <div class="card-body">
-                <% (34..47).each do |size| %>
+                <% sizes.each do |size| %>
                   <div class="form-check mb-1">
                     <label class="form-check-label">
                       <%= f.check_box :size, { multiple: true, class: "form-check-input" }, size, nil %> <%= size %>
-                    </label>
-                  </div>
-                  <% break if size == 47%>
-                  <div class="form-check mb-1">
-                    <label class="form-check-label">
-                      <%= f.check_box :size, { multiple: true, class: "form-check-input" }, (size + 0.5), nil %> <%= size + 0.5 %>
                     </label>
                   </div>
                 <% end %>
