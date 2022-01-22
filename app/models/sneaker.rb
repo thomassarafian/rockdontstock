@@ -24,7 +24,7 @@ class Sneaker < ApplicationRecord
 	has_many_attached :photos, service: :cloudinary, dependent: :detach
   has_many :orders, dependent: :destroy
 	belongs_to :user
-  belongs_to :sneaker_db, optional: true
+  belongs_to :sneaker_db, optional: true 
   
   validates :sneaker_db, presence: true, if: :active_or_step_sneaker_db?
   validates :size, :condition, :box, :price, presence: true, if: :active_or_step_infos?

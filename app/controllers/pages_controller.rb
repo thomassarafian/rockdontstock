@@ -9,7 +9,7 @@ class PagesController < ApplicationController
     @sneakers_last_added = Sneaker.limit(8) if @sneakers_last_added.empty?
   end
   
-  def newsletter
+  def newsletter 
     if Subscription.new(params[:email]).as_prospect
       redirect_to request.referer, notice: "Félicitations ! Tu vas bientôt recevoir nos offres"
     else

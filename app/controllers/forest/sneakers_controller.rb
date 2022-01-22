@@ -18,7 +18,7 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     selection = Sneaker.where(id: selected_ids)
     selection.update_all(selected: true)
 
-    # keep latest 10 as selected
+    # keep latest 10 as selected 
     if Sneaker.selected.count > 10
       count = selection.count
       sneakers_to_remove = Sneaker.selected[0..count - 1]
