@@ -27,6 +27,25 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     end
   end
 
+  def send_email_finish_announcement
+    selected_ids = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0)
+
+    # we only want to send reminder emails to unactive announcements
+    unfinished_sneakers = Sneaker.where(id: selected_ids).where.not(status: "active")
+    sellers_emails = unfinished_sneakers.map(&:user).map(&:email).map{|email| {'Email'=> email}}
+
+    Mailjet::Send.create(messages: [{
+      'From'=> {
+        'Email'=> "elliot@rockdontstock.com",
+        'Name'=> "Rock Don't Stock"
+      },
+      'To'=> sellers_emails,
+      'TemplateID'=> 2965246,
+      'TemplateLanguage'=> true,
+      'Subject'=> "N'hésite pas à terminer ton annonce !",
+    }])
+  end
+
   def validate_announcement
     sneaker_id = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0).first
 

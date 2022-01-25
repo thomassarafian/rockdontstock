@@ -1599,6 +1599,19 @@
         "change": []
       }
     }, {
+      "name": "Send email finish announcement",
+      "type": "bulk",
+      "base_url": null,
+      "endpoint": "forest/actions/send-email-finish-announcement",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
+    }, {
       "name": "Validate announcement",
       "type": "bulk",
       "base_url": null,
