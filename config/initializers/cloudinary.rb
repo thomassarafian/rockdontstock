@@ -4,4 +4,7 @@ Cloudinary.config do |config|
   config.api_secret = ENV['CLOUDINARY_SECRET_KEY']
   config.secure = true
   config.cdn_subdomain = true
+  config.transformation = [
+    {:width => 1000, :height => 1000, :crop => :limit, :quality => :auto}
+  ]
 end
