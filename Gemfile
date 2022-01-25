@@ -64,6 +64,7 @@ gem 'pagy', '~> 3.5' #pagination
 gem 'forest_liana' # admin
 gem 'rack-cors'    # admin
 
+gem "figaro" # all private api key
 
 group :development, :test do
   gem 'pry-byebug'
