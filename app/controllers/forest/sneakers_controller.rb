@@ -30,20 +30,27 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
   def send_email_finish_announcement
     selected_ids = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0)
 
-    # we only want to send reminder emails to unactive announcements
-    unfinished_sneakers = Sneaker.where(id: selected_ids).where.not(status: "active")
-    sellers_emails = unfinished_sneakers.map(&:user).map(&:email).map{|email| {'Email'=> email}}
+    # we want to send reminder emails to ppl whose upload did not go through
+    sneakers = Sneaker.where(id: selected_ids).where(status: "add_photos")
 
-    Mailjet::Send.create(messages: [{
-      'From'=> {
-        'Email'=> "elliot@rockdontstock.com",
-        'Name'=> "Rock Don't Stock"
-      },
-      'To'=> sellers_emails,
-      'TemplateID'=> 2965246,
-      'TemplateLanguage'=> true,
-      'Subject'=> "N'hésite pas à terminer ton annonce !",
-    }])
+    sneakers.each do |sneaker| 
+      Mailjet::Send.create(messages: [{
+        'From'=> {
+          'Email'=> "elliot@rockdontstock.com",
+          'Name'=> "Rock Don't Stock"
+        },
+        'To' => [{ 'Email' => sneaker.user.email, 'Name' => sneaker.user.full_name }],
+        # TODO 'TemplateID'=> XXXX
+        'TemplateLanguage'=> true,
+        'Subject'=> "N'hésite pas à terminer ton annonce !",
+        'Variables'=> {
+          "prenom" => sneaker.user.first_name,
+          "modele_paire" => sneaker.sneaker_db.name,
+          "date_creation" => sneaker.created_at.strftime("%d/%m/%Y"),
+          "lien" => sneaker_build_url(sneaker.id, sneaker.status)
+        }
+      }])
+    end
   end
 
   def validate_announcement
