@@ -1806,8 +1806,8 @@
       "validations": []
     }, {
       "field": "subcategory",
-      "type": "String",
-      "default_value": null,
+      "type": ["String"],
+      "default_value": "{}",
       "enums": null,
       "integration": null,
       "is_filterable": true,

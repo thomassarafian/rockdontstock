@@ -2,7 +2,7 @@
 - Migration travaillé sur dev hier, et je migre sur prod ce soir
 -
 
-- 1000px max
+> 1000px max
+> compresser
+
 - spinner chargement
-- compresser
--
