@@ -68,7 +68,11 @@
       </div>
       <div class="sneaker-form__recap__card__total">
         <div>Total</div>
-        <div><%= (0.94 * @sneaker.price_cents - 499) / 100.00 %> €</div>
+        <% if current_user.sneakers.where(status: "active").count == 0 %>
+          <div><%= (@sneaker.price_cents - 499) / 100.00 %> €</div>
+        <% else %>
+          <div><%= (0.94 * @sneaker.price_cents - 499) / 100.00 %> €</div>
+        <% end %>
       </div>
       <%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
         <button class="sneaker-form__recap__card__btn">
