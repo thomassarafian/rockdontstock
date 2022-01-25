@@ -5,7 +5,7 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
 
     Sneaker.find(selected_id).update(highlighted: true)
 
-    # unselect oldest ones (keeps total amount equal)
+    # keep latest 3 as highlighted
     if Sneaker.highlighted.count > 3
       Sneaker.highlighted.first.update(highlighted: false)
     end
@@ -15,13 +15,41 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
   def set_as_home_selection
     selected_ids = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0)
     
-    if !selected_ids.empty?
-      selection = Sneaker.where(id: selected_ids)
-      selection.update_all(selected: true)
+    selection = Sneaker.where(id: selected_ids)
+    selection.update_all(selected: true)
 
-      # unselect oldest ones (keeps total amount equal)
-      count = selection.length
-      Sneaker.selected[0..count - 1].update_all(selected: false)
+    # keep latest 10 as selected 
+    if Sneaker.selected.count > 10
+      count = selection.count
+      sneakers_to_remove = Sneaker.selected[0..count - 1]
+      sneakers_to_remove = Sneaker.where(id: sneakers_to_remove.map(&:id))
+      sneakers_to_remove.update_all(selected: false)
+    end
+  end
+
+  def send_email_finish_announcement
+    selected_ids = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0)
+
+    # we want to send reminder emails to ppl whose upload did not go through
+    sneakers = Sneaker.where(id: selected_ids).where(status: "add_photos")
+
+    sneakers.each do |sneaker| 
+      Mailjet::Send.create(messages: [{
+        'From'=> {
+          'Email'=> "elliot@rockdontstock.com",
+          'Name'=> "Rock Don't Stock"
+        },
+        'To' => [{ 'Email' => sneaker.user.email, 'Name' => sneaker.user.full_name }],
+        # TODO 'TemplateID'=> XXXX
+        'TemplateLanguage'=> true,
+        'Subject'=> "N'hésite pas à terminer ton annonce !",
+        'Variables'=> {
+          "prenom" => sneaker.user.first_name,
+          "modele_paire" => sneaker.sneaker_db.name,
+          "date_creation" => sneaker.created_at.strftime("%d/%m/%Y"),
+          "lien" => sneaker_build_url(sneaker.id, sneaker.status)
+        }
+      }])
     end
   end
 

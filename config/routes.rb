@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     # Sneakers
     post '/actions/set-as-day-selection', to: 'sneakers#set_as_day_selection'
     post '/actions/set-as-home-selection', to: 'sneakers#set_as_home_selection'
+    post '/actions/send-email-finish-announcement', to: 'sneakers#send_email_finish_announcement'
     post '/actions/validate-announcement', to: 'sneakers#validate_announcement'
     post '/actions/reject-announcement-bad-criteria', to: 'sneakers#reject_announcement_bad_criteria'
     post '/actions/reject-announcement-bad-angles', to: 'sneakers#reject_announcement_bad_angles'

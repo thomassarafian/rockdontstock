@@ -8,7 +8,10 @@ local:
 
 cloudinary:
   service: Cloudinary
-
+  width: 1600
+  height: 1600
+  crop: limit
+  quality: auto
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
 #   service: S3

@@ -64,13 +64,12 @@ gem 'pagy', '~> 3.5' #pagination
 gem 'forest_liana' # admin
 gem 'rack-cors'    # admin
 
-gem "figaro" # all private api key
-
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'dotenv-rails'
-
+  gem 'mini_magick'
+  
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end

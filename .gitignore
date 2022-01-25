@@ -36,5 +36,6 @@ yarn-debug.log*
 .yarn-integrity
 .env*
 /todo.md
+.TODO
 # Ignore application configuration
 /config/application.yml

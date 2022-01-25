@@ -16,13 +16,13 @@ require 'csv'
 # nike_csv_file = File.read(Rails.root.join('lib', 'seeds', 'nike.csv'))
 # nike_csv = CSV.parse(nike_csv_file, :headers => true, :encoding => 'ISO-8859-1')
 
-all_sneakers_filtered = File.read(Rails.root.join('lib', 'seeds', 'all_sneakers_filtered.csv'))
-all_sneakers_csv = CSV.parse(all_sneakers_filtered, :headers => true, :encoding => 'ISO-8859-1')
+test_file = File.read(Rails.root.join('lib', 'seeds', 'test.csv'))
+test_csv = CSV.parse(test_file, :headers => true, :encoding => 'ISO-8859-1')
 
 
 count = 0
 
-all_sneakers_csv.each do |row|
+test_csv.each do |row|
   next if row['sneaker-title'] == "null" || row['sneaker-title'] == ""
   next if row['sneaker-title'].include? "page" 
   next if row['sneaker-title'].include? "Page"

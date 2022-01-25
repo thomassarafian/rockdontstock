@@ -68,7 +68,7 @@
       </div>
       <div class="sneaker-form__recap__card__total">
         <div>Total</div>
-        <div><%= (1.06 * @sneaker.price_cents - 499) / 100.00 %> €</div>
+        <div><%= (0.94 * @sneaker.price_cents - 499) / 100.00 %> €</div>
       </div>
       <%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
         <button class="sneaker-form__recap__card__btn">

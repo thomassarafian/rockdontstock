@@ -1599,6 +1599,19 @@
         "change": []
       }
     }, {
+      "name": "Send email finish announcement",
+      "type": "bulk",
+      "base_url": null,
+      "endpoint": "forest/actions/send-email-finish-announcement",
+      "http_method": "POST",
+      "redirect": null,
+      "download": false,
+      "fields": [],
+      "hooks": {
+        "load": false,
+        "change": []
+      }
+    }, {
       "name": "Validate announcement",
       "type": "bulk",
       "base_url": null,
@@ -1793,8 +1806,8 @@
       "validations": []
     }, {
       "field": "subcategory",
-      "type": "String",
-      "default_value": null,
+      "type": ["String"],
+      "default_value": "{}",
       "enums": null,
       "integration": null,
       "is_filterable": true,
@@ -3669,7 +3682,7 @@
   }],
   "meta": {
     "liana": "forest-rails",
-    "liana_version": "7.4.2",
+    "liana_version": "7.4.5",
     "stack": {
       "database_type": "postgresql",
       "orm_version": "6.1.4.4"
