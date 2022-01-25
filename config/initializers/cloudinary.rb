@@ -5,6 +5,6 @@ Cloudinary.config do |config|
   config.secure = true
   config.cdn_subdomain = true
   config.transformation = [
-    {:width => 1000, :height => 1000, :crop => :limit, :quality => :auto}
+    {:width => 2000, :height => 2000, :crop => :limit, :quality => :auto}
   ]
 end
