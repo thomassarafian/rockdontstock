@@ -19,7 +19,7 @@ class ContactController < ApplicationController
     else
       variable = Mailjet::Send.create(messages: [{
         'From'=> {
-          'Email'=> "sarafianthomas@gmail.com",
+          'Email'=> "nils@rockdontstock.com",
           'Name'=> @contact.name
         },
         'To'=> [

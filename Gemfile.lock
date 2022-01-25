@@ -202,7 +202,6 @@ GEM
     mime-types-data (3.2022.0105)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.7.1)
     minitest (5.15.0)
     monetize (1.12.0)
       money (~> 6.12)
@@ -219,9 +218,6 @@ GEM
     multipart-post (2.1.1)
     netrc (0.11.0)
     nio4r (2.5.8)
-    nokogiri (1.13.1)
-      mini_portile2 (~> 2.7.0)
-      racc (~> 1.4)
     nokogiri (1.13.1-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.7)
@@ -259,7 +255,7 @@ GEM
       webfinger (>= 1.0.1)
     orm_adapter (0.5.0)
     pagy (3.14.0)
-    pg (1.2.3)
+    pg (1.3.0)
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
@@ -427,7 +423,6 @@ GEM
     zeitwerk (2.5.3)
 
 PLATFORMS
-  ruby
   x86_64-linux
 
 DEPENDENCIES

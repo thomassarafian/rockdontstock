@@ -64,7 +64,6 @@ gem 'pagy', '~> 3.5' #pagination
 gem 'forest_liana' # admin
 gem 'rack-cors'    # admin
 
-
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
