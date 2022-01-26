@@ -19,10 +19,13 @@ class Sneakers::BuildController < ApplicationController
         flash[:notice] = "Ton annonce a bien été envoyée !"
         redirect_to success_sneaker_build_index_path(@sneaker)
       else
+        render json: {} and return if request.xhr?
         render_wizard @sneaker
       end
     else
-      flash[:alert] = @sneaker.errors.full_messages.join(', ')
+      error_msg = @sneaker.errors.full_messages.join(', ')
+      flash[:alert] = error_msg
+      render json: {error: error_msg}, status: 422 and return if request.xhr?
       redirect_to request.referrer
     end
   end
@@ -31,16 +34,7 @@ class Sneakers::BuildController < ApplicationController
     @sneaker = Sneaker.find(params[:sneaker_id])
   end
 
-  # def create
-  #   @sneaker = Sneaker.create
-  #   redirect_to wizard_path(steps.first, sneaker_id: @sneaker.id)
-  # end
-
   private
-
-  def filtering_params(params)
-		params.slice(:price, :condition, :size, :category)
-  end
 
 	def sneaker_params
 		params.require(:sneaker).permit(:sneaker_db_id, :size, :price, :condition, :box, :extras, sneaker_db_attributes: [:name], photos: [])
