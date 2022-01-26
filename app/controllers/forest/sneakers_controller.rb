@@ -33,7 +33,9 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     # we want to send reminder emails to ppl whose upload did not go through
     sneakers = Sneaker.where(id: selected_ids).where(status: "add_photos")
 
-    sneakers.each do |sneaker| 
+    sneakers.each do |sneaker|
+      next if sneaker.photos.count >= 6
+
       Mailjet::Send.create(messages: [{
         'From'=> {
           'Email'=> "elliot@rockdontstock.com",
