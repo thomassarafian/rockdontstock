@@ -21,7 +21,7 @@
 </div>
 
 <!-- MOBILE -->
-<div class="container d-lg-none backdrop" style="position: sticky; top: 0; z-index: 1;">
+<div class="container d-lg-none backdrop" style="position: sticky; top: 0; z-index: 10;">
   <div class="d-flex justify-content-between align-items-center" style="width: 100%; height: 80px;">
     <div class="navbar-burger">
     <%= image_tag "navbar/toggler_icon.svg", class: "toggler_icon navbarSideButton", style: "cursor: pointer; height: 30px;" %>
@@ -38,7 +38,7 @@
     <div class="navbar-close-icon" style="display: none; line-height: 0; font-size: 40px;" onclick="hideInput()">&times;</div>
   </div>
   <% if current_page?('/sneakers') %>
-    <div class="d-flex align-items-center d-block d-lg-none mb-4" style="height: 40px;">
+    <div class="d-flex align-items-center d-block d-lg-none mb-4">
       <div class="popup-close-icon me-auto" style="display: none; font-size: 35px; line-height: 0;" onclick="hidePopup()">&times;</div>
       <!-- FILTERS MOBILE -->
       <div class="filter-btn" style="cursor: pointer; width: 50%; padding: 0.5rem; border: 1px solid #0E0E0E; border-right: none; text-align: center;">Filtrer</div>
