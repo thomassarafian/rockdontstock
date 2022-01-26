@@ -283,12 +283,14 @@
   z-index: 100;
   height: calc(100vh - 120px); /* remaining height until bottom of viewport */
 }
-.popup::-webkit-scrollbar {
-  display: none; /* chrome safari opera */
-}
-.popup {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+@media only screen and (min-width: 768px) {
+  .popup::-webkit-scrollbar {
+    display: none; /* chrome safari opera */
+  }
+  .popup {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
 .card {
   margin-bottom: 1rem;
