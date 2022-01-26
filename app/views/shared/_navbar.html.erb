@@ -45,12 +45,12 @@
     </div>
   <% end %>
 </div>
-<div class="container popup sort-popup">
+<div class="container popup sort-popup" style="display:none">
   <div class="d-flex align-items-center justify-content-between mb-3">
     <div class="popup-close-icon me-auto" style="font-size: 35px; line-height: 0;" onclick="hidePopup()">&times;</div>
     <div>Trier</div>
   </div>
-  <%= form_with url: sneakers_path, local: false, method: :get, html: {id: "sort-form-mobile"} do |f| %>
+  <%= form_with url: sneakers_path, local: false, method: :get, html: {id: "sort-form-mobile", style: "padding-bottom: 5rem;"} do |f| %>
     <div class="form-group" style="border: 1px solid #0E0E0E; padding: 1rem;">
       <div class="form-check mb-1">
         <label class="form-check-label">
@@ -81,12 +81,12 @@
     </div>
   <% end %>
 </div>
-<div class="container popup filter-popup">
+<div class="container popup filter-popup" style="display:none">
   <div class="d-flex align-items-center justify-content-between mb-3">
     <div class="popup-close-icon me-auto" style="font-size: 35px; line-height: 0;" onclick="hidePopup()">&times;</div>
     <div>Filtrer</div>
   </div>
-  <%= form_with url: sneakers_path, local: false, method: :get, html: {style: "padding-bottom: 3rem;"} do |f| %>
+  <%= form_with url: sneakers_path, local: false, method: :get, html: {style: "padding-bottom: 5rem;"} do |f| %>
     <div id="accordion">
       <div class="card">
         <div class="card-header" style="cursor: pointer" id="headingOne" data-bs-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
