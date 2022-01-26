@@ -1,25 +1,29 @@
-import Rails from "@rails/ujs"
-import * as ActiveStorage from "@rails/activestorage"
-import "channels"
+import Rails from '@rails/ujs';
+import * as ActiveStorage from '@rails/activestorage';
+import 'channels';
 
-Rails.start()
-ActiveStorage.start()
+Rails.start();
+window.Rails = Rails;
+ActiveStorage.start();
+require('dotenv').config();
 
 var Flickity = require('flickity');
-Flickity.prototype._touchActionValue = 'pan-y pinch-zoom'
-require("./flickity-fullscreen.js");
-require("./flickity-imagesloaded.js");
-require('dotenv').config()
-
-var clamp = require('clamp-js')
-window.clamp = clamp
-
 window.Flickity = Flickity;
-window.Rails = Rails;
+Flickity.prototype._touchActionValue = 'pan-y pinch-zoom';
+require('./flickity-fullscreen.js');
+require('./flickity-imagesloaded.js');
 
-import "bootstrap";
-import "controllers";
-import "./pagy.js.erb";
+var clamp = require('clamp-js');
+window.clamp = clamp;
+
+import 'bootstrap';
+import 'controllers';
+import './pagy.js.erb';
+var bodyScrollLock = require('body-scroll-lock');
+var enableBodyScroll = bodyScrollLock.enableBodyScroll;
+var disableBodyScroll = bodyScrollLock.disableBodyScroll;
+window.enableBodyScroll = enableBodyScroll;
+window.disableBodyScroll = disableBodyScroll;
 
 // import { uploadIds } from "components/upload_ids.js"
 // import { ibanValidator } from "components/iban_validator.js"

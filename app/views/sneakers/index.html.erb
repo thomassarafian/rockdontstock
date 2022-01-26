@@ -172,42 +172,32 @@
   })
 
   function revealPopup(which) {
-    document.body.style.overflowY = 'hidden'
-    document.querySelector('.popup-close-icon').style.display = "block"
+    let targets = document.querySelectorAll('.popup')
+    targets.forEach(t => disableBodyScroll(t))
+    document.body.style.zIndex = '-1'
 
+    document.querySelector('.filter-sort-buttons').style.display = "none"
 
     if (which == "filter") {
-      sortBtn.style.display = "none"
-      filterBtn.style.textAlign = "right"
-      filterBtn.style.border = "none"
       document.querySelector('.filter-popup').style.display = "block"
     } else {
-      filterBtn.style.display = "none"
-      sortBtn.style.textAlign = "right"
-      sortBtn.style.border = "none"
       document.querySelector('.sort-popup').style.display = "block"
     }
   }
 
   function hidePopup() {
-    // reset buttons
-    filterBtn.style.textAlign = "center"
-    filterBtn.style.border = "1px solid #0E0E0E"
-    filterBtn.style.borderRight = "none"
-    sortBtn.style.textAlign = "center"
-    sortBtn.style.border = "1px solid #0E0E0E"
+    let targets = document.querySelectorAll('.popup')
+    targets.forEach(t => enableBodyScroll(t))
+    document.body.style.zIndex = ''
 
-    document.querySelector('.popup-close-icon').style.display = "none"
-    filterBtn.style.display = "block"
-    sortBtn.style.display = "block"
+    // reset buttons
+    document.querySelector('.filter-sort-buttons').style.display = "flex"
     document.querySelector('.filter-popup').style.display = "none"
     document.querySelector('.sort-popup').style.display = "none"
-    document.body.style.overflowY = ""
   }
 
   function togglePopover(which) {
-    let el = document.querySelector(`.${which}-popover`);
-
+    let el = document.querySelector(`.${which}-popover`)
     if (el.style.display === "block") el.style.display = "none"
     else el.style.display = "block"
   }
@@ -248,7 +238,7 @@
   box-shadow: 0 0 2px rgba(0,0,0,.2);
   background: white;
   overflow-y: scroll;
-  z-index: 999;
+  z-index: 10;
 }
 .sortby-popover {
   display: none;
@@ -259,7 +249,7 @@
   padding: 1rem;
   box-shadow: 0 0 2px rgba(0,0,0,.2);
   background: white;
-  z-index: 999;
+  z-index: 10;
 }
 .popup-close-icon {
   cursor: pointer;
@@ -270,13 +260,13 @@
   position: fixed;
   left: 0;
   right: 0;
-  top: 120px; /* height of navbar + filter/sort buttons*/
+  top: 80px; /* height of navbar + filter/sort buttons*/
   bottom: 0;
   overflow-y: scroll;
-  padding: 2rem 1rem;
+  padding: 0 1rem;
   background: white;
-  z-index: 990;
-  min-height: 100vh;
+  z-index: 100;
+  height: calc(100vh - 80px); /* remaining height until bottom of viewport */
 }
 .popup::-webkit-scrollbar {
   display: none; /* chrome safari opera */
