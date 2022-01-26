@@ -20,8 +20,9 @@ class Sneakers::BuildController < ApplicationController
       redirect_to request.referrer
     end
     
-    @sneaker.save
     status = (step == steps.last ? "active" : step.to_s)
+    @sneaker.status = status
+    @sneaker.save
 
     if step == steps.last
       flash[:notice] = "Ton annonce a bien été envoyée !"

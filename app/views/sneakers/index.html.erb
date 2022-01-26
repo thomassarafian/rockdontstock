@@ -176,17 +176,11 @@
     targets.forEach(t => disableBodyScroll(t))
     document.body.style.zIndex = '-1'
 
-    document.querySelector('.popup-close-icon').style.display = "block"
+    document.querySelector('.filter-sort-buttons').style.display = "none"
 
     if (which == "filter") {
-      sortBtn.style.display = "none"
-      filterBtn.style.textAlign = "right"
-      filterBtn.style.border = "none"
       document.querySelector('.filter-popup').style.display = "block"
     } else {
-      filterBtn.style.display = "none"
-      sortBtn.style.textAlign = "right"
-      sortBtn.style.border = "none"
       document.querySelector('.sort-popup').style.display = "block"
     }
   }
@@ -197,18 +191,9 @@
     document.body.style.zIndex = ''
 
     // reset buttons
-    filterBtn.style.textAlign = "center"
-    filterBtn.style.border = "1px solid #0E0E0E"
-    filterBtn.style.borderRight = "none"
-    sortBtn.style.textAlign = "center"
-    sortBtn.style.border = "1px solid #0E0E0E"
-
-    document.querySelector('.popup-close-icon').style.display = "none"
-    filterBtn.style.display = "block"
-    sortBtn.style.display = "block"
+    document.querySelector('.filter-sort-buttons').style.display = "flex"
     document.querySelector('.filter-popup').style.display = "none"
     document.querySelector('.sort-popup').style.display = "none"
-    document.body.style.overflowY = ""
   }
 
   function togglePopover(which) {
@@ -275,22 +260,20 @@
   position: fixed;
   left: 0;
   right: 0;
-  top: 120px; /* height of navbar + filter/sort buttons*/
+  top: 80px; /* height of navbar + filter/sort buttons*/
   bottom: 0;
   overflow-y: scroll;
-  padding: 2rem 1rem;
+  padding: 0 1rem;
   background: white;
   z-index: 100;
-  height: calc(100vh - 120px); /* remaining height until bottom of viewport */
+  height: calc(100vh - 80px); /* remaining height until bottom of viewport */
 }
-@media only screen and (min-width: 768px) {
-  .popup::-webkit-scrollbar {
-    display: none; /* chrome safari opera */
-  }
-  .popup {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+.popup::-webkit-scrollbar {
+  display: none; /* chrome safari opera */
+}
+.popup {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 .card {
   margin-bottom: 1rem;
