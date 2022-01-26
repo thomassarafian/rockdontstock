@@ -10,23 +10,26 @@ class Sneakers::BuildController < ApplicationController
 
   def update
     @sneaker = Sneaker.find(params[:sneaker_id])
-    status = (step == steps.last ? "active" : step.to_s)
-
-    if @sneaker.update(sneaker_params)
-      @sneaker.update(status: status)
-      
-      if step == steps.last
-        flash[:notice] = "Ton annonce a bien été envoyée !"
-        redirect_to success_sneaker_build_index_path(@sneaker)
-      else
-        render json: {} and return if request.xhr?
-        render_wizard @sneaker
-      end
-    else
+    @sneaker.attributes = sneaker_params
+    
+    if !@sneaker.valid?
       error_msg = @sneaker.errors.full_messages.join(', ')
       flash[:alert] = error_msg
-      render json: {error: error_msg}, status: 422 and return if request.xhr?
+
+      render json: { error: error_msg }, status: 422 and return if request.xhr?
       redirect_to request.referrer
+    end
+    
+    @sneaker.save
+    status = (step == steps.last ? "active" : step.to_s)
+
+    if step == steps.last
+      flash[:notice] = "Ton annonce a bien été envoyée !"
+      redirect_to success_sneaker_build_index_path(@sneaker)
+    else
+      render json: {} and return if request.xhr?
+      jump_to(:add_recap) if params[:referer]&.match?('add_recap')
+      render_wizard @sneaker
     end
   end
 

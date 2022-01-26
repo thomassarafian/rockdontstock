@@ -25,6 +25,7 @@
     </div>
   </div>
   <%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
+    <%= hidden_field_tag :referer, value: request.referer %>
     <div class="sneaker-form__infos">
       <%= f.select :size, sizes, { include_blank: "Taille FR" }, {  class: "form-group form-control form-select", required: true } %>
       <div class="form-group">
@@ -39,7 +40,9 @@
       <%= f.number_field :price, class: "form-control", placeholder: "Mon prix de vente (€)", required: true %>
     </div>
     <div class="sneaker-form__btns" style="margin-top: 3rem;">
-      <%= link_to "Précédent", previous_wizard_path, class: "sneaker-form__previous-btn" %>
+      <% if !request.referer.match?('add_recap') %>
+        <%= link_to "Précédent", previous_wizard_path, class: "sneaker-form__previous-btn" %>
+      <% end%>
       <button class="sneaker-form__next-btn">
         Suivant <i class="fas fa-arrow-right"></i>
       </button>
