@@ -40,7 +40,7 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
           'Name'=> "Rock Don't Stock"
         },
         'To' => [{ 'Email' => sneaker.user.email, 'Name' => sneaker.user.full_name }],
-        # TODO 'TemplateID'=> XXXX
+        'TemplateID'=> 3522451,
         'TemplateLanguage'=> true,
         'Subject'=> "N'hésite pas à terminer ton annonce !",
         'Variables'=> {

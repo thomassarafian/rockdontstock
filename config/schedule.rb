@@ -1,5 +1,5 @@
 set :output, "log/cron.log"
 
-every 1.week do
+every 2.week do
   rake "cleanup:sneakers"
 end

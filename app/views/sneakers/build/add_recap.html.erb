@@ -21,16 +21,16 @@
   </div>
   <div class="sneaker-form__recap__content">
     <div class="sneaker-form__recap__left">
-      <div class="sneaker-form__recap__photos" data-flickity='{ "pageDots": false, "imagesLoaded": true, "percentPosition": false, "wrapAround": true, "cellSelector": ".sneaker-form__recap__photo", "fullscreen": true }'>
+      <div class="sneaker-form__recap__photos"
+        data-flickity='{ "pageDots": false, "imagesLoaded": true, "percentPosition": false, "wrapAround": true, "cellSelector": ".sneaker-form__recap__photo", "fullscreen": true }'>
         <% @sneaker.photos.each do |photo| %>
-          <%= cl_image_tag(photo.key, class: 'sneaker-form__recap__photo') %>
+          <%= cl_image_tag(photo.key, class: 'sneaker-form__recap__photo' ) %>
         <% end %>
       </div>
       <div class="sneaker-form__recap__details">
         <div class="sneaker-form__recap__sneaker-name">
           Modèle : <%= @sneaker.sneaker_db.name %>
         </div>
-        <%= link_to "Modifier", wizard_path(:add_sneaker_db) %>
         <div class="sneaker-form__recap__sneaker-options mt-3">
           <div>
             Taille FR : <%= @sneaker.size %>
@@ -45,7 +45,7 @@
             Commentaire : <%= @sneaker.extras || "Aucun" %>
           </div>
         </div>
-        <%= link_to "Modifier", wizard_path(:add_infos) %>
+        <%= link_to "Modifier" , wizard_path(:add_infos) %>
       </div>
     </div>
     <div class="sneaker-form__recap__card">
@@ -54,12 +54,16 @@
       </div>
       <div class="sneaker-form__recap__card__order-infos">
         <div class="sneaker-form__recap__card__order-infos__item">
-          <div>Mon prix de vente (<%= link_to "modifier", wizard_path(:add_infos) %>)</div>
-          <div><%= @sneaker.price %> €</div>
+          <div>Mon prix de vente (<%= link_to "modifier" , wizard_path(:add_infos) %>)</div>
+          <div>
+            <%= @sneaker.price %> €
+          </div>
         </div>
         <div class="sneaker-form__recap__card__order-infos__item">
           <div>Authentification</div>
-          <div><%= current_user.sneakers.where(status: "active").count == 0 ? "GRATUIT" : "-#{@sneaker.price * 0.06} €" %></div>
+          <div>
+            <%= current_user.sneakers.where(status: "active" ).count==0 ? "GRATUIT" : "-#{@sneaker.price * 0.06} €" %>
+          </div>
         </div>
         <div class="sneaker-form__recap__card__order-infos__item">
           <div>Frais d'expédition</div>
@@ -68,23 +72,31 @@
       </div>
       <div class="sneaker-form__recap__card__total">
         <div>Total</div>
-        <div><%= (0.94 * @sneaker.price_cents - 499) / 100.00 %> €</div>
+        <% if current_user.sneakers.where(status: "active" ).count==0 %>
+          <div>
+            <%= (@sneaker.price_cents - 499) / 100.00 %> €
+          </div>
+        <% else %>
+          <div>
+            <%= (0.94 * @sneaker.price_cents - 499) / 100.00 %> €
+          </div>
+        <% end %>
       </div>
       <%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
         <button class="sneaker-form__recap__card__btn">
           Valider mon annonce
         </button>
         <div class="form-check mb-1">
-          <%= f.check_box :legal1, { class: "form-check-input", required: true }, 1, nil %>
-          <%= f.label "Je certifie que la paire de sneakers mis en ligne est authentique et n’est pas l’objet d’un produit contrefaisant une marque déposée.", class: "form-check-label", style: "font-size: 0.8rem" %>
+          <%= f.check_box :legal1, { class: "form-check-input" , required: true }, 1, nil %>
+          <%= f.label "Je certifie que la paire de sneakers mis en ligne est authentique et n'est pas l'objet d'un produit contrefaisant une marque déposée.", class: "form-check-label" , style: "font-size: 0.8rem" %>
         </div>
         <div class="form-check mb-1">
-          <%= f.check_box :legal2, { class: "form-check-input", required: true }, 1, nil %>
-          <%= f.label "Je certifie que ma paire de sneakers correspond exactement à l’annonce que je m’apprête à mettre en ligne.", class: "form-check-label", style: "font-size: 0.8rem" %>
+          <%= f.check_box :legal2, { class: "form-check-input" , required: true }, 1, nil %>
+          <%= f.label "Je certifie que ma paire de sneakers correspond exactement à l'annonce que je m'apprête à mettre en ligne.", class: "form-check-label" , style: "font-size: 0.8rem" %>
         </div>
         <div class="form-check mb-1">
-          <%= f.check_box :legal3, { class: "form-check-input", required: true }, 1, nil %>
-          <%= f.label "", class: "form-check-label" do %>
+          <%= f.check_box :legal3, { class: "form-check-input" , required: true }, 1, nil %>
+          <%= f.label "" , class: "form-check-label" do %>
             <span style="font-size: 0.8rem">J'accepte les <%= link_to "conditions de vente de Rock Don't Stock", cgv_path, style: "text-decoration: underline" %> dans leur ensemble.</span>
           <% end %>
         </div>
