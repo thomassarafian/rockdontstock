@@ -115,6 +115,7 @@ form .form-group {
 .page-item.active .page-link {
   border-color: $black;
   background-color: $black;
+  z-index: 0;
 }
 // offset so borders aren't cropped
 .auth-guides__content .flickity-viewport,
