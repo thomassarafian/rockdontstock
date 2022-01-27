@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="new-sneaker-success__content__recap">
-        <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-form__recap__photo', style: "height: auto; width: 60%; object-fit: contain") %>
+        <%= cl_image_tag(@sneaker.photos.first.key, class: 'sneaker-form__recap__photo', style: "height: auto; width: 60%; object-fit: contain", raw_transformation: "c_limit,h_700,q_auto,w_700") %>
         <div class="sneaker-form__recap__details">
           <div class="sneaker-form__recap__sneaker-name">
             Modèle : <%= @sneaker.sneaker_db.name %>

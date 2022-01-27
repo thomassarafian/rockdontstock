@@ -5,7 +5,7 @@
   <% end %>
   <div class="purchase">
     <div class="purchase-recap__card__sneaker is-mobile">
-      <%= cl_image_tag(@sneaker.photos.first&.key, class: 'purchase-recap__card__sneaker-photo') %>
+      <%= cl_image_tag(@sneaker.photos.first&.key, class: 'purchase-recap__card__sneaker-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
       <div class="purchase-recap__card__sneaker-details">
         <div class="purchase-recap__card__sneaker-name">
           <%= @sneaker.sneaker_db.name %>
@@ -142,7 +142,7 @@
           Ma commande
         </div>
         <div class="purchase-recap__card__sneaker">
-          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'purchase-recap__card__sneaker-photo') %>
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'purchase-recap__card__sneaker-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
           <div class="purchase-recap__card__sneaker-details">
             <div class="purchase-recap__card__sneaker-name">
               <%= @sneaker.sneaker_db.name %>

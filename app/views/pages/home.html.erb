@@ -27,7 +27,7 @@
     <div class="home-last-sneakers__block">
       <% @sneakers_last_added.each do |sneaker| %>
         <div class="sneaker-home__card" data-sneaker-id="<%= sneaker.id %>">
-          <%= cl_image_tag(sneaker.photos.first&.key || Sneaker.first.photos.first.key, class: 'sneaker-home__card__photo') %>
+          <%= cl_image_tag(sneaker.photos.first&.key || Sneaker.first.photos.first.key, class: 'sneaker-home__card__photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>
           <div class="sneaker-home__card__options">
             <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
@@ -45,7 +45,7 @@
     <div class="home-selected-sneakers__block">
       <% @sneakers_selected.each do |sneaker| %>
         <div class="sneaker-home__card" data-sneaker-id="<%= sneaker.id %>">
-          <%= cl_image_tag(sneaker.photos.first&.key || Sneaker.first.photos.first.key, class: 'sneaker-home__card__photo') %>
+          <%= cl_image_tag(sneaker.photos.first&.key || Sneaker.first.photos.first.key, class: 'sneaker-home__card__photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
           <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-home__card__name" %>
           <div class="sneaker-home__card__options">
             <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10

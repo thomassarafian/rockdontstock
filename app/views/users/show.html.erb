@@ -33,7 +33,7 @@
 					<div id="orders-carousel" class="items-carousel" data-flickity='{ "setGallerySize": false, "contain": true, "pageDots": false, "cellSelector": ".orders-cells" }'>
 						<% current_user.orders.each do |order| %>
 							<div class="profile__business-item orders-cells">
-								<%= cl_image_tag(order.sneaker.photos.first&.key, class: 'profile__business-item-photo') %>
+								<%= cl_image_tag(order.sneaker.photos.first&.key, class: 'profile__business-item-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
 								<div class="profile__business-item-details">
 									<div class="profile__business-item-name">
 										<%= order.sneaker.sneaker_db&.name %>
@@ -51,7 +51,7 @@
 					<div id="sales-carousel" class="items-carousel">
 						<% current_user.sneakers.each do |sneaker| %>
 							<div class="profile__business-item sales-cells" data-id="<%= sneaker.id %>">
-								<%= cl_image_tag(sneaker.photos.first&.key, class: 'profile__business-item-photo') %>
+								<%= cl_image_tag(sneaker.photos.first&.key, class: 'profile__business-item-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
 								<div class="profile__business-item-details">
 									<div class="profile__business-item-name">
 										<%= sneaker.sneaker_db&.name %>
