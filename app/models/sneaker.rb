@@ -88,6 +88,10 @@ class Sneaker < ApplicationRecord
     status&.include?("photos_ok") || active?
   end
 
+  def last_completed_step
+    status&.gsub('_ok', '')
+  end
+
   def timestamp_selection
     self.selected_at = Time.zone.now if self.selected_change&.last === true || self.selected_at.nil?
     self.highlighted_at = Time.zone.now if self.highlighted_change&.last === true || self.highlighted_at.nil?

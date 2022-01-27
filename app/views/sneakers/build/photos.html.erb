@@ -100,6 +100,7 @@
   let resizedPhotos = new Array
 
   form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
     // display loader
     const uploadContent = document.querySelector('.upload-content')
@@ -108,7 +109,12 @@
 
     // use uploaded photos as data
     const formData = new FormData();
-    resizedPhotos.forEach(el => formData.append('photos[]', el))
+    if (resizedPhotos.length) {
+      resizedPhotos.forEach(el => formData.append('sneaker[photos][]', el))
+    } else {
+      // we want params[:sneaker] to exist even when no photos
+      formData.append('sneaker[empty]', '')
+    }
 
     const upload = new Promise((resolve, reject) => {
       Rails.ajax({
@@ -117,16 +123,15 @@
         dataType: 'json',
         data: formData,
         success: () => resolve(),
-        error: () => reject()
+        error: (err) => reject(err)
       })
     })
 
-    upload.then(() => {
-      // submit
-      return true
-    }).catch((err) => {
-      console.log(err)
-      return false
+    upload.then(() => form.submit())
+    .catch((err) => {
+      alert(err.message)
+      uploadContent.style.display = "block"
+      loader.style.display = "none"
     })
   })
 
