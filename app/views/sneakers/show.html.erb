@@ -6,7 +6,7 @@
   <section class="sneaker-infos">
     <div class="sneaker-infos__photos-carousel">
       <% @sneaker.photos.each do |photo| %>
-        <%= cl_image_tag(photo.key, class: 'sneaker-infos__photo') %>
+        <%= cl_image_tag(photo.key, class: 'sneaker-infos__photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
       <% end %>
       
       <!-- <div class="swiper-wrapper">
@@ -78,7 +78,7 @@
       <% @similar_sneakers.each do |sneaker| %>
         <div class="flickity-cell d-inline-block">
           <div class="sneaker-similar__card">
-            <%= cl_image_tag(sneaker.photos.first&.key, class: 'sneaker-similar__card__photo') %>
+            <%= cl_image_tag(sneaker.photos.first&.key, class: 'sneaker-similar__card__photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
             <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-similar__card__name" %>
             <div class="sneaker-similar__card__options">
               <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
