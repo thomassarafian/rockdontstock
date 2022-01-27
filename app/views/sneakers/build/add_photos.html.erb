@@ -102,8 +102,6 @@
   const loader = document.querySelector('.loader-wrapper')
   let resizedPhotos = new Array
 
-  submitBtn.addEventListener('click', scrollUp)
-
   form.addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -111,15 +109,16 @@
     const uploadElements = Array.from(document.querySelectorAll('.sneaker-form__photo__input'))
     const requiredUploads = uploadElements.slice(0, 6)
     
-    if (!requiredUploads.every(el => el.value)) {
-      scrollUp()
-      return;
-    }
+    // if (!requiredUploads.every(el => el.value)) {
+    //   scrollUp()
+    //   return;
+    // }
 
     uploadContent.style.display = "none"
     loader.style.display = ""
 
     const formData = new FormData();
+    formData.append('sneaker[q]', 'q')
     resizedPhotos.forEach(el => formData.append('sneaker[photos][]', el))
 
     Rails.ajax({
@@ -127,7 +126,13 @@
       url: '<%= wizard_path %>',
       dataType: 'json',
       data: formData,
-      success: () => form.submit()
+      success: () => form.submit(),
+      error: (err) => {
+        alert(err.error);
+        uploadContent.style.display = "block"
+        loader.style.display = "none"
+        scrollUp()
+      }
     })
   })
 

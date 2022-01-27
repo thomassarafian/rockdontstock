@@ -11,10 +11,10 @@ class Sneakers::BuildController < ApplicationController
   def update
     @sneaker = Sneaker.find(params[:sneaker_id])
     @sneaker.attributes = sneaker_params
-    
+
     if !@sneaker.valid?
       error_msg = @sneaker.errors.full_messages.join(', ')
-      flash[:alert] = error_msg
+      flash.now[:alert] = error_msg
 
       render json: { error: error_msg }, status: 422 and return if request.xhr?
       redirect_to request.referrer
