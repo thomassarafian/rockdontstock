@@ -10,7 +10,8 @@ class Sneakers::BuildController < ApplicationController
   end
 
   def following_step
-    # guard
+    # guards
+    return redirect_to request.referer || root_path if @sneaker.active?
     render_wizard @sneaker if !@sneaker.last_completed_step
 
     last_step = wizard_steps.index(@sneaker.last_completed_step.to_sym)
@@ -32,7 +33,7 @@ class Sneakers::BuildController < ApplicationController
     if @sneaker.update(photos: photos)
 
       # always keep status up to the very last completed step
-      @sneaker.update(status: "photos") if !@sneaker.active? && past_step?(@sneaker.last_completed_step)
+      @sneaker.update(status: "photos") if !@sneaker.active?
 
       render json: {}, status: 200
     else
@@ -47,8 +48,7 @@ class Sneakers::BuildController < ApplicationController
       status = (step == steps.last ? "active" : "#{step.to_s}_ok")
 
       # always keep status up to the very last completed step
-      check_past_step_if_defined = @sneaker.last_completed_step ? past_step?(@sneaker.last_completed_step) : true
-      if !@sneaker.active? && check_past_step_if_defined
+      if !@sneaker.active? && !step_has_already_been_completed
         @sneaker.update(status: status)
       end
 
@@ -69,6 +69,17 @@ class Sneakers::BuildController < ApplicationController
   def success; end
 
   private
+    
+  def step_has_already_been_completed
+    step = @sneaker.last_completed_step
+    return false if !step
+
+    if past_step?(step)
+      return false
+    elsif current_step?(step)
+      return true
+    end
+  end
 
   def set_sneaker
     @sneaker = Sneaker.find(params[:sneaker_id])
