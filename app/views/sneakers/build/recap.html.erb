@@ -45,7 +45,7 @@
             Commentaire : <%= @sneaker.extras || "Aucun" %>
           </div>
         </div>
-        <%= link_to "Modifier" , wizard_path(:add_infos) %>
+        <%= link_to "Modifier" , wizard_path(:infos) %>
       </div>
     </div>
     <div class="sneaker-form__recap__card">
@@ -54,7 +54,7 @@
       </div>
       <div class="sneaker-form__recap__card__order-infos">
         <div class="sneaker-form__recap__card__order-infos__item">
-          <div>Mon prix de vente (<%= link_to "modifier" , wizard_path(:add_infos) %>)</div>
+          <div>Mon prix de vente (<%= link_to "modifier" , wizard_path(:infos) %>)</div>
           <div>
             <%= @sneaker.price %> €
           </div>

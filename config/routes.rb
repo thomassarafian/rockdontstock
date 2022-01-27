@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :build, controller: 'sneakers/build' do
       collection do
         get 'success'
+        put 'upload-photos'
       end
     end
     resources :orders, shallow: true, only: [:new, :show, :create]

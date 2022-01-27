@@ -40,7 +40,7 @@
       <%= f.number_field :price, class: "form-control", placeholder: "Mon prix de vente (€)", required: true %>
     </div>
     <div class="sneaker-form__btns" style="margin-top: 3rem;">
-      <% if !request.referer.match?('add_recap') %>
+      <% if !request.referer&.match?('recap') %>
         <%= link_to "Précédent", previous_wizard_path, class: "sneaker-form__previous-btn" %>
       <% end%>
       <button class="sneaker-form__next-btn">

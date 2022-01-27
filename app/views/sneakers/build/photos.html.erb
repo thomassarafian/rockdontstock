@@ -80,15 +80,12 @@
         </div>
       </div>
     </div>
-    <%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
-      <%= f.hidden_field :id %>
-      <div class="sneaker-form__btns" style="margin-top: 6rem;">
-        <%= link_to "Précédent", previous_wizard_path, class: "sneaker-form__previous-btn" %>
-        <button class="sneaker-form__next-btn">
-          Suivant <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    <% end %>
+    <div class="sneaker-form__btns" style="margin-top: 6rem;">
+      <%= button_to "Précédent", previous_wizard_path, method: :get, class: "sneaker-form__previous-btn" %>
+      <%= button_to next_wizard_path, method: :get, class: "sneaker-form__next-btn" do %>
+        Suivant <i class="fas fa-arrow-right"></i>
+      <% end %>
+    </div>
   </div>
   <div class="loader-wrapper" style="display: none; margin: 100px auto; width: 50%; text-align: center;">
     <div class="loader"></div>
@@ -103,38 +100,48 @@
   let resizedPhotos = new Array
 
   form.addEventListener('submit', function(e) {
-    e.preventDefault();
 
+    // display loader
     const uploadContent = document.querySelector('.upload-content')
-    const uploadElements = Array.from(document.querySelectorAll('.sneaker-form__photo__input'))
-    const requiredUploads = uploadElements.slice(0, 6)
-    
-    // if (!requiredUploads.every(el => el.value)) {
-    //   scrollUp()
-    //   return;
-    // }
-
     uploadContent.style.display = "none"
     loader.style.display = ""
 
+    // use uploaded photos as data
     const formData = new FormData();
-    formData.append('sneaker[q]', 'q')
-    resizedPhotos.forEach(el => formData.append('sneaker[photos][]', el))
+    resizedPhotos.forEach(el => formData.append('photos[]', el))
 
-    Rails.ajax({
-      type: 'PUT',
-      url: '<%= wizard_path %>',
-      dataType: 'json',
-      data: formData,
-      success: () => form.submit(),
-      error: (err) => {
-        alert(err.error);
-        uploadContent.style.display = "block"
-        loader.style.display = "none"
-        scrollUp()
-      }
+    const upload = new Promise((resolve, reject) => {
+      Rails.ajax({
+        type: 'PUT',
+        url: '<%= upload_photos_sneaker_build_index_url %>',
+        dataType: 'json',
+        data: formData,
+        success: () => resolve(),
+        error: () => reject()
+      })
+    })
+
+    upload.then(() => {
+      // submit
+      return true
+    }).catch((err) => {
+      console.log(err)
+      return false
     })
   })
+
+  // form.addEventListener('submit', function(e) {
+  //   e.preventDefault();
+
+  //   // const uploadContent = document.querySelector('.upload-content')
+  //   // const uploadElements = Array.from(document.querySelectorAll('.sneaker-form__photo__input'))
+  //   // const requiredUploads = uploadElements.slice(0, 6)
+    
+  //   // if (!requiredUploads.every(el => el.value)) {
+  //   //   scrollUp()
+  //   //   return;
+  //   // }
+  // })
 
   document.querySelectorAll('.sneaker-form__photo__input').forEach((input, index) => {
     let preview = document.getElementById("preview-photo-" + index)

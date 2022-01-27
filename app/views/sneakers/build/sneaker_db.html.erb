@@ -40,7 +40,7 @@
     </div>
     <div class="form-add" style="display: none;">
       <div style="font-weight: 700">Il n'y a pas ton modèle ? Ajoute-le ci-dessous</div>
-      <%= form_for @sneaker, url: sneaker_build_path(@sneaker.id, :add_sneaker_db), method: :put, class: "my-2" do |f| %>
+      <%= form_for @sneaker, url: sneaker_build_path(@sneaker.id, :sneaker_db), method: :put, class: "my-2" do |f| %>
         <div style="position: relative; width: 380px">
           <%= f.fields_for :sneaker_db, SneakerDb.new do |new_sneaker_db| %>
             <%= new_sneaker_db.text_field :name, class: "form-control my-2", required: true, placeholder: "Mon modèle" %>

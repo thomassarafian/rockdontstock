@@ -1,44 +1,59 @@
 class Sneakers::BuildController < ApplicationController
   include Wicked::Wizard
 
-  steps :add_sneaker_db, :add_infos, :add_photos, :add_recap
+  before_action :set_sneaker
+
+  steps :sneaker_db, :infos, :photos, :recap
 
   def show
-    @sneaker = Sneaker.find(params[:sneaker_id])
     render_wizard
   end
 
-  def update
-    @sneaker = Sneaker.find(params[:sneaker_id])
-    @sneaker.attributes = sneaker_params
+  # XHR (PUT)
+  def upload_photos
 
-    if !@sneaker.valid?
+    # guard
+    if !photos_params.present? || !photos_params.count >= 2
+      render json: { message: "Il manque des photos !" }, status: 422
+      return
+    end
+
+    if @sneaker.update(photos: photos_params)
+      @sneaker.update(status: "photos_ok")
+      render :json, status: 200
+    else
       error_msg = @sneaker.errors.full_messages.join(', ')
-      flash.now[:alert] = error_msg
-
-      render json: { error: error_msg }, status: 422 and return if request.xhr?
+      flash[:alert] = error_msg
       redirect_to request.referrer
     end
-    
-    status = (step == steps.last ? "active" : step.to_s)
-    @sneaker.status = status
-    @sneaker.save
+  end
 
-    if step == steps.last
-      flash[:notice] = "Ton annonce a bien été envoyée !"
-      redirect_to success_sneaker_build_index_path(@sneaker)
+  def update
+    if @sneaker.update(sneaker_params)
+      status = (step == steps.last ? "active" : "#{step.to_s}_ok")
+      @sneaker.update(status: status)
+
+      if step == steps.last
+        flash[:notice] = "Ton annonce a bien été envoyée !"
+        redirect_to success_sneaker_build_index_path(@sneaker)
+      else
+        jump_to(:recap) if params[:referer]&.match?('recap')
+        render_wizard @sneaker
+      end
     else
-      render json: {} and return if request.xhr?
-      jump_to(:add_recap) if params[:referer]&.match?('add_recap')
-      render_wizard @sneaker
+      error_msg = @sneaker.errors.full_messages.join(', ')
+      flash.now[:alert] = error_msg
+      redirect_to request.referrer
     end
   end
 
-  def success
-    @sneaker = Sneaker.find(params[:sneaker_id])
-  end
+  def success; end
 
   private
+
+  def set_sneaker
+    @sneaker = Sneaker.find(params[:sneaker_id])
+  end
 
 	def sneaker_params
 		params.require(:sneaker).permit(:sneaker_db_id, :size, :price, :condition, :box, :extras, sneaker_db_attributes: [:name], photos: [])
