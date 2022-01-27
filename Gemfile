@@ -38,6 +38,7 @@ gem 'friendly_id'
 gem 'data_uri'
 gem 'addressable'
 gem 'devise'
+gem 'active_storage_validations'
 
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'

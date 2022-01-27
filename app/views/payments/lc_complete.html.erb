@@ -38,7 +38,7 @@
           Ma commande
         </div>
         <div class="purchase-recap__card__sneaker">
-          <%= cl_image_tag(Sneaker.first.photos.first&.key, class: 'purchase-recap__card__sneaker-photo') %>
+          <%= cl_image_tag(Sneaker.first.photos.first&.key, class: 'purchase-recap__card__sneaker-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
           <div class="purchase-recap__card__sneaker-details">
             <div class="purchase-recap__card__sneaker-name">
               <%= Sneaker.first.sneaker_db.name %>

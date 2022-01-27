@@ -27,8 +27,11 @@ class Sneaker < ApplicationRecord
   belongs_to :sneaker_db, optional: true 
   
   validates :sneaker_db, presence: true, if: :active_or_step_sneaker_db?
+
   validates :size, :condition, :box, :price, presence: true, if: :active_or_step_infos?
-  validates :photos, presence: true, if: :active_or_step_photos?
+  validates :photos, presence: true, if: :active_or_step_infos?
+  validates :photos, attached: true, content_type: {in: ['image/jpg', 'image/jpeg', 'image/png'], message: "Must be an image of type jpg/png"}, if: :active_or_step_photos?
+  validates :photos, limit: { min: 6, max: 8 }, if: :active_or_step_photos?
   validates :legal1, :legal2, :legal3, acceptance: true
 
   accepts_nested_attributes_for :sneaker_db
