@@ -37,8 +37,10 @@ class SneakersController < ApplicationController
 	end
 
 	def create
-		@sneaker = Sneaker.create(user: current_user)
-		redirect_to sneaker_build_path(@sneaker.id, :add_sneaker_db)
+		flash[:notice] = "En cours de maintenance... Désolé, reviens un peu plus tard !"
+		redirect_to root_path and return
+		# @sneaker = Sneaker.create(user: current_user)
+		# redirect_to sneaker_build_path(@sneaker.id, :add_sneaker_db)
 		# @sneaker_db = SneakerDb.find(params[:sneaker_db]) if params[:sneaker_db]
 	end
 
