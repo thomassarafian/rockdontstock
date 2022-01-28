@@ -33,7 +33,7 @@ class Sneakers::BuildController < ApplicationController
     if @sneaker.update(photos: photos)
 
       # always keep status up to the very last completed step
-      @sneaker.update(status: "photos") if !@sneaker.active?
+      @sneaker.update(status: "photos_ok") if !@sneaker.active?
 
       render json: {}, status: 200
     else
