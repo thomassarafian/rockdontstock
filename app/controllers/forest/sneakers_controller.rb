@@ -31,7 +31,7 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
     selected_ids = ForestLiana::ResourcesGetter.get_ids_from_request(params, 0)
 
     # we want to send reminder emails to ppl whose upload did not go through
-    sneakers = Sneaker.where(id: selected_ids).where(status: "add_photos")
+    sneakers = Sneaker.where(id: selected_ids).where(status: "infos_ok")
 
     sneakers.each do |sneaker|
       next if sneaker.photos.count >= 6
