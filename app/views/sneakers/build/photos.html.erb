@@ -106,6 +106,7 @@
     const uploadContent = document.querySelector('.upload-content')
     uploadContent.style.display = "none"
     loader.style.display = ""
+    scrollUp()
 
     // use uploaded photos as data
     const formData = new FormData();
@@ -129,9 +130,10 @@
 
     upload.then(() => form.submit())
     .catch((err) => {
-      alert(err.message)
       uploadContent.style.display = "block"
       loader.style.display = "none"
+      scrollUp()
+      showAlert()
     })
   })
 
@@ -218,6 +220,15 @@
   function scrollUp() {
     document.body.scrollTop = 0; // Safari
     document.documentElement.scrollTop = 0; // Chrome, Firefox, IE and Opera
+  }
+
+  function showAlert() {
+    let element = document.createElement('div')
+    element.classList.add('alert', 'alert-info', 'alert-dismissible', 'fade', 'show')
+    element.setAttribute('role', 'alert')
+    element.innerHTML = '<h4 class="alert-heading">Notification</h4>Il manque des photos !<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'
+
+    document.getElementById('alert-container').append(element)
   }
 
 </script>
