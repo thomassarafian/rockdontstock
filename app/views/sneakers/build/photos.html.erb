@@ -32,49 +32,49 @@
       <div class="sneaker-form__photos">
         <div class="sneaker-form__photo sneaker-form__photo-0">
           <img id="preview-photo-0" class="sneaker-form__photo__preview" src="" />
-          <%= file_field_tag :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <%= file_field_tag :photos, class: "sneaker-form__photo__input" %>
           <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
           <%= label_tag "Intérieur" %>
         </div>
         <div class="sneaker-form__photo sneaker-form__photo-1">
           <img id="preview-photo-1" class="sneaker-form__photo__preview" src="" />
-          <%= file_field_tag :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <%= file_field_tag :photos, class: "sneaker-form__photo__input" %>
           <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
           <%= label_tag "Extérieur" %>
         </div>
         <div class="sneaker-form__photo sneaker-form__photo-2">
           <img id="preview-photo-2" class="sneaker-form__photo__preview" src="" />
-          <%= file_field_tag :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <%= file_field_tag :photos, class: "sneaker-form__photo__input" %>
           <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
           <%= label_tag "Derrière" %>
         </div>
         <div class="sneaker-form__photo sneaker-form__photo-3">
           <img id="preview-photo-3" class="sneaker-form__photo__preview" src="" />
-          <%= file_field_tag :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <%= file_field_tag :photos, class: "sneaker-form__photo__input" %>
           <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
           <%= label_tag "Dessus" %>
         </div>
         <div class="sneaker-form__photo sneaker-form__photo-4">
           <img id="preview-photo-4" class="sneaker-form__photo__preview" src="" />
-          <%= file_field_tag :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <%= file_field_tag :photos, class: "sneaker-form__photo__input" %>
           <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
           <%= label_tag "Dessous" %>
         </div>
         <div class="sneaker-form__photo sneaker-form__photo-5">
           <img id="preview-photo-5" class="sneaker-form__photo__preview" src="" />
-          <%= file_field_tag :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <%= file_field_tag :photos, class: "sneaker-form__photo__input" %>
           <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
           <%= label_tag "Size Tag" %>
         </div>
         <div class="sneaker-form__photo sneaker-form__photo-6">
           <img id="preview-photo-6" class="sneaker-form__photo__preview" src="" />
-          <%= file_field_tag :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <%= file_field_tag :photos, class: "sneaker-form__photo__input" %>
           <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
           <%= label_tag "Optionnel : boîte" %>
         </div>
         <div class="sneaker-form__photo sneaker-form__photo-7">
           <img id="preview-photo-7" class="sneaker-form__photo__preview" src="" />
-          <%= file_field_tag :photos, multiple: true, class: "sneaker-form__photo__input" %>
+          <%= file_field_tag :photos, class: "sneaker-form__photo__input" %>
           <img class="sneaker-form__photo__btn" src="/assets/images/upload-banner.png" />
           <%= label_tag "Optionnel : défauts sur la paire" %>
         </div>
@@ -106,6 +106,7 @@
     const uploadContent = document.querySelector('.upload-content')
     uploadContent.style.display = "none"
     loader.style.display = ""
+    scrollUp()
 
     // use uploaded photos as data
     const formData = new FormData();
@@ -129,9 +130,13 @@
 
     upload.then(() => form.submit())
     .catch((err) => {
-      alert(err.message)
       uploadContent.style.display = "block"
       loader.style.display = "none"
+      scrollUp()
+      showAlert()
+      setTimeout(() => {
+        document.querySelector(".alert").remove();
+      }, 4000)
     })
   })
 
@@ -218,6 +223,15 @@
   function scrollUp() {
     document.body.scrollTop = 0; // Safari
     document.documentElement.scrollTop = 0; // Chrome, Firefox, IE and Opera
+  }
+
+  function showAlert() {
+    let element = document.createElement('div')
+    element.classList.add('alert', 'alert-info', 'alert-dismissible', 'fade', 'show')
+    element.setAttribute('role', 'alert')
+    element.innerHTML = '<h4 class="alert-heading">Notification</h4>Il manque des photos !<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'
+
+    document.getElementById('alert-container').append(element)
   }
 
 </script>
