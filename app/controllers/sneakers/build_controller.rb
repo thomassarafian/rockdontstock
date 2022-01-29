@@ -26,8 +26,7 @@ class Sneakers::BuildController < ApplicationController
 
     # guard
     if !photos.present? || photos.length < 6
-      render json: { message: "Il manque des photos !" }, status: 422
-      return
+      render json: { message: "Il manque des photos !" }, status: 422 and return
     end
 
     if @sneaker.update(photos: photos)
