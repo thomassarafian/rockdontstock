@@ -18,10 +18,10 @@
     </div>
     <div class="row g-2">
       <div class="col">
-        <%= f.text_field :last_name, class: "form-control", placeholder: "Nom" %>
+        <%= f.text_field :last_name, class: "form-control", placeholder: "Nom", required: true %>
       </div>
       <div class="col">
-        <%= f.text_field :first_name, class: "form-control", placeholder: "Prénom" %>
+        <%= f.text_field :first_name, class: "form-control", placeholder: "Prénom", required: true %>
       </div>
     </div>
     <div class="form-group">
@@ -30,10 +30,10 @@
     <div class="row g-2">
       <div class="input-group col">
         <span class="input-group-text">Né(e) le</span>
-        <%= f.date_field :date_of_birth, class: "form-control" %>
+        <%= f.date_field :date_of_birth, class: "form-control", required: true %>
       </div>
       <div class="col">
-        <%= f.text_field :city, class: "form-control", placeholder: "Ville" %>
+        <%= f.text_field :city, class: "form-control", placeholder: "Ville", required: true %>
       </div>
     </div>
     <div class="form-check mb-3">
@@ -53,21 +53,7 @@
 </div>
 
 <script>
-
-	function ajaxSubmitForm() {
-		let form = document.getElementById('auth-modal__form');
-    let formData = new FormData(form);
-
-		return Rails.ajax({
-			type: "POST",
-			url: "<%= authentications_url %>",
-			data: formData,
-			success: (resp) => {
-				actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
-			},
-			error: () => alert("Une erreur est survenue.")
-		})
-	}
+	const form = document.getElementById('auth-modal__form');
 
   paypal.Buttons({
     style: {
@@ -78,6 +64,8 @@
     },
     // Sets up the transaction when a payment button is clicked
     createOrder: function(data, actions) {
+			if (!form.checkValidity()) return
+
       return actions.order.create({
         purchase_units: [{
           amount: {
@@ -89,7 +77,16 @@
     // Finalize the transaction after payer approval
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(orderData) {
-				ajaxSubmitForm();
+				let formData = new FormData(form);
+				return Rails.ajax({
+					type: "POST",
+					url: "<%= authentications_url %>",
+					data: formData,
+					success: (resp) => {
+						actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
+					},
+					error: () => alert("Une erreur est survenue.")
+				})
       });
     }
   }).render('#paypal-btn');
