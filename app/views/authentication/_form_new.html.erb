@@ -8,7 +8,7 @@
 <div class="auth-modal__form">
   <%= form_for :user, html: { id: 'auth-modal__form' } do |f| %>
     <div class="form-group">
-      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="10" data-dropzone-max-files="10">
+      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="5" data-dropzone-max-files="10">
       <%= f.file_field :photos, multiple: true, direct_upload: true, data: { "dropzone-target": "input" } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h4 class="dropzone-msg-title">Glisser ou rechercher des photos</h4>
@@ -18,10 +18,10 @@
     </div>
     <div class="row g-2">
       <div class="col">
-        <%= f.text_field :last_name, class: "form-control", placeholder: "Nom" %>
+        <%= f.text_field :last_name, class: "form-control", placeholder: "Nom", required: true %>
       </div>
       <div class="col">
-        <%= f.text_field :first_name, class: "form-control", placeholder: "Prénom" %>
+        <%= f.text_field :first_name, class: "form-control", placeholder: "Prénom", required: true %>
       </div>
     </div>
     <div class="form-group">
@@ -30,10 +30,10 @@
     <div class="row g-2">
       <div class="input-group col">
         <span class="input-group-text">Né(e) le</span>
-        <%= f.date_field :date_of_birth, class: "form-control" %>
+        <%= f.date_field :date_of_birth, class: "form-control", required: true %>
       </div>
       <div class="col">
-        <%= f.text_field :city, class: "form-control", placeholder: "Ville" %>
+        <%= f.text_field :city, class: "form-control", placeholder: "Ville", required: true %>
       </div>
     </div>
     <div class="form-check mb-3">
@@ -51,8 +51,26 @@
     <div id="paypal-btn"></div>
   <% end %>
 </div>
+<div class="loader-wrapper" style="display: none; margin: 100px auto; width: 50%; text-align: center;">
+	<div class="loader"></div>
+	<div>Merci de bien vouloir patienter...</div>
+</div>
+
 
 <script>
+  const loader = document.querySelector('.loader-wrapper')
+  const formBlock = document.querySelector('.auth-modal__form')
+	const form = document.getElementById('auth-modal__form');
+
+  function displaySpinner() {
+    formBlock.style.display = "none"
+    loader.style.display = ""
+  }
+
+  function hideSpinner() {
+    formBlock.style.display = "block"
+    loader.style.display = "none"
+  }
 
   paypal.Buttons({
     style: {
@@ -63,6 +81,8 @@
     },
     // Sets up the transaction when a payment button is clicked
     createOrder: function(data, actions) {
+			if (!form.checkValidity()) return
+
       return actions.order.create({
         purchase_units: [{
           amount: {
@@ -74,35 +94,19 @@
     // Finalize the transaction after payer approval
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(orderData) {
+				displaySpinner();
 
-        let form = document.getElementById('auth-modal__form');
-        let formData = new FormData(form);
+				let formData = new FormData(form);
 
-        return Rails.ajax({
-          type: "POST",
-          url: "<%= authentications_url %>",
-          data: formData,
-          success: (resp) => {
-            actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
-          },
-          error: () => alert("Une erreur est survenue.")
-        })
-
-        // let form = document.getElementById('auth-modal__form')
-        // let formData = new formData(form)
-        // console.log(formData)
-
-        // // Successful capture! For dev/demo purposes:
-        // console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-        // var transaction = orderData.purchase_units[0].payments.captures[0];
-        // alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
-
-        // // When ready to go live, remove the alert and show a success message within this page. For example:
-        // // var element = document.getElementById('paypal-button-container');
-        // // element.innerHTML = '';
-        // // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-        // // Or go to another URL:  
-        // // actions.redirect("<%= authentications_url %>");
+				return Rails.ajax({
+					type: "POST",
+					url: "<%= authentications_url %>",
+					data: formData,
+					success: (resp) => {
+						actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
+					},
+					error: () => alert("Une erreur est survenue.")
+				})
       });
     }
   }).render('#paypal-btn');
