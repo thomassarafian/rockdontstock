@@ -8,7 +8,7 @@
 <div class="auth-modal__form">
   <%= form_for :user, html: { id: 'auth-modal__form' } do |f| %>
     <div class="form-group">
-      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="10" data-dropzone-max-files="10">
+      <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="5" data-dropzone-max-files="10">
       <%= f.file_field :photos, multiple: true, direct_upload: true, data: { "dropzone-target": "input" } %>
       <div class="dropzone-msg dz-message needsclick text-gray-600">
         <h4 class="dropzone-msg-title">Glisser ou rechercher des photos</h4>
@@ -54,6 +54,21 @@
 
 <script>
 
+	function ajaxSubmitForm() {
+		let form = document.getElementById('auth-modal__form');
+    let formData = new FormData(form);
+
+		return Rails.ajax({
+			type: "POST",
+			url: "<%= authentications_url %>",
+			data: formData,
+			success: (resp) => {
+				actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
+			},
+			error: () => alert("Une erreur est survenue.")
+		})
+	}
+
   paypal.Buttons({
     style: {
       layout:  'horizontal',
@@ -74,35 +89,7 @@
     // Finalize the transaction after payer approval
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(orderData) {
-
-        let form = document.getElementById('auth-modal__form');
-        let formData = new FormData(form);
-
-        return Rails.ajax({
-          type: "POST",
-          url: "<%= authentications_url %>",
-          data: formData,
-          success: (resp) => {
-            actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
-          },
-          error: () => alert("Une erreur est survenue.")
-        })
-
-        // let form = document.getElementById('auth-modal__form')
-        // let formData = new formData(form)
-        // console.log(formData)
-
-        // // Successful capture! For dev/demo purposes:
-        // console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-        // var transaction = orderData.purchase_units[0].payments.captures[0];
-        // alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
-
-        // // When ready to go live, remove the alert and show a success message within this page. For example:
-        // // var element = document.getElementById('paypal-button-container');
-        // // element.innerHTML = '';
-        // // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-        // // Or go to another URL:  
-        // // actions.redirect("<%= authentications_url %>");
+				ajaxSubmitForm();
       });
     }
   }).render('#paypal-btn');

@@ -30,7 +30,7 @@ class Authentication < ApplicationRecord
         "nom" => self.last_name,
         "prenom" => self.first_name,
         "email" => self.email,
-        "age" => self.age,
+        "naissance" => self.date_of_birth,
         "ville" => self.city,
         "photos" => photos_urls
       }
