@@ -53,7 +53,7 @@
 </div>
 <div class="loader-wrapper" style="display: none; margin: 100px auto; width: 50%; text-align: center;">
 	<div class="loader"></div>
-	<div>Merci de patienter et ne pas quitter la page...</div>
+	<div>Merci de bien vouloir patienter...</div>
 </div>
 
 
@@ -71,7 +71,6 @@
     formBlock.style.display = "block"
     loader.style.display = "none"
   }
-
 
   paypal.Buttons({
     style: {
@@ -96,6 +95,7 @@
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(orderData) {
 				displaySpinner();
+
 				let formData = new FormData(form);
 
 				return Rails.ajax({
