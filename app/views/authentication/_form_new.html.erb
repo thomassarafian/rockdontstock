@@ -51,9 +51,27 @@
     <div id="paypal-btn"></div>
   <% end %>
 </div>
+<div class="loader-wrapper" style="display: none; margin: 100px auto; width: 50%; text-align: center;">
+	<div class="loader"></div>
+	<div>Merci de patienter et ne pas quitter la page...</div>
+</div>
+
 
 <script>
+  const loader = document.querySelector('.loader-wrapper')
+  const formBlock = document.querySelector('.auth-modal__form')
 	const form = document.getElementById('auth-modal__form');
+
+  function displaySpinner() {
+    formBlock.style.display = "none"
+    loader.style.display = ""
+  }
+
+  function hideSpinner() {
+    formBlock.style.display = "block"
+    loader.style.display = "none"
+  }
+
 
   paypal.Buttons({
     style: {
@@ -77,7 +95,9 @@
     // Finalize the transaction after payer approval
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(orderData) {
+				displaySpinner();
 				let formData = new FormData(form);
+
 				return Rails.ajax({
 					type: "POST",
 					url: "<%= authentications_url %>",

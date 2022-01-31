@@ -5,10 +5,6 @@ class Authentication < ApplicationRecord
 
   attribute :newsletter, :boolean
 
-  after_create :send_information_email
-
-  private
-
   def send_information_email
     photos_urls = self.photos.map{ |photo| photo.blob.url }.join("\n")
 

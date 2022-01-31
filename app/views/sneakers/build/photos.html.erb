@@ -97,15 +97,23 @@
   const submitBtn = document.querySelector('.sneaker-form__next-btn')
   const form = submitBtn.closest('form')
   const loader = document.querySelector('.loader-wrapper')
+  const uploadContent = document.querySelector('.upload-content')
   let resizedPhotos = new Array
+
+  function displaySpinner() {
+    uploadContent.style.display = "none"
+    loader.style.display = ""
+  }
+
+  function hideSpinner() {
+    uploadContent.style.display = "block"
+    loader.style.display = "none"
+  }
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // display loader
-    const uploadContent = document.querySelector('.upload-content')
-    uploadContent.style.display = "none"
-    loader.style.display = ""
+    displaySpinner()
     scrollUp()
 
     // use uploaded photos as data
@@ -130,8 +138,7 @@
 
     upload.then(() => form.submit())
     .catch((err) => {
-      uploadContent.style.display = "block"
-      loader.style.display = "none"
+      hideSpinner()
       scrollUp()
       showAlert()
       setTimeout(() => {
