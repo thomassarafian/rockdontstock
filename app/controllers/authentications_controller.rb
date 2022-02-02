@@ -12,7 +12,6 @@ class AuthenticationsController < ApplicationController
         render json: { lcId: lc.id }, status: 200
       end
     else
-      puts "*"*100, lc.errors.full_messages.join(', ')
       render json: { message: lc.errors.full_messages.join(', ') }, status: 422
     end
   end

@@ -238,7 +238,7 @@
     element.setAttribute('role', 'alert')
     element.innerHTML = '<h4 class="alert-heading">Notification</h4>Il manque des photos !<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'
 
-    document.getElementById('alert-container').append(element)
+    document.getElementById('alert-container').replaceChildren(element)
   }
 
 </script>

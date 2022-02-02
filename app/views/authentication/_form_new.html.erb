@@ -72,6 +72,29 @@
     loader.style.display = "none"
   }
 
+  function showAlert(msg) {
+    let element = document.createElement('div')
+    element.classList.add('alert', 'alert-info', 'alert-dismissible', 'fade', 'show')
+    element.setAttribute('role', 'alert')
+    element.innerHTML = `<h4 class="alert-heading">Notification</h4>${msg}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
+
+    document.getElementById('alert-container').replaceChildren(element)
+  }
+
+  function ajaxSubmit() {
+    let formData = new FormData(form);
+
+    return new Promise(function(resolve, reject) {
+      Rails.ajax({
+        type: "POST",
+        url: "<%= authentications_url %>",
+        data: formData,
+        success: (resp) => resolve(resp),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
   paypal.Buttons({
     style: {
       layout:  'horizontal',
@@ -81,30 +104,28 @@
     },
     // Sets up the transaction when a payment button is clicked
     createOrder: function(data, actions) {
-
-      let formData = new FormData(form);
-
-      Rails.ajax({
-        type: "POST",
-        url: "<%= authentications_url %>",
-        data: formData,
-        success: () => {
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: "4.90"
-              }
-            }]
-          });
-        },
-        error: (err) => alert(err.message)
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '4.90' // Can reference variables or functions. Example: `value: document.getElementById('...').value`
+          }
+        }]
+      });
+    },
+    onClick: (data, actions) => {
+      return ajaxSubmit().then((resp) => {
+        this.lcId = resp.lcId
+        return actions.resolve()
+      }).catch((err) => {
+        // FIXME doesnt work
+        showAlert(err.message)
+        return actions.reject()
       })
     },
-    // Finalize the transaction after payer approval
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(orderData) {
 				displaySpinner();
-        // actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
+        actions.redirect(window.location.origin + `/authentications/${this.lcId}/success`);
       });
     }
   }).render('#paypal-btn');
