@@ -89,7 +89,7 @@
         url: "<%= authentications_url %>",
         data: formData,
         success: () => {
-          actions.order.create({
+          return actions.order.create({
             purchase_units: [{
               amount: {
                 value: "4.90"
