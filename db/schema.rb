@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_14_003242) do
+ActiveRecord::Schema.define(version: 2022_02_02_223905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2022_01_14_003242) do
     t.integer "payment_status", default: 0
     t.string "checkout_session_id"
     t.date "date_of_birth"
+    t.boolean "newsletter", default: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -127,7 +128,6 @@ ActiveRecord::Schema.define(version: 2022_01_14_003242) do
     t.integer "price_cents", default: 0, null: false
     t.date "release_date"
     t.string "category"
-    t.string "subcategory"
     t.string "img_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
