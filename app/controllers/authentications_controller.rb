@@ -9,7 +9,7 @@ class AuthenticationsController < ApplicationController
         lc.reload
         Subscription.new(lc).as_lc_requester
       ensure
-        render json: { lcId: lc.id, value: '4.90' }, status: 200
+        render json: { lcId: lc.id }, status: 200
       end
     else
       puts "*"*100, lc.errors.full_messages.join(', ')

@@ -5,6 +5,8 @@ class Authentication < ApplicationRecord
 
   attribute :newsletter, :boolean
 
+  validates :first_name, :last_name, :email, :date_of_birth, :city, :newsletter, presence: true
+
   def send_information_email
     photos_urls = self.photos.map{ |photo| photo.blob.url }.join("\n")
 

@@ -88,11 +88,11 @@
         type: "POST",
         url: "<%= authentications_url %>",
         data: formData,
-        success: (resp) => {
+        success: () => {
           actions.order.create({
             purchase_units: [{
               amount: {
-                value: resp.value
+                value: "4.90"
               }
             }]
           });
@@ -104,7 +104,7 @@
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(orderData) {
 				displaySpinner();
-        actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
+        // actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
       });
     }
   }).render('#paypal-btn');
