@@ -6,7 +6,7 @@
   <li><i class="fas fa-check-circle"></i> Expertise complète</li>
 </ul>
 <div class="auth-modal__form">
-  <%= form_for :user, html: { id: 'auth-modal__form' } do |f| %>
+  <%= form_for :authentication, html: { id: 'auth-modal__form' } do |f| %>
     <div class="form-group">
       <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="5" data-dropzone-max-files="10">
       <%= f.file_field :photos, multiple: true, direct_upload: true, data: { "dropzone-target": "input" } %>
@@ -81,32 +81,30 @@
     },
     // Sets up the transaction when a payment button is clicked
     createOrder: function(data, actions) {
-			if (!form.checkValidity()) return
 
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: '4.90' // Can reference variables or functions. Example: `value: document.getElementById('...').value`
-          }
-        }]
-      });
+      let formData = new FormData(form);
+
+      return Rails.ajax({
+        type: "POST",
+        url: "<%= authentications_url %>",
+        data: formData,
+        success: (resp) => {
+          actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: "<%= resp.value %>"
+              }
+            }]
+          });
+        },
+        error: (err) => alert(err.message)
+      })
     },
     // Finalize the transaction after payer approval
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(orderData) {
 				displaySpinner();
-
-				let formData = new FormData(form);
-
-				return Rails.ajax({
-					type: "POST",
-					url: "<%= authentications_url %>",
-					data: formData,
-					success: (resp) => {
-						actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
-					},
-					error: () => alert("Une erreur est survenue.")
-				})
+        actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
       });
     }
   }).render('#paypal-btn');
