@@ -84,7 +84,7 @@
 
       let formData = new FormData(form);
 
-      return Rails.ajax({
+      Rails.ajax({
         type: "POST",
         url: "<%= authentications_url %>",
         data: formData,
