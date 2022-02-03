@@ -6,7 +6,7 @@
   <li><i class="fas fa-check-circle"></i> Expertise complète</li>
 </ul>
 <div class="auth-modal__form">
-  <%= form_for :user, html: { id: 'auth-modal__form' } do |f| %>
+  <%= form_for :authentication, html: { id: 'auth-modal__form' } do |f| %>
     <div class="form-group">
       <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="5" data-dropzone-max-files="10">
       <%= f.file_field :photos, multiple: true, direct_upload: true, data: { "dropzone-target": "input" } %>
@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="form-check mb-3">
-      <%= f.check_box :newsletter, { class: "form-check-input", required: true }, 1, nil %>
+      <%= f.check_box :newsletter, { class: "form-check-input", required: true } %>
       <%= f.label "", class: "form-check-label", style: "font-size: 0.75rem" do %>
         En envoyant ma demande j'accepte de recevoir les dernières nouveautés de Rock Don't Stock par email.
       <% end %>
@@ -72,6 +72,29 @@
     loader.style.display = "none"
   }
 
+  function showAlert(msg) {
+    let element = document.createElement('div')
+    element.classList.add('alert', 'alert-info', 'alert-dismissible', 'fade', 'show')
+    element.setAttribute('role', 'alert')
+    element.innerHTML = `<h4 class="alert-heading">Notification</h4>${msg}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
+
+    document.getElementById('alert-container').replaceChildren(element)
+  }
+
+  function ajaxSubmit() {
+    let formData = new FormData(form);
+
+    return new Promise(function(resolve, reject) {
+      Rails.ajax({
+        type: "POST",
+        url: "<%= authentications_url %>",
+        data: formData,
+        success: (resp) => resolve(resp),
+        error: (err) => reject(err)
+      })
+    })
+  }
+
   paypal.Buttons({
     style: {
       layout:  'horizontal',
@@ -81,8 +104,6 @@
     },
     // Sets up the transaction when a payment button is clicked
     createOrder: function(data, actions) {
-			if (!form.checkValidity()) return
-
       return actions.order.create({
         purchase_units: [{
           amount: {
@@ -91,22 +112,20 @@
         }]
       });
     },
-    // Finalize the transaction after payer approval
+    onClick: (data, actions) => {
+      return ajaxSubmit().then((resp) => {
+        this.lcId = resp.lcId
+        return actions.resolve()
+      }).catch((err) => {
+        // FIXME doesnt work
+        showAlert(err.message)
+        return actions.reject()
+      })
+    },
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(orderData) {
 				displaySpinner();
-
-				let formData = new FormData(form);
-
-				return Rails.ajax({
-					type: "POST",
-					url: "<%= authentications_url %>",
-					data: formData,
-					success: (resp) => {
-						actions.redirect(window.location.origin + `/authentications/${resp.lcId}/success`);
-					},
-					error: () => alert("Une erreur est survenue.")
-				})
+        actions.redirect(window.location.origin + `/authentications/${this.lcId}/success`);
       });
     }
   }).render('#paypal-btn');

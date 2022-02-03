@@ -438,13 +438,16 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": false,
+      "is_required": true,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": []
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
     }, {
       "field": "last_name",
       "type": "String",
@@ -453,13 +456,16 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": false,
+      "is_required": true,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": []
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
     }, {
       "field": "email",
       "type": "String",
@@ -468,13 +474,16 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": false,
+      "is_required": true,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": []
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
     }, {
       "field": "city",
       "type": "String",
@@ -483,13 +492,16 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": false,
+      "is_required": true,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": []
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
     }, {
       "field": "created_at",
       "type": "Date",
@@ -558,13 +570,34 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": false,
+      "is_required": true,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": []
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
+    }, {
+      "field": "newsletter",
+      "type": "Boolean",
+      "default_value": "false",
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": true,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
     }, {
       "field": "photos_attachments",
       "type": ["Number"],
@@ -1793,21 +1826,6 @@
       "field": "category",
       "type": "String",
       "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": true,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": null,
-      "inverse_of": null,
-      "widget": null,
-      "validations": []
-    }, {
-      "field": "subcategory",
-      "type": ["String"],
-      "default_value": "{}",
       "enums": null,
       "integration": null,
       "is_filterable": true,
