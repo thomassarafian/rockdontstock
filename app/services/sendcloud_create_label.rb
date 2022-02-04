@@ -31,7 +31,7 @@ class SendcloudCreateLabel
         },
         to_service_point: 10603692,
         parcel_items: [],
-        from_name: @order.sneaker.user.first_name + " " + @order.sneaker.user.last_name,
+        from_name: @order.sneaker.user.full_name,
         from_address_1: @order.sneaker.user.line1,
         from_address_2: "",
         from_house_number: @order.sneaker.user.line1.split(/\W+/)[0],
@@ -51,11 +51,12 @@ class SendcloudCreateLabel
                     basic_auth: @auth)
 
     json_create_parcel = JSON.pretty_generate(JSON.parse(create_parcel.body))
-
     puts json_create_parcel
 
-    puts "=============================="
-    puts create_parcel.parsed_response['parcel']['id']
+    # puts json_create_parcel
+
+    # puts "=============================="
+    # puts create_parcel.parsed_response['parcel']['id']
     # @order.update(sendcloud_order_id_seller: create_parcel.parsed_response['parcel']['id'])
     @order.sendcloud_order_id_seller = create_parcel.parsed_response['parcel']['id']
     # puts create_parcel.parsed_response['parcel']['tracking_url']
@@ -85,9 +86,9 @@ class SendcloudCreateLabel
         "prenom" => @order.sneaker.user.first_name,
         "numero_commande" => @order.id,
         "prix_de_vente" => @order.sneaker.price_cents.to_f / 100,
-        "frais_de_livraison" => "5,05",  
-        "frais_authentification" => (@order.service_cents.to_f / 100) / 2,
-        "somme_vendeur" => ((@order.sneaker.price_cents.to_f / 100) - 5.05) , # - (@order.service_cents / 100)),
+        "frais_de_livraison" => "6.30",  
+        "frais_authentification" => @order.service_fee_cents.to_f / 100,
+        "somme_vendeur" => ((@order.sneaker.price_cents.to_f / 100) - 6.30) , # - (@order.service_fee_cents / 100)),
         "lien_conseils_expédition" => "https://www.rockdontstock.com/faq"
       },
       'Attachments'=> [{
@@ -120,8 +121,8 @@ class SendcloudCreateLabel
         "numero_commande" => @order.id,
         "prix_de_vente" => @order.sneaker.price_cents.to_f / 100,
         "frais_de_livraison" => @order.shipping_fee_cents.to_f / 100, 
-        "frais_authentification" => (@order.service_cents.to_f / 100) / 2,
-        "prix_tot_paye_par_acheteur" => (@order.sneaker.price_cents.to_f / 100) + (@order.shipping_fee_cents.to_f / 100) + ((@order.service_cents.to_f / 100) / 2) 
+        "frais_authentification" => @order.service_fee_cents.to_f / 100,
+        "prix_tot_paye_par_acheteur" => (@order.sneaker.price_cents.to_f / 100) + (@order.shipping_fee_cents.to_f / 100) + (@order.service_fee_cents.to_f / 100) 
       }
     }])
     p variable2.attributes['Messages']
