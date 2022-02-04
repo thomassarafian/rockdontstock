@@ -96,6 +96,7 @@ class PaymentsController < ApplicationController
       order.update(
         payment_method: payment_intent["payment_method_types"][0],
         payment_status: "paid",
+        state: "Payé" # old system, needed to trigger before update callbacks
       )
     end
 

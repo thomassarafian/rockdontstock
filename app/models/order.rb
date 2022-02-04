@@ -25,7 +25,7 @@ class Order < ApplicationRecord
 
   before_update :create_sendcloud_label, if: :order_is_paid?
   before_update :new_list_id_for_buyer, if: :order_is_paid?
-  before_update :create_sendcloud_label_for_buyer, if: :order_is_in_preparation?
+  # before_update :create_sendcloud_label_for_buyer, if: :order_is_in_preparation?
 
   # after_create :shipping_price
 
