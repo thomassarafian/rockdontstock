@@ -12,9 +12,7 @@ class Forest::OrdersController < ForestLiana::SmartActionsController
 
     # Rembourser l'acheteur 
     puts "======================================================="
-    puts @order_session = Stripe::Checkout::Session.retrieve(@order.checkout_session_id)
-    puts "======================================================="
-    puts refund = Stripe::Refund.create({payment_intent: @order_session['payment_intent']})
+    puts refund = Stripe::Refund.create({payment_intent: @order.payment_intent_id})
     puts "======================================================="
     
     # Annuler la commande Sendcloud
@@ -22,7 +20,7 @@ class Forest::OrdersController < ForestLiana::SmartActionsController
       username: ENV["SENDCLOUD_API_KEY"],
       password: ENV["SENDCLOUD_SECRET_KEY"]
     }    
-    puts cancel_parcel = HTTParty.post("https://panel.sendcloud.sc/api/v2/parcels/#{@order.sendcloud_order_id}/cancel", basic_auth: @auth)
+    puts cancel_parcel = HTTParty.post("https://panel.sendcloud.sc/api/v2/parcels/#{@order.sendcloud_order_id_seller}/cancel", basic_auth: @auth)
 
     # Email a l'acheteur 
     buyer_mail = Mailjet::Send.create(messages: [{
