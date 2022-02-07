@@ -3,7 +3,7 @@ class SneakersController < ApplicationController
 	before_action :set_sneaker, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@selection_of_the_day = Sneaker.highlighted.last || Sneaker.selected.last || Sneaker.first
+		@selection_of_the_day = Sneaker.highlighted.last || Sneaker.selected.last || Sneaker.where('state >= ?', 1).first
 		results = Sneaker.where('state >= ?', 1).search_by_name_and_brand(params[:search])
 		
 		[:min_price, :max_price, :condition, :size, :category].each do |filter|
@@ -22,15 +22,15 @@ class SneakersController < ApplicationController
 	end
 
 	def show
-		@sneaker = Sneaker.find(params[:id])
+		@sneaker = Sneaker.where('state >= ?', 1).find(params[:id])
 
 		category = @sneaker.sneaker_db.category
 		size = @sneaker.size
 		price = @sneaker.price.to_i
 
-		similar_by_category = Sneaker.filter_by_category(category).limit(10)
-		similar_by_size = Sneaker.filter_by_size(size).limit(10)
-		similar_by_price = Sneaker.filter_by_min_price(price - 50).filter_by_max_price(price).limit(10)
+		similar_by_category = Sneaker.where('state >= ?', 1).filter_by_category(category).limit(10)
+		similar_by_size = Sneaker.where('state >= ?', 1).filter_by_size(size).limit(10)
+		similar_by_price = Sneaker.where('state >= ?', 1).filter_by_min_price(price - 50).filter_by_max_price(price).limit(10)
 
 		@similar_sneakers = similar_by_category + similar_by_size + similar_by_price
 		@similar_sneakers = @similar_sneakers.uniq.sample(20) || Sneaker.all.sample(6)
