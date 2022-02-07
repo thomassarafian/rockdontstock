@@ -2,6 +2,7 @@ class Sneakers::BuildController < ApplicationController
   include Wicked::Wizard
 
   before_action :set_sneaker
+  before_action :return_if_not_allowed
 
   steps :sneaker_db, :infos, :photos, :recap
 
@@ -77,6 +78,13 @@ class Sneakers::BuildController < ApplicationController
       return false
     elsif current_step?(step)
       return true
+    end
+  end
+
+  def return_if_not_allowed
+    if current_user != @sneaker.user
+      flash[:alert] = "Désolé, tu n'es pas autorisé !"
+      redirect_to request.referer || root_path
     end
   end
 
