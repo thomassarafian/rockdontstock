@@ -45,6 +45,9 @@ footer li {
   }
 }
 .footer__trustpilot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid white;
   background-color: white;
   height: 200px;
