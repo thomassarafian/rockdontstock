@@ -210,14 +210,17 @@
       let popovers = document.querySelectorAll('.custom-popover');
       popovers.forEach(p => p.style.display = "none")
     }
+
+    if (e.target.closest('.sneaker-index__card')) {
+      let card = e.target.closest('.sneaker-index__card')
+      window.location.href = "<%= sneakers_url %>/" + card.dataset.sneakerId;
+    }
   })
 
   document.querySelectorAll('.sneaker-index__card').forEach(el => {
-
     el.addEventListener('click', function() {
       window.location.href = "<%= sneakers_url %>/" + this.dataset.sneakerId;
     })
-
   })
 
   let filterBtn = document.querySelector('.filter-btn')
