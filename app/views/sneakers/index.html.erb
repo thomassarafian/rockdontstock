@@ -210,6 +210,10 @@
       let popovers = document.querySelectorAll('.custom-popover');
       popovers.forEach(p => p.style.display = "none")
     }
+
+    if (e.target.closest('.sneaker-index__card')) {
+      window.location.href = "<%= sneakers_url %>/" + e.target.dataset.sneakerId;
+    }
   })
 
   document.querySelectorAll('.sneaker-index__card').forEach(el => {

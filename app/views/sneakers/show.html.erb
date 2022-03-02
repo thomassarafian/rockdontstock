@@ -1,4 +1,4 @@
-<title>Article - Rock Don't Stock</title>
+<title><%= @sneaker.sneaker_db.name %> - Rock Don't Stock</title>
 <div class="container">
   <%= link_to :back, class: "back-button" do %>
     <div><i class="fas fa-arrow-left ms-0"></i> La marketplace</div>
@@ -33,7 +33,7 @@
       </div>
       <div class="sneaker-details__price"><%= @sneaker.price %>€</div>
       <div>
-        <div class="sneaker-details__box"><%= @sneaker.box ? "Livrée avec une #{@sneaker.box}" : "Livrée sans boîte" %></div>
+        <div class="sneaker-details__box"><%= @sneaker.box ? "Livrée avec une #{@sneaker.box}. " : "Livrée sans boîte. " %><%= @sneaker.extras + (@sneaker.extras[-1] == "." ? "" : ".") if @sneaker.extras %></div>
         <div class="sneaker-details__legal-descr">L’authenticité et la conformité du modèle seront vérifiées par nos experts avant de t’être envoyée afin de t’assurer la meilleure experience possible.</div>
       </div>
       <%= button_to "Commander", new_sneaker_order_path(@sneaker.id), method: :get, class: "sneaker-details__purchase" %>

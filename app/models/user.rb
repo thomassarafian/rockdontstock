@@ -58,7 +58,7 @@ class User < ApplicationRecord
 
   def subscribe_to_newsletter
     begin 
-      Subscription.new(self).as_user 
+      Subscription.new(self).as_user
     rescue
     end
   end
