@@ -3,7 +3,7 @@ class Authentication < ApplicationRecord
 
   enum payment_status: { unpaid: 0, paid: 10 }
 
-  validates :first_name, :last_name, :email, :date_of_birth, :city, :newsletter, presence: true
+  validates :first_name, :last_name, :email, :date_of_birth, :city, :newsletter, :photos, presence: true
   validates :newsletter, acceptance: true
 
   def send_information_email

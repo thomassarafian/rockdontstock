@@ -1,5 +1,5 @@
 <footer>
-  <div class="footer-left-block">
+  <div class="footer-content">
     <div class="footer__newsletter">
       <div class="footer__newsletter__title">Abonne-toi !</div>
       <div class="footer__newsletter__descr">Reçois toutes nos dernières news, guides gratuits et nouveautés...</div>
@@ -8,71 +8,79 @@
         <i class="fas fa-arrow-right" style="position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); cursor: pointer;" onclick="this.closest('form').submit()"></i>
       <% end %>
     </div>
-    <div class="footer__trustpilot">
-      <div class="review-widget_net" data-uuid="8f91c202-8e87-4351-b425-4120e26638ec" data-template="2" data-filter="" data-lang="en" data-theme="light"><center><a href="https://www.review-widget.net/" target="_blank" rel="noopener"><img src="https://grwapi.net/assets/spinner/spin.svg" title="Review Widget" alt="review-widget.net" loading="lazy"></a></center></div><script async type="text/javascript" src="https://grwapi.net/widget.min.js"></script>
+    <div class="footer__content-middle">
+      <div class="footer__widget-wrapper">
+        <div class="review-widget_net" data-uuid="8f91c202-8e87-4351-b425-4120e26638ec" data-template="2" data-filter="" data-lang="en" data-theme="light">
+          <center>
+            <a href="https://www.review-widget.net/" target="_blank" rel="noopener">
+              <img src="https://grwapi.net/assets/spinner/spin.svg" title="Review Widget" alt="review-widget.net" loading="lazy">
+            </a>
+          </center>
+        </div>
+      </div>
+      <div class="footer-lists">
+        <div class="footer__list-block">
+          <div class="footer__list-title">A propos</div>
+          <ul class="footer__list">
+            <%= link_to "/about" do %>
+              <li>Qui sommes-nous ?</li>
+            <% end %>
+            <%= link_to "/comment-envoyer-une-paire" do %>
+              <li>Comment envoyer ma paire ?</li>
+            <% end %>
+            <%= link_to "/about" do %>
+              <li>Plan du site</li>
+            <% end %>
+            <%= link_to "/faq" do %>
+              <li>FAQ</li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="footer__list-block">
+          <div class="footer__list-title">Conditions</div>
+          <ul class="footer__list">
+            <%= link_to "/cgu" do %>
+              <li>CGU</li>
+            <% end %>
+            <%= link_to "/cgv" do %>
+              <li>CGV</li>
+            <% end %>
+            <%= link_to "/politique-de-confidentialite" do %>
+              <li>Politique de confidentialité</li>
+            <% end %>
+            <%= link_to "/authentication" do %>
+              <li>Authentification</li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="footer__list-block">
+          <div class="footer__list-title">Nous contacter</div>
+          <ul class="footer__list">
+            <li>
+              <i class="far fa-envelope me-2"></i>
+              <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %>
+            </li>
+            <li>
+            <i class="fab fa-instagram me-2"></i>
+              <a href="https://www.instagram.com/rockdontstock/" target="_blank">@rockdontstock</a>
+            </li>
+            <li>
+              <i class="fab fa-facebook me-2"></i>
+              <a href="https://www.facebook.com/rockdntstock/" target='_blank'>Sur Facebook</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="footer__bottom-line">
       <div>Copyright ©, 2021, Rock Don’t Stock. Tous droits réservés. N°135094456839</div>
       <%= image_tag("images/payment-types.svg", style: "height: 20px") %>
     </div>
-  </div>
-  <div class="footer-right-block">
-    <div class="footer__list-block">
-      <div class="footer__list-title">A propos</div>
-      <ul class="footer__list">
-        <%= link_to "/about" do %>
-          <li>Qui sommes-nous ?</li>
-        <% end %>
-        <%= link_to "/comment-envoyer-une-paire" do %>
-          <li>Comment envoyer ma paire ?</li>
-        <% end %>
-        <%= link_to "/about" do %>
-          <li>Plan du site</li>
-        <% end %>
-        <%= link_to "/faq" do %>
-          <li>FAQ</li>
-        <% end %>
-      </ul>
+    <div class="footer__bottom-line--mobile">
+      <div>Copyright ©, 2021, Rock Don’t Stock. Tous droits réservés. N°135094456839</div>
+      <%= image_tag("images/payment-types.svg", style: "height: 20px;") %>
     </div>
-    <div class="footer__list-block">
-      <div class="footer__list-title">Conditions</div>
-      <ul class="footer__list">
-        <%= link_to "/cgu" do %>
-          <li>CGU</li>
-        <% end %>
-        <%= link_to "/cgv" do %>
-          <li>CGV</li>
-        <% end %>
-        <%= link_to "/politique-de-confidentialite" do %>
-          <li>Politique de confidentialité</li>
-        <% end %>
-        <%= link_to "/authentication" do %>
-          <li>Authentification</li>
-        <% end %>
-      </ul>
-    </div>
-    <div class="footer__list-block">
-      <div class="footer__list-title">Nous contacter</div>
-      <ul class="footer__list">
-        <li>
-          <i class="far fa-envelope me-2"></i>
-          <%= mail_to("hello@rockdontstock.com", "hello@rockdontstock.com", target:"_blank") %>
-        </li>
-        <li>
-        <i class="fab fa-instagram me-2"></i>
-          <a href="https://www.instagram.com/rockdontstock/" target="_blank">@rockdontstock</a>
-        </li>
-        <li>
-          <i class="fab fa-facebook me-2"></i>
-          <a href="https://www.facebook.com/rockdntstock/" target='_blank'>Sur Facebook</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer__bottom-line--mobile">
-    <div>Copyright ©, 2021, Rock Don’t Stock. Tous droits réservés. N°135094456839</div>
-    <%= image_tag("images/payment-types.svg", style: "height: 20px;") %>
   </div>
 </footer>
 
-<script src="https://apps.elfsight.com/p/platform.js" defer></script>
+<script async type="text/javascript" src="https://grwapi.net/widget.min.js"></script>
