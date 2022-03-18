@@ -56,6 +56,8 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
 gem 'stripe'
+gem 'paypal-checkout-sdk'
+
 # gem 'stripe_event'
 gem 'money-rails' #managing money display easily
 # gem "httparty"

@@ -1,6 +1,99 @@
 class PaymentsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:stripe_webhooks]
+  skip_before_action :authenticate_user!, only: [:stripe_webhooks, :create_paypal_order, :capture_paypal_order]
+  before_action :init_paypal, only: [:create_paypal_order, :capture_paypal_order]
   
+  def create_paypal_order
+    request = PayPalCheckoutSdk::Orders::OrdersCreateRequest::new
+    request.request_body({
+      intent: 'CAPTURE',
+      purchase_units: [
+        {
+          amount: {
+            currency_code: 'EUR',
+            value: "#{Authentication::PRICE}"
+          }
+        }
+      ]
+    })
+    begin
+      response = @client.execute(request)
+      # order = Order.new
+      # order.price = price.to_i
+      # order.token = response.result.id
+      # if order.save
+      # end
+      return render json: {token: response.result.id}, status: :ok
+    rescue PayPalHttp::HttpError => err
+      puts "*"*50
+      puts err.status_code
+      puts err.headers["debug_id"]
+      puts "*"*50
+    end
+  end
+  
+  def capture_paypal_order
+    request = PayPalCheckoutSdk::Orders::OrdersCaptureRequest::new(params[:paypal_order_id])
+    begin
+      response = @client.execute(request)
+      # order = Order.find_by(token: params[:paypal_order_id])
+      # order.paid = response.result.status == 'COMPLETED'
+      # if order.save
+      # end
+      return render json: {status: response.result.status}, status: :ok
+    rescue PayPalHttp::HttpError => err
+      puts "*"*50
+      puts err.status_code
+      puts err.headers["debug_id"]
+      puts "*"*50
+    end
+  end
+  
+  def sneaker_complete
+    # here we only want proper display informations, the actual update
+    # of payment status and payment method happens through webhooks
+  
+    @order = Order.find(params[:order_id])
+    intent = Stripe::PaymentIntent.retrieve(params[:payment_intent])
+    @payment_method = intent.payment_method_types[0]
+  end
+  
+  def stripe_webhooks
+    payload = request.body.read
+    sig_header = request.env['HTTP_STRIPE_SIGNATURE']
+    endpoint_secret = ENV['STRIPE_WEBHOOK_SECRET']
+    event = nil
+  
+    begin
+      event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
+    rescue JSON::ParserError
+      return status 400
+    rescue Stripe::SignatureVerificationError
+      return status 422
+    end
+  
+    case event.type
+    when 'payment_intent.succeeded'
+      payment_intent = event.data.object
+  
+      order = Order.find_by(payment_intent_id: payment_intent.id)
+      order.update(
+        payment_method: payment_intent["payment_method_types"][0],
+        payment_status: "paid",
+        state: "Payé" # old system, needed to trigger before update callbacks
+      )
+    end
+  
+    head :ok
+  end
+
+  private
+
+  def init_paypal
+    client_id = ENV['PAYPAL_CLIENT_ID']
+    client_secret = ENV['PAYPAL_SECRET_ID']
+    environment = PayPal::SandboxEnvironment.new(client_id, client_secret)
+    @client = PayPal::PayPalHttpClient.new(environment)
+  end
   # def lc_stripe_checkout
   #   lc = Authentication.new(lc_request_params)
 
@@ -64,44 +157,7 @@ class PaymentsController < ApplicationController
   #   end
 
   # end
-  
-  def sneaker_complete
-    # here we only want proper display informations, the actual update
-    # of payment status and payment method happens through webhooks
 
-    @order = Order.find(params[:order_id])
-    intent = Stripe::PaymentIntent.retrieve(params[:payment_intent])
-    @payment_method = intent.payment_method_types[0]
-  end
-  
-  def stripe_webhooks
-    payload = request.body.read
-    sig_header = request.env['HTTP_STRIPE_SIGNATURE']
-    endpoint_secret = ENV['STRIPE_WEBHOOK_SECRET']
-    event = nil
-
-    begin
-      event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
-    rescue JSON::ParserError
-      return status 400
-    rescue Stripe::SignatureVerificationError
-      return status 422
-    end
-
-    case event.type
-    when 'payment_intent.succeeded'
-      payment_intent = event.data.object
-
-      order = Order.find_by(payment_intent_id: payment_intent.id)
-      order.update(
-        payment_method: payment_intent["payment_method_types"][0],
-        payment_status: "paid",
-        state: "Payé" # old system, needed to trigger before update callbacks
-      )
-    end
-
-    head :ok
-  end
 
   # def new
   #   @order = current_user.orders.where(state: 'En cours').find(params[:order_id])

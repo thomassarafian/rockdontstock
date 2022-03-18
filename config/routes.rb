@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   	resources :transfers, only: [:index, :create]
   end
 
-  resources :authentications, only: [:new, :create] do 
+  resources :authentications, only: [:new, :create] do
     member do
       get 'success'
     end
@@ -44,9 +44,8 @@ Rails.application.routes.draw do
   
   # PAYMENTS
   get 'sneaker-payment-complete', to: "payments#sneaker_complete"
-  post 'sneaker-stripe-checkout', to: 'payments#sneaker_stripe_checkout'
-  get 'lc-payment-complete', to: "payments#lc_complete"
-  post 'lc-stripe-checkout', to: 'payments#lc_stripe_checkout'
+  post 'create-paypal-order', :to => 'payments#create_paypal_order'
+  post 'capture-paypal-order', :to => 'payments#capture_paypal_order'
   post 'stripe-webhooks', to: 'payments#stripe_webhooks'
   
   namespace :forest do
