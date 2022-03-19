@@ -5,72 +5,95 @@
   <li><i class="fas fa-check-circle"></i> Tout modèle</li>
   <li><i class="fas fa-check-circle"></i> Expertise complète</li>
 </ul>
-<div class="auth-modal__form">
-  <div id="error" class="d-none">Tous les champs doivent être remplis</div>
-  <%= form_with model: Authentication.new, html: { class: "dropzone", id: "auth-modal-form" } do |f| %>
-    <%# <div class="form-group">
-      <div class="dz-clickable">
-        <div class="dz-message">
-          <h4>Glisser ou rechercher des photos</h4>
-          <span>Types de fichiers autorisés : jpg, png.</span>
+<div class="auth-modal__content">
+  <div class="auth-modal__spinner" hidden>
+    <div class="loader"></div>
+    <div>Merci de bien vouloir patienter...</div>
+  </div>
+  <div class="auth-modal__form">
+    <%= form_with model: Authentication.new, html: { class: "dropzone", id: "auth-modal-form" } do |f| %>
+      <%# <div class="form-group">
+        <div class="dz-clickable">
+          <div class="dz-message">
+            <h4>Glisser ou rechercher des photos</h4>
+            <span>Types de fichiers autorisés : jpg, png.</span>
+          </div>
+        </div>
+      </div> %>
+      <div id="error" hidden>Tous les champs doivent être remplis</div>
+      <div class="dropzone-previews"></div>
+      <div class="row g-2">
+        <div class="col">
+          <%= f.text_field :last_name, class: "form-control", placeholder: "Nom", required: true %>
+        </div>
+        <div class="col">
+          <%= f.text_field :first_name, class: "form-control", placeholder: "Prénom", required: true %>
         </div>
       </div>
-    </div> %>
-    <div class="dropzone-previews"></div>
-    <div class="row g-2">
-      <div class="col">
-        <%= f.text_field :last_name, class: "form-control", placeholder: "Nom", required: true %>
+      <div class="form-group">
+        <%= f.email_field :email, class: "form-control", placeholder: "Email", required: true %>
       </div>
-      <div class="col">
-        <%= f.text_field :first_name, class: "form-control", placeholder: "Prénom", required: true %>
+      <div class="row g-2">
+        <div class="input-group col">
+          <span class="input-group-text">Né(e) le</span>
+          <%= f.date_field :date_of_birth, class: "form-control", required: true %>
+        </div>
+        <div class="col">
+          <%= f.text_field :city, class: "form-control", placeholder: "Ville", required: true %>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <%= f.email_field :email, class: "form-control", placeholder: "Email", required: true %>
-    </div>
-    <div class="row g-2">
-      <div class="input-group col">
-        <span class="input-group-text">Né(e) le</span>
-        <%= f.date_field :date_of_birth, class: "form-control", required: true %>
+      <div class="form-check mb-3">
+        <%= f.check_box :newsletter, { class: "form-check-input", required: true } %>
+        <%= f.label "", class: "form-check-label", style: "font-size: 0.75rem" do %>
+          En envoyant ma demande j'accepte de recevoir les dernières nouveautés de Rock Don't Stock par email.
+        <% end %>
       </div>
-      <div class="col">
-        <%= f.text_field :city, class: "form-control", placeholder: "Ville", required: true %>
+      <div class="auth-modal__form__bottom-infos">
+        <div>
+          TOTAL: 4.90€
+        </div>
+        <%= link_to "Contacter le support", new_contact_path %>
+        <%= f.submit "Continuer", class: "auth-modal__form__submit" %>
       </div>
-    </div>
-    <div class="form-check mb-3">
-      <%= f.check_box :newsletter, { class: "form-check-input", required: true } %>
-      <%= f.label "", class: "form-check-label", style: "font-size: 0.75rem" do %>
-        En envoyant ma demande j'accepte de recevoir les dernières nouveautés de Rock Don't Stock par email.
-      <% end %>
-    </div>
-    <div class="auth-modal__form__bottom-infos">
-      <div>
-        TOTAL: 4.90€
-      </div>
-      <%= link_to "Contacter le support", new_contact_path %>
-    </div>
-    <div id="auth-modal__form-submit"></div>
-  <% end %>
+    <% end %>
+  </div>
   <div id="paypal-btn"></div>
-</div>
-<div class="loader-wrapper" style="display: none; margin: 100px auto; width: 50%; text-align: center;">
-	<div class="loader"></div>
-	<div>Merci de bien vouloir patienter...</div>
 </div>
 
 
 <script>
-  const loader = document.querySelector('.loader-wrapper')
+  const loader = document.querySelector('.auth-modal__spinner')
   const formBlock = document.querySelector('.auth-modal__form')
 	const form = document.getElementById('auth-modal-form')
+  const submit = form.querySelector('[type=submit]')
   const inputs = Array.from(form.querySelectorAll('input'))
   const checkbox = form.querySelector('[type=checkbox]')
   const error = document.getElementById('error')
+  const paypalBtn = document.getElementById('paypal-btn')
 
-  document.addEventListener('DOMContentLoaded', () => {
-    initDropzone()
-    initPaypal()
-  })
+  function disableElement(el) {
+    el.style.opacity = 0.5
+    el.style.pointerEvent = none
+  }
+
+  function enableElement(el) {
+    el.removeAttribute(style)
+  }
+
+  function setLoadingStatus(status) {
+    if (status === 'loading') {
+      disableElement(formBlock)
+      disableElement(paypalBtn)
+      loader.hidden = false
+    }
+    else if (status === 'success') {
+      enableElement(paypalBtn)
+      loader.hidden = true
+    }
+    else if (status === 'fail') {
+      // handle fail
+    }
+  }
 
   function initDropzone() {
     const myDropzone = new Dropzone("#auth-modal-form", {
@@ -88,50 +111,24 @@
       // upon submitting form, first upload pictures then redirect once done
       init: function() {
 
-        this.element.querySelector('#auth-modal__form-submit').addEventListener("click", function(e) {
+        submit.addEventListener("click", function(e) {
           e.preventDefault()
           e.stopPropagation()
           myDropzone.processQueue()
         });
 
-        // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
-        // of the sending event because uploadMultiple is set to true.
         this.on("sendingmultiple", function() {
-          displaySpinner()
+          setLoadingStatus('loading')
         });
         this.on("successmultiple", function(files, response) {
-          hideSpinner()
+          setLoadingStatus('success')
         });
         this.on("errormultiple", function(files, response) {
-          // Gets triggered when there was an error sending the files.
-          // Maybe show form again, and notify user of error
+          setLoadingStatus('fail')
           console.log('*********** ERROR')
         });
       }
     })
-  }
-
-  function displaySpinner() {
-    formBlock.style.display = "none"
-    loader.style.display = ""
-  }
-
-  function hideSpinner() {
-    formBlock.style.display = "block"
-    loader.style.display = "none"
-  }
-
-  function showAlert(msg) {
-    let element = document.createElement('div')
-    element.classList.add('alert', 'alert-info', 'alert-dismissible', 'fade', 'show')
-    element.setAttribute('role', 'alert')
-    element.innerHTML = `<h4 class="alert-heading">Notification</h4>${msg}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
-
-    document.getElementById('alert-container').replaceChildren(element)
-  }
-
-  function validateForm() {
-    return inputs.every(({value}) => value) && checkbox.checked
   }
 
   function initPaypal() {
@@ -144,20 +141,16 @@
       },
 
       onInit: function(data, actions)  {
-        // initially disabled
         actions.disable();
-
-        // enabled only when all fields are filled
         inputs.forEach(input => {
           input.addEventListener('change', () => {
-            let isValid = validateForm()
-            isValid ? actions.enable() : actions.disable()
+            form.checkValidity() ? actions.enable() : actions.disable()
           })
         })
       },
 
       onClick: function()  {
-        error.classList.toggle('d-none', validateForm())
+        error.hidden = form.checkValidity()
       },
 
       createOrder: async function() {
@@ -169,23 +162,21 @@
       onApprove: async function(data, actions) {
         const resp = await fetch('/capture-paypal-order', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({paypal_order_id: data.orderID})
         });
         const respData = await resp.json();
         const errorDetail = Array.isArray(orderData.details) && orderData.details[0];
 
         if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
-          return actions.restart(); // Recoverable state, per: // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+          return actions.restart();
         }
 
         if (errorDetail) {
           var msg = 'Sorry, your transaction could not be processed.';
           if (errorDetail.description) msg += '\n\n' + errorDetail.description;
           if (orderData.debug_id) msg += ' (' + orderData.debug_id + ')';
-          return alert(msg); // Show a failure message (try to avoid alerts in production environments)
+          return alert(msg);
         }
         
         actions.redirect(window.location.origin + `/authentications/${data.orderID}/success`);
@@ -193,12 +184,26 @@
     }).render('#paypal-btn');
   }
 
+  document.addEventListener('DOMContentLoaded', () => {
+    initDropzone()
+    initPaypal()
+  })
+
+
+  // function showAlert(msg) {
+  //   let element = document.createElement('div')
+  //   element.classList.add('alert', 'alert-info', 'alert-dismissible', 'fade', 'show')
+  //   element.setAttribute('role', 'alert')
+  //   element.innerHTML = `<h4 class="alert-heading">Notification</h4>${msg}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
+
+  //   document.getElementById('alert-container').replaceChildren(element)
+  // }
   // function ajaxSubmit() {
-  //   let formData = new FormData(form);
+    //   let formData = new FormData(form);
 
   //   return new Promise(function(resolve, reject) {
-  //     Rails.ajax({
-  //       type: "POST",
+    //     Rails.ajax({
+      //       type: "POST",
   //       url: "<%= authentications_url %>",
   //       data: formData,
   //       success: (resp) => resolve(resp),

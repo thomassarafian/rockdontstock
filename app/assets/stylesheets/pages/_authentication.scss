@@ -259,5 +259,14 @@ section {
   @include cta-button;
   width: 100%;
 }
+.auth-modal__spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%)
+}
+.auth-modal__content {
+  position: relative;
+}
 
 
