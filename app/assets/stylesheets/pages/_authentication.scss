@@ -250,7 +250,7 @@ section {
 .auth-modal__form__bottom-infos {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 .auth-modal__form__bottom-infos div:first-child{
   font-weight: 700;
@@ -258,6 +258,7 @@ section {
 .auth-modal__form__submit {
   @include cta-button;
   width: 100%;
+  margin: 1rem 0;
 }
 .auth-modal__spinner {
   position: absolute;
@@ -268,5 +269,10 @@ section {
 .auth-modal__content {
   position: relative;
 }
+// .auth-modal__fields {
+//   position: absolute;
+//   width: 100%;
+//   top: 100%;
+// }
 
 
