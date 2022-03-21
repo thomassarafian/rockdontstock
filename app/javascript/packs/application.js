@@ -7,7 +7,7 @@ ActiveStorage.start();
 import 'bootstrap';
 import 'controllers';
 import './pagy.js.erb';
-import 'dropzone';
+import Dropzone from 'dropzone';
 require('dotenv').config();
 require('./flickity-fullscreen.js');
 require('./flickity-imagesloaded.js');
@@ -21,6 +21,7 @@ var disableBodyScroll = bodyScrollLock.disableBodyScroll;
 window.Rails = Rails;
 window.Flickity = Flickity;
 window.clamp = clamp;
+window.Dropzone = Dropzone;
 window.enableBodyScroll = enableBodyScroll;
 window.disableBodyScroll = disableBodyScroll;
 
