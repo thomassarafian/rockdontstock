@@ -5,9 +5,9 @@ class Authentication < ApplicationRecord
 
   PRICE = 4.90
 
-  # validates :first_name, :last_name, :email, :date_of_birth, :city, :newsletter, :photos, presence: true
+  validates :first_name, :last_name, :email, :date_of_birth, :city, :newsletter, :photos, presence: true
   validates :photos, presence: true
-  # validates :newsletter, acceptance: true
+  validates :newsletter, acceptance: true
 
   def send_information_email
     photos_urls = self.photos.map{ |photo| photo.blob.url }.join("\n")

@@ -17,12 +17,11 @@ class PaymentsController < ApplicationController
     })
     begin
       response = @client.execute(request)
-      # order = Order.new
-      # order.price = price.to_i
-      # order.token = response.result.id
-      # if order.save
-      # end
-      return render json: {token: response.result.id}, status: :ok
+      order = Authentication.find(params[:lc_id])
+      order.paypal_order_id = response.result.id
+      if order.save
+        return render json: {token: response.result.id}, status: :ok
+      end
     rescue PayPalHttp::HttpError => err
       puts "*"*50
       puts err.status_code
@@ -35,11 +34,11 @@ class PaymentsController < ApplicationController
     request = PayPalCheckoutSdk::Orders::OrdersCaptureRequest::new(params[:paypal_order_id])
     begin
       response = @client.execute(request)
-      # order = Order.find_by(token: params[:paypal_order_id])
-      # order.paid = response.result.status == 'COMPLETED'
-      # if order.save
-      # end
-      return render json: {status: response.result.status}, status: :ok
+      order = Authentication.find_by(paypal_order_id: params[:paypal_order_id])
+      order.payment_status = 'paid' if response.result.status == 'COMPLETED'
+      if order.save
+        return render json: {status: response.result.status}, status: :ok
+      end
     rescue PayPalHttp::HttpError => err
       puts "*"*50
       puts err.status_code
