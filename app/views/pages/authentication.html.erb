@@ -3,9 +3,10 @@
   <!-- MOBILE -->
   <div class="auth-hero d-flex d-lg-none" style="margin-bottom: 5rem">
     <div class="auth-hero__title">
-      <h1>1er produit</h1>
-      <h1><span class="auth-hero__title-variant">contrefait</span> dans</h1>
-      <h1>le monde</h1>
+      <h1>La sneaker</h1>
+      <h1>est le produit le</h1>
+      <h1>plus <span class="auth-hero__title-variant">contrefait</span></h1>
+      <h1>au monde</h1>
     </div>
     <%= image_tag "images/mobile-auth-header.png", style: "object-fit: contain; max-width: 90%" %>
     <div class="auth-hero__caption__buttons">
@@ -19,24 +20,24 @@
   <div class="auth-hero d-none d-lg-flex">
     <%= image_tag "images/banner-fake.png", style: "object-fit: contain; width: 50%" %>
     <div class="auth-hero__title">
-      <h1>1er produit</h1>
-      <h1><span class="auth-hero__title-variant">contrefait</span> dans</h1>
-      <h1>le monde</h1>
+      <h1>Aujourd'hui, la sneaker</h1>
+      <h1>est le produit le plus</h1>
+      <h1><span class="auth-hero__title-variant">contrefait</span> au monde</h1>
     </div>
     <%= image_tag "images/banner-legit.png", style: "object-fit: contain; width: 50%" %>
   </div>
   <section class="auth-infos">
-    <div class="auth-infos__subtitle">Notre Marketplace</div>
-    <h2>L'authentification sur notre marketplace</h2>
+    <div class="auth-infos__subtitle">Vous éviter les mauvaises surprises</div>
+    <h2>Notre service d'authentification ARCHIMÈDE</h2>
     <div class="auth-infos-block">
       <div class="auth-infos__content">
         <div class="auth-infos__content__stats">
           <div class="auth-infos__content__stat-element">
-            <div>+70</div>
+            <div>+100</div>
             <div>Arnaques évitées</div>
           </div>
           <div class="auth-infos__content__stat-element">
-            <div>+300</div>
+            <div>+1000</div>
             <div>Guides téléchargés</div>
           </div>
           <div class="auth-infos__content__stat-element">
@@ -44,45 +45,19 @@
             <div>Points détaillés</div>
           </div>
           <div class="auth-infos__content__stat-element">
-            <div>1h</div>
-            <div>Par Legit Check</div>
+            <div>+145</div>
+            <div>Paires maîtrisées</div>
           </div>
         </div>
         <%= button_to "Parcourir la marketplace", sneakers_path, method: :get, class: "auth-infos__content__cta" %>
       </div>
-      <div class="auth-infos__footer d-none d-lg-block">
-        Chez Rock Don’t Stock, tous les articles sont authentifiés par nos soins. Chaque modèle acheté passe entre les
-        mains de nos experts afin de garantir un Legit Check de qualité. Nous prenons le temps qu’il faut afin de vérifier
-        un maximum d’éléments et ainsi certifier la conformité de ton modèle. En tant que produit le plus contrefait, nous
-        accordons une importance primordiale à l’authenticité des sneakers vendues via notre plateforme !
-        <br /><br />
-        Rock Don’t Stock met tout en oeuvre afin de te proposer un service des plus fiables. De paires décortiquées en
-        passant par des informations récupérées directement via les fabricants, nos authentifications sont le fruit de
-        recherches et d’un sourcing minutieux. Nous mettons quotidiennement à jour nos fiches produits pour chaque
-        nouvelle release ou amélioration d’un modèle antérieur afin de rester dans la course face aux contrefaiseurs.
-      </div>
-      <div class="auth-infos__footer d-block d-lg-none">
-        <div class="mb-1">
-          Chez Rock Don’t Stock, tous les articles sont authentifiés par nos soins. Chaque modèle acheté passe entre les
-          mains de nos experts afin de garantir un Legit Check de qualité. Nous prenons le temps qu’il faut afin de vérifier
-          un maximum d’éléments et ainsi certifier la conformité de ton modèle. En tant que produit le plus contrefait, nous
-          accordons une importance primordiale à l’authenticité des sneakers vendues via notre plateforme !
-        </div>
-        <a class="auth-infos__footer__more-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          En savoir plus <i class="fas fa-chevron-down"></i>
-        </a>
-        <div class="mt-1 collapse" id="collapseExample">
-          Rock Don’t Stock met tout en oeuvre afin de te proposer un service des plus fiables. De paires décortiquées en
-          passant par des informations récupérées directement via les fabricants, nos authentifications sont le fruit de
-          recherches et d’un sourcing minutieux. Nous mettons quotidiennement à jour nos fiches produits pour chaque
-          nouvelle release ou amélioration d’un modèle antérieur afin de rester dans la course face aux contrefaiseurs.
-        </div>
+      <div class="auth-infos__footer">
       </div>
     </div>
   </section>
   <section class="auth-guides">
     <div class="auth-guides__title">Découvrez</div>
-    <h2>Nos guides gratuits</h2>
+    <h2>Nos guides à la demande</h2>
     <div class="auth-guides-block">
       <div class="auth-guides__content" data-flickity='{ "setGallerySize": false, "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
         <% Guide.all.order("created_at DESC").each do |guide| %>
@@ -101,27 +76,105 @@
     </div>
   </section>
   <section class="auth-service">
-    <div class="auth-service__subtitle">Notre service</div>
-    <h2>Service d'authentification premium</h2>
+    <div class="auth-service__subtitle">Plus qu'une simple authentification</div>
+    <h2>Pourquoi utiliser ARCHIMÈDE</h2>
     <div class="auth-service-block">
-      <div class="auth-service__description">
-        Envie d’être 100% sur d’un modèle que tu souhaites acquérir en dehors de notre plateforme de vente ? N’hésites pas à faire appel a notre service d’authentification. Déposes tes photos, on s’occupe du reste.
+      <div class="auth-service__infos">
+        <div class="auth-service__info">
+          <div class="auth-service__info-icon">
+            <%= image_tag("images/icon_lock.svg", width: "48", height: "48") %>
+          </div>
+          <div class="auth-service__info-title">Sécurise ton achat</div>
+          <div class="auth-service__info-text">Jusqu’à présent, plus de 100 passionnés de sneakers ont évité l’achat ou la revente d’une paire contrefaite en ayant eu recours à notre service d’authentification.</div>
+        </div>
+        <div class="auth-service__info">
+          <div class="auth-service__info-icon">
+            <%= image_tag("images/icon_trophee.svg", width: "48", height: "48") %>
+          </div>
+          <div class="auth-service__info-title">Gagne tes litiges</div>
+          <div class="auth-service__info-text">Jusqu’à présent, 100% des guides générés par Archimède ont permis de remporter les litiges. Utilise ce dossier pour te faire rembourser en toute simplicité.</div>
+        </div>
+        <div class="auth-service__info">
+          <div class="auth-service__info-icon">
+            <%= image_tag("images/icon_book.svg", width: "48", height: "48") %>
+          </div>
+          <div class="auth-service__info-title">Des guides intemporels</div>
+          <div class="auth-service__info-text">Réutilisables, nos guides te permettent d’avoir toutes les cartes en mains pour authentifier tes prochaines paires en toute autonomie et en toute sécurité.</div>
+        </div>
       </div>
-      <div class="auth-service__card">
-        <div class="auth-service__card__title">
-          Authentification de votre paire
+      <div class="auth-service__reviews">
+        <div class="auth-service__google-widget">
+          <div class="review-widget_net" data-uuid="8f91c202-8e87-4351-b425-4120e26638ec" data-template="2" data-filter="" data-lang="en" data-theme="light">
+            <center>
+              <a href="https://www.review-widget.net/" target="_blank" rel="noopener">
+                <img src="https://grwapi.net/assets/spinner/spin.svg" title="Review Widget" alt="review-widget.net" loading="lazy">
+              </a>
+            </center>
+          </div>
         </div>
-        <div class="auth-service__card__price">
-          4.90€
+        <div class="auth-service__review">
+          <div class="auth-service__review-info">
+            <div class="auth-service__review-name">Thomas L.</div>
+            <div class="auth-service__review-purchase">Pour l’achat de : Air Max 1 Patta Monarque (2021)<br />Il y a 5 jours</div>
+            <div class="auth-service__review-note">
+              <span class="me-2">5/5</span>
+              <% 5.times do %>
+                <%= image_tag("images/star.svg", width: 20, height: 20) %>
+              <% end %>
+            </div>
+          </div>
+          <div class="auth-service__review-content">Première fois que je fais authentifier<br />une paire d’occasion, pas déçu<br />Foncez si vous voulez éviter les<br />mauvaises surprises!</div>
         </div>
-        <ul class="auth-service__card__checklist">
-          <li><i class="fas fa-check-circle"></i> Résultats en 24h</li>
-          <li><i class="fas fa-check-circle"></i> Tout modèle</li>
-          <li><i class="fas fa-check-circle"></i> Expertise complète</li>
+      </div>
+    </div>
+  </section>
+  <section class="auth-products">
+    <h2>Nos authentifications</h2>
+    <div class="auth-products__subtitle">Nous authentifions n'importe quelle paire de sneaker en quelques heures.<br />Air Jordan, Yeezy et toutes les plus grandes marques.</div>
+    <div class="auth-products__cards">
+      <div class="auth-product__card">
+        <div class="auth-product__card__image">
+          <%= image_tag("images/auth-icon-basic.svg") %>
+        </div>
+        <div class="auth-product__card__type">Basique</div>
+        <div class="auth-product__card__price">7.90€</div>
+        <div class="auth-product__card__descr">Bénéficie de l’avis d’experts et reçois ton guide complet en 2 jours.</div>
+        <button class="auth-product__card__button">Commander</button>
+        <ul class="auth-product__card__infos-list">
+          <li><i class="fas fa-check-circle ms-0"></i> Résultats en 48H</li>
+          <li><i class="fas fa-check-circle ms-0"></i> 4 points d'authentification par guide</li>
+          <li><i class="fas fa-check-circle ms-0"></i> Guide complet offert</li>
         </ul>
-        <button class="auth-service__card__purchase" data-bs-toggle="modal" data-bs-target="#modal-auth">
-          Commander
-        </button>
+      </div>
+      <div class="auth-product__card">
+        <div class="auth-product__card__image">
+          <%= image_tag("images/auth-icon-rapide.svg") %>
+        </div>
+        <div class="auth-product__card__type">Rapide</div>
+        <div class="auth-product__card__price">12.90€</div>
+        <div class="auth-product__card__descr">Sécurise ton achat en ligne avec une expertise solide dans la journée.</div>
+        <button class="auth-product__card__button">Commander</button>
+        <ul class="auth-product__card__infos-list">
+          <li><i class="fas fa-check-circle ms-0"></i> Résultats en 12H</li>
+          <li><i class="fas fa-check-circle ms-0"></i> 5 points d'authentification par guide</li>
+          <li><i class="fas fa-check-circle ms-0"></i> Idéal pour résoudre les litiges</li>
+          <li><i class="fas fa-check-circle ms-0"></i> Guide complet offert</li>
+        </ul>
+      </div>
+      <div class="auth-product__card">
+        <div class="auth-product__card__image">
+          <%= image_tag("images/auth-icon-express.svg") %>
+        </div>
+        <div class="auth-product__card__type">Express</div>
+        <div class="auth-product__card__price">17.90€</div>
+        <div class="auth-product__card__descr">Pas le temps d'attendre ? Notre analyse complète en moins de 3 heures</div>
+        <button class="auth-product__card__button">Commander</button>
+        <ul class="auth-product__card__infos-list">
+          <li><i class="fas fa-check-circle ms-0"></i> Résultats en 3H seulement</li>
+          <li><i class="fas fa-check-circle ms-0"></i> 5 points d'authentification par guide</li>
+          <li><i class="fas fa-check-circle ms-0"></i> Idéal pour résoudre les litiges</li>
+          <li><i class="fas fa-check-circle ms-0"></i> Guide complet + 1 guide générique</li>
+        </ul>
       </div>
     </div>
   </section>
