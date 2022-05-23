@@ -1,57 +1,79 @@
 <title>Authentification - Rock Don't Stock</title>
 <div class="auth-page container">
+  <!-- DESKTOP -->
+  <div class="auth-hero">
+    <%= image_tag "images/banner-fake.png" %>
+    <div class="auth-hero__title">
+      <h1>Aujourd'hui, la sneaker</h1>
+      <h1>est le produit le plus</h1>
+      <h1><span class="auth-hero__title-variant">contrefait</span> au monde</h1>
+    </div>
+    <%= image_tag "images/banner-legit.png" %>
+  </div>
   <!-- MOBILE -->
-  <div class="auth-hero d-flex d-lg-none" style="margin-bottom: 5rem">
+  <div class="auth-hero-mobile">
     <div class="auth-hero__title">
       <h1>La sneaker</h1>
       <h1>est le produit le</h1>
       <h1>plus <span class="auth-hero__title-variant">contrefait</span></h1>
       <h1>au monde</h1>
     </div>
-    <%= image_tag "images/mobile-auth-header.png", style: "object-fit: contain; max-width: 90%" %>
+    <%= image_tag "images/mobile-auth-header.png" %>
     <div class="auth-hero__caption__buttons">
       <button class="auth-hero__caption__primary-btn" data-bs-toggle="modal" data-bs-target="#modal-auth">
         Authentifier ma paire <i class="fas fa-arrow-right"></i>
       </button>
-      <%= button_to "En savoir plus", sneakers_path, class: "auth-hero__caption__secondary-btn" %>
+      <%= button_to "En savoir plus" , sneakers_path, class: "auth-hero__caption__secondary-btn" %>
     </div>
-  </div>
-  <!-- DESKTOP -->
-  <div class="auth-hero d-none d-lg-flex">
-    <%= image_tag "images/banner-fake.png", style: "object-fit: contain; width: 50%" %>
-    <div class="auth-hero__title">
-      <h1>Aujourd'hui, la sneaker</h1>
-      <h1>est le produit le plus</h1>
-      <h1><span class="auth-hero__title-variant">contrefait</span> au monde</h1>
-    </div>
-    <%= image_tag "images/banner-legit.png", style: "object-fit: contain; width: 50%" %>
   </div>
   <section class="auth-infos">
     <div class="auth-infos__subtitle">Vous éviter les mauvaises surprises</div>
     <h2>Notre service d'authentification ARCHIMÈDE</h2>
-    <div class="auth-infos-block">
-      <div class="auth-infos__content">
-        <div class="auth-infos__content__stats">
-          <div class="auth-infos__content__stat-element">
-            <div>+100</div>
-            <div>Arnaques évitées</div>
+    <div class="auth-infos__content">
+      <div class="auth-infos__content__stats">
+        <div class="auth-infos__content__stat-element">
+          <div>+100</div>
+          <div>Arnaques évitées</div>
+        </div>
+        <div class="auth-infos__content__stat-element">
+          <div>+1000</div>
+          <div>Guides téléchargés</div>
+        </div>
+        <div class="auth-infos__content__stat-element">
+          <div>4 à 6</div>
+          <div>Points détaillés</div>
+        </div>
+        <div class="auth-infos__content__stat-element">
+          <div>+145</div>
+          <div>Paires maîtrisées</div>
+        </div>
+      </div>
+      <div class="auth-infos__guide-example">
+        <div class="auth-infos__guide-example-left">
+          <div class="auth-infos__guide-example-slider" data-flickity='{ "imagesLoaded": true, "pageDots": false, "cellSelector": ".auth-infos__guide-example-slide" }'>
+            <% (1..9).each do |i| %>
+              <%= image_tag("images/Archimede-#{i}", class: "auth-infos__guide-example-slide") %>
+            <% end %>
           </div>
-          <div class="auth-infos__content__stat-element">
-            <div>+1000</div>
-            <div>Guides téléchargés</div>
-          </div>
-          <div class="auth-infos__content__stat-element">
-            <div>4 à 6</div>
-            <div>Points détaillés</div>
-          </div>
-          <div class="auth-infos__content__stat-element">
-            <div>+145</div>
-            <div>Paires maîtrisées</div>
+          <div class="auth-infos__guide-example__bottom-title">
+            Ton guide legit check
           </div>
         </div>
-        <%= button_to "Parcourir la marketplace", sneakers_path, method: :get, class: "auth-infos__content__cta" %>
-      </div>
-      <div class="auth-infos__footer">
+        <div class="auth-infos__guide-example-right">
+          <div class="auth-infos__guide-example-right__title">Une expertise reconnue</div>
+          <div>Archimède met tout en oeuvre afin de te proposer un service d’authentification des plus fiables. De paires décortiquées en passant par des informations récupérées directement via les fabricants, nos authentifications sont le fruit de recherches et d’un sourcing minutieux.</div>
+          <div>
+            <% 5.times do %>
+              <%= image_tag("images/star.svg", width: 20, height: 20) %>
+            <% end %>         
+            <div class="auth-infos__guide-example-number">
+              +100
+            </div>
+            <div class="auth-infos__guide-example-text">
+              Arnaques évitées
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -59,19 +81,24 @@
     <div class="auth-guides__subtitle">Découvrez</div>
     <h2>Nos guides à la demande</h2>
     <div class="auth-guides-block">
-      <div class="auth-guides__content" data-flickity='{ "setGallerySize": false, "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
+      <div class="auth-guides__content"
+        data-flickity='{ "setGallerySize": false, "freeScroll": true, "contain": true, "prevNextButtons": false, "pageDots": false, "cellSelector": ".flickity-cell" }'>
         <% Guide.all.order("created_at DESC").each do |guide| %>
           <div class="flickity-cell">
             <div class="auth-guides__content__card">
-              <%= image_tag(guide.img_url, class: "auth-guides__content__card__image") %>
-              <div class="auth-guides__content__card__name"><%= guide.name %></div>
-              <button class="auth-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-guide" data-bs-guideName="<%= guide.name %>" data-bs-guideId="<%= guide.id %>">Commander</button>
+              <%= image_tag(guide.img_url, class: "auth-guides__content__card__image" ) %>
+                <div class="auth-guides__content__card__name">
+                  <%= guide.name %>
+                </div>
+                <button class="auth-guides__content__card__btn" data-bs-toggle="modal" data-bs-target="#modal-guide"
+                  data-bs-guideName="<%= guide.name %>" data-bs-guideId="<%= guide.id %>">Commander</button>
             </div>
           </div>
         <% end %>
       </div>
       <div class="auth-guides__footer">
-        Chaque guide te permet de connaitre différents points d’authentification essentiels afin de Legit Check le modèle en toute autonomie. N’hésites pas à t’en servir afin d’éviter l’achat d’un modèle suspicieux.
+        Chaque guide te permet de connaitre différents points d’authentification essentiels afin de Legit Check le
+        modèle en toute autonomie. N’hésites pas à t’en servir afin d’éviter l’achat d’un modèle suspicieux.
       </div>
     </div>
   </section>
@@ -82,32 +109,37 @@
       <div class="auth-service__infos">
         <div class="auth-service__info">
           <div class="auth-service__info-icon">
-            <%= image_tag("images/icon_lock.svg", width: "48", height: "48") %>
+            <%= image_tag("images/icon_lock.svg", width: "48" , height: "48" ) %>
           </div>
           <div class="auth-service__info-title">Sécurise ton achat</div>
-          <div class="auth-service__info-text">Jusqu’à présent, plus de 100 passionnés de sneakers ont évité l’achat ou la revente d’une paire contrefaite en ayant eu recours à notre service d’authentification.</div>
+          <div class="auth-service__info-text">Jusqu’à présent, plus de 100 passionnés de sneakers ont évité l’achat ou
+            la revente d’une paire contrefaite en ayant eu recours à notre service d’authentification.</div>
         </div>
         <div class="auth-service__info">
           <div class="auth-service__info-icon">
-            <%= image_tag("images/icon_trophee.svg", width: "48", height: "48") %>
+            <%= image_tag("images/icon_trophee.svg", width: "48" , height: "48" ) %>
           </div>
           <div class="auth-service__info-title">Gagne tes litiges</div>
-          <div class="auth-service__info-text">Jusqu’à présent, 100% des guides générés par Archimède ont permis de remporter les litiges. Utilise ce dossier pour te faire rembourser en toute simplicité.</div>
+          <div class="auth-service__info-text">Jusqu’à présent, 100% des guides générés par Archimède ont permis de
+            remporter les litiges. Utilise ce dossier pour te faire rembourser en toute simplicité.</div>
         </div>
         <div class="auth-service__info">
           <div class="auth-service__info-icon">
-            <%= image_tag("images/icon_book.svg", width: "48", height: "48") %>
+            <%= image_tag("images/icon_book.svg", width: "48" , height: "48" ) %>
           </div>
           <div class="auth-service__info-title">Des guides intemporels</div>
-          <div class="auth-service__info-text">Réutilisables, nos guides te permettent d’avoir toutes les cartes en mains pour authentifier tes prochaines paires en toute autonomie et en toute sécurité.</div>
+          <div class="auth-service__info-text">Réutilisables, nos guides te permettent d’avoir toutes les cartes en
+            mains pour authentifier tes prochaines paires en toute autonomie et en toute sécurité.</div>
         </div>
       </div>
       <div class="auth-service__reviews">
         <div class="auth-service__google-widget">
-          <div class="review-widget_net" data-uuid="8f91c202-8e87-4351-b425-4120e26638ec" data-template="2" data-filter="" data-lang="en" data-theme="light">
+          <div class="review-widget_net" data-uuid="8f91c202-8e87-4351-b425-4120e26638ec" data-template="2"
+            data-filter="" data-lang="en" data-theme="light">
             <center>
               <a href="https://www.review-widget.net/" target="_blank" rel="noopener">
-                <img src="https://grwapi.net/assets/spinner/spin.svg" title="Review Widget" alt="review-widget.net" loading="lazy">
+                <img src="https://grwapi.net/assets/spinner/spin.svg" title="Review Widget" alt="review-widget.net"
+                  loading="lazy">
               </a>
             </center>
           </div>
@@ -120,17 +152,19 @@
               <span class="me-2">5/5</span>
               <% 5.times do %>
                 <%= image_tag("images/star.svg", width: 20, height: 20) %>
-              <% end %>
+                  <% end %>
             </div>
           </div>
-          <div class="auth-service__review-content">Première fois que je fais authentifier<br />une paire d’occasion, pas déçu<br />Foncez si vous voulez éviter les<br />mauvaises surprises!</div>
+          <div class="auth-service__review-content">Première fois que je fais authentifier<br />une paire d’occasion,
+            pas déçu<br />Foncez si vous voulez éviter les<br />mauvaises surprises!</div>
         </div>
       </div>
     </div>
   </section>
   <section class="auth-products">
     <h2>Nos authentifications</h2>
-    <div class="auth-products__subtitle">Nous authentifions n'importe quelle paire de sneaker en quelques heures.<br />Air Jordan, Yeezy et toutes les plus grandes marques.</div>
+    <div class="auth-products__subtitle">Nous authentifions n'importe quelle paire de sneaker en quelques
+      heures.<br />Air Jordan, Yeezy et toutes les plus grandes marques.</div>
     <div class="auth-products__cards">
       <div class="auth-product__card">
         <div class="auth-product__card__image">
@@ -138,7 +172,8 @@
         </div>
         <div class="auth-product__card__type">Basique</div>
         <div class="auth-product__card__price">7.90€</div>
-        <div class="auth-product__card__descr">Bénéficie de l’avis d’experts et reçois ton guide complet en 2 jours.</div>
+        <div class="auth-product__card__descr">Bénéficie de l’avis d’experts et reçois ton guide complet en 2 jours.
+        </div>
         <button class="auth-product__card__button">Commander</button>
         <ul class="auth-product__card__infos-list">
           <li><i class="fas fa-check-circle ms-0"></i> Résultats en 48H</li>
@@ -152,7 +187,8 @@
         </div>
         <div class="auth-product__card__type">Rapide</div>
         <div class="auth-product__card__price">12.90€</div>
-        <div class="auth-product__card__descr">Sécurise ton achat en ligne avec une expertise solide dans la journée.</div>
+        <div class="auth-product__card__descr">Sécurise ton achat en ligne avec une expertise solide dans la journée.
+        </div>
         <button class="auth-product__card__button">Commander</button>
         <ul class="auth-product__card__infos-list">
           <li><i class="fas fa-check-circle ms-0"></i> Résultats en 12H</li>
@@ -167,7 +203,8 @@
         </div>
         <div class="auth-product__card__type">Express</div>
         <div class="auth-product__card__price">17.90€</div>
-        <div class="auth-product__card__descr">Pas le temps d'attendre ? Notre analyse complète en moins de 3 heures</div>
+        <div class="auth-product__card__descr">Pas le temps d'attendre ? Notre analyse complète en moins de 3 heures
+        </div>
         <button class="auth-product__card__button">Commander</button>
         <ul class="auth-product__card__infos-list">
           <li><i class="fas fa-check-circle ms-0"></i> Résultats en 3H seulement</li>
@@ -186,23 +223,26 @@
         <div class="auth-insta__content__image">
           <div class="comparison-slider-wrapper">
             <div class="comparison-slider">
-              <%= image_tag "images/fake2.png", style: "width: 300px" %>
-              <div class="resize">
-                <%= image_tag "images/real2.png", style: "width: 300px" %>
-              </div>
-              <div class="divider">
-                <div style="left: -40px; position: absolute;">Real</div>
-                <div style="right: -40px; position: absolute;">Fake</div>
-              </div>
+              <%= image_tag "images/fake2.png" , style: "width: 300px" %>
+                <div class="resize">
+                  <%= image_tag "images/real2.png" , style: "width: 300px" %>
+                </div>
+                <div class="divider">
+                  <div style="left: -40px; position: absolute;">Real</div>
+                  <div style="right: -40px; position: absolute;">Fake</div>
+                </div>
             </div>
           </div>
         </div>
-        <%= link_to "https://www.instagram.com/rockdontstock/", target: "_blank" do %>
+        <%= link_to "https://www.instagram.com/rockdontstock/" , target: "_blank" do %>
           <div class="auth-insta__content__button mt-5">@rockdontstock</div>
-        <% end %>
+          <% end %>
       </div>
       <div class="auth-insta__footer">
-        Plus qu’un outil de promotion, notre Instagram a pour vocation de te donner d’autres informations et les clés afin de pouvoir t’aider à authentifier les dernières releases. Tu pourras aussi retrouver des stories informatives sur l’histoire des sneakers, des sondages participatifs ou des mini jeux dans le but de developper tes compétences en Legit Check !
+        Plus qu’un outil de promotion, notre Instagram a pour vocation de te donner d’autres informations et les clés
+        afin de pouvoir t’aider à authentifier les dernières releases. Tu pourras aussi retrouver des stories
+        informatives sur l’histoire des sneakers, des sondages participatifs ou des mini jeux dans le but de developper
+        tes compétences en Legit Check !
       </div>
     </div>
   </section>
@@ -210,7 +250,8 @@
 </div>
 
 <!-- Modals -->
-<div class="modal fade" id="modal-auth" tabindex="-1" role="dialog" aria-labelledby="modal-authTitle" aria-hidden="true">
+<div class="modal fade" id="modal-auth" tabindex="-1" role="dialog" aria-labelledby="modal-authTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -223,7 +264,8 @@
   </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="modal-guide" tabindex="-1" role="dialog" aria-labelledby="modal-guideTitle" aria-hidden="true">
+<div class="modal fade" id="modal-guide" tabindex="-1" role="dialog" aria-labelledby="modal-guideTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-body">
@@ -240,7 +282,7 @@
   let guideModal = document.getElementById('modal-guide')
 
   guideModal.addEventListener('show.bs.modal', function (e) {
-    
+
     let button = e.relatedTarget
     let guideName = button.getAttribute('data-bs-guideName')
     let guideId = button.getAttribute('data-bs-guideId')
@@ -253,169 +295,177 @@
 </script>
 
 <style>
-.comparison-slider-wrapper {
-	position: relative;
-	width: 100%;
-	margin: 20px 0;
-	background-color: white;
-}
-.comparison-slider {
-  position: relative;
-  width: 100%;
-  margin: 0;
-  border: 5px white solid;
-  box-sizing: border-box;
-}
-.comparison-slider > img {
-  display: block;
-}
-.comparison-slider .resize {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 50%;
-  overflow: hidden;
-}
-.comparison-slider .divider {
-  position: absolute;
-  width: 2px;
-  height: calc(100% + 40px);
-  background-color: #0E0E0E;
-  left: 50%;
-  top: -20px;
-  bottom: 0;
-  margin-left: -1px;
-  cursor: ew-resize;
-}
-.comparison-slider .divider:before {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  left: -9px;
-  top: 50%;
-  margin-top: -10px;
-  background-color: #FECD07;
-  transform: rotate(45deg);
-  transition: all 0.1s ease-in-out;
-}
-.comparison-slider .divider:after {
-  content: "";
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  left: -5px;
-  top: 50%;
-  margin-top: -6px;
-  background-color: #FECD07;
-  transform: rotate(45deg);
-  transition: all 0.1s ease-in-out;
-}
-.comparison-slider.draggable:before {
-  width: 30px;
-  height: 30px;
-  left: -14px;
-  margin-top: -15px;
-}
-.comparison-slider.draggable:after {
-  width: 20px;
-  height: 20px;
-  left: -9px;
-  margin-top: -10px;
-  background-color: #555;
-}
+  .comparison-slider-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+    background-color: white;
+  }
+
+  .comparison-slider {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    border: 5px white solid;
+    box-sizing: border-box;
+  }
+
+  .comparison-slider>img {
+    display: block;
+  }
+
+  .comparison-slider .resize {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+  }
+
+  .comparison-slider .divider {
+    position: absolute;
+    width: 2px;
+    height: calc(100% + 40px);
+    background-color: #0E0E0E;
+    left: 50%;
+    top: -20px;
+    bottom: 0;
+    margin-left: -1px;
+    cursor: ew-resize;
+  }
+
+  .comparison-slider .divider:before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: -9px;
+    top: 50%;
+    margin-top: -10px;
+    background-color: #FECD07;
+    transform: rotate(45deg);
+    transition: all 0.1s ease-in-out;
+  }
+
+  .comparison-slider .divider:after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: -5px;
+    top: 50%;
+    margin-top: -6px;
+    background-color: #FECD07;
+    transform: rotate(45deg);
+    transition: all 0.1s ease-in-out;
+  }
+
+  .comparison-slider.draggable:before {
+    width: 30px;
+    height: 30px;
+    left: -14px;
+    margin-top: -15px;
+  }
+
+  .comparison-slider.draggable:after {
+    width: 20px;
+    height: 20px;
+    left: -9px;
+    margin-top: -10px;
+    background-color: #555;
+  }
 </style>
 
 <script>
-$(document).ready(function() {
-	
-	// If the comparison slider is present on the page lets initialise it, this is good you will include this in the main js to prevent the code from running when not needed
-	if ($(".comparison-slider")[0]) {
-		let compSlider = $(".comparison-slider");
-	
-		//let's loop through the sliders and initialise each of them
-		compSlider.each(function() {
-			let compSliderWidth = $(this).width() + "px";
-			$(this).find(".resize img").css({ width: compSliderWidth });
-			drags($(this).find(".divider"), $(this).find(".resize"), $(this));
-		});
+  $(document).ready(function () {
 
-		//if the user resizes the windows lets update our variables and resize our images
-		$(window).on("resize", function() {
-			let compSliderWidth = compSlider.width() + "px";
-			compSlider.find(".resize img").css({ width: compSliderWidth });
-		});
-	}
-});
+    // If the comparison slider is present on the page lets initialise it, this is good you will include this in the main js to prevent the code from running when not needed
+    if ($(".comparison-slider")[0]) {
+      let compSlider = $(".comparison-slider");
 
-// This is where all the magic happens
-// This is a modified version of the pen from Ege Görgülü - https://codepen.io/bamf/pen/jEpxOX - and you should check it out too.
-function drags(dragElement, resizeElement, container) {
-	
-	// This creates a variable that detects if the user is using touch input insted of the mouse.
-	let touched = false;
-	window.addEventListener('touchstart', function() {
-		touched = true;
-	});
-	window.addEventListener('touchend', function() {
-		touched = false;
-	});
-	
-	// clicp the image and move the slider on interaction with the mouse or the touch input
-	dragElement.on("mousedown touchstart", function(e) {
-			
-			//add classes to the emelents - good for css animations if you need it to
-			dragElement.addClass("draggable");
-			resizeElement.addClass("resizable");
-			//create vars
-			let startX = e.pageX ? e.pageX : e.originalEvent.touches[0].pageX;
-			let dragWidth = dragElement.outerWidth();
-			let posX = dragElement.offset().left + dragWidth - startX;
-			let containerOffset = container.offset().left;
-			let containerWidth = container.outerWidth();
-			let minLeft = containerOffset;
-			let maxLeft = containerOffset + containerWidth - dragWidth;
-			
-			//add event listner on the divider emelent
-			dragElement.parents().on("mousemove touchmove", function(e) {
-				
-				// if the user is not using touch input let do preventDefault to prevent the user from slecting the images as he moves the silder arround.
-				if ( touched === false ) {
-					e.preventDefault();
-				}
-				
-				let moveX = e.pageX ? e.pageX : e.originalEvent.touches[0].pageX;
-				let leftValue = moveX + posX - dragWidth;
+      //let's loop through the sliders and initialise each of them
+      compSlider.each(function () {
+        let compSliderWidth = $(this).width() + "px";
+        $(this).find(".resize img").css({ width: compSliderWidth });
+        drags($(this).find(".divider"), $(this).find(".resize"), $(this));
+      });
 
-				// stop the divider from going over the limits of the container
-				if (leftValue < minLeft) {
-					leftValue = minLeft;
-				} else if (leftValue > maxLeft) {
-					leftValue = maxLeft;
-				}
+      //if the user resizes the windows lets update our variables and resize our images
+      $(window).on("resize", function () {
+        let compSliderWidth = compSlider.width() + "px";
+        compSlider.find(".resize img").css({ width: compSliderWidth });
+      });
+    }
+  });
 
-				let widthValue = (leftValue + dragWidth / 2 - containerOffset) * 100 / containerWidth + "%";
+  // This is where all the magic happens
+  // This is a modified version of the pen from Ege Görgülü - https://codepen.io/bamf/pen/jEpxOX - and you should check it out too.
+  function drags(dragElement, resizeElement, container) {
 
-				$(".draggable").css("left", widthValue).on("mouseup touchend touchcancel", function() {
-					$(this).removeClass("draggable");
-					resizeElement.removeClass("resizable");
-				});
-				
-				$(".resizable").css("width", widthValue);
-				
-			}).on("mouseup touchend touchcancel", function() {
-				dragElement.removeClass("draggable");
-				resizeElement.removeClass("resizable");
-				
-			});
-		
-		}).on("mouseup touchend touchcancel", function(e) {
-			// stop clicping the image and move the slider
-			dragElement.removeClass("draggable");
-			resizeElement.removeClass("resizable");
-		
-		});
-	
-}
+    // This creates a variable that detects if the user is using touch input insted of the mouse.
+    let touched = false;
+    window.addEventListener('touchstart', function () {
+      touched = true;
+    });
+    window.addEventListener('touchend', function () {
+      touched = false;
+    });
+
+    // clicp the image and move the slider on interaction with the mouse or the touch input
+    dragElement.on("mousedown touchstart", function (e) {
+
+      //add classes to the emelents - good for css animations if you need it to
+      dragElement.addClass("draggable");
+      resizeElement.addClass("resizable");
+      //create vars
+      let startX = e.pageX ? e.pageX : e.originalEvent.touches[0].pageX;
+      let dragWidth = dragElement.outerWidth();
+      let posX = dragElement.offset().left + dragWidth - startX;
+      let containerOffset = container.offset().left;
+      let containerWidth = container.outerWidth();
+      let minLeft = containerOffset;
+      let maxLeft = containerOffset + containerWidth - dragWidth;
+
+      //add event listner on the divider emelent
+      dragElement.parents().on("mousemove touchmove", function (e) {
+
+        // if the user is not using touch input let do preventDefault to prevent the user from slecting the images as he moves the silder arround.
+        if (touched === false) {
+          e.preventDefault();
+        }
+
+        let moveX = e.pageX ? e.pageX : e.originalEvent.touches[0].pageX;
+        let leftValue = moveX + posX - dragWidth;
+
+        // stop the divider from going over the limits of the container
+        if (leftValue < minLeft) {
+          leftValue = minLeft;
+        } else if (leftValue > maxLeft) {
+          leftValue = maxLeft;
+        }
+
+        let widthValue = (leftValue + dragWidth / 2 - containerOffset) * 100 / containerWidth + "%";
+
+        $(".draggable").css("left", widthValue).on("mouseup touchend touchcancel", function () {
+          $(this).removeClass("draggable");
+          resizeElement.removeClass("resizable");
+        });
+
+        $(".resizable").css("width", widthValue);
+
+      }).on("mouseup touchend touchcancel", function () {
+        dragElement.removeClass("draggable");
+        resizeElement.removeClass("resizable");
+
+      });
+
+    }).on("mouseup touchend touchcancel", function (e) {
+      // stop clicping the image and move the slider
+      dragElement.removeClass("draggable");
+      resizeElement.removeClass("resizable");
+
+    });
+
+  }
 </script>

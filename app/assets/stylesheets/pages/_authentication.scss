@@ -1,22 +1,36 @@
 .auth-page h2 {
   font-weight: 700;
 }
-
 section {
   margin-bottom: 8rem;
 }
 .auth-hero {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  margin-top: -80px;
   margin-bottom: 5rem;
-  @include media-breakpoint-up(lg) {
-    justify-content: space-between;
-    height: 100vh;
-    margin-top: -80px;
+  & > img {
+    object-fit: contain;
+    width: 50%;
   }
   @include media-breakpoint-down(lg) {
-    height: calc(100vh - 80px);
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
+    display: none;
+  }
+}
+.auth-hero-mobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5rem;
+  // height: calc(100vh - 80px);
+  & > img {
+    object-fit: contain;
+    width: 90%;
+  }
+  @include media-breakpoint-up(lg) {
+    display: none;
   }
 }
 .auth-hero__title {
@@ -71,6 +85,11 @@ section {
     width: 100%;
   }
 }
+.auth-hero__mobile-header {
+  object-fit: contain;
+  height: 100%;
+  width: 90%;
+}
 
 /////////////// SECTION INFOS ///////////////
 
@@ -78,11 +97,16 @@ section {
   @include para-1;
 }
 .auth-infos__content {
-  padding: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  padding: 3rem;
+  gap: 5rem;
+  @include media-breakpoint-down(md) {
+    padding-left: 0; 
+    padding-right: 0; 
+  }
 }
 .auth-infos__content__stats {
   display: flex;
@@ -90,9 +114,6 @@ section {
   width: 100%;
   gap: 2rem;
   flex-wrap: wrap;
-  @include media-breakpoint-down(lg) {
-    gap: 1rem;
-  }
   @include media-breakpoint-down(md) {
     flex-direction: column;
   }
@@ -116,25 +137,62 @@ section {
   @include cta-button;
   margin-top: 3rem;
 }
-.auth-infos__footer {
+.auth-infos__guide-example {
   display: flex;
-  width: 100%;
-  gap: 1rem;
-
-  @include media-breakpoint-up(lg) {
-    padding: 2rem;
-    border-top: 1px solid $black;
-  }
+  align-items: center;
+  gap: 3rem;
   @include media-breakpoint-down(lg) {
-    padding: 0;
     flex-direction: column;
   }
 }
-.auth-infos__footer__more-btn {
-  text-decoration: none;
-  font-weight: 700;
+.auth-infos__guide-example-left {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
-
+.auth-infos__guide-example__bottom-title {
+  font-family: "Permanent Marker", "DM Sans", "Helvetica", "sans-serif";
+  font-size: 1.5rem;
+}
+.auth-infos__guide-example-slider {
+  width: 100%;
+  position: relative;
+  padding: 2rem;
+  border: 1px solid $black;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%; 
+    top: 10px;
+    left: 10px;
+    border-right: 10px solid $black;
+    border-bottom: 10px solid $black;
+    z-index: -1;
+  }
+}
+.auth-infos__guide-example-slide {
+  width: 100%;
+  height: 600px;
+  object-fit: contain;
+}
+.auth-infos__guide-example-right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  &__title {
+    @include para-1;
+  }
+}
+.auth-infos__guide-example-number {
+  @include para-2-bold;
+}
+.auth-infos__guide-example-text {
+  @include para-3;
+}
 
 /////////////// SECTION GUIDES ///////////////
 
@@ -201,6 +259,9 @@ section {
     border-bottom: 10px solid $black;
     z-index: -1;
   }
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
 }
 .auth-service__review-info {
   display: flex;
@@ -216,8 +277,6 @@ section {
 .auth-service__review-note {
   display: flex;
   align-items: center;
-}
-.auth-service__google {
 }
 
 /////////////// SECTION PRODUCTS ///////////////
