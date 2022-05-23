@@ -12,7 +12,7 @@ section {
   margin-bottom: 5rem;
   & > img {
     object-fit: contain;
-    width: 50%;
+    width: 35%;
   }
   @include media-breakpoint-down(lg) {
     display: none;
@@ -172,11 +172,21 @@ section {
     border-bottom: 10px solid $black;
     z-index: -1;
   }
+  & > .flickity-prev-next-button.previous {
+    left: 20px;
+  }
+  & > .flickity-prev-next-button.next {
+    right: 20px;
+  }
 }
 .auth-infos__guide-example-slide {
   width: 100%;
-  height: 600px;
+  height: 540px;
   object-fit: contain;
+
+  &:not(:first-of-type):not(:last-of-type) {
+    filter: blur(2px);
+  }
 }
 .auth-infos__guide-example-right {
   width: 100%;
