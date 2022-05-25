@@ -6,7 +6,7 @@ class Authentication < ApplicationRecord
   enum payment_method: { card: 0 }
 
   validates :first_name, :last_name, :email, :date_of_birth, :city, :newsletter, presence: true
-  # validates :photos, presence: true
+  validates :photos, presence: true
   validates :newsletter, acceptance: true
 
   def send_information_email

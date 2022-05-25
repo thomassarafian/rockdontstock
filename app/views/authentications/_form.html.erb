@@ -11,13 +11,14 @@
     <div>Merci de bien vouloir patienter...</div>
   </div>
   <div class="modal__form">
-    <%= form_for Authentication.new, remote: true, html: { id: "modal-form" } do |f| %>
+    <%= form_for Authentication.new, remote: true, html: { class: "dropzone", id: "modal-form" } do |f| %>
       <div class="form-group">
         <div class="dz-clickable">
           <div class="dz-message">
             <h4>Glisser ou rechercher des photos</h4>
             <span>Types de fichiers autorisés : jpg, png.</span>
           </div>
+          <div id="dz-previews" class="dropzone-previews"></div>
         </div>
       </div>
       <div class="modal__fields">
@@ -55,7 +56,6 @@
           <%= link_to "Contacter le support", new_contact_path %>
         </div>
       </div>
-      <div id="dz-previews" class="dropzone-previews"></div>
       <%= f.hidden_field :product_id, value: @product.id %>
       <%= f.submit "Continuer", class: "modal__form__submit" %>
     <% end %>

@@ -411,6 +411,8 @@
       maxFiles: 10,
       maxFilesize: 5,
       resizeWidth: 1000,
+      thumbnailWidth: 80,
+      thumbnailHeight: 80,
       dictDefaultMessage: "Glisse ou dépose tes photos ici...",
       dictFileTooBig: "Le fichier est trop gros ({{filesize}}mo). Taille max: {{maxFilesize}}mo.",
       dictInvalidFileType: "Ce type de fichier n'est pas autorisé.",
@@ -456,21 +458,15 @@
   }
 
   function setLoadingStatus(status) {
-    const loader = document.querySelector('.modal__spinner')
-    const formBlock = document.querySelector('.modal__form')
-
     if (status === 'loading') {
-      // disableElement(formBlock)
-      loader.hidden = false
-      formBlock.hidden = true
+      showModalSpinner();
     }
     else if (status === 'success') {
-      // enableElement(paypalBtn)
-      loader.hidden = true
+      hideModalSpinner();
     }
     else if (status === 'fail') {
       // handle fail
-      loader.hidden = true
+      hideModalSpinner();
     }
   }
 </script>
