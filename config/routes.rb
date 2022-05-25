@@ -30,6 +30,13 @@ Rails.application.routes.draw do
       get 'success'
     end
   end
+
+  resources :guides, only: [] do
+    member do 
+      get "new-request"
+      post "send-request"
+    end
+  end
   
   # PAGES
   get 'about', to: 'pages#about'
@@ -40,7 +47,6 @@ Rails.application.routes.draw do
   get 'cgv', to: 'pages#cgv'
   get 'politique-de-confidentialite', to: 'pages#trust_policy'
   post 'newsletter', to: 'pages#newsletter'
-  post 'guide-request', to: 'pages#guide_request'
   
   # PAYMENTS
   get 'sneaker-payment-complete', to: "payments#sneaker_complete"

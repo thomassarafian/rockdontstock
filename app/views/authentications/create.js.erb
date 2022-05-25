@@ -1,0 +1,11 @@
+var modalEl = document.getElementById('modal');
+var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+
+<% if @status %>
+  modalEl.querySelector('#form-container').innerHTML = "<%= j render partial: 'payment' %>";
+<% else %>
+  var error = modalEl.querySelector('#error')
+  error.innerHTML = "<%= @error_msg %>"
+<% end %>
+
+modal.show();

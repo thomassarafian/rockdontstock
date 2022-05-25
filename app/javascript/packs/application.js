@@ -4,7 +4,6 @@ import 'channels';
 Rails.start();
 ActiveStorage.start();
 
-import 'bootstrap';
 import 'controllers';
 import './pagy.js.erb';
 import Dropzone from 'dropzone';
@@ -12,6 +11,7 @@ require('dotenv').config();
 require('./flickity-fullscreen.js');
 require('./flickity-imagesloaded.js');
 
+var bootstrap = require('bootstrap');
 var Flickity = require('flickity');
 var clamp = require('clamp-js');
 var bodyScrollLock = require('body-scroll-lock');
@@ -24,5 +24,6 @@ window.clamp = clamp;
 window.Dropzone = Dropzone;
 window.enableBodyScroll = enableBodyScroll;
 window.disableBodyScroll = disableBodyScroll;
+window.bootstrap = bootstrap;
 
 Flickity.prototype._touchActionValue = 'pan-y pinch-zoom';

@@ -232,9 +232,6 @@
     gap: 1.5rem;
     border: 1px solid $black;
     @include media-breakpoint-up(lg) {
-      &:hover {
-        outline: 1px solid $black;
-      }
       &:hover::before {
         content: "";
         position: absolute;
@@ -248,11 +245,15 @@
       }
     }
   }
+  &__card__type {
+    @include para-1;
+  }
   &__card__price {
     @include para-1-bold;
   }
   &__card__button {
     @include cta-button;
+    text-align: center;
   }
   &__card__infos-list {
     padding: 1.2rem 0 0 0;

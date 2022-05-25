@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_21_152407) do
+ActiveRecord::Schema.define(version: 2022_05_24_164850) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2022_03_21_152407) do
     t.string "paypal_order_id"
     t.date "date_of_birth"
     t.boolean "newsletter", default: false
+    t.bigint "product_id"
+    t.index ["product_id"], name: "index_authentications_on_product_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -110,6 +112,18 @@ ActiveRecord::Schema.define(version: 2022_03_21_152407) do
     t.string "relay_address"
     t.index ["sneaker_id"], name: "index_orders_on_sneaker_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "price_in_cents"
+    t.string "li1"
+    t.string "li2"
+    t.string "li3"
+    t.string "li4"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -191,6 +205,7 @@ ActiveRecord::Schema.define(version: 2022_03_21_152407) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "authentications", "products"
   add_foreign_key "items", "orders"
   add_foreign_key "items", "users"
   add_foreign_key "orders", "sneakers"

@@ -1,12 +1,11 @@
 class Authentication < ApplicationRecord
+  belongs_to :product
   has_many_attached :photos, service: :cloudinary, dependent: :detach
 
   enum payment_status: { unpaid: 0, paid: 10 }
 
-  PRICE = 4.90
-
-  validates :first_name, :last_name, :email, :date_of_birth, :city, :newsletter, :photos, presence: true
-  validates :photos, presence: true
+  validates :first_name, :last_name, :email, :date_of_birth, :city, :newsletter, presence: true
+  # validates :photos, presence: true
   validates :newsletter, acceptance: true
 
   def send_information_email

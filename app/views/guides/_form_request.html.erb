@@ -1,0 +1,35 @@
+<div class="modal-wrapper">
+  <div class="modal__infos">
+    <%= image_tag(@guide.img_url) %>
+    <div class="modal__subtitle">Le Guide Gratuit</div>
+    <div class="modal__guide-name"><%= @guide.name %></div>
+  </div>
+  <div class="modal__form">
+    <%= form_for :user, url: send_request_guide_path(@guide.id) do |f| %>
+      <div class="row g-2">
+        <div class="col">
+          <%= f.text_field :last_name, class: "form-control", placeholder: "Nom" %>
+        </div>
+        <div class="col">
+          <%= f.text_field :first_name, class: "form-control", placeholder: "Prénom" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.email_field :email, class: "form-control", placeholder: "Email", required: true %>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-text">Né(e) le</span>
+          <%= f.date_field :date_of_birth, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-check mb-3">
+        <%= f.check_box :newsletter, { class: "form-check-input", required: true }, 1, nil %>
+        <%= f.label "", class: "form-check-label", style: "font-size: 0.75rem" do %>
+          En envoyant ma demande j'accepte de recevoir les dernières nouveautés de Rock Don't Stock par email.
+        <% end %>
+      </div>
+      <button type="submit" class="modal__form__submit">Recevoir mon guide</button>
+    <% end %>
+  </div>
+</div>
