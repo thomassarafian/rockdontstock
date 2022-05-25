@@ -32,11 +32,11 @@ class AuthenticationsController < ApplicationController
       automatic_payment_methods: {
         enabled: true,
       },
-      metadata: {model: "Product"}
+      metadata: {model: "Authentication"}
     )
 
     lc.update(payment_intent_id: payment_intent.id)
-    
+
     render json: {clientSecret: payment_intent['client_secret']}
   end
 
