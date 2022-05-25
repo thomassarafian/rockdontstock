@@ -1,51 +1,5 @@
 class PaymentsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:stripe_webhooks, :create_paypal_order, :capture_paypal_order]
-  before_action :init_paypal, only: [:create_paypal_order, :capture_paypal_order]
-  
-  def create_paypal_order
-    request = PayPalCheckoutSdk::Orders::OrdersCreateRequest::new
-    request.request_body({
-      intent: 'CAPTURE',
-      purchase_units: [
-        {
-          amount: {
-            currency_code: 'EUR',
-            value: "#{Authentication::PRICE}"
-          }
-        }
-      ]
-    })
-    begin
-      response = @client.execute(request)
-      order = Authentication.find(params[:lc_id])
-      order.paypal_order_id = response.result.id
-      if order.save
-        return render json: {token: response.result.id}, status: :ok
-      end
-    rescue PayPalHttp::HttpError => err
-      puts "*"*50
-      puts err.status_code
-      puts err.headers["debug_id"]
-      puts "*"*50
-    end
-  end
-  
-  def capture_paypal_order
-    request = PayPalCheckoutSdk::Orders::OrdersCaptureRequest::new(params[:paypal_order_id])
-    begin
-      response = @client.execute(request)
-      order = Authentication.find_by(paypal_order_id: params[:paypal_order_id])
-      order.payment_status = 'paid' if response.result.status == 'COMPLETED'
-      if order.save
-        return render json: {status: response.result.status}, status: :ok
-      end
-    rescue PayPalHttp::HttpError => err
-      puts "*"*50
-      puts err.status_code
-      puts err.headers["debug_id"]
-      puts "*"*50
-    end
-  end
+  skip_before_action :authenticate_user!, only: [:stripe_webhooks]
   
   def sneaker_complete
     # here we only want proper display informations, the actual update
@@ -73,121 +27,21 @@ class PaymentsController < ApplicationController
     case event.type
     when 'payment_intent.succeeded'
       payment_intent = event.data.object
+      model = payment_intent.metadata.model.constantize
   
-      order = Order.find_by(payment_intent_id: payment_intent.id)
-      order.update(
+      record = model.find_by(payment_intent_id: payment_intent.id)
+      args = {
         payment_method: payment_intent["payment_method_types"][0],
-        payment_status: "paid",
-        state: "Payé" # old system, needed to trigger before update callbacks
-      )
+        payment_status: "paid"
+      }
+
+      # old system, needed to trigger before_update callbacks
+      # to be removed eventually to avoid duplicated infos
+      args[:state] = "Payé" if model == "Order" 
+
+      record.update(args)
     end
   
     head :ok
   end
-
-  private
-
-  def init_paypal
-    client_id = ENV['PAYPAL_CLIENT_ID']
-    client_secret = ENV['PAYPAL_SECRET_ID']
-    environment = PayPal::SandboxEnvironment.new(client_id, client_secret)
-    @client = PayPal::PayPalHttpClient.new(environment)
-  end
-  # def lc_stripe_checkout
-  #   lc = Authentication.new(lc_request_params)
-
-  #   if lc.save
-  #     Subscription.new(lc).as_lc_requester
-  #   else
-  #     redirect_to request.referer, alert: lc.errors.full_messages.join(', ')
-  #   end
-
-  #   session = Stripe::Checkout::Session.create({
-  #     customer_email: lc.email,
-  #     line_items: [{
-  #       price_data: {
-  #         currency: 'eur',
-  #         product_data: {
-  #           name: 'Legit Check',
-  #         },
-  #         unit_amount: 490,
-  #       },
-  #       quantity: 1,
-  #     }],
-  #     mode: 'payment',
-  #     metadata: { lc_id: lc.id },
-  #     success_url: lc_payment_complete_url,
-  #     cancel_url: 'https://example.com/cancel',
-  #   })
-  #   redirect_to session.url, status: 303
-  # end
-  
-  # def sneaker_stripe_checkout
-  #   order = Order.new(order_params.merge(user: current_user))
-
-  #   if order.save
-  #     shipping_fees = { relay: 630, colissimo: 915 }
-
-  #     @shipping_fee = shipping_fees[order_params[:delivery].to_sym]
-  #     @service_fee = order.sneaker.price_cents * 0.06
-  #     @total_price = order.sneaker.price_cents + @shipping_fee + @service_fee
-
-  #     session = Stripe::Checkout::Session.create({
-  #       customer_email: order.user.email,
-  #       line_items: [{
-  #         price_data: {
-  #           currency: 'eur',
-  #           product_data: {
-  #             name: order.sneaker.sneaker_db.name,
-  #             images: [order.sneaker.photos.first.url]
-  #           },
-  #           unit_amount: @total_price.to_i,
-  #         },
-  #         quantity: 1,
-  #       }],
-  #       mode: 'payment',
-  #       metadata: { order_id: order.id, shipping_fee: @shipping_fee, service_fee: @service_fee, total_price: @total_price },
-  #       success_url: sneaker_payment_complete_url + "?session_id={CHECKOUT_SESSION_ID}&shipping_fee=#{@shipping_fee}&service_fee=#{@service_fee}&total_price=#{@total_price}",
-  #       cancel_url: 'https://example.com/cancel',
-  #     })
-  #     redirect_to session.url, status: 303
-  #   else
-  #     redirect_to request.referer, alert: order.errors.full_messages.join(', ')
-  #   end
-
-  # end
-
-
-  # def new
-  #   @order = current_user.orders.where(state: 'En cours').find(params[:order_id])
-  #   @auth = {
-  #     username: ENV["SENDCLOUD_API_KEY"],
-  #     password: ENV["SENDCLOUD_SECRET_KEY"]
-  #   }
-  #   get_shipping_price_ml = HTTParty.get(
-  #    "https://panel.sendcloud.sc/api/v2/shipping-price/?shipping_method_id=#{1680}&from_country=FR&to_country=FR&weight=2&weight_unit=kilogram",
-  #    :headers => { 'Content-Type' => 'application/json' },
-  #    basic_auth: @auth)
-
-  #   get_shipping_price_colissimo = HTTParty.get(
-  #    "https://panel.sendcloud.sc/api/v2/shipping-price/?shipping_method_id=#{1066}&from_country=FR&to_country=FR&weight=2&weight_unit=kilogram",
-  #    :headers => { 'Content-Type' => 'application/json' },
-  #    basic_auth: @auth)
-    
-  #   # get_shipping_price_chronopost = HTTParty.get(
-  #   #  "https://panel.sendcloud.sc/api/v2/shipping-price/?shipping_method_id=#{1346}&from_country=FR&to_country=FR&weight=2&weight_unit=kilogram",
-  #   #  :headers => { 'Content-Type' => 'application/json' },
-  #   #  basic_auth: @auth)
-    
-  #   @mondial_relay_price = get_shipping_price_ml[0]['price'] #.to_f * 1.2).truncate(2) #6.30
-  #   @colissimo_price = get_shipping_price_colissimo[0]['price'] #.to_f * 1.2).truncate(2) #9.15
-  #   # @chronopost_price = (get_shipping_price_chronopost['price'].to_f * 1.2).truncate(2)
-  # end
-
-  # private
-
-  # def lc_request_params
-  #  params.require(:user).permit(:first_name, :last_name, :email, :date_of_birth, :city, :photos)
-  # end
-
 end

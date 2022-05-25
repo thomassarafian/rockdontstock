@@ -423,11 +423,18 @@ section {
 .modal__spinner {
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%)
+  top: 400px;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 .modal__content {
   position: relative;
+
+  & button {
+    @include cta-button;
+    margin-top: 1.5rem;
+    width: 100%;
+  }
 }
 .modal__fields-errors {
   margin-bottom: 0.5rem;

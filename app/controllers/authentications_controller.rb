@@ -14,18 +14,17 @@ class AuthenticationsController < ApplicationController
     photos = (params[:photos].present? && params[:photos].values) || nil
     @lc = Authentication.new(lc_params.merge(photos: photos))
 
-    @status = lc.save
-    @error_msg = lc.errors.full_messages.join(", ") if !@status
+    @status = @lc.save
+    @error_msg = @lc.errors.full_messages.join(", ") if !@status
     respond_to do |format|
       format.js
       format.html
     end
   end
 
-  def create_auth_payment_intent
-    data = JSON.parse(request.body.read)
-    product = Product.find(data['productId'].to_i)
-    amount = product.price_in_cents
+  def create_payment_intent
+    lc = Authentication.find(params['lcId'].to_i)
+    amount = lc.product.price_in_cents
 
     payment_intent = Stripe::PaymentIntent.create(
       amount: amount,
@@ -33,7 +32,11 @@ class AuthenticationsController < ApplicationController
       automatic_payment_methods: {
         enabled: true,
       },
+      metadata: {model: "Product"}
     )
+
+    lc.update(payment_intent_id: payment_intent.id)
+    
     render json: {clientSecret: payment_intent['client_secret']}
   end
 

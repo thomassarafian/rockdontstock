@@ -65,7 +65,8 @@ class OrdersController < ApplicationController
 			currency: 'eur',
 			automatic_payment_methods: {
 				enabled: true,
-			}
+			},
+			metadata: {model: "Order"}
 		)
 
 		@order.payment_intent_id = @intent.id

@@ -3,6 +3,7 @@ class Authentication < ApplicationRecord
   has_many_attached :photos, service: :cloudinary, dependent: :detach
 
   enum payment_status: { unpaid: 0, paid: 10 }
+  enum payment_method: { card: 0 }
 
   validates :first_name, :last_name, :email, :date_of_birth, :city, :newsletter, presence: true
   # validates :photos, presence: true

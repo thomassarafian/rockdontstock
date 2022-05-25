@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :authentications, only: [:new, :create] do
     get 'success', on: :member
-    get 'create-payment-intent', on: :collection
+    post 'create-payment-intent', on: :collection
   end
 
   resources :guides, only: [] do
