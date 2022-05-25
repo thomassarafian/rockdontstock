@@ -14,11 +14,10 @@ class AuthenticationsController < ApplicationController
     photos = (params[:photos].present? && params[:photos].values) || nil
     @lc = Authentication.new(lc_params.merge(photos: photos))
 
-    @status = @lc.save
-    @error_msg = @lc.errors.full_messages.join(", ") if !@status
-    respond_to do |format|
-      format.js
-      format.html
+    if @lc.save
+      render json: { lcId: @lc.id }, status: 200
+    else
+      render json: { message: @lc.errors.full_messages.join(", ") }, status: 422
     end
   end
 
