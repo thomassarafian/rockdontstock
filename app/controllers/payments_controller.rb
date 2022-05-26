@@ -37,7 +37,7 @@ class PaymentsController < ApplicationController
 
       # old system, needed to trigger before_update callbacks
       # to be removed eventually to avoid duplicated infos
-      args[:state] = "Payé" if model == "Order" 
+      args[:state] = "Payé" if model == "Order"
 
       record.update(args)
     end
