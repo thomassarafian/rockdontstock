@@ -378,11 +378,11 @@ section {
 
 .modal-wrapper {
   display: flex;
-  flex-direction: column;
   gap: 2rem;
 }
 .modal__guide-name {
   @include para-1-bold;
+  text-align: center;
 }
 .modal__infos {
   display: flex;
@@ -390,10 +390,10 @@ section {
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
-  & > img {
-    width: 60%;
-    margin-bottom: 1rem;
-  }
+}
+.modal__img {
+  width: 80%;
+  margin-bottom: 1rem;
 }
 .modal__h2 {
   // smaller size for the word "authentification" to avoid overflow
@@ -402,10 +402,15 @@ section {
   }
 }
 .modal__checklist {
-  margin-bottom: 3rem;
   list-style-type: none;
   padding: 0;
-  @include media-breakpoint-down(lg) {
+  &--auth {
+    margin-bottom: 3rem;
+    @include media-breakpoint-down(lg) {
+      margin-top: 1.5rem;
+    }
+  }
+  &--guide {
     margin-top: 1.5rem;
   }
 }
@@ -420,12 +425,11 @@ section {
 .modal__form__submit {
   @include cta-button;
   width: 100%;
-  margin: 1rem 0;
 }
 .modal__spinner {
   position: absolute;
   left: 50%;
-  top: 400px;
+  top: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
 }
@@ -444,4 +448,14 @@ section {
   font-size: 0.85rem;
   line-height: 1;
   color: tomato;
+}
+.form__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
+}
+.form__price {
+  @include para-1-bold;
 }

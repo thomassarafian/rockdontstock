@@ -37,6 +37,12 @@ a, a:hover {
 a:not(:hover) {
   text-decoration: none;
 }
+hr {
+  margin: 0;
+  border: none;
+  background-color: $black;
+  opacity: 0.4;
+}
 input {
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
@@ -61,7 +67,6 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px #fff inset; 
 }
-
 ul > li {
   line-height: 2;
 }
@@ -72,6 +77,9 @@ i.fas {
 form .row,
 form .form-group {
   margin-bottom: 1rem;
+}
+label:not(.form-check-label) {
+  @include para-2-bold;
 }
 .form-control {
 	color: #495057;
@@ -92,14 +100,14 @@ form .form-group {
 .modal-content {
   border: none;
   border-radius: 0;
-  min-height: 600px;
 }
 .modal-body {
-  padding: 2rem;
+  padding: 3rem;
 }
 .modal-body .btn-close {
 	position: absolute;
-	right: 2rem;
+	right: 1rem;
+	top: 1rem;
 }
 .back-button {
   @include para-1;

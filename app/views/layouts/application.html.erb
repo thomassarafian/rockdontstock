@@ -96,13 +96,13 @@
     <!-- Modal -->
     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-title"
       aria-hidden="true">
-      <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
+          <div class="modal__spinner" hidden>
+            <div class="loader"></div>
+            <div>Merci de bien vouloir patienter...</div>
+          </div>
           <div class="modal-body">
-            <div class="modal__spinner" hidden>
-              <div class="loader"></div>
-              <div>Merci de bien vouloir patienter...</div>
-            </div>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <div id="form-container"></div>
           </div>
@@ -141,8 +141,11 @@ $(document).ready(function () {
 });
 function showModalSpinner() {
   document.querySelector('.modal__spinner').hidden = false;
+  document.querySelector('.modal-body').style.pointerEvents = "none"
+  document.querySelector('.modal-body').style.opacity = "0.1"
 }
 function hideModalSpinner() {
+  document.querySelector('.modal-body').removeAttribute("style")
   document.querySelector('.modal__spinner').hidden = true;
 }
 </script>

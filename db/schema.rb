@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_25_133332) do
+ActiveRecord::Schema.define(version: 2022_05_26_120211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,12 +71,29 @@ ActiveRecord::Schema.define(version: 2022_05_25_133332) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "guide_requests", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "city"
+    t.date "date_of_birth"
+    t.boolean "newsletter", default: false
+    t.string "payment_intent_id"
+    t.integer "payment_method"
+    t.integer "payment_status", default: 0
+    t.bigint "guide_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guide_id"], name: "index_guide_requests_on_guide_id"
+  end
+
   create_table "guides", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "img_url"
     t.integer "sendinblue_list_id"
+    t.integer "price_in_cents", default: 390
   end
 
   create_table "items", force: :cascade do |t|

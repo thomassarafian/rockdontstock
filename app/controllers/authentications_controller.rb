@@ -21,24 +21,6 @@ class AuthenticationsController < ApplicationController
     end
   end
 
-  def create_payment_intent
-    lc = Authentication.find(params['lcId'].to_i)
-    amount = lc.product.price_in_cents
-
-    payment_intent = Stripe::PaymentIntent.create(
-      amount: amount,
-      currency: 'eur',
-      automatic_payment_methods: {
-        enabled: true,
-      },
-      metadata: {model: "Authentication"}
-    )
-
-    lc.update(payment_intent_id: payment_intent.id)
-
-    render json: {clientSecret: payment_intent['client_secret']}
-  end
-
   def success
     # lc = Authentication.find(params[:id])
     # lc.update(payment_status: "paid")

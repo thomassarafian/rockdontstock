@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:stripe_webhooks]
+  skip_before_action :authenticate_user!, only: [:stripe_webhooks, :create_payment_intent]
   
   def sneaker_complete
     # here we only want proper display informations, the actual update
@@ -43,5 +43,24 @@ class PaymentsController < ApplicationController
     end
   
     head :ok
+  end
+
+  def create_payment_intent
+    model = params[:model].constantize
+    record = model.find(params['id'].to_i)
+    amount = record.price_in_cents
+
+    payment_intent = Stripe::PaymentIntent.create(
+      amount: amount,
+      currency: 'eur',
+      automatic_payment_methods: {
+        enabled: true,
+      },
+      metadata: {model: params[:model]}
+    )
+
+    record.update(payment_intent_id: payment_intent.id)
+
+    render json: {clientSecret: payment_intent['client_secret']}
   end
 end

@@ -2,7 +2,13 @@ class Guide < ApplicationRecord
   before_create :set_default_image
   after_create :create_sendinblue_list
 
+  has_many :guide_requests
+
   attribute :newsletter, :boolean
+
+  def price
+    '%.2f' % (price_in_cents / 100.00)
+  end
   
   def fetch_sendinblue
     sib = SibApiV3Sdk::ContactsApi.new

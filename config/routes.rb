@@ -26,14 +26,14 @@ Rails.application.routes.draw do
   end
 
   resources :authentications, only: [:new, :create] do
-    get 'success', on: :member
-    post 'create-payment-intent', on: :collection
+    collection do 
+      get 'success'
+    end
   end
 
-  resources :guides, only: [] do
-    member do 
-      get "new-request"
-      post "send-request"
+  resources :guide_requests, only: [:new, :create] do
+    collection do 
+      get 'success'
     end
   end
   
@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   post 'create-paypal-order', :to => 'payments#create_paypal_order'
   post 'capture-paypal-order', :to => 'payments#capture_paypal_order'
   post 'stripe-webhooks', to: 'payments#stripe_webhooks'
+  post 'create-payment-intent', to: 'payments#create_payment_intent'
   
   namespace :forest do
     # Sneakers

@@ -87,7 +87,7 @@
               <div class="auth-guides__content__card__name">
                 <%= guide.name %>
               </div>
-              <%= link_to "Commander", new_request_guide_path(guide.id), remote: true, class: "auth-guides__content__card__btn" %>
+              <%= link_to "Acheter", new_guide_request_path(guide_id: guide.id), remote: true, class: "auth-guides__content__card__btn" %>
             </div>
           </div>
         <% end %>
@@ -171,6 +171,7 @@
           <div class="auth-product__card__price"><%= product.price %>€</div>
           <div class="auth-product__card__descr"><%= product.description %></div>
           <%= link_to "Commander", new_authentication_path(product_id: product.id), remote: true, class: "auth-product__card__button" %>
+          <hr/>
           <ul class="auth-product__card__infos-list">
             <% product.list_items.each do |li| %>
               <% if li %>
@@ -324,7 +325,6 @@
   function initDropzone() {
     const form = document.getElementById('modal-form')
     const submit = document.querySelector('.modal__form__submit')
-    const error = document.getElementById('error')
     const modalEl = document.getElementById('modal');
     const modal = bootstrap.Modal.getOrCreateInstance(modalEl)
     const formContainer = document.getElementById('form-container')
@@ -364,25 +364,22 @@
 
         this.on("sendingmultiple", function() {
           // showModalSpinner()
-          // disableForm(formContainer)
         });
         this.on("successmultiple", function(files, response) {
-          showModalSpinner()
           formContainer.innerHTML = "<%= j render partial: 'authentications/payment' %>"
-          enableForm(formContainer)
-          initStripe(response.lcId)
+          showModalSpinner()
+          initStripe("Authentication", response.lcId)
         });
         this.on("errormultiple", function(files, response) {
           hideModalSpinner()
-          error.innerHTML = response.message
-          enableForm(formContainer)
+          showErrorMessage(response.message)
         });
       }
     })
   }
 
   // STRIPE
-  function initStripe(lcId) {
+  function initStripe(model, id) {
     const stripe = Stripe("<%= ENV['STRIPE_PUBLIC'] %>");
     const paymentForm = document.getElementById("payment-form")
     let elements;
@@ -409,10 +406,10 @@
         }
       }
       
-      const response = await fetch("/authentications/create-payment-intent", {
+      const response = await fetch("/create-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lcId: lcId }),
+        body: JSON.stringify({ model: model, id: id }),
       });
       const { clientSecret } = await response.json();
     
@@ -431,7 +428,7 @@
         elements,
         confirmParams: {
           // Return URL where the customer should be redirected after the PaymentIntent is confirmed.
-          return_url: `${window.location.origin}/authentications/${lcId}/success`,
+          return_url: `${window.location.origin}/authentications/success`,
         },
       });
     
@@ -494,24 +491,13 @@
       if (isLoading) {
         // Disable the button and show a spinner
         showModalSpinner();
-        disableForm(paymentForm)
       } else {
         hideModalSpinner();
-        enableForm(paymentForm)
       }
     }
   }
 
   // UI
-  function disableForm(form) {
-    form.style.opacity = 0.4
-    form.style.pointerEvents = "none"
-    form.querySelector("[type=submit]").disabled = true
-  }
-  function enableForm(form) {
-    form.removeAttribute("style")
-    form.querySelector("[type=submit]").disabled = false
-  }
   function drags(dragElement, resizeElement, container) {
 
     // This creates a variable that detects if the user is using touch input insted of the mouse.
@@ -578,5 +564,8 @@
 
     });
 
+  }
+  function showErrorMessage(msg) {
+    document.getElementById('error').innerHTML = msg;
   }
 </script>

@@ -2,6 +2,8 @@ class Authentication < ApplicationRecord
   belongs_to :product
   has_many_attached :photos, service: :cloudinary, dependent: :detach
 
+  delegate :price_in_cents, to: :product
+
   enum payment_status: { unpaid: 0, paid: 10 }
   enum payment_method: { card: 0 }
 
