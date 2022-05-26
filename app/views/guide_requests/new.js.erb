@@ -1,0 +1,6 @@
+var modalEl = document.getElementById('modal');
+var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+
+modalEl.querySelector('#form-container').innerHTML = "<%= j render partial: 'form' %>";
+
+modal.show();

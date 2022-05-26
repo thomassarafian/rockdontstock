@@ -1,0 +1,14 @@
+<% if @guide_req.valid? %>
+  var modalEl = document.getElementById('modal')
+  var modal = bootstrap.Modal.getOrCreateInstance(modalEl)
+  var formContainer = modalEl.querySelector('#form-container')
+  formContainer.innerHTML = "<%= j render partial: 'payment' %>"
+  
+  showModalSpinner()
+
+  initStripe("GuideRequest", <%= @guide_req.id %>)
+
+  modal.show()
+<% else %>
+  showErrorMessage(<%= @message %>)
+<% end %>
