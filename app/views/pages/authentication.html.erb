@@ -162,8 +162,11 @@
     <div class="auth-products__subtitle">Nous authentifions n'importe quelle paire de sneaker en quelques
       heures.<br />Air Jordan, Yeezy et toutes les plus grandes marques.</div>
     <div class="auth-products__cards">
-      <% Product.all.each do |product| %>
+      <% Product.all.each_with_index do |product, index| %>
         <div class="auth-product__card">
+          <% if index == 1 %>
+            <div class="auth-product__card__popular">Le plus populaire 🔥</div>
+          <% end %>
           <div class="auth-product__card__image">
             <%= image_tag("images/auth-icon-#{product.name.downcase}.svg") %>
           </div>
@@ -324,26 +327,27 @@
     }
     animateCTA()
   });
-  document.querySelector(".auth-product__card__button")
 
   // Animate CTA
   function animateCTA() {
-    const light = document.getElementById("cta-light");
-    light.style.opacity = "0";
-    let s = true;
-    setInterval(() => {
-      if (s) {
-        light.style.transition = "ease-in 500ms"
-        light.style.transform = "translateX(364px) rotate(20deg)"
-        light.style.opacity = "0.8"
-        s = false
-      } else {
-        light.style.transition = "none",
-        light.style.transform = "rotate(20deg)",
-        light.style.opacity = "0",
-        s = true
-      }
-    }, 2000)
+    const lights = document.querySelectorAll("#cta-light");
+    lights.forEach((light) => {
+      light.style.opacity = "0";
+      let s = true;
+      setInterval(() => {
+        if (s) {
+          light.style.transition = "ease-in 500ms"
+          light.style.transform = "translateX(364px) rotate(20deg)"
+          light.style.opacity = "0.8"
+          s = false
+        } else {
+          light.style.transition = "none",
+          light.style.transform = "rotate(20deg)",
+          light.style.opacity = "0",
+          s = true
+        }
+      }, 2000)
+    })
   }
 
   // DROPZONE

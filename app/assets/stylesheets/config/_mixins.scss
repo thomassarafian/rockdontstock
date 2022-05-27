@@ -230,38 +230,38 @@
     width: 380px;
     padding: 1.5rem;
     gap: 1.5rem;
+    background-color: white;
     border: 1px solid $black;
+    transition: all 0.3s ease;
     @include media-breakpoint-up(lg) {
-      &:hover::before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 10px;
-        left: 10px;
-        border-right: 10px solid $black;
-        border-bottom: 10px solid $black;
-        z-index: -1;
+      &:hover {
+        transform: translate(-10px, -10px);
+        box-shadow: 10px 10px $black;
+      }
+      &:hover &__popular {
+        transform: translateX(-1rem);
       }
     }
     @include media-breakpoint-down(md) {
       width: calc(100% - 10px);
       gap: 0.8rem;
-      &:nth-of-type(2)::before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 10px;
-        left: 10px;
-        border-right: 10px solid $black;
-        border-bottom: 10px solid $black;
-        z-index: -1;
+      &:nth-of-type(2) {
+        box-shadow: 10px 10px $black;
       }
     }
   }
   &__card__type {
     @include para-1;
+  }
+  &__card__popular {
+    position: absolute;
+    top: -18px;
+    right: 1rem;
+    padding: 0.4rem;
+    width: max-content;
+    color: white;
+    background: black;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
   &__card__price {
     @include para-1-bold;
@@ -269,6 +269,7 @@
   &__card__button {
     @include cta-button;
     text-align: center;
+    position: relative;
   }
   &__card__image > img {
     @include media-breakpoint-down(md) {
