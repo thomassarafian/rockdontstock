@@ -10,6 +10,14 @@ if (mediaQuery.matches) {
   var offcanvasEl = document.getElementById('offcanvasBottom');
   var offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
   offcanvasEl.querySelector('.offcanvas-body').innerHTML = "<%= j render partial: 'form' %>";
+  offcanvasEl.addEventListener('hidden.bs.offcanvas', () => offcanvasEl.removeAttribute("style"))
   offcanvas.show();
+
+  var hammertime = new Hammer(offcanvasEl);
+  hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+  hammertime.on('swipeup', function(e) {
+    console.log(e)
+    offcanvasEl.style.height = "100%"
+  })
 }
 initDropzone();

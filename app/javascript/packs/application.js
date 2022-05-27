@@ -15,6 +15,7 @@ var bootstrap = require('bootstrap');
 var Flickity = require('flickity');
 var clamp = require('clamp-js');
 var bodyScrollLock = require('body-scroll-lock');
+var Hammer = require('hammerjs');
 var enableBodyScroll = bodyScrollLock.enableBodyScroll;
 var disableBodyScroll = bodyScrollLock.disableBodyScroll;
 
@@ -25,5 +26,6 @@ window.Dropzone = Dropzone;
 window.enableBodyScroll = enableBodyScroll;
 window.disableBodyScroll = disableBodyScroll;
 window.bootstrap = bootstrap;
+window.Hammer = Hammer;
 
 Flickity.prototype._touchActionValue = 'pan-y pinch-zoom';

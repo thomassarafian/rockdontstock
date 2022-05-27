@@ -6,7 +6,7 @@ if (mediaQuery.matches) {
   modalEl.querySelector('#form-container').innerHTML = "<%= j render partial: 'payment' %>";
   modal.show();
 } else {
-  var offcanvasEl = document.getElementById('offcanvas');
+  var offcanvasEl = document.getElementById('offcanvasBottom');
   var offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
   offcanvasEl.querySelector('.offcanvas-body').innerHTML = "<%= j render partial: 'payment' %>";
   offcanvas.show();

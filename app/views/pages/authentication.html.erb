@@ -363,20 +363,20 @@
         });
 
         this.on("sendingmultiple", function() {
-          // showModalSpinner()
+          // showSpinner()
         });
         this.on("successmultiple", function(files, response) {
           Rails.ajax({
             type: "GET",
             url: `/authentications/${response.lcId}/payment`,
             success: () => {
-              showModalSpinner()
+              showSpinner()
               initStripe("Authentication", response.lcId)
             }
           })
         });
         this.on("errormultiple", function(files, response) {
-          hideModalSpinner()
+          hideSpinner()
           showErrorMessage(response.message)
         });
       }
@@ -421,7 +421,7 @@
       elements = stripe.elements({ appearance, clientSecret });
       const paymentElement = elements.create("payment");
       paymentElement.mount("#payment-element");
-      hideModalSpinner()
+      hideSpinner()
       paymentForm.hidden = false;
     }
     
@@ -495,9 +495,9 @@
     function setLoading(isLoading) {
       if (isLoading) {
         // Disable the button and show a spinner
-        showModalSpinner();
+        showSpinner();
       } else {
-        hideModalSpinner();
+        hideSpinner();
       }
     }
   }
@@ -573,13 +573,17 @@
   function showErrorMessage(msg) {
     document.getElementById('error').innerHTML = msg;
   }
-  function showModalSpinner() {
-    document.querySelector('.modal__spinner').hidden = false;
-    document.querySelector('.modal-body').style.pointerEvents = "none"
-    document.querySelector('.modal-body').style.opacity = "0.1"
+  function showSpinner() {
+    ["modal", "offcanvas"].forEach((type) => {
+      document.querySelector(`.${type}__spinner`).hidden = false;
+      document.querySelector(`.${type}-body`).style.pointerEvents = "none"
+      document.querySelector(`.${type}-body`).style.opacity = "0.1"
+    })
   }
-  function hideModalSpinner() {
-    document.querySelector('.modal-body').removeAttribute("style")
-    document.querySelector('.modal__spinner').hidden = true;
+  function hideSpinner() {
+    ["modal", "offcanvas"].forEach((type) => {
+      document.querySelector(`.${type}-body`).removeAttribute("style")
+      document.querySelector(`.${type}__spinner`).hidden = true;
+    })
   }
 </script>

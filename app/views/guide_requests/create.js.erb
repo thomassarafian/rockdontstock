@@ -7,13 +7,15 @@ var mediaQuery = window.matchMedia('(min-width: 576px)')
     var formContainer = modalEl.querySelector('#form-container')
     formContainer.innerHTML = "<%= j render partial: 'payment' %>"
     modal.show()
+    showSpinner()
   } else {
-    var offcanvasEl = document.getElementById('offcanvas')
+    var offcanvasEl = document.getElementById('offcanvasBottom')
     var offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl)
     offcanvasEl.querySelector('.offcanvas-body').innerHTML = "<%= j render partial: 'payment' %>"
     offcanvas.show()
+    showSpinner()
   }
-  showModalSpinner()
+  
   initStripe("GuideRequest", <%= @guide_req.id %>)
 <% else %>
   showErrorMessage("<%= @message %>")
