@@ -150,3 +150,12 @@ label:not(.form-check-label) {
     opacity: 1;
   }
 }
+.cta__light {
+  position: absolute;
+  top: -0.75px;
+  left: -1.75rem;
+  height: 6rem;
+  width: 2rem;
+  background-color: white;
+  filter: blur(4px);
+}

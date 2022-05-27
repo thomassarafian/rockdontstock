@@ -170,7 +170,10 @@
           <div class="auth-product__card__type"><%= product.name %></div>
           <div class="auth-product__card__price"><%= product.price %>€</div>
           <div class="auth-product__card__descr"><%= product.description %></div>
-          <%= link_to "Commander", new_authentication_path(product_id: product.id), remote: true, class: "auth-product__card__button" %>
+          <%= link_to new_authentication_path(product_id: product.id), remote: true, class: "auth-product__card__button" do %>
+            Commander
+            <div id="cta-light" class="cta__light"></div>
+          <% end %>
           <hr/>
           <ul class="auth-product__card__infos-list">
             <% product.list_items.each do |li| %>
@@ -319,7 +322,29 @@
         compSlider.find(".resize img").css({ width: compSliderWidth });
       });
     }
+    animateCTA()
   });
+  document.querySelector(".auth-product__card__button")
+
+  // Animate CTA
+  function animateCTA() {
+    const light = document.getElementById("cta-light");
+    light.style.opacity = "0";
+    let s = true;
+    setInterval(() => {
+      if (s) {
+        light.style.transition = "ease-in 500ms"
+        light.style.transform = "translateX(364px) rotate(20deg)"
+        light.style.opacity = "0.8"
+        s = false
+      } else {
+        light.style.transition = "none",
+        light.style.transform = "rotate(20deg)",
+        light.style.opacity = "0",
+        s = true
+      }
+    }, 2000)
+  }
 
   // DROPZONE
   function initDropzone() {
