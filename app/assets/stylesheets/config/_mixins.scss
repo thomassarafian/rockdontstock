@@ -245,7 +245,7 @@
       }
     }
     @include media-breakpoint-down(md) {
-      width: 100%;
+      width: calc(100% - 10px);
       gap: 0.8rem;
       &:nth-of-type(2)::before {
         content: "";
