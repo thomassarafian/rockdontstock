@@ -453,3 +453,12 @@ section {
 .form__price {
   @include para-1-bold;
 }
+
+
+// OFFCANVAS 
+.offcanvas {
+  transition: transform 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+.offcanvas-bottom {
+  height: 70vh;
+}

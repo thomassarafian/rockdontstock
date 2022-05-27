@@ -110,6 +110,18 @@
       </div>
     </div>
 
+    <!-- Bottom offcanvas -->
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="modal__spinner" hidden>
+        <div class="loader"></div>
+        <div>Merci de bien vouloir patienter...</div>
+      </div>
+      <div class="offcanvas-body"></div>
+    </div>
+
     <%= render partial: 'shared/footer' %>
   </body>
 </html>
@@ -139,15 +151,6 @@ $(document).ready(function () {
     }
   });
 });
-function showModalSpinner() {
-  document.querySelector('.modal__spinner').hidden = false;
-  document.querySelector('.modal-body').style.pointerEvents = "none"
-  document.querySelector('.modal-body').style.opacity = "0.1"
-}
-function hideModalSpinner() {
-  document.querySelector('.modal-body').removeAttribute("style")
-  document.querySelector('.modal__spinner').hidden = true;
-}
 </script>
 
 

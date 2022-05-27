@@ -573,4 +573,13 @@
   function showErrorMessage(msg) {
     document.getElementById('error').innerHTML = msg;
   }
+  function showModalSpinner() {
+    document.querySelector('.modal__spinner').hidden = false;
+    document.querySelector('.modal-body').style.pointerEvents = "none"
+    document.querySelector('.modal-body').style.opacity = "0.1"
+  }
+  function hideModalSpinner() {
+    document.querySelector('.modal-body').removeAttribute("style")
+    document.querySelector('.modal__spinner').hidden = true;
+  }
 </script>
