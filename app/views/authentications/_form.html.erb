@@ -1,59 +1,66 @@
-<div class="modal__subtitle">Service premium</div>
-<h2 class="modal__h2">Authentification</h2>
-<ul class="modal__checklist modal__checklist--auth">
-  <li><i class="fas fa-check-circle"></i> Résultats en 24h</li>
-  <li><i class="fas fa-check-circle"></i> Tout modèle</li>
-  <li><i class="fas fa-check-circle"></i> Expertise complète</li>
-</ul>
-<div class="modal__content">
-  <div class="modal__form">
-    <%= form_for Authentication.new, html: { class: "dropzone", id: "modal-form", multipart: true } do |f| %>
-      <div class="form-group">
-        <div class="dz-clickable">
-          <div class="dz-message">
-            <h4>Glisser ou rechercher des photos</h4>
-            <span>Types de fichiers autorisés : jpg, png.</span>
+<div class="modal-wrapper">
+  <div class="modal__infos">
+    <div class="auth-product__card__image">
+      <%= image_tag("images/auth-icon-#{@product.name.downcase}.svg") %>
+    </div>
+    <div class="modal__product-name">Authentification <%= @product.name %></div>
+    <ul class="modal__checklist modal__checklist--auth">
+      <% @product.list_items.each do |li| %>
+        <% if li %>
+          <li><i class="fas fa-check-circle ms-0"></i> <%= li %></li>
+        <% end%>
+      <% end %>
+    </ul>
+  </div>
+  <div class="modal__content">
+    <div class="modal__form">
+      <%= form_for Authentication.new, html: { class: "dropzone", id: "modal-form", multipart: true } do |f| %>
+        <%= f.hidden_field :product_id, value: @product.id %>
+        <div class="form-group">
+          <div class="dz-clickable">
+            <div class="dz-message">
+              <h4>Glisser ou rechercher des photos</h4>
+              <span>Types de fichiers autorisés : jpg, png.</span>
+            </div>
+            <div id="dz-previews" class="dropzone-previews"></div>
           </div>
-          <div id="dz-previews" class="dropzone-previews"></div>
         </div>
-      </div>
-      <div class="modal__fields">
+        <div class="modal__fields">
         <div id="error" class="modal__fields-errors"></div>
         <div class="row g-2">
           <div class="col">
-            <%= f.text_field :last_name, class: "form-control", placeholder: "Nom" %>
+            <%= f.label "Nom" %>
+            <%= f.text_field :last_name, class: "form-control" , placeholder: "Jean" , required: true %>
           </div>
           <div class="col">
-            <%= f.text_field :first_name, class: "form-control", placeholder: "Prénom", required: true %>
+            <%= f.label "Prénom" %>
+            <%= f.text_field :first_name, class: "form-control" , placeholder: "Dupont" , required: true %>
           </div>
         </div>
         <div class="form-group">
-          <%= f.email_field :email, class: "form-control", placeholder: "Email", required: true %>
+          <%= f.label "E-mail" %>
+          <%= f.email_field :email, class: "form-control" , placeholder: "jean.dupont@email.fr" , required: true %>
         </div>
-        <div class="row g-2">
-          <div class="input-group col">
-            <span class="input-group-text">Né(e) le</span>
-            <%= f.date_field :date_of_birth, class: "form-control", required: true %>
-          </div>
-          <div class="col">
-            <%= f.text_field :city, class: "form-control", placeholder: "Ville", required: true %>
-          </div>
+        <div class="form-group">
+          <%= f.label "Date de naissance" %>
+          <%= f.date_field :date_of_birth, class: "form-control" , required: true %>
         </div>
         <div class="form-check mb-3">
-          <%= f.check_box :newsletter, { class: "form-check-input", required: true } %>
-          <%= f.label "", class: "form-check-label", style: "font-size: 0.75rem" do %>
+          <%= f.check_box :newsletter, { class: "form-check-input" , required: true }, 1, nil %>
+          <%= f.label "" , class: "form-check-label" , style: "font-size: 0.75rem" do %>
             En envoyant ma demande j'accepte de recevoir les dernières nouveautés de Rock Don't Stock par email.
           <% end %>
         </div>
-        <div class="modal__form__bottom-infos">
-          <div>
-            TOTAL: 4.90€
-          </div>
-          <%= link_to "Contacter le support", new_contact_path %>
         </div>
-      </div>
-      <%= f.hidden_field :product_id, value: @product.id %>
-      <%= f.submit "Continuer", class: "modal__form__submit" %>
-    <% end %>
+        <hr/>
+        <div class="form__total">
+          <div>Total</div>
+          <div class="form__price">
+            <%= @product.price || "3.90" %>€
+          </div>
+        </div>
+        <%= f.submit "Continuer", class: "modal__form__submit" %>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -15,7 +15,7 @@ class AuthenticationsController < ApplicationController
     @lc = Authentication.new(lc_params.merge(photos: photos))
 
     if @lc.save
-      render json: { lcId: @lc.id }, status: 200
+      render json: { lcId: @lc.id, productId: @lc.product.id }, status: 200
     else
       render json: { message: @lc.errors.full_messages.join(", ") }, status: 422
     end
@@ -26,6 +26,16 @@ class AuthenticationsController < ApplicationController
     # lc.update(payment_status: "paid")
     # lc.send_information_email
     redirect_to authentication_path, notice: "Merci, ta demande a bien été envoyée !"
+  end
+
+  def payment
+    lc = Authentication.find(params[:id])
+    @product = lc.product
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   # def show

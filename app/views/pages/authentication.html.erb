@@ -341,8 +341,8 @@
       maxFiles: 10,
       maxFilesize: 5,
       resizeWidth: 1000,
-      thumbnailWidth: 80,
-      thumbnailHeight: 80,
+      thumbnailWidth: 60,
+      thumbnailHeight: 60,
       dictDefaultMessage: "Glisse ou dépose tes photos ici...",
       dictFileTooBig: "Le fichier est trop gros ({{filesize}}mo). Taille max: {{maxFilesize}}mo.",
       dictInvalidFileType: "Ce type de fichier n'est pas autorisé.",
@@ -366,9 +366,14 @@
           // showModalSpinner()
         });
         this.on("successmultiple", function(files, response) {
-          formContainer.innerHTML = "<%= j render partial: 'authentications/payment' %>"
-          showModalSpinner()
-          initStripe("Authentication", response.lcId)
+          Rails.ajax({
+            type: "GET",
+            url: `/authentications/${response.lcId}/payment`,
+            success: () => {
+              showModalSpinner()
+              initStripe("Authentication", response.lcId)
+            }
+          })
         });
         this.on("errormultiple", function(files, response) {
           hideModalSpinner()

@@ -378,18 +378,19 @@ section {
 
 .modal-wrapper {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
 }
-.modal__guide-name {
+.modal__product-name {
   @include para-1-bold;
   text-align: center;
 }
 .modal__infos {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   align-items: center;
   justify-content: center;
+  width: 80%;
+  gap: 0.5rem;
 }
 .modal__img {
   width: 80%;
@@ -404,15 +405,7 @@ section {
 .modal__checklist {
   list-style-type: none;
   padding: 0;
-  &--auth {
-    margin-bottom: 3rem;
-    @include media-breakpoint-down(lg) {
-      margin-top: 1.5rem;
-    }
-  }
-  &--guide {
-    margin-top: 1.5rem;
-  }
+  margin-top: 1.5rem;
 }
 .modal__form__bottom-infos {
   display: flex;
@@ -435,6 +428,7 @@ section {
 }
 .modal__content {
   position: relative;
+  width: 100%;
 
   & button {
     @include cta-button;

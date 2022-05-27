@@ -46,8 +46,8 @@ class PaymentsController < ApplicationController
   end
 
   def create_payment_intent
-    model = params[:model].constantize
-    record = model.find(params['id'].to_i)
+    model = params['model'].constantize
+    record = model.find(params['id'])
     amount = record.price_in_cents
 
     payment_intent = Stripe::PaymentIntent.create(
@@ -56,7 +56,7 @@ class PaymentsController < ApplicationController
       automatic_payment_methods: {
         enabled: true,
       },
-      metadata: {model: params[:model]}
+      metadata: {model: params['model']}
     )
 
     record.update(payment_intent_id: payment_intent.id)
