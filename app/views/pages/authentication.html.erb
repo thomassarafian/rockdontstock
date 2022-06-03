@@ -140,7 +140,7 @@
             </center>
           </div>
         </div>
-        <div class="auth-service__review-slider" data-flickity='{ "autoPlay": true, "wrapAround": true, "draggable": false, "pauseAutoPlayOnHover": false, "prevNextButtons": false, "pageDots": false }'>
+        <div class="auth-service__review-slider">
           <% Review.all.each do |review| %>
             <div class="flickity-cell" style="width: 100%; padding: 10px;">
               <div class="auth-service__review">
@@ -337,7 +337,22 @@
       });
     }
     animateCTA()
+    initFlickity()
   });
+
+  function initFlickity() {
+    var flkty = new Flickity( '.auth-service__review-slider', {
+      autoPlay: true,
+      wrapAround: true,
+      draggable: true,
+      pauseAutoPlayOnHover: false,
+      prevNextButtons: false,
+      pageDots: false,
+      on: {
+        pointerUp: () => flkty.player.play()
+      }
+    });
+  }
 
   // Animate CTA
   function animateCTA() {
