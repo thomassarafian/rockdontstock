@@ -65,16 +65,13 @@
 }
 @mixin para-2 {
   font-size: $font-size-1;
-  @include media-breakpoint-down(lg) {
-    font-size: $font-size-1-sm;
-  }
 }
 @mixin para-2-bold {
   font-size: $font-size-1;
   font-weight: 700;
-  @include media-breakpoint-down(lg) {
-    font-size: $font-size-1-sm;
-  }
+}
+@mixin para-3 {
+  font-size: $font-size-6;
 }
 @mixin head-3 {
   font-size: $font-size-3;
@@ -91,7 +88,6 @@
   &-block {
     @include media-breakpoint-up(lg) {
       border: 1px solid $black;
-      border-top: 20px solid $black;
     }
   }
   &__content {
@@ -223,5 +219,71 @@
   }
   &__card__price {
     font-weight: 700;
+  }
+}
+
+@mixin auth-product-card {
+  &__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    background-color: white;
+    border: 1px solid $black;
+    transition: all 0.3s ease;
+    @include media-breakpoint-up(lg) {
+      &:hover {
+        transform: translate(-10px, -10px);
+        box-shadow: 10px 10px $black;
+      }
+      &:hover &__popular {
+        transform: translateX(-1rem);
+      }
+    }
+    @include media-breakpoint-down(md) {
+      width: calc(100% - 10px);
+      gap: 0.8rem;
+      &:nth-of-type(2) {
+        box-shadow: 10px 10px $black;
+      }
+    }
+  }
+  &__card__type {
+    @include para-1;
+  }
+  &__card__popular {
+    position: absolute;
+    top: -18px;
+    right: 1rem;
+    padding: 0.4rem;
+    width: max-content;
+    color: white;
+    background: black;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  &__card__price {
+    @include para-1-bold;
+  }
+  &__card__button {
+    @include cta-button;
+    text-align: center;
+    position: relative;
+  }
+  &__card__image > img {
+    @include media-breakpoint-down(md) {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  &__card__infos-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0;
+
+    & > li {
+      line-height: 2;
+    }
   }
 }

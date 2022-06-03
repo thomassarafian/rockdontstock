@@ -1,0 +1,24 @@
+<div class="modal__infos mb-5 w-100">
+  <div class="auth-product__card__image">
+    <%= image_tag("images/auth-icon-#{@product.name.downcase}.svg") %>
+  </div>
+  <div class="modal__product-name">Authentification <%= @product.name %></div>
+  <ul class="modal__checklist modal__checklist--auth">
+    <% @product.list_items.each do |li| %>
+      <% if li %>
+        <li><i class="fas fa-check-circle ms-0"></i> <%= li %></li>
+      <% end%>
+    <% end %>
+  </ul>
+</div>
+<div class="modal__content">
+  <form id="payment-form" hidden>
+    <div id="payment-element">
+      <!--Stripe.js injects the Payment Element-->
+    </div>
+    <button id="submit" type="submit">
+      <span id="button-text">Payer <%= @product.price %></span>
+    </button>
+    <div id="payment-message" hidden></div>
+  </form>
+</div>

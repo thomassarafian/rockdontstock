@@ -18,8 +18,9 @@ class User < ApplicationRecord
   validates :email, format: { with:  /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/i }
   validates :date_of_birth, presence: true
   validates :iban, presence: true
+  validates :phone, numericality: true
+  validates_length_of :phone, minimum: 9, maximum: 13
   validate :user_must_be_over_13, on: [:create, :update]
-  # validates :phone, length: {minimun: 9, maximum: 10}, format: { with: /^[0-9]*$/, multiline: true  } #, on: [:edit]
   # validates :line1, presence: true
   # validate :correct_ids_type?
 
@@ -39,12 +40,20 @@ class User < ApplicationRecord
   def full_name
     self.first_name.capitalize + " " + self.last_name.capitalize
   end
-  
+
   def age
     ((Time.zone.now - self.date_of_birth.to_time) / 1.year.seconds).floor
   end
+
+  def phone_valid?
+    self.phone? && is_numeric?(self.phone) && self.phone.length.in?(9..13)
+  end
   
   private
+
+  def is_numeric?(string)
+    Integer(string) != nil rescue false
+  end
   
   def user_must_be_over_13
     if date_of_birth > (Date.today - 13.years)

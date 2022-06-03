@@ -52,7 +52,7 @@ export default class extends Controller {
 	}
 
 	get acceptedFiles() {
-		return this.data.get('acceptedFiles');
+		return this.data.get('acceptedFiles') || 'image/*';
 	}
 
 	get addRemoveLinks() {
@@ -139,7 +139,6 @@ function createDropZone(controller) {
 		maxFilesize: controller.maxFileSize,
 		acceptedFiles: controller.acceptedFiles,
 		addRemoveLinks: controller.addRemoveLinks,
-		autoQueue: false,
 		autoProcessQueue: false,
 		uploadMultiple: true,
 	});

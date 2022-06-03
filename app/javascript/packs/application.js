@@ -1,36 +1,31 @@
 import Rails from '@rails/ujs';
 import * as ActiveStorage from '@rails/activestorage';
 import 'channels';
-
 Rails.start();
-window.Rails = Rails;
 ActiveStorage.start();
-require('dotenv').config();
 
-var Flickity = require('flickity');
-window.Flickity = Flickity;
-Flickity.prototype._touchActionValue = 'pan-y pinch-zoom';
+import 'controllers';
+import './pagy.js.erb';
+import Dropzone from 'dropzone';
+require('dotenv').config();
 require('./flickity-fullscreen.js');
 require('./flickity-imagesloaded.js');
 
+var bootstrap = require('bootstrap');
+var Flickity = require('flickity');
 var clamp = require('clamp-js');
-window.clamp = clamp;
-
-import 'bootstrap';
-import 'controllers';
-import './pagy.js.erb';
 var bodyScrollLock = require('body-scroll-lock');
+var Hammer = require('hammerjs');
 var enableBodyScroll = bodyScrollLock.enableBodyScroll;
 var disableBodyScroll = bodyScrollLock.disableBodyScroll;
+
+window.Rails = Rails;
+window.Flickity = Flickity;
+window.clamp = clamp;
+window.Dropzone = Dropzone;
 window.enableBodyScroll = enableBodyScroll;
 window.disableBodyScroll = disableBodyScroll;
+window.bootstrap = bootstrap;
+window.Hammer = Hammer;
 
-// import { uploadIds } from "components/upload_ids.js"
-// import { ibanValidator } from "components/iban_validator.js"
-// import { createStripeTokenEditUser } from "components/create_stripe_token_edit_user.js"
-
-// document.addEventListener('turbolinks:load', () => {
-//   uploadIds();
-//   ibanValidator();
-//   createStripeTokenEditUser();
-// });
+Flickity.prototype._touchActionValue = 'pan-y pinch-zoom';

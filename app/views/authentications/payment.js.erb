@@ -1,0 +1,13 @@
+var mediaQuery = window.matchMedia('(min-width: 576px)')
+
+if (mediaQuery.matches) {
+  var modalEl = document.getElementById('modal');
+  var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+  modalEl.querySelector('#form-container').innerHTML = "<%= j render partial: 'payment' %>";
+  modal.show();
+} else {
+  var offcanvasEl = document.getElementById('offcanvasBottom');
+  var offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+  offcanvasEl.querySelector('.offcanvas-body').innerHTML = "<%= j render partial: 'payment' %>";
+  offcanvas.show();
+}

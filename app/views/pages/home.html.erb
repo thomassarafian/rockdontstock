@@ -113,34 +113,7 @@
   </section>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="modal-guide" tabindex="-1" role="dialog" aria-labelledby="modal-guideTitle" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <div id="form-container">
-          <%= render partial: "authentication/form_guide" %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
-  let guideModal = document.getElementById('modal-guide')
-
-  guideModal.addEventListener('show.bs.modal', function (e) {
-    let button = e.relatedTarget
-    let guideName = button.getAttribute('data-bs-guideName')
-    let guideId = button.getAttribute('data-bs-guideId')
-    let modalTitle = guideModal.querySelector('.auth-modal__guide-name')
-    let hiddenInput = document.getElementById('user_guide_id')
-
-    modalTitle.textContent = guideName
-    hiddenInput.value = guideId
-  })
-
   document.querySelectorAll('.sneaker-home__card').forEach(el => {
 
     el.addEventListener('click', function() {

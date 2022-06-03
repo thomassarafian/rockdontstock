@@ -25,8 +25,13 @@ Rails.application.routes.draw do
   	resources :transfers, only: [:index, :create]
   end
 
-  resources :authentications, only: [:new, :create] do 
-    member do
+  resources :authentications, only: [:new, :create] do
+    get 'success', on: :collection
+    get 'payment', on: :member
+  end
+
+  resources :guide_requests, only: [:new, :create] do
+    collection do 
       get 'success'
     end
   end
@@ -40,14 +45,13 @@ Rails.application.routes.draw do
   get 'cgv', to: 'pages#cgv'
   get 'politique-de-confidentialite', to: 'pages#trust_policy'
   post 'newsletter', to: 'pages#newsletter'
-  post 'guide-request', to: 'pages#guide_request'
   
   # PAYMENTS
   get 'sneaker-payment-complete', to: "payments#sneaker_complete"
-  post 'sneaker-stripe-checkout', to: 'payments#sneaker_stripe_checkout'
-  get 'lc-payment-complete', to: "payments#lc_complete"
-  post 'lc-stripe-checkout', to: 'payments#lc_stripe_checkout'
+  post 'create-paypal-order', :to => 'payments#create_paypal_order'
+  post 'capture-paypal-order', :to => 'payments#capture_paypal_order'
   post 'stripe-webhooks', to: 'payments#stripe_webhooks'
+  post 'create-payment-intent', to: 'payments#create_payment_intent'
   
   namespace :forest do
     # Sneakers

@@ -1,7 +1,30 @@
 @import "dropzone/dist/dropzone.css";
 
 .dropzone {
+  padding: 0;
+  border: none;
+}
+.dropzone.dz-drag-hover {
+  border: none;
+}
+.dropzone .dz-message {
+  padding: 3rem 0;
+  margin: 0;
   border: 3px dashed #d6d6d6;
   border-radius: 0;
   color: $dark-gray;
+}
+.dropzone .dz-preview .dz-image {
+  height: 60px;
+  width: 60px;
+}
+.dropzone .dz-remove {
+  z-index: 999;
+}
+.dropzone .dz-preview .dz-details {
+  display: none;
+}
+.dropzone .dz-preview {
+  margin: 12px;
+  min-height: 80px;
 }

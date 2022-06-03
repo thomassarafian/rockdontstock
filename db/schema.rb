@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_02_223905) do
+ActiveRecord::Schema.define(version: 2022_06_03_112514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,9 +51,13 @@ ActiveRecord::Schema.define(version: 2022_02_02_223905) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "payment_status", default: 0
-    t.string "checkout_session_id"
+    t.string "paypal_order_id"
     t.date "date_of_birth"
     t.boolean "newsletter", default: false
+    t.bigint "product_id"
+    t.string "payment_intent_id"
+    t.integer "payment_method"
+    t.index ["product_id"], name: "index_authentications_on_product_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -67,12 +71,29 @@ ActiveRecord::Schema.define(version: 2022_02_02_223905) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "guide_requests", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "city"
+    t.date "date_of_birth"
+    t.boolean "newsletter", default: false
+    t.string "payment_intent_id"
+    t.integer "payment_method"
+    t.integer "payment_status", default: 0
+    t.bigint "guide_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guide_id"], name: "index_guide_requests_on_guide_id"
+  end
+
   create_table "guides", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "img_url"
     t.integer "sendinblue_list_id"
+    t.integer "price_in_cents", default: 390
   end
 
   create_table "items", force: :cascade do |t|
@@ -110,6 +131,27 @@ ActiveRecord::Schema.define(version: 2022_02_02_223905) do
     t.string "relay_address"
     t.index ["sneaker_id"], name: "index_orders_on_sneaker_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "price_in_cents"
+    t.string "li1"
+    t.string "li2"
+    t.string "li3"
+    t.string "li4"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string "name"
+    t.string "purchase"
+    t.text "content"
+    t.integer "rating"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -191,6 +233,7 @@ ActiveRecord::Schema.define(version: 2022_02_02_223905) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "authentications", "products"
   add_foreign_key "items", "orders"
   add_foreign_key "items", "users"
   add_foreign_key "orders", "sneakers"

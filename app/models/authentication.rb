@@ -1,9 +1,14 @@
 class Authentication < ApplicationRecord
+  belongs_to :product
   has_many_attached :photos, service: :cloudinary, dependent: :detach
 
-  enum payment_status: { unpaid: 0, paid: 10 }
+  delegate :price_in_cents, to: :product
 
-  validates :first_name, :last_name, :email, :date_of_birth, :city, :newsletter, :photos, presence: true
+  enum payment_status: { unpaid: 0, paid: 10 }
+  enum payment_method: { card: 0 }
+
+  validates :first_name, :last_name, :email, :date_of_birth, :newsletter, presence: true
+  # validates :photos, presence: true
   validates :newsletter, acceptance: true
 
   def send_information_email
@@ -32,6 +37,10 @@ class Authentication < ApplicationRecord
         "photos" => photos_urls
       }
     }])
+  end
+
+  def price
+    '%.2f' % (price_in_cents / 100.00)
   end
 
 end

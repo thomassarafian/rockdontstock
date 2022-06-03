@@ -33,7 +33,7 @@
     <meta charset="utf-8">
     <meta name="description" content="Le but de Rock Don’t Stock ? Lutter contre le fake et l’explosion des prix tout en promouvant la sneakers rockée.">
 
-    <link rel="icon" type="image/png" href="assets/logo_tab.png" />
+    <%= favicon_link_tag asset_path('logo_tab.png') %>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="//unpkg.com/leaflet/dist/leaflet.css" />  
@@ -92,6 +92,35 @@
     <%= render partial: 'shared/flashes' %>
 
     <%= yield %>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-title"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal__spinner" hidden> 
+            <div class="loader"></div>
+            <div>Merci de bien vouloir patienter...</div>
+          </div>
+          <div class="modal-body">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div id="form-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom offcanvas -->
+    <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas__spinner" hidden>
+        <div class="loader"></div>
+        <div>Merci de bien vouloir patienter...</div>
+      </div>
+      <div class="offcanvas-body"></div>
+    </div>
 
     <%= render partial: 'shared/footer' %>
   </body>
