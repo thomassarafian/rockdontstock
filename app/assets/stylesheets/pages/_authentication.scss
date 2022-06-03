@@ -265,7 +265,7 @@ section {
 .auth-service__review {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1.5rem;
   position: relative;
   padding: 2rem;
   border: 1px solid $black;
@@ -284,6 +284,8 @@ section {
   }
   @include media-breakpoint-down(md) {
     flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
     width: calc(100% - 10px);
   }
 }
