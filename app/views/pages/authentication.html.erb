@@ -140,19 +140,30 @@
             </center>
           </div>
         </div>
-        <div class="auth-service__review">
-          <div class="auth-service__review-info">
-            <div class="auth-service__review-name">Thomas L.</div>
-            <div class="auth-service__review-purchase">Pour l’achat de : Air Max 1 Patta Monarque (2021)<br />Il y a 5 jours</div>
-            <div class="auth-service__review-note">
-              <span class="me-2">5/5</span>
-              <% 5.times do %>
-                <%= image_tag("images/star.svg", width: 20, height: 20) %>
-                  <% end %>
+        <div class="auth-service__review-slider" data-flickity='{ "autoPlay": true, "wrapAround": true, "draggable": false, "pauseAutoPlayOnHover": false, "prevNextButtons": false, "pageDots": false }'>
+          <% Review.all.each do |review| %>
+            <div class="flickity-cell" style="width: 100%; padding-bottom: 10px;">
+              <div class="auth-service__review">
+                <div class="auth-service__review-info">
+                  <div class="auth-service__review-name">
+                    <%= review.name %>
+                  </div>
+                  <div class="auth-service__review-purchase">
+                    <%= review.purchase %>
+                  </div>
+                  <div class="auth-service__review-note">
+                    <span class="me-2"><%= review.rating %>/5</span>
+                    <% review.rating.times do %>
+                      <%= image_tag("images/star.svg", width: 20, height: 20) %>
+                        <% end %>
+                  </div>
+                </div>
+                <div class="auth-service__review-content">
+                  <%= review.content %>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="auth-service__review-content">Première fois que je fais authentifier<br />une paire d’occasion,
-            pas déçu<br />Foncez si vous voulez éviter les<br />mauvaises surprises!</div>
+          <% end %>
         </div>
       </div>
     </div>
