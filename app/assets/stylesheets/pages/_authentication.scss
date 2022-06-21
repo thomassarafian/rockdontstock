@@ -397,10 +397,17 @@ section {
     flex-direction: column;
     align-items: center;
   }
+  &.modal-offer {
+    align-items: center;
+  }
 }
 .modal__product-name {
   @include para-1-bold;
   text-align: center;
+}
+.modal__product-options {
+  color: #727272;
+  font-size: 0.8rem;
 }
 .modal__infos {
   display: flex;
@@ -412,6 +419,8 @@ section {
 }
 .modal__img {
   width: 80%;
+  height: 200px;
+  object-fit: contain;
   margin-bottom: 1rem;
 }
 .modal__h2 {

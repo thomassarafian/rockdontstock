@@ -3,6 +3,7 @@ class User < ApplicationRecord
   
   has_many :sneakers, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_many :offers, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable
@@ -43,6 +44,10 @@ class User < ApplicationRecord
 
   def age
     ((Time.zone.now - self.date_of_birth.to_time) / 1.year.seconds).floor
+  end
+
+  def search_accepted_offer_on(sneaker)
+    self.offers.find_by(sneaker: sneaker, status: "accepted")
   end
 
   def phone_valid?

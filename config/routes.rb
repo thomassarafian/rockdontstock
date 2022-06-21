@@ -18,10 +18,16 @@ Rails.application.routes.draw do
       end
     end
     resources :orders, shallow: true, only: [:new, :show, :create]
+    resources :offers, shallow: true, only: [:new, :create] do
+      member do
+        post 'accept'
+        post 'refuse'
+      end
+    end
   end
   
 	resource :user, only: [:show, :update], path: 'me' do
-    resources :items, only: [:index]
+    # resources :items, only: [:index]
   	resources :transfers, only: [:index, :create]
   end
 

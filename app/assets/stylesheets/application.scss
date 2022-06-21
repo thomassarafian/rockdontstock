@@ -81,6 +81,9 @@ form .form-group {
 label:not(.form-check-label) {
   @include para-2-bold;
 }
+.input-group-text {
+  border: 1px solid $dark-gray;
+}
 .form-control {
 	color: #495057;
 	background-color: transparent;

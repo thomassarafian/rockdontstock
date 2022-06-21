@@ -1,0 +1,21 @@
+var mediaQuery = window.matchMedia('(min-width: 576px)')
+
+if (mediaQuery.matches) {
+  var modalEl = document.getElementById('modal');
+  var modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+  modalEl.querySelector('#form-container').innerHTML = "<%= j render partial: 'form' %>";
+  modal.show();
+} else {
+  var offcanvasEl = document.getElementById('offcanvasBottom');
+  var offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+  offcanvasEl.querySelector('.offcanvas-body').innerHTML = "<%= j render partial: 'form' %>";
+  offcanvasEl.addEventListener('hidden.bs.offcanvas', () => offcanvasEl.removeAttribute("style"))
+  offcanvas.show();
+
+  var hammertime = new Hammer(offcanvasEl);
+  hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+  hammertime.on('swipeup', function(e) {
+    console.log(e)
+    offcanvasEl.style.height = "100%"
+  })
+}

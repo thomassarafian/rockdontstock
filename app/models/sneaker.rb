@@ -23,6 +23,7 @@ class Sneaker < ApplicationRecord
   
 	has_many_attached :photos, service: :cloudinary, dependent: :detach
   has_many :orders, dependent: :destroy
+  has_many :offers, dependent: :destroy
 	belongs_to :user
   belongs_to :sneaker_db, optional: true 
   
@@ -68,9 +69,10 @@ class Sneaker < ApplicationRecord
     end
   end
 
-  def send_notification
-    UserMailer.new_sneaker(self, user).deliver
-  end
+  # NOTE NOT USED
+  # def send_notification
+  #   UserMailer.new_sneaker(self, user).deliver
+  # end
 
   def active?
     status == "active"

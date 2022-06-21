@@ -43,8 +43,22 @@
   color: #727272;
   margin-bottom: 0.6rem;
 }
+.sneaker-details__buttons {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  & > div {
+    width: 100%;
+  }
+}
 .sneaker-details__purchase{
   @include cta-button;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.sneaker-details__bid{
+  @include primary-button;
   width: 100%;
   margin-top: 1rem;
   margin-bottom: 1rem;

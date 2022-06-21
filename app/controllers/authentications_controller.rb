@@ -48,7 +48,7 @@ class AuthenticationsController < ApplicationController
   private
 
   def lc_params
-    params.require(:authentication).permit(:first_name, :last_name, :email, :date_of_birth, :city, :newsletter, :product_id)
+    params.require(:authentication).permit(:first_name, :last_name, :email, :date_of_birth, :city, :newsletter, :coupon, :product_id)
   end
 
 end

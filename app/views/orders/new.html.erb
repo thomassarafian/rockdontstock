@@ -14,7 +14,7 @@
           <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
         </div>
         <div class="purchase-recap__card__sneaker-price">
-          <%= @sneaker.price %> €
+          <%= @price %> €
         </div>
       </div>
     </div>
@@ -113,7 +113,7 @@
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
-            <div><%= 0.06 * @sneaker.price %> €</div>
+            <div><%= 0.06 * @price %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Code promo</div>
@@ -122,7 +122,7 @@
         </div>
         <div class="purchase-recap__card__total is-mobile">
           <div>Total</div>
-          <div id="total-price"><%= (1.06 * @sneaker.price_cents + 915) / 100.00 %> €</div>
+          <div id="total-price"><%= (1.06 * @price_cents + 915) / 100.00 %> €</div>
         </div>
         <div class="purchase-form__get-payment mt-5 mt-lg-3">
           <%= f.submit "Procéder au paiement", class: "purchase-form__get-payment__btn" %>
@@ -151,7 +151,7 @@
               <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
             </div>
             <div class="purchase-recap__card__sneaker-price">
-              <%= @sneaker.price %> €
+              <%= @price %> €
             </div>
           </div>
         </div>
@@ -162,7 +162,7 @@
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
-            <div><%= 0.06 * @sneaker.price %> €</div>
+            <div><%= 0.06 * @price %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Code promo</div>
@@ -171,7 +171,7 @@
         </div>
         <div class="purchase-recap__card__total">
           <div>Total</div>
-          <div id="total-price"><%= (1.06 * @sneaker.price_cents + 915) / 100.00 %> €</div>
+          <div id="total-price"><%= (1.06 * @price_cents + 915)  / 100.00 %> €</div>
         </div>
       </div>
     </div>
@@ -197,14 +197,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
         colissimoBlock.style.display = "none"
         colissimoBlock.querySelectorAll('input').forEach(input => input.required = false)
         shippingFee.forEach(el => el.innerText = "6.30 €")
-        totalPrice.forEach(el => el.innerText = "<%= (@sneaker.price_cents * 1.06 + 630) / 100.00 %> €")
+        totalPrice.forEach(el => el.innerText = "<%= (1.06 * @price_cents + 630) / 100.00 %> €")
       }
       if (this === radioColissimo) {
         relayBlock.style.display = "none"
         colissimoBlock.style.display = "block"
         colissimoBlock.querySelectorAll('input').forEach(input => input.required = true)
         shippingFee.forEach(el => el.innerText = "9.15 €")
-        totalPrice.forEach(el => el.innerText = "<%= (@sneaker.price_cents * 1.06 + 915) / 100.00 %> €")
+        totalPrice.forEach(el => el.innerText = "<%= (1.06 * @price_cents + 915) / 100.00 %> €")
       }
     });
   })

@@ -48,6 +48,7 @@
 							</div>
 						<% end %>
 					</div>
+					<%# TODO voir la différence entre sneakers en cours et sneakers vendues + rajouter statut %>
 					<div id="sales-carousel" class="items-carousel">
 						<% current_user.sneakers.each do |sneaker| %>
 							<div class="profile__business-item sales-cells" data-id="<%= sneaker.id %>">
