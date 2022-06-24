@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :sneakers do 
     resources :build, controller: 'sneakers/build' do
       collection do
+        get 'drafts'
         get 'following-step'
         get 'success'
         put 'upload-photos'

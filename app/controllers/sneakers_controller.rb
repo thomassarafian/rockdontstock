@@ -44,8 +44,13 @@ class SneakersController < ApplicationController
 	def create
 		# flash[:notice] = "En cours de ... Désolé, reviens un peu plus tard !"
 		# redirect_to root_path and return
-		@sneaker = Sneaker.create(user: current_user)
-		redirect_to sneaker_build_path(@sneaker.id, :sneaker_db)
+		@draft = current_user.sneakers.where.not(status: "active")[0]
+		if @draft && !params[:from_draft_page]
+			render "sneakers/build/drafts"
+		else
+			@sneaker = Sneaker.create(user: current_user)
+			redirect_to sneaker_build_path(@sneaker.id, :sneaker_db)
+		end
 	end
 
 	# def create

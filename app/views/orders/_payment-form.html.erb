@@ -10,6 +10,8 @@
     <div id="error-message">
       <!-- Display error message to your customers here -->
     </div>
+    <%= label_tag "Code promo" %>
+    <%= text_field_tag "Coupon", class: "form-control", placeholder: "CODE2022" %>
     <button class="purchase-form__validation__btn">Valider ma commande (<%= @intent.amount / 100.00 %>€)</button>
   </form>
 </div>
