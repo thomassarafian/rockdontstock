@@ -46,7 +46,11 @@
           <%= button_to "Commander", new_sneaker_order_path(@sneaker.id), method: :get, class: "sneaker-details__purchase" %>
         </div>
         <div>
-          <%= button_to ("#{@offer ? "Refaire" : "Faire"} une offre"), new_sneaker_offer_path(@sneaker.id), method: :get, remote: true, class: "sneaker-details__bid" %>
+          <% if user_signed_in? %>
+            <%= button_to ("#{@offer ? "Refaire" : "Faire"} une offre"), new_sneaker_offer_path(@sneaker.id), method: :get, remote: true, class: "sneaker-details__bid" %>
+          <% else %>
+            <%= button_to "Faire une offre", "/users/sign_in", method: :get, class: "sneaker-details__bid" %>
+          <% end %>
         </div>
       </div>
       <ul class="sneaker-details__legal-infos-list mb-0">

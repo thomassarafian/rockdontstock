@@ -127,6 +127,11 @@
           <div>Total</div>
           <div id="total-price"><%= (1.06 * @price_cents + 915) / 100.00 %> €</div>
         </div>
+        <!-- END-MOBILE -->
+        <div class="form-group" style="width: 250px">
+          <%= f.label "J'ai un code promo", class: "form-label" %>
+          <%= f.text_field :coupon, class: "form-control", placeholder: "CODE2022" %>
+        </div>
         <div class="purchase-form__get-payment mt-5 mt-lg-3">
           <%= f.submit "Procéder au paiement", class: "purchase-form__get-payment__btn" %>
           <div class="form-check">
