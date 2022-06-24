@@ -48,7 +48,7 @@ class PaymentsController < ApplicationController
   def create_payment_intent
     model = params['model'].constantize
     @record = model.find(params['id'])
-    amount = record.price_in_cents
+    amount = @record.price_in_cents
 
     check_coupon_validity if model == Authentication
 
@@ -61,7 +61,7 @@ class PaymentsController < ApplicationController
       metadata: {model: params['model']}
     )
 
-    record.update(payment_intent_id: payment_intent.id)
+    @record.update(payment_intent_id: payment_intent.id)
 
     render json: {clientSecret: payment_intent['client_secret']}
   end
@@ -72,7 +72,7 @@ class PaymentsController < ApplicationController
     return if !@record.coupon
 
     # TODO
-    if Stripe::Coupon.retrieve(@record.coupon)
+    if Stripe::PromotionCode.retrieve(@record.coupon)
       # apply discount
     else
       # price doesnt change

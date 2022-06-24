@@ -70,7 +70,7 @@ class OffersController < ApplicationController
         "modele_paire" => @sneaker.sneaker_db.name,
         "initial_amount" => @sneaker.price,
         "offer_amount" => @offer.amount,
-        "offer_id" => @offer.id
+        "sneaker_id" => @sneaker.id
       }
     }])
   end
@@ -98,7 +98,8 @@ class OffersController < ApplicationController
         "prenom_acheteur" => @buyer.first_name,
         "modele_paire" => @sneaker.sneaker_db.name,
         "initial_amount" => @sneaker.price,
-        "offer_amount" => @offer.amount
+        "offer_amount" => @offer.amount,
+        "sneaker_id" => @sneaker.id
       }
     }])
   end

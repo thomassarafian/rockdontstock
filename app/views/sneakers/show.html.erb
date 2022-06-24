@@ -31,7 +31,7 @@
           <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
         </div>
       </div>
-      <div class="sneaker-details__price"><%= @sneaker.price %>€</div>
+      <div class="sneaker-details__price"><%= @price %>€</div>
       <div>
         <div class="sneaker-details__box"><%= @sneaker.box ? "Livrée avec une #{@sneaker.box}." : "Livrée sans boîte." %><%= " #{@sneaker.extras}" if @sneaker.extras %></div>
         <div class="sneaker-details__legal-descr">L’authenticité et la conformité du modèle seront vérifiées par nos experts avant de t’être envoyée afin de t’assurer la meilleure experience possible.</div>
@@ -41,7 +41,7 @@
           <%= button_to "Commander", new_sneaker_order_path(@sneaker.id), method: :get, class: "sneaker-details__purchase" %>
         </div>
         <div>
-          <%= button_to "Faire une offre", new_sneaker_offer_path(@sneaker.id), method: :get, remote: true, class: "sneaker-details__bid" %>
+          <%= button_to ("#{@offer ? "Refaire" : "Faire"} une offre"), new_sneaker_offer_path(@sneaker.id), method: :get, remote: true, class: "sneaker-details__bid" %>
         </div>
       </div>
       <ul class="sneaker-details__legal-infos-list mb-0">
