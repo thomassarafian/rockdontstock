@@ -55,14 +55,14 @@
           <%= f.input :iban, label: "IBAN", placeholder: "FR1420041010050500013M02606", hint: "Pas d’inquiétude, nous avons seulement besoin de ton IBAN afin de vérifier ton profil et te transférer la somme de tes futures ventes." %>
           <div id="iban-error"></div>
           <div class="row g-2">
-            <div class="col-md-6">
+            <div class="col-lg-6">
               <%= f.input :password, label: "Mot de passe",
                           required: true,
                           hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                           input_html: { autocomplete: "new-password" } %>
             </div>
-            <div class="col-md-6">
-              <%= f.input :password_confirmation, label: "Confirmation du mot de passe",
+            <div class="col-lg-6">
+              <%= f.input :password_confirmation, label: "Confirmation",
                           required: true,
                           input_html: { autocomplete: "new-password" } %>
             </div>

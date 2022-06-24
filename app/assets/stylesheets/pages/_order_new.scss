@@ -129,6 +129,11 @@
       }
       &-price {
         @include para-2-bold;
+        &--inactive {
+          opacity: 0.25;
+          text-decoration: line-through;
+          margin-right: 0.5rem;
+        }
       }
     }
     &__order-infos {

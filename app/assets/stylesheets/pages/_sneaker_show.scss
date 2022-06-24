@@ -38,6 +38,11 @@
   @include para-1-bold;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  &--inactive {
+    opacity: 0.25;
+    text-decoration: line-through;
+    margin-right: 0.5rem;
+  }
 }
 .sneaker-details__box{
   color: #727272;

@@ -2,9 +2,12 @@ class OrdersController < ApplicationController
 
 	def new 
 		@sneaker = Sneaker.find(params[:sneaker_id])
-		if offer = current_user.search_accepted_offer_on(@sneaker)
-			@price = offer.amount
-			@price_cents = offer.amount_cents
+		@offer = current_user.search_accepted_offer_on(@sneaker)
+
+		if @offer
+			@price = @offer.amount
+			@price_cents = @offer.amount_cents
+			@initial_price = @sneaker.price
 		else
 			@price = @sneaker.price
 			@price_cents = @sneaker.price_cents

@@ -14,7 +14,10 @@
           <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
         </div>
         <div class="purchase-recap__card__sneaker-price">
-          <%= @price %> €
+          <span class="<%= "purchase-recap__card__sneaker-price--inactive" if @offer %>"><%= @initial_price %>€</span>
+          <% if @offer %>
+            <span><%= @price %>€</span>
+          <% end %>
         </div>
       </div>
     </div>
@@ -151,7 +154,10 @@
               <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
             </div>
             <div class="purchase-recap__card__sneaker-price">
-              <%= @price %> €
+              <span class="<%= "purchase-recap__card__sneaker-price--inactive" if @offer %>"><%= @initial_price %>€</span>
+              <% if @offer %>
+                <span><%= @price %>€</span>
+              <% end %>
             </div>
           </div>
         </div>

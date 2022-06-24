@@ -3,6 +3,8 @@ class OffersController < ApplicationController
   before_action :find_offer, only: [:accept, :refuse]
 
   def new
+    offer = current_user&.search_accepted_offer_on(@sneaker)
+    @offer_price = offer&.amount
   end
 
   def create

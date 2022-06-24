@@ -23,11 +23,10 @@ class SneakersController < ApplicationController
 
 	def show
 		@sneaker = Sneaker.where('state >= ?', 1).find(params[:id])
-		@price = if @offer = current_user.search_accepted_offer_on(@sneaker)
-			@offer.amount
-		else
-			@sneaker.price
-		end
+		offer = current_user&.search_accepted_offer_on(@sneaker)
+
+		@initial_price = @sneaker.price
+		@offer_price = offer&.amount
 
 		category = @sneaker.sneaker_db.category
 		size = @sneaker.size
