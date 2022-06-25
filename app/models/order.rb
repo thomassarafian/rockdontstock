@@ -15,6 +15,7 @@ class Order < ApplicationRecord
 
   belongs_to :user
   belongs_to :sneaker
+  belongs_to :coupon, optional: true
 
   monetize :total_price_cents
   monetize :shipping_fee_cents

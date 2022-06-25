@@ -23,20 +23,33 @@ class OrdersController < ApplicationController
 	
 	def create
 		sneaker = Sneaker.find(order_params[:sneaker_id])
+		coupon = Coupon.find_by(code: params[:order][:coupon])
 
+		# use price of accepted offer if there is one
 		if offer = current_user.search_accepted_offer_on(sneaker)
 			sneaker_price = offer.amount_cents
 		else
 			sneaker_price = sneaker.price_cents
 		end
-
+		
+		# shipping fees
 		shipping_fees = { relay: 630, colissimo: 915 }
 		shipping_fee = shipping_fees[order_params[:delivery].to_sym]
-		service_fee = sneaker_price * 0.06
-		total_price = sneaker_price + shipping_fee + service_fee
+		
+		# service fees
+		# will need a better validation system if there are more
+		service_fee = if coupon&.code == "FRAISOFFERTS2022"
+			0
+		else 
+			sneaker_price * 0.06
+		end
 
+		# total price
+		total_price = sneaker_price + shipping_fee + service_fee
+		
 		@order = Order.new(order_params.merge(
 			user: current_user,
+			coupon: coupon,
 			shipping_fee: Money.new(shipping_fee),
 			service_fee: Money.new(service_fee),
 			total_price: Money.new(total_price),

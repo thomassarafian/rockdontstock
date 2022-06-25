@@ -13,12 +13,14 @@
         <div class="purchase-recap__card__sneaker-options">
           <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
         </div>
-        <div class="purchase-recap__card__sneaker-price">
-          <span class="<%= "purchase-recap__card__sneaker-price--inactive" if @offer %>"><%= @initial_price %>€</span>
-          <% if @offer %>
+        <% if @offer %>
+          <div class="purchase-recap__card__sneaker-price">
+            <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @initial_price %>€</span>
             <span><%= @price %>€</span>
-          <% end %>
-        </div>
+          </div>
+        <% else %>
+          <div class="purchase-recap__card__sneaker-price"><%= @price %>€</div>
+        <% end %>
       </div>
     </div>
     <div id="order-forms" class="purchase-form__payment">
@@ -128,7 +130,7 @@
           <div id="total-price"><%= (1.06 * @price_cents + 915) / 100.00 %> €</div>
         </div>
         <!-- END-MOBILE -->
-        <div class="form-group" style="width: 250px">
+        <div class="from-group mb-3" style="width: 250px">
           <%= f.label "J'ai un code promo", class: "form-label" %>
           <%= f.text_field :coupon, class: "form-control", placeholder: "CODE2022" %>
         </div>
@@ -159,9 +161,13 @@
               <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
             </div>
             <div class="purchase-recap__card__sneaker-price">
-              <span class="<%= "purchase-recap__card__sneaker-price--inactive" if @offer %>"><%= @initial_price %>€</span>
               <% if @offer %>
-                <span><%= @price %>€</span>
+                <div class="purchase-recap__card__sneaker-price">
+                  <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @initial_price %>€</span>
+                  <span><%= @price %>€</span>
+                </div>
+              <% else %>
+                <div class="purchase-recap__card__sneaker-price"><%= @price %>€</div>
               <% end %>
             </div>
           </div>

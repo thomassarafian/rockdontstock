@@ -7,6 +7,9 @@
 .sneaker-drafts__btns {
   display: flex;
   justify-content: center;
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
 }
 .sneaker-drafts__btn {
   &--left {
@@ -20,6 +23,9 @@
   margin: 0 3rem;
   border-right: 1px solid $black;
   height: 50px;
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
 }
 
 .sneaker-form__previous-btn {
