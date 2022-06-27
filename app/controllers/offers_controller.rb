@@ -20,7 +20,7 @@ class OffersController < ApplicationController
     if offer.save
 
       # inform seller
-      Mailjet::Send.create(messages: [{
+      var = Mailjet::Send.create(messages: [{
         'From'=> {
           'Email'=> "elliot@rockdontstock.com",
           'Name'=> "Rock Don't Stock"
@@ -38,21 +38,25 @@ class OffersController < ApplicationController
           "prenom_vendeur" => seller.first_name,
           "prenom_acheteur" => buyer.first_name,
           "modele_paire" => @sneaker.sneaker_db.name,
-          "initial_amount" => @sneaker.price,
-          "offer_amount" => offer.amount,
-          "offer_id" => offer.id
+          "initial_amount" => @sneaker.price.to_s,
+          "offer_amount" => offer.amount.to_s,
+          "offer_id" => offer.id.to_s
         }
       }])
+      p var.attributes['Messages']
     else
     
     end
+    flash[:notice] = "L'offre a bien été envoyée au vendeur !"
+    redirect_to @sneaker
   end
 
+  # TODO add token in mails
   def accept
-    @offer.update(status: "accepted")
+    @offer.update!(status: "accepted")
 
     # inform buyer
-    Mailjet::Send.create(messages: [{
+    var = Mailjet::Send.create(messages: [{
       'From'=> {
         'Email'=> "elliot@rockdontstock.com",
         'Name'=> "Rock Don't Stock"
@@ -70,18 +74,21 @@ class OffersController < ApplicationController
         "prenom_vendeur" => @seller.first_name,
         "prenom_acheteur" => @buyer.first_name,
         "modele_paire" => @sneaker.sneaker_db.name,
-        "initial_amount" => @sneaker.price,
-        "offer_amount" => @offer.amount,
-        "sneaker_id" => @sneaker.id
+        "initial_amount" => @sneaker.price.to_s,
+        "offer_amount" => @offer.amount.to_s,
+        "sneaker_id" => @sneaker.id.to_s
       }
     }])
+    p var.attributes['Messages']
+    flash[:notice] = "L'offre a bien été acceptée"
+    redirect_to @sneaker
   end
 
   def refuse
     @offer.update(status: "refused")
 
     # inform buyer
-    Mailjet::Send.create(messages: [{
+    var = Mailjet::Send.create(messages: [{
       'From'=> {
         'Email'=> "elliot@rockdontstock.com",
         'Name'=> "Rock Don't Stock"
@@ -99,17 +106,20 @@ class OffersController < ApplicationController
         "prenom_vendeur" => @seller.first_name,
         "prenom_acheteur" => @buyer.first_name,
         "modele_paire" => @sneaker.sneaker_db.name,
-        "initial_amount" => @sneaker.price,
-        "offer_amount" => @offer.amount,
-        "sneaker_id" => @sneaker.id
+        "initial_amount" => @sneaker.price.to_s,
+        "offer_amount" => @offer.amount.to_s,
+        "sneaker_id" => @sneaker.id.to_s
       }
     }])
+    p var.attributes['Messages']
+    flash[:notice] = "L'offre a bien été refusée"
+    redirect_to @sneaker
   end
 
   private
 
   def offer_params
-    params.require(:offer).permit(:amount)
+    params.permit(:amount)
   end
 
   def find_sneaker

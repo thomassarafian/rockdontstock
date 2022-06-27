@@ -9,6 +9,7 @@
   justify-content: center;
   @include media-breakpoint-down(md) {
     flex-direction: column;
+    gap: 1.5rem;
   }
 }
 .sneaker-drafts__btn {

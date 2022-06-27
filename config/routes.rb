@@ -21,8 +21,8 @@ Rails.application.routes.draw do
     resources :orders, shallow: true, only: [:new, :show, :create]
     resources :offers, shallow: true, only: [:new, :create] do
       member do
-        post 'accept'
-        post 'refuse'
+        get 'accept'
+        get 'refuse'
       end
     end
   end
