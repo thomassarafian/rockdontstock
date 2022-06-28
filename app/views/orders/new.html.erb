@@ -24,7 +24,7 @@
       </div>
     </div>
     <div id="order-forms" class="purchase-form__payment">
-      <%= form_for :order, url: sneaker_orders_path(@sneaker), html: { class: "purchase-form" }, remote: true do |f| %>
+      <%= form_for :order, url: sneaker_orders_path(@sneaker), html: { class: "purchase-form" } do |f| %>
         <%= f.hidden_field :sneaker_id, value: @sneaker.id %>
         <div class="purchase-form__infos">
           <div class="purchase-form__infos__title">

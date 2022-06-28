@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
 		if @offer
 			@price = @offer.amount
 			@price_cents = @offer.amount_cents
-			@initial_price = @sneaker.price
 		else
 			@price = @sneaker.price
 			@price_cents = @sneaker.price_cents
@@ -22,41 +21,42 @@ class OrdersController < ApplicationController
 	end
 	
 	def create
-		sneaker = Sneaker.find(order_params[:sneaker_id])
+		@sneaker = Sneaker.find(order_params[:sneaker_id])
+		@offer = current_user.search_accepted_offer_on(@sneaker)
 		coupon = Coupon.find_by(code: params[:order][:coupon])
 
 		# use price of accepted offer if there is one
-		if offer = current_user.search_accepted_offer_on(sneaker)
-			sneaker_price = offer.amount_cents
+		if @offer
+			@price = @offer.amount
+			@price_cents = @offer.amount_cents
+			@initial_price = @sneaker.price
 		else
-			sneaker_price = sneaker.price_cents
+			@price = @sneaker.price
+			@price_cents = @sneaker.price_cents
 		end
 		
 		# shipping fees
 		shipping_fees = { relay: 630, colissimo: 915 }
-		shipping_fee = shipping_fees[order_params[:delivery].to_sym]
+		@shipping_fee_cents = shipping_fees[order_params[:delivery].to_sym]
 		
 		# service fees
 		# will need a better validation system if there are more
-		service_fee = if coupon&.code == "FRAISOFFERTS2022"
-			0
-		else 
-			sneaker_price * 0.06
-		end
+		@service_fee_cents = @price_cents * 0.06
+		@discount_cents = coupon&.code == "FRAISOFFERTS2022" ? @service_fee_cents : 0.00
 
 		# total price
-		total_price = sneaker_price + shipping_fee + service_fee
+		@total_price_cents = @price_cents + @shipping_fee_cents + @service_fee_cents - @discount_cents
 		
 		@order = Order.new(order_params.merge(
 			user: current_user,
 			coupon: coupon,
-			shipping_fee: Money.new(shipping_fee),
-			service_fee: Money.new(service_fee),
-			total_price: Money.new(total_price),
+			shipping_fee: Money.new(@shipping_fee_cents),
+			service_fee: Money.new(@service_fee_cents),
+			total_price: Money.new(@total_price_cents),
 		))
 
 		@intent = Stripe::PaymentIntent.create(
-			amount: total_price.to_i,
+			amount: @total_price_cents.to_i,
 			currency: 'eur',
 			automatic_payment_methods: {
 				enabled: true,
@@ -67,10 +67,7 @@ class OrdersController < ApplicationController
 		@order.payment_intent_id = @intent.id
 
 		if @order.save
-			respond_to do |format|
-				format.js
-				format.html
-			end
+			render :payment
 		else
 			redirect_to request.referer, alert: @order.errors.full_messages.join(', ')
 		end
