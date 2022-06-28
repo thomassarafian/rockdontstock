@@ -16,10 +16,10 @@
         <% if @offer %>
           <div class="purchase-recap__card__sneaker-price">
             <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @sneaker.price %>€</span>
-            <span><%= @price %>€</span>
+            <span><%= @offer.amount %>€</span>
           </div>
         <% else %>
-          <div class="purchase-recap__card__sneaker-price"><%= @price %>€</div>
+          <div class="purchase-recap__card__sneaker-price"><%= @sneaker.price %>€</div>
         <% end %>
       </div>
     </div>
@@ -118,7 +118,7 @@
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
-            <div><%= 0.06 * @price %> €</div>
+            <div><%= Money.new @service_fee_cents %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Code promo</div>
@@ -127,7 +127,7 @@
         </div>
         <div class="purchase-recap__card__total is-mobile">
           <div>Total</div>
-          <div id="total-price"><%= (1.06 * @price_cents + 915) / 100.00 %> €</div>
+          <div id="total-price"><%= Money.new @total_price_colissimo_cents %> €</div>
         </div>
         <!-- END-MOBILE -->
         <div class="from-group mb-3" style="width: 250px">
@@ -164,10 +164,10 @@
               <% if @offer %>
                 <div class="purchase-recap__card__sneaker-price">
                   <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @sneaker.price %>€</span>
-                  <span><%= @price %>€</span>
+                  <span><%= @offer.amount %>€</span>
                 </div>
               <% else %>
-                <div class="purchase-recap__card__sneaker-price"><%= @price %>€</div>
+                <div class="purchase-recap__card__sneaker-price"><%= @sneaker.price %>€</div>
               <% end %>
             </div>
           </div>
@@ -179,7 +179,7 @@
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
-            <div><%= 0.06 * @price %> €</div>
+            <div><%= Money.new @service_fee_cents %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Code promo</div>
@@ -188,7 +188,7 @@
         </div>
         <div class="purchase-recap__card__total">
           <div>Total</div>
-          <div id="total-price"><%= (1.06 * @price_cents + 915)  / 100.00 %> €</div>
+          <div id="total-price"><%= Money.new @total_price_colissimo_cents %> €</div>
         </div>
       </div>
     </div>
@@ -196,6 +196,7 @@
 </div>
 
 <script>
+// TODO passer en ajax
 document.addEventListener('DOMContentLoaded', function(event) {
 
   const radioRelay = document.getElementById('order_delivery_relay');
@@ -214,14 +215,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
         colissimoBlock.style.display = "none"
         colissimoBlock.querySelectorAll('input').forEach(input => input.required = false)
         shippingFee.forEach(el => el.innerText = "6.30 €")
-        totalPrice.forEach(el => el.innerText = "<%= (1.06 * @price_cents + 630) / 100.00 %> €")
+        totalPrice.forEach(el => el.innerText = "<%= Money.new @total_price_relay_cents %> €")
       }
       if (this === radioColissimo) {
         relayBlock.style.display = "none"
         colissimoBlock.style.display = "block"
         colissimoBlock.querySelectorAll('input').forEach(input => input.required = true)
         shippingFee.forEach(el => el.innerText = "9.15 €")
-        totalPrice.forEach(el => el.innerText = "<%= (1.06 * @price_cents + 915) / 100.00 %> €")
+        totalPrice.forEach(el => el.innerText = "<%= Money.new @total_price_colissimo_cents %> €")
       }
     });
   })

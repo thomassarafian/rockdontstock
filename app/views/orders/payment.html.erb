@@ -16,10 +16,10 @@
         <% if @offer %>
           <div class="purchase-recap__card__sneaker-price">
             <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @sneaker.price %>€</span>
-            <span><%= Money.new @price_cents %>€</span>
+            <span><%= @offer.amount %>€</span>
           </div>
         <% else %>
-          <div class="purchase-recap__card__sneaker-price"><%= Money.new @price_cents %>€</div>
+          <div class="purchase-recap__card__sneaker-price"><%= @sneaker.price %>€</div>
         <% end %>
       </div>
     </div>
@@ -59,10 +59,10 @@
               <% if @offer %>
                 <div class="purchase-recap__card__sneaker-price">
                   <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @sneaker.price %>€</span>
-                  <span><%= Money.new @price_cents %>€</span>
+                  <span><%= @offer.amount %>€</span>
                 </div>
               <% else %>
-                <div class="purchase-recap__card__sneaker-price"><%= Money.new @price_cents %>€</div>
+                <div class="purchase-recap__card__sneaker-price"><%= @sneaker.price %>€</div>
               <% end %>
             </div>
           </div>

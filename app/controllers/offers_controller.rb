@@ -25,12 +25,10 @@ class OffersController < ApplicationController
           'Email'=> "elliot@rockdontstock.com",
           'Name'=> "Rock Don't Stock"
         },
-        'To'=> [
-          {
-            'Email'=> seller.email,
-            'Name'=> seller.first_name
-          }
-        ],
+        'To'=> [{
+          'Email'=> seller.email,
+          'Name'=> seller.first_name
+        }],
         'TemplateID'=> 4019021,
         'TemplateLanguage'=> true,
         'Subject'=> "Tu as reçu une nouvelle offre de prix",

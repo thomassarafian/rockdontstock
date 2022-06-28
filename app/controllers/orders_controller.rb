@@ -3,14 +3,11 @@ class OrdersController < ApplicationController
 	def new 
 		@sneaker = Sneaker.find(params[:sneaker_id])
 		@offer = current_user.search_accepted_offer_on(@sneaker)
-
-		if @offer
-			@price = @offer.amount
-			@price_cents = @offer.amount_cents
-		else
-			@price = @sneaker.price
-			@price_cents = @sneaker.price_cents
-		end
+		# use price of accepted offer if there is one
+		@price_cents = @offer&.amount_cents || @sneaker.price_cents
+		@service_fee_cents = @price_cents * 0.06
+		@total_price_colissimo_cents = @price_cents + @service_fee_cents + 915
+		@total_price_relay_cents = @price_cents + @service_fee_cents + 630
 	end
 
 	def show
@@ -26,14 +23,7 @@ class OrdersController < ApplicationController
 		coupon = Coupon.find_by(code: params[:order][:coupon])
 
 		# use price of accepted offer if there is one
-		if @offer
-			@price = @offer.amount
-			@price_cents = @offer.amount_cents
-			@initial_price = @sneaker.price
-		else
-			@price = @sneaker.price
-			@price_cents = @sneaker.price_cents
-		end
+		@price_cents = @offer&.amount_cents || @sneaker.price_cents
 		
 		# shipping fees
 		shipping_fees = { relay: 630, colissimo: 915 }

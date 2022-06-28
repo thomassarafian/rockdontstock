@@ -47,7 +47,7 @@ class User < ApplicationRecord
   end
 
   def search_accepted_offer_on(sneaker)
-    self.offers.find_by(sneaker: sneaker, status: "accepted")
+    self.offers.where(sneaker: sneaker, status: "accepted").last
   end
 
   def phone_valid?
