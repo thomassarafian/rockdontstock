@@ -15,7 +15,7 @@
         </div>
         <% if @offer %>
           <div class="purchase-recap__card__sneaker-price">
-            <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @initial_price %>€</span>
+            <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @sneaker.price %>€</span>
             <span><%= @price %>€</span>
           </div>
         <% else %>
@@ -163,7 +163,7 @@
             <div class="purchase-recap__card__sneaker-price">
               <% if @offer %>
                 <div class="purchase-recap__card__sneaker-price">
-                  <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @initial_price %>€</span>
+                  <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @sneaker.price %>€</span>
                   <span><%= @price %>€</span>
                 </div>
               <% else %>

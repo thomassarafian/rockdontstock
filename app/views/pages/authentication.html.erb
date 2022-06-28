@@ -17,10 +17,10 @@
     </div>
     <%= image_tag "images/mobile-auth-header.png" %>
     <div class="auth-hero__caption__buttons">
-      <button class="auth-hero__caption__primary-btn" data-bs-toggle="modal" data-bs-target="#modal-auth">
+      <a href="#auth-products" class="auth-hero__caption__primary-btn">
         Authentifier ma paire <i class="fas fa-arrow-right"></i>
-      </button>
-      <%= button_to "En savoir plus" , sneakers_path, class: "auth-hero__caption__secondary-btn" %>
+      </a>
+      <%= link_to "En savoir plus", "#auth-service", class: "auth-hero__caption__secondary-btn" %>
     </div>
   </div>
   <section class="auth-infos">
@@ -98,7 +98,7 @@
       </div>
     </div>
   </section>
-  <section class="auth-service">
+  <section id="auth-service" class="auth-service">
     <div class="auth-service__subtitle">Plus qu'une simple authentification</div>
     <h2>Pourquoi utiliser ARCHIMÈDE</h2>
     <div class="auth-service-block">
@@ -168,7 +168,7 @@
       </div>
     </div>
   </section>
-  <section class="auth-products">
+  <section id="auth-products" class="auth-products">
     <h2>Nos authentifications</h2>
     <div class="auth-products__subtitle">Nous authentifions n'importe quelle paire de sneaker en quelques
       heures.<br />Air Jordan, Yeezy et toutes les plus grandes marques.</div>
