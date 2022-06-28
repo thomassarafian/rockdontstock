@@ -119,11 +119,11 @@ class OffersController < ApplicationController
   private
 
   def offer_params
-    params.permit(:amount)
+    params.permit(:amount, :sneaker_id)
   end
 
   def find_sneaker
-    @sneaker = Sneaker.find(params[:sneaker_id])
+    @sneaker = Sneaker.find(offer_params[:sneaker_id])
   end
 
   def find_offer
