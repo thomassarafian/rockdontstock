@@ -70,17 +70,13 @@ section {
 }
 .auth-hero__caption__buttons {
   display: flex;
-  gap: 1rem;
-  @include media-breakpoint-down(md) {
-    flex-direction: column;
-  }
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
 }
 .auth-hero__caption__primary-btn {
-  @include media-breakpoint-up(lg) {
-    @include primary-button;
-  }
+  @include cta-button;
   @include media-breakpoint-down(lg) {
-    @include cta-button;
     width: 100%;
   }
 }
@@ -88,8 +84,8 @@ section {
   @include secondary-button;
   @include media-breakpoint-down(lg) {
     width: 100%;
-    text-align: center;
   }
+  font-size: 1rem;
 }
 .auth-hero__mobile-header {
   object-fit: contain;

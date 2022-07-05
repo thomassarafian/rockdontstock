@@ -2,13 +2,22 @@
 <div class="auth-page container">
   <!-- DESKTOP -->
   <div class="auth-hero">
-    <%= image_tag "images/banner-fake.png" %>
+    <%= image_tag "images/banner-fake.png", style: "align-self: flex-start" %>
     <div class="auth-hero__title">
       <h1>Aujourd'hui, la sneaker</h1>
       <h1>est le produit le plus</h1>
       <h1><span class="auth-hero__title-variant">contrefait</span> au monde</h1>
+      <div class="text-center" style="margin: 2rem 0">D'ailleurs, 80 % des paires que tu trouveras sur les <br/> sites de revente entre particuliers sont fakes.</div>
+      <div class="auth-hero__caption__buttons">
+        <a href="#auth-products" class="auth-hero__caption__primary-btn">
+          Faire authentifier ma paire 
+        </a>
+        <%= link_to "#auth-guides", class: "auth-hero__caption__secondary-btn" do %>
+          Accéder à nos guides génériques <i class="fas fa-arrow-right"></i>
+        <% end %>
+      </div>
     </div>
-    <%= image_tag "images/banner-legit.png" %>
+    <%= image_tag "images/banner-legit.png", style: "align-self: flex-end" %>
   </div>
   <!-- MOBILE -->
   <div class="auth-hero-mobile">
@@ -18,9 +27,11 @@
     <%= image_tag "images/mobile-auth-header.png" %>
     <div class="auth-hero__caption__buttons">
       <a href="#auth-products" class="auth-hero__caption__primary-btn">
-        Authentifier ma paire <i class="fas fa-arrow-right"></i>
+        Faire authentifier ma paire
       </a>
-      <%= link_to "En savoir plus", "#auth-service", class: "auth-hero__caption__secondary-btn" %>
+      <%= link_to "#auth-guides", class: "auth-hero__caption__secondary-btn" do %>
+        Accéder à nos guides génériques <i class="fas fa-arrow-right"></i>
+      <% end %>
     </div>
   </div>
   <section class="auth-infos">
@@ -74,7 +85,7 @@
       </div>
     </div>
   </section>
-  <section class="auth-guides">
+  <section id="auth-guides" class="auth-guides">
     <div class="auth-guides__subtitle">Découvrez</div>
     <h2>Nos guides à la demande</h2>
     <div class="auth-guides-block">
