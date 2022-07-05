@@ -88,6 +88,7 @@ section {
   @include secondary-button;
   @include media-breakpoint-down(lg) {
     width: 100%;
+    text-align: center;
   }
 }
 .auth-hero__mobile-header {
