@@ -16,23 +16,19 @@ class GuideRequestsController < ApplicationController
     # sib_list_id = guide.fetch_sendinblue["id"]
 
     @guide_req = GuideRequest.new(guide_req_params)
-
-    respond_to do |format|
-      if @guide_req.save
+    
+    if @guide_req.save
+      respond_to do |format|
         format.js
         format.html
-      else
+      end
+    else
+      respond_to do |format|
         @message = @guide_req.errors.full_messages.join(", ")
         format.js { render status: 422 }
         format.html { render :new, status: 422, notice: @message }
       end
     end
-  
-    # if Subscription.new(temp_user).to_lc_guide(sib_list_id)
-    #   redirect_to request.referer, notice: "Félicitations ! Tu vas bientôt recevoir ton guide par email"
-    # else
-    #   redirect_to request.referer, notice: "Tu as déjà reçu ton guide !"
-    # end
   end
 
   def success

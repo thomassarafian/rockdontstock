@@ -50,8 +50,6 @@ class PaymentsController < ApplicationController
     @record = model.find(params['id'])
     amount = @record.price_in_cents
 
-    check_coupon_validity if model == Authentication
-
     payment_intent = Stripe::PaymentIntent.create(
       amount: amount,
       currency: 'eur',
@@ -65,17 +63,5 @@ class PaymentsController < ApplicationController
 
     render json: {clientSecret: payment_intent['client_secret']}
   end
-
-  private
-
-  def check_coupon_validity
-    return if !@record.coupon
-
-    # TODO
-    if Stripe::PromotionCode.retrieve(@record.coupon)
-      # apply discount
-    else
-      # price doesnt change
-    end
-  end
+  
 end
