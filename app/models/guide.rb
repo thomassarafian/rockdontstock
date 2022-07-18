@@ -6,6 +6,8 @@ class Guide < ApplicationRecord
 
   attribute :newsletter, :boolean
 
+  validates :name, :price_in_cents, presence: true
+
   def price
     '%.2f' % (price_in_cents / 100.00)
   end
@@ -27,8 +29,6 @@ class Guide < ApplicationRecord
     sib = SibApiV3Sdk::ContactsApi.new
     new_list = SibApiV3Sdk::CreateList.new({name: self.name, folderId: 14}.as_json)
     response = sib.create_list(new_list)
-
-    # store sendinblue_id for easy access
     self.update(sendinblue_list_id: response.as_json["id"])
   end
 

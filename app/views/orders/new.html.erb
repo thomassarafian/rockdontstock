@@ -1,7 +1,7 @@
 <title>Achat de <%= @sneaker.sneaker_db.name %> - Rock Don't Stock</title>
 <div class="container">
   <%= link_to :back, class: "back-button" do %>
-    <h2><i class="fas fa-arrow-left ms-0"></i> Commander</h2>
+    <div><i class="fas fa-arrow-left ms-0"></i> Commander</div>
   <% end %>
   <div class="purchase">
     <div class="purchase-recap__card__sneaker is-mobile">
@@ -13,13 +13,18 @@
         <div class="purchase-recap__card__sneaker-options">
           <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
         </div>
-        <div class="purchase-recap__card__sneaker-price">
-          <%= @sneaker.price %> €
-        </div>
+        <% if @offer %>
+          <div class="purchase-recap__card__sneaker-price">
+            <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @sneaker.price %>€</span>
+            <span><%= @offer.amount %>€</span>
+          </div>
+        <% else %>
+          <div class="purchase-recap__card__sneaker-price"><%= @sneaker.price %>€</div>
+        <% end %>
       </div>
     </div>
     <div id="order-forms" class="purchase-form__payment">
-      <%= form_for :order, url: sneaker_orders_path(@sneaker), html: { class: "purchase-form" }, remote: true do |f| %>
+      <%= form_for :order, url: sneaker_orders_path(@sneaker), html: { class: "purchase-form" } do |f| %>
         <%= f.hidden_field :sneaker_id, value: @sneaker.id %>
         <div class="purchase-form__infos">
           <div class="purchase-form__infos__title">
@@ -113,7 +118,7 @@
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
-            <div><%= 0.06 * @sneaker.price %> €</div>
+            <div><%= Money.new @service_fee_cents %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Code promo</div>
@@ -122,7 +127,12 @@
         </div>
         <div class="purchase-recap__card__total is-mobile">
           <div>Total</div>
-          <div id="total-price"><%= (1.06 * @sneaker.price_cents + 915) / 100.00 %> €</div>
+          <div id="total-price"><%= Money.new @total_price_colissimo_cents %> €</div>
+        </div>
+        <!-- END-MOBILE -->
+        <div class="from-group mb-3" style="width: 250px">
+          <%= f.label "J'ai un code promo", class: "form-label" %>
+          <%= f.text_field :coupon, class: "form-control", placeholder: "CODE2022" %>
         </div>
         <div class="purchase-form__get-payment mt-5 mt-lg-3">
           <%= f.submit "Procéder au paiement", class: "purchase-form__get-payment__btn" %>
@@ -151,7 +161,14 @@
               <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
             </div>
             <div class="purchase-recap__card__sneaker-price">
-              <%= @sneaker.price %> €
+              <% if @offer %>
+                <div class="purchase-recap__card__sneaker-price">
+                  <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @sneaker.price %>€</span>
+                  <span><%= @offer.amount %>€</span>
+                </div>
+              <% else %>
+                <div class="purchase-recap__card__sneaker-price"><%= @sneaker.price %>€</div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -162,7 +179,7 @@
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Authentification Premium</div>
-            <div><%= 0.06 * @sneaker.price %> €</div>
+            <div><%= Money.new @service_fee_cents %> €</div>
           </div>
           <div class="purchase-recap__card__order-infos__item">
             <div>Code promo</div>
@@ -171,7 +188,7 @@
         </div>
         <div class="purchase-recap__card__total">
           <div>Total</div>
-          <div id="total-price"><%= (1.06 * @sneaker.price_cents + 915) / 100.00 %> €</div>
+          <div id="total-price"><%= Money.new @total_price_colissimo_cents %> €</div>
         </div>
       </div>
     </div>
@@ -179,6 +196,7 @@
 </div>
 
 <script>
+// TODO passer en ajax
 document.addEventListener('DOMContentLoaded', function(event) {
 
   const radioRelay = document.getElementById('order_delivery_relay');
@@ -197,14 +215,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
         colissimoBlock.style.display = "none"
         colissimoBlock.querySelectorAll('input').forEach(input => input.required = false)
         shippingFee.forEach(el => el.innerText = "6.30 €")
-        totalPrice.forEach(el => el.innerText = "<%= (@sneaker.price_cents * 1.06 + 630) / 100.00 %> €")
+        totalPrice.forEach(el => el.innerText = "<%= Money.new @total_price_relay_cents %> €")
       }
       if (this === radioColissimo) {
         relayBlock.style.display = "none"
         colissimoBlock.style.display = "block"
         colissimoBlock.querySelectorAll('input').forEach(input => input.required = true)
         shippingFee.forEach(el => el.innerText = "9.15 €")
-        totalPrice.forEach(el => el.innerText = "<%= (@sneaker.price_cents * 1.06 + 915) / 100.00 %> €")
+        totalPrice.forEach(el => el.innerText = "<%= Money.new @total_price_colissimo_cents %> €")
       }
     });
   })

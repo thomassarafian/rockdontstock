@@ -47,8 +47,8 @@ class PaymentsController < ApplicationController
 
   def create_payment_intent
     model = params['model'].constantize
-    record = model.find(params['id'])
-    amount = record.price_in_cents
+    @record = model.find(params['id'])
+    amount = @record.price_in_cents
 
     payment_intent = Stripe::PaymentIntent.create(
       amount: amount,
@@ -59,8 +59,9 @@ class PaymentsController < ApplicationController
       metadata: {model: params['model']}
     )
 
-    record.update(payment_intent_id: payment_intent.id)
+    @record.update(payment_intent_id: payment_intent.id)
 
     render json: {clientSecret: payment_intent['client_secret']}
   end
+  
 end

@@ -1,3 +1,34 @@
+.sneaker-drafts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+.sneaker-drafts__btns {
+  display: flex;
+  justify-content: center;
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+.sneaker-drafts__btn {
+  &--left {
+    @include cta-button;
+  }
+  &--right {
+    @include primary-button;
+  }
+}
+.sneaker-drafts__divider {
+  margin: 0 3rem;
+  border-right: 1px solid $black;
+  height: 50px;
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+}
+
 .sneaker-form__previous-btn {
   @include secondary-button;
   @include media-breakpoint-down(md) {

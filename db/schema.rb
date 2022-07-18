@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_03_112514) do
+ActiveRecord::Schema.define(version: 2022_06_25_102555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,14 @@ ActiveRecord::Schema.define(version: 2022_06_03_112514) do
     t.index ["product_id"], name: "index_authentications_on_product_id"
   end
 
+  create_table "coupons", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -105,6 +113,17 @@ ActiveRecord::Schema.define(version: 2022_06_03_112514) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+  create_table "offers", force: :cascade do |t|
+    t.integer "amount_cents"
+    t.integer "status"
+    t.bigint "user_id"
+    t.bigint "sneaker_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sneaker_id"], name: "index_offers_on_sneaker_id"
+    t.index ["user_id"], name: "index_offers_on_user_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "state"
     t.string "sneaker_name"
@@ -129,6 +148,8 @@ ActiveRecord::Schema.define(version: 2022_06_03_112514) do
     t.integer "service_fee_cents", default: 0, null: false
     t.integer "total_price_cents", default: 0, null: false
     t.string "relay_address"
+    t.bigint "coupon_id"
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["sneaker_id"], name: "index_orders_on_sneaker_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -226,6 +247,7 @@ ActiveRecord::Schema.define(version: 2022_06_03_112514) do
     t.string "iban"
     t.json "picker_data"
     t.integer "age"
+    t.string "instagram"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["stripe_account_id"], name: "index_users_on_stripe_account_id", unique: true
@@ -236,6 +258,7 @@ ActiveRecord::Schema.define(version: 2022_06_03_112514) do
   add_foreign_key "authentications", "products"
   add_foreign_key "items", "orders"
   add_foreign_key "items", "users"
+  add_foreign_key "orders", "coupons"
   add_foreign_key "orders", "sneakers"
   add_foreign_key "orders", "users"
   add_foreign_key "sneakers", "sneaker_dbs"

@@ -70,17 +70,13 @@ section {
 }
 .auth-hero__caption__buttons {
   display: flex;
-  gap: 1rem;
-  @include media-breakpoint-down(md) {
-    flex-direction: column;
-  }
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
 }
 .auth-hero__caption__primary-btn {
-  @include media-breakpoint-up(lg) {
-    @include primary-button;
-  }
+  @include cta-button;
   @include media-breakpoint-down(lg) {
-    @include cta-button;
     width: 100%;
   }
 }
@@ -89,6 +85,7 @@ section {
   @include media-breakpoint-down(lg) {
     width: 100%;
   }
+  font-size: 1rem;
 }
 .auth-hero__mobile-header {
   object-fit: contain;
@@ -397,10 +394,17 @@ section {
     flex-direction: column;
     align-items: center;
   }
+  &.modal-offer {
+    align-items: center;
+  }
 }
 .modal__product-name {
   @include para-1-bold;
   text-align: center;
+}
+.modal__product-options {
+  color: #727272;
+  font-size: 0.8rem;
 }
 .modal__infos {
   display: flex;
@@ -412,6 +416,8 @@ section {
 }
 .modal__img {
   width: 80%;
+  height: 200px;
+  object-fit: contain;
   margin-bottom: 1rem;
 }
 .modal__h2 {

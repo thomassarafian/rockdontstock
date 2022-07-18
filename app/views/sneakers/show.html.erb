@@ -31,12 +31,28 @@
           <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
         </div>
       </div>
-      <div class="sneaker-details__price"><%= @sneaker.price %>€</div>
+      <div class="sneaker-details__price">
+        <span class="<%= "sneaker-details__price--inactive" if @offer_price %>"><%= @initial_price %>€</span>
+        <% if @offer_price %>
+          <span><%= @offer_price %>€</span>
+        <% end %>
+      </div>
       <div>
         <div class="sneaker-details__box"><%= @sneaker.box ? "Livrée avec une #{@sneaker.box}." : "Livrée sans boîte." %><%= " #{@sneaker.extras}" if @sneaker.extras %></div>
         <div class="sneaker-details__legal-descr">L’authenticité et la conformité du modèle seront vérifiées par nos experts avant de t’être envoyée afin de t’assurer la meilleure experience possible.</div>
       </div>
-      <%= button_to "Commander", new_sneaker_order_path(@sneaker.id), method: :get, class: "sneaker-details__purchase" %>
+      <div class="sneaker-details__buttons">
+        <div>
+          <%= button_to "Commander", new_sneaker_order_path(@sneaker.id), method: :get, class: "sneaker-details__purchase" %>
+        </div>
+        <div>
+          <% if user_signed_in? %>
+            <%= button_to ("#{@offer ? "Refaire" : "Faire"} une offre"), new_sneaker_offer_path(@sneaker.id), method: :get, remote: true, class: "sneaker-details__bid" %>
+          <% else %>
+            <%= button_to "Faire une offre", "/users/sign_in", method: :get, class: "sneaker-details__bid" %>
+          <% end %>
+        </div>
+      </div>
       <ul class="sneaker-details__legal-infos-list mb-0">
         <li><%= image_tag("images/icon_calendar.svg") %> Expédition garantie</li>
         <li><%= image_tag("images/icon_truck.svg") %> Livraison à partir de 5€</li>
