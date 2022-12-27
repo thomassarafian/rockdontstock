@@ -6,8 +6,6 @@ function uploadIds() {
 
   function handleFormTest(event) {
     console.log('handleFormTest() -> event!!');
-    const publishableKey = 'pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA';
-    const stripe = Stripe('pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA');
     event.preventDefault();
     
     var dataFront = new FormData();

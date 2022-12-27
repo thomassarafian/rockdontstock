@@ -1,7 +1,6 @@
 function createStripeTokenEditUser() {
   const editUserForm = document.querySelector('#edit_user_form');
   if (editUserForm) {
-    const stripe = Stripe('pk_live_51IcAgiE0gVjPTo06ziMfiQyCjUBf55UxtqKRguncXYvXEMsyv2q4e1IHus9q1ZWhhfWfOP0uoiMNzMEZJDtOuGmS00ZDsAYrqA');
     document.querySelector('.edit-user-btn').addEventListener('click', (event) => {
       event.preventDefault();
       // let user_email = document.querySelector('#user_email');
