@@ -2,7 +2,7 @@
 
 <div class="container">
   <%= link_to :back, class: "back-button" do %>
-    <h3><i class="fas fa-arrow-left ms-0"></i> Retour</h3>
+    <div><i class="fas fa-arrow-left ms-0"></i> Retour</div>
   <% end %>
   <div class="profile">
     <h2 class="profile__title">Mon compte</h2>
@@ -48,6 +48,7 @@
 							</div>
 						<% end %>
 					</div>
+					<%# TODO voir la différence entre sneakers en cours et sneakers vendues + rajouter statut %>
 					<div id="sales-carousel" class="items-carousel">
 						<% current_user.sneakers.each do |sneaker| %>
 							<div class="profile__business-item sales-cells" data-id="<%= sneaker.id %>">

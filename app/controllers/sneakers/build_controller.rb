@@ -15,7 +15,7 @@ class Sneakers::BuildController < ApplicationController
     return redirect_to request.referer || root_path if @sneaker.active?
     render_wizard @sneaker if !@sneaker.last_completed_step
 
-    last_step = wizard_steps.index(@sneaker.last_completed_step.to_sym)
+    last_step = wizard_steps.index(@sneaker.last_completed_step.to_sym) || 0
     following_step = wizard_steps[last_step + 1]
     jump_to(following_step)
     render_wizard @sneaker

@@ -25,7 +25,7 @@
 .sneaker-details{
   display: flex;
   flex-direction: column;
-  min-width: 50%;
+  width: 100%;
 }
 .sneaker-details__name {
   margin-bottom: 0.2em;
@@ -38,13 +38,32 @@
   @include para-1-bold;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  &--inactive {
+    opacity: 0.25;
+    text-decoration: line-through;
+    margin-right: 0.5rem;
+  }
 }
 .sneaker-details__box{
   color: #727272;
   margin-bottom: 0.6rem;
 }
+.sneaker-details__buttons {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  & > div {
+    width: 100%;
+  }
+}
 .sneaker-details__purchase{
   @include cta-button;
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.sneaker-details__bid{
+  @include primary-button;
   width: 100%;
   margin-top: 1rem;
   margin-bottom: 1rem;

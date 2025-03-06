@@ -23,6 +23,10 @@ class SneakersController < ApplicationController
 
 	def show
 		@sneaker = Sneaker.where('state >= ?', 1).find(params[:id])
+		offer = current_user&.search_accepted_offer_on(@sneaker)
+
+		@initial_price = @sneaker.price
+		@offer_price = offer&.amount
 
 		category = @sneaker.sneaker_db.category
 		size = @sneaker.size
@@ -39,8 +43,13 @@ class SneakersController < ApplicationController
 	def create
 		# flash[:notice] = "En cours de ... Désolé, reviens un peu plus tard !"
 		# redirect_to root_path and return
-		@sneaker = Sneaker.create(user: current_user)
-		redirect_to sneaker_build_path(@sneaker.id, :sneaker_db)
+		@draft = current_user.sneakers.where.not(status: "active")[0]
+		if @draft && !params[:from_draft_page]
+			render "sneakers/build/drafts"
+		else
+			@sneaker = Sneaker.create(user: current_user)
+			redirect_to sneaker_build_path(@sneaker.id, :sneaker_db)
+		end
 	end
 
 	# def create

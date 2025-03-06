@@ -123,6 +123,13 @@
     </div>
 
     <%= render partial: 'shared/footer' %>
+
+    <script type="text/javascript" >
+      window.ZohoHCAsapSettings = {
+        lang : "fr_FR"
+      };
+    </script>
+    <%= javascript_include_tag "https://desk.zoho.eu/portal/api/web/inapp/30532000000176001?orgId=20082968261", nonce: true, defer: true %>
   </body>
 </html>
 

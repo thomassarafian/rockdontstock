@@ -1,0 +1,33 @@
+<div class="modal-wrapper modal-offer">
+  <div class="modal__infos">
+    <%= cl_image_tag(@sneaker.photos.first&.key, class: 'modal__img', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
+    <div class="modal__product-name">
+      <%= @sneaker.sneaker_db.name %>
+    </div>
+    <div class="modal__product-options">
+      <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
+    </div>
+  </div>
+  <div class="modal__content">
+    <div class="modal__form">
+      <div id="error" class="modal__fields-errors" hidden></div>
+      <%= form_with url: sneaker_offers_path(@sneaker.id) do |f| %>
+        <%= f.label "Prix actuel", class: "form-label" %>
+        <div class="form-group">
+          <div class="form-group input-group">
+            <span class="input-group-text">€</span>
+            <%= f.text_field :current_price, class: "form-control", value: @offer_price || @sneaker.price, disabled: true %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label "Mon offre", class: "form-label" %>
+          <div class="input-group">
+            <span class="input-group-text">€</span>
+            <%= f.number_field :amount, class: "form-control", placeholder: "200.00", min: 0, required: true %>
+          </div>
+        </div>
+        <button type="submit" class="modal__form__submit">Envoyer mon offre</button>
+      <% end %>
+    </div>
+  </div>
+</div>

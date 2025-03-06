@@ -1,0 +1,13 @@
+<div class="container">
+  <%= link_to :back, class: "back-button" do %>
+    <div><i class="fas fa-arrow-left ms-0"></i> Retour</div>
+  <% end %>
+  <div class="sneaker-drafts">
+    <h2>Vendre</h2>
+    <div class="sneaker-drafts__btns">
+      <%= link_to "Finaliser mon annonce", following_step_sneaker_build_index_path(@draft.id), class: "sneaker-drafts__btn--left" %>
+      <div class="sneaker-drafts__divider"></div>
+      <%= button_to "Vendre une nouvelle paire", sneakers_path(from_draft_page: true), class: "sneaker-drafts__btn--right" %>
+    </div>
+  </div>
+</div>

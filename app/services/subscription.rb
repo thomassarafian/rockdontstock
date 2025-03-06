@@ -15,7 +15,7 @@ class Subscription
   def initialize(arg)
 
     # Init attributes
-    if arg.is_a?(User) || arg.is_a?(Authentication)
+    if arg.is_a?(User) || arg.is_a?(Authentication) || arg.is_a?(GuideRequest)
       obj = {
         NOM: arg.last_name,
         PRENOM: arg.first_name,
@@ -90,7 +90,7 @@ class Subscription
     end
   end
 
-  def to_lc_guide(list_id)
+  def to_guide(list_id)
     if @sib_contact
       return if @sib_contact.list_ids.include?(list_id)
 

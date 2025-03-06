@@ -1,0 +1,138 @@
+<title>Achat de <%= @sneaker.sneaker_db.name %> - Rock Don't Stock</title>
+<div class="container">
+  <%= link_to :back, class: "back-button" do %>
+    <div><i class="fas fa-arrow-left ms-0"></i> Commander</div>
+  <% end %>
+  <div class="purchase">
+    <div class="purchase-recap__card__sneaker is-mobile">
+      <%= cl_image_tag(@sneaker.photos.first&.key, class: 'purchase-recap__card__sneaker-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
+      <div class="purchase-recap__card__sneaker-details">
+        <div class="purchase-recap__card__sneaker-name">
+          <%= @sneaker.sneaker_db.name %>
+        </div>
+        <div class="purchase-recap__card__sneaker-options">
+          <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
+        </div>
+        <% if @offer %>
+          <div class="purchase-recap__card__sneaker-price">
+            <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @sneaker.price %>€</span>
+            <span><%= @offer.amount %>€</span>
+          </div>
+        <% else %>
+          <div class="purchase-recap__card__sneaker-price"><%= @sneaker.price %>€</div>
+        <% end %>
+      </div>
+    </div>
+    <div id="order-forms" class="purchase-form__payment">
+      <div class="purchase-form__payment__title">
+        <%= image_tag("images/icon_bill.svg") %>
+        <span class="ms-2">Moyen de paiement</span>
+      </div>
+      <div class="purchase-form__payment__fields col-12 col-lg-9">
+        <form id="payment-form" data-secret="<%= @intent.client_secret %>">
+          <div id="payment-element">
+            <!-- Elements will create form elements here -->
+          </div>
+          <div id="error-message">
+            <!-- Display error message to your customers here -->
+          </div>
+          <button class="purchase-form__validation__btn">Valider ma commande (<%= @intent.amount / 100.00 %>€)</button>
+        </form>
+      </div>
+    </div>
+    <!-- DESKTOP -->
+    <div class="purchase-recap">
+      <div class="purchase-recap__card">
+        <div class="purchase-recap__card__title">
+          Ma commande
+        </div>
+        <div class="purchase-recap__card__sneaker">
+          <%= cl_image_tag(@sneaker.photos.first&.key, class: 'purchase-recap__card__sneaker-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
+          <div class="purchase-recap__card__sneaker-details">
+            <div class="purchase-recap__card__sneaker-name">
+              <%= @sneaker.sneaker_db.name %>
+            </div>
+            <div class="purchase-recap__card__sneaker-options">
+              <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
+            </div>
+            <div class="purchase-recap__card__sneaker-price">
+              <% if @offer %>
+                <div class="purchase-recap__card__sneaker-price">
+                  <span class="<%= "purchase-recap__card__sneaker-price--inactive" %>"><%= @sneaker.price %>€</span>
+                  <span><%= @offer.amount %>€</span>
+                </div>
+              <% else %>
+                <div class="purchase-recap__card__sneaker-price"><%= @sneaker.price %>€</div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="purchase-recap__card__order-infos">
+          <div class="purchase-recap__card__order-infos__item">
+            <div>Livraison</div>
+            <div id="shipping-fee"><%= Money.new @shipping_fee_cents %> €</div>
+          </div>
+          <div class="purchase-recap__card__order-infos__item">
+            <div>Authentification Premium</div>
+            <div><%= Money.new @service_fee_cents %> €</div>
+          </div>
+          <div class="purchase-recap__card__order-infos__item">
+            <div>Code promo</div>
+            <div>-<%= Money.new(@discount_cents) %> €</div>
+          </div>
+        </div>
+        <div class="purchase-recap__card__total">
+          <div>Total</div>
+          <div id="total-price"><%= Money.new @total_price_cents %> €</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function initStripe() {
+  const stripe = Stripe("<%= ENV['STRIPE_PUBLIC'] %>");
+
+  const options = {
+    clientSecret: '<%= @intent.client_secret %>',
+    appearance: {
+      theme: 'flat',
+      rules: {
+        '.Input:hover': {
+          outline: '1px solid rgba(100, 100, 100, 0.25)'
+        },
+      },
+      variables: {
+        colorPrimary: '#0E0E0E',
+        colorText: '#0E0E0E',
+        spacingUnit: '4px',
+        borderRadius: '0',
+        focusBoxShadow: '0 0 0 0.2rem rgba(100, 100, 100, 0.25)'
+      }
+    },
+  };
+
+  const elements = stripe.elements(options);
+  const paymentElement = elements.create('payment');
+  paymentElement.mount('#payment-element');
+
+  const form = document.getElementById('payment-form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const {error} = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: "<%= sneaker_payment_complete_url(order_id: @order.id) %>"
+      },
+    });
+
+    if (error) {
+      const messageContainer = document.querySelector('#error-message');
+      messageContainer.textContent = error.message;
+    }
+  })
+}
+initStripe();
+</script>

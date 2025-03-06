@@ -12,16 +12,23 @@ Rails.application.routes.draw do
   resources :sneakers do 
     resources :build, controller: 'sneakers/build' do
       collection do
+        get 'drafts'
         get 'following-step'
         get 'success'
         put 'upload-photos'
       end
     end
     resources :orders, shallow: true, only: [:new, :show, :create]
+    resources :offers, shallow: true, only: [:new, :create] do
+      member do
+        get 'accept'
+        get 'refuse'
+      end
+    end
   end
   
 	resource :user, only: [:show, :update], path: 'me' do
-    resources :items, only: [:index]
+    # resources :items, only: [:index]
   	resources :transfers, only: [:index, :create]
   end
 
