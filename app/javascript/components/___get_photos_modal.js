@@ -1,11 +1,8 @@
 function getPhotosModal() {
   let sneakerCardImg = $(".sneaker-card_img").each(function( index ) {});
   for (let i = 0; i < sneakerCardImg.length; i++) {
-    // console.log(sneakerCardImg[i]);
     sneakerCardImg[i].addEventListener('click', (event) => {
       event.preventDefault();
-      console.log(sneakerCardImg[i]);
-      console.log(sneakerCardImg[i].dataset.target.replace('#modal','carousel'));
       if (sneakerCardImg[i].dataset.target) {
         let sneaker_id_card = sneakerCardImg[i].dataset.target.split('-')[3];
         let sneaker_data_target = sneakerCardImg[i].dataset.target.replace('#modal','carousel');
