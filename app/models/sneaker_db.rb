@@ -22,7 +22,9 @@ class SneakerDb < ApplicationRecord
   private
 
   def set_default_image
-    self.img_url = "/assets/oeil-rds.png"
+    if self.img_url.blank? || self.img_url == "/assets/oeil-rds.png"
+      self.img_url = "/assets/oeil-rds.png"
+    end
   end
 
  #  scope :filter_by_price, -> (price) { 
