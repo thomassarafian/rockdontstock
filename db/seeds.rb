@@ -23,10 +23,6 @@ test_csv = CSV.parse(test_file, :headers => true, :encoding => 'ISO-8859-1')
 count = 0
 
 test_csv.each do |row|
-  next if row['sneaker-title'] == "null" || row['sneaker-title'] == ""
-  next if row['sneaker-title'].include? "page" 
-  next if row['sneaker-title'].include? "Page"
-
   s = SneakerDb.find_or_initialize_by(name: row['sneaker-title'])
   # SneakerDb.new
   # s.subcategory = row['subcategory']
@@ -38,21 +34,11 @@ test_csv.each do |row|
   #   s.price_cents = row['price-retail']     
   # end
   #  s.release_date = row['release-date']
-    
-  # s.name = row['sneaker-title']
-  s.category = row['brand']
 
-  if row['img-fixed-src'] == nil
-    s.img_url = row['img-slide-src']
-  elsif row['img-slide-src'] == nil
-    if row['img-fixed-src'].start_with? "https://stockx-assets.imgix.net"
-      s.img_url = '/assets/oeil-rds.png'
-    else
-      s.img_url = row['img-fixed-src']
-    end
-  else
-    s.img_url = row['img-fixed-src']
-  end
+  # s.category = row['brand']
+  s.name = row['sneaker-title']
+  s.img_url = row['img_url']
+
   if s.save
     count += 1
     puts "#{s.name} - #{count}"
