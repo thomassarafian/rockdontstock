@@ -24,7 +24,9 @@
       <div class="sneaker-form__recap__photos"
         data-flickity='{ "pageDots": false, "imagesLoaded": true, "percentPosition": false, "wrapAround": true, "cellSelector": ".sneaker-form__recap__photo" }'>
         <% @sneaker.photos.each do |photo| %>
-          <%= cl_image_tag(photo.key, class: 'sneaker-form__recap__photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
+          <%= photo_with_transformation(photo, 
+                class: 'sneaker-form__recap__photo', 
+                raw_transformation: "c_limit,h_700,q_auto,w_700") %>
         <% end %>
       </div>
       <div class="sneaker-form__recap__details">

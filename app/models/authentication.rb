@@ -1,6 +1,6 @@
 class Authentication < ApplicationRecord
   belongs_to :product
-  has_many_attached :photos, service: :cloudinary, dependent: :detach
+  has_many_attached :photos, service: Rails.application.config.active_storage.service, dependent: :detach
 
   delegate :price_in_cents, to: :product
 

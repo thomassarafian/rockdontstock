@@ -21,7 +21,7 @@ class Sneaker < ApplicationRecord
   before_create -> { self.state = 0 }
 	# after_create :send_notification  # a configurer avec mailjet 
   
-	has_many_attached :photos, service: :cloudinary, dependent: :detach
+	has_many_attached :photos, service: Rails.application.config.active_storage.service, dependent: :detach
   has_many :orders, dependent: :destroy
 	belongs_to :user
   belongs_to :sneaker_db, optional: true 

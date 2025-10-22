@@ -4,14 +4,14 @@
 
 <title>Recherche - Rock Don't Stock</title>
 <div class="container">
-  <% if !@referer&.match?("/sneakers?") %>
+  <% if !@referer&.match?("/sneakers?") && @selection_of_the_day.present? %>
     <section class="sneaker-featured">
       <div class="sneaker-featured__subtitle">Parcourir nos</div>
       <h2>Sneakers</h2>
       <div class="sneaker-featured-block">
         <div class="sneaker-featured-block__title">Sélection du jour</div>
         <div class="sneaker-featured-block__content">
-          <%= cl_image_tag(@selection_of_the_day.photos.first&.key, class: 'sneaker-featured-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
+          <%= smart_image_tag(@selection_of_the_day.photos.first, class: 'sneaker-featured-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
           <div class="sneaker-featured-details">
             <%= link_to sneaker_path(@selection_of_the_day) do %>
               <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
