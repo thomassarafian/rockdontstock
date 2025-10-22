@@ -27,17 +27,17 @@
   <%= form_for @sneaker, url: wizard_path, method: :put do |f| %>
     <%= hidden_field_tag :referer, value: request.referer %>
     <div class="sneaker-form__infos">
-      <%= f.select :size, sizes, { include_blank: "Taille FR" }, {  class: "form-group form-control form-select", required: true } %>
+      <%= f.select :size, sizes, { include_blank: "Taille FR", selected: @sneaker.size.to_i }, {  class: "form-group form-control form-select", required: true } %>
       <div class="form-group">
-        <%= f.select :condition, conditions, { include_blank: "Condition" }, {  class: "form-control form-select", required: true } %>
+        <%= f.select :condition, conditions, { include_blank: "Condition", selected: @sneaker.condition }, {  class: "form-control form-select", required: true } %>
         <%= link_to "Tout savoir sur les conditions", root_path, style: "font-size: 0.8rem" %>
       </div>
-      <%= f.select :box, boxes, { include_blank: "Type de boîte" }, {  class: "form-group form-control form-select", required: true } %>
+      <%= f.select :box, boxes, { include_blank: "Type de boîte", selected: @sneaker.box }, {  class: "form-group form-control form-select", required: true } %>
       <div class="form-group">
         <%= f.label "Commentaire", class: "form-label" %>
-        <%= f.text_area :extras, rows: 5, class: "form-control", placeholder: "Transmets-nous ici les défauts de ta paire ou toute information utile pour l’acheteur (trous, traçes, extra manquant...). " %>
+        <%= f.text_area :extras, rows: 5, class: "form-control", placeholder: "Transmets-nous ici les défauts de ta paire ou toute information utile pour l'acheteur (trous, traçes, extra manquant...). ", value: @sneaker.extras %>
       </div>
-      <%= f.number_field :price, class: "form-control", placeholder: "Mon prix de vente (€)", required: true %>
+      <%= f.number_field :price, class: "form-control", placeholder: "Mon prix de vente (€)", required: true, value: @sneaker.price.to_i %>
     </div>
     <div class="sneaker-form__btns" style="margin-top: 3rem;">
       <% if !request.referer&.match?('recap') %>
