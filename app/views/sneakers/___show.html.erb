@@ -5,7 +5,7 @@
     <div class="carousel-inner">
       <% @sneaker.photos.each_with_index do |photo, index| %>
         <div class="carousel-item <%= "active" if index == 0 %>">
-          <%=cl_image_tag(photo.key, class: 'sneaker-show-photos') %>
+          <%= smart_image_tag(photo, class: 'sneaker-show-photos', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
         </div>
       <% end %>
     </div>

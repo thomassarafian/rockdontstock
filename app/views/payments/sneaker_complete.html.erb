@@ -39,7 +39,7 @@
             Ma commande
           </div>
           <div class="success__content__recap__card__sneaker">
-            <%= cl_image_tag(@order.sneaker.photos.first&.key, class: 'success__content__recap__card__sneaker-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
+            <%= smart_image_tag(@order.sneaker.photos.first, class: 'success__content__recap__card__sneaker-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
             <div class="success__content__recap__card__sneaker-details">
               <div class="success__content__recap__card__sneaker-name">
                 <%= @order.sneaker.sneaker_db.name %>
