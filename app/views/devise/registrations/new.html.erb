@@ -157,7 +157,7 @@ document.addEventListener('turbolinks:load', () => {
 document.addEventListener('turbolinks:load', () => {
   const newUserForm = document.querySelector('#new_user');
   if (newUserForm && document.querySelector('.sign-up-user')) {
-    const stripe = Stripe("<%= ENV['STRIPE_PUBLIC'] %>");    
+    const stripe = Stripe("<%= stripe_public_key %>");    
     document.querySelector('.sign-up-user').addEventListener('click', (event) => {
       event.preventDefault();
       let user_email = document.querySelector('#user_email');
