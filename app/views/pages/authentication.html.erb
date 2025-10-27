@@ -440,7 +440,7 @@
 
   // STRIPE
   function initStripe(model, id) {
-    const stripe = Stripe("<%= ENV['STRIPE_PUBLIC'] %>");
+    const stripe = Stripe("<%= stripe_public_key %>");
     const paymentForm = document.getElementById("payment-form")
     let elements;
 

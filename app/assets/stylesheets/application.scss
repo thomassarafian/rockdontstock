@@ -14,6 +14,18 @@ body {
   font-family: "DM Sans", "Helvetica", "sans-serif";
   color: #0E0E0E;
 }
+
+// Stripe test mode indicator
+.stripe-test-mode-indicator {
+  background: #ff6b35;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 10px;
+  display: inline-block;
+}
 h1 {
   font-size: $font-size-5;
   font-weight: 700;

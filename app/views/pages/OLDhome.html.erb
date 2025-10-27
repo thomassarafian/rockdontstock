@@ -22,7 +22,7 @@
       <div class="sneaker-card">
         <% if !sneaker.orders.last.nil? && sneaker.orders.last.state == "Payé" %>
           <div class="sneaker-card_img sneaker-card_img-sold">
-            <%= cl_image_tag(sneaker.photos[0].key) %>
+            <%= smart_image_tag(sneaker.photos[0]) %>
             <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
           </div>
           <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title sneaker-title-sold") do %>
@@ -31,7 +31,7 @@
           <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
         <% else %>
           <div class="sneaker-card_img" id="sneaker_card_img">
-            <%= cl_image_tag(sneaker.photos[0].key) %>
+            <%= smart_image_tag(sneaker.photos[0]) %>
           </div>
           <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title") do %>
             <strong><%= sneaker.sneaker_db.name %></strong>
@@ -64,7 +64,7 @@
       <div class="sneaker-card">
         <% if !sneaker.orders.last.nil?  && sneaker.orders.last.state == "Payé" %>
           <div class="sneaker-card_img sneaker-card_img-sold">
-            <%= cl_image_tag(sneaker.photos[0].key) %>
+            <%= smart_image_tag(sneaker.photos[0]) %>
             <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
           </div>
           <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title sneaker-title-sold") do %>
@@ -73,7 +73,7 @@
           <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
         <% else %>
           <div class="sneaker-card_img">
-            <%= cl_image_tag(sneaker.photos[0].key) %>
+            <%= smart_image_tag(sneaker.photos[0]) %>
           </div>
           <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title") do %>
             <strong><%= sneaker.sneaker_db.name %></strong>
@@ -104,7 +104,7 @@
       <div class="sneaker-card">
         <% if !sneaker.orders.last.nil?  && sneaker.orders.last.state == "Payé" %>
           <div class="sneaker-card_img sneaker-card_img-sold">
-            <%= cl_image_tag(sneaker.photos[0].key) %>
+            <%= smart_image_tag(sneaker.photos[0]) %>
             <div class="sneaker-card-img-sold" style="position: absolute;font-weight: 500;font-size: 20px;text-shadow: 1px 1px 3px rgb(0 0 0 / 50%);color: black;">VENDU</div>
           </div>
           <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title sneaker-title-sold") do %>
@@ -113,7 +113,7 @@
           <div class="sneaker-price sneaker-price-sold"><%= sneaker.size %> US &nbsp;| <%= sneaker.condition %> / 10 &nbsp;|&nbsp; <%= humanized_money_with_symbol sneaker.price %></div>
         <% else %>
           <div class="sneaker-card_img">
-            <%= cl_image_tag(sneaker.photos[0].key) %>
+            <%= smart_image_tag(sneaker.photos[0]) %>
           </div>
           <%= link_to(sneaker_path(sneaker.id), class: "sneaker-title") do %>
             <strong><%= sneaker.sneaker_db.name %></strong>

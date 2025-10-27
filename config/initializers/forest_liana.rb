@@ -5,7 +5,7 @@ ForestLiana.application_url = Rails.application.secrets.forest_application_url
 
 ForestLiana.integrations = {
   stripe: {
-    api_key: ENV['STRIPE_SECRET'],
+    api_key: Rails.application.config.stripe_secret_key,
     mapping: 'User.customer_id'
   }
 }
