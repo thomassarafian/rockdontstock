@@ -1,6 +1,7 @@
 <div class="purchase-form__payment__title">
   <%= image_tag("images/icon_bill.svg") %>
   <span class="ms-2">Moyen de paiement</span>
+  <%= stripe_test_mode_indicator %>
 </div>
 <div class="purchase-form__payment__fields col-12 col-lg-9">
   <form id="payment-form" data-secret="<%= @intent.client_secret %>">

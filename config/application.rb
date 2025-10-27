@@ -27,9 +27,9 @@ module Rockdontstock
 
     config.i18n.default_locale = :fr
     
-    # Stripe configuration helpers
-    config.stripe_secret_key = Rails.env.production? ? ENV['STRIPE_SECRET'] : ENV['STRIPE_SECRET_TEST']
-    config.stripe_public_key = Rails.env.production? ? ENV['STRIPE_PUBLIC'] : ENV['STRIPE_PUBLIC_TEST']
+    # Stripe configuration - Always use test keys for demo/testing purposes
+    config.stripe_secret_key = ENV['STRIPE_SECRET_TEST']
+    config.stripe_public_key = ENV['STRIPE_PUBLIC_TEST']
     
     null_regex = Regexp.new(/\Anull\z/)
     config.middleware.insert_before 0, Rack::Cors do
