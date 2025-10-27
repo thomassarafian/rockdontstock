@@ -32,9 +32,9 @@ class User < ApplicationRecord
   
   # after_update :send_ids #, if: :ids_are_filled?
   
-  after_create :subscribe_to_newsletter
-  after_create :send_welcome
-  after_commit :send_iban
+  # after_create :subscribe_to_newsletter
+  # after_create :send_welcome
+  # after_commit :send_iban
   after_update :convert_picker_data_to_json, if: :picker_data_is_filled?
   
   def full_name
