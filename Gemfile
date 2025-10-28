@@ -44,7 +44,6 @@ gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 # gem "better_errors" #gem for debuging
 # gem "binding_of_caller" #gem for debuging
-gem 'spring' #for reload automaticaly
 gem 'cloudinary', '~> 1.16.0' # for image upload
 gem 'mailjet' # email transactionel
 # gem 'gibbon' #pour envoyer la liste des emails a elliot sur mailchimp
@@ -88,7 +87,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  # gem 'spring'
+  gem 'spring' #for reload automaticaly
   gem 'bullet'
 end
 
