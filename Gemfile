@@ -51,6 +51,8 @@ gem 'mailjet' # email transactionel
 gem 'sib-api-v3-sdk'
 gem 'rails-i18n'
 gem 'net-smtp' # Required for Ruby 3.1+
+gem 'net-pop' # Required for Ruby 3.1+ (used by mail gem)
+gem 'net-imap' # Required for Ruby 3.1+ (used by mail gem)
 gem 'open-uri' # Required for Ruby 3.1+ (URI.open)
 
 gem 'wicked_pdf'
