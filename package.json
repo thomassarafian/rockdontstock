@@ -1,6 +1,10 @@
 {
   "name": "rockdontstock",
   "private": true,
+  "scripts": {
+    "webpack": "NODE_OPTIONS=--openssl-legacy-provider webpack",
+    "webpack-dev-server": "NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server"
+  },
   "dependencies": {
     "@popperjs/core": "^2.11.0",
     "@rails/actioncable": "^6.0.0",
@@ -34,6 +38,8 @@
   "version": "0.1.0",
   "devDependencies": {
     "@webpack-cli/serve": "^1.4.0",
+    "browserslist": "^4.27.0",
+    "caniuse-lite": "^1.0.30001751",
     "webpack-dev-server": "^3"
   },
   "peerDependencies": {

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3'
@@ -35,7 +35,6 @@ gem 'simple_form'
 gem 'wicked' # wizard form
 gem 'whenever', require: false # cron job
 gem 'friendly_id'
-gem 'data_uri'
 gem 'addressable'
 gem 'devise'
 gem 'active_storage_validations'
@@ -51,6 +50,8 @@ gem 'mailjet' # email transactionel
 # gem 'gibbon' #pour envoyer la liste des emails a elliot sur mailchimp
 gem 'sib-api-v3-sdk'
 gem 'rails-i18n'
+gem 'net-smtp' # Required for Ruby 3.1+
+gem 'open-uri' # Required for Ruby 3.1+ (URI.open)
 
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
