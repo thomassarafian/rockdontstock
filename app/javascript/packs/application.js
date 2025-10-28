@@ -5,7 +5,7 @@ Rails.start();
 ActiveStorage.start();
 
 import 'controllers';
-import './pagy.js.erb';
+import './pagy.js';
 import Dropzone from 'dropzone';
 require('dotenv').config();
 require('./flickity-fullscreen.js');
