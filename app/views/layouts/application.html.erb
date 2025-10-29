@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <% if ENV['GOOGLE_SITE_VERIFICATION'].present? %>
     <meta name="google-site-verification" content="<%= ENV['GOOGLE_SITE_VERIFICATION'] %>" />
+    <% end %>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -66,7 +68,9 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+    <% if ENV['PAYPAL_CLIENT_ID'].present? %>
     <script src="https://www.paypal.com/sdk/js?client-id=<%= ENV['PAYPAL_CLIENT_ID'] %>&currency=EUR"></script>
+    <% end %>
     
     <script>
     window.cookieconsent.initialise({

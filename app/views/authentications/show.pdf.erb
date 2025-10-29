@@ -37,17 +37,24 @@
           Ma commande
         </div>
         <div class="purchase-recap__card__sneaker">
-          <div class="purchase-recap__card__sneaker-details">
-            <div class="purchase-recap__card__sneaker-name">
-              <%= Sneaker.first.sneaker_db.name %>
+          <% if @authentication&.product&.sneaker.present? %>
+            <% display_sneaker = @authentication.product.sneaker %>
+            <div class="purchase-recap__card__sneaker-details">
+              <div class="purchase-recap__card__sneaker-name">
+                <%= display_sneaker.sneaker_db&.name || 'N/A' %>
+              </div>
+              <div class="purchase-recap__card__sneaker-options">
+                <%= display_sneaker.sneaker_db&.category || 'N/A' %> - Taille <%= display_sneaker.size %> <br />Condition: <%= display_sneaker.condition %>/10
+              </div>
+              <div class="purchase-recap__card__sneaker-price">
+                <%= display_sneaker.price %>€
+              </div>
             </div>
-            <div class="purchase-recap__card__sneaker-options">
-              <%= Sneaker.first.sneaker_db.category %> - Taille <%= Sneaker.first.size %> <br />Condition: <%= Sneaker.first.condition %>/10
+          <% else %>
+            <div class="purchase-recap__card__sneaker-details">
+              <div class="purchase-recap__card__sneaker-name">Authentification en cours</div>
             </div>
-            <div class="purchase-recap__card__sneaker-price">
-              <%= Sneaker.first.price %>€
-            </div>
-          </div>
+          <% end %>
         </div>
         <div class="purchase-recap__card__order-infos">
           <div class="purchase-recap__card__order-infos__item">
