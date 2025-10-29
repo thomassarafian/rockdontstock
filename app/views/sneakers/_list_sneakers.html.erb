@@ -1,9 +1,9 @@
 <% @results.each do |sneaker| %>
   <div class="sneaker-index__card" data-sneaker-id="<%= sneaker.id %>">
     <%= smart_image_tag(sneaker.photos.first, class: 'sneaker-index__card__photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
-    <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-index__card__name" %>
+    <%= link_to sneaker.sneaker_db&.name || 'Sneaker non trouvé', sneaker_path(sneaker), class: "sneaker-index__card__name" %>
     <div class="sneaker-index__card__options">
-      <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
+      <%= sneaker.sneaker_db&.category || 'N/A' %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
     </div>
     <div class="sneaker-index__card__price"><%= sneaker.price %>€</div>
   </div>

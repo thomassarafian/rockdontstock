@@ -1,5 +1,5 @@
 <title>Article - Rock Don't Stock</title>
-<h1 class="sneaker-show-title"><%= @sneaker.sneaker_db.name %></h1>
+<h1 class="sneaker-show-title"><%= @sneaker.sneaker_db&.name || 'Sneaker' %></h1>
 <div class="sneaker-show">
   <div id="carouselSneakerShow" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="sneaker-show-infos">
-    <h2 class="sneaker-show-infos-title"><%= @sneaker.sneaker_db.name %></h2>
+    <h2 class="sneaker-show-infos-title"><%= @sneaker.sneaker_db&.name || 'Sneaker' %></h2>
     <p><strong>Taille : </strong><%=  @sneaker.size %> US</p>
  <%#= US (shoes_size[@sneaker.size] FR)%>
     <p><strong>Prix : </strong><%= humanized_money_with_symbol(@sneaker.price) %></p>

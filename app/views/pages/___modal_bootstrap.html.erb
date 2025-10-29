@@ -1,7 +1,8 @@
 
-<% sneaker = Sneaker.find(params['sneaker_id']) %>
+<% sneaker = Sneaker.find_by(id: params['sneaker_id']) %>
 <% sneaker_data_target = params['sneaker_target'] %>
 
+<% if sneaker.present? %>
 <div id="spox-game">
   <div class="carousel-item active">
     <%= smart_image_tag(sneaker.photos[0], class: 'sneaker-show-photos') %>
@@ -42,3 +43,6 @@
   </a>
 
 </div>
+<% else %>
+  <div class="alert alert-warning">Sneaker introuvable</div>
+<% end %>

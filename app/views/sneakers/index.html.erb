@@ -14,10 +14,10 @@
           <%= smart_image_tag(@selection_of_the_day.photos.first, class: 'sneaker-featured-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
           <div class="sneaker-featured-details">
             <%= link_to sneaker_path(@selection_of_the_day) do %>
-              <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db.name %></h2>
+              <h2 class="sneaker-featured__name"><%= @selection_of_the_day.sneaker_db&.name || 'Sneaker non trouvé' %></h2>
             <% end %>
             <div class="sneaker-featured-details__options">
-              <%= @selection_of_the_day.sneaker_db.category %> - Taille <%= @selection_of_the_day.size %> <br />Condition: <%= @selection_of_the_day.condition %>/10
+              <%= @selection_of_the_day.sneaker_db&.category || 'N/A' %> - Taille <%= @selection_of_the_day.size %> <br />Condition: <%= @selection_of_the_day.condition %>/10
             </div>
             <div class="sneaker-featured-details__price"><%= @selection_of_the_day.price %>€</div>
             <div>

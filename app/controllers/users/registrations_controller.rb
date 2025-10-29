@@ -25,9 +25,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     if @user.save
       if session[:sneaker_session_id]
-        @sneaker_session = Sneaker.where(id: session[:sneaker_session_id])
-        @sneaker_session[0].update(user_id: @user.id)
-        @sneaker_session[0].save
+        @sneaker_session = Sneaker.where(id: session[:sneaker_session_id]).first
+        if @sneaker_session.present?
+          @sneaker_session.update(user_id: @user.id)
+          @sneaker_session.save
+        end
         if Rails.env.production?
           begin
             variable = Mailjet::Send.create(messages: [{
@@ -45,8 +47,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
               'TemplateLanguage'=> true,
               'Subject'=> "Ta paire est en cours de validation ⌛",
               'Variables'=> {
-                "prenom" => @user.first_name,
-                "modele_paire" => @user.sneakers.last.sneaker_db.name,
+                "prenom" => @user.first_name || '',
+                "modele_paire" => @user.sneakers.last&.sneaker_db&.name || 'Non spécifié',
               }
             }])
             p variable

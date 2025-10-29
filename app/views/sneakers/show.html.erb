@@ -1,4 +1,4 @@
-<title><%= @sneaker.sneaker_db.name %> - Rock Don't Stock</title>
+<title><%= @sneaker.sneaker_db&.name || 'Sneaker' %> - Rock Don't Stock</title>
 <div class="container">
   <%= link_to :back, class: "back-button" do %>
     <div><i class="fas fa-arrow-left ms-0"></i> La marketplace</div>
@@ -26,9 +26,9 @@
     </div>
     <div class="sneaker-details">
       <div>
-        <h2 class="sneaker-details__name"><%= @sneaker.sneaker_db.name %></h2>
+        <h2 class="sneaker-details__name"><%= @sneaker.sneaker_db&.name || 'Sneaker non trouvé' %></h2>
         <div class="sneaker-details__options">
-          <%= @sneaker.sneaker_db.category %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
+          <%= @sneaker.sneaker_db&.category || 'N/A' %> - Taille <%= @sneaker.size %> <br />Condition: <%= @sneaker.condition %>/10
         </div>
       </div>
       <div class="sneaker-details__price"><%= @sneaker.price %>€</div>
@@ -79,9 +79,9 @@
         <div class="flickity-cell d-inline-block">
           <div class="sneaker-similar__card">
             <%= smart_image_tag(sneaker.photos.first, class: 'sneaker-similar__card__photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
-            <%= link_to sneaker.sneaker_db.name, sneaker_path(sneaker), class: "sneaker-similar__card__name" %>
+            <%= link_to sneaker.sneaker_db&.name || 'Sneaker non trouvé', sneaker_path(sneaker), class: "sneaker-similar__card__name" %>
             <div class="sneaker-similar__card__options">
-              <%= sneaker.sneaker_db.category %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
+              <%= sneaker.sneaker_db&.category || 'N/A' %> - Taille <%= sneaker.size %> <br />Condition: <%= sneaker.condition %>/10
             </div>
             <div class="sneaker-similar__card__price"><%= sneaker.price %>€</div>
           </div>

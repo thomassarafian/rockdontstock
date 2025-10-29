@@ -24,7 +24,7 @@
               raw_transformation: "c_limit,h_700,q_auto,w_700") %>
         <div class="sneaker-form__recap__details">
           <div class="sneaker-form__recap__sneaker-name">
-            Modèle : <%= @sneaker.sneaker_db.name %>
+            Modèle : <%= @sneaker.sneaker_db&.name || 'Non spécifié' %>
           </div>
           <div class="sneaker-form__recap__sneaker-options">
             <div>

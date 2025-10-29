@@ -8,7 +8,7 @@
   <h5>Commande #<%= @order.id %> <span class="badge badge-dark"> <%= @order.state %></span></h5>
   <ul class="list-unstyled">
     <li><strong>Commande passée le</strong> <%= @order.created_at.to_date.strftime("%d/%m/%Y") %></li>
-    <li><strong>Paire :</strong> <%= @order.sneaker.sneaker_db.name %></li>
+    <li><strong>Paire :</strong> <%= @order.sneaker.sneaker_db&.name || 'Sneaker non trouvé' %></li>
 
     <%# if @order.shipping_fee_cents == 883 %>
       <li><strong>Livraison :</strong> <%= humanized_money_with_symbol @order.shipping_cost %></li>

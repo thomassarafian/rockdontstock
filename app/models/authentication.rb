@@ -12,7 +12,7 @@ class Authentication < ApplicationRecord
   validates :newsletter, acceptance: true
 
   def send_information_email
-    photos_urls = self.photos.map{ |photo| photo.blob.url }.join("\n")
+    photos_urls = self.photos.map{ |photo| photo.blob&.url }.compact.join("\n")
 
     Mailjet::Send.create(messages: [{
       'From'=> {

@@ -24,16 +24,19 @@ class SneakersController < ApplicationController
 	def show
 		@sneaker = Sneaker.where('state >= ?', 0).find(params[:id])
 
-		category = @sneaker.sneaker_db.category
+		# Get category safely - if sneaker_db is nil, use empty array for similar searches
+		category = @sneaker.sneaker_db&.category
 		size = @sneaker.size
 		price = @sneaker.price.to_i
 
-		similar_by_category = Sneaker.where('state >= ?', 0).filter_by_category(category).limit(10)
+		similar_by_category = category.present? ? Sneaker.where('state >= ?', 0).filter_by_category(category).limit(10) : []
 		similar_by_size = Sneaker.where('state >= ?', 0).filter_by_size(size).limit(10)
 		similar_by_price = Sneaker.where('state >= ?', 0).filter_by_min_price(price - 50).filter_by_max_price(price).limit(10)
 
 		@similar_sneakers = similar_by_category + similar_by_size + similar_by_price
-		@similar_sneakers = @similar_sneakers.uniq.sample(20) || Sneaker.all.sample(6)
+		@similar_sneakers = @similar_sneakers.uniq.sample(20)
+		# Fallback if no similar sneakers found
+		@similar_sneakers = Sneaker.where('state >= ?', 0).where.not(id: @sneaker.id).limit(6).order("RANDOM()") if @similar_sneakers.empty?
 	end
 
 	def create

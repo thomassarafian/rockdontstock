@@ -7,7 +7,8 @@ class Forest::SneakersController < ForestLiana::SmartActionsController
 
     # keep latest 3 as highlighted
     if Sneaker.highlighted.count > 3
-      Sneaker.highlighted.first.update(highlighted: false)
+      first_highlighted = Sneaker.highlighted.first
+      first_highlighted&.update(highlighted: false)
     end
 
   end

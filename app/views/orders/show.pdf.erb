@@ -40,10 +40,10 @@
           <%= smart_image_tag(@order.sneaker.photos.first, class: 'purchase-recap__card__sneaker-photo', raw_transformation: "c_limit,h_700,q_auto,w_700") %>
           <div class="purchase-recap__card__sneaker-details">
             <div class="purchase-recap__card__sneaker-name">
-              <%= @order.sneaker.sneaker_db.name %>
+              <%= @order.sneaker.sneaker_db&.name || 'Sneaker non trouvé' %>
             </div>
             <div class="purchase-recap__card__sneaker-options">
-              <%= @order.sneaker.sneaker_db.category %> - Taille <%= @order.sneaker.size %> <br />Condition: <%= @order.sneaker.condition %>/10
+              <%= @order.sneaker.sneaker_db&.category || 'N/A' %> - Taille <%= @order.sneaker.size %> <br />Condition: <%= @order.sneaker.condition %>/10
             </div>
             <div class="purchase-recap__card__sneaker-price">
               <%= @order.sneaker.price %> €
