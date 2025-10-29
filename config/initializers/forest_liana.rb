@@ -1,11 +1,14 @@
-ForestLiana.env_secret = Rails.application.secrets.forest_env_secret
-ForestLiana.auth_secret = Rails.application.secrets.forest_auth_secret
-ForestLiana.application_url = Rails.application.secrets.forest_application_url
+# Configure Forest Liana only if secrets are present
+if Rails.application.secrets.forest_env_secret.present? && 
+   Rails.application.secrets.forest_auth_secret.present?
+  ForestLiana.env_secret = Rails.application.secrets.forest_env_secret
+  ForestLiana.auth_secret = Rails.application.secrets.forest_auth_secret
+  ForestLiana.application_url = Rails.application.secrets.forest_application_url || ENV['FOREST_APPLICATION_URL']
 
-
-ForestLiana.integrations = {
-  stripe: {
-    api_key: Rails.application.config.stripe_secret_key,
-    mapping: 'User.customer_id'
+  ForestLiana.integrations = {
+    stripe: {
+      api_key: Rails.application.config.stripe_secret_key,
+      mapping: 'User.customer_id'
+    }
   }
-}
+end

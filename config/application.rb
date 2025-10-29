@@ -35,7 +35,10 @@ module Rockdontstock
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         hostnames = [null_regex, 'localhost:4200', 'app.forestadmin.com', 'localhost:3000']
-        hostnames += ENV['CORS_ORIGINS'].split(',') if ENV['CORS_ORIGINS']
+        # Add additional CORS origins from environment variable if provided
+        if ENV['CORS_ORIGINS'].present?
+          hostnames += ENV['CORS_ORIGINS'].split(',').map(&:strip).reject(&:blank?)
+        end
         origins hostnames
         resource '*',
           headers: :any,

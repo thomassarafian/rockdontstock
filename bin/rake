@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
+# This file loads Spring only if it's available in the bundle
 begin
   load File.expand_path('../spring', __FILE__)
 rescue LoadError => e
-  raise unless e.message.include?('spring')
+  # Spring is not available (common in production)
+  # This is fine, continue without Spring
 end
-load File.expand_path("spring", __dir__)
+
 require_relative "../config/boot"
 require "rake"
 Rake.application.run
