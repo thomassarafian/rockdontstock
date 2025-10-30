@@ -1,5 +1,5 @@
 
-<h1><a href="https://www.rockdontstock.com/"> Rock Don't Stock</a> est une marketplace mettant en relation des acheteurs et vendeurs de sneakers LEGIT.</h1>
+<h1><a href="https://rockdontstock.onrender.com"> Rock Don't Stock</a> est une marketplace mettant en relation des acheteurs et vendeurs de sneakers LEGIT.</h1>
 <h3>Contexte</h3>
 <h4>Pourquoi ?</h4>
 <p>Ce projet fait face à l'explosion de la revente de sneakers en France. Sur les sites comme Vinted et Leboncoin, beaucoup d'utilisateurs vendent des paires. Malheureusement pour les acheteurs, très peu sont LEGIT. Rock Don't Stock propose aux acheteurs de vérifier pour eux la paire ainsi que son état. Ce contrôle qualité est minutieux et réalise par des experts qui rendent leurs verdicts en 24H sous forme de rapport de plusieurs pages.</p>
