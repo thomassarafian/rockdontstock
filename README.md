@@ -1,51 +1,120 @@
+# <a href="https://rockdontstock.onrender.com">Rock Don't Stock</a> 👟
 
-<h1><a href="https://rockdontstock.onrender.com"> Rock Don't Stock</a> est une marketplace mettant en relation des acheteurs et vendeurs de sneakers LEGIT.</h1>
-<h3>Contexte</h3>
-<h4>Pourquoi ?</h4>
-<p>Ce projet fait face à l'explosion de la revente de sneakers en France. Sur les sites comme Vinted et Leboncoin, beaucoup d'utilisateurs vendent des paires. Malheureusement pour les acheteurs, très peu sont LEGIT. Rock Don't Stock propose aux acheteurs de vérifier pour eux la paire ainsi que son état. Ce contrôle qualité est minutieux et réalise par des experts qui rendent leurs verdicts en 24H sous forme de rapport de plusieurs pages.</p>
+A marketplace connecting buyers and sellers of **authentic sneakers**, with expert verification to combat counterfeits in the French resale market.
 
-<h4>L'évolution</h4>
-<p>J'ai commencé ce projet en freelance, from scratch et étant le seul développeur. Voilà la liste des fonctionnalités implémentée, dans l'ordre :</p>
-<ul>
-  <li>Système de Paiement - Stripe Payment</li>
-  <li>Webhooks pour vérifier si le paiement est bien validé - Stripe Payment</li>
-  <li>Bon de réduction - Stripe Payment</li>
-  <li>Vérification légale des vendeurs - Stripe Connect</li>
-  <hr>
-  <li>Recherche de point relais autour de l'utilisateur - Sendcloud</li>
-  <li>Création de bordereaux de livraisons lors d'une vente - Sendcloud</li>
-  <li>Tracking du colis - Sendcloud</li>
-  <hr>
-  <li>Envoi d'email transactionnel - Mailjet</li>
-  <li>Automation et groupe - Sendinblue</li>
-  <hr>
-  <li>Système de recherche de paires scrapé dans la base de données</li>
-  <li>Les vendeurs peuvent ajouté de nouvelles paires sur le site et les retrouver sur leurs profils</li>
-  <li>Optimisation des photos upload par les utilisateurs avant de leurs stocker en ligne en JavaScript</li>
-  <li>Stockage de photos - Cloudinary</li>
-  <hr>
-  <li>Recherche et filtrage des paires mises en ligne par les vendeurs</li>
-  <hr>
-  <li>Intégration de Forest Admin et de 11 smart actions conçues pour le service</li>
-</ul>
+---
+
+## 🎯 Why This Project?
+
+The sneaker resale market in France has exploded, but platforms like Vinted and Leboncoin are flooded with counterfeit pairs. Buyers have no guarantee of authenticity.
+
+**Rock Don't Stock solves this problem** by providing:
+- Expert verification of every pair before shipment
+- Detailed condition reports delivered within 24 hours
+- A trusted marketplace where buyers can purchase with confidence
+
+---
+
+## ✨ Key Features
+
+### For Buyers
+- Browse verified authentic sneakers
+- Advanced search and filtering
+- Secure payment processing (Stripe)
+- Real-time shipping tracking
+- Discount code support
+
+### For Sellers
+- Legal seller verification (Stripe Connect)
+- Add new sneaker listings to the catalog
+- Automatic photo optimization before upload
+- Profile management with listing overview
+- Relay point selection for shipping
+
+### Operations & Admin
+- Automated shipping label generation (Sendcloud)
+- Transactional emails (Mailjet)
+- Marketing automation (Sendinblue)
+- Custom admin panel with 11 smart actions (Forest Admin)
+- Comprehensive order and inventory management
+
+---
+
+## 🛠 Tech Stack
+
+### Backend
+- **Ruby on Rails** — Core application framework
+- **PostgreSQL** — Database
+- **Heroku** — Hosting and deployment
+- **Forest Admin** — Admin panel with custom actions
+
+### Frontend
+- **HTML/CSS/JavaScript** — Core web technologies
+- **Bootstrap** — Responsive UI framework
+
+### Integrations
+- **Stripe Payment** — Secure payment processing
+- **Stripe Connect** — Seller verification and payouts
+- **Sendcloud** — Shipping logistics (relay points, labels, tracking)
+- **Cloudinary** — Image storage and optimization
+- **Mailjet** — Transactional emails
+- **Sendinblue** — Marketing automation
+
+---
+
+## 🚀 Installation
+
+### Prerequisites
+- Ruby 2.7+ (check with `ruby -v`)
+- Rails 6.0+ (check with `rails -v`)
+- PostgreSQL 12+ (check with `psql --version`)
+- Node.js & Yarn (for asset compilation)
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/rock-dont-stock.git
+cd rock-dont-stock
+
+# Install dependencies
+bundle install
+yarn install
+
+# Setup database
+rails db:create db:migrate db:seed
+
+# Configure environment variables
+# Copy .env.example to .env and fill in:
+# - Stripe API keys (STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY)
+# - Sendcloud API credentials
+# - Cloudinary credentials
+# - Mailjet API keys
+# - Sendinblue API keys
+
+# Start the server
+rails server
+```
+
+Visit `http://localhost:3000` to see the app running.
+
+---
+
+## 💡 Usage
+
+### As a Buyer
+1. Browse the catalog or search for specific sneakers
+2. Add items to cart and proceed to checkout
+3. Complete payment via Stripe
+4. Receive confirmation and tracking updates via email
+5. Track your shipment in real-time
+
+### As a Seller
+1. Register and complete legal verification (Stripe Connect)
+2. Add new sneaker listings with photos and details
+3. Ship to buyer's selected relay point when notified
+4. Receive automated shipping labels via Sendcloud
+5. Get paid securely through Stripe Connect
 
 
-
-<h3>Technologies utilisés</h3>
-<h4>BACK</h4>
-<ul>
-  <li>Ruby on Rails</li>
-  <li>PostgresSQL</li>
-  <li>Heroku</li>
-  <li>Forest Admin</li>
-</ul>
-<h4>FRONT</h4>
-<ul>
-  <li>HTML</li>
-  <li>CSS</li>
-  <li>Javascript</li>
-  <li>Bootstrap</li>
-</ul>
-
-
-<p></p>
+**Built with ❤️ for sneaker enthusiasts who deserve authenticity. Enjoy !**
